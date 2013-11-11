@@ -1,0 +1,9 @@
+language: java
+
+script: ./bin/run_tests.sh
+
+notifications:
+  email:
+    recipients:
+      - greenbutton-dev@googlegroups.com
+    on_success: always
