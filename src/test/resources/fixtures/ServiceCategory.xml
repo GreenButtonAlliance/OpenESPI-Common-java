@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<espi:ServiceCategory xmlns:espi="http://naesb.org/espi">
+    <espi:kind>9</espi:kind>
+</espi:ServiceCategory>
