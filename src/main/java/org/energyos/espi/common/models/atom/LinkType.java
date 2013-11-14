@@ -32,12 +32,12 @@ import javax.xml.bind.annotation.XmlSchemaType;
 
 /**
  * The Atom link construct is defined in section 3.4 of the format spec.
- *
- *
+ * <p/>
+ * <p/>
  * <p>Java class for linkType complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="linkType">
  *   &lt;complexContent>

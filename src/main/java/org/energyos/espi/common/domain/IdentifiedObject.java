@@ -36,11 +36,11 @@ import java.util.UUID;
 
 /**
  * This is a root class to provide common naming attributes for all classes needing naming attributes
- *
+ * <p/>
  * <p>Java class for IdentifiedObject complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="IdentifiedObject">
  *   &lt;complexContent>

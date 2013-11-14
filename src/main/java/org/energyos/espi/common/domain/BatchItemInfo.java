@@ -34,11 +34,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Includes elements that make it possible to include multiple transactions in a single (batch) request.
- *
+ * <p/>
  * <p>Java class for BatchItemInfo complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="BatchItemInfo">
  *   &lt;complexContent>

@@ -40,11 +40,11 @@ import java.util.UUID;
 
 /**
  * Represents a permission granted by an owner for access to a resource.
- *
+ * <p/>
  * <p>Java class for Authorization complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="Authorization">
  *   &lt;complexContent>

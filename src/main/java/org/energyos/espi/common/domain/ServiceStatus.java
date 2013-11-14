@@ -32,11 +32,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Contains the current status of the service.
- *
+ * <p/>
  * <p>Java class for ServiceStatus complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="ServiceStatus">
  *   &lt;complexContent>

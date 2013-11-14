@@ -33,11 +33,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Summary of usage for a billing period
- *
+ * <p/>
  * <p>Java class for ElectricPowerUsageSummary complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="ElectricPowerUsageSummary">
  *   &lt;complexContent>

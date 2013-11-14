@@ -37,11 +37,11 @@ import java.util.Map;
 
 /**
  * Category of service provided to the customer.
- *
+ * <p/>
  * <p>Java class for ServiceCategory complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="ServiceCategory">
  *   &lt;complexContent>

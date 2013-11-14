@@ -41,11 +41,11 @@ import java.util.Set;
 
 /**
  * Logical point on a network at which consumption or production is either physically measured (e.g., metered) or estimated (e.g., unmetered street lights).
- *
+ * <p/>
  * <p>Java class for UsagePoint complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="UsagePoint">
  *   &lt;complexContent>

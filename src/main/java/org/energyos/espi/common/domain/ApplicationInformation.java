@@ -32,11 +32,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Contains information about a Third Party Application requesting access to the DataCustodian services. Information requested may include items such as Organization Name, Website, Contact Info, Application Name, Description, Icon, Type, default Notification and Callback endpoints, and may also include agreement with terms of service.
- *
+ * <p/>
  * <p>Java class for ApplicationInformation complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="ApplicationInformation">
  *   &lt;complexContent>

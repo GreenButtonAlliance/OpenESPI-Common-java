@@ -32,11 +32,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Interval of date and time. End is not included because it can be derived from the start and the duration.
- *
+ * <p/>
  * <p>Java class for DateTimeInterval complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="DateTimeInterval">
  *   &lt;complexContent>

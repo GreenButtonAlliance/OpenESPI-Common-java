@@ -34,12 +34,12 @@ import java.util.Map;
 
 /**
  * The Atom id construct is defined in section 4.2.6 of the format spec.
- *
- *
+ * <p/>
+ * <p/>
  * <p>Java class for idType complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="idType">
  *   &lt;simpleContent>
@@ -133,11 +133,11 @@ public class IdType {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     *
-     * <p>
+     * <p/>
+     * <p/>
      * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     *
+     * <p/>
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
      *

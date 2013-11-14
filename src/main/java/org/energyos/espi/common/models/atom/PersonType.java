@@ -37,12 +37,12 @@ import java.util.Map;
 
 /**
  * The Atom person construct is defined in section 3.2 of the format spec.
- *
- *
+ * <p/>
+ * <p/>
  * <p>Java class for personType complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="personType">
  *   &lt;complexContent>
@@ -85,21 +85,21 @@ public class PersonType {
 
     /**
      * Gets the value of the nameOrUriOrEmail property.
-     *
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the nameOrUriOrEmail property.
-     *
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getNameOrUriOrEmail().add(newItem);
      * </pre>
-     *
-     *
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
@@ -155,11 +155,11 @@ public class PersonType {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     *
-     * <p>
+     * <p/>
+     * <p/>
      * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     *
+     * <p/>
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
      *

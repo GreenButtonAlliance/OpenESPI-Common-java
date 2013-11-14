@@ -32,11 +32,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * An aggregated summary measurement reading.
- *
+ * <p/>
  * <p>Java class for SummaryMeasurement complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="SummaryMeasurement">
  *   &lt;complexContent>

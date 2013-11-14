@@ -35,11 +35,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Contains attributes related to the configuration of the time service.
- *
+ * <p/>
  * <p>Java class for TimeConfiguration complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="TimeConfiguration">
  *   &lt;complexContent>

@@ -31,11 +31,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * A resource is an addressable unit of information, either a collection (List) or instance of an object (identifiedObject, or simply, Resource)
- *
+ * <p/>
  * <p>Java class for Resource complex type.
- *
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- *
+ * <p/>
  * <pre>
  * &lt;complexType name="Resource">
  *   &lt;complexContent>
