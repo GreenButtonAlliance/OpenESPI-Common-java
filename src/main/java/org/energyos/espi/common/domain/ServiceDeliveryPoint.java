@@ -28,7 +28,8 @@ public class ServiceDeliveryPoint {
     private String customerAgreement;
     private long id;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }

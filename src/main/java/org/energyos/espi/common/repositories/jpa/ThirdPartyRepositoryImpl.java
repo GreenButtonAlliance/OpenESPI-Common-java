@@ -38,7 +38,8 @@ public class ThirdPartyRepositoryImpl implements ThirdPartyRepository {
                 .setParameter("id", id).getSingleResult();
     }
 
-    @Override @SuppressWarnings("unchecked")
+    @Override
+    @SuppressWarnings("unchecked")
     public List<ThirdParty> findAll() {
         return (List<ThirdParty>)this.em.createNamedQuery(ThirdParty.QUERY_FIND_ALL).getResultList();
     }

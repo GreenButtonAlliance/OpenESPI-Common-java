@@ -22,7 +22,7 @@ public class EspiFactory {
     }
 
     public static UsagePoint newUsagePoint() {
-       return newUsagePoint(newRetailCustomer());
+        return newUsagePoint(newRetailCustomer());
     }
 
     public static UsagePoint newUsagePointWithId(RetailCustomer retailCustomer) {
@@ -248,7 +248,7 @@ public class EspiFactory {
         summary.setHarmonicVoltage(3L);
         summary.setLongInterruptions(4L);
         summary.setMainsVoltage(5L);
-        summary.setMeasurementProtocol((short) 6);
+        summary.setMeasurementProtocol((short)6);
         summary.setPowerFrequency(7L);
         summary.setRapidVoltageChanges(8L);
         summary.setShortInterruptions(9L);

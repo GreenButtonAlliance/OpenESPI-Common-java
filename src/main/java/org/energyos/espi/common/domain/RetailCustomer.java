@@ -39,11 +39,12 @@ public class RetailCustomer implements UserDetails, Principal {
 
     public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
     public final static String QUERY_FIND_BY_USERNAME = "RetailCustomer.findByUsername";
-    public final static String ROLE_CUSTOMER  = "ROLE_USER";
-    public final static String ROLE_CUSTODIAN  = "ROLE_CUSTODIAN";
+    public final static String ROLE_CUSTOMER = "ROLE_USER";
+    public final static String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
 
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
     protected Long id;
 
@@ -52,11 +53,13 @@ public class RetailCustomer implements UserDetails, Principal {
     protected String username;
 
     @Column(name = "first_name")
-    @NotEmpty @Size(max = 30)
+    @NotEmpty
+    @Size(max = 30)
     protected String firstName;
 
     @Column(name = "last_name")
-    @NotEmpty @Size(max = 30)
+    @NotEmpty
+    @Size(max = 30)
     protected String lastName;
 
     @Column(name = "password")

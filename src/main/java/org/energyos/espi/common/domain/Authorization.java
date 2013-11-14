@@ -40,11 +40,11 @@ import java.util.UUID;
 
 /**
  * Represents a permission granted by an owner for access to a resource.
- * 
+ *
  * <p>Java class for Authorization complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Authorization">
  *   &lt;complexContent>
@@ -62,24 +62,21 @@ import java.util.UUID;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Authorization", propOrder = {
-    "accessToken",
-    "authorizationServer",
-    "authorizedPeriod",
-    "publishedPeriod",
-    "resource",
-    "status",
-    "thirdParty"
+        "accessToken",
+        "authorizationServer",
+        "authorizedPeriod",
+        "publishedPeriod",
+        "resource",
+        "status",
+        "thirdParty"
 })
 @Entity
 @Table(name = "authorizations")
 public class Authorization
-    extends IdentifiedObject
-{
+        extends IdentifiedObject {
     @Column(name = "access_token")
     @NotEmpty
     protected String accessToken;
@@ -103,11 +100,9 @@ public class Authorization
 
     /**
      * Gets the value of the accessToken property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccessToken() {
         return accessToken;
@@ -115,11 +110,9 @@ public class Authorization
 
     /**
      * Sets the value of the accessToken property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setAccessToken(String value) {
         this.accessToken = value;
@@ -127,11 +120,9 @@ public class Authorization
 
     /**
      * Gets the value of the authorizationServer property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAuthorizationServer() {
         return authorizationServer;
@@ -139,11 +130,9 @@ public class Authorization
 
     /**
      * Sets the value of the authorizationServer property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setAuthorizationServer(String value) {
         this.authorizationServer = value;
@@ -151,11 +140,9 @@ public class Authorization
 
     /**
      * Gets the value of the authorizedPeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DateTimeInterval }
-     *     
+     *
+     * @return possible object is
+     *         {@link DateTimeInterval }
      */
     public DateTimeInterval getAuthorizedPeriod() {
         return authorizedPeriod;
@@ -163,11 +150,9 @@ public class Authorization
 
     /**
      * Sets the value of the authorizedPeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DateTimeInterval }
-     *     
+     *
+     * @param value allowed object is
+     * {@link DateTimeInterval }
      */
     public void setAuthorizedPeriod(DateTimeInterval value) {
         this.authorizedPeriod = value;
@@ -175,11 +160,9 @@ public class Authorization
 
     /**
      * Gets the value of the publishedPeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DateTimeInterval }
-     *     
+     *
+     * @return possible object is
+     *         {@link DateTimeInterval }
      */
     public DateTimeInterval getPublishedPeriod() {
         return publishedPeriod;
@@ -187,11 +170,9 @@ public class Authorization
 
     /**
      * Sets the value of the publishedPeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DateTimeInterval }
-     *     
+     *
+     * @param value allowed object is
+     * {@link DateTimeInterval }
      */
     public void setPublishedPeriod(DateTimeInterval value) {
         this.publishedPeriod = value;
@@ -199,11 +180,9 @@ public class Authorization
 
     /**
      * Gets the value of the resource property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getResource() {
         return resource;
@@ -211,11 +190,9 @@ public class Authorization
 
     /**
      * Sets the value of the resource property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setResource(String value) {
         this.resource = value;
@@ -223,11 +200,9 @@ public class Authorization
 
     /**
      * Gets the value of the status property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getStatus() {
         return status;
@@ -235,11 +210,9 @@ public class Authorization
 
     /**
      * Sets the value of the status property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setStatus(String value) {
         this.status = value;
@@ -247,11 +220,9 @@ public class Authorization
 
     /**
      * Gets the value of the thirdParty property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdParty() {
         return thirdParty;
@@ -259,11 +230,9 @@ public class Authorization
 
     /**
      * Sets the value of the thirdParty property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdParty(String value) {
         this.thirdParty = value;

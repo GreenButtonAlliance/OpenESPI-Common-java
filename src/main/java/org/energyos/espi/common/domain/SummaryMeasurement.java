@@ -32,11 +32,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * An aggregated summary measurement reading.
- * 
+ *
  * <p>Java class for SummaryMeasurement complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="SummaryMeasurement">
  *   &lt;complexContent>
@@ -51,20 +51,17 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SummaryMeasurement", propOrder = {
-    "powerOfTenMultiplier",
-    "timeStamp",
-    "uom",
-    "value"
+        "powerOfTenMultiplier",
+        "timeStamp",
+        "uom",
+        "value"
 })
 @Embeddable
 public class SummaryMeasurement
-    extends java.lang.Object
-{
+        extends java.lang.Object {
 
     protected String powerOfTenMultiplier;
     protected Long timeStamp;
@@ -83,11 +80,9 @@ public class SummaryMeasurement
 
     /**
      * Gets the value of the powerOfTenMultiplier property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPowerOfTenMultiplier() {
         return powerOfTenMultiplier;
@@ -95,11 +90,9 @@ public class SummaryMeasurement
 
     /**
      * Sets the value of the powerOfTenMultiplier property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setPowerOfTenMultiplier(String value) {
         this.powerOfTenMultiplier = value;
@@ -107,11 +100,9 @@ public class SummaryMeasurement
 
     /**
      * Gets the value of the timeStamp property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getTimeStamp() {
         return timeStamp;
@@ -119,11 +110,9 @@ public class SummaryMeasurement
 
     /**
      * Sets the value of the timeStamp property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     * {@link Long }
      */
     public void setTimeStamp(Long value) {
         this.timeStamp = value;
@@ -131,11 +120,9 @@ public class SummaryMeasurement
 
     /**
      * Gets the value of the uom property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUom() {
         return uom;
@@ -143,11 +130,9 @@ public class SummaryMeasurement
 
     /**
      * Sets the value of the uom property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setUom(String value) {
         this.uom = value;
@@ -155,11 +140,9 @@ public class SummaryMeasurement
 
     /**
      * Gets the value of the value property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getValue() {
         return value;
@@ -167,11 +150,9 @@ public class SummaryMeasurement
 
     /**
      * Sets the value of the value property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     * {@link Long }
      */
     public void setValue(Long value) {
         this.value = value;

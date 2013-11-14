@@ -51,15 +51,14 @@ import java.util.List;
  * &lt;/complexType>
  * </pre>
  */
-@XmlRootElement(name="MeterReading")
+@XmlRootElement(name = "MeterReading")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MeterReading")
 @Entity
 @Table(name = "meter_readings")
 @XmlJavaTypeAdapter(GenericAdapter.class)
 public class MeterReading
-    extends IdentifiedObject
-{
+        extends IdentifiedObject {
     @OneToMany(mappedBy = "meterReading", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @XmlTransient

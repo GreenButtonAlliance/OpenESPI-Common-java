@@ -33,11 +33,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Summary of usage for a billing period
- * 
+ *
  * <p>Java class for ElectricPowerUsageSummary complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="ElectricPowerUsageSummary">
  *   &lt;complexContent>
@@ -65,36 +65,33 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
-@XmlRootElement(name="ElectricPowerUsageSummary")
+@XmlRootElement(name = "ElectricPowerUsageSummary")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ElectricPowerUsageSummary", propOrder = {
-    "billingPeriod",
-    "billLastPeriod",
-    "billToDate",
-    "costAdditionalLastPeriod",
-    "currency",
-    "currentBillingPeriodOverAllConsumption",
-    "currentDayLastYearNetConsumption",
-    "currentDayNetConsumption",
-    "currentDayOverallConsumption",
-    "peakDemand",
-    "previousDayLastYearOverallConsumption",
-    "previousDayNetConsumption",
-    "previousDayOverallConsumption",
-    "ratchetDemand",
-    "qualityOfReading",
-    "ratchetDemandPeriod",
-    "statusTimeStamp"
+        "billingPeriod",
+        "billLastPeriod",
+        "billToDate",
+        "costAdditionalLastPeriod",
+        "currency",
+        "currentBillingPeriodOverAllConsumption",
+        "currentDayLastYearNetConsumption",
+        "currentDayNetConsumption",
+        "currentDayOverallConsumption",
+        "peakDemand",
+        "previousDayLastYearOverallConsumption",
+        "previousDayNetConsumption",
+        "previousDayOverallConsumption",
+        "ratchetDemand",
+        "qualityOfReading",
+        "ratchetDemandPeriod",
+        "statusTimeStamp"
 })
 @Entity
 @Table(name = "electric_power_usage_summaries")
 @XmlJavaTypeAdapter(GenericAdapter.class)
 public class ElectricPowerUsageSummary
-    extends IdentifiedObject
-{
+        extends IdentifiedObject {
 
     protected Long billLastPeriod;
     protected Long billToDate;
@@ -103,98 +100,98 @@ public class ElectricPowerUsageSummary
     protected String qualityOfReading;
     protected long statusTimeStamp;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="duration", column = @Column(name="ratchetDemandPeriod_duration") ),
-            @AttributeOverride(name="start", column = @Column(name="ratchetDemandPeriod_start") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "duration", column = @Column(name = "ratchetDemandPeriod_duration")),
+            @AttributeOverride(name = "start", column = @Column(name = "ratchetDemandPeriod_start")),
+    })
     @Embedded
     protected DateTimeInterval ratchetDemandPeriod;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="duration", column = @Column(name="billingPeriod_duration") ),
-            @AttributeOverride(name="start", column = @Column(name="billingPeriod_start") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "duration", column = @Column(name = "billingPeriod_duration")),
+            @AttributeOverride(name = "start", column = @Column(name = "billingPeriod_start")),
+    })
     @Embedded
     protected DateTimeInterval billingPeriod;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="powerOfTenMultiplier", column = @Column(name="currentBillingPeriodOverAllConsumption_powerOfTenMultiplier") ),
-            @AttributeOverride(name="timeStamp", column = @Column(name="currentBillingPeriodOverAllConsumption_timeStamp") ),
-            @AttributeOverride(name="uom", column = @Column(name="currentBillingPeriodOverAllConsumption_uom") ),
-            @AttributeOverride(name="value", column = @Column(name="currentBillingPeriodOverAllConsumption_value") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "currentBillingPeriodOverAllConsumption_powerOfTenMultiplier")),
+            @AttributeOverride(name = "timeStamp", column = @Column(name = "currentBillingPeriodOverAllConsumption_timeStamp")),
+            @AttributeOverride(name = "uom", column = @Column(name = "currentBillingPeriodOverAllConsumption_uom")),
+            @AttributeOverride(name = "value", column = @Column(name = "currentBillingPeriodOverAllConsumption_value")),
+    })
     @Embedded
     protected SummaryMeasurement currentBillingPeriodOverAllConsumption;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="powerOfTenMultiplier", column = @Column(name="currentDayLastYearNetConsumption_powerOfTenMultiplier") ),
-            @AttributeOverride(name="timeStamp", column = @Column(name="currentDayLastYearNetConsumption_timeStamp") ),
-            @AttributeOverride(name="uom", column = @Column(name="currentDayLastYearNetConsumption_uom") ),
-            @AttributeOverride(name="value", column = @Column(name="currentDayLastYearNetConsumption_value") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "currentDayLastYearNetConsumption_powerOfTenMultiplier")),
+            @AttributeOverride(name = "timeStamp", column = @Column(name = "currentDayLastYearNetConsumption_timeStamp")),
+            @AttributeOverride(name = "uom", column = @Column(name = "currentDayLastYearNetConsumption_uom")),
+            @AttributeOverride(name = "value", column = @Column(name = "currentDayLastYearNetConsumption_value")),
+    })
     @Embedded
     protected SummaryMeasurement currentDayLastYearNetConsumption;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="powerOfTenMultiplier", column = @Column(name="currentDayNetConsumption_powerOfTenMultiplier") ),
-            @AttributeOverride(name="timeStamp", column = @Column(name="currentDayNetConsumption_timeStamp") ),
-            @AttributeOverride(name="uom", column = @Column(name="currentDayNetConsumption_uom") ),
-            @AttributeOverride(name="value", column = @Column(name="currentDayNetConsumption_value") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "currentDayNetConsumption_powerOfTenMultiplier")),
+            @AttributeOverride(name = "timeStamp", column = @Column(name = "currentDayNetConsumption_timeStamp")),
+            @AttributeOverride(name = "uom", column = @Column(name = "currentDayNetConsumption_uom")),
+            @AttributeOverride(name = "value", column = @Column(name = "currentDayNetConsumption_value")),
+    })
     @Embedded
     protected SummaryMeasurement currentDayNetConsumption;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="powerOfTenMultiplier", column = @Column(name="currentDayOverallConsumption_powerOfTenMultiplier") ),
-            @AttributeOverride(name="timeStamp", column = @Column(name="currentDayOverallConsumption_timeStamp") ),
-            @AttributeOverride(name="uom", column = @Column(name="currentDayOverallConsumption_uom") ),
-            @AttributeOverride(name="value", column = @Column(name="currentDayOverallConsumption_value") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "currentDayOverallConsumption_powerOfTenMultiplier")),
+            @AttributeOverride(name = "timeStamp", column = @Column(name = "currentDayOverallConsumption_timeStamp")),
+            @AttributeOverride(name = "uom", column = @Column(name = "currentDayOverallConsumption_uom")),
+            @AttributeOverride(name = "value", column = @Column(name = "currentDayOverallConsumption_value")),
+    })
     @Embedded
     protected SummaryMeasurement currentDayOverallConsumption;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="powerOfTenMultiplier", column = @Column(name="peakDemand_powerOfTenMultiplier") ),
-            @AttributeOverride(name="timeStamp", column = @Column(name="peakDemand_timeStamp") ),
-            @AttributeOverride(name="uom", column = @Column(name="peakDemand_uom") ),
-            @AttributeOverride(name="value", column = @Column(name="peakDemand_value") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "peakDemand_powerOfTenMultiplier")),
+            @AttributeOverride(name = "timeStamp", column = @Column(name = "peakDemand_timeStamp")),
+            @AttributeOverride(name = "uom", column = @Column(name = "peakDemand_uom")),
+            @AttributeOverride(name = "value", column = @Column(name = "peakDemand_value")),
+    })
     @Embedded
     protected SummaryMeasurement peakDemand;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="powerOfTenMultiplier", column = @Column(name="previousDayLastYearOverallConsumption_powerOfTenMultiplier") ),
-            @AttributeOverride(name="timeStamp", column = @Column(name="previousDayLastYearOverallConsumption_timeStamp") ),
-            @AttributeOverride(name="uom", column = @Column(name="previousDayLastYearOverallConsumption_uom") ),
-            @AttributeOverride(name="value", column = @Column(name="previousDayLastYearOverallConsumption_value") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "previousDayLastYearOverallConsumption_powerOfTenMultiplier")),
+            @AttributeOverride(name = "timeStamp", column = @Column(name = "previousDayLastYearOverallConsumption_timeStamp")),
+            @AttributeOverride(name = "uom", column = @Column(name = "previousDayLastYearOverallConsumption_uom")),
+            @AttributeOverride(name = "value", column = @Column(name = "previousDayLastYearOverallConsumption_value")),
+    })
     @Embedded
     protected SummaryMeasurement previousDayLastYearOverallConsumption;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="powerOfTenMultiplier", column = @Column(name="previousDayNetConsumption_powerOfTenMultiplier") ),
-            @AttributeOverride(name="timeStamp", column = @Column(name="previousDayNetConsumption_timeStamp") ),
-            @AttributeOverride(name="uom", column = @Column(name="previousDayNetConsumption_uom") ),
-            @AttributeOverride(name="value", column = @Column(name="previousDayNetConsumption_value") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "previousDayNetConsumption_powerOfTenMultiplier")),
+            @AttributeOverride(name = "timeStamp", column = @Column(name = "previousDayNetConsumption_timeStamp")),
+            @AttributeOverride(name = "uom", column = @Column(name = "previousDayNetConsumption_uom")),
+            @AttributeOverride(name = "value", column = @Column(name = "previousDayNetConsumption_value")),
+    })
     @Embedded
     protected SummaryMeasurement previousDayNetConsumption;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="powerOfTenMultiplier", column = @Column(name="previousDayOverallConsumption_powerOfTenMultiplier") ),
-            @AttributeOverride(name="timeStamp", column = @Column(name="previousDayOverallConsumption_timeStamp") ),
-            @AttributeOverride(name="uom", column = @Column(name="previousDayOverallConsumption_uom") ),
-            @AttributeOverride(name="value", column = @Column(name="previousDayOverallConsumption_value") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "previousDayOverallConsumption_powerOfTenMultiplier")),
+            @AttributeOverride(name = "timeStamp", column = @Column(name = "previousDayOverallConsumption_timeStamp")),
+            @AttributeOverride(name = "uom", column = @Column(name = "previousDayOverallConsumption_uom")),
+            @AttributeOverride(name = "value", column = @Column(name = "previousDayOverallConsumption_value")),
+    })
     @Embedded
     protected SummaryMeasurement previousDayOverallConsumption;
 
-    @AttributeOverrides( {
-            @AttributeOverride(name="powerOfTenMultiplier", column = @Column(name="ratchetDemand_powerOfTenMultiplier") ),
-            @AttributeOverride(name="timeStamp", column = @Column(name="ratchetDemand_timeStamp") ),
-            @AttributeOverride(name="uom", column = @Column(name="ratchetDemand_uom") ),
-            @AttributeOverride(name="value", column = @Column(name="ratchetDemand_value") ),
-    } )
+    @AttributeOverrides({
+            @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "ratchetDemand_powerOfTenMultiplier")),
+            @AttributeOverride(name = "timeStamp", column = @Column(name = "ratchetDemand_timeStamp")),
+            @AttributeOverride(name = "uom", column = @Column(name = "ratchetDemand_uom")),
+            @AttributeOverride(name = "value", column = @Column(name = "ratchetDemand_value")),
+    })
     @Embedded
     protected SummaryMeasurement ratchetDemand;
 
@@ -213,11 +210,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Gets the value of the billingPeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DateTimeInterval }
-     *     
+     *
+     * @return possible object is
+     *         {@link DateTimeInterval }
      */
     public DateTimeInterval getBillingPeriod() {
         return billingPeriod;
@@ -225,11 +220,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Sets the value of the billingPeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DateTimeInterval }
-     *     
+     *
+     * @param value allowed object is
+     * {@link DateTimeInterval }
      */
     public void setBillingPeriod(DateTimeInterval value) {
         this.billingPeriod = value;
@@ -237,11 +230,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Gets the value of the billLastPeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getBillLastPeriod() {
         return billLastPeriod;
@@ -249,11 +240,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Sets the value of the billLastPeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     * {@link Long }
      */
     public void setBillLastPeriod(Long value) {
         this.billLastPeriod = value;
@@ -261,11 +250,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Gets the value of the billToDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getBillToDate() {
         return billToDate;
@@ -273,11 +260,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Sets the value of the billToDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     * {@link Long }
      */
     public void setBillToDate(Long value) {
         this.billToDate = value;
@@ -285,11 +270,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Gets the value of the costAdditionalLastPeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getCostAdditionalLastPeriod() {
         return costAdditionalLastPeriod;
@@ -297,11 +280,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Sets the value of the costAdditionalLastPeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     * {@link Long }
      */
     public void setCostAdditionalLastPeriod(Long value) {
         this.costAdditionalLastPeriod = value;
@@ -309,11 +290,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Gets the value of the currency property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCurrency() {
         return currency;
@@ -321,11 +300,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Sets the value of the currency property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setCurrency(String value) {
         this.currency = value;
@@ -334,10 +311,8 @@ public class ElectricPowerUsageSummary
     /**
      * Gets the value of the currentBillingPeriodOverAllConsumption property.
      *
-     * @return
-     *     possible object is
-     *     {@link SummaryMeasurement }
-     *
+     * @return possible object is
+     *         {@link SummaryMeasurement }
      */
     public SummaryMeasurement getCurrentBillingPeriodOverAllConsumption() {
         return currentBillingPeriodOverAllConsumption;
@@ -346,10 +321,8 @@ public class ElectricPowerUsageSummary
     /**
      * Sets the value of the currentBillingPeriodOverAllConsumption property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link SummaryMeasurement }
-     *
+     * @param value allowed object is
+     * {@link SummaryMeasurement }
      */
     public void setCurrentBillingPeriodOverAllConsumption(SummaryMeasurement value) {
         this.currentBillingPeriodOverAllConsumption = value;
@@ -357,11 +330,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Gets the value of the qualityOfReading property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getQualityOfReading() {
         return qualityOfReading;
@@ -369,11 +340,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Sets the value of the qualityOfReading property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setQualityOfReading(String value) {
         this.qualityOfReading = value;
@@ -382,10 +351,8 @@ public class ElectricPowerUsageSummary
     /**
      * Gets the value of the currentDayLastYearNetConsumption property.
      *
-     * @return
-     *     possible object is
-     *     {@link SummaryMeasurement }
-     *
+     * @return possible object is
+     *         {@link SummaryMeasurement }
      */
     public SummaryMeasurement getCurrentDayLastYearNetConsumption() {
         return currentDayLastYearNetConsumption;
@@ -394,10 +361,8 @@ public class ElectricPowerUsageSummary
     /**
      * Sets the value of the currentDayLastYearNetConsumption property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link SummaryMeasurement }
-     *
+     * @param value allowed object is
+     * {@link SummaryMeasurement }
      */
     public void setCurrentDayLastYearNetConsumption(SummaryMeasurement value) {
         this.currentDayLastYearNetConsumption = value;
@@ -406,10 +371,8 @@ public class ElectricPowerUsageSummary
     /**
      * Gets the value of the currentDayNetConsumption property.
      *
-     * @return
-     *     possible object is
-     *     {@link SummaryMeasurement }
-     *
+     * @return possible object is
+     *         {@link SummaryMeasurement }
      */
     public SummaryMeasurement getCurrentDayNetConsumption() {
         return currentDayNetConsumption;
@@ -418,10 +381,8 @@ public class ElectricPowerUsageSummary
     /**
      * Sets the value of the currentDayNetConsumption property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link SummaryMeasurement }
-     *
+     * @param value allowed object is
+     * {@link SummaryMeasurement }
      */
     public void setCurrentDayNetConsumption(SummaryMeasurement value) {
         this.currentDayNetConsumption = value;
@@ -430,10 +391,8 @@ public class ElectricPowerUsageSummary
     /**
      * Gets the value of the currentDayOverallConsumption property.
      *
-     * @return
-     *     possible object is
-     *     {@link SummaryMeasurement }
-     *
+     * @return possible object is
+     *         {@link SummaryMeasurement }
      */
     public SummaryMeasurement getCurrentDayOverallConsumption() {
         return currentDayOverallConsumption;
@@ -442,10 +401,8 @@ public class ElectricPowerUsageSummary
     /**
      * Sets the value of the currentDayOverallConsumption property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link SummaryMeasurement }
-     *
+     * @param value allowed object is
+     * {@link SummaryMeasurement }
      */
     public void setCurrentDayOverallConsumption(SummaryMeasurement value) {
         this.currentDayOverallConsumption = value;
@@ -454,10 +411,8 @@ public class ElectricPowerUsageSummary
     /**
      * Gets the value of the peakDemand property.
      *
-     * @return
-     *     possible object is
-     *     {@link SummaryMeasurement }
-     *
+     * @return possible object is
+     *         {@link SummaryMeasurement }
      */
     public SummaryMeasurement getPeakDemand() {
         return peakDemand;
@@ -466,10 +421,8 @@ public class ElectricPowerUsageSummary
     /**
      * Sets the value of the peakDemand property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link SummaryMeasurement }
-     *
+     * @param value allowed object is
+     * {@link SummaryMeasurement }
      */
     public void setPeakDemand(SummaryMeasurement value) {
         this.peakDemand = value;
@@ -478,10 +431,8 @@ public class ElectricPowerUsageSummary
     /**
      * Gets the value of the previousDayLastYearOverallConsumption property.
      *
-     * @return
-     *     possible object is
-     *     {@link SummaryMeasurement }
-     *
+     * @return possible object is
+     *         {@link SummaryMeasurement }
      */
     public SummaryMeasurement getPreviousDayLastYearOverallConsumption() {
         return previousDayLastYearOverallConsumption;
@@ -490,10 +441,8 @@ public class ElectricPowerUsageSummary
     /**
      * Sets the value of the previousDayLastYearOverallConsumption property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link SummaryMeasurement }
-     *
+     * @param value allowed object is
+     * {@link SummaryMeasurement }
      */
     public void setPreviousDayLastYearOverallConsumption(SummaryMeasurement value) {
         this.previousDayLastYearOverallConsumption = value;
@@ -502,10 +451,8 @@ public class ElectricPowerUsageSummary
     /**
      * Gets the value of the previousDayNetConsumption property.
      *
-     * @return
-     *     possible object is
-     *     {@link SummaryMeasurement }
-     *
+     * @return possible object is
+     *         {@link SummaryMeasurement }
      */
     public SummaryMeasurement getPreviousDayNetConsumption() {
         return previousDayNetConsumption;
@@ -514,10 +461,8 @@ public class ElectricPowerUsageSummary
     /**
      * Sets the value of the previousDayNetConsumption property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link SummaryMeasurement }
-     *
+     * @param value allowed object is
+     * {@link SummaryMeasurement }
      */
     public void setPreviousDayNetConsumption(SummaryMeasurement value) {
         this.previousDayNetConsumption = value;
@@ -526,10 +471,8 @@ public class ElectricPowerUsageSummary
     /**
      * Gets the value of the previousDayOverallConsumption property.
      *
-     * @return
-     *     possible object is
-     *     {@link SummaryMeasurement }
-     *
+     * @return possible object is
+     *         {@link SummaryMeasurement }
      */
     public SummaryMeasurement getPreviousDayOverallConsumption() {
         return previousDayOverallConsumption;
@@ -538,21 +481,18 @@ public class ElectricPowerUsageSummary
     /**
      * Sets the value of the previousDayOverallConsumption property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link SummaryMeasurement }
-     *
+     * @param value allowed object is
+     * {@link SummaryMeasurement }
      */
     public void setPreviousDayOverallConsumption(SummaryMeasurement value) {
         this.previousDayOverallConsumption = value;
     }
+
     /**
      * Gets the value of the ratchetDemand property.
      *
-     * @return
-     *     possible object is
-     *     {@link SummaryMeasurement }
-     *
+     * @return possible object is
+     *         {@link SummaryMeasurement }
      */
     public SummaryMeasurement getRatchetDemand() {
         return ratchetDemand;
@@ -561,10 +501,8 @@ public class ElectricPowerUsageSummary
     /**
      * Sets the value of the ratchetDemand property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link SummaryMeasurement }
-     *
+     * @param value allowed object is
+     * {@link SummaryMeasurement }
      */
     public void setRatchetDemand(SummaryMeasurement value) {
         this.ratchetDemand = value;
@@ -572,11 +510,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Gets the value of the ratchetDemandPeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DateTimeInterval }
-     *     
+     *
+     * @return possible object is
+     *         {@link DateTimeInterval }
      */
     public DateTimeInterval getRatchetDemandPeriod() {
         return ratchetDemandPeriod;
@@ -584,11 +520,9 @@ public class ElectricPowerUsageSummary
 
     /**
      * Sets the value of the ratchetDemandPeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DateTimeInterval }
-     *     
+     *
+     * @param value allowed object is
+     * {@link DateTimeInterval }
      */
     public void setRatchetDemandPeriod(DateTimeInterval value) {
         this.ratchetDemandPeriod = value;
@@ -596,7 +530,6 @@ public class ElectricPowerUsageSummary
 
     /**
      * Gets the value of the statusTimeStamp property.
-     * 
      */
     public long getStatusTimeStamp() {
         return statusTimeStamp;
@@ -604,7 +537,6 @@ public class ElectricPowerUsageSummary
 
     /**
      * Sets the value of the statusTimeStamp property.
-     * 
      */
     public void setStatusTimeStamp(long value) {
         this.statusTimeStamp = value;

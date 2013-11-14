@@ -62,19 +62,19 @@ public class SubscriptionBuilder {
     }
 
     private void populateElectricPowerQualitySummaryEntries(UsagePoint usagePoint) throws FeedException {
-        for(ElectricPowerQualitySummary summary : usagePoint.getElectricPowerQualitySummaries()) {
+        for (ElectricPowerQualitySummary summary : usagePoint.getElectricPowerQualitySummaries()) {
             feed.getEntries().add(new ElectricPowerQualitySummaryEntry(summary));
         }
     }
 
     private void populateElectricPowerUsageSummaryEntries(UsagePoint usagePoint) throws FeedException {
-        for(ElectricPowerUsageSummary summary : usagePoint.getElectricPowerUsageSummaries()) {
+        for (ElectricPowerUsageSummary summary : usagePoint.getElectricPowerUsageSummaries()) {
             feed.getEntries().add(new ElectricPowerUsageSummaryEntry(summary));
         }
     }
 
     private void populateMeterReadingEntries(UsagePoint usagePoint) throws FeedException {
-        for(MeterReading meterReading : usagePoint.getMeterReadings()) {
+        for (MeterReading meterReading : usagePoint.getMeterReadings()) {
             feed.getEntries().add(new MeterReadingEntry(meterReading));
 
             populateReadingTypeEntry(meterReading);

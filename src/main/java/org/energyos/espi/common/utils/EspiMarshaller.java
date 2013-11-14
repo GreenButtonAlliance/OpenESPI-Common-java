@@ -32,7 +32,7 @@ public class EspiMarshaller {
     private static Unmarshaller unmarshaller;
 
     public static <T extends Object> JAXBElement<T> unmarshal(String xml) throws JAXBException {
-        return (JAXBElement<T>) getUnmarshaller().unmarshal(new ByteArrayInputStream(xml.getBytes()));
+        return (JAXBElement<T>)getUnmarshaller().unmarshal(new ByteArrayInputStream(xml.getBytes()));
     }
 
     public static String marshal(Object entity) throws FeedException {

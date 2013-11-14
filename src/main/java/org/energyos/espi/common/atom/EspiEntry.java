@@ -56,7 +56,9 @@ public abstract class EspiEntry<T extends IdentifiedObject> extends Entry {
     }
 
     protected abstract String getSelfHref();
+
     protected abstract String getUpHref();
+
     protected abstract void buildRelatedLinks();
 
     public Link getSelfLink() {

@@ -31,14 +31,13 @@ import javax.xml.bind.annotation.XmlSchemaType;
 
 
 /**
- * 
- * 				The Atom link construct is defined in section 3.4 of the format spec.
- * 			
- * 
+ * The Atom link construct is defined in section 3.4 of the format spec.
+ *
+ *
  * <p>Java class for linkType complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="linkType">
  *   &lt;complexContent>
@@ -55,8 +54,6 @@ import javax.xml.bind.annotation.XmlSchemaType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class LinkType {
@@ -82,11 +79,9 @@ public class LinkType {
 
     /**
      * Sets the value of the href property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setHref(String value) {
         this.href = value;
@@ -94,11 +89,9 @@ public class LinkType {
 
     /**
      * Gets the value of the rel property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getRel() {
         return rel;

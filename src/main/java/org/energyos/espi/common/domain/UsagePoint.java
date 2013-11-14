@@ -59,19 +59,17 @@ import java.util.Set;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
-@XmlRootElement(name="UsagePoint")
+@XmlRootElement(name = "UsagePoint")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UsagePoint", propOrder = {
-    "roleFlags",
-    "serviceCategory",
-    "status",
-    "serviceDeliveryPoint"
+        "roleFlags",
+        "serviceCategory",
+        "status",
+        "serviceDeliveryPoint"
 })
 @Entity
-@Table(name = "usage_points", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
+@Table(name = "usage_points", uniqueConstraints = {@UniqueConstraint(columnNames = {"uuid"})})
 @NamedQueries(value = {
         @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_BY_RETAIL_CUSTOMER_ID,
                 query = "SELECT point FROM UsagePoint point WHERE point.retailCustomer.id = :retailCustomerId"),
@@ -84,8 +82,7 @@ import java.util.Set;
 })
 @XmlJavaTypeAdapter(UsagePointAdapter.class)
 public class UsagePoint
-    extends IdentifiedObject
-{
+        extends IdentifiedObject {
     public static final String QUERY_FIND_ALL_BY_RETAIL_CUSTOMER_ID = "UsagePoint.findUsagePointsByRetailCustomer";
     public static final String QUERY_FIND_BY_UUID = "UsagePoint.findByUUID";
     public static final String QUERY_FIND_BY_ID = "UsagePoint.findById";
@@ -131,15 +128,14 @@ public class UsagePoint
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<Subscription> subscriptions = new HashSet<>();
 
-    public void addMeterReading(MeterReading meterReading)
-    {
+    public void addMeterReading(MeterReading meterReading) {
         meterReading.setUsagePoint(this);
         meterReadings.add(meterReading);
     }
 
     @XmlTransient
     @ManyToOne
-    @JoinColumn(name="retail_customer_id")
+    @JoinColumn(name = "retail_customer_id")
     protected RetailCustomer retailCustomer;
 
     public String getSelfHref() {
@@ -153,10 +149,8 @@ public class UsagePoint
     /**
      * Gets the value of the roleFlags property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     *         {@link String }
      */
     public byte[] getRoleFlags() {
         return roleFlags;
@@ -165,10 +159,8 @@ public class UsagePoint
     /**
      * Sets the value of the roleFlags property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setRoleFlags(byte[] value) {
         this.roleFlags = value;
@@ -177,10 +169,8 @@ public class UsagePoint
     /**
      * Gets the value of the serviceCategory property.
      *
-     * @return
-     *     possible object is
-     *     {@link ServiceCategory }
-     *
+     * @return possible object is
+     *         {@link ServiceCategory }
      */
     public ServiceCategory getServiceCategory() {
         return serviceCategory;
@@ -189,10 +179,8 @@ public class UsagePoint
     /**
      * Sets the value of the serviceCategory property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link ServiceCategory }
-     *
+     * @param value allowed object is
+     * {@link ServiceCategory }
      */
     public void setServiceCategory(ServiceCategory value) {
         this.serviceCategory = value;
@@ -201,10 +189,8 @@ public class UsagePoint
     /**
      * Gets the value of the status property.
      *
-     * @return
-     *     possible object is
-     *     {@link Short }
-     *
+     * @return possible object is
+     *         {@link Short }
      */
     public Short getStatus() {
         return status;
@@ -213,10 +199,8 @@ public class UsagePoint
     /**
      * Sets the value of the status property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Short }
-     *
+     * @param value allowed object is
+     * {@link Short }
      */
     public void setStatus(Short value) {
         this.status = value;
@@ -285,19 +269,19 @@ public class UsagePoint
     }
 
     private void addMeterReadingLinks(List<LinkType> links) {
-        if(meterReadings.size() > 0) {
+        if (meterReadings.size() > 0) {
             links.add(new LinkType("related", getSelfHref() + "/MeterReading"));
         }
     }
 
     private void addElectricPowerUsageSummaryLinks(List<LinkType> links) {
-        if(electricPowerUsageSummaries.size() > 0) {
+        if (electricPowerUsageSummaries.size() > 0) {
             links.add(new LinkType("related", getSelfHref() + "/ElectricPowerUsageSummary"));
         }
     }
 
     private void addElectricPowerQualitySummaryLinks(List<LinkType> links) {
-        if(electricPowerQualitySummaries.size() > 0) {
+        if (electricPowerQualitySummaries.size() > 0) {
             links.add(new LinkType("related", getSelfHref() + "/ElectricPowerQualitySummary"));
         }
     }

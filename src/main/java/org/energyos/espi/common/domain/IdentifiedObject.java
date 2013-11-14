@@ -36,11 +36,11 @@ import java.util.UUID;
 
 /**
  * This is a root class to provide common naming attributes for all classes needing naming attributes
- * 
+ *
  * <p>Java class for IdentifiedObject complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="IdentifiedObject">
  *   &lt;complexContent>
@@ -53,27 +53,24 @@ import java.util.UUID;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IdentifiedObject")
 @XmlSeeAlso({
-    MeterReading.class,
-    UsagePoint.class,
-    ElectricPowerUsageSummary.class,
-    TimeConfiguration.class,
-    ApplicationInformation.class,
-    Authorization.class,
-    Subscription.class,
-    ElectricPowerQualitySummary.class,
-    IntervalBlock.class,
-    ReadingType.class
+        MeterReading.class,
+        UsagePoint.class,
+        ElectricPowerUsageSummary.class,
+        TimeConfiguration.class,
+        ApplicationInformation.class,
+        Authorization.class,
+        Subscription.class,
+        ElectricPowerQualitySummary.class,
+        IntervalBlock.class,
+        ReadingType.class
 })
 @MappedSuperclass
 public class IdentifiedObject
-    extends Resource
-{
+        extends Resource {
     @XmlTransient
     protected String description;
 
@@ -81,7 +78,8 @@ public class IdentifiedObject
     @NotNull
     protected String uuid;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
     protected Long id;
 
@@ -100,11 +98,9 @@ public class IdentifiedObject
 
     /**
      * Gets the value of the mrid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMRID() {
         if (uuid == null)
@@ -114,11 +110,9 @@ public class IdentifiedObject
 
     /**
      * Sets the value of the mrid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setMRID(String value) {
         this.uuid = value.replace("urn:uuid:", "").toUpperCase();
@@ -126,11 +120,9 @@ public class IdentifiedObject
 
     /**
      * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDescription() {
         return description;
@@ -138,11 +130,9 @@ public class IdentifiedObject
 
     /**
      * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setDescription(String value) {
         this.description = value;

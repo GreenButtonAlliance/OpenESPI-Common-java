@@ -32,11 +32,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Contains the current status of the service.
- * 
+ *
  * <p>Java class for ServiceStatus complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="ServiceStatus">
  *   &lt;complexContent>
@@ -48,27 +48,22 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ServiceStatus", propOrder = {
-    "currentStatus"
+        "currentStatus"
 })
 public class ServiceStatus
-    extends java.lang.Object
-{
+        extends java.lang.Object {
 
     @XmlElement(required = true)
     protected String currentStatus;
 
     /**
      * Gets the value of the currentStatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCurrentStatus() {
         return currentStatus;
@@ -76,11 +71,9 @@ public class ServiceStatus
 
     /**
      * Sets the value of the currentStatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setCurrentStatus(String value) {
         this.currentStatus = value;

@@ -41,8 +41,7 @@ import java.util.Map;
 
 
 /**
- *
- * 				The Atom entry construct is defined in section 4.1.2 of the format spec.
+ * The Atom entry construct is defined in section 4.1.2 of the format spec.
  *
  *
  * <p>Java class for entryType complex type.
@@ -74,8 +73,6 @@ import java.util.Map;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlRootElement(name = "entry")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -125,23 +122,21 @@ public class EntryType {
     protected DateTimeType updated;
 
     @XmlElementRefs({
-        @XmlElementRef(name = "contributor", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "link", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "author", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "rights", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "source", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "summary", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "content", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "published", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "updated", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "id", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "category", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "title", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false)
+            @XmlElementRef(name = "contributor", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "link", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "author", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "rights", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "source", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "summary", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "content", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "published", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "updated", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "id", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "category", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "title", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false)
     })
     @XmlAnyElement(lax = true)
     protected List<Object> authorOrCategoryOrContent;
-
-
 
 
     @XmlAttribute(name = "base", namespace = "http://www.w3.org/XML/1998/namespace")
@@ -203,6 +198,7 @@ public class EntryType {
     public void setUpdated(DateTimeType updated) {
         this.updated = updated;
     }
+
     /**
      * Gets the value of the authorOrCategoryOrContent property.
      *
@@ -234,8 +230,6 @@ public class EntryType {
      * {@link JAXBElement }{@code <}{@link DateTimeType }{@code >}
      * {@link Object }
      * {@link JAXBElement }{@code <}{@link TextType }{@code >}
-     *
-     *
      */
     public List<Object> getAuthorOrCategoryOrContent() {
         if (authorOrCategoryOrContent == null) {
@@ -247,10 +241,8 @@ public class EntryType {
     /**
      * Gets the value of the base property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBase() {
         return base;
@@ -259,10 +251,8 @@ public class EntryType {
     /**
      * Sets the value of the base property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setBase(String value) {
         this.base = value;
@@ -271,10 +261,8 @@ public class EntryType {
     /**
      * Gets the value of the lang property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLang() {
         return lang;
@@ -283,10 +271,8 @@ public class EntryType {
     /**
      * Sets the value of the lang property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setLang(String value) {
         this.lang = value;
@@ -302,9 +288,7 @@ public class EntryType {
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
      *
-     *
-     * @return
-     *     always non-null
+     * @return always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;

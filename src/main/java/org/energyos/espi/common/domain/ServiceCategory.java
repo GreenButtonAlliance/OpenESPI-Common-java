@@ -37,11 +37,11 @@ import java.util.Map;
 
 /**
  * Category of service provided to the customer.
- * 
+ *
  * <p>Java class for ServiceCategory complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="ServiceCategory">
  *   &lt;complexContent>
@@ -53,15 +53,12 @@ import java.util.Map;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlRootElement(name = "ServiceCategory")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "service_categories")
-public class ServiceCategory
-{
+public class ServiceCategory {
     public final static Long ELECTRICITY_SERVICE = 0L;
     public final static Long GAS_SERVICE = 1L;
     public final static Long WATER_SERVICE = 2L;
@@ -74,8 +71,8 @@ public class ServiceCategory
     public final static Long INTERNET_SERVICE = 9L;
 
     private static final Map<Long, String> labels = new HashMap<Long, String>();
-    static
-    {
+
+    static {
         labels.put(ELECTRICITY_SERVICE, "ELECTRICITY_SERVICE");
         labels.put(GAS_SERVICE, "GAS_SERVICE");
         labels.put(WATER_SERVICE, "GAS_SERVICE");
@@ -101,11 +98,9 @@ public class ServiceCategory
 
     /**
      * Gets the value of the kind property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public Long getKind() {
         return kind;
@@ -113,11 +108,9 @@ public class ServiceCategory
 
     /**
      * Sets the value of the kind property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setKind(Long value) {
         this.kind = value;

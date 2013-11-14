@@ -32,11 +32,11 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Contains information about a Third Party Application requesting access to the DataCustodian services. Information requested may include items such as Organization Name, Website, Contact Info, Application Name, Description, Icon, Type, default Notification and Callback endpoints, and may also include agreement with terms of service.
- * 
+ *
  * <p>Java class for ApplicationInformation complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="ApplicationInformation">
  *   &lt;complexContent>
@@ -65,33 +65,30 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ApplicationInformation", propOrder = {
-    "dataCustodianApplicationStatus",
-    "dataCustodianDefaultBatchResource",
-    "dataCustodianDefaultSubscriptionResource",
-    "dataCustodianThirdPartyId",
-    "dataCustodianThirdPartySecret",
-    "thirdPartyApplicationDescription",
-    "thirdPartyApplicationLogo",
-    "thirdPartyApplicationName",
-    "thirdPartyApplicationStatus",
-    "thirdPartyApplicationType",
-    "thirdPartyApplicationUse",
-    "thirdPartyApplicationWebsite",
-    "thirdPartyDefaultBatchResource",
-    "thirdPartyDefaultNotifyResource",
-    "thirdPartyDefaultOAuthCallback",
-    "thirdPartyEmail",
-    "thirdPartyName",
-    "thirdPartyPhone"
+        "dataCustodianApplicationStatus",
+        "dataCustodianDefaultBatchResource",
+        "dataCustodianDefaultSubscriptionResource",
+        "dataCustodianThirdPartyId",
+        "dataCustodianThirdPartySecret",
+        "thirdPartyApplicationDescription",
+        "thirdPartyApplicationLogo",
+        "thirdPartyApplicationName",
+        "thirdPartyApplicationStatus",
+        "thirdPartyApplicationType",
+        "thirdPartyApplicationUse",
+        "thirdPartyApplicationWebsite",
+        "thirdPartyDefaultBatchResource",
+        "thirdPartyDefaultNotifyResource",
+        "thirdPartyDefaultOAuthCallback",
+        "thirdPartyEmail",
+        "thirdPartyName",
+        "thirdPartyPhone"
 })
 public class ApplicationInformation
-    extends IdentifiedObject
-{
+        extends IdentifiedObject {
 
     protected String dataCustodianApplicationStatus;
     @XmlSchemaType(name = "anyURI")
@@ -121,11 +118,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the dataCustodianApplicationStatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDataCustodianApplicationStatus() {
         return dataCustodianApplicationStatus;
@@ -133,11 +128,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the dataCustodianApplicationStatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setDataCustodianApplicationStatus(String value) {
         this.dataCustodianApplicationStatus = value;
@@ -145,11 +138,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the dataCustodianDefaultBatchResource property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDataCustodianDefaultBatchResource() {
         return dataCustodianDefaultBatchResource;
@@ -157,11 +148,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the dataCustodianDefaultBatchResource property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setDataCustodianDefaultBatchResource(String value) {
         this.dataCustodianDefaultBatchResource = value;
@@ -169,11 +158,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the dataCustodianDefaultSubscriptionResource property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDataCustodianDefaultSubscriptionResource() {
         return dataCustodianDefaultSubscriptionResource;
@@ -181,11 +168,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the dataCustodianDefaultSubscriptionResource property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setDataCustodianDefaultSubscriptionResource(String value) {
         this.dataCustodianDefaultSubscriptionResource = value;
@@ -193,11 +178,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the dataCustodianThirdPartyId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDataCustodianThirdPartyId() {
         return dataCustodianThirdPartyId;
@@ -205,11 +188,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the dataCustodianThirdPartyId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setDataCustodianThirdPartyId(String value) {
         this.dataCustodianThirdPartyId = value;
@@ -217,11 +198,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the dataCustodianThirdPartySecret property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDataCustodianThirdPartySecret() {
         return dataCustodianThirdPartySecret;
@@ -229,11 +208,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the dataCustodianThirdPartySecret property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setDataCustodianThirdPartySecret(String value) {
         this.dataCustodianThirdPartySecret = value;
@@ -241,11 +218,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyApplicationDescription property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyApplicationDescription() {
         return thirdPartyApplicationDescription;
@@ -253,11 +228,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyApplicationDescription property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyApplicationDescription(String value) {
         this.thirdPartyApplicationDescription = value;
@@ -265,11 +238,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyApplicationLogo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyApplicationLogo() {
         return thirdPartyApplicationLogo;
@@ -277,11 +248,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyApplicationLogo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyApplicationLogo(String value) {
         this.thirdPartyApplicationLogo = value;
@@ -289,11 +258,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyApplicationName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyApplicationName() {
         return thirdPartyApplicationName;
@@ -301,11 +268,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyApplicationName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyApplicationName(String value) {
         this.thirdPartyApplicationName = value;
@@ -313,11 +278,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyApplicationStatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyApplicationStatus() {
         return thirdPartyApplicationStatus;
@@ -325,11 +288,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyApplicationStatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyApplicationStatus(String value) {
         this.thirdPartyApplicationStatus = value;
@@ -337,11 +298,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyApplicationType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyApplicationType() {
         return thirdPartyApplicationType;
@@ -349,11 +308,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyApplicationType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyApplicationType(String value) {
         this.thirdPartyApplicationType = value;
@@ -361,11 +318,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyApplicationUse property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyApplicationUse() {
         return thirdPartyApplicationUse;
@@ -373,11 +328,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyApplicationUse property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyApplicationUse(String value) {
         this.thirdPartyApplicationUse = value;
@@ -385,11 +338,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyApplicationWebsite property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyApplicationWebsite() {
         return thirdPartyApplicationWebsite;
@@ -397,11 +348,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyApplicationWebsite property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyApplicationWebsite(String value) {
         this.thirdPartyApplicationWebsite = value;
@@ -409,11 +358,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyDefaultBatchResource property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyDefaultBatchResource() {
         return thirdPartyDefaultBatchResource;
@@ -421,11 +368,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyDefaultBatchResource property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyDefaultBatchResource(String value) {
         this.thirdPartyDefaultBatchResource = value;
@@ -433,11 +378,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyDefaultNotifyResource property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyDefaultNotifyResource() {
         return thirdPartyDefaultNotifyResource;
@@ -445,11 +388,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyDefaultNotifyResource property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyDefaultNotifyResource(String value) {
         this.thirdPartyDefaultNotifyResource = value;
@@ -457,11 +398,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyDefaultOAuthCallback property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyDefaultOAuthCallback() {
         return thirdPartyDefaultOAuthCallback;
@@ -469,11 +408,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyDefaultOAuthCallback property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyDefaultOAuthCallback(String value) {
         this.thirdPartyDefaultOAuthCallback = value;
@@ -481,11 +418,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyEmail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyEmail() {
         return thirdPartyEmail;
@@ -493,11 +428,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyEmail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyEmail(String value) {
         this.thirdPartyEmail = value;
@@ -505,11 +438,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyName() {
         return thirdPartyName;
@@ -517,11 +448,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyName(String value) {
         this.thirdPartyName = value;
@@ -529,11 +458,9 @@ public class ApplicationInformation
 
     /**
      * Gets the value of the thirdPartyPhone property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getThirdPartyPhone() {
         return thirdPartyPhone;
@@ -541,11 +468,9 @@ public class ApplicationInformation
 
     /**
      * Sets the value of the thirdPartyPhone property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setThirdPartyPhone(String value) {
         this.thirdPartyPhone = value;

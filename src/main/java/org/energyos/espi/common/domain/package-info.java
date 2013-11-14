@@ -27,7 +27,6 @@
         xmlns = {
                 @XmlNs(prefix = "espi", namespaceURI = "http://naesb.org/espi")
         }
-)
-package org.energyos.espi.common.domain;
+) package org.energyos.espi.common.domain;
 
 import javax.xml.bind.annotation.XmlNs;

@@ -31,11 +31,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * A resource is an addressable unit of information, either a collection (List) or instance of an object (identifiedObject, or simply, Resource)
- * 
+ *
  * <p>Java class for Resource complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="Resource">
  *   &lt;complexContent>
@@ -49,13 +49,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Resource")
 @XmlSeeAlso({
-    IdentifiedObject.class
+        IdentifiedObject.class
 })
 public class Resource {
 
@@ -77,11 +75,9 @@ public class Resource {
 
     /**
      * Gets the value of the href property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getHref() {
         return href;
@@ -89,11 +85,9 @@ public class Resource {
 
     /**
      * Sets the value of the href property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setHref(String value) {
         this.href = value;
@@ -101,11 +95,9 @@ public class Resource {
 
     /**
      * Gets the value of the replyTo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getReplyTo() {
         return replyTo;
@@ -113,11 +105,9 @@ public class Resource {
 
     /**
      * Sets the value of the replyTo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setReplyTo(String value) {
         this.replyTo = value;
@@ -125,11 +115,9 @@ public class Resource {
 
     /**
      * Gets the value of the responseRequired property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public byte[] getResponseRequired() {
         return responseRequired;
@@ -137,11 +125,9 @@ public class Resource {
 
     /**
      * Sets the value of the responseRequired property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setResponseRequired(byte[] value) {
         this.responseRequired = value;
@@ -149,11 +135,9 @@ public class Resource {
 
     /**
      * Gets the value of the signatureRequired property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isSignatureRequired() {
         return signatureRequired;
@@ -161,11 +145,9 @@ public class Resource {
 
     /**
      * Sets the value of the signatureRequired property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     * {@link Boolean }
      */
     public void setSignatureRequired(Boolean value) {
         this.signatureRequired = value;
@@ -173,11 +155,9 @@ public class Resource {
 
     /**
      * Gets the value of the subscribable property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     *
+     * @return possible object is
+     *         {@link Boolean }
      */
     public Boolean isSubscribable() {
         return subscribable;
@@ -185,11 +165,9 @@ public class Resource {
 
     /**
      * Sets the value of the subscribable property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     *
+     * @param value allowed object is
+     * {@link Boolean }
      */
     public void setSubscribable(Boolean value) {
         this.subscribable = value;

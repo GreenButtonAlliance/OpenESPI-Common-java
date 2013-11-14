@@ -49,18 +49,15 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DateTimeInterval", propOrder = {
-    "duration",
-    "start"
+        "duration",
+        "start"
 })
 @Embeddable
 public class DateTimeInterval
-    extends Object
-{
+        extends Object {
 
     protected Long duration;
     protected Long start;
@@ -76,10 +73,8 @@ public class DateTimeInterval
     /**
      * Gets the value of the duration property.
      *
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getDuration() {
         return duration;
@@ -88,10 +83,8 @@ public class DateTimeInterval
     /**
      * Sets the value of the duration property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *
+     * @param value allowed object is
+     * {@link Long }
      */
     public void setDuration(Long value) {
         this.duration = value;
@@ -100,10 +93,8 @@ public class DateTimeInterval
     /**
      * Gets the value of the start property.
      *
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getStart() {
         return start;
@@ -112,10 +103,8 @@ public class DateTimeInterval
     /**
      * Sets the value of the start property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *
+     * @param value allowed object is
+     * {@link Long }
      */
     public void setStart(Long value) {
         this.start = value;

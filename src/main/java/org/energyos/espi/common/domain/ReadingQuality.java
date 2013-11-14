@@ -33,11 +33,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Quality of a specific reading value or interval reading value. Note that more than one Quality may be applicable to a given Reading. Typically not used unless problems or unusual conditions occur (i.e., quality for each Reading is assumed to be 'Good' (valid) unless stated otherwise in associated ReadingQuality).
- * 
+ *
  * <p>Java class for ReadingQuality complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="ReadingQuality">
  *   &lt;complexContent>
@@ -49,19 +49,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReadingQuality", propOrder = {
-    "quality"
+        "quality"
 })
 @Entity
 @Table(name = "reading_qualities")
 @XmlJavaTypeAdapter(ReadingQualityAdapter.class)
 @XmlRootElement(name = "ReadingQuality")
-public class ReadingQuality
-{
+public class ReadingQuality {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
@@ -77,11 +74,9 @@ public class ReadingQuality
 
     /**
      * Gets the value of the quality property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getQuality() {
         return quality;
@@ -89,11 +84,9 @@ public class ReadingQuality
 
     /**
      * Sets the value of the quality property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setQuality(String value) {
         this.quality = value;

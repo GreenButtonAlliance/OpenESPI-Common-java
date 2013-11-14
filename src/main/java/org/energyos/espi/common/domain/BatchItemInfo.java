@@ -34,11 +34,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Includes elements that make it possible to include multiple transactions in a single (batch) request.
- * 
+ *
  * <p>Java class for BatchItemInfo complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="BatchItemInfo">
  *   &lt;complexContent>
@@ -53,19 +53,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BatchItemInfo", propOrder = {
-    "name",
-    "operation",
-    "statusCode",
-    "statusReason"
+        "name",
+        "operation",
+        "statusCode",
+        "statusReason"
 })
 public class BatchItemInfo
-    extends Object
-{
+        extends Object {
 
     @XmlElement(type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
@@ -76,11 +73,9 @@ public class BatchItemInfo
 
     /**
      * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public byte[] getName() {
         return name;
@@ -88,11 +83,9 @@ public class BatchItemInfo
 
     /**
      * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setName(byte[] value) {
         this.name = value;
@@ -100,11 +93,9 @@ public class BatchItemInfo
 
     /**
      * Gets the value of the operation property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOperation() {
         return operation;
@@ -112,11 +103,9 @@ public class BatchItemInfo
 
     /**
      * Sets the value of the operation property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setOperation(String value) {
         this.operation = value;
@@ -124,11 +113,9 @@ public class BatchItemInfo
 
     /**
      * Gets the value of the statusCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getStatusCode() {
         return statusCode;
@@ -136,11 +123,9 @@ public class BatchItemInfo
 
     /**
      * Sets the value of the statusCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setStatusCode(String value) {
         this.statusCode = value;
@@ -148,11 +133,9 @@ public class BatchItemInfo
 
     /**
      * Gets the value of the statusReason property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getStatusReason() {
         return statusReason;
@@ -160,11 +143,9 @@ public class BatchItemInfo
 
     /**
      * Sets the value of the statusReason property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setStatusReason(String value) {
         this.statusReason = value;

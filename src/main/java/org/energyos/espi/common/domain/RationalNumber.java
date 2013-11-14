@@ -77,7 +77,7 @@ public class RationalNumber {
      * Sets the value of the numerator property.
      *
      * @param value allowed object is
-     *              {@link BigInteger }
+     * {@link BigInteger }
      */
     public void setNumerator(BigInteger value) {
         this.numerator = value;
@@ -97,7 +97,7 @@ public class RationalNumber {
      * Sets the value of the denominator property.
      *
      * @param value allowed object is
-     *              {@link java.lang.Object }
+     * {@link java.lang.Object }
      */
     public void setDenominator(BigInteger value) {
         this.denominator = value;

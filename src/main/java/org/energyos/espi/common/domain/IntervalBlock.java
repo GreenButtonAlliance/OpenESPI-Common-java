@@ -55,13 +55,11 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IntervalBlock", propOrder = {
-    "interval",
-    "intervalReadings"
+        "interval",
+        "intervalReadings"
 })
 @Entity
 @Table(name = "interval_blocks")
@@ -72,8 +70,7 @@ import java.util.List;
 @XmlRootElement(name = "IntervalBlock")
 @XmlJavaTypeAdapter(IntervalBlockAdapter.class)
 public class IntervalBlock
-    extends IdentifiedObject
-{
+        extends IdentifiedObject {
     public static final String QUERY_ALL_BY_METER_READING_ID = "IntervalBlock.findAllByMeterReadingId";
 
     @Embedded
@@ -95,10 +92,8 @@ public class IntervalBlock
     /**
      * Gets the value of the interval property.
      *
-     * @return
-     *     possible object is
-     *     {@link DateTimeInterval }
-     *
+     * @return possible object is
+     *         {@link DateTimeInterval }
      */
     public DateTimeInterval getInterval() {
         return interval;
@@ -107,10 +102,8 @@ public class IntervalBlock
     /**
      * Sets the value of the interval property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link DateTimeInterval }
-     *
+     * @param value allowed object is
+     * {@link DateTimeInterval }
      */
     public void setInterval(DateTimeInterval value) {
         this.interval = value;
@@ -135,8 +128,6 @@ public class IntervalBlock
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link IntervalReading }
-     *
-     *
      */
     public List<IntervalReading> getIntervalReadings() {
         return this.intervalReadings;

@@ -31,18 +31,17 @@ import javax.xml.namespace.QName;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the org.naesb.espi package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the org.naesb.espi package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -68,14 +67,12 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.naesb.espi
-     *
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link MeterReading }
-     *
      */
     public MeterReading createMeterReading() {
         return new MeterReading();
@@ -83,7 +80,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link UsagePoint }
-     *
      */
     public UsagePoint createUsagePoint() {
         return new UsagePoint();
@@ -91,7 +87,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link BatchItemInfo }
-     *
      */
     public BatchItemInfo createBatchItemInfo() {
         return new BatchItemInfo();
@@ -99,7 +94,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ElectricPowerUsageSummary }
-     *
      */
     public ElectricPowerUsageSummary createElectricPowerUsageSummary() {
         return new ElectricPowerUsageSummary();
@@ -107,7 +101,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TimeConfiguration }
-     *
      */
     public TimeConfiguration createTimeConfiguration() {
         return new TimeConfiguration();
@@ -115,7 +108,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ApplicationInformation }
-     *
      */
     public ApplicationInformation createApplicationInformation() {
         return new ApplicationInformation();
@@ -123,7 +115,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link DateTimeInterval }
-     *
      */
     public DateTimeInterval createDateTimeInterval() {
         return new DateTimeInterval();
@@ -131,7 +122,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ServiceStatus }
-     *
      */
     public ServiceStatus createServiceStatus() {
         return new ServiceStatus();
@@ -139,7 +129,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link IdentifiedObject }
-     *
      */
     public IdentifiedObject createIdentifiedObject() {
         return new IdentifiedObject();
@@ -147,7 +136,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link SummaryMeasurement }
-     *
      */
     public SummaryMeasurement createSummaryMeasurement() {
         return new SummaryMeasurement();
@@ -155,7 +143,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Authorization }
-     *
      */
     public Authorization createAuthorization() {
         return new Authorization();
@@ -163,7 +150,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Subscription }
-     *
      */
     public Subscription createSubscription() {
         return new Subscription();
@@ -171,7 +157,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReadingQuality }
-     *
      */
     public ReadingQuality createReadingQuality() {
         return new ReadingQuality();
@@ -179,7 +164,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ElectricPowerQualitySummary }
-     *
      */
     public ElectricPowerQualitySummary createElectricPowerQualitySummary() {
         return new ElectricPowerQualitySummary();
@@ -187,7 +171,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link IntervalReading }
-     *
      */
     public IntervalReading createIntervalReading() {
         return new IntervalReading();
@@ -195,7 +178,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link java.lang.Object }
-     *
      */
     public java.lang.Object createObject() {
         return new java.lang.Object();
@@ -203,7 +185,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link IntervalBlock }
-     *
      */
     public IntervalBlock createIntervalBlock() {
         return new IntervalBlock();
@@ -211,7 +192,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReadingType }
-     *
      */
     public ReadingType createReadingType() {
         return new ReadingType();
@@ -219,7 +199,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RationalNumber }
-     *
      */
     public RationalNumber createRationalNumber() {
         return new RationalNumber();
@@ -227,7 +206,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ServiceCategory }
-     *
      */
     public ServiceCategory createServiceCategory() {
         return new ServiceCategory();
@@ -235,7 +213,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Resource }
-     *
      */
     public Resource createResource() {
         return new Resource();
@@ -243,7 +220,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ReadingInterharmonic }
-     *
      */
     public ReadingInterharmonic createReadingInterharmonic() {
         return new ReadingInterharmonic();
@@ -251,7 +227,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link IntervalReading }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "IntervalReading")
     public JAXBElement<IntervalReading> createIntervalReading(IntervalReading value) {
@@ -260,7 +235,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link IntervalBlock }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "IntervalBlock")
     public JAXBElement<IntervalBlock> createIntervalBlock(IntervalBlock value) {
@@ -269,7 +243,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link java.lang.Object }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "Object")
     public JAXBElement<java.lang.Object> createObject(java.lang.Object value) {
@@ -278,7 +251,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ReadingType }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "ReadingType")
     public JAXBElement<ReadingType> createReadingType(ReadingType value) {
@@ -287,7 +259,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SummaryMeasurement }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "SummaryMeasurement")
     public JAXBElement<SummaryMeasurement> createSummaryMeasurement(SummaryMeasurement value) {
@@ -296,7 +267,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Authorization }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "Authorization")
     public JAXBElement<Authorization> createAuthorization(Authorization value) {
@@ -305,7 +275,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ElectricPowerQualitySummary }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "ElectricPowerQualitySummary")
     public JAXBElement<ElectricPowerQualitySummary> createElectricPowerQualitySummary(ElectricPowerQualitySummary value) {
@@ -314,7 +283,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ReadingQuality }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "ReadingQuality")
     public JAXBElement<ReadingQuality> createReadingQuality(ReadingQuality value) {
@@ -323,7 +291,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Subscription }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "Subscription")
     public JAXBElement<Subscription> createSubscription(Subscription value) {
@@ -332,7 +299,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TimeConfiguration }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "LocalTimeParameters")
     public JAXBElement<TimeConfiguration> createLocalTimeParameters(TimeConfiguration value) {
@@ -341,7 +307,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ApplicationInformation }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "ApplicationInformation")
     public JAXBElement<ApplicationInformation> createApplicationInformation(ApplicationInformation value) {
@@ -350,7 +315,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DateTimeInterval }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "DateTimeInterval")
     public JAXBElement<DateTimeInterval> createDateTimeInterval(DateTimeInterval value) {
@@ -359,7 +323,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ServiceStatus }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "ServiceStatus")
     public JAXBElement<ServiceStatus> createServiceStatus(ServiceStatus value) {
@@ -368,7 +331,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link IdentifiedObject }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "IdentifiedObject")
     public JAXBElement<IdentifiedObject> createIdentifiedObject(IdentifiedObject value) {
@@ -377,7 +339,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link MeterReading }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "MeterReading")
     public JAXBElement<MeterReading> createMeterReading(MeterReading value) {
@@ -386,7 +347,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link UsagePoint }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "UsagePoint")
     public JAXBElement<UsagePoint> createUsagePoint(UsagePoint value) {
@@ -395,7 +355,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BatchItemInfo }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "BatchItemInfo")
     public JAXBElement<BatchItemInfo> createBatchItemInfo(BatchItemInfo value) {
@@ -404,7 +363,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ElectricPowerUsageSummary }{@code >}}
-     *
      */
     @XmlElementDecl(namespace = "http://naesb.org/espi", name = "ElectricPowerUsageSummary")
     public JAXBElement<ElectricPowerUsageSummary> createElectricPowerUsageSummary(ElectricPowerUsageSummary value) {

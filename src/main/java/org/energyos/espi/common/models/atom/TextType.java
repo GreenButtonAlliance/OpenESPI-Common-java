@@ -35,14 +35,13 @@ import java.util.Map;
 
 
 /**
- * 
- * 				The Atom text construct is defined in section 3.1 of the format spec.
- * 			
- * 
+ * The Atom text construct is defined in section 3.1 of the format spec.
+ *
+ *
  * <p>Java class for textType complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="textType">
  *   &lt;complexContent>
@@ -65,13 +64,11 @@ import java.util.Map;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "textType", propOrder = {
-    "content"
+        "content"
 })
 public class TextType {
 
@@ -92,29 +89,26 @@ public class TextType {
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
     /**
-     * 
-     * 				The Atom text construct is defined in section 3.1 of the format spec.
-     * 			Gets the value of the content property.
-     * 
+     * The Atom text construct is defined in section 3.1 of the format spec.
+     * Gets the value of the content property.
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the content property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getContent().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Object }
      * {@link String }
-     * 
-     * 
      */
     public List<Object> getContent() {
         if (content == null) {
@@ -125,11 +119,9 @@ public class TextType {
 
     /**
      * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getType() {
         return type;
@@ -137,11 +129,9 @@ public class TextType {
 
     /**
      * Sets the value of the type property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setType(String value) {
         this.type = value;
@@ -149,11 +139,9 @@ public class TextType {
 
     /**
      * Gets the value of the base property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBase() {
         return base;
@@ -161,11 +149,9 @@ public class TextType {
 
     /**
      * Sets the value of the base property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setBase(String value) {
         this.base = value;
@@ -173,11 +159,9 @@ public class TextType {
 
     /**
      * Gets the value of the lang property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLang() {
         return lang;
@@ -185,11 +169,9 @@ public class TextType {
 
     /**
      * Sets the value of the lang property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setLang(String value) {
         this.lang = value;
@@ -197,17 +179,15 @@ public class TextType {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     * 
+     *
      * <p>
-     * the map is keyed by the name of the attribute and 
+     * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     * 
+     *
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
-     * 
-     * 
-     * @return
-     *     always non-null
+     *
+     * @return always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;

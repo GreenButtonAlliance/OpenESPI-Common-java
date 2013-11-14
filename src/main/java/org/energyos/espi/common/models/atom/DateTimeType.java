@@ -35,9 +35,9 @@ import java.util.Map;
 
 /**
  * <p>Java class for dateTimeType complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="dateTimeType">
  *   &lt;simpleContent>
@@ -48,13 +48,11 @@ import java.util.Map;
  *   &lt;/simpleContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dateTimeType", propOrder = {
-    "value"
+        "value"
 })
 public class DateTimeType {
 
@@ -73,11 +71,9 @@ public class DateTimeType {
 
     /**
      * Gets the value of the value property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getValue() {
         return value;
@@ -85,11 +81,9 @@ public class DateTimeType {
 
     /**
      * Sets the value of the value property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     * {@link XMLGregorianCalendar }
      */
     public void setValue(XMLGregorianCalendar value) {
         this.value = value;
@@ -97,11 +91,9 @@ public class DateTimeType {
 
     /**
      * Gets the value of the base property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBase() {
         return base;
@@ -109,11 +101,9 @@ public class DateTimeType {
 
     /**
      * Sets the value of the base property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setBase(String value) {
         this.base = value;
@@ -121,11 +111,9 @@ public class DateTimeType {
 
     /**
      * Gets the value of the lang property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLang() {
         return lang;
@@ -133,11 +121,9 @@ public class DateTimeType {
 
     /**
      * Sets the value of the lang property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setLang(String value) {
         this.lang = value;
@@ -145,17 +131,15 @@ public class DateTimeType {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     * 
+     *
      * <p>
-     * the map is keyed by the name of the attribute and 
+     * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     * 
+     *
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
-     * 
-     * 
-     * @return
-     *     always non-null
+     *
+     * @return always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;

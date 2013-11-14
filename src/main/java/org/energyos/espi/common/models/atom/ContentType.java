@@ -213,7 +213,7 @@ public class ContentType {
      * Sets the value of the type property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setType(String value) {
         this.type = value;
@@ -233,7 +233,7 @@ public class ContentType {
      * Sets the value of the src property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setSrc(String value) {
         this.src = value;
@@ -253,7 +253,7 @@ public class ContentType {
      * Sets the value of the base property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setBase(String value) {
         this.base = value;
@@ -273,7 +273,7 @@ public class ContentType {
      * Sets the value of the lang property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setLang(String value) {
         this.lang = value;

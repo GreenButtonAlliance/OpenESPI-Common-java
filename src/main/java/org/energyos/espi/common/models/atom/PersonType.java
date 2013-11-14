@@ -36,14 +36,13 @@ import java.util.Map;
 
 
 /**
- * 
- * 				The Atom person construct is defined in section 3.2 of the format spec.
- * 			
- * 
+ * The Atom person construct is defined in section 3.2 of the format spec.
+ *
+ *
  * <p>Java class for personType complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="personType">
  *   &lt;complexContent>
@@ -60,19 +59,17 @@ import java.util.Map;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "personType", propOrder = {
-    "nameOrUriOrEmail"
+        "nameOrUriOrEmail"
 })
 public class PersonType {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "name", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "email", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "uri", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false)
+            @XmlElementRef(name = "name", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "email", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "uri", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false)
     })
     @XmlAnyElement(lax = true)
     protected List<Object> nameOrUriOrEmail;
@@ -88,28 +85,26 @@ public class PersonType {
 
     /**
      * Gets the value of the nameOrUriOrEmail property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the nameOrUriOrEmail property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getNameOrUriOrEmail().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link String }{@code >}
      * {@link JAXBElement }{@code <}{@link UriType }{@code >}
      * {@link Object }
-     * 
-     * 
      */
     public List<Object> getNameOrUriOrEmail() {
         if (nameOrUriOrEmail == null) {
@@ -120,11 +115,9 @@ public class PersonType {
 
     /**
      * Gets the value of the base property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBase() {
         return base;
@@ -132,11 +125,9 @@ public class PersonType {
 
     /**
      * Sets the value of the base property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setBase(String value) {
         this.base = value;
@@ -144,11 +135,9 @@ public class PersonType {
 
     /**
      * Gets the value of the lang property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getLang() {
         return lang;
@@ -156,11 +145,9 @@ public class PersonType {
 
     /**
      * Sets the value of the lang property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     * {@link String }
      */
     public void setLang(String value) {
         this.lang = value;
@@ -168,17 +155,15 @@ public class PersonType {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     * 
+     *
      * <p>
-     * the map is keyed by the name of the attribute and 
+     * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     * 
+     *
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
-     * 
-     * 
-     * @return
-     *     always non-null
+     *
+     * @return always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;

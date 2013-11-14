@@ -28,7 +28,6 @@
                 @XmlNs(prefix = "", namespaceURI = "http://www.w3.org/2005/Atom"),
                 @XmlNs(prefix = "espi", namespaceURI = "http://naesb.org/espi"),
         }
-)
-package org.energyos.espi.common.models.atom;
+) package org.energyos.espi.common.models.atom;
 
 import javax.xml.bind.annotation.XmlNs;

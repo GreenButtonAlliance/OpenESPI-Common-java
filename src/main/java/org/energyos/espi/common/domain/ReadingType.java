@@ -72,7 +72,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * &lt;/complexType>
  * </pre>
  */
-@XmlRootElement(name="ReadingType")
+@XmlRootElement(name = "ReadingType")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReadingType", propOrder = {
         "accumulationBehaviour",
@@ -136,7 +136,7 @@ public class ReadingType
      * Sets the value of the accumulationBehaviour property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setAccumulationBehaviour(String value) {
         this.accumulationBehaviour = value;
@@ -156,7 +156,7 @@ public class ReadingType
      * Sets the value of the commodity property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setCommodity(String value) {
         this.commodity = value;
@@ -176,7 +176,7 @@ public class ReadingType
      * Sets the value of the dataQualifier property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setDataQualifier(String value) {
         this.dataQualifier = value;
@@ -196,7 +196,7 @@ public class ReadingType
      * Sets the value of the flowDirection property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setFlowDirection(String value) {
         this.flowDirection = value;
@@ -216,7 +216,7 @@ public class ReadingType
      * Sets the value of the intervalLength property.
      *
      * @param value allowed object is
-     *              {@link Long }
+     * {@link Long }
      */
     public void setIntervalLength(Long value) {
         this.intervalLength = value;
@@ -236,7 +236,7 @@ public class ReadingType
      * Sets the value of the kind property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setKind(String value) {
         this.kind = value;
@@ -256,7 +256,7 @@ public class ReadingType
      * Sets the value of the phase property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setPhase(String value) {
         this.phase = value;
@@ -276,7 +276,7 @@ public class ReadingType
      * Sets the value of the powerOfTenMultiplier property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setPowerOfTenMultiplier(String value) {
         this.powerOfTenMultiplier = value;
@@ -296,7 +296,7 @@ public class ReadingType
      * Sets the value of the timeAttribute property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setTimeAttribute(String value) {
         this.timeAttribute = value;
@@ -316,7 +316,7 @@ public class ReadingType
      * Sets the value of the uom property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setUom(String value) {
         this.uom = value;
@@ -336,7 +336,7 @@ public class ReadingType
      * Sets the value of the consumptionTier property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setConsumptionTier(String value) {
         this.consumptionTier = value;
@@ -356,7 +356,7 @@ public class ReadingType
      * Sets the value of the cpp property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setCpp(String value) {
         this.cpp = value;
@@ -376,7 +376,7 @@ public class ReadingType
      * Sets the value of the currency property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setCurrency(String value) {
         this.currency = value;
@@ -396,7 +396,7 @@ public class ReadingType
      * Sets the value of the interharmonic property.
      *
      * @param value allowed object is
-     *              {@link ReadingInterharmonic }
+     * {@link ReadingInterharmonic }
      */
     public void setInterharmonic(ReadingInterharmonic value) {
         this.interharmonic = value;
@@ -416,7 +416,7 @@ public class ReadingType
      * Sets the value of the measuringPeriod property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setMeasuringPeriod(String value) {
         this.measuringPeriod = value;
@@ -436,7 +436,7 @@ public class ReadingType
      * Sets the value of the tou property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setTou(String value) {
         this.tou = value;
@@ -456,7 +456,7 @@ public class ReadingType
      * Sets the value of the aggregate property.
      *
      * @param value allowed object is
-     *              {@link String }
+     * {@link String }
      */
     public void setAggregate(String value) {
         this.aggregate = value;
@@ -476,7 +476,7 @@ public class ReadingType
      * Sets the value of the argument property.
      *
      * @param value allowed object is
-     *              {@link RationalNumber }
+     * {@link RationalNumber }
      */
     public void setArgument(RationalNumber value) {
         this.argument = value;

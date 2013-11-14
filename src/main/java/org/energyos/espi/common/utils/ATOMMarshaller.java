@@ -40,7 +40,7 @@ public class ATOMMarshaller {
 
     public FeedType unmarshal(InputStream stream) throws JAXBException {
         @SuppressWarnings("unchecked")
-        JAXBElement<FeedType> object = (JAXBElement<FeedType>) marshaller.unmarshal(new StreamSource(stream));
+        JAXBElement<FeedType> object = (JAXBElement<FeedType>)marshaller.unmarshal(new StreamSource(stream));
         return object.getValue();
     }
 

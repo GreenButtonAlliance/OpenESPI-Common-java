@@ -32,7 +32,7 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
     @PersistenceContext
     protected EntityManager em;
 
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public List<RetailCustomer> findAll() {
         return (List<RetailCustomer>)this.em.createNamedQuery(RetailCustomer.QUERY_FIND_ALL).getResultList();
     }
@@ -49,7 +49,7 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 
     @Override
     public UserDetails findByUsername(String username) {
-       return (UserDetails)this.em.createNamedQuery(RetailCustomer.QUERY_FIND_BY_USERNAME)
-               .setParameter("username", username).getSingleResult();
+        return (UserDetails)this.em.createNamedQuery(RetailCustomer.QUERY_FIND_BY_USERNAME)
+                .setParameter("username", username).getSingleResult();
     }
 }

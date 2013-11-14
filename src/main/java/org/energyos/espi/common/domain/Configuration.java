@@ -2,7 +2,7 @@ package org.energyos.espi.common.domain;
 
 public class Configuration {
     public static final String DATA_CUSTODIAN_ID = "data_custodian";
-    public static final String[] SCOPES = new String [] {
+    public static final String[] SCOPES = new String[]{
             "FB=4_5_15;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13",
             "FB=4_5_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13"
     };

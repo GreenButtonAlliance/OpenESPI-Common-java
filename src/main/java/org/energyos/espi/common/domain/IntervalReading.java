@@ -38,11 +38,11 @@ import java.util.List;
 
 /**
  * Specific value measured by a meter or other asset. Each Reading is associated with a specific ReadingType.
- * 
+ *
  * <p>Java class for IntervalReading complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="IntervalReading">
  *   &lt;complexContent>
@@ -57,24 +57,22 @@ import java.util.List;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IntervalReading", propOrder = {
-    "cost",
-    "readingQualities",
-    "timePeriod",
-    "value"
+        "cost",
+        "readingQualities",
+        "timePeriod",
+        "value"
 })
 @Entity
 @Table(name = "interval_readings")
 @XmlJavaTypeAdapter(IntervalReadingAdapter.class)
 @XmlRootElement(name = "IntervalReading")
-public class IntervalReading
-{
+public class IntervalReading {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
     protected Long id;
 
@@ -100,11 +98,9 @@ public class IntervalReading
 
     /**
      * Gets the value of the cost property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getCost() {
         return cost;
@@ -112,11 +108,9 @@ public class IntervalReading
 
     /**
      * Sets the value of the cost property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     * {@link Long }
      */
     public void setCost(Long value) {
         this.cost = value;
@@ -124,25 +118,23 @@ public class IntervalReading
 
     /**
      * Gets the value of the readingQuality property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the readingQuality property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getReadingQuality().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link ReadingQuality }
-     * 
-     * 
      */
     public List<ReadingQuality> getReadingQualities() {
         return this.readingQualities;
@@ -150,11 +142,9 @@ public class IntervalReading
 
     /**
      * Gets the value of the timePeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DateTimeInterval }
-     *     
+     *
+     * @return possible object is
+     *         {@link DateTimeInterval }
      */
     public DateTimeInterval getTimePeriod() {
         return timePeriod;
@@ -162,11 +152,9 @@ public class IntervalReading
 
     /**
      * Sets the value of the timePeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DateTimeInterval }
-     *     
+     *
+     * @param value allowed object is
+     * {@link DateTimeInterval }
      */
     public void setTimePeriod(DateTimeInterval value) {
         this.timePeriod = value;
@@ -174,11 +162,9 @@ public class IntervalReading
 
     /**
      * Gets the value of the value property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     *         {@link Long }
      */
     public Long getValue() {
         return value;
@@ -186,11 +172,9 @@ public class IntervalReading
 
     /**
      * Sets the value of the value property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     * {@link Long }
      */
     public void setValue(Long value) {
         this.value = value;
