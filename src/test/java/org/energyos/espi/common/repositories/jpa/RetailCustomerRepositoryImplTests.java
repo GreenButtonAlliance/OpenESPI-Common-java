@@ -18,13 +18,13 @@ package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
+import org.energyos.espi.common.test.EspiFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -34,7 +34,7 @@ import static org.junit.Assert.assertTrue;
 @Transactional
 public class RetailCustomerRepositoryImplTests {
 
-    @Resource
+    @Autowired
     private RetailCustomerRepository repository;
 
     @Test
@@ -45,6 +45,14 @@ public class RetailCustomerRepositoryImplTests {
     @Test
     public void findById_returnsRetailCustomer() throws Exception {
         assertNotNull(repository.findById(1L));
+    }
+
+    @Test
+    public void findByUsername() throws Exception {
+        RetailCustomer retailCustomer = EspiFactory.newRetailCustomer();
+        repository.persist(retailCustomer);
+
+        assertNotNull(repository.findByUsername(retailCustomer.getUsername()));
     }
 
     @Test
