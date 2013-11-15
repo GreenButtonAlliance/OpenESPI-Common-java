@@ -30,6 +30,9 @@ import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -38,13 +41,12 @@ public class SubscriptionTests {
     @Test
     public void isValid() throws Exception {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        RetailCustomer retailCustomer = EspiFactory.newRetailCustomer();
 
-        Subscription subscription = EspiFactory.newSubscription(retailCustomer);
+        Subscription subscription = EspiFactory.newSubscription();
 
         Set<ConstraintViolation<Subscription>> violations = validator.validate(subscription);
 
-        assertTrue(violations.isEmpty());
+        assertThat(violations, is(empty()));
     }
 
     @Test

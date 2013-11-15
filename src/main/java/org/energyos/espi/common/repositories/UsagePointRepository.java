@@ -40,4 +40,6 @@ public interface UsagePointRepository {
     List<UsagePoint> findAllUpdatedFor(Subscription subscription);
 
     void deleteById(Long id);
+
+    UsagePoint findByURI(String uri);
 }

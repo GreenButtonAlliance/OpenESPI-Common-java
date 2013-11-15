@@ -1,12 +1,10 @@
 package org.energyos.espi.common.utils.factories;
 
-import com.sun.syndication.io.FeedException;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.FeedType;
 import org.energyos.espi.common.utils.DateConverter;
 import org.energyos.espi.common.utils.FeedBuilder;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import java.util.*;
 
 import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
@@ -15,7 +13,7 @@ public class ATOMFactory {
     private ATOMFactory() {
     }
 
-    public static FeedType newFeedType() throws DatatypeConfigurationException, FeedException {
+    public static FeedType newFeedType() {
 
         UsagePoint usagePoint = newUsagePoint();
         List<UsagePoint> usagePoints = new ArrayList<>();

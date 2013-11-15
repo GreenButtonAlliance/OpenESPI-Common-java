@@ -15,7 +15,6 @@ package org.energyos.espi.common.utils;
  *    limitations under the License.
  */
 
-import com.sun.syndication.io.FeedException;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.models.atom.FeedType;
@@ -27,7 +26,7 @@ import java.util.List;
 public class FeedBuilder {
     private FeedType feed;
 
-    public FeedType build(List<UsagePoint> usagePointList) throws FeedException {
+    public FeedType build(List<UsagePoint> usagePointList) {
         feed = new FeedType();
 
         populateEntries(usagePointList);
@@ -35,7 +34,7 @@ public class FeedBuilder {
         return feed;
     }
 
-    private void populateEntries(List<UsagePoint> usagePointList) throws FeedException {
+    private void populateEntries(List<UsagePoint> usagePointList) {
         for (UsagePoint usagePoint : usagePointList) {
             feed.getEntries().add(new EntryBuilder().build(usagePoint));
         }

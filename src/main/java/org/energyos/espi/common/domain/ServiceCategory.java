@@ -27,6 +27,7 @@ package org.energyos.espi.common.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -93,6 +94,7 @@ public class ServiceCategory {
     }
 
     @XmlElement(required = true)
+    @NotNull
     @Id
     protected Long kind;
 

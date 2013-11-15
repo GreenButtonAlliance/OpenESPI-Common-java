@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 
 import java.io.Serializable;
+import java.lang.Object;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -15,6 +16,7 @@ public class EspiFactory {
 
         usagePoint.setUUID(uuid);
         usagePoint.setDescription("Electric meter");
+//        usagePoint.setURI("/espi/1_1/resource/RetailCustomer/" + getRandomString() + "/UsagePoint/" + getRandomString());
 
         usagePoint.setServiceCategory(new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE));
 
@@ -42,7 +44,6 @@ public class EspiFactory {
         retailCustomer.setId(1L);
         return retailCustomer;
     }
-
     public static UsagePoint newUsagePoint(RetailCustomer retailCustomer) {
         UsagePoint usagePoint = new UsagePoint();
 
@@ -69,6 +70,9 @@ public class EspiFactory {
         updated.setTimeZone(TimeZone.getTimeZone("UTC"));
         usagePoint.setUpdated(updated.getTime());
 
+//        usagePoint.setURI("/espi/1_1/resource/RetailCustomer/" + getRandomString() + "/UsagePoint/" + getRandomString());
+
+
         return usagePoint;
     }
 
@@ -85,7 +89,7 @@ public class EspiFactory {
     }
 
     public static TimeConfiguration newTimeConfigurationWithUsagePoint() {
-        return newUsagePoint().getLocalTimeParameters();
+        return newLocalTimeParameters();
     }
 
     public static IntervalBlock newIntervalBlockWithUsagePoint() {
@@ -115,7 +119,7 @@ public class EspiFactory {
         return meterReading;
     }
 
-    private static TimeConfiguration newLocalTimeParameters() {
+    public static TimeConfiguration newLocalTimeParameters() {
         TimeConfiguration timeConfiguration = new TimeConfiguration();
 
         timeConfiguration.setDescription("DST For North America");
@@ -165,7 +169,7 @@ public class EspiFactory {
         return readingType;
     }
 
-    private static IntervalBlock newIntervalBlock() {
+    public static IntervalBlock newIntervalBlock() {
         IntervalBlock intervalBlock = new IntervalBlock();
 
         DateTimeInterval interval = new DateTimeInterval();
@@ -266,6 +270,53 @@ public class EspiFactory {
         return summary;
     }
 
+    public static Subscription newSubscription(RetailCustomer retailCustomer) {
+        Subscription subscription = new Subscription();
+        subscription.setUUID(UUID.randomUUID());
+        subscription.setRetailCustomer(retailCustomer);
+        subscription.setThirdParty(newThirdParty());
+        return subscription;
+    }
+
+    public static Authorization newAuthorization() {
+        return newAuthorization(newRetailCustomer(), newDataCustodian());
+    }
+
+
+    public static DataCustodian newDataCustodian() {
+        DataCustodian dataCustodian = new DataCustodian();
+        dataCustodian.setDescription("Description" + System.currentTimeMillis());
+        dataCustodian.setUrl("http://DataCustodian" + System.currentTimeMillis() + ".example.com");
+        dataCustodian.setClientId("clientId" + System.currentTimeMillis());
+
+        return dataCustodian;
+    }
+
+    public static Authorization newAuthorization(RetailCustomer retailCustomer, DataCustodian dataCustodian) {
+        Authorization authorization = new Authorization();
+
+        authorization.setAccessToken("accessToken" + System.currentTimeMillis());
+        authorization.setAuthorizationServer("http://DataCustodian" + System.currentTimeMillis() + ".example.com");
+        authorization.setSubscriptionURI(Routes.getDataCustodianRESTSubscriptionGetURL(UUID.randomUUID().toString()));
+        authorization.setThirdParty("thirdParty" + System.currentTimeMillis());
+        authorization.setState("state" + UUID.randomUUID());
+        authorization.setRetailCustomer(retailCustomer);
+        authorization.setDataCustodian(dataCustodian);
+        authorization.setUUID(UUID.randomUUID());
+
+        return authorization;
+    }
+
+    public static Object getRandomString() {
+        return UUID.randomUUID().toString();
+    }
+
+    public static BatchList newBatchList() {
+        BatchList batchList = new BatchList();
+        batchList.getResources().add("some resource uri");
+        return batchList;
+    }
+
     public static ThirdParty newThirdParty() {
         ThirdParty thirdParty = new ThirdParty();
         thirdParty.setName("Name" + System.currentTimeMillis());
@@ -290,15 +341,6 @@ public class EspiFactory {
         subscription.setUUID(UUID.randomUUID());
         subscription.setRetailCustomer(retailCustomer);
         subscription.setThirdParty(thirdParty);
-
-        return subscription;
-    }
-
-    public static Subscription newSubscription(RetailCustomer retailCustomer) {
-        Subscription subscription = new Subscription();
-        subscription.setUUID(UUID.randomUUID());
-        subscription.setRetailCustomer(retailCustomer);
-        subscription.setThirdParty(newThirdParty());
 
         return subscription;
     }

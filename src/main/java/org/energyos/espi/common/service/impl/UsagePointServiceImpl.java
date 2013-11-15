@@ -150,4 +150,9 @@ public class UsagePointServiceImpl implements UsagePointService {
             repository.deleteById(usagePoint.getId());
         }
     }
+
+    @Override
+    public UsagePoint findByURI(String uri) {
+        return repository.findByURI(uri);
+    }
 }

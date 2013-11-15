@@ -34,9 +34,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -62,12 +60,6 @@ import java.util.Set;
  */
 @XmlRootElement(name = "UsagePoint")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "UsagePoint", propOrder = {
-        "roleFlags",
-        "serviceCategory",
-        "status",
-        "serviceDeliveryPoint"
-})
 @Entity
 @Table(name = "usage_points", uniqueConstraints = {@UniqueConstraint(columnNames = {"uuid"})})
 @NamedQueries(value = {
@@ -78,7 +70,9 @@ import java.util.Set;
         @NamedQuery(name = UsagePoint.QUERY_FIND_BY_ID,
                 query = "SELECT point FROM UsagePoint point WHERE point.id = :id"),
         @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_UPDATED_FOR,
-                query = "SELECT point FROM UsagePoint point WHERE point.updated > :lastUpdate")
+                query = "SELECT point FROM UsagePoint point WHERE point.updated > :lastUpdate"),
+        @NamedQuery(name = UsagePoint.QUERY_FIND_BY_URI,
+                query = "SELECT point FROM UsagePoint point WHERE point.uri = :uri"),
 })
 @XmlJavaTypeAdapter(UsagePointAdapter.class)
 public class UsagePoint
@@ -87,6 +81,7 @@ public class UsagePoint
     public static final String QUERY_FIND_BY_UUID = "UsagePoint.findByUUID";
     public static final String QUERY_FIND_BY_ID = "UsagePoint.findById";
     public static final String QUERY_FIND_ALL_UPDATED_FOR = "UsagePoint.findAllUpdatedFor";
+    public static final String QUERY_FIND_BY_URI = "UsagePoint.findByURI";
 
     @XmlElement(type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
@@ -124,9 +119,12 @@ public class UsagePoint
     private TimeConfiguration localTimeParameters;
 
     @XmlTransient
-    @ManyToMany(mappedBy = "usagePoints")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<Subscription> subscriptions = new HashSet<>();
+//    @NotEmpty
+    private String uri;
+
+    @XmlTransient
+    @OneToOne
+    private Subscription subscription;
 
     public void addMeterReading(MeterReading meterReading) {
         meterReading.setUsagePoint(this);
@@ -286,11 +284,19 @@ public class UsagePoint
         }
     }
 
-    public Set<Subscription> getSubscriptions() {
-        return subscriptions;
+    public String getURI() {
+        return uri;
     }
 
-    public void setSubscriptions(Set<Subscription> subscriptions) {
-        this.subscriptions = subscriptions;
+    public void setURI(String URI) {
+        this.uri = URI;
+    }
+
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
     }
 }

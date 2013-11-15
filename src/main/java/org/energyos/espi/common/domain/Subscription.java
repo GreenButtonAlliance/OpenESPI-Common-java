@@ -75,6 +75,9 @@ public class Subscription
     protected RetailCustomer retailCustomer;
 
     @OneToOne
+    private Authorization authorization;
+
+    @OneToOne
     @NotNull
     private ThirdParty thirdParty;
 
@@ -123,5 +126,13 @@ public class Subscription
 
     public void setUsagePoints(Set<UsagePoint> usagePoints) {
         this.usagePoints = usagePoints;
+    }
+
+    public Authorization getAuthorization() {
+        return authorization;
+    }
+
+    public void setAuthorization(Authorization authorization) {
+        this.authorization = authorization;
     }
 }

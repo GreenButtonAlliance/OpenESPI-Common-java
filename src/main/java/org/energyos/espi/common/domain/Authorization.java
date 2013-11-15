@@ -26,16 +26,9 @@ package org.energyos.espi.common.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import java.util.UUID;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -64,85 +57,80 @@ import java.util.UUID;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Authorization", propOrder = {
-        "accessToken",
-        "authorizationServer",
-        "authorizedPeriod",
-        "publishedPeriod",
-        "resource",
-        "status",
-        "thirdParty"
-})
 @Entity
 @Table(name = "authorizations")
+@NamedQueries(value = {
+        @NamedQuery(name = Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID,
+                query = "SELECT authorization FROM Authorization authorization WHERE authorization.retailCustomer.id = :retailCustomerId AND authorization.subscriptionURI IS NOT NULL"),
+        @NamedQuery(name = Authorization.QUERY_FIND_BY_STATE,
+                query = "SELECT authorization FROM Authorization authorization WHERE authorization.state = :state")
+})
 public class Authorization
         extends IdentifiedObject {
+
+    public static final String QUERY_FIND_BY_RETAIL_CUSTOMER_ID = "Authorization.findAllByRetailCustomerId";
+    public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";
+
+    @Transient
+    protected DateTimeInterval authorizedPeriod;
+
+    @Transient
+    protected DateTimeInterval publishedPeriod;
     @Column(name = "access_token")
     @NotEmpty
     protected String accessToken;
+    @Column(name = "authorization_server")
+    @NotEmpty
     @XmlSchemaType(name = "anyURI")
     protected String authorizationServer;
-    @Transient
-    protected DateTimeInterval authorizedPeriod;
-    @Transient
-    protected DateTimeInterval publishedPeriod;
+
     @XmlSchemaType(name = "anyURI")
-    @NotEmpty
     protected String resource;
+    @Column(name = "status")
     protected String status;
+    @Column(name = "third_party")
+    @NotEmpty
     protected String thirdParty;
-
-    @Override
+    @ManyToOne @JoinColumn(name = "retail_customer_id")
     @NotNull
-    public UUID getUUID() {
-        return super.getUUID();
-    }
+    @XmlTransient
+    protected RetailCustomer retailCustomer;
 
-    /**
-     * Gets the value of the accessToken property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    /**
-     * Sets the value of the accessToken property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setAccessToken(String value) {
-        this.accessToken = value;
-    }
-
-    /**
-     * Gets the value of the authorizationServer property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getAuthorizationServer() {
-        return authorizationServer;
-    }
-
-    /**
-     * Sets the value of the authorizationServer property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setAuthorizationServer(String value) {
-        this.authorizationServer = value;
-    }
+    @XmlElement(name = "expires_in")
+    protected Long expiresIn;
+    @XmlElement(name = "grant_type")
+    protected GrantType grantType;
+    @XmlElement(name = "refresh_token")
+    protected String refreshToken;
+    protected String scope;
+    @Column(name = "state")
+    @NotEmpty
+    @XmlTransient
+    private String state;
+    @XmlElement(name = "response_type")
+    protected ResponseType responseType;
+    @XmlElement(name = "token_type")
+    protected TokenType tokenType;
+    protected String code;
+    protected OAuthError error;
+    @XmlElement(name = "error_description")
+    protected String errorDescription;
+    @XmlElement(name = "error_uri")
+    @XmlSchemaType(name = "anyURI")
+    protected String errorUri;
+    @ManyToOne @JoinColumn(name = "data_custodian_id")
+    @NotNull
+    @XmlTransient
+    private DataCustodian dataCustodian;
+    private String subscriptionURI;
 
     /**
      * Gets the value of the authorizedPeriod property.
      *
-     * @return possible object is
-     *         {@link DateTimeInterval }
+     * @return
+     *     possible object is
+     *     {@link DateTimeInterval }
+     *
      */
     public DateTimeInterval getAuthorizedPeriod() {
         return authorizedPeriod;
@@ -151,8 +139,10 @@ public class Authorization
     /**
      * Sets the value of the authorizedPeriod property.
      *
-     * @param value allowed object is
-     * {@link DateTimeInterval }
+     * @param value
+     *     allowed object is
+     *     {@link DateTimeInterval }
+     *
      */
     public void setAuthorizedPeriod(DateTimeInterval value) {
         this.authorizedPeriod = value;
@@ -161,8 +151,10 @@ public class Authorization
     /**
      * Gets the value of the publishedPeriod property.
      *
-     * @return possible object is
-     *         {@link DateTimeInterval }
+     * @return
+     *     possible object is
+     *     {@link DateTimeInterval }
+     *
      */
     public DateTimeInterval getPublishedPeriod() {
         return publishedPeriod;
@@ -171,38 +163,46 @@ public class Authorization
     /**
      * Sets the value of the publishedPeriod property.
      *
-     * @param value allowed object is
-     * {@link DateTimeInterval }
+     * @param value
+     *     allowed object is
+     *     {@link DateTimeInterval }
+     *
      */
     public void setPublishedPeriod(DateTimeInterval value) {
         this.publishedPeriod = value;
     }
 
     /**
-     * Gets the value of the resource property.
+     * Gets the value of the accessToken property.
      *
-     * @return possible object is
-     *         {@link String }
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
      */
-    public String getResource() {
-        return resource;
+    public String getAccessToken() {
+        return accessToken;
     }
 
     /**
-     * Sets the value of the resource property.
+     * Sets the value of the accessToken property.
      *
-     * @param value allowed object is
-     * {@link String }
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
      */
-    public void setResource(String value) {
-        this.resource = value;
+    public void setAccessToken(String value) {
+        this.accessToken = value;
     }
 
     /**
      * Gets the value of the status property.
      *
-     * @return possible object is
-     *         {@link String }
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
      */
     public String getStatus() {
         return status;
@@ -211,31 +211,345 @@ public class Authorization
     /**
      * Sets the value of the status property.
      *
-     * @param value allowed object is
-     * {@link String }
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
      */
     public void setStatus(String value) {
         this.status = value;
     }
 
     /**
-     * Gets the value of the thirdParty property.
+     * Gets the value of the expiresIn property.
      *
-     * @return possible object is
-     *         {@link String }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
+    public Long getExpiresIn() {
+        return expiresIn;
+    }
+
+    /**
+     * Sets the value of the expiresIn property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
+     */
+    public void setExpiresIn(Long value) {
+        this.expiresIn = value;
+    }
+
+    /**
+     * Gets the value of the grantType property.
+     *
+     * @return
+     *     possible object is
+     *     {@link GrantType }
+     *
+     */
+    public GrantType getGrantType() {
+        return grantType;
+    }
+
+    /**
+     * Sets the value of the grantType property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link GrantType }
+     *
+     */
+    public void setGrantType(GrantType value) {
+        this.grantType = value;
+    }
+
+    /**
+     * Gets the value of the resource property.
+     *
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
+     */
+    public String getResource() {
+        return resource;
+    }
+
+    /**
+     * Sets the value of the resource property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
+     */
+    public void setResource(String value) {
+        this.resource = value;
+    }
+
+    /**
+     * Gets the value of the refreshToken property.
+     *
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
+     */
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    /**
+     * Sets the value of the refreshToken property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
+     */
+    public void setRefreshToken(String value) {
+        this.refreshToken = value;
+    }
+
+    /**
+     * Gets the value of the scope property.
+     *
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
+     */
+    public String getScope() {
+        return scope;
+    }
+
+    /**
+     * Sets the value of the scope property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
+     */
+    public void setScope(String value) {
+        this.scope = value;
+    }
+
+    /**
+     * Gets the value of the state property.
+     *
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * Sets the value of the state property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
+     */
+    public void setState(String value) {
+        this.state = value;
+    }
+
+    /**
+     * Gets the value of the responseType property.
+     *
+     * @return
+     *     possible object is
+     *     {@link ResponseType }
+     *
+     */
+    public ResponseType getResponseType() {
+        return responseType;
+    }
+
+    /**
+     * Sets the value of the responseType property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link ResponseType }
+     *
+     */
+    public void setResponseType(ResponseType value) {
+        this.responseType = value;
+    }
+
+    /**
+     * Gets the value of the tokenType property.
+     *
+     * @return
+     *     possible object is
+     *     {@link TokenType }
+     *
+     */
+    public TokenType getTokenType() {
+        return tokenType;
+    }
+
+    /**
+     * Sets the value of the tokenType property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link TokenType }
+     *
+     */
+    public void setTokenType(TokenType value) {
+        this.tokenType = value;
+    }
+
+    /**
+     * Gets the value of the code property.
+     *
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * Sets the value of the code property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
+     */
+    public void setCode(String value) {
+        this.code = value;
+    }
+
+    /**
+     * Gets the value of the error property.
+     *
+     * @return
+     *     possible object is
+     *     {@link OAuthError }
+     *
+     */
+    public OAuthError getError() {
+        return error;
+    }
+
+    /**
+     * Sets the value of the error property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link OAuthError }
+     *
+     */
+    public void setError(OAuthError value) {
+        this.error = value;
+    }
+
+    /**
+     * Gets the value of the errorDescription property.
+     *
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
+     */
+    public String getErrorDescription() {
+        return errorDescription;
+    }
+
+    /**
+     * Sets the value of the errorDescription property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
+     */
+    public void setErrorDescription(String value) {
+        this.errorDescription = value;
+    }
+
+    /**
+     * Gets the value of the errorUri property.
+     *
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
+     */
+    public String getErrorUri() {
+        return errorUri;
+    }
+
+    /**
+     * Sets the value of the errorUri property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
+     */
+    public void setErrorUri(String value) {
+        this.errorUri = value;
+    }
+
+    public String getAuthorizationServer() {
+        return authorizationServer;
+    }
+
+    public void setAuthorizationServer(String authorizationServer) {
+        this.authorizationServer = authorizationServer;
+    }
+
     public String getThirdParty() {
         return thirdParty;
     }
 
-    /**
-     * Sets the value of the thirdParty property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setThirdParty(String value) {
-        this.thirdParty = value;
+    public void setThirdParty(String thirdParty) {
+        this.thirdParty = thirdParty;
     }
 
+    public RetailCustomer getRetailCustomer() {
+        return retailCustomer;
+    }
+
+    public void setRetailCustomer(RetailCustomer retailCustomer) {
+        this.retailCustomer = retailCustomer;
+    }
+
+    public DataCustodian getDataCustodian() {
+        return dataCustodian;
+    }
+
+    public void setDataCustodian(DataCustodian dataCustodian) {
+        this.dataCustodian = dataCustodian;
+    }
+
+    public void setSubscriptionURI(String subscriptionURI) {
+        this.subscriptionURI = subscriptionURI;
+    }
+
+    public String getSubscriptionURI() {
+        return subscriptionURI;
+    }
+
+    public String getSubscriptionId() {
+        String[] pieces = subscriptionURI.split("/");
+        return pieces[pieces.length-1];
+    }
 }

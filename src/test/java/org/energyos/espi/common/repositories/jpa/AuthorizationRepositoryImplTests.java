@@ -17,7 +17,12 @@
 package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.Authorization;
+import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.repositories.AuthorizationRepository;
+import org.energyos.espi.common.repositories.DataCustodianRepository;
+import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.energyos.espi.common.test.EspiPersistenceFactory;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +30,67 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
 @Transactional
 public class AuthorizationRepositoryImplTests {
+
     @Autowired
-    private EspiPersistenceFactory factory;
+    AuthorizationRepository repository;
+
+    @Autowired
+    RetailCustomerRepository retailCustomerRepository;
+
+    @Autowired
+    DataCustodianRepository dataCustodianRepository;
+
+    @Autowired
+    EspiPersistenceFactory espiPersistenceFactory;
+
+    @Test
+    public void findAllByRetailCustomerId() {
+        Authorization authorization = espiPersistenceFactory.createAuthorization();
+        RetailCustomer retailCustomer = authorization.getRetailCustomer();
+        repository.persist(authorization);
+
+        assertTrue(repository.findAllByRetailCustomerId(retailCustomer.getId()).size() == 1);
+    }
+
+    @Test
+    public void findByState() {
+        Authorization authorization = espiPersistenceFactory.createAuthorization();
+
+        repository.persist(authorization);
+
+        Assert.assertEquals(authorization, repository.findByState(authorization.getState()));
+    }
 
     @Test
     public void persist() {
-        Authorization authorization = factory.createAuthorization();
+        Authorization authorization = espiPersistenceFactory.createAuthorization();
+
+        repository.persist(authorization);
 
         assertNotNull(authorization.getId());
+    }
+
+    @Test
+    public void merge() {
+        Authorization authorization = espiPersistenceFactory.createAuthorization();
+
+        repository.persist(authorization);
+
+        assertNotNull(authorization.getId());
+
+        Authorization authorization1 = repository.findByState(authorization.getState());
+
+        authorization1.setAccessToken(UUID.randomUUID().toString());
+
+        repository.merge(authorization1);
     }
 }

@@ -16,15 +16,17 @@
 
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.support.TestUtils;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
+import static org.energyos.espi.common.support.TestUtils.assertAnnotationPresent;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class RetailCustomerValidationTests {
@@ -43,11 +45,33 @@ public class RetailCustomerValidationTests {
     }
 
     @Test
-    public void validations() {
-        TestUtils.assertAnnotationPresent(RetailCustomer.class, "firstName", NotEmpty.class);
-        TestUtils.assertSizeValidation(RetailCustomer.class, "firstName", 0, 30);
+    public void isInvalid() throws Exception {
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-        TestUtils.assertAnnotationPresent(RetailCustomer.class, "lastName", NotEmpty.class);
-        TestUtils.assertSizeValidation(RetailCustomer.class, "lastName", 0, 30);
+        RetailCustomer retailCustomer = new RetailCustomer();
+
+        Set<ConstraintViolation<RetailCustomer>> violations = validator.validate(retailCustomer);
+
+        assertFalse(violations.isEmpty());
+    }
+
+    @Test
+    public void firstName() {
+        assertAnnotationPresent(RetailCustomer.class, "firstName", NotEmpty.class);
+    }
+
+    @Test
+    public void lastName() {
+        assertAnnotationPresent(RetailCustomer.class, "lastName", NotEmpty.class);
+    }
+
+    @Test
+    public void enabled() {
+        assertAnnotationPresent(RetailCustomer.class, "enabled", NotNull.class);
+    }
+
+    @Test
+    public void role() {
+        assertAnnotationPresent(RetailCustomer.class, "role", NotEmpty.class);
     }
 }

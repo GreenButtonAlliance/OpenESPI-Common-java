@@ -102,4 +102,11 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }
+
+    @Override
+    public UsagePoint findByURI(String uri) {
+        return (UsagePoint)em.createNamedQuery(UsagePoint.QUERY_FIND_BY_URI)
+                .setParameter("uri", uri)
+                .getSingleResult();
+    }
 }

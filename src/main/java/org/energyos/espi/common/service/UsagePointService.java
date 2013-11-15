@@ -53,4 +53,6 @@ public interface UsagePointService {
     List<UsagePoint> findAllUpdatedFor(Subscription subscription);
 
     void deleteByHashedId(String usagePointHashedId);
+
+    UsagePoint findByURI(String uri);
 }

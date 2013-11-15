@@ -16,20 +16,26 @@
 
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.test.EspiFactory;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.junit.Test;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 import static org.energyos.espi.common.support.TestUtils.assertAnnotationPresent;
 import static org.energyos.espi.common.support.TestUtils.assertColumnAnnotation;
-import static org.junit.Assert.assertFalse;
+import static org.energyos.espi.common.test.EspiFactory.newAuthorization;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertTrue;
 
 public class AuthorizationTests {
@@ -37,13 +43,12 @@ public class AuthorizationTests {
     @Test
     public void isValid() throws Exception {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        RetailCustomer retailCustomer = EspiFactory.newRetailCustomer();
 
-        Authorization authorization = EspiFactory.newAuthorization(EspiFactory.newSubscription(retailCustomer));
+        Authorization authorization = newAuthorization();
 
         Set<ConstraintViolation<Authorization>> violations = validator.validate(authorization);
 
-        assertTrue(violations.isEmpty());
+        assertThat(violations, is(empty()));
     }
 
     @Test
@@ -54,7 +59,7 @@ public class AuthorizationTests {
 
         Set<ConstraintViolation<Authorization>> violations = validator.validate(authorization);
 
-        assertFalse(violations.isEmpty());
+        assertThat(violations, is(not(empty())));
     }
 
     @Test
@@ -75,7 +80,42 @@ public class AuthorizationTests {
     }
 
     @Test
-    public void resource() {
-        assertAnnotationPresent(Authorization.class, "resource", NotEmpty.class);
+    public void authorizationServer() {
+        assertColumnAnnotation(Authorization.class, "authorizationServer", "authorization_server");
+    }
+
+    @Test
+    public void thirdParty() {
+        assertAnnotationPresent(Authorization.class, "thirdParty", NotEmpty.class);
+        assertColumnAnnotation(Authorization.class, "thirdParty", "third_party");
+    }
+
+    @Test
+    public void retailCustomer() {
+        assertAnnotationPresent(Authorization.class, "retailCustomer", ManyToOne.class);
+        assertAnnotationPresent(Authorization.class, "retailCustomer", JoinColumn.class);
+        assertAnnotationPresent(Authorization.class, "retailCustomer", NotNull.class);
+    }
+
+    @Test
+    public void state() {
+        assertAnnotationPresent(Authorization.class, "state", NotEmpty.class);
+        assertColumnAnnotation(Authorization.class, "state", "state");
+    }
+
+    @Test
+    public void dataCustodian() {
+        assertAnnotationPresent(Authorization.class, "dataCustodian", ManyToOne.class);
+        assertAnnotationPresent(Authorization.class, "dataCustodian", JoinColumn.class);
+        assertAnnotationPresent(Authorization.class, "dataCustodian", NotNull.class);
+    }
+
+    @Test
+    public void subscriptionId() {
+        Authorization authorization = new Authorization();
+
+        authorization.setSubscriptionURI("http://localhost:8080/DataCustodian/espi/1_1/resource/Subscription/16228736-8e29-4807-a2a7-283be5cc253e");
+
+        assertThat(authorization.getSubscriptionId(), is("16228736-8e29-4807-a2a7-283be5cc253e"));
     }
 }
