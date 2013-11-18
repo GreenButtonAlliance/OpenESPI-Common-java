@@ -76,7 +76,7 @@ public class IdentifiedObject
 
     @XmlTransient
     @NotNull
-    protected String uuid;
+    protected UUID uuid;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,7 +105,7 @@ public class IdentifiedObject
     public String getMRID() {
         if (uuid == null)
             return null;
-        return "urn:uuid:" + uuid;
+        return "urn:uuid:" + uuid.toString().toUpperCase();
     }
 
     /**
@@ -115,7 +115,7 @@ public class IdentifiedObject
      * {@link String }
      */
     public void setMRID(String value) {
-        this.uuid = value.replace("urn:uuid:", "").toUpperCase();
+        this.uuid = UUID.fromString(value.replace("urn:uuid:", "").toUpperCase());
     }
 
     /**
@@ -155,16 +155,14 @@ public class IdentifiedObject
     }
 
     public void setUUID(UUID uuid) {
-        this.uuid = uuid.toString().toUpperCase();
+        this.uuid = uuid;
     }
 
     public UUID getUUID() {
-        if (uuid != null)
-            return UUID.fromString(uuid);
-        return null;
+        return uuid;
     }
 
     public String getHashedId() {
-        return "" + getId();
+        return uuid.toString();
     }
 }

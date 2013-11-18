@@ -100,6 +100,7 @@ public class EspiFactory {
         RetailCustomer retailCustomer = new RetailCustomer();
         retailCustomer.setFirstName(("First" + UUID.randomUUID()).substring(0, 29));
         retailCustomer.setLastName(("Last" + UUID.randomUUID()).substring(0, 29));
+        retailCustomer.setUsername("alan" + System.currentTimeMillis());
 
         return retailCustomer;
     }

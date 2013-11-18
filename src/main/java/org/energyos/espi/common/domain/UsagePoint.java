@@ -137,7 +137,7 @@ public class UsagePoint
     protected RetailCustomer retailCustomer;
 
     public String getSelfHref() {
-        return getUpHref() + "/" + getId();
+        return getUpHref() + "/" + getHashedId();
     }
 
     public String getUpHref() {

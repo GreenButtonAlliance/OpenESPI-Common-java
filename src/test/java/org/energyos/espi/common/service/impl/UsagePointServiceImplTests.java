@@ -37,6 +37,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.energyos.espi.common.test.EspiFactory.newSubscription;
 import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
@@ -90,7 +91,7 @@ public class UsagePointServiceImplTests {
     @Test
     public void findByHashedId() {
         service.findByHashedId(usagePoint.getHashedId());
-        verify(repository).findById(usagePoint.getId());
+        verify(repository).findByUUID(usagePoint.getUUID());
     }
 
     @Test
@@ -191,12 +192,11 @@ public class UsagePointServiceImplTests {
 
     @Test
     public void deleteByHashedId() {
-        Long id = usagePoint.getId();
-        when(repository.findById(id)).thenReturn(usagePoint);
+        when(repository.findByUUID(UUID.fromString(usagePoint.getHashedId()))).thenReturn(usagePoint);
 
         service.deleteByHashedId(usagePoint.getHashedId());
 
-        verify(repository).deleteById(id);
+        verify(repository).deleteById(usagePoint.getId());
     }
 
     @Test

@@ -135,7 +135,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 
     @Override
     public UsagePoint findByHashedId(String usagePointHashedId) {
-        return findById(Long.valueOf(usagePointHashedId));
+        return findByUUID(UUID.fromString(usagePointHashedId));
     }
 
     @Override

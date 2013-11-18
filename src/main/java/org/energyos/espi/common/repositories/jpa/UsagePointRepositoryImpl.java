@@ -99,7 +99,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
 
     public UsagePoint findByUUID(UUID uuid) {
         return (UsagePoint)this.em.createNamedQuery(UsagePoint.QUERY_FIND_BY_UUID)
-                .setParameter("uuid", uuid.toString().toUpperCase())
+                .setParameter("uuid", uuid)
                 .getSingleResult();
     }
 

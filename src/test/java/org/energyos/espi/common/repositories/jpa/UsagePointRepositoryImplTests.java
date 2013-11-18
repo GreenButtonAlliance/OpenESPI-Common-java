@@ -40,6 +40,8 @@ import static org.energyos.espi.common.test.EspiFactory.*;
 import static org.energyos.espi.common.test.IsEmpty.isEmpty;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -274,7 +276,9 @@ public class UsagePointRepositoryImplTests {
         usagePoint.setServiceCategory(new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE));
         repository.persist(usagePoint);
 
-        assertEquals(usagePoint, repository.findByUUID(usagePoint.getUUID()));
+        UsagePoint savedUsagePoint = repository.findByUUID(usagePoint.getUUID());
+
+        assertThat(usagePoint, is(equalTo(savedUsagePoint)));
     }
 
     @Test
