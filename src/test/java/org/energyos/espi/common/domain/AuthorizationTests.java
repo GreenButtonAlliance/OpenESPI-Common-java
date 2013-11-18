@@ -16,7 +16,6 @@
 
 package org.energyos.espi.common.domain;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.junit.Test;
 
 import javax.persistence.Entity;
@@ -26,7 +25,6 @@ import javax.persistence.Table;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 import static org.energyos.espi.common.support.TestUtils.assertAnnotationPresent;
@@ -76,7 +74,6 @@ public class AuthorizationTests {
     @Test
     public void accessToken() {
         assertColumnAnnotation(Authorization.class, "accessToken", "access_token");
-        assertAnnotationPresent(Authorization.class, "accessToken", NotEmpty.class);
     }
 
     @Test
@@ -86,7 +83,6 @@ public class AuthorizationTests {
 
     @Test
     public void thirdParty() {
-        assertAnnotationPresent(Authorization.class, "thirdParty", NotEmpty.class);
         assertColumnAnnotation(Authorization.class, "thirdParty", "third_party");
     }
 
@@ -94,12 +90,10 @@ public class AuthorizationTests {
     public void retailCustomer() {
         assertAnnotationPresent(Authorization.class, "retailCustomer", ManyToOne.class);
         assertAnnotationPresent(Authorization.class, "retailCustomer", JoinColumn.class);
-        assertAnnotationPresent(Authorization.class, "retailCustomer", NotNull.class);
     }
 
     @Test
     public void state() {
-        assertAnnotationPresent(Authorization.class, "state", NotEmpty.class);
         assertColumnAnnotation(Authorization.class, "state", "state");
     }
 
@@ -107,7 +101,6 @@ public class AuthorizationTests {
     public void dataCustodian() {
         assertAnnotationPresent(Authorization.class, "dataCustodian", ManyToOne.class);
         assertAnnotationPresent(Authorization.class, "dataCustodian", JoinColumn.class);
-        assertAnnotationPresent(Authorization.class, "dataCustodian", NotNull.class);
     }
 
     @Test

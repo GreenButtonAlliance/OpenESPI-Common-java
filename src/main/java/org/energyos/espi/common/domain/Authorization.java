@@ -24,10 +24,7 @@
 
 package org.energyos.espi.common.domain;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
 
@@ -77,10 +74,8 @@ public class Authorization
     @Transient
     protected DateTimeInterval publishedPeriod;
     @Column(name = "access_token")
-    @NotEmpty
     protected String accessToken;
     @Column(name = "authorization_server")
-    @NotEmpty
     @XmlSchemaType(name = "anyURI")
     protected String authorizationServer;
 
@@ -89,10 +84,8 @@ public class Authorization
     @Column(name = "status")
     protected String status;
     @Column(name = "third_party")
-    @NotEmpty
     protected String thirdParty;
     @ManyToOne @JoinColumn(name = "retail_customer_id")
-    @NotNull
     @XmlTransient
     protected RetailCustomer retailCustomer;
 
@@ -104,7 +97,6 @@ public class Authorization
     protected String refreshToken;
     protected String scope;
     @Column(name = "state")
-    @NotEmpty
     @XmlTransient
     private String state;
     @XmlElement(name = "response_type")
@@ -119,7 +111,6 @@ public class Authorization
     @XmlSchemaType(name = "anyURI")
     protected String errorUri;
     @ManyToOne @JoinColumn(name = "data_custodian_id")
-    @NotNull
     @XmlTransient
     private DataCustodian dataCustodian;
     private String subscriptionURI;
