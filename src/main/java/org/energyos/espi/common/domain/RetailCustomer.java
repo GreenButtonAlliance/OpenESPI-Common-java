@@ -39,7 +39,7 @@ public class RetailCustomer implements UserDetails, Principal {
 
     public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
     public final static String QUERY_FIND_BY_USERNAME = "RetailCustomer.findByUsername";
-    public final static String ROLE_CUSTOMER = "ROLE_USER";
+    public final static String ROLE_CUSTOMER = "ROLE_CUSTOMER";
     public final static String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
 
 
@@ -156,6 +156,14 @@ public class RetailCustomer implements UserDetails, Principal {
 
     public String getHashedId() {
         return "" + getId();
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
