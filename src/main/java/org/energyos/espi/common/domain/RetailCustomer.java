@@ -39,7 +39,7 @@ public class RetailCustomer implements UserDetails, Principal {
 
     public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
     public final static String QUERY_FIND_BY_USERNAME = "RetailCustomer.findByUsername";
-    public final static String ROLE_CUSTOMER = "ROLE_CUSTOMER";
+    public final static String ROLE_USER = "ROLE_USER";
     public final static String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
 
 
@@ -72,7 +72,7 @@ public class RetailCustomer implements UserDetails, Principal {
 
     @Column(name = "role")
     @NotEmpty
-    protected String role = ROLE_CUSTOMER;
+    protected String role = ROLE_USER;
 
     public Long getId() {
         return id;
