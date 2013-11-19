@@ -29,7 +29,7 @@ public class EntryBuilder {
     private void buildMetadata(UsagePoint usagePoint) {
         entry.setId("urn:uuid:" + usagePoint.getUUID().toString());
         entry.setTitle(usagePoint.getDescription());
-        entry.setPublished(DateConverter.toDateTimeType(usagePoint.getCreated()));
+        entry.setPublished(DateConverter.toDateTimeType(usagePoint.getPublished()));
         entry.setUpdated(DateConverter.toDateTimeType(usagePoint.getUpdated()));
 
         buildLinks(usagePoint);

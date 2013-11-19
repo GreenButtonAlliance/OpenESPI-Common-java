@@ -118,6 +118,18 @@ public class ContentType {
     @XmlAnyElement(lax = true)
     private ElectricPowerQualitySummary electricPowerQualitySummary;
 
+    @XmlElementRefs({
+            @XmlElementRef(name = "ReadingType", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
+    })
+    @XmlAnyElement(lax = true)
+    protected ReadingType readingType;
+
+    @XmlElementRefs({
+            @XmlElementRef(name = "LocalTimeParameters", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
+    })
+    @XmlAnyElement(lax = true)
+    private TimeConfiguration localTimeParameters;
+
     @XmlMixed
     @XmlAnyElement(lax = true)
     protected List<Object> content;
@@ -140,18 +152,6 @@ public class ContentType {
 
     @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
-
-    @XmlElementRefs({
-            @XmlElementRef(name = "ReadingType", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
-    })
-    @XmlAnyElement(lax = true)
-    protected ReadingType readingType;
-
-    @XmlElementRefs({
-            @XmlElementRef(name = "LocalTimeParameters", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
-    })
-    @XmlAnyElement(lax = true)
-    private TimeConfiguration localTimeParameters;
 
     public UsagePoint getUsagePoint() {
         return usagePoint;
@@ -213,7 +213,7 @@ public class ContentType {
      * Sets the value of the type property.
      *
      * @param value allowed object is
-     * {@link String }
+     *              {@link String }
      */
     public void setType(String value) {
         this.type = value;
@@ -233,7 +233,7 @@ public class ContentType {
      * Sets the value of the src property.
      *
      * @param value allowed object is
-     * {@link String }
+     *              {@link String }
      */
     public void setSrc(String value) {
         this.src = value;
@@ -253,7 +253,7 @@ public class ContentType {
      * Sets the value of the base property.
      *
      * @param value allowed object is
-     * {@link String }
+     *              {@link String }
      */
     public void setBase(String value) {
         this.base = value;
@@ -273,7 +273,7 @@ public class ContentType {
      * Sets the value of the lang property.
      *
      * @param value allowed object is
-     * {@link String }
+     *              {@link String }
      */
     public void setLang(String value) {
         this.lang = value;
@@ -307,6 +307,10 @@ public class ContentType {
         return electricPowerUsageSummary;
     }
 
+    public void setElectricPowerUsageSummary(ElectricPowerUsageSummary electricPowerUsageSummary) {
+        this.electricPowerUsageSummary = electricPowerUsageSummary;
+    }
+
     public ElectricPowerQualitySummary getElectricPowerQualitySummary() {
         return electricPowerQualitySummary;
     }
@@ -321,5 +325,33 @@ public class ContentType {
 
     public void setLocalTimeParameters(TimeConfiguration localTimeParameters) {
         this.localTimeParameters = localTimeParameters;
+    }
+
+    public IdentifiedObject getResource() {
+        if (getUsagePoint() != null) {
+            return getUsagePoint();
+        } else if (getMeterReading() != null) {
+            return getMeterReading();
+        } else if (getLocalTimeParameters() != null) {
+            return getLocalTimeParameters();
+        } else if (getElectricPowerUsageSummary() != null) {
+            return getElectricPowerUsageSummary();
+        } else if (getElectricPowerQualitySummary() != null) {
+            return getElectricPowerQualitySummary();
+        } else if (getReadingType() != null) {
+            return getReadingType();
+        }
+        return null;
+    }
+
+    public List<IdentifiedObject> getResources() {
+        List<IdentifiedObject> resources = new ArrayList<>();
+        if (getResource() != null) {
+            resources.add(getResource());
+        } else {
+            for(IntervalBlock intervalBlock: getIntervalBlocks())
+                resources.add(intervalBlock);
+        }
+        return resources;
     }
 }

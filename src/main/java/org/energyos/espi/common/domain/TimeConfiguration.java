@@ -28,6 +28,7 @@ import org.energyos.espi.common.models.atom.adapters.TimeConfigurationAdapter;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -65,9 +66,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlJavaTypeAdapter(TimeConfigurationAdapter.class)
 @XmlRootElement(name = "LocalTimeParameters")
 @Entity
-@Table(name = "time_configurations")
+@Table(name = "time_configurations", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
 public class TimeConfiguration
-        extends IdentifiedObject {
+        extends IdentifiedObject
+{
 
     @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
@@ -81,8 +83,10 @@ public class TimeConfiguration
     /**
      * Gets the value of the dstEndRule property.
      *
-     * @return possible object is
-     *         {@link String }
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
      */
     public byte[] getDstEndRule() {
         return dstEndRule;
@@ -91,8 +95,10 @@ public class TimeConfiguration
     /**
      * Sets the value of the dstEndRule property.
      *
-     * @param value allowed object is
-     * {@link String }
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
      */
     public void setDstEndRule(byte[] value) {
         this.dstEndRule = value;
@@ -100,6 +106,7 @@ public class TimeConfiguration
 
     /**
      * Gets the value of the dstOffset property.
+     *
      */
     public long getDstOffset() {
         return dstOffset;
@@ -107,6 +114,7 @@ public class TimeConfiguration
 
     /**
      * Sets the value of the dstOffset property.
+     *
      */
     public void setDstOffset(long value) {
         this.dstOffset = value;
@@ -115,8 +123,10 @@ public class TimeConfiguration
     /**
      * Gets the value of the dstStartRule property.
      *
-     * @return possible object is
-     *         {@link String }
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
      */
     public byte[] getDstStartRule() {
         return dstStartRule;
@@ -125,8 +135,10 @@ public class TimeConfiguration
     /**
      * Sets the value of the dstStartRule property.
      *
-     * @param value allowed object is
-     * {@link String }
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
      */
     public void setDstStartRule(byte[] value) {
         this.dstStartRule = value;
@@ -134,6 +146,7 @@ public class TimeConfiguration
 
     /**
      * Gets the value of the tzOffset property.
+     *
      */
     public long getTzOffset() {
         return tzOffset;
@@ -141,9 +154,14 @@ public class TimeConfiguration
 
     /**
      * Sets the value of the tzOffset property.
+     *
      */
     public void setTzOffset(long value) {
         this.tzOffset = value;
     }
 
+    @Override
+    public String getParentQuery() {
+        return UsagePoint.QUERY_FIND_BY_RELATED_HREF;
+    }
 }

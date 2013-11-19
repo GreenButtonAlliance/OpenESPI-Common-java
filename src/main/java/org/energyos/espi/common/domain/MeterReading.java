@@ -24,6 +24,7 @@
 
 package org.energyos.espi.common.domain;
 
+import org.energyos.espi.common.models.atom.LinkType;
 import org.energyos.espi.common.models.atom.adapters.GenericAdapter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -51,26 +52,36 @@ import java.util.List;
  * &lt;/complexType>
  * </pre>
  */
-@XmlRootElement(name = "MeterReading")
+@XmlRootElement(name="MeterReading")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MeterReading")
 @Entity
-@Table(name = "meter_readings")
+@Table(name = "meter_readings", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
 @XmlJavaTypeAdapter(GenericAdapter.class)
-public class MeterReading
-        extends IdentifiedObject {
+@NamedQueries(value = {
+        @NamedQuery(name = MeterReading.QUERY_FIND_BY_UUID,
+                query = "SELECT meterReading FROM MeterReading meterReading WHERE meterReading.uuid = :uuid"),
+        @NamedQuery(name = MeterReading.QUERY_FIND_BY_RELATED_HREF,
+                query = "SELECT reading FROM MeterReading reading join reading.relatedLinks link WHERE link.href = :href"),
+        @NamedQuery(name = MeterReading.QUERY_FIND_ALL_RELATED,
+                query = "SELECT readingType FROM ReadingType readingType WHERE readingType.upLink.href in (:relatedLinkHrefs)")
+
+})
+public class MeterReading extends IdentifiedObject
+{
+    public static final String QUERY_FIND_BY_UUID = "MeterReading.findByUUID";
+    public static final String QUERY_FIND_BY_RELATED_HREF = "MeterReading.findByAllParentsHref";
+    public static final String QUERY_FIND_ALL_RELATED = "MeterReading.findAllRelated";
     @OneToMany(mappedBy = "meterReading", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @XmlTransient
     private List<IntervalBlock> intervalBlocks = new ArrayList<>();
 
-    public List<IntervalBlock> getIntervalBlocks() {
-        return intervalBlocks;
-    }
-
-    public void setIntervalBlocks(List<IntervalBlock> intervalBlocks) {
-        this.intervalBlocks = intervalBlocks;
-    }
+    @XmlTransient
+    @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @CollectionTable(name="meter_reading_related_links", joinColumns=@JoinColumn(name="meter_reading_id"))
+    private List<LinkType> relatedLinks = new ArrayList<>();
 
     @XmlTransient
     @ManyToOne
@@ -78,7 +89,7 @@ public class MeterReading
     private UsagePoint usagePoint;
 
     @XmlTransient
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "reading_type_id")
     private ReadingType readingType;
 
@@ -101,5 +112,37 @@ public class MeterReading
 
     public void setReadingType(ReadingType readingType) {
         this.readingType = readingType;
+    }
+
+    public List<IntervalBlock> getIntervalBlocks() {
+        return intervalBlocks;
+    }
+
+    public void setIntervalBlocks(List<IntervalBlock> intervalBlocks) {
+        this.intervalBlocks = intervalBlocks;
+    }
+
+    @Override
+    public void setUpResource(IdentifiedObject resource) {
+        UsagePoint usagePoint = (UsagePoint)resource;
+        usagePoint.addMeterReading(this);
+    }
+
+    @Override
+    public String getParentQuery() {
+        return UsagePoint.QUERY_FIND_BY_RELATED_HREF;
+    }
+
+    @Override
+    public String getAllRelatedQuery() {
+        return MeterReading.QUERY_FIND_ALL_RELATED;
+    }
+
+    public List<LinkType> getRelatedLinks() {
+        return relatedLinks;
+    }
+
+    public void setRelatedLinks(List<LinkType> relatedLinks) {
+        this.relatedLinks = relatedLinks;
     }
 }

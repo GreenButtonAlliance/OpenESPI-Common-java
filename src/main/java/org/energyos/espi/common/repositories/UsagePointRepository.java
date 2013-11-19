@@ -16,6 +16,7 @@
 
 package org.energyos.espi.common.repositories;
 
+import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -28,7 +29,6 @@ public interface UsagePointRepository {
     List<UsagePoint> findAllByRetailCustomerId(Long id);
 
     UsagePoint findById(Long id);
-
     void persist(UsagePoint up);
 
     UsagePoint findByUUID(UUID uuid);
@@ -42,4 +42,6 @@ public interface UsagePointRepository {
     void deleteById(Long id);
 
     UsagePoint findByURI(String uri);
+
+    IdentifiedObject findByRelatedHref(String href);
 }

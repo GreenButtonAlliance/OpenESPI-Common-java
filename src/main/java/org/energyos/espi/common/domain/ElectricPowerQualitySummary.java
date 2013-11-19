@@ -26,10 +26,7 @@ package org.energyos.espi.common.domain;
 
 import org.energyos.espi.common.models.atom.adapters.GenericAdapter;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -66,7 +63,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * &lt;/complexType>
  * </pre>
  */
-@XmlRootElement(name = "ElectricPowerQualitySummary")
+@XmlRootElement(name="ElectricPowerQualitySummary")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ElectricPowerQualitySummary", propOrder = {
         "flickerPlt",
@@ -85,10 +82,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
         "tempOvervoltage"
 })
 @Entity
-@Table(name = "electric_power_quality_summaries")
+@Table(name = "electric_power_quality_summaries", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
 @XmlJavaTypeAdapter(GenericAdapter.class)
 public class ElectricPowerQualitySummary
-        extends IdentifiedObject {
+        extends IdentifiedObject
+{
 
     protected Long flickerPlt;
     protected Long flickerPst;
@@ -115,7 +113,7 @@ public class ElectricPowerQualitySummary
      * Gets the value of the flickerPlt property.
      *
      * @return possible object is
-     *         {@link Long }
+     *     {@link Long }
      */
     public Long getFlickerPlt() {
         return flickerPlt;
@@ -125,7 +123,7 @@ public class ElectricPowerQualitySummary
      * Sets the value of the flickerPlt property.
      *
      * @param value allowed object is
-     * {@link Long }
+     *     {@link Long }
      */
     public void setFlickerPlt(Long value) {
         this.flickerPlt = value;
@@ -134,8 +132,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the flickerPst property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getFlickerPst() {
         return flickerPst;
@@ -144,8 +144,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the flickerPst property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setFlickerPst(Long value) {
         this.flickerPst = value;
@@ -154,8 +156,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the harmonicVoltage property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getHarmonicVoltage() {
         return harmonicVoltage;
@@ -164,8 +168,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the harmonicVoltage property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setHarmonicVoltage(Long value) {
         this.harmonicVoltage = value;
@@ -174,8 +180,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the longInterruptions property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getLongInterruptions() {
         return longInterruptions;
@@ -184,8 +192,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the longInterruptions property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setLongInterruptions(Long value) {
         this.longInterruptions = value;
@@ -194,8 +204,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the mainsVoltage property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getMainsVoltage() {
         return mainsVoltage;
@@ -204,8 +216,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the mainsVoltage property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setMainsVoltage(Long value) {
         this.mainsVoltage = value;
@@ -214,8 +228,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the measurementProtocol property.
      *
-     * @return possible object is
-     *         {@link Short }
+     * @return
+     *     possible object is
+     *     {@link Short }
+     *
      */
     public Short getMeasurementProtocol() {
         return measurementProtocol;
@@ -224,8 +240,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the measurementProtocol property.
      *
-     * @param value allowed object is
-     * {@link Short }
+     * @param value
+     *     allowed object is
+     *     {@link Short }
+     *
      */
     public void setMeasurementProtocol(Short value) {
         this.measurementProtocol = value;
@@ -234,8 +252,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the powerFrequency property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getPowerFrequency() {
         return powerFrequency;
@@ -244,8 +264,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the powerFrequency property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setPowerFrequency(Long value) {
         this.powerFrequency = value;
@@ -254,8 +276,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the rapidVoltageChanges property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getRapidVoltageChanges() {
         return rapidVoltageChanges;
@@ -264,8 +288,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the rapidVoltageChanges property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setRapidVoltageChanges(Long value) {
         this.rapidVoltageChanges = value;
@@ -274,8 +300,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the shortInterruptions property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getShortInterruptions() {
         return shortInterruptions;
@@ -284,8 +312,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the shortInterruptions property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setShortInterruptions(Long value) {
         this.shortInterruptions = value;
@@ -294,8 +324,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the summaryInterval property.
      *
-     * @return possible object is
-     *         {@link DateTimeInterval }
+     * @return
+     *     possible object is
+     *     {@link DateTimeInterval }
+     *
      */
     public DateTimeInterval getSummaryInterval() {
         return summaryInterval;
@@ -304,8 +336,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the summaryInterval property.
      *
-     * @param value allowed object is
-     * {@link DateTimeInterval }
+     * @param value
+     *     allowed object is
+     *     {@link DateTimeInterval }
+     *
      */
     public void setSummaryInterval(DateTimeInterval value) {
         this.summaryInterval = value;
@@ -314,8 +348,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the supplyVoltageDips property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getSupplyVoltageDips() {
         return supplyVoltageDips;
@@ -324,8 +360,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the supplyVoltageDips property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setSupplyVoltageDips(Long value) {
         this.supplyVoltageDips = value;
@@ -334,8 +372,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the supplyVoltageImbalance property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getSupplyVoltageImbalance() {
         return supplyVoltageImbalance;
@@ -344,8 +384,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the supplyVoltageImbalance property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setSupplyVoltageImbalance(Long value) {
         this.supplyVoltageImbalance = value;
@@ -354,8 +396,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the supplyVoltageVariations property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getSupplyVoltageVariations() {
         return supplyVoltageVariations;
@@ -364,8 +408,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the supplyVoltageVariations property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setSupplyVoltageVariations(Long value) {
         this.supplyVoltageVariations = value;
@@ -374,8 +420,10 @@ public class ElectricPowerQualitySummary
     /**
      * Gets the value of the tempOvervoltage property.
      *
-     * @return possible object is
-     *         {@link Long }
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *
      */
     public Long getTempOvervoltage() {
         return tempOvervoltage;
@@ -384,8 +432,10 @@ public class ElectricPowerQualitySummary
     /**
      * Sets the value of the tempOvervoltage property.
      *
-     * @param value allowed object is
-     * {@link Long }
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *
      */
     public void setTempOvervoltage(Long value) {
         this.tempOvervoltage = value;
@@ -397,5 +447,17 @@ public class ElectricPowerQualitySummary
 
     public void setUsagePoint(UsagePoint usagePoint) {
         this.usagePoint = usagePoint;
+    }
+
+    @Override
+    public String getParentQuery() {
+        return UsagePoint.QUERY_FIND_BY_RELATED_HREF;
+    }
+
+    @Override
+    public void setUpResource(IdentifiedObject resource) {
+        UsagePoint usagePoint = (UsagePoint) resource;
+        usagePoint.addElectricPowerQualitySummary(this);
+        setUsagePoint(usagePoint);
     }
 }

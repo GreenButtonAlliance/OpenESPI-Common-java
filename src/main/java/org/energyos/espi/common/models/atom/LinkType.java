@@ -24,6 +24,7 @@
 
 package org.energyos.espi.common.models.atom;
 
+import javax.persistence.Embeddable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -56,9 +57,15 @@ import javax.xml.bind.annotation.XmlSchemaType;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@Embeddable
 public class LinkType {
 
-    @XmlAttribute(name = "href", required = true)
+    public static final String SELF = "self";
+    public static final String UP = "up";
+    public static final String RELATED = "related";
+    public static final String HREF = "href";
+
+    @XmlAttribute(name = HREF, required = true)
     @XmlSchemaType(name = "anyURI")
     protected String href;
 
@@ -80,8 +87,10 @@ public class LinkType {
     /**
      * Sets the value of the href property.
      *
-     * @param value allowed object is
-     * {@link String }
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
      */
     public void setHref(String value) {
         this.href = value;
@@ -90,8 +99,10 @@ public class LinkType {
     /**
      * Gets the value of the rel property.
      *
-     * @return possible object is
-     *         {@link String }
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
      */
     public String getRel() {
         return rel;

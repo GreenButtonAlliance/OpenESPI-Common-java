@@ -53,8 +53,8 @@ public class IdentifiedObjectTests {
         TestUtils.assertAnnotationPresent(IdentifiedObject.class, "id", XmlTransient.class);
     }
     @Test
-    public void created_hasTransientAnnotation() {
-        TestUtils.assertAnnotationPresent(IdentifiedObject.class, "created", XmlTransient.class);
+    public void published_hasTransientAnnotation() {
+        TestUtils.assertAnnotationPresent(IdentifiedObject.class, "published", XmlTransient.class);
     }
 
     @Test

@@ -21,7 +21,6 @@ import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
-import org.energyos.espi.common.models.atom.FeedType;
 import org.energyos.espi.common.repositories.UsagePointRepository;
 import org.energyos.espi.common.service.UsagePointService;
 import org.energyos.espi.common.utils.ATOMMarshaller;
@@ -32,7 +31,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.xml.bind.JAXBException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,15 +87,6 @@ public class UsagePointServiceImpl implements UsagePointService {
     }
 
     @Override
-    public void importUsagePoints(InputStream stream) throws JAXBException {
-        List<UsagePoint> usagePoints = usagePointBuilder.newUsagePoints(xmlMarshaller.unmarshal(stream, FeedType.class));
-
-        for (UsagePoint usagePoint : usagePoints) {
-            createOrReplaceByUUID(usagePoint);
-        }
-    }
-
-    @Override
     public UsagePoint importUsagePoint(InputStream stream) {
         UsagePoint usagePoint = usagePointBuilder.newUsagePoint(xmlMarshaller.unmarshal(stream, EntryType.class));
         createOrReplaceByUUID(usagePoint);
@@ -149,10 +138,5 @@ public class UsagePointServiceImpl implements UsagePointService {
         if (usagePoint != null) {
             repository.deleteById(usagePoint.getId());
         }
-    }
-
-    @Override
-    public UsagePoint findByURI(String uri) {
-        return repository.findByURI(uri);
     }
 }

@@ -31,6 +31,23 @@ public class DateConverter {
         return dateTimeType;
     }
 
+    public static DateTimeType toDateTimeType(GregorianCalendar gregorianCalendar) {
+        DateTimeType dateTimeType = new DateTimeType();
+        DatatypeFactory datatypeFactory;
+
+        try {
+            datatypeFactory = DatatypeFactory.newInstance();
+        } catch (DatatypeConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+
+        XMLGregorianCalendar xmlGregorianCalendar = datatypeFactory.newXMLGregorianCalendar(gregorianCalendar);
+        xmlGregorianCalendar.setFractionalSecond(null);
+        dateTimeType.setValue(xmlGregorianCalendar);
+
+        return dateTimeType;
+    }
+
     public static Calendar epoch() {
         Calendar epoch = Calendar.getInstance();
         epoch.setTimeInMillis(0L);

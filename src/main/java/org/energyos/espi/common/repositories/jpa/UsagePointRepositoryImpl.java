@@ -16,10 +16,7 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.RetailCustomer;
-import org.energyos.espi.common.domain.ServiceCategory;
-import org.energyos.espi.common.domain.Subscription;
-import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.domain.*;
 import org.energyos.espi.common.repositories.UsagePointRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -76,12 +74,18 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 usagePoint.setRetailCustomer(existingUsagePoint.getRetailCustomer());
             }
 
+            if (existingUsagePoint.getMeterReadings() != null) {
+                usagePoint.setMeterReadings(existingUsagePoint.getMeterReadings());
+            }
+
             if (existingUsagePoint.getLocalTimeParameters() != null) {
                 usagePoint.setLocalTimeParameters(existingUsagePoint.getLocalTimeParameters());
             }
 
             em.merge(usagePoint);
         } catch (NoResultException e) {
+            usagePoint.setPublished(new GregorianCalendar());
+            usagePoint.setUpdated(new GregorianCalendar());
             persist(usagePoint);
         }
     }
@@ -89,7 +93,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
     @Override
     public List<UsagePoint> findAllUpdatedFor(Subscription subscription) {
         return (List<UsagePoint>)this.em.createNamedQuery(UsagePoint.QUERY_FIND_ALL_UPDATED_FOR)
-                .setParameter("lastUpdate", subscription.getLastUpdate().getTime())
+                .setParameter("lastUpdate", subscription.getLastUpdate())
                 .getResultList();
     }
 
@@ -97,9 +101,10 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
         em.remove(findById(id));
     }
 
-    public UsagePoint findByUUID(UUID uuid) {
-        return (UsagePoint)this.em.createNamedQuery(UsagePoint.QUERY_FIND_BY_UUID)
-                .setParameter("uuid", uuid)
+    @Override
+    public IdentifiedObject findByRelatedHref(String href) {
+        return (UsagePoint)this.em.createNamedQuery(UsagePoint.QUERY_FIND_BY_RELATED_HREF)
+                .setParameter("href", href)
                 .getSingleResult();
     }
 
@@ -107,6 +112,13 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
     public UsagePoint findByURI(String uri) {
         return (UsagePoint)em.createNamedQuery(UsagePoint.QUERY_FIND_BY_URI)
                 .setParameter("uri", uri)
+                .getSingleResult();
+    }
+
+    @Override
+    public UsagePoint findByUUID(UUID uuid) {
+        return (UsagePoint)this.em.createNamedQuery(UsagePoint.QUERY_FIND_BY_UUID)
+                .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }
 }

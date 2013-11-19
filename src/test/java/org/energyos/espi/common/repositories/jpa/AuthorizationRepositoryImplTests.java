@@ -54,8 +54,9 @@ public class AuthorizationRepositoryImplTests {
 
     @Test
     public void findAllByRetailCustomerId() {
-        Authorization authorization = espiPersistenceFactory.createAuthorization();
-        RetailCustomer retailCustomer = authorization.getRetailCustomer();
+        RetailCustomer retailCustomer = espiPersistenceFactory.createRetailCustomer();
+        Authorization authorization = espiPersistenceFactory.createAuthorization(retailCustomer);
+
         repository.persist(authorization);
 
         assertTrue(repository.findAllByRetailCustomerId(retailCustomer.getId()).size() == 1);

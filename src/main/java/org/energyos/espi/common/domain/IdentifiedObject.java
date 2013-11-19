@@ -24,13 +24,14 @@
 
 package org.energyos.espi.common.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import org.energyos.espi.common.models.atom.LinkType;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -69,24 +70,26 @@ import java.util.UUID;
         ReadingType.class
 })
 @MappedSuperclass
-public class IdentifiedObject
-        extends Resource {
+public class IdentifiedObject extends Resource implements Linkable {
     @XmlTransient
     protected String description;
 
     @XmlTransient
     @NotNull
-    protected UUID uuid;
+    protected String uuid;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
     protected Long id;
 
     @XmlTransient
-    protected Date created = new Date();
+    protected GregorianCalendar updated = new GregorianCalendar();
     @XmlTransient
-    protected Date updated = new Date();
+    protected GregorianCalendar published = new GregorianCalendar();
+
+    @XmlTransient
+    @Embedded
+    private LinkType upLink;
 
     public Long getId() {
         return id;
@@ -99,30 +102,36 @@ public class IdentifiedObject
     /**
      * Gets the value of the mrid property.
      *
-     * @return possible object is
-     *         {@link String }
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
      */
     public String getMRID() {
         if (uuid == null)
             return null;
-        return "urn:uuid:" + uuid.toString().toUpperCase();
+        return "urn:uuid:" + uuid;
     }
 
     /**
      * Sets the value of the mrid property.
      *
-     * @param value allowed object is
-     * {@link String }
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
      */
     public void setMRID(String value) {
-        this.uuid = UUID.fromString(value.replace("urn:uuid:", "").toUpperCase());
+        this.uuid = value.replace("urn:uuid:", "").toUpperCase();
     }
 
     /**
      * Gets the value of the description property.
      *
-     * @return possible object is
-     *         {@link String }
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
      */
     public String getDescription() {
         return description;
@@ -131,38 +140,85 @@ public class IdentifiedObject
     /**
      * Sets the value of the description property.
      *
-     * @param value allowed object is
-     * {@link String }
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
      */
     public void setDescription(String value) {
         this.description = value;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
+    public GregorianCalendar getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(GregorianCalendar updated) {
         this.updated = updated;
     }
 
+    public GregorianCalendar getPublished() {
+        return published;
+    }
+
+    public void setPublished(GregorianCalendar published) {
+        this.published = published;
+    }
+
     public void setUUID(UUID uuid) {
-        this.uuid = uuid;
+        this.uuid = uuid.toString().toUpperCase();
     }
 
     public UUID getUUID() {
-        return uuid;
+        if (uuid != null)
+            return UUID.fromString(uuid);
+        return null;
     }
 
     public String getHashedId() {
-        return uuid.toString();
+        return "" + getUUID();
+    }
+
+    @Override
+    public void setUpResource(IdentifiedObject resource) {
+    }
+
+    @Override
+    public String getParentQuery() {
+        return null;
+    }
+
+    @Override
+    public String getAllRelatedQuery() {
+        return null;
+    }
+
+    @Override
+    public List<String> getRelatedLinkHrefs() {
+        List<String> hrefs = new ArrayList<>();
+        for(LinkType link : getRelatedLinks()) {
+            hrefs.add(link.getHref());
+        }
+        return hrefs;
+    }
+
+    public List<LinkType> getRelatedLinks() {
+        return new ArrayList<>();
+    }
+
+    public LinkType getUpLink() {
+        return upLink;
+    }
+
+    public void setUpLink(LinkType upLink) {
+        this.upLink = upLink;
+    }
+
+    public void merge(IdentifiedObject resource) {
+        this.setSelfLink(resource.getSelfLink());
+        this.setUpLink(resource.getUpLink());
+        this.setDescription(resource.getDescription());
+        this.setUpdated(resource.getUpdated());
+        this.setPublished(resource.getPublished());
     }
 }

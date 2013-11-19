@@ -2,6 +2,7 @@ package org.energyos.espi.common;
 
 
 import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.RetailCustomerService;
 import org.energyos.espi.common.service.UsagePointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,15 @@ public class SeedDataGenerator {
     private RetailCustomerService retailCustomerService;
     @Autowired
     private UsagePointService usagePointService;
+    @Autowired
+    private ImportService importService;
 
     public void init() throws Exception {
         RetailCustomer retailCustomer = retailCustomerService.findById(1L);
         usagePointService.associateByUUID(retailCustomer, UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C2"));
-        usagePointService.importUsagePoints(newUsagePointInputStream(UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C2")));
+        importService.importData(newUsagePointInputStream(UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C2")));
         usagePointService.associateByUUID(retailCustomer, UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C3"));
-        usagePointService.importUsagePoints(newUsagePointInputStream(UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C3")));
+        importService.importData(newUsagePointInputStream(UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C3")));
     }
 
     public static InputStream newUsagePointInputStream(UUID uuid) throws IOException {
@@ -40,5 +43,6 @@ public class SeedDataGenerator {
         return xml;
     }
 }
+
 
 

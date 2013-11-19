@@ -52,14 +52,14 @@ public class EntryBuilderTest {
     public void published() {
         DateTimeType published = entryType.getPublished();
         assertThat(published, is(notNullValue()));
-        assertThat(published.getValue().toGregorianCalendar().getTimeInMillis(), is(usagePoint.getCreated().getTime()));
+        assertThat(published.getValue().toGregorianCalendar().getTimeInMillis(), is(usagePoint.getPublished().getTimeInMillis()));
     }
 
     @Test
     public void updated() {
         DateTimeType updated = entryType.getUpdated();
         assertThat(updated, is(notNullValue()));
-        assertThat(updated.getValue().toGregorianCalendar().getTimeInMillis(), is(usagePoint.getUpdated().getTime()));
+        assertThat(updated.getValue().toGregorianCalendar().getTimeInMillis(), is(usagePoint.getUpdated().getTimeInMillis()));
     }
 
     @Test

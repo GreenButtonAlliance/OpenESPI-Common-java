@@ -18,7 +18,7 @@ package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
-import org.energyos.espi.common.test.EspiFactory;
+import org.energyos.espi.common.test.EspiPersistenceFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +37,9 @@ public class RetailCustomerRepositoryImplTests {
     @Autowired
     private RetailCustomerRepository repository;
 
+    @Autowired
+    private EspiPersistenceFactory factory;
+
     @Test
     public void findAll_returnsAllRetailCustomers() throws Exception {
         assertTrue(repository.findAll().size() > 0);
@@ -49,7 +52,7 @@ public class RetailCustomerRepositoryImplTests {
 
     @Test
     public void findByUsername() throws Exception {
-        RetailCustomer retailCustomer = EspiFactory.newRetailCustomer();
+        RetailCustomer retailCustomer = factory.createRetailCustomer();
         repository.persist(retailCustomer);
 
         assertNotNull(repository.findByUsername(retailCustomer.getUsername()));

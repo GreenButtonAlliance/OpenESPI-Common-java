@@ -10,8 +10,6 @@ import java.util.Calendar;
 @Component
 public class EspiPersistenceFactory {
     @Autowired
-    private DataCustodianService dataCustodianService;
-    @Autowired
     private ThirdPartyService thirdPartyService;
     @Autowired
     private RetailCustomerService retailCustomerService;
@@ -21,19 +19,10 @@ public class EspiPersistenceFactory {
     private AuthorizationService authorizationService;
     @Autowired
     private UsagePointService usagePointService;
-
-    public Authorization createAuthorization() {
-        return createAuthorization(createRetailCustomer());
-    }
-
-    public Authorization createAuthorization(RetailCustomer retailCustomer) {
-        DataCustodian dataCustodian = EspiFactory.newDataCustodian();
-        dataCustodianService.persist(dataCustodian);
-        Authorization authorization = EspiFactory.newAuthorization(retailCustomer, dataCustodian);
-        authorizationService.persist(authorization);
-
-        return authorization;
-    }
+    @Autowired
+    private MeterReadingService meterReadingService;
+    @Autowired
+    private DataCustodianService dataCustodianService;
 
     public Subscription createSubscription() {
         RetailCustomer retailCustomer = EspiFactory.newRetailCustomer();
@@ -53,6 +42,23 @@ public class EspiPersistenceFactory {
         return subscription;
     }
 
+    public Authorization createAuthorization(RetailCustomer retailCustomer) {
+        DataCustodian dataCustodian = EspiFactory.newDataCustodian();
+        dataCustodianService.persist(dataCustodian);
+        Authorization authorization = EspiFactory.newAuthorization(retailCustomer, dataCustodian);
+        authorizationService.persist(authorization);
+
+        return authorization;
+    }
+
+    public Authorization createAuthorization() {
+        Subscription subscription = createSubscription();
+        Authorization authorization = EspiFactory.newAuthorization(subscription);
+        authorizationService.persist(authorization);
+
+        return authorization;
+    }
+
     public RetailCustomer createRetailCustomer() {
         RetailCustomer retailCustomer = EspiFactory.newRetailCustomer();
         retailCustomerService.persist(retailCustomer);
@@ -65,6 +71,13 @@ public class EspiPersistenceFactory {
         usagePointService.persist(usagePoint);
 
         return usagePoint;
+    }
+
+    public MeterReading createMeterReading() {
+        MeterReading meterReading = EspiFactory.newMeterReading();
+        meterReadingService.persist(meterReading);
+
+        return meterReading;
     }
 
     public ThirdParty createThirdParty() {

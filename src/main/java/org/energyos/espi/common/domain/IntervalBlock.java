@@ -62,7 +62,7 @@ import java.util.List;
         "intervalReadings"
 })
 @Entity
-@Table(name = "interval_blocks")
+@Table(name = "interval_blocks", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
 @NamedQueries(value = {
         @NamedQuery(name = IntervalBlock.QUERY_ALL_BY_METER_READING_ID,
                 query = "SELECT block FROM IntervalBlock block WHERE block.meterReading.id = :meterReadingId")
@@ -70,7 +70,8 @@ import java.util.List;
 @XmlRootElement(name = "IntervalBlock")
 @XmlJavaTypeAdapter(IntervalBlockAdapter.class)
 public class IntervalBlock
-        extends IdentifiedObject {
+        extends IdentifiedObject
+{
     public static final String QUERY_ALL_BY_METER_READING_ID = "IntervalBlock.findAllByMeterReadingId";
 
     @Embedded
@@ -92,8 +93,10 @@ public class IntervalBlock
     /**
      * Gets the value of the interval property.
      *
-     * @return possible object is
-     *         {@link DateTimeInterval }
+     * @return
+     *     possible object is
+     *     {@link DateTimeInterval }
+     *
      */
     public DateTimeInterval getInterval() {
         return interval;
@@ -102,8 +105,10 @@ public class IntervalBlock
     /**
      * Sets the value of the interval property.
      *
-     * @param value allowed object is
-     * {@link DateTimeInterval }
+     * @param value
+     *     allowed object is
+     *     {@link DateTimeInterval }
+     *
      */
     public void setInterval(DateTimeInterval value) {
         this.interval = value;
@@ -111,23 +116,25 @@ public class IntervalBlock
 
     /**
      * Gets the value of the intervalReading property.
-     * <p/>
-     * <p/>
+     *
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the intervalReading property.
-     * <p/>
-     * <p/>
+     *
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getIntervalReading().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     *
+     *
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link IntervalReading }
+     *
+     *
      */
     public List<IntervalReading> getIntervalReadings() {
         return this.intervalReadings;
@@ -148,5 +155,16 @@ public class IntervalBlock
     public void addIntervalReading(IntervalReading intervalReading) {
         this.intervalReadings.add(intervalReading);
         intervalReading.setIntervalBlock(this);
+    }
+
+    @Override
+    public String getParentQuery() {
+        return MeterReading.QUERY_FIND_BY_RELATED_HREF;
+    }
+
+    @Override
+    public void setUpResource(IdentifiedObject resource) {
+        MeterReading meterReading = (MeterReading) resource;
+        meterReading.addIntervalBlock(this);
     }
 }

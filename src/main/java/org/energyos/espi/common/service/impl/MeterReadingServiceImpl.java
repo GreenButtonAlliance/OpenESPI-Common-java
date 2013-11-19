@@ -6,6 +6,8 @@ import org.energyos.espi.common.service.MeterReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class MeterReadingServiceImpl implements MeterReadingService {
 
@@ -14,6 +16,11 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 
     public void setRepository(MeterReadingRepository repository) {
         this.repository = repository;
+    }
+
+    @Override
+    public MeterReading findByUUID(UUID uuid) {
+        return repository.findByUUID(uuid);
     }
 
     public MeterReading findById(Long meterReadingId) {

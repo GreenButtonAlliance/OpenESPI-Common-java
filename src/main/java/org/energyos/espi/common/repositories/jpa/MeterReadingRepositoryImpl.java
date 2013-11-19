@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.UUID;
 
 @Repository
 public class MeterReadingRepositoryImpl implements MeterReadingRepository {
@@ -39,5 +40,12 @@ public class MeterReadingRepositoryImpl implements MeterReadingRepository {
     @Transactional
     public void persist(MeterReading meterReading) {
         em.persist(meterReading);
+    }
+
+    @Override
+    public MeterReading findByUUID(UUID uuid) {
+        return (MeterReading) em.createNamedQuery(MeterReading.QUERY_FIND_BY_UUID)
+                .setParameter("uuid", uuid.toString().toUpperCase())
+                .getSingleResult();
     }
 }

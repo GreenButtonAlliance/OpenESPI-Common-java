@@ -87,6 +87,7 @@ import java.util.Map;
 })
 public class EntryType {
 
+
     @XmlElement
     protected String id;
 
@@ -137,7 +138,6 @@ public class EntryType {
     })
     @XmlAnyElement(lax = true)
     protected List<Object> authorOrCategoryOrContent;
-
 
     @XmlAttribute(name = "base", namespace = "http://www.w3.org/XML/1998/namespace")
     @XmlSchemaType(name = "anyURI")
@@ -198,24 +198,23 @@ public class EntryType {
     public void setUpdated(DateTimeType updated) {
         this.updated = updated;
     }
-
     /**
      * Gets the value of the authorOrCategoryOrContent property.
-     * <p/>
-     * <p/>
+     *
+     * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the authorOrCategoryOrContent property.
-     * <p/>
-     * <p/>
+     *
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getAuthorOrCategoryOrContent().add(newItem);
      * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
+     *
+     *
+     * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link PersonType }{@code >}
      * {@link JAXBElement }{@code <}{@link PersonType }{@code >}
@@ -230,6 +229,8 @@ public class EntryType {
      * {@link JAXBElement }{@code <}{@link DateTimeType }{@code >}
      * {@link Object }
      * {@link JAXBElement }{@code <}{@link TextType }{@code >}
+     *
+     *
      */
     public List<Object> getAuthorOrCategoryOrContent() {
         if (authorOrCategoryOrContent == null) {
@@ -241,8 +242,10 @@ public class EntryType {
     /**
      * Gets the value of the base property.
      *
-     * @return possible object is
-     *         {@link String }
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
      */
     public String getBase() {
         return base;
@@ -251,8 +254,10 @@ public class EntryType {
     /**
      * Sets the value of the base property.
      *
-     * @param value allowed object is
-     * {@link String }
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
      */
     public void setBase(String value) {
         this.base = value;
@@ -261,8 +266,10 @@ public class EntryType {
     /**
      * Gets the value of the lang property.
      *
-     * @return possible object is
-     *         {@link String }
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
      */
     public String getLang() {
         return lang;
@@ -271,8 +278,10 @@ public class EntryType {
     /**
      * Sets the value of the lang property.
      *
-     * @param value allowed object is
-     * {@link String }
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
      */
     public void setLang(String value) {
         this.lang = value;
@@ -280,18 +289,38 @@ public class EntryType {
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     * <p/>
-     * <p/>
+     *
+     * <p>
      * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     * <p/>
+     *
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
      *
-     * @return always non-null
+     *
+     * @return
+     *     always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;
     }
 
+    public void addRelatedLink(String href) {
+        getLinks().add(new LinkType(LinkType.RELATED, href));
+    }
+
+    public void addUpLink(String href) {
+        getLinks().add(new LinkType(LinkType.UP, href));
+    }
+
+    public String getUpHref() {
+        String upHref = null;
+        for(LinkType link : getLinks()) {
+            if (link.getRel().equals(LinkType.UP)) {
+                upHref = link.getHref();
+                break;
+            }
+        }
+        return upHref;
+    }
 }

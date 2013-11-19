@@ -22,7 +22,6 @@ import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
 
-import javax.xml.bind.JAXBException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
@@ -33,8 +32,6 @@ public interface UsagePointService {
     UsagePoint findById(Long id);
 
     void persist(UsagePoint up);
-
-    void importUsagePoints(InputStream stream) throws JAXBException;
 
     String exportUsagePoints(RetailCustomer customer) throws FeedException;
 
@@ -53,6 +50,4 @@ public interface UsagePointService {
     List<UsagePoint> findAllUpdatedFor(Subscription subscription);
 
     void deleteByHashedId(String usagePointHashedId);
-
-    UsagePoint findByURI(String uri);
 }

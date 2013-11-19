@@ -1,12 +1,10 @@
 package org.energyos.espi.common.integration.service;
 
-import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.service.RetailCustomerService;
 import org.energyos.espi.common.service.UsagePointService;
 import org.energyos.espi.common.test.EspiFactory;
-import org.energyos.espi.common.test.FixtureFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.xml.bind.JAXBException;
-import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -97,21 +92,5 @@ public class UsagePointServiceTests {
         UsagePoint existingUsagePoint = usagePointService.findByUUID(newUsagePoint.getUUID());
 
         assertEquals(retailCustomer.getId(), existingUsagePoint.getRetailCustomer().getId());
-    }
-
-    @Test
-    public void importUsagePoint_persistsMeterReadings() throws IOException, JAXBException {
-        RetailCustomer retailCustomer = EspiFactory.newRetailCustomer();
-        retailCustomerService.persist(retailCustomer);
-
-        UsagePoint usagePoint = EspiFactory.newUsagePoint(retailCustomer);
-        usagePointService.createOrReplaceByUUID(usagePoint);
-
-        usagePointService.importUsagePoints(FixtureFactory.newUsagePointInputStream(UUID.randomUUID()));
-
-        List<UsagePoint> usagePoints = usagePointService.findAllByRetailCustomer(retailCustomer);
-        MeterReading meterReading = usagePoints.get(0).getMeterReadings().get(0);
-
-        assertNotNull(meterReading.getId());
     }
 }

@@ -37,8 +37,8 @@ public abstract class EspiEntry<T extends IdentifiedObject> extends Entry {
         this.espiObject = espiObject;
         this.setTitle(espiObject.getDescription());
         this.setId(espiObject.getMRID());
-        this.setPublished(espiObject.getCreated());
-        this.setUpdated(espiObject.getUpdated());
+        this.setPublished(espiObject.getPublished().getTime());
+        this.setUpdated(espiObject.getUpdated().getTime());
 
         selfLink.setRel("self");
         selfLink.setHref(getSelfHref());
@@ -67,6 +67,14 @@ public abstract class EspiEntry<T extends IdentifiedObject> extends Entry {
 
     public Link getUpLink() {
         return upLink;
+    }
+
+    public void setSelfLink(Link selfLink) {
+        this.selfLink = selfLink;
+    }
+
+    public void setUpLink(Link upLink) {
+        this.upLink = upLink;
     }
 
     public List<Link> getRelatedLinks() {
