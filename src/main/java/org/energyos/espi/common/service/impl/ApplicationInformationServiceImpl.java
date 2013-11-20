@@ -2,7 +2,7 @@ package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.domain.ThirdParty;
 import org.energyos.espi.common.repositories.ThirdPartyRepository;
-import org.energyos.espi.common.service.ThirdPartyService;
+import org.energyos.espi.common.service.ApplicationInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ThirdPartyServiceImpl implements ThirdPartyService {
+public class ApplicationInformationServiceImpl implements ApplicationInformationService {
 
     @Autowired
     private ThirdPartyRepository repository;

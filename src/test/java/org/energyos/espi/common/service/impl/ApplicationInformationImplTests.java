@@ -26,11 +26,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class ThirdPartyServiceImplTests {
+public class ApplicationInformationImplTests {
 
     @Test
     public void persist() {
-        ThirdPartyServiceImpl service = new ThirdPartyServiceImpl();
+        ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ThirdPartyRepository repository = mock(ThirdPartyRepository.class);
         ThirdParty thirdParty = new ThirdParty();
         service.setRepository(repository);
@@ -42,7 +42,7 @@ public class ThirdPartyServiceImplTests {
 
     @Test
     public void findById() {
-        ThirdPartyServiceImpl service = new ThirdPartyServiceImpl();
+        ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ThirdPartyRepository repository = mock(ThirdPartyRepository.class);
         ThirdParty thirdParty = new ThirdParty();
         service.setRepository(repository);
@@ -53,7 +53,7 @@ public class ThirdPartyServiceImplTests {
 
     @Test
     public void findByClientId() {
-        ThirdPartyServiceImpl service = new ThirdPartyServiceImpl();
+        ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ThirdPartyRepository repository = mock(ThirdPartyRepository.class);
         ThirdParty thirdParty = new ThirdParty();
         service.setRepository(repository);
@@ -64,7 +64,7 @@ public class ThirdPartyServiceImplTests {
 
     @Test
     public void findAll() {
-        ThirdPartyServiceImpl service = new ThirdPartyServiceImpl();
+        ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ThirdPartyRepository repository = mock(ThirdPartyRepository.class);
         List<ThirdParty> thirdParties = new ArrayList<>();
 

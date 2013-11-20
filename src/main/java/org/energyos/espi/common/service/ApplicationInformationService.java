@@ -4,7 +4,7 @@ import org.energyos.espi.common.domain.ThirdParty;
 
 import java.util.List;
 
-public interface ThirdPartyService {
+public interface ApplicationInformationService {
 
     public List<ThirdParty> findAll();
 
