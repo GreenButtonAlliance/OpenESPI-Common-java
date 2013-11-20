@@ -2,6 +2,7 @@ package org.energyos.espi.common.repositories;
 
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.Linkable;
+import org.energyos.espi.common.domain.UsagePoint;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,4 +15,8 @@ public interface ResourceRepository {
     List<IdentifiedObject> findAllRelated(Linkable linkable);
 
     <T> T findByUUID(UUID uuid, Class<T> clazz);
+
+    UsagePoint findByUUID(UUID uuid);
+
+    void update(UsagePoint resource);
 }

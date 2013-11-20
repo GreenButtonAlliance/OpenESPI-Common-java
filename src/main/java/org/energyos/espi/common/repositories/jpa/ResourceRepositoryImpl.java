@@ -2,6 +2,7 @@ package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.Linkable;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.springframework.stereotype.Repository;
 
@@ -39,5 +40,20 @@ class ResourceRepositoryImpl implements ResourceRepository {
         return (T)em.createQuery("SELECT resource FROM " + clazz.getCanonicalName() + " resource WHERE resource.uuid = :uuid")
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
+    }
+
+    @Override
+    public UsagePoint findByUUID(UUID uuid) {
+        return findByUUID(uuid, UsagePoint.class);
+    }
+
+    public void update(UsagePoint updatedUsagePoint) {
+        UsagePoint originalUsagePoint = findByUUID(updatedUsagePoint.getUUID());
+        originalUsagePoint.setDescription(updatedUsagePoint.getDescription());
+        originalUsagePoint.setRoleFlags(updatedUsagePoint.getRoleFlags());
+        originalUsagePoint.setServiceCategory(updatedUsagePoint.getServiceCategory());
+        originalUsagePoint.setStatus(updatedUsagePoint.getStatus());
+
+        em.merge(originalUsagePoint);
     }
 }
