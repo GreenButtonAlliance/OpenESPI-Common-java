@@ -18,17 +18,38 @@ package org.energyos.espi.common.test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class WebDriverSingleton {
     private WebDriverSingleton() { }
 
     private static class SingletonHolder {
-        public static final HtmlUnitDriver INSTANCE = new HtmlUnitDriver(BrowserVersion.FIREFOX_17);
+
+        public static HtmlUnitDriver HTML_UNIT;
+        public static ChromeDriver CHROME;
+
+        public static ChromeDriver chrome() {
+            if (CHROME == null) {
+                CHROME = new ChromeDriver();
+                System.out.println("********************************************************");
+                System.out.println("/!\\    Hey! You're using Chrome from the Googles!    /!\\");
+                System.out.println("********************************************************");
+            }
+
+            return CHROME;
+        }
+
+        public static HtmlUnitDriver htmlUnit() {
+            if (HTML_UNIT == null) {
+                HTML_UNIT = new HtmlUnitDriver(BrowserVersion.FIREFOX_17);
+                HTML_UNIT.setJavascriptEnabled(true);
+            }
+            return HTML_UNIT;
+        }
     }
 
     public static WebDriver getInstance() {
-        SingletonHolder.INSTANCE.setJavascriptEnabled(true);
-        return SingletonHolder.INSTANCE;
+        return SingletonHolder.htmlUnit();
     }
 }
