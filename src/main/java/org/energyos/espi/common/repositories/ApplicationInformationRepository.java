@@ -20,7 +20,7 @@ import org.energyos.espi.common.domain.ThirdParty;
 
 import java.util.List;
 
-public interface ThirdPartyRepository {
+public interface ApplicationInformationRepository {
 
     public List<ThirdParty> findAll();
 

@@ -1,7 +1,7 @@
 package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.ThirdParty;
-import org.energyos.espi.common.repositories.ThirdPartyRepository;
+import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.test.EspiFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,10 +16,10 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
 @Transactional
-public class ThirdPartyRepositoryImplTest {
+public class ApplicationInformationRepositoryImplTest {
 
     @Autowired
-    private ThirdPartyRepository repository;
+    private ApplicationInformationRepository repository;
     private ThirdParty thirdParty;
 
     @Before

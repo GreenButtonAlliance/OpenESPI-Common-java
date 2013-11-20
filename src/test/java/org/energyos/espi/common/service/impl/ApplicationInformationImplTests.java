@@ -17,7 +17,7 @@
 package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.domain.ThirdParty;
-import org.energyos.espi.common.repositories.ThirdPartyRepository;
+import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class ApplicationInformationImplTests {
     @Test
     public void persist() {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
-        ThirdPartyRepository repository = mock(ThirdPartyRepository.class);
+        ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
         ThirdParty thirdParty = new ThirdParty();
         service.setRepository(repository);
 
@@ -43,7 +43,7 @@ public class ApplicationInformationImplTests {
     @Test
     public void findById() {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
-        ThirdPartyRepository repository = mock(ThirdPartyRepository.class);
+        ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
         ThirdParty thirdParty = new ThirdParty();
         service.setRepository(repository);
         when(repository.findById(1L)).thenReturn(thirdParty);
@@ -54,7 +54,7 @@ public class ApplicationInformationImplTests {
     @Test
     public void findByClientId() {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
-        ThirdPartyRepository repository = mock(ThirdPartyRepository.class);
+        ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
         ThirdParty thirdParty = new ThirdParty();
         service.setRepository(repository);
         when(repository.findByClientId("thirdParty")).thenReturn(thirdParty);
@@ -65,7 +65,7 @@ public class ApplicationInformationImplTests {
     @Test
     public void findAll() {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
-        ThirdPartyRepository repository = mock(ThirdPartyRepository.class);
+        ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
         List<ThirdParty> thirdParties = new ArrayList<>();
 
         service.setRepository(repository);

@@ -17,7 +17,7 @@
 package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.ThirdParty;
-import org.energyos.espi.common.repositories.ThirdPartyRepository;
+import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +27,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ThirdPartyRepositoryImpl implements ThirdPartyRepository {
+public class ApplicationInformationRepositoryImpl implements ApplicationInformationRepository {
 
     @PersistenceContext
     protected EntityManager em;
