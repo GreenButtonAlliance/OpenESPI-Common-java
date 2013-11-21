@@ -1,6 +1,6 @@
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.ThirdParty;
+import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.test.EspiFactory;
 import org.junit.Before;
@@ -20,35 +20,35 @@ public class ApplicationInformationRepositoryImplTest {
 
     @Autowired
     private ApplicationInformationRepository repository;
-    private ThirdParty thirdParty;
+    private ApplicationInformation applicationInformation;
 
     @Before
     public void setUp() throws Exception {
-        thirdParty = EspiFactory.newThirdParty();
-        repository.persist(thirdParty);
+        applicationInformation = EspiFactory.newApplicationInformation();
+        repository.persist(applicationInformation);
     }
 
     @Test
     public void persist() throws Exception {
-        assertNotNull(thirdParty.getId());
+        assertNotNull(applicationInformation.getId());
     }
 
     @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
     public void persist_modelEnforcesUniqueClientId() throws Exception {
-        ThirdParty thirdParty2 = EspiFactory.newThirdParty();
-        thirdParty2.setClientId(thirdParty.getClientId());
+        ApplicationInformation duplicateApplicationInformation = EspiFactory.newApplicationInformation();
+        duplicateApplicationInformation.setDataCustodianThirdPartyId(applicationInformation.getDataCustodianThirdPartyId());
 
-        repository.persist(thirdParty2);
+        repository.persist(duplicateApplicationInformation);
     }
 
     @Test
     public void findById() throws Exception {
-        assertEquals(thirdParty.getId(), repository.findById(thirdParty.getId()).getId());
+        assertEquals(applicationInformation.getId(), repository.findById(applicationInformation.getId()).getId());
     }
 
     @Test
     public void findByClientId() throws Exception {
-        assertEquals(thirdParty.getId(), repository.findByClientId(thirdParty.getClientId()).getId());
+        assertEquals(applicationInformation.getId(), repository.findByClientId(applicationInformation.getDataCustodianThirdPartyId()).getId());
     }
 
     @Test

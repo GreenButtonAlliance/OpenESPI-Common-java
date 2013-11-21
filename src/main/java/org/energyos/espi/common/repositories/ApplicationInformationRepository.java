@@ -16,17 +16,17 @@
 
 package org.energyos.espi.common.repositories;
 
-import org.energyos.espi.common.domain.ThirdParty;
+import org.energyos.espi.common.domain.ApplicationInformation;
 
 import java.util.List;
 
 public interface ApplicationInformationRepository {
 
-    public List<ThirdParty> findAll();
+    public List<ApplicationInformation> findAll();
 
-    ThirdParty findById(Long id);
+    ApplicationInformation findById(Long id);
 
-    void persist(ThirdParty thirdParty);
+    void persist(ApplicationInformation applicationInformation);
 
-    ThirdParty findByClientId(String clientId);
+    ApplicationInformation findByClientId(String clientId);
 }

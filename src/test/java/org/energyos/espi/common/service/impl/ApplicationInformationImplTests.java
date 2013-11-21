@@ -16,7 +16,7 @@
 
 package org.energyos.espi.common.service.impl;
 
-import org.energyos.espi.common.domain.ThirdParty;
+import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.junit.Test;
 
@@ -32,45 +32,45 @@ public class ApplicationInformationImplTests {
     public void persist() {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
-        ThirdParty thirdParty = new ThirdParty();
+        ApplicationInformation applicationInformation = new ApplicationInformation();
         service.setRepository(repository);
 
-        service.persist(thirdParty);
+        service.persist(applicationInformation);
 
-        verify(repository).persist(thirdParty);
+        verify(repository).persist(applicationInformation);
     }
 
     @Test
     public void findById() {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
-        ThirdParty thirdParty = new ThirdParty();
+        ApplicationInformation applicationInformation = new ApplicationInformation();
         service.setRepository(repository);
-        when(repository.findById(1L)).thenReturn(thirdParty);
+        when(repository.findById(1L)).thenReturn(applicationInformation);
 
-        assertEquals(thirdParty, service.findById(1L));
+        assertEquals(applicationInformation, service.findById(1L));
     }
 
     @Test
     public void findByClientId() {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
-        ThirdParty thirdParty = new ThirdParty();
+        ApplicationInformation applicationInformation = new ApplicationInformation();
         service.setRepository(repository);
-        when(repository.findByClientId("thirdParty")).thenReturn(thirdParty);
+        when(repository.findByClientId("thirdParty")).thenReturn(applicationInformation);
 
-        assertEquals(thirdParty, service.findByClientId("thirdParty"));
+        assertEquals(applicationInformation, service.findByClientId("thirdParty"));
     }
 
     @Test
     public void findAll() {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
-        List<ThirdParty> thirdParties = new ArrayList<>();
+        List<ApplicationInformation> applicationInformationList = new ArrayList<>();
 
         service.setRepository(repository);
-        when(repository.findAll()).thenReturn(thirdParties);
+        when(repository.findAll()).thenReturn(applicationInformationList);
 
-        assertEquals(thirdParties, service.findAll());
+        assertEquals(applicationInformationList, service.findAll());
     }
 }

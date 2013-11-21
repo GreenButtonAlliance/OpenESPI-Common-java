@@ -25,7 +25,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public Subscription createSubscription(OAuth2Authentication authentication) {
         Subscription subscription = new Subscription();
         subscription.setUUID(UUID.randomUUID());
-        subscription.setThirdParty(applicationInformationService.findByClientId(authentication.getOAuth2Request().getClientId()));
+        subscription.setApplicationInformation(applicationInformationService.findByClientId(authentication.getOAuth2Request().getClientId()));
         subscription.setRetailCustomer((RetailCustomer)authentication.getPrincipal());
         subscription.setLastUpdate(DateConverter.epoch());
         repository.persist(subscription);

@@ -331,13 +331,14 @@ public class EspiFactory {
         return batchList;
     }
 
-    public static ThirdParty newThirdParty() {
-        ThirdParty thirdParty = new ThirdParty();
-        thirdParty.setName("Name" + System.currentTimeMillis());
-        thirdParty.setClientId("Client" + System.currentTimeMillis());
-        thirdParty.setNotificationURI("http://example.com:8080/ThirdParty/espi/1_1/Notification");
+    public static ApplicationInformation newApplicationInformation() {
+        ApplicationInformation applicationInformation = new ApplicationInformation();
+        applicationInformation.setUUID(UUID.randomUUID());
+        applicationInformation.setThirdPartyApplicationName("Name" + UUID.randomUUID().toString());
+        applicationInformation.setDataCustodianThirdPartyId("ClientId" + UUID.randomUUID().toString());
+        applicationInformation.setThirdPartyDefaultNotifyResource("http://example.com:8080/ThirdParty/espi/1_1/Notification");
 
-        return thirdParty;
+        return applicationInformation;
     }
 
     public static Subscription newSubscription() {
@@ -345,16 +346,16 @@ public class EspiFactory {
         subscription.setUUID(UUID.randomUUID());
         subscription.setHashedId(UUID.randomUUID().toString());
         subscription.setRetailCustomer(newRetailCustomer());
-        subscription.setThirdParty(newThirdParty());
+        subscription.setApplicationInformation(newApplicationInformation());
 
         return subscription;
     }
 
-    public static Subscription newSubscription(RetailCustomer retailCustomer, ThirdParty thirdParty) {
+    public static Subscription newSubscription(RetailCustomer retailCustomer, ApplicationInformation applicationInformation) {
         Subscription subscription = new Subscription();
         subscription.setUUID(UUID.randomUUID());
         subscription.setRetailCustomer(retailCustomer);
-        subscription.setThirdParty(thirdParty);
+        subscription.setApplicationInformation(applicationInformation);
 
         return subscription;
     }
@@ -363,7 +364,7 @@ public class EspiFactory {
         Subscription subscription = new Subscription();
         subscription.setUUID(UUID.randomUUID());
         subscription.setRetailCustomer(retailCustomer);
-        subscription.setThirdParty(newThirdParty());
+        subscription.setApplicationInformation(newApplicationInformation());
 
         return subscription;
     }

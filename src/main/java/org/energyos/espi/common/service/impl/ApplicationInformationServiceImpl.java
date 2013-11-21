@@ -1,6 +1,6 @@
 package org.energyos.espi.common.service.impl;
 
-import org.energyos.espi.common.domain.ThirdParty;
+import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,12 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
     private ApplicationInformationRepository repository;
 
     @Override
-    public List<ThirdParty> findAll() {
+    public List<ApplicationInformation> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public ThirdParty findById(Long id) {
+    public ApplicationInformation findById(Long id) {
         return repository.findById(id);
     }
 
@@ -31,12 +31,12 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
     }
 
     @Override
-    public void persist(ThirdParty thirdParty) {
-        repository.persist(thirdParty);
+    public void persist(ApplicationInformation applicationInformation) {
+        repository.persist(applicationInformation);
     }
 
     @Override
-    public ThirdParty findByClientId(String clientId) {
+    public ApplicationInformation findByClientId(String clientId) {
         return repository.findByClientId(clientId);
     }
 }

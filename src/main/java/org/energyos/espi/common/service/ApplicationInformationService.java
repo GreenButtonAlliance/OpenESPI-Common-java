@@ -1,16 +1,16 @@
 package org.energyos.espi.common.service;
 
-import org.energyos.espi.common.domain.ThirdParty;
+import org.energyos.espi.common.domain.ApplicationInformation;
 
 import java.util.List;
 
 public interface ApplicationInformationService {
 
-    public List<ThirdParty> findAll();
+    public List<ApplicationInformation> findAll();
 
-    ThirdParty findById(Long id);
+    ApplicationInformation findById(Long id);
 
-    void persist(ThirdParty thirdParty);
+    void persist(ApplicationInformation applicationInformation);
 
-    ThirdParty findByClientId(String thirdPartyClientId);
+    ApplicationInformation findByClientId(String clientId);
 }

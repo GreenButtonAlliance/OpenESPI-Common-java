@@ -24,6 +24,10 @@
 
 package org.energyos.espi.common.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
@@ -81,25 +85,40 @@ import javax.xml.bind.annotation.XmlType;
         "thirdPartyApplicationUse",
         "thirdPartyApplicationWebsite",
         "thirdPartyDefaultBatchResource",
+        "thirdPartyDefaultScopeResource",
         "thirdPartyDefaultNotifyResource",
         "thirdPartyDefaultOAuthCallback",
         "thirdPartyEmail",
         "thirdPartyName",
         "thirdPartyPhone"
 })
+@Entity
+@Table(name = "application_information", uniqueConstraints = {@UniqueConstraint(columnNames = {"dataCustodianThirdPartyId"})})
+@NamedQueries(value = {
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.id = :id"),
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.dataCustodianThirdPartyId = :clientId"),
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL, query = "SELECT info FROM ApplicationInformation info")
+})
 public class ApplicationInformation
         extends IdentifiedObject {
+    public final static String QUERY_FIND_ALL = "ApplicationInformation.findAll";
+    public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
+    public static final String QUERY_FIND_BY_CLIENT_ID = "ApplicationInformation.findByClientId";
 
     protected String dataCustodianApplicationStatus;
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianDefaultBatchResource;
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianDefaultSubscriptionResource;
+    @NotEmpty
+    @Size(min = 2, max = 64)
     protected String dataCustodianThirdPartyId;
     protected String dataCustodianThirdPartySecret;
     protected String thirdPartyApplicationDescription;
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyApplicationLogo;
+    @NotEmpty
+    @Size(min = 2, max = 64)
     protected String thirdPartyApplicationName;
     protected String thirdPartyApplicationStatus;
     protected String thirdPartyApplicationType;
@@ -108,6 +127,8 @@ public class ApplicationInformation
     protected String thirdPartyApplicationWebsite;
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyDefaultBatchResource;
+    @XmlSchemaType(name = "anyURI")
+    protected String thirdPartyDefaultScopeResource;
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyDefaultNotifyResource;
     @XmlSchemaType(name = "anyURI")
@@ -476,4 +497,11 @@ public class ApplicationInformation
         this.thirdPartyPhone = value;
     }
 
+    public String getThirdPartyDefaultScopeResource() {
+        return thirdPartyDefaultScopeResource;
+    }
+
+    public void setThirdPartyDefaultScopeResource(String thirdPartyDefaultScopeResource) {
+        this.thirdPartyDefaultScopeResource = thirdPartyDefaultScopeResource;
+    }
 }

@@ -357,10 +357,10 @@ public class UsagePointRepositoryImplTests {
         updatedUsagePoint.setUpdated(EspiFactory.newCalendar(2013, 11, 23));
         repository.persist(updatedUsagePoint);
 
-        ThirdParty thirdParty = EspiFactory.newThirdParty();
-        applicationInformationRepository.persist(thirdParty);
+        ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+        applicationInformationRepository.persist(applicationInformation);
 
-        Subscription subscription = newSubscription(retailCustomer, thirdParty);
+        Subscription subscription = newSubscription(retailCustomer, applicationInformation);
         subscription.setLastUpdate(EspiFactory.newCalendar(2013, 11, 15));
         subscriptionRepository.persist(subscription);
 

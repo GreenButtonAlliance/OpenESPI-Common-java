@@ -67,7 +67,7 @@ public class SubscriptionServiceImplTests extends BaseTest {
 
         when(authentication.getPrincipal()).thenReturn(retailCustomer);
         when(authentication.getOAuth2Request()).thenReturn(oAuth2Request);
-        when(applicationInformationService.findByClientId(oAuth2Request.getClientId())).thenReturn(newThirdParty());
+        when(applicationInformationService.findByClientId(oAuth2Request.getClientId())).thenReturn(newApplicationInformation());
 
         subscription = service.createSubscription(authentication);
     }
