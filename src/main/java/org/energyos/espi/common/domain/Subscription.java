@@ -79,7 +79,7 @@ public class Subscription
 
     @OneToOne
     @NotNull
-    private ThirdParty thirdParty;
+    private ApplicationInformation applicationInformation;
 
     @XmlTransient
     @ManyToMany
@@ -104,12 +104,12 @@ public class Subscription
         this.retailCustomer = retailCustomer;
     }
 
-    public ThirdParty getThirdParty() {
-        return thirdParty;
+    public ApplicationInformation getApplicationInformation() {
+        return applicationInformation;
     }
 
-    public void setThirdParty(ThirdParty thirdParty) {
-        this.thirdParty = thirdParty;
+    public void setApplicationInformation(ApplicationInformation applicationInformation) {
+        this.applicationInformation = applicationInformation;
     }
 
     public void setLastUpdate(Calendar lastUpdate) {

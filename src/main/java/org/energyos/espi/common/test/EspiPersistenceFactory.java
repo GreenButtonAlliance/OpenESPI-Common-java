@@ -10,7 +10,7 @@ import java.util.Calendar;
 @Component
 public class EspiPersistenceFactory {
     @Autowired
-    private ThirdPartyService thirdPartyService;
+    private ApplicationInformationService applicationInformationService;
     @Autowired
     private RetailCustomerService retailCustomerService;
     @Autowired
@@ -32,10 +32,10 @@ public class EspiPersistenceFactory {
     }
 
     public Subscription createSubscription(RetailCustomer retailCustomer) {
-        ThirdParty thirdParty = EspiFactory.newThirdParty();
-        thirdPartyService.persist(thirdParty);
+        ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+        applicationInformationService.persist(applicationInformation);
 
-        Subscription subscription = EspiFactory.newSubscription(retailCustomer, thirdParty);
+        Subscription subscription = EspiFactory.newSubscription(retailCustomer, applicationInformation);
         subscription.setLastUpdate(Calendar.getInstance());
         subscriptionService.persist(subscription);
 
@@ -80,10 +80,10 @@ public class EspiPersistenceFactory {
         return meterReading;
     }
 
-    public ThirdParty createThirdParty() {
-        ThirdParty thirdParty = EspiFactory.newThirdParty();
-        thirdPartyService.persist(thirdParty);
+    public ApplicationInformation createApplicationInformation() {
+        ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+        applicationInformationService.persist(applicationInformation);
 
-        return thirdParty;
+        return applicationInformation;
     }
 }

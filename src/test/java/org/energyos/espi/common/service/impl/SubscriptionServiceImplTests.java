@@ -21,7 +21,7 @@ import org.energyos.espi.common.BaseTest;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.repositories.jpa.SubscriptionRepositoryImpl;
-import org.energyos.espi.common.service.ThirdPartyService;
+import org.energyos.espi.common.service.ApplicationInformationService;
 import org.energyos.espi.common.utils.DateConverter;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +48,7 @@ public class SubscriptionServiceImplTests extends BaseTest {
     private OAuth2Authentication authentication;
 
     @Mock
-    private ThirdPartyService thirdPartyService;
+    private ApplicationInformationService applicationInformationService;
 
     public SubscriptionServiceImpl service;
 
@@ -63,11 +63,11 @@ public class SubscriptionServiceImplTests extends BaseTest {
         retailCustomer = newRetailCustomer();
         oAuth2Request = newOAuth2Request("third_party_client");
         service.setRepository(repository);
-        service.setThirdPartyService(thirdPartyService);
+        service.setApplicationInformationService(applicationInformationService);
 
         when(authentication.getPrincipal()).thenReturn(retailCustomer);
         when(authentication.getOAuth2Request()).thenReturn(oAuth2Request);
-        when(thirdPartyService.findByClientId(oAuth2Request.getClientId())).thenReturn(newThirdParty());
+        when(applicationInformationService.findByClientId(oAuth2Request.getClientId())).thenReturn(newApplicationInformation());
 
         subscription = service.createSubscription(authentication);
     }

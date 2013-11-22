@@ -3,8 +3,8 @@ package org.energyos.espi.common.service.impl;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
+import org.energyos.espi.common.service.ApplicationInformationService;
 import org.energyos.espi.common.service.SubscriptionService;
-import org.energyos.espi.common.service.ThirdPartyService;
 import org.energyos.espi.common.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -19,13 +19,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private SubscriptionRepository repository;
 
     @Autowired
-    private ThirdPartyService thirdPartyService;
+    private ApplicationInformationService applicationInformationService;
 
     @Override
     public Subscription createSubscription(OAuth2Authentication authentication) {
         Subscription subscription = new Subscription();
         subscription.setUUID(UUID.randomUUID());
-        subscription.setThirdParty(thirdPartyService.findByClientId(authentication.getOAuth2Request().getClientId()));
+        subscription.setApplicationInformation(applicationInformationService.findByClientId(authentication.getOAuth2Request().getClientId()));
         subscription.setRetailCustomer((RetailCustomer)authentication.getPrincipal());
         subscription.setLastUpdate(DateConverter.epoch());
         repository.persist(subscription);
@@ -52,7 +52,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         this.repository = repository;
     }
 
-    public void setThirdPartyService(ThirdPartyService thirdPartyService) {
-        this.thirdPartyService = thirdPartyService;
+    public void setApplicationInformationService(ApplicationInformationService applicationInformationService) {
+        this.applicationInformationService = applicationInformationService;
     }
 }

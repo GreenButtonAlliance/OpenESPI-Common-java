@@ -18,9 +18,9 @@ package org.energyos.espi.common.repositories.jpa;
 
 
 import org.energyos.espi.common.domain.*;
+import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
-import org.energyos.espi.common.repositories.ThirdPartyRepository;
 import org.energyos.espi.common.repositories.UsagePointRepository;
 import org.energyos.espi.common.test.EspiFactory;
 import org.energyos.espi.common.test.EspiPersistenceFactory;
@@ -54,7 +54,7 @@ public class UsagePointRepositoryImplTests {
     @Autowired
     RetailCustomerRepository retailCustomerRepository;
     @Autowired
-    ThirdPartyRepository thirdPartyRepository;
+    ApplicationInformationRepository applicationInformationRepository;
     @Autowired
     private SubscriptionRepository subscriptionRepository;
     @Autowired
@@ -357,10 +357,10 @@ public class UsagePointRepositoryImplTests {
         updatedUsagePoint.setUpdated(EspiFactory.newCalendar(2013, 11, 23));
         repository.persist(updatedUsagePoint);
 
-        ThirdParty thirdParty = EspiFactory.newThirdParty();
-        thirdPartyRepository.persist(thirdParty);
+        ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+        applicationInformationRepository.persist(applicationInformation);
 
-        Subscription subscription = newSubscription(retailCustomer, thirdParty);
+        Subscription subscription = newSubscription(retailCustomer, applicationInformation);
         subscription.setLastUpdate(EspiFactory.newCalendar(2013, 11, 15));
         subscriptionRepository.persist(subscription);
 

@@ -16,8 +16,8 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.ThirdParty;
-import org.energyos.espi.common.repositories.ThirdPartyRepository;
+import org.energyos.espi.common.domain.ApplicationInformation;
+import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,31 +27,32 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ThirdPartyRepositoryImpl implements ThirdPartyRepository {
+public class ApplicationInformationRepositoryImpl implements ApplicationInformationRepository {
 
     @PersistenceContext
     protected EntityManager em;
 
     @Override
-    public ThirdParty findById(Long id) {
-        return (ThirdParty)em.createNamedQuery(ThirdParty.QUERY_FIND_BY_ID)
+    public ApplicationInformation findById(Long id) {
+        return (ApplicationInformation)em.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_ID)
                 .setParameter("id", id).getSingleResult();
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ThirdParty> findAll() {
-        return (List<ThirdParty>)this.em.createNamedQuery(ThirdParty.QUERY_FIND_ALL).getResultList();
+    public List<ApplicationInformation> findAll() {
+        return (List<ApplicationInformation>)this.em
+                .createNamedQuery(ApplicationInformation.QUERY_FIND_ALL).getResultList();
     }
 
     @Override
-    public void persist(ThirdParty thirdParty) {
-        em.persist(thirdParty);
+    public void persist(ApplicationInformation applicationInformation) {
+        em.persist(applicationInformation);
     }
 
     @Override
-    public ThirdParty findByClientId(String clientId) {
-        return (ThirdParty)em.createNamedQuery(ThirdParty.QUERY_FIND_BY_CLIENT_ID)
+    public ApplicationInformation findByClientId(String clientId) {
+        return (ApplicationInformation)em.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_CLIENT_ID)
                 .setParameter("clientId", clientId).getSingleResult();
     }
 }
