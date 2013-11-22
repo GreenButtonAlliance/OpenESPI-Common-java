@@ -311,7 +311,7 @@ public class EspiFactory {
 
         authorization.setAccessToken("accessToken" + System.currentTimeMillis());
         authorization.setAuthorizationServer("http://DataCustodian" + System.currentTimeMillis() + ".example.com");
-        authorization.setSubscriptionURI(Routes.getDataCustodianRESTSubscriptionGetURL(UUID.randomUUID().toString()));
+        authorization.setSubscriptionURI(Routes.getDataCustodianRESTSubscriptionGetURL(newRandomString()));
         authorization.setThirdParty("thirdParty" + System.currentTimeMillis());
         authorization.setState("state" + UUID.randomUUID());
         authorization.setRetailCustomer(retailCustomer);
@@ -322,7 +322,7 @@ public class EspiFactory {
     }
 
     public static Object getRandomString() {
-        return UUID.randomUUID().toString();
+        return newRandomString();
     }
 
     public static BatchList newBatchList() {
@@ -334,17 +334,24 @@ public class EspiFactory {
     public static ApplicationInformation newApplicationInformation() {
         ApplicationInformation applicationInformation = new ApplicationInformation();
         applicationInformation.setUUID(UUID.randomUUID());
-        applicationInformation.setThirdPartyApplicationName("Name" + UUID.randomUUID().toString());
-        applicationInformation.setDataCustodianThirdPartyId("ClientId" + UUID.randomUUID().toString());
+        applicationInformation.setThirdPartyApplicationName("Name" + newRandomString());
+        applicationInformation.setDataCustodianThirdPartyId("ClientId" + newRandomString());
         applicationInformation.setThirdPartyDefaultNotifyResource("http://example.com:8080/ThirdParty/espi/1_1/Notification");
+        applicationInformation.setDataCustodianThirdPartySecret("Secret" + newRandomString());
+        applicationInformation.getScope().add("FB=4_5_15;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13");
+        applicationInformation.getScope().add("FB=4_5_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13");
 
         return applicationInformation;
+    }
+
+    private static String newRandomString() {
+        return UUID.randomUUID().toString();
     }
 
     public static Subscription newSubscription() {
         Subscription subscription = new Subscription();
         subscription.setUUID(UUID.randomUUID());
-        subscription.setHashedId(UUID.randomUUID().toString());
+        subscription.setHashedId(newRandomString());
         subscription.setRetailCustomer(newRetailCustomer());
         subscription.setApplicationInformation(newApplicationInformation());
 
@@ -372,9 +379,9 @@ public class EspiFactory {
     public static Authorization newAuthorization(Subscription subscription) {
         Authorization authorization = new Authorization();
         authorization.setUUID(UUID.randomUUID());
-        authorization.setAccessToken(UUID.randomUUID().toString());
-        authorization.setResource("/Resource/" + UUID.randomUUID().toString());
-        authorization.setState(UUID.randomUUID().toString());
+        authorization.setAccessToken(newRandomString());
+        authorization.setResource("/Resource/" + newRandomString());
+        authorization.setState(newRandomString());
         return authorization;
     }
 

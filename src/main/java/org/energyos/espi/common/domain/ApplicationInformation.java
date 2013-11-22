@@ -24,14 +24,18 @@
 
 package org.energyos.espi.common.domain;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.provider.ClientDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import java.lang.Object;
+import java.util.*;
 
 
 /**
@@ -100,7 +104,7 @@ import javax.xml.bind.annotation.XmlType;
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL, query = "SELECT info FROM ApplicationInformation info")
 })
 public class ApplicationInformation
-        extends IdentifiedObject {
+        extends IdentifiedObject implements ClientDetails {
     public final static String QUERY_FIND_ALL = "ApplicationInformation.findAll";
     public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
     public static final String QUERY_FIND_BY_CLIENT_ID = "ApplicationInformation.findByClientId";
@@ -136,6 +140,12 @@ public class ApplicationInformation
     protected String thirdPartyEmail;
     protected String thirdPartyName;
     protected String thirdPartyPhone;
+
+    @XmlTransient
+    @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @CollectionTable(name="application_information_scopes", joinColumns=@JoinColumn(name="application_information_id"))
+    private Set<String> scope = new HashSet<>();
 
     /**
      * Gets the value of the dataCustodianApplicationStatus property.
@@ -503,5 +513,71 @@ public class ApplicationInformation
 
     public void setThirdPartyDefaultScopeResource(String thirdPartyDefaultScopeResource) {
         this.thirdPartyDefaultScopeResource = thirdPartyDefaultScopeResource;
+    }
+
+    @Override
+    public String getClientId() {
+        return getDataCustodianThirdPartyId();
+    }
+
+    @Override
+    public Set<String> getResourceIds() {
+        return null;
+    }
+
+    @Override
+    public boolean isSecretRequired() {
+        return true;
+    }
+
+    @Override
+    public String getClientSecret() {
+        return getDataCustodianThirdPartySecret();
+    }
+
+    @Override
+    public boolean isScoped() {
+        return true;
+    }
+
+    @Override
+    public Set<String> getScope() {
+        return scope;
+    }
+
+    @Override
+    public Set<String> getAuthorizedGrantTypes() {
+        Set<String> grantTypes = new HashSet<>();
+        grantTypes.add("authorization_code");
+        return grantTypes;
+    }
+
+    @Override
+    public Set<String> getRegisteredRedirectUri() {
+        Set<String> uris = new HashSet<>();
+        uris.add(getThirdPartyDefaultOAuthCallback());
+        return uris;
+    }
+
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_CLIENT"));
+        return authorities;
+    }
+
+    @Override
+    public Integer getAccessTokenValiditySeconds() {
+        return Integer.valueOf(60*60*24*60);
+    }
+
+    @Override
+    public Integer getRefreshTokenValiditySeconds() {
+        return Integer.valueOf(60*60*24);
+    }
+
+    @Override
+    public Map<String, Object> getAdditionalInformation() {
+        return null;
     }
 }

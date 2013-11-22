@@ -4,6 +4,7 @@ import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,5 +39,10 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
     @Override
     public ApplicationInformation findByClientId(String clientId) {
         return repository.findByClientId(clientId);
+    }
+
+    @Override
+    public ClientDetails loadClientByClientId(String clientId) {
+        return findByClientId(clientId);
     }
 }
