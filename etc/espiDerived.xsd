@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns="http://naesb.org/espi" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified"
-           version="0.7.20131008">
+<xs:schema xmlns="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.7.20131008">
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20131021
+    Version: 0.7.20131111
      Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -136,6 +134,11 @@ self link to this resource</xs:documentation>
 							<xs:documentation>A URI used by the client to register a Third Party with a Data Custodian via its {AuthorizationServer}{AuthorizationServer}{RegistrationPath}</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="AuthorizationServerTokenEndpoint" type="xs:anyURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>An OAuth 2.0 URL used by the client to exchange an authorization grant for an access token, typically with client authentication.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="DataCustodianBulkRequestURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>{DataCustodianBulkRequestURI}  URI of DataCustodian’s Bulk Request endpoint.  The value is provided by the Data Custodian and cannot be modified by the ThirdParty.  The field MUST be a valid URI.</xs:documentation>
@@ -223,18 +226,18 @@ self link to this resource</xs:documentation>
 							<xs:documentation>A version identifier for the software that comprises a Third Party Application.  The value of this field is a string that is intended to be compared using string equality matching.  The value of the software_version SHOULD change on any update to the Third Party software.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="client_issued_at" type="TimeType" minOccurs="0">
+					<xs:element name="client_id_issued_at" type="TimeType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Time date stamp at which this client_id was issued. Note the schema data type is TimeType and the presentation in OAuth message flow is xs:dateTime and requires a conversion when accessed.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="client_expires_at" type="TimeType" minOccurs="0">
+					<xs:element name="client_secret_expires_at" type="TimeType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Date time at which this client_secret expires -- value of 0 means the client_secret never expires.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!-- Additional OAuth 2.0 fields -->
-					<xs:element name="contacts" type="String64" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="contacts" type="String256" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>Array of email addresses for people responsible for the Authorized Third Party Application.  These MAY be made available to Retail Customers for support requests for the Authorized Third Party application.  The Data Custodian Authorization Server MAY use the email addresses as identifiers for an Authorized Third Party application administrative page.</xs:documentation>
 						</xs:annotation>
@@ -296,6 +299,11 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 					<xs:element name="publishedPeriod" type="DateTimeInterval" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Restricts access to the objects within the associated resource that were published within this date time interval.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="referenceID" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>referenceID used in constructing of URIs for resources (e.g. in the RESTful API examples, this would populate the RetailCustomerID field)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="access_token" type="String512" minOccurs="0">
@@ -361,6 +369,16 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 					<xs:element name="error_uri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>speciic error URI for last returned erorr</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="resourceURI" type="xs:anyURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>resrouceURI that represents the data set authorized. Can be used in a GET of the resrouce subscription.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="authorizationURI" type="xs:anyURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URI that can be used to update thor delete this Authorization</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
