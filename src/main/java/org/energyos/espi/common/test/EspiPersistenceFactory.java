@@ -67,7 +67,11 @@ public class EspiPersistenceFactory {
     }
 
     public UsagePoint createUsagePoint() {
-        UsagePoint usagePoint = EspiFactory.newUsagePoint(createRetailCustomer());
+        return createUsagePoint(createRetailCustomer());
+    }
+
+    public UsagePoint createUsagePoint(RetailCustomer retailCustomer) {
+        UsagePoint usagePoint = EspiFactory.newUsagePoint(retailCustomer);
         usagePointService.persist(usagePoint);
 
         return usagePoint;
