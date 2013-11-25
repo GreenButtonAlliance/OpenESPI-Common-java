@@ -46,6 +46,21 @@ public class ResourceServiceImpl implements ResourceService {
         return repository.findByUUID(uuid, clazz);
     }
 
+    @Override
+    public <T extends IdentifiedObject> T findById(Long id, Class<T> clazz) {
+        return repository.findById(id, clazz);
+    }
+
+    @Override
+    public <T extends IdentifiedObject> List<Long> findAllIds(Class<T> clazz) {
+        return repository.findAllIds(clazz);
+    }
+
+    @Override
+    public <T extends IdentifiedObject> List<Long> findAllIdsByUsagePointId(Long id, Class<T> clazz) {
+        return repository.findAllIdsByUsagePointId(id, clazz);
+    }
+
     public void setRepository(ResourceRepository repository) {
         this.repository = repository;
     }
