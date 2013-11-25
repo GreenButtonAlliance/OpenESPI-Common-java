@@ -29,4 +29,6 @@ public interface ApplicationInformationRepository {
     void persist(ApplicationInformation applicationInformation);
 
     ApplicationInformation findByClientId(String clientId);
+
+    ApplicationInformation findByDataCustodianClientId(String dataCustodianId);
 }

@@ -82,6 +82,8 @@ import java.util.*;
         "dataCustodianThirdPartyId",
         "dataCustodianId",
         "dataCustodianDefaultScopeResource",
+        "dataCustodianAuthorizationResource",
+        "dataCustodianTokenResource",
         "dataCustodianThirdPartySecret",
         "thirdPartyApplicationDescription",
         "thirdPartyApplicationLogo",
@@ -103,6 +105,7 @@ import java.util.*;
 @NamedQueries(value = {
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.id = :id"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.dataCustodianThirdPartyId = :clientId"),
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.dataCustodianId = :dataCustodianId"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL, query = "SELECT info FROM ApplicationInformation info")
 })
 public class ApplicationInformation
@@ -110,6 +113,7 @@ public class ApplicationInformation
     public final static String QUERY_FIND_ALL = "ApplicationInformation.findAll";
     public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
     public static final String QUERY_FIND_BY_CLIENT_ID = "ApplicationInformation.findByClientId";
+    public static final String QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID = "ApplicationInformation.findByDataCustodianClientId";
 
     protected String dataCustodianApplicationStatus;
     @XmlSchemaType(name = "anyURI")
@@ -123,6 +127,8 @@ public class ApplicationInformation
     protected String dataCustodianId;
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianDefaultScopeResource;
+    protected String dataCustodianAuthorizationResource;
+    protected String dataCustodianTokenResource;
     protected String dataCustodianThirdPartySecret;
     protected String thirdPartyApplicationDescription;
     @XmlSchemaType(name = "anyURI")
@@ -231,6 +237,22 @@ public class ApplicationInformation
      */
     public void setDataCustodianThirdPartyId(String value) {
         this.dataCustodianThirdPartyId = value;
+    }
+
+    public String getDataCustodianAuthorizationResource() {
+        return dataCustodianAuthorizationResource;
+    }
+
+    public void setDataCustodianAuthorizationResource(String dataCustodianAuthorizationResource) {
+        this.dataCustodianAuthorizationResource = dataCustodianAuthorizationResource;
+    }
+
+    public String getDataCustodianTokenResource() {
+        return dataCustodianTokenResource;
+    }
+
+    public void setDataCustodianTokenResource(String dataCustodianTokenResource) {
+        this.dataCustodianTokenResource = dataCustodianTokenResource;
     }
 
     /**
