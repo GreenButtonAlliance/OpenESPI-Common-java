@@ -15,7 +15,7 @@ package org.energyos.espi.common.utils;
  *    limitations under the License.
  */
 
-import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.domain.*;
 import org.energyos.espi.common.models.atom.DateTimeType;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.models.atom.LinkType;
@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
+import static org.energyos.espi.common.test.EspiFactory.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
@@ -98,4 +98,49 @@ public class EntryBuilderTest {
         LinkType link = new LinkType("related", usagePoint.getSelfHref() + "/ElectricPowerQualitySummary");
         assertThat(relatedLinks, hasItem(link));
     }
+
+
+    @Test
+    public void build_givenMeterReading() throws Exception {
+        MeterReading meterReading = newMeterReading();
+        EntryType entry = new EntryBuilder().build(meterReading);
+        assertThat(entry.getContent().getMeterReading(), is(equalTo(meterReading)));
+    }
+
+    @Test
+    public void build_givenTimeConfiguration() throws Exception {
+        TimeConfiguration localTimeParameters = newLocalTimeParameters();
+        EntryType entry = new EntryBuilder().build(localTimeParameters);
+        assertThat(entry.getContent().getLocalTimeParameters(), is(equalTo(localTimeParameters)));
+    }
+
+    @Test
+    public void build_givenUsagePoint() throws Exception {
+        UsagePoint usagePoint = newUsagePoint();
+        EntryType entry = new EntryBuilder().build(usagePoint);
+        assertThat(entry.getContent().getUsagePoint(), is(equalTo(usagePoint)));
+    }
+
+    @Test
+    public void build_givenElectricPowerUsageSummary() throws Exception {
+        ElectricPowerUsageSummary electricPowerUsageSummary = newElectricPowerUsageSummary();
+        EntryType entry = new EntryBuilder().build(electricPowerUsageSummary);
+        assertThat(entry.getContent().getElectricPowerUsageSummary(), is(equalTo(electricPowerUsageSummary)));
+    }
+
+    @Test
+    public void build_givenElectricPowerQualitySummary() throws Exception {
+        ElectricPowerQualitySummary electricPowerQualitySummary = newElectricPowerQualitySummary();
+        EntryType entry = new EntryBuilder().build(electricPowerQualitySummary);
+        assertThat(entry.getContent().getElectricPowerQualitySummary(), is(equalTo(electricPowerQualitySummary)));
+    }
+
+    @Test
+    public void build_givenReadingType() throws Exception {
+        ReadingType readingType = newReadingType();
+        EntryType entry = new EntryBuilder().build(readingType);
+        assertThat(entry.getContent().getReadingType(), is(equalTo(readingType)));
+    }
+
+
 }

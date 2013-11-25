@@ -1,6 +1,6 @@
 package org.energyos.espi.common.utils;
 
-import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.models.atom.ContentType;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.models.atom.LinkType;
@@ -9,37 +9,35 @@ public class EntryBuilder {
 
     private EntryType entry;
 
-    public EntryBuilder() {
+    public EntryType build(IdentifiedObject usagePoint) {
         entry = new EntryType();
-    }
 
-    public EntryType build(UsagePoint usagePoint) {
         buildMetadata(usagePoint);
         buildContent(usagePoint);
 
         return entry;
     }
 
-    private void buildContent(UsagePoint usagePoint) {
+    private void buildContent(IdentifiedObject resource) {
         ContentType content = new ContentType();
-        content.setUsagePoint(usagePoint);
+        content.setResource(resource);
         entry.setContent(content);
     }
 
-    private void buildMetadata(UsagePoint usagePoint) {
-        entry.setId("urn:uuid:" + usagePoint.getUUID().toString());
-        entry.setTitle(usagePoint.getDescription());
-        entry.setPublished(DateConverter.toDateTimeType(usagePoint.getPublished()));
-        entry.setUpdated(DateConverter.toDateTimeType(usagePoint.getUpdated()));
+    private void buildMetadata(IdentifiedObject resource) {
+        entry.setId("urn:uuid:" + resource.getUUID().toString());
+        entry.setTitle(resource.getDescription());
+        entry.setPublished(DateConverter.toDateTimeType(resource.getPublished()));
+        entry.setUpdated(DateConverter.toDateTimeType(resource.getUpdated()));
 
-        buildLinks(usagePoint);
+        buildLinks(resource);
     }
 
-    private void buildLinks(UsagePoint usagePoint) {
-        entry.getLinks().add(new LinkType("up", usagePoint.getUpHref()));
-        entry.getLinks().add(new LinkType("self", usagePoint.getSelfHref()));
+    private void buildLinks(IdentifiedObject resource) {
+        entry.getLinks().add(resource.getUpLink());
+        entry.getLinks().add(new LinkType("self", resource.getSelfLink()));
 
-        for (LinkType link : usagePoint.getRelatedLinks()) {
+        for (LinkType link : resource.getRelatedLinks()) {
             entry.getLinks().add(link);
         }
     }
