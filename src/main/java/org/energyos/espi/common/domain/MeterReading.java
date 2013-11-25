@@ -59,19 +59,25 @@ import java.util.List;
 @Table(name = "meter_readings", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
 @XmlJavaTypeAdapter(GenericAdapter.class)
 @NamedQueries(value = {
+        @NamedQuery(name = MeterReading.QUERY_FIND_BY_ID,
+                query = "SELECT reading FROM MeterReading reading WHERE reading.id = :id"),
         @NamedQuery(name = MeterReading.QUERY_FIND_BY_UUID,
                 query = "SELECT meterReading FROM MeterReading meterReading WHERE meterReading.uuid = :uuid"),
         @NamedQuery(name = MeterReading.QUERY_FIND_BY_RELATED_HREF,
                 query = "SELECT reading FROM MeterReading reading join reading.relatedLinks link WHERE link.href = :href"),
         @NamedQuery(name = MeterReading.QUERY_FIND_ALL_RELATED,
-                query = "SELECT readingType FROM ReadingType readingType WHERE readingType.upLink.href in (:relatedLinkHrefs)")
+                query = "SELECT readingType FROM ReadingType readingType WHERE readingType.upLink.href in (:relatedLinkHrefs)"),
+        @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
+                query = "SELECT reading.id FROM MeterReading reading WHERE reading.usagePoint.id = :usagePointId"),
 
 })
 public class MeterReading extends IdentifiedObject
 {
     public static final String QUERY_FIND_BY_UUID = "MeterReading.findByUUID";
+    public static final String QUERY_FIND_BY_ID = "MeterReading.findById";
     public static final String QUERY_FIND_BY_RELATED_HREF = "MeterReading.findByAllParentsHref";
     public static final String QUERY_FIND_ALL_RELATED = "MeterReading.findAllRelated";
+    public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "MeterReading.findAllIdsByUsagePointId";
     @OneToMany(mappedBy = "meterReading", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @XmlTransient
