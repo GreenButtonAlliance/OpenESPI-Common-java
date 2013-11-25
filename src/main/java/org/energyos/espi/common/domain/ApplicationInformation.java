@@ -589,6 +589,12 @@ public class ApplicationInformation
         return scope;
     }
 
+    public String[] getScopeArray() {
+        if (scope == null)
+            return new String[] {};
+        return scope.toArray(new String[scope.size()]);
+    }
+
     @Override
     public Set<String> getAuthorizedGrantTypes() {
         Set<String> grantTypes = new HashSet<>();
