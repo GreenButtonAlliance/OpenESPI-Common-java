@@ -80,6 +80,8 @@ import java.util.*;
         "dataCustodianDefaultBatchResource",
         "dataCustodianDefaultSubscriptionResource",
         "dataCustodianThirdPartyId",
+        "dataCustodianId",
+        "dataCustodianDefaultScopeResource",
         "dataCustodianThirdPartySecret",
         "thirdPartyApplicationDescription",
         "thirdPartyApplicationLogo",
@@ -117,6 +119,10 @@ public class ApplicationInformation
     @NotEmpty
     @Size(min = 2, max = 64)
     protected String dataCustodianThirdPartyId;
+    @Size(min = 2, max = 64)
+    protected String dataCustodianId;
+    @XmlSchemaType(name = "anyURI")
+    protected String dataCustodianDefaultScopeResource;
     protected String dataCustodianThirdPartySecret;
     protected String thirdPartyApplicationDescription;
     @XmlSchemaType(name = "anyURI")
@@ -513,6 +519,22 @@ public class ApplicationInformation
 
     public void setThirdPartyDefaultScopeResource(String thirdPartyDefaultScopeResource) {
         this.thirdPartyDefaultScopeResource = thirdPartyDefaultScopeResource;
+    }
+
+    public String getDataCustodianId() {
+        return dataCustodianId;
+    }
+
+    public void setDataCustodianId(String dataCustodianId) {
+        this.dataCustodianId = dataCustodianId;
+    }
+
+    public String getDataCustodianDefaultScopeResource() {
+        return dataCustodianDefaultScopeResource;
+    }
+
+    public void setDataCustodianDefaultScopeResource(String dataCustodianDefaultScopeResource) {
+        this.dataCustodianDefaultScopeResource = dataCustodianDefaultScopeResource;
     }
 
     @Override
