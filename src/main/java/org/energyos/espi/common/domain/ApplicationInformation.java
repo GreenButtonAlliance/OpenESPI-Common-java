@@ -101,7 +101,7 @@ import java.util.*;
         "thirdPartyPhone"
 })
 @Entity
-@Table(name = "application_information", uniqueConstraints = {@UniqueConstraint(columnNames = {"dataCustodianThirdPartyId"})})
+@Table(name = "application_information", uniqueConstraints = {@UniqueConstraint(columnNames = {"dataCustodianId", "dataCustodianThirdPartyId"})})
 @NamedQueries(value = {
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.id = :id"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.dataCustodianThirdPartyId = :clientId"),

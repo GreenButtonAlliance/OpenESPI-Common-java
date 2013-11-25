@@ -52,6 +52,11 @@ public class ApplicationInformationRepositoryImplTest {
     }
 
     @Test
+    public void findByDataCustodianClientId() throws Exception {
+        assertEquals(applicationInformation.getId(), repository.findByDataCustodianClientId(applicationInformation.getDataCustodianId()).getId());
+    }
+
+    @Test
     public void findAll_returnsAllThirdParties() throws Exception {
         assertTrue("Repository has no data", repository.findAll().size() > 0);
     }

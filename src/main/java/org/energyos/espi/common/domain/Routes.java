@@ -37,8 +37,6 @@ public class Routes {
     public static final String THIRD_PARTY_SCOPE_SELECTION_SCREEN = "/RetailCustomer/ScopeSelection";
     public static final String THIRD_PARTY_SCOPE_SELECTION_SCREEN_WITH_RETAIL_CUSTOMER_ID = "/RetailCustomer/{retailCustomerId}/ScopeSelection";
 
-    public static final String AUTHORIZATION_SERVER_AUTHORIZATION_ENDPOINT = "/oauth/authorize";
-    public static final String AUTHORIZATION_SERVER_TOKEN_ENDPOINT = "/oauth/token";
     public static final String METER_READINGS_SHOW = "/RetailCustomer/{retailCustomerId}/meterreadings/{meterReadingId}/show";
     public static final String OAUTH_ACCESS = "/oauth/confirm_access";
     public static final String OAUTH_ERROR = "/oauth/error";

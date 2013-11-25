@@ -19,7 +19,6 @@ package org.energyos.espi.common.repositories.jpa;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.repositories.AuthorizationRepository;
-import org.energyos.espi.common.repositories.DataCustodianRepository;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.energyos.espi.common.test.EspiPersistenceFactory;
 import org.junit.Assert;
@@ -45,9 +44,6 @@ public class AuthorizationRepositoryImplTests {
 
     @Autowired
     RetailCustomerRepository retailCustomerRepository;
-
-    @Autowired
-    DataCustodianRepository dataCustodianRepository;
 
     @Autowired
     EspiPersistenceFactory espiPersistenceFactory;
