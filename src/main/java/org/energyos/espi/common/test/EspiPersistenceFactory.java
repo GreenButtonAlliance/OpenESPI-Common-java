@@ -21,8 +21,6 @@ public class EspiPersistenceFactory {
     private UsagePointService usagePointService;
     @Autowired
     private MeterReadingService meterReadingService;
-    @Autowired
-    private DataCustodianService dataCustodianService;
 
     public Subscription createSubscription() {
         RetailCustomer retailCustomer = EspiFactory.newRetailCustomer();
@@ -43,9 +41,9 @@ public class EspiPersistenceFactory {
     }
 
     public Authorization createAuthorization(RetailCustomer retailCustomer) {
-        DataCustodian dataCustodian = EspiFactory.newDataCustodian();
-        dataCustodianService.persist(dataCustodian);
-        Authorization authorization = EspiFactory.newAuthorization(retailCustomer, dataCustodian);
+        ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+        applicationInformationService.persist(applicationInformation);
+        Authorization authorization = EspiFactory.newAuthorization(retailCustomer, applicationInformation);
         authorizationService.persist(authorization);
 
         return authorization;

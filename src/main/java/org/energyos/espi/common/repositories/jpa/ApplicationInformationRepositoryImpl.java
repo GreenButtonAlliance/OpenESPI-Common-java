@@ -55,4 +55,10 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
         return (ApplicationInformation)em.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_CLIENT_ID)
                 .setParameter("clientId", clientId).getSingleResult();
     }
+
+    @Override
+    public ApplicationInformation findByDataCustodianClientId(String dataCustodianId) {
+        return (ApplicationInformation)em.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID)
+                .setParameter("dataCustodianId", dataCustodianId).getSingleResult();
+    }
 }

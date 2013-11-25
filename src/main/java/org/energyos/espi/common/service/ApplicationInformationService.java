@@ -15,5 +15,7 @@ public interface ApplicationInformationService {
 
     ApplicationInformation findByClientId(String clientId);
 
+    ApplicationInformation findByDataCustodianClientId(String dataCustodianClientId);
+
     ClientDetails loadClientByClientId(String clientId);
 }

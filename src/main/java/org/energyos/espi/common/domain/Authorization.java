@@ -110,9 +110,9 @@ public class Authorization
     @XmlElement(name = "error_uri")
     @XmlSchemaType(name = "anyURI")
     protected String errorUri;
-    @ManyToOne @JoinColumn(name = "data_custodian_id")
+    @ManyToOne @JoinColumn(name = "application_information_id")
     @XmlTransient
-    private DataCustodian dataCustodian;
+    private ApplicationInformation applicationInformation;
     private String subscriptionURI;
 
     /**
@@ -523,12 +523,12 @@ public class Authorization
         this.retailCustomer = retailCustomer;
     }
 
-    public DataCustodian getDataCustodian() {
-        return dataCustodian;
+    public ApplicationInformation getApplicationInformation() {
+        return applicationInformation;
     }
 
-    public void setDataCustodian(DataCustodian dataCustodian) {
-        this.dataCustodian = dataCustodian;
+    public void setApplicationInformation(ApplicationInformation applicationInformation) {
+        this.applicationInformation = applicationInformation;
     }
 
     public void setSubscriptionURI(String subscriptionURI) {

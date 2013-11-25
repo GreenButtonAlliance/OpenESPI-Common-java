@@ -80,6 +80,10 @@ import java.util.*;
         "dataCustodianDefaultBatchResource",
         "dataCustodianDefaultSubscriptionResource",
         "dataCustodianThirdPartyId",
+        "dataCustodianId",
+        "dataCustodianDefaultScopeResource",
+        "dataCustodianAuthorizationResource",
+        "dataCustodianTokenResource",
         "dataCustodianThirdPartySecret",
         "thirdPartyApplicationDescription",
         "thirdPartyApplicationLogo",
@@ -97,10 +101,11 @@ import java.util.*;
         "thirdPartyPhone"
 })
 @Entity
-@Table(name = "application_information", uniqueConstraints = {@UniqueConstraint(columnNames = {"dataCustodianThirdPartyId"})})
+@Table(name = "application_information", uniqueConstraints = {@UniqueConstraint(columnNames = {"dataCustodianId", "dataCustodianThirdPartyId"})})
 @NamedQueries(value = {
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.id = :id"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.dataCustodianThirdPartyId = :clientId"),
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.dataCustodianId = :dataCustodianId"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL, query = "SELECT info FROM ApplicationInformation info")
 })
 public class ApplicationInformation
@@ -108,6 +113,7 @@ public class ApplicationInformation
     public final static String QUERY_FIND_ALL = "ApplicationInformation.findAll";
     public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
     public static final String QUERY_FIND_BY_CLIENT_ID = "ApplicationInformation.findByClientId";
+    public static final String QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID = "ApplicationInformation.findByDataCustodianClientId";
 
     protected String dataCustodianApplicationStatus;
     @XmlSchemaType(name = "anyURI")
@@ -117,6 +123,12 @@ public class ApplicationInformation
     @NotEmpty
     @Size(min = 2, max = 64)
     protected String dataCustodianThirdPartyId;
+    @Size(min = 2, max = 64)
+    protected String dataCustodianId;
+    @XmlSchemaType(name = "anyURI")
+    protected String dataCustodianDefaultScopeResource;
+    protected String dataCustodianAuthorizationResource;
+    protected String dataCustodianTokenResource;
     protected String dataCustodianThirdPartySecret;
     protected String thirdPartyApplicationDescription;
     @XmlSchemaType(name = "anyURI")
@@ -225,6 +237,22 @@ public class ApplicationInformation
      */
     public void setDataCustodianThirdPartyId(String value) {
         this.dataCustodianThirdPartyId = value;
+    }
+
+    public String getDataCustodianAuthorizationResource() {
+        return dataCustodianAuthorizationResource;
+    }
+
+    public void setDataCustodianAuthorizationResource(String dataCustodianAuthorizationResource) {
+        this.dataCustodianAuthorizationResource = dataCustodianAuthorizationResource;
+    }
+
+    public String getDataCustodianTokenResource() {
+        return dataCustodianTokenResource;
+    }
+
+    public void setDataCustodianTokenResource(String dataCustodianTokenResource) {
+        this.dataCustodianTokenResource = dataCustodianTokenResource;
     }
 
     /**
@@ -513,6 +541,22 @@ public class ApplicationInformation
 
     public void setThirdPartyDefaultScopeResource(String thirdPartyDefaultScopeResource) {
         this.thirdPartyDefaultScopeResource = thirdPartyDefaultScopeResource;
+    }
+
+    public String getDataCustodianId() {
+        return dataCustodianId;
+    }
+
+    public void setDataCustodianId(String dataCustodianId) {
+        this.dataCustodianId = dataCustodianId;
+    }
+
+    public String getDataCustodianDefaultScopeResource() {
+        return dataCustodianDefaultScopeResource;
+    }
+
+    public void setDataCustodianDefaultScopeResource(String dataCustodianDefaultScopeResource) {
+        this.dataCustodianDefaultScopeResource = dataCustodianDefaultScopeResource;
     }
 
     @Override

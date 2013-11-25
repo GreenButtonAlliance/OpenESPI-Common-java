@@ -36,6 +36,7 @@ public class ApplicationInformationRepositoryImplTest {
     @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
     public void persist_modelEnforcesUniqueClientId() throws Exception {
         ApplicationInformation duplicateApplicationInformation = EspiFactory.newApplicationInformation();
+        duplicateApplicationInformation.setDataCustodianId(applicationInformation.getDataCustodianId());
         duplicateApplicationInformation.setDataCustodianThirdPartyId(applicationInformation.getDataCustodianThirdPartyId());
 
         repository.persist(duplicateApplicationInformation);
@@ -49,6 +50,11 @@ public class ApplicationInformationRepositoryImplTest {
     @Test
     public void findByClientId() throws Exception {
         assertEquals(applicationInformation.getId(), repository.findByClientId(applicationInformation.getDataCustodianThirdPartyId()).getId());
+    }
+
+    @Test
+    public void findByDataCustodianClientId() throws Exception {
+        assertEquals(applicationInformation.getId(), repository.findByDataCustodianClientId(applicationInformation.getDataCustodianId()).getId());
     }
 
     @Test

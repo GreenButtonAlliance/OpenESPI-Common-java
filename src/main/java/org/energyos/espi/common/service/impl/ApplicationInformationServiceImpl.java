@@ -42,6 +42,11 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
     }
 
     @Override
+    public ApplicationInformation findByDataCustodianClientId(String dataCustodianClientId) {
+        return repository.findByDataCustodianClientId(dataCustodianClientId);
+    }
+
+    @Override
     public ClientDetails loadClientByClientId(String clientId) {
         return findByClientId(clientId);
     }

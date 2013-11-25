@@ -293,20 +293,10 @@ public class EspiFactory {
     }
 
     public static Authorization newAuthorization() {
-        return newAuthorization(newRetailCustomer(), newDataCustodian());
+        return newAuthorization(newRetailCustomer(), newApplicationInformation());
     }
 
-
-    public static DataCustodian newDataCustodian() {
-        DataCustodian dataCustodian = new DataCustodian();
-        dataCustodian.setDescription("Description" + System.currentTimeMillis());
-        dataCustodian.setUrl("http://DataCustodian" + System.currentTimeMillis() + ".example.com");
-        dataCustodian.setClientId("clientId" + System.currentTimeMillis());
-
-        return dataCustodian;
-    }
-
-    public static Authorization newAuthorization(RetailCustomer retailCustomer, DataCustodian dataCustodian) {
+    public static Authorization newAuthorization(RetailCustomer retailCustomer, ApplicationInformation applicationInformation) {
         Authorization authorization = new Authorization();
 
         authorization.setAccessToken("accessToken" + System.currentTimeMillis());
@@ -315,7 +305,7 @@ public class EspiFactory {
         authorization.setThirdParty("thirdParty" + System.currentTimeMillis());
         authorization.setState("state" + UUID.randomUUID());
         authorization.setRetailCustomer(retailCustomer);
-        authorization.setDataCustodian(dataCustodian);
+        authorization.setApplicationInformation(applicationInformation);
         authorization.setUUID(UUID.randomUUID());
 
         return authorization;
@@ -336,7 +326,11 @@ public class EspiFactory {
         applicationInformation.setUUID(UUID.randomUUID());
         applicationInformation.setThirdPartyApplicationName("Name" + newRandomString());
         applicationInformation.setDataCustodianThirdPartyId("ClientId" + newRandomString());
+        applicationInformation.setDataCustodianId("DataCustodianId" + newRandomString());
         applicationInformation.setThirdPartyDefaultNotifyResource("http://example.com:8080/ThirdParty/espi/1_1/Notification");
+        applicationInformation.setDataCustodianAuthorizationResource("http://example.com:8080/ThirdParty/oauth/authorize");
+        applicationInformation.setDataCustodianTokenResource("http://example.com:8080/ThirdParty/oauth/token");
+        applicationInformation.setThirdPartyDefaultOAuthCallback("http://example.com:8080/ThirdParty/espi/1_1/OAuthCallBack");
         applicationInformation.setDataCustodianThirdPartySecret("Secret" + newRandomString());
         applicationInformation.getScope().add("FB=4_5_15;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13");
         applicationInformation.getScope().add("FB=4_5_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13");

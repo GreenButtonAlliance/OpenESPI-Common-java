@@ -98,9 +98,9 @@ public class AuthorizationTests {
     }
 
     @Test
-    public void dataCustodian() {
-        assertAnnotationPresent(Authorization.class, "dataCustodian", ManyToOne.class);
-        assertAnnotationPresent(Authorization.class, "dataCustodian", JoinColumn.class);
+    public void applicationInformation() {
+        assertAnnotationPresent(Authorization.class, "applicationInformation", ManyToOne.class);
+        assertAnnotationPresent(Authorization.class, "applicationInformation", JoinColumn.class);
     }
 
     @Test
