@@ -38,6 +38,7 @@ import java.util.UUID;
 
 import static org.energyos.espi.common.test.EspiFactory.*;
 import static org.energyos.espi.common.test.IsEmpty.isEmpty;
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.equalTo;
@@ -376,5 +377,16 @@ public class UsagePointRepositoryImplTests {
         List<UsagePoint> usagePointList = repository.findAllUpdatedFor(subscription);
 
         assertThat(usagePointList, isEmpty());
+    }
+
+    @Test
+    public void findAllIdsForRetailCustomer() {
+        RetailCustomer retailCustomer = factory.createRetailCustomer();
+        UsagePoint up1 = factory.createUsagePoint(retailCustomer);
+        UsagePoint up2 = factory.createUsagePoint(retailCustomer);
+
+        List<Long> allIdsForRetailCustomer = repository.findAllIdsForRetailCustomer(retailCustomer.getId());
+
+        assertThat(allIdsForRetailCustomer, allOf(hasItem(up1.getId()), hasItem(up2.getId())));
     }
 }

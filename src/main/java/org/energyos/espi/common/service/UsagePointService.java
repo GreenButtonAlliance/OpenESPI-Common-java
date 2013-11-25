@@ -50,4 +50,6 @@ public interface UsagePointService {
     List<UsagePoint> findAllUpdatedFor(Subscription subscription);
 
     void deleteByHashedId(String usagePointHashedId);
+
+    List<Long> findAllIdsForRetailCustomer(Long id);
 }
