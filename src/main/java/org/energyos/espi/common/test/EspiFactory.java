@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 
 import java.io.Serializable;
-import java.lang.Object;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -313,10 +312,6 @@ public class EspiFactory {
         return authorization;
     }
 
-    public static Object getRandomString() {
-        return newRandomString();
-    }
-
     public static BatchList newBatchList() {
         BatchList batchList = new BatchList();
         batchList.getResources().add("some resource uri");
@@ -382,12 +377,7 @@ public class EspiFactory {
     }
 
     public static ServiceCategory newServiceCategory() {
-        ServiceCategory serviceCategory = new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE);
-        return serviceCategory;
-    }
-
-    public static Date newDate(int year, int month, int date) {
-        return newCalendar(year, month, date).getTime();
+        return new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE);
     }
 
     public static GregorianCalendar newCalendar(int year, int month, int date) {
