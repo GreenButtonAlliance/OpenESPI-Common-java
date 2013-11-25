@@ -36,6 +36,7 @@ public class ApplicationInformationRepositoryImplTest {
     @Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
     public void persist_modelEnforcesUniqueClientId() throws Exception {
         ApplicationInformation duplicateApplicationInformation = EspiFactory.newApplicationInformation();
+        duplicateApplicationInformation.setDataCustodianId(applicationInformation.getDataCustodianId());
         duplicateApplicationInformation.setDataCustodianThirdPartyId(applicationInformation.getDataCustodianThirdPartyId());
 
         repository.persist(duplicateApplicationInformation);

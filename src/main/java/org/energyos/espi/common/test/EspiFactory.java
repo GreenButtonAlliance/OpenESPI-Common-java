@@ -329,6 +329,8 @@ public class EspiFactory {
         applicationInformation.setDataCustodianId("DataCustodianId" + newRandomString());
         applicationInformation.setThirdPartyDefaultNotifyResource("http://example.com:8080/ThirdParty/espi/1_1/Notification");
         applicationInformation.setDataCustodianAuthorizationResource("http://example.com:8080/ThirdParty/oauth/authorize");
+        applicationInformation.setDataCustodianTokenResource("http://example.com:8080/ThirdParty/oauth/token");
+        applicationInformation.setThirdPartyDefaultOAuthCallback("http://example.com:8080/ThirdParty/espi/1_1/OAuthCallBack");
         applicationInformation.setDataCustodianThirdPartySecret("Secret" + newRandomString());
         applicationInformation.getScope().add("FB=4_5_15;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13");
         applicationInformation.getScope().add("FB=4_5_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13");
