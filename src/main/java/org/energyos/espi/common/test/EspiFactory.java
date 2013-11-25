@@ -57,6 +57,8 @@ public class EspiFactory {
         usagePoint.getRelatedLinks().add(new LinkType("related", usagePoint.getSelfHref() + "/MeterReading"));
         usagePoint.getRelatedLinks().add(new LinkType("related", usagePoint.getSelfHref() + "/ElectricPowerUsageSummary"));
         usagePoint.getRelatedLinks().add(new LinkType("related", usagePoint.getSelfHref() + "/ElectricPowerQualitySummary"));
+        usagePoint.setSelfLink(usagePoint.getSelfHref());
+        usagePoint.setUpLink(new LinkType("up", usagePoint.getUpHref()));
 
         GregorianCalendar published = new GregorianCalendar(2012, Calendar.NOVEMBER, 15, 0, 0, 0);
         published.setTimeZone(TimeZone.getTimeZone("UTC"));
