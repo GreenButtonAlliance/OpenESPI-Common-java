@@ -24,7 +24,7 @@
 
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.models.atom.adapters.GenericAdapter;
+import org.energyos.espi.common.models.atom.adapters.ElectricPowerQualitySummaryAdapter;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -83,7 +83,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 })
 @Entity
 @Table(name = "electric_power_quality_summaries", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
-@XmlJavaTypeAdapter(GenericAdapter.class)
+@XmlJavaTypeAdapter(ElectricPowerQualitySummaryAdapter.class)
 @NamedQueries(value = {
         @NamedQuery(name = ElectricPowerQualitySummary.QUERY_FIND_BY_ID,
                 query = "SELECT summary FROM ElectricPowerQualitySummary summary WHERE summary.id = :id"),

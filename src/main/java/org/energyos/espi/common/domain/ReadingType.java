@@ -24,7 +24,7 @@
 
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.models.atom.adapters.GenericAdapter;
+import org.energyos.espi.common.models.atom.adapters.ReadingTypeAdapter;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -94,7 +94,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 })
 @Entity
 @Table(name = "reading_types", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
-@XmlJavaTypeAdapter(GenericAdapter.class)
+@XmlJavaTypeAdapter(ReadingTypeAdapter.class)
 @NamedQueries(value = {
         @NamedQuery(name = ReadingType.QUERY_FIND_BY_ID,
                 query = "SELECT readingType FROM ReadingType readingType WHERE readingType.id = :id"),

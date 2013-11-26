@@ -25,7 +25,7 @@
 package org.energyos.espi.common.domain;
 
 import org.energyos.espi.common.models.atom.LinkType;
-import org.energyos.espi.common.models.atom.adapters.GenericAdapter;
+import org.energyos.espi.common.models.atom.adapters.MeterReadingAdapter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -57,7 +57,7 @@ import java.util.List;
 @XmlType(name = "MeterReading")
 @Entity
 @Table(name = "meter_readings", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
-@XmlJavaTypeAdapter(GenericAdapter.class)
+@XmlJavaTypeAdapter(MeterReadingAdapter.class)
 @NamedQueries(value = {
         @NamedQuery(name = MeterReading.QUERY_FIND_BY_ID,
                 query = "SELECT reading FROM MeterReading reading WHERE reading.id = :id"),
