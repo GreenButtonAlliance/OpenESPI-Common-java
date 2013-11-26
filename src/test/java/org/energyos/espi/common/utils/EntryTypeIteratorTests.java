@@ -24,7 +24,7 @@ import static org.junit.Assert.assertThat;
 @WebAppConfiguration
 @ContextConfiguration("/spring/test-context.xml")
 @Transactional
-public class EntryTypeIteratorTest extends BaseTest {
+public class EntryTypeIteratorTests extends BaseTest {
     @Autowired
     private ResourceService resourceService;
 
@@ -120,6 +120,16 @@ public class EntryTypeIteratorTest extends BaseTest {
         EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
 
         assertThat(find(iterator, readingType), is(notNullValue()));
+    }
+
+    @Test
+    public void entry_hasLinks() throws Exception {
+        UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
+
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+
+        UsagePoint usagePointFromEntry = find(iterator, usagePoint).getContent().getUsagePoint();
+        assertThat(usagePointFromEntry.getSelfLink().getHref(), is(not(nullValue())));
     }
 
     private EntryType find(EntryTypeIterator iterator, IdentifiedObject matchedObject) {
