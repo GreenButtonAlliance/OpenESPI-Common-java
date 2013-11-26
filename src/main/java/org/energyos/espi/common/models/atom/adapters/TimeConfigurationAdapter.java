@@ -16,6 +16,7 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
+import org.energyos.espi.common.domain.ObjectFactory;
 import org.energyos.espi.common.domain.TimeConfiguration;
 
 import javax.xml.bind.JAXBElement;
@@ -30,6 +31,9 @@ public class TimeConfigurationAdapter extends XmlAdapter<JAXBElement<TimeConfigu
 
     @Override
     public JAXBElement<TimeConfiguration> marshal(TimeConfiguration v) throws Exception {
-        return null;
+        if(v == null) {
+            return null;
+        }
+        return new JAXBElement<>(ObjectFactory.LocalTimeParameters_QNAME, TimeConfiguration.class, v);
     }
 }

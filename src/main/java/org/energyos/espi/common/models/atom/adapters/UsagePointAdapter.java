@@ -30,6 +30,9 @@ public class UsagePointAdapter extends XmlAdapter<JAXBElement<UsagePoint>, Usage
 
     @Override
     public JAXBElement<UsagePoint> marshal(UsagePoint v) throws Exception {
+        if(v == null) {
+            return null;
+        }
         return new JAXBElement<>(ObjectFactory.UsagePoint_QNAME, UsagePoint.class, v);
     }
 }

@@ -16,31 +16,23 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
-import org.energyos.espi.common.domain.IntervalBlock;
-import org.energyos.espi.common.domain.IntervalReading;
 import org.energyos.espi.common.domain.ObjectFactory;
+import org.energyos.espi.common.domain.ReadingType;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-public class IntervalBlockAdapter extends XmlAdapter<JAXBElement<IntervalBlock>, IntervalBlock> {
-
+public class ReadingTypeAdapter extends XmlAdapter<JAXBElement<ReadingType>, ReadingType> {
     @Override
-    public IntervalBlock unmarshal(JAXBElement<IntervalBlock> v) throws Exception {
-        IntervalBlock intervalBlock = v.getValue();
-
-        for (IntervalReading intervalReading : intervalBlock.getIntervalReadings()) {
-            intervalReading.setIntervalBlock(intervalBlock);
-        }
-
-        return intervalBlock;
+    public ReadingType unmarshal(JAXBElement<ReadingType> v) throws Exception {
+        return v.getValue();
     }
 
     @Override
-    public JAXBElement<IntervalBlock> marshal(IntervalBlock v) throws Exception {
+    public JAXBElement<ReadingType> marshal(ReadingType v) throws Exception {
         if(v == null) {
             return null;
         }
-        return new JAXBElement<>(ObjectFactory.IntervalBlock_QNAME, IntervalBlock.class, v);
+        return new JAXBElement<>(ObjectFactory.ReadingType_QNAME, ReadingType.class, v);
     }
 }

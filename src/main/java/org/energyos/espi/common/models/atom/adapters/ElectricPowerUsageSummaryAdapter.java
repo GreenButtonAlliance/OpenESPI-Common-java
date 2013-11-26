@@ -17,6 +17,7 @@
 package org.energyos.espi.common.models.atom.adapters;
 
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.ObjectFactory;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
@@ -29,6 +30,9 @@ public class ElectricPowerUsageSummaryAdapter extends XmlAdapter<JAXBElement<Ele
 
     @Override
     public JAXBElement<ElectricPowerUsageSummary> marshal(ElectricPowerUsageSummary v) throws Exception {
-        return null;
+        if(v == null) {
+            return null;
+        }
+        return new JAXBElement<>(ObjectFactory.ElectricPowerUsageSummary_QNAME, ElectricPowerUsageSummary.class, v);
     }
 }

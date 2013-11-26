@@ -16,31 +16,23 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
-import org.energyos.espi.common.domain.IntervalBlock;
-import org.energyos.espi.common.domain.IntervalReading;
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ObjectFactory;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-public class IntervalBlockAdapter extends XmlAdapter<JAXBElement<IntervalBlock>, IntervalBlock> {
-
+public class ElectricPowerQualitySummaryAdapter extends XmlAdapter<JAXBElement<ElectricPowerQualitySummary>, ElectricPowerQualitySummary> {
     @Override
-    public IntervalBlock unmarshal(JAXBElement<IntervalBlock> v) throws Exception {
-        IntervalBlock intervalBlock = v.getValue();
-
-        for (IntervalReading intervalReading : intervalBlock.getIntervalReadings()) {
-            intervalReading.setIntervalBlock(intervalBlock);
-        }
-
-        return intervalBlock;
+    public ElectricPowerQualitySummary unmarshal(JAXBElement<ElectricPowerQualitySummary> v) throws Exception {
+        return (ElectricPowerQualitySummary)v.getValue();
     }
 
     @Override
-    public JAXBElement<IntervalBlock> marshal(IntervalBlock v) throws Exception {
+    public JAXBElement<ElectricPowerQualitySummary> marshal(ElectricPowerQualitySummary v) throws Exception {
         if(v == null) {
             return null;
         }
-        return new JAXBElement<>(ObjectFactory.IntervalBlock_QNAME, IntervalBlock.class, v);
+        return new JAXBElement<>(ObjectFactory.ElectricPowerQualitySummary_QNAME, ElectricPowerQualitySummary.class, v);
     }
 }
