@@ -65,6 +65,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         return new EntryTypeIterator(resourceService, allIdsForRetailCustomer);
     }
 
+    @Override
+    public EntryTypeIterator findEntriesByRetailCustomerId(Long retailCustomerId) {
+        List<Long> allIdsForRetailCustomer = usagePointService.findAllIdsForRetailCustomer(retailCustomerId);
+
+        return new EntryTypeIterator(resourceService, allIdsForRetailCustomer);
+    }
+
     public void setRepository(SubscriptionRepository repository) {
         this.repository = repository;
     }

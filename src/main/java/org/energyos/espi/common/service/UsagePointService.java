@@ -17,7 +17,6 @@
 package org.energyos.espi.common.service;
 
 
-import com.sun.syndication.io.FeedException;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -32,10 +31,6 @@ public interface UsagePointService {
     UsagePoint findById(Long id);
 
     void persist(UsagePoint up);
-
-    String exportUsagePoints(RetailCustomer customer) throws FeedException;
-
-    String exportUsagePointById(Long usagePointId) throws FeedException;
 
     void createOrReplaceByUUID(UsagePoint usagePoint);
 
