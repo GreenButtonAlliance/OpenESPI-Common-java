@@ -26,9 +26,7 @@ package org.energyos.espi.common.domain;
 
 import org.energyos.espi.common.models.atom.adapters.TimeConfigurationAdapter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -67,9 +65,22 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement(name = "LocalTimeParameters")
 @Entity
 @Table(name = "time_configurations", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
-public class TimeConfiguration
-        extends IdentifiedObject
-{
+@NamedQueries(value = {
+        @NamedQuery(name = TimeConfiguration.QUERY_FIND_BY_ID,
+                query = "SELECT config FROM TimeConfiguration config WHERE config.id = :id"),
+        @NamedQuery(name = TimeConfiguration.QUERY_FIND_BY_UUID,
+                query = "SELECT config FROM TimeConfiguration config WHERE config.uuid = :uuid"),
+        @NamedQuery(name = TimeConfiguration.QUERY_FIND_ALL_IDS,
+                query = "SELECT config.id FROM TimeConfiguration config"),
+        @NamedQuery(name = TimeConfiguration.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
+                query = "SELECT usagePoint.localTimeParameters.id FROM UsagePoint usagePoint WHERE usagePoint.id = :usagePointId"),
+})
+public class TimeConfiguration extends IdentifiedObject {
+
+    public static final String QUERY_FIND_BY_ID = "TimeConfiguration.findById";
+    public static final String QUERY_FIND_ALL_IDS = "TimeConfiguration.findByAllIds";
+    public static final String QUERY_FIND_BY_UUID = "TimeConfiguration.findByUUID";
+    public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "TimeConfiguration.findAllIdsByUsagePointId";
 
     @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
@@ -79,6 +90,7 @@ public class TimeConfiguration
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
     protected byte[] dstStartRule;
     protected long tzOffset;
+
 
     /**
      * Gets the value of the dstEndRule property.

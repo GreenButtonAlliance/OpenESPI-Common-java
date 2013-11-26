@@ -90,9 +90,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @Entity
 @Table(name = "electric_power_usage_summaries", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
 @XmlJavaTypeAdapter(GenericAdapter.class)
+@NamedQueries(value = {
+        @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_BY_ID,
+                query = "SELECT summary FROM ElectricPowerUsageSummary summary WHERE summary.id = :id"),
+        @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_BY_UUID,
+                query = "SELECT summary FROM ElectricPowerUsageSummary summary WHERE summary.uuid = :uuid"),
+        @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
+                query = "SELECT summary.id FROM ElectricPowerUsageSummary summary WHERE summary.usagePoint.id = :usagePointId"),
+})
 public class ElectricPowerUsageSummary
         extends IdentifiedObject
 {
+
+    public static final String QUERY_FIND_BY_ID = "ElectricPowerUsageSummary.findById";
+    public static final String QUERY_FIND_BY_UUID = "ElectricPowerUsageSummary.findByUUID";
+    public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ElectricPowerUsageSummary.findAllIdsByUsagePointId";
 
     protected Long billLastPeriod;
     protected Long billToDate;

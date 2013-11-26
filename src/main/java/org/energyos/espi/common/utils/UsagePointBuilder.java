@@ -20,6 +20,7 @@ import org.energyos.espi.common.domain.*;
 import org.energyos.espi.common.models.atom.ContentType;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.models.atom.FeedType;
+import org.energyos.espi.common.models.atom.LinkType;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -147,5 +148,16 @@ public class UsagePointBuilder {
     private void updateEntity(IdentifiedObject entity, EntryType entry) {
         entity.setMRID(entry.getId());
         entity.setDescription(entry.getTitle());
+        entity.setSelfLink(getLinkHrefForType(entry, "self"));
+        entity.setUpLink(getLinkHrefForType(entry, "up"));
+    }
+
+    private LinkType getLinkHrefForType(EntryType entry, String type) {
+        for (LinkType link : entry.getLinks()) {
+            if (link.getRel().equals(type)) {
+                return link;
+            }
+        }
+        return null;
     }
 }

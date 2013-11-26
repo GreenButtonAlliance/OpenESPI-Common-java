@@ -17,12 +17,15 @@
 package org.energyos.espi.common.service.impl;
 
 
+import com.google.common.collect.Lists;
 import org.energyos.espi.common.BaseTest;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.repositories.jpa.SubscriptionRepositoryImpl;
 import org.energyos.espi.common.service.ApplicationInformationService;
+import org.energyos.espi.common.service.UsagePointService;
 import org.energyos.espi.common.utils.DateConverter;
+import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -31,9 +34,12 @@ import org.springframework.security.oauth2.provider.OAuth2Request;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.energyos.espi.common.test.EspiFactory.*;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
@@ -50,6 +56,9 @@ public class SubscriptionServiceImplTests extends BaseTest {
     @Mock
     private ApplicationInformationService applicationInformationService;
 
+    @Mock
+    private UsagePointService usagePointService;
+
     public SubscriptionServiceImpl service;
 
     public RetailCustomer retailCustomer;
@@ -64,12 +73,14 @@ public class SubscriptionServiceImplTests extends BaseTest {
         oAuth2Request = newOAuth2Request("third_party_client");
         service.setRepository(repository);
         service.setApplicationInformationService(applicationInformationService);
+        service.setUsagePointService(usagePointService);
 
         when(authentication.getPrincipal()).thenReturn(retailCustomer);
         when(authentication.getOAuth2Request()).thenReturn(oAuth2Request);
         when(applicationInformationService.findByClientId(oAuth2Request.getClientId())).thenReturn(newApplicationInformation());
 
         subscription = service.createSubscription(authentication);
+        subscription.setHashedId(UUID.randomUUID().toString());
     }
 
     @Test
@@ -108,4 +119,16 @@ public class SubscriptionServiceImplTests extends BaseTest {
         assertEquals(subscription, service.findByHashedId("foo"));
     }
 
+    @Test
+    public void findEntriesByHashedId() throws Exception {
+        List<Long> ids = Lists.newArrayList(1L);
+
+        when(repository.findByHashedId(subscription.getHashedId())).thenReturn(subscription);
+        when(usagePointService.findAllIdsForRetailCustomer(subscription.getRetailCustomer().getId())).thenReturn(ids);
+
+        EntryTypeIterator entries = service.findEntriesByHashedId(subscription.getHashedId());
+
+        assertThat(entries, is(not(nullValue())));
+        assertThat(entries.hasNext(), is(true));
+    }
 }

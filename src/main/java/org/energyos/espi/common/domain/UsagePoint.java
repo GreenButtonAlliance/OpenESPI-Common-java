@@ -85,6 +85,10 @@ import java.util.Set;
                 query = "SELECT meterReading FROM MeterReading meterReading WHERE meterReading.upLink.href in (:relatedLinkHrefs)"),
         @NamedQuery(name = UsagePoint.QUERY_FIND_BY_URI,
                 query = "SELECT point FROM UsagePoint point WHERE point.uri = :uri"),
+        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_FOR_RETAIL_CUSTOMER,
+                query = "SELECT point.id from UsagePoint point where point.retailCustomer.id = :retailCustomerId"),
+        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS,
+                query = "SELECT point.id from UsagePoint point")
 })
 @XmlJavaTypeAdapter(UsagePointAdapter.class)
 public class UsagePoint
@@ -97,6 +101,8 @@ public class UsagePoint
     public static final String QUERY_FIND_BY_RELATED_HREF = "UsagePoint.findByAllParentsHref";
     public static final String QUERY_FIND_ALL_RELATED = "UsagePoint.findAllRelated";
     public static final String QUERY_FIND_BY_URI = "UsagePoint.findByURI";
+    public static final String QUERY_FIND_ALL_IDS_FOR_RETAIL_CUSTOMER = "UsagePoint.findAllIdsForRetailCustomer";
+    public static final String QUERY_FIND_ALL_IDS = "UsagePoint.findAllIds";
 
     @XmlElement(type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)

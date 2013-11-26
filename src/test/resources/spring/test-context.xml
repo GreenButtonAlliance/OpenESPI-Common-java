@@ -98,6 +98,31 @@
         </property>
     </bean>
 
+    <bean id="fragmentMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="packagesToScan">
+            <list>
+                <value>org.energyos.espi.common.models.atom</value>
+                <value>org.energyos.espi.common.domain</value>
+            </list>
+        </property>
+        <property name="marshallerProperties">
+            <map>
+                <entry>
+                    <key>
+                        <util:constant static-field="javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT"/>
+                    </key>
+                    <value type="java.lang.Boolean">true</value>
+                </entry>
+                <entry>
+                    <key>
+                        <util:constant static-field="javax.xml.bind.Marshaller.JAXB_FRAGMENT"/>
+                    </key>
+                    <value type="java.lang.Boolean">true</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
     <bean id="validator"
                 class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 </beans>

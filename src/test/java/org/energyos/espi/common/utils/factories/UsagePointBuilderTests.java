@@ -16,19 +16,19 @@
 
 package org.energyos.espi.common.utils.factories;
 
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import org.energyos.espi.common.domain.ServiceCategory;
 import org.energyos.espi.common.domain.UsagePoint;
-import org.energyos.espi.common.models.atom.ContentType;
-import org.energyos.espi.common.models.atom.EntryType;
-import org.energyos.espi.common.models.atom.FeedType;
-import org.energyos.espi.common.models.atom.LinkType;
+import org.energyos.espi.common.models.atom.*;
 import org.energyos.espi.common.test.EspiFactory;
 import org.energyos.espi.common.utils.UsagePointBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertNull;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class UsagePointBuilderTests {
 
@@ -55,6 +55,16 @@ public class UsagePointBuilderTests {
         UsagePoint usagePoint = builder.newUsagePoints(feed).get(0);
 
         assertEquals(title, usagePoint.getDescription());
+    }
+
+    @Test
+    public void newUsagePoint_populatesLinks() throws Exception {
+        EntryType entryType = newEntry("howdy");
+
+        UsagePoint usagePoint = builder.newUsagePoint(entryType);
+
+        assertThat(usagePoint.getSelfLink(), is(not(nullValue())));
+        assertThat(usagePoint.getUpLink(), is(not(nullValue())));
     }
 
     @Test
@@ -90,6 +100,7 @@ public class UsagePointBuilderTests {
     @Test
     public void newUsagePoint_givenEntryWithNoContent_returnsNull() {
         EntryType entry = newEntry("Nothing");
+        entry.setContent(null);
         assertNull(builder.newUsagePoint(entry));
     }
 
@@ -99,6 +110,10 @@ public class UsagePointBuilderTests {
         ContentType content = new ContentType();
         content.setReadingType(EspiFactory.newReadingType());
         entryType.setContent(content);
+        DateTimeType date = new DateTimeType();
+        date.setValue(new XMLGregorianCalendarImpl());
+        entryType.setPublished(date);
+        entryType.setUpdated(date);
 
         assertNull(builder.newUsagePoint(entryType));
     }
@@ -107,6 +122,7 @@ public class UsagePointBuilderTests {
         EntryType entryType = new EntryType();
         entryType.setTitle(title);
         entryType.setId("urn:uuid:0071C5A7-91CF-434E-8BCE-C38AC8AF215D");
+        newUsagePoint(entryType);
 
         return entryType;
     }
@@ -115,7 +131,6 @@ public class UsagePointBuilderTests {
         FeedType feed = new FeedType();
 
         EntryType entryType = newEntry(title);
-        newUsagePoint(entryType);
         feed.getEntries().add(entryType);
 
         return feed;
@@ -127,8 +142,14 @@ public class UsagePointBuilderTests {
         usagePoint.setServiceCategory(new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE));
         usagePointContentType.setUsagePoint(usagePoint);
         entryType.setContent(usagePointContentType);
+        entryType.getLinks().add(newLinkType("up", "RetailCustomer/9b6c7063/UsagePoint"));
         entryType.getLinks().add(newLinkType("self", "RetailCustomer/9b6c7063/UsagePoint/01"));
         entryType.getLinks().add(newLinkType("related", "RetailCustomer/9b6c7063/UsagePoint/01/MeterReading"));
+        entryType.getLinks().add(newLinkType("related", "RetailCustomer/9b6c7063/UsagePoint/01/ElectricPowerUsageSummary"));
+        DateTimeType date = new DateTimeType();
+        date.setValue(new XMLGregorianCalendarImpl());
+        entryType.setPublished(date);
+        entryType.setUpdated(date);
     }
 
     private LinkType newLinkType(String rel, String href) {

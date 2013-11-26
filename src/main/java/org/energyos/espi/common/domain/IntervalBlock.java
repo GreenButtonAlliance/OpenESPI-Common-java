@@ -65,7 +65,13 @@ import java.util.List;
 @Table(name = "interval_blocks", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
 @NamedQueries(value = {
         @NamedQuery(name = IntervalBlock.QUERY_ALL_BY_METER_READING_ID,
-                query = "SELECT block FROM IntervalBlock block WHERE block.meterReading.id = :meterReadingId")
+                query = "SELECT block FROM IntervalBlock block WHERE block.meterReading.id = :meterReadingId"),
+        @NamedQuery(name = IntervalBlock.QUERY_FIND_BY_ID,
+                query = "SELECT block FROM IntervalBlock block WHERE block.id = :id"),
+        @NamedQuery(name = IntervalBlock.QUERY_FIND_BY_UUID,
+                query = "SELECT block FROM IntervalBlock block WHERE block.uuid = :uuid"),
+        @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
+                query = "SELECT block.id FROM IntervalBlock block where block.meterReading.usagePoint.id = :usagePointId"),
 })
 @XmlRootElement(name = "IntervalBlock")
 @XmlJavaTypeAdapter(IntervalBlockAdapter.class)
@@ -73,6 +79,9 @@ public class IntervalBlock
         extends IdentifiedObject
 {
     public static final String QUERY_ALL_BY_METER_READING_ID = "IntervalBlock.findAllByMeterReadingId";
+    public static final String QUERY_FIND_BY_ID = "IntervalBlock.findById";
+    public static final String QUERY_FIND_BY_UUID = "IntervalBlock.findByUUID";
+    public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "IntervalBlock.findAllIdsByUsagePointId";
 
     @Embedded
     protected DateTimeInterval interval;

@@ -109,6 +109,13 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
     }
 
     @Override
+    public List<Long> findAllIdsForRetailCustomer(Long retailCustomerId) {
+        return (List<Long>)this.em.createNamedQuery(UsagePoint.QUERY_FIND_ALL_IDS_FOR_RETAIL_CUSTOMER)
+                .setParameter("retailCustomerId", retailCustomerId)
+                .getResultList();
+    }
+
+    @Override
     public UsagePoint findByURI(String uri) {
         return (UsagePoint)em.createNamedQuery(UsagePoint.QUERY_FIND_BY_URI)
                 .setParameter("uri", uri)

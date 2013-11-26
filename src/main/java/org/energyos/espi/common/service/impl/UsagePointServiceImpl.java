@@ -139,4 +139,9 @@ public class UsagePointServiceImpl implements UsagePointService {
             repository.deleteById(usagePoint.getId());
         }
     }
+
+    @Override
+    public List<Long> findAllIdsForRetailCustomer(Long retailCustomerId) {
+        return repository.findAllIdsForRetailCustomer(retailCustomerId);
+    }
 }

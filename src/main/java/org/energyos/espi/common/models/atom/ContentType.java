@@ -24,6 +24,7 @@
 
 package org.energyos.espi.common.models.atom;
 
+import com.google.common.collect.Lists;
 import org.energyos.espi.common.domain.*;
 
 import javax.xml.bind.JAXBElement;
@@ -151,7 +152,7 @@ public class ContentType {
     protected String lang;
 
     @XmlAnyAttribute
-    private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+    private Map<QName, String> otherAttributes = new HashMap<>();
 
     public UsagePoint getUsagePoint() {
         return usagePoint;
@@ -194,7 +195,7 @@ public class ContentType {
      */
     public List<Object> getContent() {
         if (content == null) {
-            content = new ArrayList<Object>();
+            content = new ArrayList<>();
         }
         return this.content;
     }
@@ -349,9 +350,40 @@ public class ContentType {
         if (getResource() != null) {
             resources.add(getResource());
         } else {
-            for(IntervalBlock intervalBlock: getIntervalBlocks())
+            for (IntervalBlock intervalBlock : getIntervalBlocks())
                 resources.add(intervalBlock);
         }
         return resources;
+    }
+
+    public void setResource(IdentifiedObject resource) {
+        if (resource instanceof UsagePoint) {
+            setUsagePoint((UsagePoint) resource);
+        } else if (resource instanceof MeterReading) {
+            setMeterReading((MeterReading) resource);
+        } else if (resource instanceof TimeConfiguration) {
+            setLocalTimeParameters((TimeConfiguration) resource);
+        } else if (resource instanceof IntervalBlock) {
+            setIntervalBlocks(Lists.newArrayList((IntervalBlock) resource));
+        } else if (resource instanceof ElectricPowerUsageSummary) {
+            setElectricPowerUsageSummary((ElectricPowerUsageSummary) resource);
+        } else if (resource instanceof ElectricPowerQualitySummary) {
+            setElectricPowerQualitySummary((ElectricPowerQualitySummary) resource);
+        } else if (resource instanceof ReadingType) {
+            setReadingType((ReadingType) resource);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setResources(List<IdentifiedObject> identifiedObjects) {
+        if (identifiedObjects == null)
+            return;
+
+        if (identifiedObjects.get(0) instanceof IntervalBlock) {
+            List<IntervalBlock> intervalBlocks = (List<IntervalBlock>) (List<?>) identifiedObjects;
+            setIntervalBlocks(intervalBlocks);
+        } else {
+            setResource(identifiedObjects.get(0));
+        }
     }
 }

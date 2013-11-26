@@ -26,10 +26,7 @@ package org.energyos.espi.common.domain;
 
 import org.energyos.espi.common.models.atom.adapters.GenericAdapter;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -98,8 +95,22 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @Entity
 @Table(name = "reading_types", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
 @XmlJavaTypeAdapter(GenericAdapter.class)
+@NamedQueries(value = {
+        @NamedQuery(name = ReadingType.QUERY_FIND_BY_ID,
+                query = "SELECT readingType FROM ReadingType readingType WHERE readingType.id = :id"),
+        @NamedQuery(name = ReadingType.QUERY_FIND_BY_UUID,
+                query = "SELECT readingType FROM ReadingType readingType WHERE readingType.uuid = :uuid"),
+        @NamedQuery(name = ReadingType.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
+                query = "SELECT meterReading.readingType.id FROM MeterReading meterReading WHERE meterReading.usagePoint.id = :usagePointId"),
+})
 public class ReadingType
-        extends IdentifiedObject {
+        extends IdentifiedObject
+{
+
+    public static final String QUERY_FIND_BY_ID = "ReadingType.findById";
+    public static final String QUERY_FIND_BY_UUID = "ReadingType.findByUUID";
+    public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ReadingType.findAllIdsByUsagePointId";
+
 
     protected String accumulationBehaviour;
     protected String commodity;

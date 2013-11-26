@@ -21,6 +21,8 @@ public class EspiPersistenceFactory {
     private UsagePointService usagePointService;
     @Autowired
     private MeterReadingService meterReadingService;
+    @Autowired
+    private ResourceService resourceService;
 
     public Subscription createSubscription() {
         RetailCustomer retailCustomer = EspiFactory.newRetailCustomer();
@@ -65,7 +67,11 @@ public class EspiPersistenceFactory {
     }
 
     public UsagePoint createUsagePoint() {
-        UsagePoint usagePoint = EspiFactory.newUsagePoint(createRetailCustomer());
+        return createUsagePoint(createRetailCustomer());
+    }
+
+    public UsagePoint createUsagePoint(RetailCustomer retailCustomer) {
+        UsagePoint usagePoint = EspiFactory.newUsagePoint(retailCustomer);
         usagePointService.persist(usagePoint);
 
         return usagePoint;
@@ -83,5 +89,12 @@ public class EspiPersistenceFactory {
         applicationInformationService.persist(applicationInformation);
 
         return applicationInformation;
+    }
+
+    public TimeConfiguration createLocalTimeParameters() {
+        TimeConfiguration localTimeParameters = EspiFactory.newLocalTimeParameters();
+        resourceService.persist(localTimeParameters);
+
+        return localTimeParameters;
     }
 }

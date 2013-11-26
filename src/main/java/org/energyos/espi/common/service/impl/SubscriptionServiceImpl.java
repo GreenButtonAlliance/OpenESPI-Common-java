@@ -4,8 +4,11 @@ import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
+import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.SubscriptionService;
+import org.energyos.espi.common.service.UsagePointService;
 import org.energyos.espi.common.utils.DateConverter;
+import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Autowired
     private ApplicationInformationService applicationInformationService;
+
+    @Autowired
+    private UsagePointService usagePointService;
+
+    @Autowired
+    private ResourceService resourceService;
 
     @Override
     public Subscription createSubscription(OAuth2Authentication authentication) {
@@ -48,11 +57,23 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         return repository.findByHashedId(hashedId);
     }
 
+    @Override
+    public EntryTypeIterator findEntriesByHashedId(String hashedId) {
+        RetailCustomer retailCustomer = findByHashedId(hashedId).getRetailCustomer();
+        List<Long> allIdsForRetailCustomer = usagePointService.findAllIdsForRetailCustomer(retailCustomer.getId());
+
+        return new EntryTypeIterator(resourceService, allIdsForRetailCustomer);
+    }
+
     public void setRepository(SubscriptionRepository repository) {
         this.repository = repository;
     }
 
     public void setApplicationInformationService(ApplicationInformationService applicationInformationService) {
         this.applicationInformationService = applicationInformationService;
+    }
+
+    public void setUsagePointService(UsagePointService usagePointService) {
+        this.usagePointService = usagePointService;
     }
 }

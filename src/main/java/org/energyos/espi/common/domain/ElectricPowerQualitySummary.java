@@ -84,9 +84,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @Entity
 @Table(name = "electric_power_quality_summaries", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
 @XmlJavaTypeAdapter(GenericAdapter.class)
+@NamedQueries(value = {
+        @NamedQuery(name = ElectricPowerQualitySummary.QUERY_FIND_BY_ID,
+                query = "SELECT summary FROM ElectricPowerQualitySummary summary WHERE summary.id = :id"),
+        @NamedQuery(name = ElectricPowerQualitySummary.QUERY_FIND_BY_UUID,
+                query = "SELECT summary FROM ElectricPowerQualitySummary summary WHERE summary.uuid = :uuid"),
+        @NamedQuery(name = ElectricPowerQualitySummary.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
+                query = "SELECT summary.id FROM ElectricPowerQualitySummary summary WHERE summary.usagePoint.id = :usagePointId"),
+})
 public class ElectricPowerQualitySummary
         extends IdentifiedObject
 {
+
+    public static final String QUERY_FIND_BY_ID = "ElectricPowerQualitySummary.findById";
+    public static final String QUERY_FIND_BY_UUID = "ElectricPowerQualitySummary.findByUUID";
+    public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ElectricPowerQualitySummary.findAllIdsByUsagePointId";
 
     protected Long flickerPlt;
     protected Long flickerPst;

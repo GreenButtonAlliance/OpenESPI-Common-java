@@ -127,7 +127,7 @@ public class UsagePointServiceImplTests {
 
         Feed atomFeed = mock(Feed.class);
 
-        List<UsagePoint> usagePointList = new ArrayList<UsagePoint>();
+        List<UsagePoint> usagePointList = new ArrayList<>();
         String atomFeedResult = "<?xml version=\"1.0\"?><feed></feed>";
 
 
@@ -191,5 +191,12 @@ public class UsagePointServiceImplTests {
         service.deleteByHashedId(usagePoint.getHashedId());
 
         verify(repository, never()).deleteById(id);
+    }
+
+    @Test
+    public void findAllIdsForRetailCustomer() {
+        service.findAllIdsForRetailCustomer(1L);
+
+        verify(repository).findAllIdsForRetailCustomer(1L);
     }
 }
