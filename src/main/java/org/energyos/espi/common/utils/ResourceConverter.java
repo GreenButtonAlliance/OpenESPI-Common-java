@@ -11,7 +11,7 @@ public class ResourceConverter {
             resource.setMRID(entry.getId());
             for(LinkType link : entry.getLinks()) {
                 if (link.getRel().equals(LinkType.SELF))
-                    resource.setSelfLink(link.getHref());
+                    resource.setSelfLink(link);
                 if (link.getRel().equals(LinkType.UP))
                     resource.setUpLink(link);
                 if (link.getRel().equals(LinkType.RELATED))

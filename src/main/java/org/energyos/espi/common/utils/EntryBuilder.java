@@ -35,7 +35,7 @@ public class EntryBuilder {
 
     private void buildLinks(IdentifiedObject resource) {
         entry.getLinks().add(resource.getUpLink());
-        entry.getLinks().add(new LinkType("self", resource.getSelfLink()));
+        entry.getLinks().add(resource.getSelfLink());
 
         for (LinkType link : resource.getRelatedLinks()) {
             entry.getLinks().add(link);

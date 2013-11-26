@@ -89,7 +89,19 @@ public class IdentifiedObject extends Resource implements Linkable {
 
     @XmlTransient
     @Embedded
+    @AttributeOverrides( {
+            @AttributeOverride(name="rel", column = @Column(name="up_link_rel") ),
+            @AttributeOverride(name="href", column = @Column(name="up_link_href") ),
+    } )
     private LinkType upLink;
+
+    @XmlTransient
+    @Embedded
+    @AttributeOverrides( {
+            @AttributeOverride(name="rel", column = @Column(name="self_link_rel") ),
+            @AttributeOverride(name="href", column = @Column(name="self_link_href") ),
+    } )
+    private LinkType selfLink;
 
     public Long getId() {
         return id;
@@ -220,5 +232,13 @@ public class IdentifiedObject extends Resource implements Linkable {
         this.setDescription(resource.getDescription());
         this.setUpdated(resource.getUpdated());
         this.setPublished(resource.getPublished());
+    }
+
+    public LinkType getSelfLink() {
+        return selfLink;
+    }
+
+    public void setSelfLink(LinkType selfLink) {
+        this.selfLink = selfLink;
     }
 }

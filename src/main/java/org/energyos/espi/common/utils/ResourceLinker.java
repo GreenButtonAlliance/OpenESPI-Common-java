@@ -35,7 +35,7 @@ public class ResourceLinker {
 
     public void linkUpMember(IdentifiedObject resource) {
         if (resource.getSelfLink() != null) {
-            List<IdentifiedObject> parentResources = resourceService.findByAllParentsHref(resource.getSelfLink(), resource);
+            List<IdentifiedObject> parentResources = resourceService.findByAllParentsHref(resource.getSelfLink().getHref(), resource);
             for(IdentifiedObject parentResource : parentResources) {
                 if (parentResource != null) {
                     if (resource instanceof TimeConfiguration) {

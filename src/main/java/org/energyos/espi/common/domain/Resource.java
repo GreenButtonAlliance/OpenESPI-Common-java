@@ -70,9 +70,6 @@ public class Resource {
     protected Boolean signatureRequired;
     @XmlAttribute(name = "subscribable")
     protected Boolean subscribable;
-
-    private String selfLink;
-
     /**
      * Gets the value of the href property.
      *
@@ -171,13 +168,5 @@ public class Resource {
      */
     public void setSubscribable(Boolean value) {
         this.subscribable = value;
-    }
-
-    public String getSelfLink() {
-        return selfLink;
-    }
-
-    public void setSelfLink(String selfLink) {
-        this.selfLink = selfLink;
     }
 }
