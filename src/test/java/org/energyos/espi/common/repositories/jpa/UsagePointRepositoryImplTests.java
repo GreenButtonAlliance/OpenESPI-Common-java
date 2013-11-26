@@ -288,6 +288,38 @@ public class UsagePointRepositoryImplTests {
     }
 
     @Test
+    public void createOrReplaceByUUID_replacesSelfLink() throws Exception {
+        UsagePoint usagePoint = EspiFactory.newUsagePointOnly(uuid);
+        usagePoint.setSelfLink(new LinkType(LinkType.SELF, "self"));
+
+        repository.persist(usagePoint);
+
+        UsagePoint updatedUsagePoint = EspiFactory.newUsagePointOnly(uuid);
+
+        repository.createOrReplaceByUUID(updatedUsagePoint);
+
+        usagePoint = repository.findByUUID(uuid);
+
+        assertThat(usagePoint.getSelfLink(), is(not(nullValue())));
+    }
+
+    @Test
+    public void createOrReplaceByUUID_replacesUpLink() throws Exception {
+        UsagePoint usagePoint = EspiFactory.newUsagePointOnly(uuid);
+        usagePoint.setUpLink(new LinkType(LinkType.UP, "up"));
+
+        repository.persist(usagePoint);
+
+        UsagePoint updatedUsagePoint = EspiFactory.newUsagePointOnly(uuid);
+
+        repository.createOrReplaceByUUID(updatedUsagePoint);
+
+        usagePoint = repository.findByUUID(uuid);
+
+        assertThat(usagePoint.getUpLink(), is(not(nullValue())));
+    }
+
+    @Test
     public void findByUUID() {
         UsagePoint usagePoint = new UsagePoint();
         usagePoint.setMRID("urn:uuid:E8E75691-7F9D-49F3-8BE2-3A74EBF6BFC0");
