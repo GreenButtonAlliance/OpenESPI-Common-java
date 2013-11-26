@@ -25,6 +25,9 @@ import org.energyos.espi.common.utils.UsagePointBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import static junit.framework.Assert.assertNull;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
@@ -66,6 +69,27 @@ public class UsagePointBuilderTests {
         assertThat(usagePoint.getSelfLink(), is(not(nullValue())));
         assertThat(usagePoint.getUpLink(), is(not(nullValue())));
     }
+
+    @Test
+    public void newUsagePoint_hasCreatedAndUpdated() {
+        GregorianCalendar calendar = new GregorianCalendar(2011, Calendar.OCTOBER, 1, 0, 0, 0);
+        calendar.set(GregorianCalendar.MILLISECOND, 0);
+        DateTimeType publishedTime = new DateTimeType(new XMLGregorianCalendarImpl(calendar));
+
+        GregorianCalendar calendar2 = new GregorianCalendar(2013, Calendar.NOVEMBER, 3, 0, 0, 0);
+        calendar2.set(GregorianCalendar.MILLISECOND, 0);
+        DateTimeType updatedTime = new DateTimeType(new XMLGregorianCalendarImpl(calendar2));
+
+        EntryType entryType = newEntry("hi there");
+        entryType.setPublished(publishedTime);
+        entryType.setUpdated(updatedTime);
+
+        UsagePoint usagePoint = builder.newUsagePoint(entryType);
+
+        assertThat(usagePoint.getPublished().getTimeInMillis(), is(entryType.getPublished().getValue().toGregorianCalendar().getTimeInMillis()));
+        assertThat(usagePoint.getUpdated().getTimeInMillis(), is(entryType.getUpdated().getValue().toGregorianCalendar().getTimeInMillis()));
+    }
+
 
     @Test
     public void newUsagePoints_givenFeedWithNoEntries_returnsEmptyList() {

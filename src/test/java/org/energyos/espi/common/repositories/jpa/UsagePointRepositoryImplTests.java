@@ -18,6 +18,7 @@ package org.energyos.espi.common.repositories.jpa;
 
 
 import org.energyos.espi.common.domain.*;
+import org.energyos.espi.common.models.atom.LinkType;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
@@ -38,9 +39,7 @@ import java.util.UUID;
 
 import static org.energyos.espi.common.test.EspiFactory.*;
 import static org.energyos.espi.common.test.IsEmpty.isEmpty;
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -115,6 +114,24 @@ public class UsagePointRepositoryImplTests {
 
         assertNotNull("MeterReading id was null", usagePoint.getMeterReadings().get(0).getId());
         assertNotNull("MeterReading usagePoint is null", usagePoint.getMeterReadings().get(0).getUsagePoint());
+    }
+
+    @Test
+    public void persist_savesPublishedAndUpdated() {
+        RetailCustomer customer1 = EspiFactory.newRetailCustomer();
+        retailCustomerRepository.persist(customer1);
+
+        UsagePoint usagePoint = newUsagePoint(customer1);
+
+        assertThat(usagePoint.getUpdated(), is(notNullValue()));
+        assertThat(usagePoint.getPublished(), is(notNullValue()));
+
+        repository.persist(usagePoint);
+
+        UsagePoint persistedUsagePoint = repository.findById(usagePoint.getId());
+
+        assertThat(usagePoint.getUpdated(), is(persistedUsagePoint.getUpdated()));
+        assertThat(usagePoint.getPublished(), is(persistedUsagePoint.getPublished()));
     }
 
     @Test
@@ -377,6 +394,16 @@ public class UsagePointRepositoryImplTests {
         List<UsagePoint> usagePointList = repository.findAllUpdatedFor(subscription);
 
         assertThat(usagePointList, isEmpty());
+    }
+
+    @Test
+    public void findByRelatedHref() {
+        UsagePoint usagePoint = factory.createUsagePoint();
+        String relatedLink = UUID.randomUUID().toString();
+        usagePoint.getRelatedLinks().add(new LinkType(LinkType.RELATED, relatedLink));
+        repository.persist(usagePoint);
+
+        assertThat(repository.findByRelatedHref(relatedLink), equalTo((IdentifiedObject)usagePoint));
     }
 
     @Test
