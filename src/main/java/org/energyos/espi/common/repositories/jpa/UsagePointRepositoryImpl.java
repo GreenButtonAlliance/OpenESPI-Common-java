@@ -82,6 +82,14 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 usagePoint.setLocalTimeParameters(existingUsagePoint.getLocalTimeParameters());
             }
 
+            if (existingUsagePoint.getSelfLink() != null) {
+                usagePoint.setSelfLink(existingUsagePoint.getSelfLink());
+            }
+
+            if (existingUsagePoint.getUpLink() != null) {
+                usagePoint.setUpLink(existingUsagePoint.getUpLink());
+            }
+
             em.merge(usagePoint);
         } catch (NoResultException e) {
             usagePoint.setPublished(new GregorianCalendar());
