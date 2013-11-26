@@ -9,11 +9,11 @@ public class EntryBuilder {
 
     private EntryType entry;
 
-    public EntryType build(IdentifiedObject usagePoint) {
+    public EntryType build(IdentifiedObject reource) {
         entry = new EntryType();
 
-        buildMetadata(usagePoint);
-        buildContent(usagePoint);
+        buildMetadata(reource);
+        buildContent(reource);
 
         return entry;
     }
