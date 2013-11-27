@@ -15,20 +15,20 @@ The project uses a mixture of Cucumber and JUnit tests. When implementing a new 
 #### Code Structure
 When implementing a new feature or bugfix, you want to ensure the you have appropriate test coverage. Here is an example of the code structure for a single feature (UsagePoint REST API).
 
-*  ##### Write a Cucumber feature test
+* **Write a Cucumber feature test**
     * [Feature](https://github.com/energyos/OpenESPI-DataCustodian-java/blob/master/src/test/resources/features/API.feature)
-* ##### Implement the Controller
+* **Implement the Controller**
     * [Implementation](https://github.com/energyos/OpenESPI-DataCustodian-java/blob/master/src/main/java/org/energyos/espi/datacustodian/web/api/UsagePointRESTController.java)
     * [Integration Test](https://github.com/energyos/OpenESPI-DataCustodian-java/blob/master/src/test/java/org/energyos/espi/datacustodian/integration/api/UsagePointRESTTests.java)
 	* [Unit Test](https://github.com/energyos/OpenESPI-DataCustodian-java/blob/master/src/test/java/org/energyos/espi/datacustodian/web/api/UsagePointRESTControllerTests.java)
-* ##### Implement the Service Layer
+* **Implement the Service Layer**
 	* [Implementation](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/main/java/org/energyos/espi/common/service/impl/UsagePointServiceImpl.java)
 	* [Integration Test](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/test/java/org/energyos/espi/common/integration/service/UsagePointServiceTests.java)
 	* [Unit Test](https://github.com/energyos/OpenESPI-DataCustodian-java/blob/master/src/test/java/org/energyos/espi/datacustodian/service/impl/UsagePointServiceImplTests.java)
-* ##### Implement the Repository Layer
+* **Implement the Repository Layer**
 	* [Implementation](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/main/java/org/energyos/espi/common/repositories/jpa/UsagePointRepositoryImpl.java)	 
 	* [Integration Test](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/test/java/org/energyos/espi/common/repositories/jpa/UsagePointRepositoryImplTests.java)
-* ##### Implement the Domain Object
+* **Implement the Domain Object**
 	* [Implementation](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/main/java/org/energyos/espi/common/domain/UsagePoint.java)
 	* [Unit Test](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/test/java/org/energyos/espi/common/domain/UsagePointTests.java)
 	
