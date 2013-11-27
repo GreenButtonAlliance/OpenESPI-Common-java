@@ -16,7 +16,6 @@
 
 package org.energyos.espi.common.service.impl;
 
-import com.sun.syndication.io.FeedException;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -32,7 +31,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -97,19 +95,6 @@ public class UsagePointServiceImpl implements UsagePointService {
     @Override
     public void createOrReplaceByUUID(UsagePoint usagePoint) {
         repository.createOrReplaceByUUID(usagePoint);
-    }
-
-    @Override
-    public String exportUsagePoints(RetailCustomer customer) throws FeedException {
-        return marshaller.marshal(subscriptionBuilder.buildFeed(findAllByRetailCustomer(customer)));
-    }
-
-    @Override
-    public String exportUsagePointById(Long usagePointId) throws FeedException {
-        List<UsagePoint> usagePointList = new ArrayList<>();
-        usagePointList.add(findById(usagePointId));
-
-        return marshaller.marshal(subscriptionBuilder.buildFeed(usagePointList));
     }
 
     @Override

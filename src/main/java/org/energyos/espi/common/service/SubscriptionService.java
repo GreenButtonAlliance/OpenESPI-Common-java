@@ -16,4 +16,6 @@ public interface SubscriptionService {
     Subscription findByHashedId(String hashedId);
 
     EntryTypeIterator findEntriesByHashedId(String hashedId);
+
+    EntryTypeIterator findEntriesByRetailCustomerId(Long retailCustomerId);
 }
