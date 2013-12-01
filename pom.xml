@@ -29,6 +29,14 @@
                 <database>mysql</database>
             </properties>
         </profile>
+        <profile>
+            <id>greenbuttondata</id>
+            <properties>
+                <datacustodian.base.url>http://services.greenbuttondata.org/DataCustodian</datacustodian.base.url>
+                <profile>greenbuttondata</profile>
+                <database>mysql</database>
+            </properties>
+        </profile>
     </profiles>
 
     <properties>
