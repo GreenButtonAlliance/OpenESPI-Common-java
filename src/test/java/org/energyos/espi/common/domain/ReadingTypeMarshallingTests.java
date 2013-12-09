@@ -30,7 +30,7 @@ public class ReadingTypeMarshallingTests {
             "</interharmonic>" +
             "<measuringPeriod>MeasuringPeriod</measuringPeriod>" +
             "<tou>Tou</tou>" +
-            "<aggregate>Aggregate</aggregate>" +
+            "<defaultQuality>DefaultQuality</defaultQuality>" +
             "<argument>"+
                 "<numerator>1</numerator>" +
                 "<denominator>3</denominator>" +
@@ -135,8 +135,8 @@ public class ReadingTypeMarshallingTests {
     }
 
     @Test
-    public void unmarshal_setsAggregate() {
-        assertEquals("Aggregate", readingType.getAggregate());
+    public void unmarshal_setsDefaultQuality() {
+        assertEquals("DefaultQuality", readingType.getDefaultQuality());
     }
 
     @Test

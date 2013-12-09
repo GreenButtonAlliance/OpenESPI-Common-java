@@ -40,7 +40,7 @@ public class ReadingTypeTests extends XMLTest {
                 "</interharmonic>" +
                 "<measuringPeriod>MeasuringPeriod</measuringPeriod>" +
                 "<tou>Tou</tou>" +
-                "<aggregate>Aggregate</aggregate>" +
+                "<defaultQuality>DefaultQuality</defaultQuality>" +
                 "<argument>"+
                     "<numerator>1</numerator>" +
                     "<denominator>3</denominator>" +
@@ -147,8 +147,8 @@ public class ReadingTypeTests extends XMLTest {
     }
 
     @Test
-    public void unmarshal_setsAggregate() {
-        assertEquals("Aggregate", readingType.getAggregate());
+    public void unmarshal_setsDefaultQuality() {
+        assertEquals("DefaultQuality", readingType.getDefaultQuality());
     }
 
     @Test
@@ -248,8 +248,8 @@ public class ReadingTypeTests extends XMLTest {
     }
 
     @Test
-    public void marshal_setsAggregate() throws SAXException, IOException, XpathException {
-        assertXpathValue("aggregate", "espi:ReadingType/espi:aggregate", xml);
+    public void marshal_setsDefaultQuality() throws SAXException, IOException, XpathException {
+        assertXpathValue("DefaultQuality", "espi:ReadingType/espi:defaultQuality", xml);
     }
 
     @Test

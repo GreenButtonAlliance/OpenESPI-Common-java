@@ -163,7 +163,10 @@ public class EspiFactory {
 
         readingType.setAccumulationBehaviour("accumulationBehaviour");
         readingType.setCommodity("commodity");
+        readingType.setConsumptionTier("consumptionTier");
+        readingType.setCurrency("currency");
         readingType.setDataQualifier("dataQualifier");
+        readingType.setDefaultQuality("DefaultQuality");
         readingType.setFlowDirection("flowDirection");
         readingType.setIntervalLength(10L);
         readingType.setKind("kind");
@@ -171,11 +174,8 @@ public class EspiFactory {
         readingType.setPowerOfTenMultiplier("multiplier");
         readingType.setTimeAttribute("timeAttribute");
         readingType.setUom("uom");
-        readingType.setConsumptionTier("consumptionTier");
         readingType.setCpp("cpp");
-        readingType.setCurrency("currency");
         readingType.setTou("tou");
-        readingType.setAggregate("aggregate");
         readingType.setArgument(argument);
         readingType.setInterharmonic(interharmonic);
         readingType.setMeasuringPeriod("measuringPeriod");

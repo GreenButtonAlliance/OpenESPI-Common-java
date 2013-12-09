@@ -48,7 +48,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;sequence>
  *         &lt;element name="accumulationBehaviour" type="{http://naesb.org/espi}AccumulationBehavior" minOccurs="0"/>
  *         &lt;element name="commodity" type="{http://naesb.org/espi}Commodity" minOccurs="0"/>
+ *         &lt;element name="consumptionTier" type="{http://naesb.org/espi}ConsumptionTier" minOccurs="0"/>
+ *         &lt;element name="currency" type="{http://naesb.org/espi}Currency" minOccurs="0"/>
  *         &lt;element name="dataQualifier" type="{http://naesb.org/espi}DataQualifier" minOccurs="0"/>
+ *         &lt;element name="defaultQuality" type="{http://naesb.org/espi}QualityOfReading" minOccurs="0"/>
  *         &lt;element name="flowDirection" type="{http://naesb.org/espi}DirectionOfFlow" minOccurs="0"/>
  *         &lt;element name="intervalLength" type="{http://naesb.org/espi}UInt32" minOccurs="0"/>
  *         &lt;element name="kind" type="{http://naesb.org/espi}Kind" minOccurs="0"/>
@@ -56,13 +59,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *         &lt;element name="powerOfTenMultiplier" type="{http://naesb.org/espi}UnitMultiplier" minOccurs="0"/>
  *         &lt;element name="timeAttribute" type="{http://naesb.org/espi}TimePeriodOfInterest" minOccurs="0"/>
  *         &lt;element name="uom" type="{http://naesb.org/espi}UnitSymbol" minOccurs="0"/>
- *         &lt;element name="consumptionTier" type="{http://naesb.org/espi}ConsumptionTier" minOccurs="0"/>
  *         &lt;element name="cpp" type="{http://naesb.org/espi}CPP" minOccurs="0"/>
- *         &lt;element name="currency" type="{http://naesb.org/espi}Currency" minOccurs="0"/>
  *         &lt;element name="interharmonic" type="{http://naesb.org/espi}ReadingInterharmonic" minOccurs="0"/>
  *         &lt;element name="measuringPeriod" type="{http://naesb.org/espi}TimeAttribute" minOccurs="0"/>
  *         &lt;element name="tou" type="{http://naesb.org/espi}TOU" minOccurs="0"/>
- *         &lt;element name="aggregate" type="{http://naesb.org/espi}DataQualifier" minOccurs="0"/>
  *         &lt;element name="argument" type="{http://naesb.org/espi}RationalNumber" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
@@ -75,21 +75,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "ReadingType", propOrder = {
         "accumulationBehaviour",
         "commodity",
+        "consumptionTier",
+        "currency",
         "dataQualifier",
+        "defaultQuality",
         "flowDirection",
         "intervalLength",
         "kind",
         "phase",
         "powerOfTenMultiplier",
         "timeAttribute",
+        "tou",
         "uom",
-        "consumptionTier",
         "cpp",
-        "currency",
         "interharmonic",
         "measuringPeriod",
-        "tou",
-        "aggregate",
         "argument"
 })
 @Entity
@@ -114,7 +114,10 @@ public class ReadingType
 
     protected String accumulationBehaviour;
     protected String commodity;
+    protected String consumptionTier;
+    protected String currency;
     protected String dataQualifier;
+    protected String defaultQuality;
     protected String flowDirection;
     protected Long intervalLength;
     protected String kind;
@@ -122,12 +125,9 @@ public class ReadingType
     protected String powerOfTenMultiplier;
     protected String timeAttribute;
     protected String uom;
-    protected String consumptionTier;
     protected String cpp;
-    protected String currency;
     protected String measuringPeriod;
     protected String tou;
-    protected String aggregate;
 
     @Embedded
     protected RationalNumber argument;
@@ -455,23 +455,23 @@ public class ReadingType
     }
 
     /**
-     * Gets the value of the aggregate property.
+     * Gets the value of the defaultQuality property.
      *
      * @return possible object is
      *         {@link String }
      */
-    public String getAggregate() {
-        return aggregate;
+    public String getDefaultQuality() {
+        return defaultQuality;
     }
 
     /**
-     * Sets the value of the aggregate property.
+     * Sets the value of the defaultQuality property.
      *
      * @param value allowed object is
      *              {@link String }
      */
-    public void setAggregate(String value) {
-        this.aggregate = value;
+    public void setDefaultQuality(String value) {
+        this.defaultQuality = value;
     }
 
     /**
