@@ -1,5 +1,6 @@
 package org.energyos.espi.common.service.impl;
 
+import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.ATOMContentHandler;
@@ -18,8 +19,10 @@ import org.xml.sax.XMLReader;
 import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 @Service
 @Transactional
@@ -31,10 +34,19 @@ public class ImportServiceImpl implements ImportService {
     private ResourceLinker resourceLinker;
     @Autowired
     private ResourceService resourceService;
+    
+    private List<EntryType> entries;
+    
+    @Override
+    
+    public List<EntryType> getEntries() {
+    	return entries;
+    }
 
     @Override
     public void importData(InputStream stream) throws IOException, SAXException, ParserConfigurationException {
-        JAXBContext context = marshaller.getJaxbContext();
+        
+    	JAXBContext context = marshaller.getJaxbContext();
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
         factory.setNamespaceAware(true);
@@ -45,5 +57,8 @@ public class ImportServiceImpl implements ImportService {
         reader.setContentHandler(atomContentHandler);
 
         reader.parse(new InputSource(stream));
+        
+        entries = atomContentHandler.getEntries();
+        
     }
 }
