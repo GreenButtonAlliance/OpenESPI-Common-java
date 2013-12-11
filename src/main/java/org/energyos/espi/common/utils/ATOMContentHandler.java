@@ -9,7 +9,10 @@ import org.xml.sax.helpers.NamespaceSupport;
 import org.xml.sax.helpers.XMLFilterImpl;
 
 import javax.xml.bind.*;
+
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 public class ATOMContentHandler extends XMLFilterImpl {
     private final JAXBContext context;
@@ -18,12 +21,17 @@ public class ATOMContentHandler extends XMLFilterImpl {
     private Locator locator;
     private NamespaceSupport namespaces = new NamespaceSupport();
     private EntryProcessor procssor;
+    private List <EntryType> entries = new ArrayList<EntryType>();
 
     public ATOMContentHandler(JAXBContext context, EntryProcessor procssor) {
         this.context = context;
         this.procssor = procssor;
     }
 
+    public List<EntryType> getEntries () {
+    	return entries;
+    }
+    
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts)
             throws SAXException {
 
@@ -90,6 +98,7 @@ public class ATOMContentHandler extends XMLFilterImpl {
                         throw new SAXException("Unbale to unmarshall <entry>", x);
                     }
                     procssor.process(result.getValue());
+                    entries.add(result.getValue());
                 }
 
                 unmarshallerHandler = null;
