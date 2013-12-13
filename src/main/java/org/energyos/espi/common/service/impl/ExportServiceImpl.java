@@ -7,6 +7,7 @@ import org.energyos.espi.common.service.SubscriptionService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class ExportServiceImpl implements ExportService {
     private SubscriptionService subscriptionService;
 
     @Autowired
+    @Qualifier("fragmentMarshaller")
     private Jaxb2Marshaller fragmentMarshaller;
 
     @Override
