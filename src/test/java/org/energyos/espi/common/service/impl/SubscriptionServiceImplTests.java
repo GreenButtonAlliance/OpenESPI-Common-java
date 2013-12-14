@@ -72,8 +72,6 @@ public class SubscriptionServiceImplTests extends BaseTest {
         retailCustomer = newRetailCustomer();
         oAuth2Request = newOAuth2Request("third_party_client");
         service.setRepository(repository);
-        service.setApplicationInformationService(applicationInformationService);
-        service.setUsagePointService(usagePointService);
 
         when(authentication.getPrincipal()).thenReturn(retailCustomer);
         when(authentication.getOAuth2Request()).thenReturn(oAuth2Request);

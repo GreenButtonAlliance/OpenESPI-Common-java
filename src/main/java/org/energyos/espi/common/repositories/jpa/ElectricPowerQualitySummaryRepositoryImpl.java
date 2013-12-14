@@ -16,8 +16,8 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.repositories.MeterReadingRepository;
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.repositories.ElectricPowerQualitySummaryRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,25 +26,25 @@ import javax.persistence.PersistenceContext;
 import java.util.UUID;
 
 @Repository
-public class MeterReadingRepositoryImpl implements MeterReadingRepository {
+public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQualitySummaryRepository {
 
     @PersistenceContext
     protected EntityManager em;
 
     @Override
-    public MeterReading findById(Long meterReadingId) {
-        return em.find(MeterReading.class, meterReadingId);
+    public ElectricPowerQualitySummary findById(Long electricPowerQualitySummaryId) {
+        return em.find(ElectricPowerQualitySummary.class, electricPowerQualitySummaryId);
     }
 
     @Override
     @Transactional
-    public void persist(MeterReading meterReading) {
-        em.persist(meterReading);
+    public void persist(ElectricPowerQualitySummary electricPowerQualitySummary) {
+        em.persist(electricPowerQualitySummary);
     }
 
     @Override
-    public MeterReading findByUUID(UUID uuid) {
-        return (MeterReading) em.createNamedQuery(MeterReading.QUERY_FIND_BY_UUID)
+    public ElectricPowerQualitySummary findByUUID(UUID uuid) {
+        return (ElectricPowerQualitySummary) em.createNamedQuery(ElectricPowerQualitySummary.QUERY_FIND_BY_UUID)
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }

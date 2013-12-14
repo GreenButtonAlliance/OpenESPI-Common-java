@@ -20,31 +20,48 @@ package org.energyos.espi.common.service;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.models.atom.EntryType;
+import org.energyos.espi.common.repositories.UsagePointRepository;
+import org.energyos.espi.common.utils.EntryTypeIterator;
+import org.energyos.espi.common.utils.ExportFilter;
+
+import com.sun.syndication.io.FeedException;
 
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
 public interface UsagePointService {
+    //TODO: likely deprecated
     List<UsagePoint> findAllByRetailCustomer(RetailCustomer customer);
-
-    UsagePoint findById(Long id);
-
-    void persist(UsagePoint up);
-
     void createOrReplaceByUUID(UsagePoint usagePoint);
-
     void associateByUUID(RetailCustomer retailCustomer, UUID uuid);
-
     UsagePoint findByUUID(UUID uuid);
-
     UsagePoint findByHashedId(String usagePointHashedId);
-
-    UsagePoint importUsagePoint(InputStream stream);
-
     List<UsagePoint> findAllUpdatedFor(Subscription subscription);
-
     void deleteByHashedId(String usagePointHashedId);
-
     List<Long> findAllIdsForRetailCustomer(Long id);
+    String feedFor(List<UsagePoint> usagePoints) throws FeedException;
+    String entryFor(UsagePoint usagePoint);
+    List<UsagePoint> findAllByRetailCustomer(Long retailCustomerId);
+
+    // persistence management services
+    public void setRepository (UsagePointRepository usagePointRepository); 
+    public void persist(UsagePoint usagePoint);
+
+    // accessor services
+	public UsagePoint findById(Long usagePointId);
+	public UsagePoint findById(Long retailCustomerId, Long usagePointId);
+	public EntryType find(Long retailCustomerId, Long usagePointId);
+	public EntryTypeIterator find(Long retailCustomerId);
+    public void add(UsagePoint usagePoint);
+    public void delete(UsagePoint usagePoint);
+
+    // import-exportResource services
+    public UsagePoint importResource(InputStream stream);
+
+
+
 }

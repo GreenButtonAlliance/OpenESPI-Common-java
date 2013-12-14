@@ -23,6 +23,8 @@ import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.UsagePointRepository;
 import org.energyos.espi.common.service.UsagePointService;
 import org.energyos.espi.common.utils.ATOMMarshaller;
+import org.energyos.espi.common.utils.EntryTypeIterator;
+import org.energyos.espi.common.utils.ExportFilter;
 import org.energyos.espi.common.utils.SubscriptionBuilder;
 import org.energyos.espi.common.utils.UsagePointBuilder;
 import org.energyos.espi.common.utils.XMLMarshaller;
@@ -30,7 +32,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sun.syndication.io.FeedException;
+
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,7 +47,7 @@ public class UsagePointServiceImpl implements UsagePointService {
     @Autowired
     private XMLMarshaller xmlMarshaller;
     @Autowired
-    private UsagePointRepository repository;
+    private UsagePointRepository usagePointRepository;
     @Autowired
     private ATOMMarshaller marshaller;
     @Autowired
@@ -49,8 +55,8 @@ public class UsagePointServiceImpl implements UsagePointService {
     @Autowired
     private SubscriptionBuilder subscriptionBuilder;
 
-    public void setRepository(UsagePointRepository repository) {
-        this.repository = repository;
+    public void setRepository(UsagePointRepository usagePointRepository) {
+        this.usagePointRepository = usagePointRepository;
     }
 
     public void setMarshaller(ATOMMarshaller marshaller) {
@@ -71,40 +77,37 @@ public class UsagePointServiceImpl implements UsagePointService {
 
     @Override
     public List<UsagePoint> findAllByRetailCustomer(RetailCustomer customer) {
-        return repository.findAllByRetailCustomerId(customer.getId());
+        return usagePointRepository.findAllByRetailCustomerId(customer.getId());
     }
 
     @Override
-    public UsagePoint findById(Long id) {
-        return this.repository.findById(id);
+    public UsagePoint findById(Long usagePointId) {
+        return this.usagePointRepository.findById(usagePointId);
     }
 
+    @Override
+    public UsagePoint findById(Long retailCustomerId, Long usagePointId) {
+    	// TODO: if needed, this needs to be scoped down to the RetailCustomer collection
+    	return this.usagePointRepository.findById(usagePointId);
+    }
     @Override
     public void persist(UsagePoint up) {
-        this.repository.persist(up);
-    }
-
-    @Override
-    public UsagePoint importUsagePoint(InputStream stream) {
-        UsagePoint usagePoint = usagePointBuilder.newUsagePoint(xmlMarshaller.unmarshal(stream, EntryType.class));
-        createOrReplaceByUUID(usagePoint);
-
-        return usagePoint;
+        this.usagePointRepository.persist(up);
     }
 
     @Override
     public void createOrReplaceByUUID(UsagePoint usagePoint) {
-        repository.createOrReplaceByUUID(usagePoint);
+    	usagePointRepository.createOrReplaceByUUID(usagePoint);
     }
 
     @Override
     public void associateByUUID(RetailCustomer retailCustomer, UUID uuid) {
-        repository.associateByUUID(retailCustomer, uuid);
+    	usagePointRepository.associateByUUID(retailCustomer, uuid);
     }
 
     @Override
     public UsagePoint findByUUID(UUID uuid) {
-        return repository.findByUUID(uuid);
+        return usagePointRepository.findByUUID(uuid);
     }
 
     @Override
@@ -114,19 +117,68 @@ public class UsagePointServiceImpl implements UsagePointService {
 
     @Override
     public List<UsagePoint> findAllUpdatedFor(Subscription subscription) {
-        return repository.findAllUpdatedFor(subscription);
+        return usagePointRepository.findAllUpdatedFor(subscription);
     }
 
     @Override
     public void deleteByHashedId(String usagePointHashedId) {
         UsagePoint usagePoint = findByHashedId(usagePointHashedId);
         if (usagePoint != null) {
-            repository.deleteById(usagePoint.getId());
+        	usagePointRepository.deleteById(usagePoint.getId());
         }
     }
 
     @Override
     public List<Long> findAllIdsForRetailCustomer(Long retailCustomerId) {
-        return repository.findAllIdsForRetailCustomer(retailCustomerId);
+        return usagePointRepository.findAllIdsForRetailCustomer(retailCustomerId);
     }
+
+	@Override
+	public String feedFor(List<UsagePoint> usagePoints) throws FeedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String entryFor(UsagePoint usagePoint) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    @Override
+	public List<UsagePoint> findAllByRetailCustomer(Long retailCustomerId) {
+     return usagePointRepository.findAllByRetailCustomerId(retailCustomerId);
+	}
+
+	@Override
+	public EntryTypeIterator find(Long retailCustomerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EntryType find(Long retailCustomerId, Long usagePointId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void add(UsagePoint usagePoint) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(UsagePoint usagePoint) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public UsagePoint importResource(InputStream stream) {
+        UsagePoint usagePoint = usagePointBuilder.newUsagePoint(xmlMarshaller.unmarshal(stream, EntryType.class));
+        createOrReplaceByUUID(usagePoint);
+
+        return usagePoint;
+	}
+
 }

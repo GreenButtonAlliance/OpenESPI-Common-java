@@ -16,15 +16,22 @@
 
 package org.energyos.espi.common.service.impl;
 
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.energyos.espi.common.service.RetailCustomerService;
+import org.energyos.espi.common.utils.EntryTypeIterator;
+import org.energyos.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 @Service
@@ -65,4 +72,34 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
             throw new UsernameNotFoundException("Unable to find user");
         }
     }
+
+	@Override
+	public EntryType find(Long retailCustomerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EntryTypeIterator find() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void add(ElectricPowerUsageSummary electricPowerUsageSummary) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(ElectricPowerUsageSummary electricPowerUsageSummary) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public RetailCustomer importResource(InputStream stream) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
