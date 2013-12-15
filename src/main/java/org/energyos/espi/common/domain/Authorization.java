@@ -115,7 +115,10 @@ public class Authorization
     public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";
 
     @Embedded
-    @Column(name = "authorized_period")
+    @AttributeOverrides({
+    	@AttributeOverride(name="start", column=@Column(name="ap_start")),
+    	@AttributeOverride(name="duration", column=@Column(name="ap_duration"))
+    })
     protected DateTimeInterval authorizedPeriod;
 
     @Embedded 
