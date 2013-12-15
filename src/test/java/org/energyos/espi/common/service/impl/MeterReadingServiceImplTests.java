@@ -49,7 +49,7 @@ public class MeterReadingServiceImplTests {
 
     @Test
     public void findById_returnsMeterReading() {
-        service.findById(1L);
+        service.findById(1L, 1L, 1L);
         verify(repository).findById(1L);
     }
 }

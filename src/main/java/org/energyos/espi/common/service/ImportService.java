@@ -10,7 +10,8 @@ import java.io.InputStream;
 import java.util.List;
 
 public interface ImportService {
-    void importData(InputStream stream) throws IOException, SAXException, ParserConfigurationException;
+	void importData(InputStream stream) throws IOException, SAXException,
+			ParserConfigurationException;
 
 	List<EntryType> getEntries();
 }

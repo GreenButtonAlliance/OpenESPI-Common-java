@@ -104,7 +104,7 @@ public class UsagePointServiceImplTests {
         when(xmlMarshaller.unmarshal(inputStream, EntryType.class)).thenReturn(entryType);
         when(usagePointBuilder.newUsagePoint(entryType)).thenReturn(usagePoint);
 
-        UsagePoint returnedUsagePoint = service.importUsagePoint(inputStream);
+        UsagePoint returnedUsagePoint = service.importResource(inputStream);
 
         verify(repository).createOrReplaceByUUID(usagePoint);
         assertThat(returnedUsagePoint, is(usagePoint));
