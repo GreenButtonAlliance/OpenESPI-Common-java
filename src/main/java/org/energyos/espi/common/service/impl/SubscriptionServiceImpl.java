@@ -84,6 +84,14 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         this.subscriptionRepository = subscriptionRepository;
     }
 
+    public void setApplicationInformationService(ApplicationInformationService applicationInformationService) {
+    	this.applicationInformationService = applicationInformationService;
+    }
+    
+    public void setSubscriptionRepository(SubscriptionRepository subscriptionRepository) {
+    	this.subscriptionRepository = subscriptionRepository;
+    }
+    
 	@Override
 	public EntryTypeIterator find(String subscriptionHashedId) {
 		// TODO Auto-generated method stub

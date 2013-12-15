@@ -35,8 +35,9 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 	@Override
 	public MeterReading findById(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO need to scope to the retailCustomer.usagePoint.meterReading
+		// for now, just do it the old way
+		return meterReadingRepository.findById(meterReadingId);
 	}
 
     @Override

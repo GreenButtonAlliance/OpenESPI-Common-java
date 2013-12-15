@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamResult;
 
 import java.io.IOException;
@@ -65,9 +68,44 @@ public class ExportServiceImpl implements ExportService {
         this.authorizationService = authorizationService;
     }
 
+    public void setApplicationInformationService(ApplicationInformationService applicationInformationService) {
+    	this.applicationInformationService = applicationInformationService;
+    }
+     
+ 
     public void setRetailCustomerService (RetailCustomerService retailCustomerService) {
     	this.retailCustomerService = retailCustomerService;
     }
+    
+    public void setUsagePointService(UsagePointService usagePointService) {
+    	this.usagePointService = usagePointService;
+    }
+    
+    public void setMeterReadingService(MeterReadingService meterReadingService) {
+    	this.meterReadingService = meterReadingService;
+    }
+    
+    public void setReadingTypeService(ReadingTypeService readingTypeService) {
+    	this.readingTypeService = readingTypeService;
+    }
+    
+    public void setIntervalBlockService(IntervalBlockService intervalBlockService) {
+    	this.intervalBlockService = intervalBlockService;
+    }
+    
+    public void setTimeConfigurationService(TimeConfigurationService timeConfigurationService) {
+    	this.timeConfigurationService = timeConfigurationService;
+    }
+        
+    public void setElectricPowerQualitySummaryService(ElectricPowerQualitySummaryService electricPowerQualitySummaryService) {
+    	this.electricPowerQualitySummaryService = electricPowerQualitySummaryService;
+    }
+     
+    public void setElectricPowerUsageSummaryService(ElectricPowerUsageSummaryService electricPowerUsageSummaryService) {
+    	this.electricPowerUsageSummaryService = electricPowerUsageSummaryService;
+    }
+    
+    
     public void setMarshaller(Jaxb2Marshaller fragmentMarshaller) {
         this.fragmentMarshaller = fragmentMarshaller;
     }
@@ -246,9 +284,13 @@ public class ExportServiceImpl implements ExportService {
         StreamResult result = new StreamResult(stream);
 
         while (entries.hasNext()) {
-        	exportEntry(entries.next(),stream, exportFilter);
-        }
-
+        	try {
+            	exportEntry(entries.next(),stream, exportFilter);        		
+        	} catch (Exception e) {
+        	  stream.write("/* an error happened in exportEntry */".getBytes());	
+        	}
+ 
+          }
         stream.write("</feed>".getBytes());
     }
 
@@ -256,11 +298,13 @@ public class ExportServiceImpl implements ExportService {
 			ExportFilter exportFilter) throws IOException {
 
 		StreamResult result = new StreamResult(stream);
-
+        try {
 		if (exportFilter.matches(entry)) {
 			fragmentMarshaller.marshal(entry, result);
 		}
-
+        } catch (Exception e) {
+        	stream.write("/* an error happened in exportEntry */".getBytes());
+        }
 	}
 
 }

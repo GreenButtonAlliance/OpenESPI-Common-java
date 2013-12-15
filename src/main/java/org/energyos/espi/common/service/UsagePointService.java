@@ -34,34 +34,50 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UsagePointService {
-    //TODO: likely deprecated
-    List<UsagePoint> findAllByRetailCustomer(RetailCustomer customer);
-    void createOrReplaceByUUID(UsagePoint usagePoint);
-    void associateByUUID(RetailCustomer retailCustomer, UUID uuid);
-    UsagePoint findByUUID(UUID uuid);
-    UsagePoint findByHashedId(String usagePointHashedId);
-    List<UsagePoint> findAllUpdatedFor(Subscription subscription);
-    void deleteByHashedId(String usagePointHashedId);
-    List<Long> findAllIdsForRetailCustomer(Long id);
-    String feedFor(List<UsagePoint> usagePoints) throws FeedException;
-    String entryFor(UsagePoint usagePoint);
-    List<UsagePoint> findAllByRetailCustomer(Long retailCustomerId);
+	// TODO: likely deprecated
+	List<UsagePoint> findAllByRetailCustomer(RetailCustomer customer);
 
-    // persistence management services
-    public void setRepository (UsagePointRepository usagePointRepository); 
-    public void persist(UsagePoint usagePoint);
+	void createOrReplaceByUUID(UsagePoint usagePoint);
 
-    // accessor services
+	void associateByUUID(RetailCustomer retailCustomer, UUID uuid);
+
+	UsagePoint findByUUID(UUID uuid);
+
+	UsagePoint findByHashedId(String usagePointHashedId);
+
+	List<UsagePoint> findAllUpdatedFor(Subscription subscription);
+
+	void deleteByHashedId(String usagePointHashedId);
+
+	List<Long> findAllIdsForRetailCustomer(Long id);
+
+	String feedFor(List<UsagePoint> usagePoints) throws FeedException;
+
+	String entryFor(UsagePoint usagePoint);
+
+	List<UsagePoint> findAllByRetailCustomer(Long retailCustomerId);
+
+	// persistence management services
+	public void setRepository(UsagePointRepository usagePointRepository);
+
+	public void setResourceService(ResourceService resourceService);
+
+	public void persist(UsagePoint usagePoint);
+
+	// accessor services
 	public UsagePoint findById(Long usagePointId);
+
 	public UsagePoint findById(Long retailCustomerId, Long usagePointId);
+
 	public EntryType find(Long retailCustomerId, Long usagePointId);
+
 	public EntryTypeIterator find(Long retailCustomerId);
-    public void add(UsagePoint usagePoint);
-    public void delete(UsagePoint usagePoint);
 
-    // import-exportResource services
-    public UsagePoint importResource(InputStream stream);
+	public void add(UsagePoint usagePoint);
 
+	public void delete(UsagePoint usagePoint);
 
+	// import-exportResource services
+	public UsagePoint importResource(InputStream stream);
 
 }
