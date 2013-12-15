@@ -78,7 +78,7 @@ public class AuthorizationTests {
 
     @Test
     public void authorizationServer() {
-        assertColumnAnnotation(Authorization.class, "authorizationServer", "authorization_server");
+        assertColumnAnnotation(Authorization.class, "authorizationURI", "authorization_uri");
     }
 
     @Test

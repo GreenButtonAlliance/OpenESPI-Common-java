@@ -27,34 +27,80 @@ package org.energyos.espi.common.domain;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 /**
- * Represents a permission granted by an owner for access to a resource.
- * <p/>
+ * [extension] Represents a permission granted by an owner for access to a resource.
+ * 
+ * Atom Links:
+ * self link to this resource
+ * rel corresponding ApplicationInformation (if this is the client access containing token instance)
+ * rel corresponding to the authorized resource (if this is the access_token containing instance for a customer resource)
+ * 
+ * Note: for privacy there is no identifier of the RetailCustomer in this structure but an implementation will have consider how to maintain a correspendance between a RetailCustomer and his authorization.
+ * 
  * <p>Java class for Authorization complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType name="Authorization">
  *   &lt;complexContent>
  *     &lt;extension base="{http://naesb.org/espi}IdentifiedObject">
  *       &lt;sequence>
- *         &lt;element name="accessToken" type="{http://naesb.org/espi}String32" minOccurs="0"/>
- *         &lt;element name="authorizationServer" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
  *         &lt;element name="authorizedPeriod" type="{http://naesb.org/espi}DateTimeInterval" minOccurs="0"/>
  *         &lt;element name="publishedPeriod" type="{http://naesb.org/espi}DateTimeInterval" minOccurs="0"/>
- *         &lt;element name="resource" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="referenceID" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/>
+ *         &lt;element name="access_token" type="{http://naesb.org/espi}String512" minOccurs="0"/>
  *         &lt;element name="status" type="{http://naesb.org/espi}AuthorizationStatus" minOccurs="0"/>
- *         &lt;element name="thirdParty" type="{http://naesb.org/espi}String32" minOccurs="0"/>
+ *         &lt;element name="expires_in" type="{http://naesb.org/espi}TimeType" minOccurs="0"/>
+ *         &lt;element name="grant_type" type="{http://naesb.org/espi}GrantType" minOccurs="0"/>
+ *         &lt;element name="refresh_token" type="{http://naesb.org/espi}String512" minOccurs="0"/>
+ *         &lt;element name="scope" type="{http://naesb.org/espi}String256" minOccurs="0"/>
+ *         &lt;element name="state" type="{http://naesb.org/espi}String256" minOccurs="0"/>
+ *         &lt;element name="response_type" type="{http://naesb.org/espi}ResponseType" minOccurs="0"/>
+ *         &lt;element name="token_type" type="{http://naesb.org/espi}TokenType" minOccurs="0"/>
+ *         &lt;element name="code" type="{http://naesb.org/espi}String512" minOccurs="0"/>
+ *         &lt;element name="error" type="{http://naesb.org/espi}OAuthError" minOccurs="0"/>
+ *         &lt;element name="error_description" type="{http://naesb.org/espi}String256" minOccurs="0"/>
+ *         &lt;element name="error_uri" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="resourceURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="authorizationURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
+
+
+
 @XmlAccessorType(XmlAccessType.FIELD)
-@Entity
+@XmlType(name = "Authorization", propOrder = {
+	    "authorizedPeriod",
+	    "publishedPeriod",
+	    "retailCustomer",
+	    "accessToken",
+	    "status",
+	    "expiresIn",
+	    "grantType",
+	    "refreshToken",
+	    "scope",
+	    "state",
+	    "responseType",
+	    "tokenType",
+	    "code",
+	    "error",
+	    "errorDescription",
+	    "errorUri",
+	    "resourceURI",
+	    "authorizationURI",
+	    "subscriptionURI",
+	    "thirdParty"
+	})@Entity
 @Table(name = "authorizations")
 @NamedQueries(value = {
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID,
@@ -68,25 +114,33 @@ public class Authorization
     public static final String QUERY_FIND_BY_RETAIL_CUSTOMER_ID = "Authorization.findAllByRetailCustomerId";
     public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";
 
-    @Transient
+    @Embedded
+    @AttributeOverrides({
+    	@AttributeOverride(name="start", column=@Column(name="ap_start")),
+    	@AttributeOverride(name="duration", column=@Column(name="ap_duration"))
+    })
     protected DateTimeInterval authorizedPeriod;
 
-    @Transient
-    protected DateTimeInterval publishedPeriod;
+    @Embedded 
+    @AttributeOverrides({
+    	@AttributeOverride(name="start", column=@Column(name="pp_start")),
+    	@AttributeOverride(name="duration", column=@Column(name="pp_duration"))
+    })
+	protected DateTimeInterval publishedPeriod;
     @Column(name = "access_token")
     protected String accessToken;
-    @Column(name = "authorization_server")
+    @Column(name = "authorization_uri")
     @XmlSchemaType(name = "anyURI")
-    protected String authorizationServer;
+    protected String authorizationURI;
 
     @XmlSchemaType(name = "anyURI")
-    protected String resource;
+    protected String resourceURI;
     @Column(name = "status")
     protected String status;
     @Column(name = "third_party")
     protected String thirdParty;
     @ManyToOne @JoinColumn(name = "retail_customer_id")
-    @XmlTransient
+    @XmlElement(name = "referenceID")
     protected RetailCustomer retailCustomer;
 
     @XmlElement(name = "expires_in")
@@ -97,7 +151,6 @@ public class Authorization
     protected String refreshToken;
     protected String scope;
     @Column(name = "state")
-    @XmlTransient
     private String state;
     @XmlElement(name = "response_type")
     protected ResponseType responseType;
@@ -268,7 +321,7 @@ public class Authorization
      *
      */
     public String getResource() {
-        return resource;
+        return resourceURI;
     }
 
     /**
@@ -280,7 +333,7 @@ public class Authorization
      *
      */
     public void setResource(String value) {
-        this.resource = value;
+        this.resourceURI = value;
     }
 
     /**
@@ -500,11 +553,11 @@ public class Authorization
     }
 
     public String getAuthorizationServer() {
-        return authorizationServer;
+        return authorizationURI;
     }
 
     public void setAuthorizationServer(String authorizationServer) {
-        this.authorizationServer = authorizationServer;
+        this.authorizationURI = authorizationServer;
     }
 
     public String getThirdParty() {
