@@ -49,7 +49,7 @@ public class Routes {
     public static final String USAGE_POINT_SHOW_TP = "/RetailCustomer/{retailCustomerId}/UsagePoint/{UsagePointHashedId}/show";
     public static final String USAGE_POLICY = "/UsagePolicy";
 
-    // patterns for REST access to management entities
+    // patterns for RESTful access to management entities
     //
     public static final String AUTHORIZATION_COLLECTION = "/espi/1_1/resource/Authorization";
     public static final String AUTHORIZATION_MEMBER = "/espi/1_1/resource/Authorization/{authorizationId}";
@@ -58,7 +58,7 @@ public class Routes {
     public static final String APPLICATION_INFORMATION_COLLECTION = "/espi/1_1/resource/ApplicationInformation";
     public static final String APPLICATION_INFORMATION_MEMBER = "/espi/1_1/resource/Applicationinformation/{applicationInformationId}";
 
-    // patterns for REST access to Resources
+    // patterns for RESTful access to Resources
     public static final String USAGE_POINT_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint";
     public static final String USAGE_POINT_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}";
     public static final String METER_READING_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading";
