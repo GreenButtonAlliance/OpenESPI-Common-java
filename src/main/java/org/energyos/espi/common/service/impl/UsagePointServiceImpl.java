@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -181,12 +182,6 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public EntryType find(Long retailCustomerId, Long usagePointId) {
-      // TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void add(UsagePoint usagePoint) {
 		// TODO Auto-generated method stub
 	}
@@ -205,5 +200,41 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 		return usagePoint;
 	}
+
+	@Override
+	public EntryType find(Long retailCustomerId, Long usagePointId,
+			Map<String, String> params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EntryType find(String retailCustomerId, String usagePointId,
+			Map<String, String> params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UsagePoint findObject(String retailCustomerId, String usagePointId,
+			Map<String, String> params) {
+		
+		return findByHashedId(usagePointId);
+	}
+
+
+	@Override
+	public UsagePoint findObject(Long retailCustomerId, Long usagePointId,
+			Map<String, String> params) {
+		
+		return findById(usagePointId);
+	}
+	
+	@Override
+	public EntryTypeIterator find(String retailCustomerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

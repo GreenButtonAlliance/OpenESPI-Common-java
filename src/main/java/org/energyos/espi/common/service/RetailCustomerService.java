@@ -41,15 +41,20 @@ public interface RetailCustomerService extends UserDetailsService {
 	void persist(RetailCustomer customer);
 
 	// accessor services
+	//
 	RetailCustomer findById(Long retailCustomerId);
+	
+	RetailCustomer findById(String retailCustomerId);
 
 	public EntryType find(Long retailCustomerId);
+	
+	public EntryType find(String retailCustomerId);
 
 	public EntryTypeIterator find();
 
-	public void add(ElectricPowerUsageSummary electricPowerUsageSummary);
+	public void add(RetailCustomer retailCustomer);
 
-	public void delete(ElectricPowerUsageSummary electricPowerUsageSummary);
+	public void delete(RetailCustomer retailCustomer);
 
 	// import-exportResource services
 	public RetailCustomer importResource(InputStream stream);

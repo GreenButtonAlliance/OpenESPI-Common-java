@@ -136,15 +136,32 @@ public class ExportServiceImpl implements ExportService {
 		
 	}
 
+	// UsagePoints
+	//
 	@Override
 	public void exportUsagePoint(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(usagePointService.find(retailCustomerId, usagePointId), stream, exportFilter);
+		// TODO pass the (filter) params on through to the exporter
+		exportEntry(usagePointService.find(retailCustomerId, usagePointId, null), stream, exportFilter);
 		
 	}
 
 	@Override
 	public void exportUsagePoints(Long retailCustomerId, 
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		// TODO pass the (filter) params on through to the exporter
+		exportEntries(usagePointService.find(retailCustomerId), stream, exportFilter);
+	}
+	
+	@Override
+	public void exportUsagePoint(String retailCustomerId, String usagePointId,
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntry(usagePointService.find(retailCustomerId, usagePointId, null), stream, exportFilter);
+		
+	}
+
+	@Override
+	public void exportUsagePoints(String retailCustomerId, 
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntries(usagePointService.find(retailCustomerId), stream, exportFilter);
 	}

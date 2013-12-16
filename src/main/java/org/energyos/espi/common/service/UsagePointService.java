@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface UsagePointService {
@@ -69,9 +70,15 @@ public interface UsagePointService {
 
 	public UsagePoint findById(Long retailCustomerId, Long usagePointId);
 
-	public EntryType find(Long retailCustomerId, Long usagePointId);
+	public EntryType find(Long retailCustomerId, Long usagePointId, Map<String, String> params);
+	
+	public EntryType find(String retailCustomerId, String usagePointId, Map<String, String> params);
+	
+	public UsagePoint findObject(String retailCustomerId, String usagePointId, Map<String, String> params);
 
 	public EntryTypeIterator find(Long retailCustomerId);
+	
+	public EntryTypeIterator find(String retailCustomerId);
 
 	public void add(UsagePoint usagePoint);
 
@@ -79,5 +86,8 @@ public interface UsagePointService {
 
 	// import-exportResource services
 	public UsagePoint importResource(InputStream stream);
+
+	UsagePoint findObject(Long retailCustomerId, Long usagePointId,
+			Map<String, String> params);
 
 }

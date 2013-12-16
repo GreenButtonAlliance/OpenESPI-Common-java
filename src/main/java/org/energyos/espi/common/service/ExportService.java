@@ -18,11 +18,20 @@ public interface ExportService {
 	void exportSubscriptions(Long retailCustomerId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException;
 
+	// UsagePoints
+	//
 	void exportUsagePoint(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportResourceFilter)
 			throws IOException;
 
 	void exportUsagePoints(Long retailCustomerId, OutputStream stream,
+			ExportFilter exportResourceFilter) throws IOException;
+
+	void exportUsagePoint(String retailCustomerId, String usagePointId,
+			OutputStream stream, ExportFilter exportResourceFilter)
+			throws IOException;
+
+	void exportUsagePoints(String retailCustomerId, OutputStream stream,
 			ExportFilter exportResourceFilter) throws IOException;
 
     public void exportApplicationInformation(Long applicationInformationId,
