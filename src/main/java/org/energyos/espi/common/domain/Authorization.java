@@ -27,8 +27,6 @@ package org.energyos.espi.common.domain;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 
 /**
  * [extension] Represents a permission granted by an owner for access to a resource.
@@ -320,7 +318,7 @@ public class Authorization
      *     {@link String }
      *
      */
-    public String getResource() {
+    public String getResourceURI() {
         return resourceURI;
     }
 
@@ -332,7 +330,7 @@ public class Authorization
      *     {@link String }
      *
      */
-    public void setResource(String value) {
+    public void setResourceURI(String value) {
         this.resourceURI = value;
     }
 
@@ -552,12 +550,12 @@ public class Authorization
         this.errorUri = value;
     }
 
-    public String getAuthorizationServer() {
+    public String getAuthorizationURI() {
         return authorizationURI;
     }
 
-    public void setAuthorizationServer(String authorizationServer) {
-        this.authorizationURI = authorizationServer;
+    public void setAuthorizationURI(String authorizationServerURI) {
+        this.authorizationURI = authorizationServerURI;
     }
 
     public String getThirdParty() {

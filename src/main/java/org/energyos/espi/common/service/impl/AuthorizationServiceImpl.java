@@ -60,7 +60,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         Authorization authorization = new Authorization();
         authorization.setUUID(UUID.randomUUID());
         authorization.setAccessToken(accessToken);
-        authorization.setResource(Routes.DATA_CUSTODIAN_SUBSCRIPTION.replace("{SubscriptionID}", subscription.getUUID().toString()));
+        authorization.setResourceURI(Routes.DATA_CUSTODIAN_SUBSCRIPTION.replace("{SubscriptionID}", subscription.getUUID().toString()));
         repository.persist(authorization);
 
         return authorization;
