@@ -297,9 +297,6 @@ public class ExportServiceImpl implements ExportService {
 
         stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
         stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">".getBytes());
-
-        StreamResult result = new StreamResult(stream);
-
         while (entries.hasNext()) {
         	try {
             	exportEntry(entries.next(),stream, exportFilter);        		
@@ -308,9 +305,12 @@ public class ExportServiceImpl implements ExportService {
         	}
  
           }
+
         stream.write("</feed>".getBytes());
     }
-
+    
+    // to export a single entry (w/o the <feed>...</feed> wrappers
+    
 	private void exportEntry(EntryType entry, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
 

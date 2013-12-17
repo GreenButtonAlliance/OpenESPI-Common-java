@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -39,6 +39,7 @@ import com.sun.syndication.io.FeedException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -202,10 +203,20 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public EntryType find(Long retailCustomerId, Long usagePointId,
-			Map<String, String> params) {
-		// TODO Auto-generated method stub
-		return null;
+	public EntryType find(Long retailCustomerId, Long usagePointId, Map<String, String> params) {
+		EntryType result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+		    temp.add(usagePointId);
+			findAllIdsForRetailCustomer(retailCustomerId);
+			result = (new EntryTypeIterator(resourceService, temp)).next();
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
 
 	@Override
