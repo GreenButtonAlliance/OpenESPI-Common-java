@@ -16,19 +16,42 @@
 
 package org.energyos.espi.common.service;
 
-
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.models.atom.EntryType;
+import org.energyos.espi.common.repositories.RetailCustomerRepository;
+import org.energyos.espi.common.utils.EntryTypeIterator;
+import org.energyos.espi.common.utils.ExportFilter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 public interface RetailCustomerService extends UserDetailsService {
+	// TODO: likely deprecated
+	List<RetailCustomer> findAll();
 
-    List<RetailCustomer> findAll();
+	RetailCustomer findByHashedId(Long retailCustomerId);
 
-    void persist(RetailCustomer customer);
+	// persistence management services
+	public void setRepository(RetailCustomerRepository retailCustomerRepository);
 
-    RetailCustomer findById(Long id);
+	void persist(RetailCustomer customer);
 
-    RetailCustomer findByHashedId(Long retailCustomerId);
+	// accessor services
+	RetailCustomer findById(Long retailCustomerId);
+
+	public EntryType find(Long retailCustomerId);
+
+	public EntryTypeIterator find();
+
+	public void add(ElectricPowerUsageSummary electricPowerUsageSummary);
+
+	public void delete(ElectricPowerUsageSummary electricPowerUsageSummary);
+
+	// import-exportResource services
+	public RetailCustomer importResource(InputStream stream);
+
 }

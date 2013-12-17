@@ -16,8 +16,8 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.repositories.MeterReadingRepository;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.repositories.ReadingTypeRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,25 +26,25 @@ import javax.persistence.PersistenceContext;
 import java.util.UUID;
 
 @Repository
-public class MeterReadingRepositoryImpl implements MeterReadingRepository {
+public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
 
     @PersistenceContext
     protected EntityManager em;
 
     @Override
-    public MeterReading findById(Long meterReadingId) {
-        return em.find(MeterReading.class, meterReadingId);
+    public ReadingType findById(Long readingTypeId) {
+        return em.find(ReadingType.class, readingTypeId);
     }
 
     @Override
     @Transactional
-    public void persist(MeterReading meterReading) {
-        em.persist(meterReading);
+    public void persist(ReadingType readingType) {
+        em.persist(readingType);
     }
 
     @Override
-    public MeterReading findByUUID(UUID uuid) {
-        return (MeterReading) em.createNamedQuery(MeterReading.QUERY_FIND_BY_UUID)
+    public ReadingType findByUUID(UUID uuid) {
+        return (ReadingType) em.createNamedQuery(ReadingType.QUERY_FIND_BY_UUID)
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }

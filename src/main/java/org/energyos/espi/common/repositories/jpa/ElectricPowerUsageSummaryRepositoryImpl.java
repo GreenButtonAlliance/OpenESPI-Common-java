@@ -16,8 +16,8 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.repositories.MeterReadingRepository;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.repositories.ElectricPowerUsageSummaryRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,25 +26,25 @@ import javax.persistence.PersistenceContext;
 import java.util.UUID;
 
 @Repository
-public class MeterReadingRepositoryImpl implements MeterReadingRepository {
+public class ElectricPowerUsageSummaryRepositoryImpl implements ElectricPowerUsageSummaryRepository {
 
     @PersistenceContext
     protected EntityManager em;
 
     @Override
-    public MeterReading findById(Long meterReadingId) {
-        return em.find(MeterReading.class, meterReadingId);
+    public ElectricPowerUsageSummary findById(Long electricPowerUsageSummaryId) {
+        return em.find(ElectricPowerUsageSummary.class, electricPowerUsageSummaryId);
     }
 
     @Override
     @Transactional
-    public void persist(MeterReading meterReading) {
-        em.persist(meterReading);
+    public void persist(ElectricPowerUsageSummary electricPowerUsageSummary) {
+        em.persist(electricPowerUsageSummary);
     }
 
     @Override
-    public MeterReading findByUUID(UUID uuid) {
-        return (MeterReading) em.createNamedQuery(MeterReading.QUERY_FIND_BY_UUID)
+    public ElectricPowerUsageSummary findByUUID(UUID uuid) {
+        return (ElectricPowerUsageSummary) em.createNamedQuery(ElectricPowerUsageSummary.QUERY_FIND_BY_UUID)
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }

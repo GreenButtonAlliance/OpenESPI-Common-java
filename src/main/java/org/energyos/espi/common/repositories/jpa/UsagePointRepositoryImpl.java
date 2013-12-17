@@ -82,13 +82,14 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 usagePoint.setLocalTimeParameters(existingUsagePoint.getLocalTimeParameters());
             }
 
+            if (existingUsagePoint.getRelatedLinks() != null) {
+            	usagePoint.setRelatedLinks(existingUsagePoint.getRelatedLinks());
+            }
+            
             if (existingUsagePoint.getSelfLink() != null) {
                 usagePoint.setSelfLink(existingUsagePoint.getSelfLink());
             }
-            
-            if (existingUsagePoint.getRelatedLinks() != null) {
-                usagePoint.setRelatedLinks(existingUsagePoint.getRelatedLinks());
-            }
+
             if (existingUsagePoint.getUpLink() != null) {
                 usagePoint.setUpLink(existingUsagePoint.getUpLink());
             }

@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import java.util.List;
 
 @Repository
@@ -61,4 +62,16 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
         return (ApplicationInformation)em.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID)
                 .setParameter("dataCustodianId", dataCustodianId).getSingleResult();
     }
+
+	@Override
+	public ApplicationInformation find(Long applicationInformationId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ApplicationInformation> find() {
+	    // TODO Auto-generated method stub
+		return null;
+	}
 }

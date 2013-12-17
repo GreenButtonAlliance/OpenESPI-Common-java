@@ -44,7 +44,7 @@ public class AuthorizationServiceImplTests extends BaseTest {
     public void before() {
         subscription = EspiFactory.newSubscription(EspiFactory.newRetailCustomer());
         service = new AuthorizationServiceImpl();
-        service.setRepository(repository);
+        service.setAuthorizationRepository(repository);
 
         authorization = service.createAuthorization(subscription, "accessToken");
     }

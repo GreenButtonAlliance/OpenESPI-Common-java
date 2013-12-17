@@ -31,4 +31,8 @@ public interface ApplicationInformationRepository {
     ApplicationInformation findByClientId(String clientId);
 
     ApplicationInformation findByDataCustodianClientId(String dataCustodianId);
+
+	public ApplicationInformation find(Long applicationInformationId);
+
+	public List<ApplicationInformation> find();
 }

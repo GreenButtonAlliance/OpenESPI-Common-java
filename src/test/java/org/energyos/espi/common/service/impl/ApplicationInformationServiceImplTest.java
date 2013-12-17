@@ -16,7 +16,7 @@ public class ApplicationInformationServiceImplTest {
     public void before() throws Exception {
         service = new ApplicationInformationServiceImpl();
         repository = mock(ApplicationInformationRepository.class);
-        service.setRepository(repository);
+        service.setApplicationInformationRepository(repository);
     }
 
     @Test

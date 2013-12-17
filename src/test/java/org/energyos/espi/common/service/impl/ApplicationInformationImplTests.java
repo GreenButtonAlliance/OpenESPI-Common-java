@@ -33,7 +33,7 @@ public class ApplicationInformationImplTests {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
         ApplicationInformation applicationInformation = new ApplicationInformation();
-        service.setRepository(repository);
+        service.setApplicationInformationRepository(repository);
 
         service.persist(applicationInformation);
 
@@ -45,7 +45,7 @@ public class ApplicationInformationImplTests {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
         ApplicationInformation applicationInformation = new ApplicationInformation();
-        service.setRepository(repository);
+        service.setApplicationInformationRepository(repository);
         when(repository.findById(1L)).thenReturn(applicationInformation);
 
         assertEquals(applicationInformation, service.findById(1L));
@@ -56,7 +56,7 @@ public class ApplicationInformationImplTests {
         ApplicationInformationServiceImpl service = new ApplicationInformationServiceImpl();
         ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
         ApplicationInformation applicationInformation = new ApplicationInformation();
-        service.setRepository(repository);
+        service.setApplicationInformationRepository(repository);
         when(repository.findByClientId("thirdParty")).thenReturn(applicationInformation);
 
         assertEquals(applicationInformation, service.findByClientId("thirdParty"));
@@ -68,7 +68,7 @@ public class ApplicationInformationImplTests {
         ApplicationInformationRepository repository = mock(ApplicationInformationRepository.class);
         List<ApplicationInformation> applicationInformationList = new ArrayList<>();
 
-        service.setRepository(repository);
+        service.setApplicationInformationRepository(repository);
         when(repository.findAll()).thenReturn(applicationInformationList);
 
         assertEquals(applicationInformationList, service.findAll());
