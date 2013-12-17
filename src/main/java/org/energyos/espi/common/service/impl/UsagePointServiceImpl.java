@@ -189,7 +189,8 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 	@Override
 	public void delete(UsagePoint usagePoint) {
-		// TODO Auto-generated method stub
+	
+       usagePointRepository.deleteById(usagePoint.getId());
 
 	}
 
