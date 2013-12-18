@@ -301,7 +301,7 @@ public class EspiFactory {
         Authorization authorization = new Authorization();
 
         authorization.setAccessToken("accessToken" + System.currentTimeMillis());
-        authorization.setAuthorizationServer("http://DataCustodian" + System.currentTimeMillis() + ".example.com");
+        authorization.setAuthorizationURI("http://DataCustodian" + System.currentTimeMillis() + ".example.com");
         authorization.setSubscriptionURI(Routes.getDataCustodianRESTSubscriptionGetURL(newRandomString()));
         authorization.setThirdParty("thirdParty" + System.currentTimeMillis());
         authorization.setState("state" + UUID.randomUUID());
@@ -322,13 +322,13 @@ public class EspiFactory {
         ApplicationInformation applicationInformation = new ApplicationInformation();
         applicationInformation.setUUID(UUID.randomUUID());
         applicationInformation.setThirdPartyApplicationName("Name" + newRandomString());
-        applicationInformation.setDataCustodianThirdPartyId("ClientId" + newRandomString());
+        applicationInformation.setClientId("ClientId" + newRandomString());
         applicationInformation.setDataCustodianId("DataCustodianId" + newRandomString());
-        applicationInformation.setThirdPartyDefaultNotifyResource("http://example.com:8080/ThirdParty/espi/1_1/Notification");
-        applicationInformation.setDataCustodianAuthorizationResource("http://example.com:8080/ThirdParty/oauth/authorize");
-        applicationInformation.setDataCustodianTokenResource("http://example.com:8080/ThirdParty/oauth/token");
-        applicationInformation.setThirdPartyDefaultOAuthCallback("http://example.com:8080/ThirdParty/espi/1_1/OAuthCallBack");
-        applicationInformation.setDataCustodianThirdPartySecret("Secret" + newRandomString());
+        applicationInformation.setThirdPartyNotifyUri("http://example.com:8080/ThirdParty/espi/1_1/Notification");
+        applicationInformation.setAuthorizationServerAuthorizationEndpoint("http://example.com:8080/ThirdParty/oauth/authorize");
+        applicationInformation.setAuthorizationServerTokenEndpoint("http://example.com:8080/ThirdParty/oauth/token");
+        applicationInformation.setRedirectUri("http://example.com:8080/ThirdParty/espi/1_1/OAuthCallBack");
+        applicationInformation.setClientSecret("Secret" + newRandomString());
         applicationInformation.getScope().add("FB=4_5_15;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13");
         applicationInformation.getScope().add("FB=4_5_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13");
 
@@ -371,7 +371,7 @@ public class EspiFactory {
         Authorization authorization = new Authorization();
         authorization.setUUID(UUID.randomUUID());
         authorization.setAccessToken(newRandomString());
-        authorization.setResource("/Resource/" + newRandomString());
+        authorization.setResourceURI("/Resource/" + newRandomString());
         authorization.setState(newRandomString());
         return authorization;
     }

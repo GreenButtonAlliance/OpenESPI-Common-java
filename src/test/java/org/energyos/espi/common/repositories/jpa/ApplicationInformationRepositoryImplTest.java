@@ -37,7 +37,7 @@ public class ApplicationInformationRepositoryImplTest {
     public void persist_modelEnforcesUniqueClientId() throws Exception {
         ApplicationInformation duplicateApplicationInformation = EspiFactory.newApplicationInformation();
         duplicateApplicationInformation.setDataCustodianId(applicationInformation.getDataCustodianId());
-        duplicateApplicationInformation.setDataCustodianThirdPartyId(applicationInformation.getDataCustodianThirdPartyId());
+        duplicateApplicationInformation.setClientId(applicationInformation.getClientId());
 
         repository.persist(duplicateApplicationInformation);
     }
@@ -49,7 +49,7 @@ public class ApplicationInformationRepositoryImplTest {
 
     @Test
     public void findByClientId() throws Exception {
-        assertEquals(applicationInformation.getId(), repository.findByClientId(applicationInformation.getDataCustodianThirdPartyId()).getId());
+        assertEquals(applicationInformation.getId(), repository.findByClientId(applicationInformation.getClientId()).getId());
     }
 
     @Test

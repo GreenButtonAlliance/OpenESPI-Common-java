@@ -56,7 +56,7 @@ public class AuthorizationServiceImplTests extends BaseTest {
 
     @Test
     public void createAuthorization_setsResource() {
-        assertEquals(Routes.DATA_CUSTODIAN_SUBSCRIPTION.replace("{SubscriptionID}", subscription.getUUID().toString()), authorization.getResource());
+        assertEquals(Routes.DATA_CUSTODIAN_SUBSCRIPTION.replace("{SubscriptionID}", subscription.getUUID().toString()), authorization.getResourceURI());
     }
 
     @Test

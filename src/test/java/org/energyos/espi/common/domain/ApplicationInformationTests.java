@@ -41,9 +41,9 @@ public class ApplicationInformationTests {
     }
 
     @Test
-    public void dataCustodianThirdPartyId() {
-        assertAnnotationPresent(ApplicationInformation.class, "dataCustodianThirdPartyId", NotEmpty.class);
-        assertSizeValidation(ApplicationInformation.class, "dataCustodianThirdPartyId", 2, 64);
+    public void clientId() {
+        assertAnnotationPresent(ApplicationInformation.class, "clientId", NotEmpty.class);
+        assertSizeValidation(ApplicationInformation.class, "clientId", 2, 64);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class ApplicationInformationTests {
     @Test
     public void getClientId() {
         ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
-        assertThat(applicationInformation.getClientId(), equalTo(applicationInformation.getDataCustodianThirdPartyId()));
+        assertThat(applicationInformation.getClientId(), containsString("ClientId"));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ApplicationInformationTests {
     @Test
     public void getClientSecret() {
         ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
-        assertThat(applicationInformation.getClientSecret(), equalTo(applicationInformation.getDataCustodianThirdPartySecret()));
+        assertThat(applicationInformation.getClientSecret(), containsString("Secret"));
     }
 
     @Test
@@ -95,10 +95,12 @@ public class ApplicationInformationTests {
         assertThat(applicationInformation.getAuthorizedGrantTypes(), hasItem("authorization_code"));
     }
 
+    
+    // ToDo: Verify this test
     @Test
     public void getRegisteredRedirectUri() {
         ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
-        assertThat(applicationInformation.getRegisteredRedirectUri(), hasItem(applicationInformation.getThirdPartyDefaultOAuthCallback()));
+        assertThat(applicationInformation.getRegisteredRedirectUri(), hasItem(applicationInformation.getRedirectUri()));
     }
 
     @Test
