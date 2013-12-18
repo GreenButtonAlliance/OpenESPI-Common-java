@@ -87,13 +87,13 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 
 	@Override
 	public EntryType find(Long retailCustomerId, Long usagePointId,
-			Long timeConfigurationId) {
+			Long timeConfigurationId, ExportFilter params) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId) {
+	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId, ExportFilter params) {
 		// TODO Auto-generated method stub
 		return null;
 	}

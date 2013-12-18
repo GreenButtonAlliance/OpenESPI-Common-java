@@ -136,36 +136,7 @@ public class ExportServiceImpl implements ExportService {
 		
 	}
 
-	// UsagePoints
-	//
-	@Override
-	public void exportUsagePoint(Long retailCustomerId, Long usagePointId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		// TODO pass the (filter) params on through to the exporter
-		exportEntry(usagePointService.find(retailCustomerId, usagePointId, null), stream, exportFilter);
-		
-	}
 
-	@Override
-	public void exportUsagePoints(Long retailCustomerId, 
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		// TODO pass the (filter) params on through to the exporter
-		exportEntries(usagePointService.find(retailCustomerId), stream, exportFilter);
-	}
-	
-	@Override
-	public void exportUsagePoint(String retailCustomerId, String usagePointId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(usagePointService.find(retailCustomerId, usagePointId, null), stream, exportFilter);
-		
-	}
-
-	@Override
-	public void exportUsagePoints(String retailCustomerId, 
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(usagePointService.find(retailCustomerId), stream, exportFilter);
-	}
-	
 	@Override
 	public void exportApplicationInformation(Long applicationInformationId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
@@ -282,15 +253,42 @@ public class ExportServiceImpl implements ExportService {
 	public void exportTimeConfiguration(Long retailCustomerId, Long usagePointId,
 			Long timeConfigurationId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntry(timeConfigurationService.find(retailCustomerId, usagePointId, timeConfigurationId), stream, exportFilter);	
+		exportEntry(timeConfigurationService.find(retailCustomerId, usagePointId, timeConfigurationId, exportFilter), stream, exportFilter);	
 	}
 
 	@Override
 	public void exportTimeConfigurations(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(timeConfigurationService.find(retailCustomerId, usagePointId), stream, exportFilter);	
+		exportEntries(timeConfigurationService.find(retailCustomerId, usagePointId, exportFilter), stream, exportFilter);	
+	}
+	
+	// UsagePoints
+	//
+	@Override
+	public void exportUsagePoint(Long retailCustomerId, Long usagePointId,
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntry(usagePointService.find(retailCustomerId, usagePointId, exportFilter), stream, exportFilter);
+		
 	}
 
+	@Override
+	public void exportUsagePoints(Long retailCustomerId, 
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntries(usagePointService.find(retailCustomerId), stream, exportFilter);
+	}
+	
+	@Override
+	public void exportUsagePoint(Long usagePointId,
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntry(usagePointService.find(usagePointId, exportFilter), stream, exportFilter);
+		
+	}
+
+	@Override
+	public void exportUsagePoints(OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntries(usagePointService.find(exportFilter), stream, exportFilter);
+	}
+	
     // worker functions
     //
     private void exportEntries(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter) throws IOException {
@@ -299,9 +297,10 @@ public class ExportServiceImpl implements ExportService {
         stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">".getBytes());
         while (entries.hasNext()) {
         	try {
-            	exportEntry(entries.next(),stream, exportFilter);        		
+        		EntryType entry = entries.next();
+            	exportEntry(entry, stream, exportFilter);        		
         	} catch (Exception e) {
-        	  stream.write("/* an error happened in exportEntry */".getBytes());	
+        	  stream.write("/* TODO - Remove this message - let the error happenan error happened in exportEntry - it is caused by an assumption of required (TimeConfiguration) relationships */".getBytes());	
         	}
  
           }

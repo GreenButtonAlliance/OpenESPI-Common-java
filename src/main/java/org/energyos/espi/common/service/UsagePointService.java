@@ -70,11 +70,15 @@ public interface UsagePointService {
 
 	public UsagePoint findById(Long retailCustomerId, Long usagePointId);
 
-	public EntryType find(Long retailCustomerId, Long usagePointId, Map<String, String> params);
+	public EntryType find(Long retailCustomerId, Long usagePointId, ExportFilter params);
 	
-	public EntryType find(String retailCustomerId, String usagePointId, Map<String, String> params);
+	public EntryType find(Long usagePointId, ExportFilter params);
 	
-	public UsagePoint findObject(String retailCustomerId, String usagePointId, Map<String, String> params);
+	public EntryTypeIterator find(ExportFilter params);
+	
+	public UsagePoint findObject(Long retailCustomerId, Long usagePointId, ExportFilter params);
+	
+	public UsagePoint findObject(Long usagePointId, ExportFilter params);
 
 	public EntryTypeIterator find(Long retailCustomerId);
 	
@@ -86,8 +90,5 @@ public interface UsagePointService {
 
 	// import-exportResource services
 	public UsagePoint importResource(InputStream stream);
-
-	UsagePoint findObject(Long retailCustomerId, Long usagePointId,
-			Map<String, String> params);
 
 }

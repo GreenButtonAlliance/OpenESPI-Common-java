@@ -204,10 +204,10 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public EntryType find(Long retailCustomerId, Long usagePointId, Map<String, String> params) {
+	public EntryType find(Long retailCustomerId, Long usagePointId, ExportFilter params) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 		    temp.add(usagePointId);
 			findAllIdsForRetailCustomer(retailCustomerId);
@@ -221,32 +221,62 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public EntryType find(String retailCustomerId, String usagePointId,
-			Map<String, String> params) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public UsagePoint findObject(String retailCustomerId, String usagePointId,
-			Map<String, String> params) {
-		
-		return findByHashedId(usagePointId);
-	}
-
-
-	@Override
-	public UsagePoint findObject(Long retailCustomerId, Long usagePointId,
-			Map<String, String> params) {
-		
-		return findById(usagePointId);
+	public EntryTypeIterator find(ExportFilter params) {
+		EntryTypeIterator result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp = usagePointRepository.findAllIds();
+			result = new EntryTypeIterator(resourceService, temp);
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
 	
 	@Override
-	public EntryTypeIterator find(String retailCustomerId) {
-		// TODO Auto-generated method stub
-		return null;
+	public EntryType find(Long usagePointId, ExportFilter params) {
+		EntryType result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp = usagePointRepository.findAllIds();
+			result = (new EntryTypeIterator(resourceService, temp)).next();
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
 
+
+	@Override
+	public UsagePoint findObject(Long retailCustomerId, Long usagePointId, ExportFilter params) {
+		
+		return findById(usagePointId);
+	}
+
+	@Override
+	public UsagePoint findObject(Long usagePointId, ExportFilter params) {
+		
+		return findById(usagePointId);
+	}
+		
+	@Override
+	public EntryTypeIterator find(String retailCustomerId) {
+		EntryTypeIterator result = null;
+		try {
+			List<Long> allIds = usagePointRepository.findAllIds();
+			result = new EntryTypeIterator(resourceService, allIds);
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
+	}
 
 }
