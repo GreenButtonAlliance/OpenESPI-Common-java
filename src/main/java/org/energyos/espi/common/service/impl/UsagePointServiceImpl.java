@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -39,7 +39,9 @@ import com.sun.syndication.io.FeedException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -181,19 +183,14 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public EntryType find(Long retailCustomerId, Long usagePointId) {
-      // TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void add(UsagePoint usagePoint) {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void delete(UsagePoint usagePoint) {
-		// TODO Auto-generated method stub
+	
+       usagePointRepository.deleteById(usagePoint.getId());
 
 	}
 
@@ -204,6 +201,82 @@ public class UsagePointServiceImpl implements UsagePointService {
 		createOrReplaceByUUID(usagePoint);
 
 		return usagePoint;
+	}
+
+	@Override
+	public EntryType find(Long retailCustomerId, Long usagePointId, ExportFilter params) {
+		EntryType result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+		    temp.add(usagePointId);
+			findAllIdsForRetailCustomer(retailCustomerId);
+			result = (new EntryTypeIterator(resourceService, temp)).next();
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
+	}
+
+	@Override
+	public EntryTypeIterator find(ExportFilter params) {
+		EntryTypeIterator result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp = usagePointRepository.findAllIds();
+			result = new EntryTypeIterator(resourceService, temp);
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
+	}
+	
+	@Override
+	public EntryType find(Long usagePointId, ExportFilter params) {
+		EntryType result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp = usagePointRepository.findAllIds();
+			result = (new EntryTypeIterator(resourceService, temp)).next();
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
+	}
+
+
+	@Override
+	public UsagePoint findObject(Long retailCustomerId, Long usagePointId, ExportFilter params) {
+		
+		return findById(usagePointId);
+	}
+
+	@Override
+	public UsagePoint findObject(Long usagePointId, ExportFilter params) {
+		
+		return findById(usagePointId);
+	}
+		
+	@Override
+	public EntryTypeIterator find(String retailCustomerId) {
+		EntryTypeIterator result = null;
+		try {
+			List<Long> allIds = usagePointRepository.findAllIds();
+			result = new EntryTypeIterator(resourceService, allIds);
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
 
 }

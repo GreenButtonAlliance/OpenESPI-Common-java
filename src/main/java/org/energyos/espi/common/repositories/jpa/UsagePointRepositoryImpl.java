@@ -140,4 +140,9 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }
+    @SuppressWarnings("unchecked")
+    public List<Long> findAllIds() {
+            return (List<Long>)this.em.createNamedQuery(UsagePoint.QUERY_FIND_ALL_IDS)
+                    .getResultList();
+        }
 }

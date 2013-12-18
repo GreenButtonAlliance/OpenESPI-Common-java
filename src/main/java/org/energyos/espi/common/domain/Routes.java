@@ -49,16 +49,39 @@ public class Routes {
     public static final String USAGE_POINT_SHOW_TP = "/RetailCustomer/{retailCustomerId}/UsagePoint/{UsagePointHashedId}/show";
     public static final String USAGE_POLICY = "/UsagePolicy";
 
-    // patterns for RESTful access to management entities
+    // patterns for RESTful root access to management entities
     //
-    public static final String AUTHORIZATION_COLLECTION = "/espi/1_1/resource/Authorization";
-    public static final String AUTHORIZATION_MEMBER = "/espi/1_1/resource/Authorization/{authorizationId}";
-    public static final String SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/Subscription";
-    public static final String SUBSCRIPTION_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionId}";
-    public static final String APPLICATION_INFORMATION_COLLECTION = "/espi/1_1/resource/ApplicationInformation";
-    public static final String APPLICATION_INFORMATION_MEMBER = "/espi/1_1/resource/Applicationinformation/{applicationInformationId}";
+    public static final String ROOT_AUTHORIZATION_COLLECTION = "/espi/1_1/resource/Authorization";
+    public static final String ROOT_AUTHORIZATION_MEMBER = "/espi/1_1/resource/Authorization/{authorizationId}";
+    public static final String ROOT_SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/Subscription";
+    public static final String ROOT_SUBSCRIPTION_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionId}";
+    public static final String ROOT_APPLICATION_INFORMATION_COLLECTION = "/espi/1_1/resource/ApplicationInformation";
+    public static final String ROOT_APPLICATION_INFORMATION_MEMBER = "/espi/1_1/resource/Applicationinformation/{applicationInformationId}";
 
-    // patterns for RESTful access to Resources
+    // patterns for RESTful xpath access to management entities
+    //
+    public static final String AUTHORIZATION_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Authorization";
+    public static final String AUTHORIZATION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Authorization/{authorizationId}";
+    public static final String SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/Subscription";
+    public static final String SUBSCRIPTION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Subscription/{subscriptionId}";
+
+    // patterns for RESTful root access to Resources
+    public static final String ROOT_USAGE_POINT_COLLECTION = "/espi/1_1/resource/UsagePoint";
+    public static final String ROOT_USAGE_POINT_MEMBER = "/espi/1_1/resource/UsagePoint/{usagePointId}";
+    public static final String ROOT_METER_READING_COLLECTION = "/espi/1_1/resource/MeterReading";
+    public static final String ROOT_METER_READING_MEMBER = "/espi/1_1/resource/MeterReading/{meterReadingId}";
+    public static final String ROOT_READING_TYPE_COLLECTION = "/espi/1_1/resource/ReadingType";
+    public static final String ROOT_READING_TYPE_MEMBER = "/espi/1_1/resource/ReadingType/{readingTypeId}";
+    public static final String ROOT_INTERVAL_BLOCK_COLLECTION = "/espi/1_1/resource/IntervalBlock";
+    public static final String ROOT_INTERVAL_BLOCK_MEMBER = "/espi/1_1/resource/IntervalBlock/{intervalBlockId}";
+    public static final String ROOT_TIME_CONFIGURATION_COLLECTION = "/espi/1_1/resource/TimeConfiguration";
+    public static final String ROOT_TIME_CONFIGURATION_MEMBER = "/espi/1_1/resource/TimeConfiguration/{timeConfigurationId}";
+    public static final String ROOT_ELECTRIC_POWER_QUALITY_SUMMARY_COLLECTION = "/espi/1_1/resource/ElectricPowerQualitySummary";
+    public static final String ROOT_ELECTRIC_POWER_QUALITY_SUMMARY_MEMBER = "/espi/1_1/resource/ElectricPowerQualitySummary/{electricPowerQualitySummaryId}";
+    public static final String ROOT_ELECTRIC_POWER_USAGE_SUMMARY_COLLECTION = "/espi/1_1/resource/ElectricPowerUsageSummary";
+    public static final String ROOT_ELECTRIC_POWER_USAGE_SUMMARY_MEMBER = "/espi/1_1/resource/ElectricPowerUsageSummary/{electricPowerUsageSummaryId}";
+    
+    // patterns for RESTful xpath based access to Resources
     public static final String USAGE_POINT_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint";
     public static final String USAGE_POINT_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}";
     public static final String METER_READING_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading";

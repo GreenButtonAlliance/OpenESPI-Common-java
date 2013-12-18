@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -38,27 +38,32 @@ import java.util.List;
 public class RetailCustomerServiceImpl implements RetailCustomerService {
 
     @Autowired
-    private RetailCustomerRepository repository;
+    private RetailCustomerRepository retailCustomerRepository;
 
-    public void setRepository(RetailCustomerRepository repository) {
-        this.repository = repository;
+    public void setRepository(RetailCustomerRepository retailCustomerRepository) {
+        this.retailCustomerRepository = retailCustomerRepository;
     }
 
     @Override
     public List<RetailCustomer> findAll() {
-        return repository.findAll();
+        return retailCustomerRepository.findAll();
     }
 
     @Override
     public void persist(RetailCustomer customer) {
-        repository.persist(customer);
+    	retailCustomerRepository.persist(customer);
     }
 
     @Override
     public RetailCustomer findById(Long id) {
-        return repository.findById(id);
+        return retailCustomerRepository.findById(id);
     }
-
+    
+	@Override
+	public RetailCustomer findById(String retailCustomerId) {
+		return retailCustomerRepository.findById(retailCustomerId);
+	}
+	
     @Override
     public RetailCustomer findByHashedId(Long retailCustomerId) {
         return findById(retailCustomerId);
@@ -67,7 +72,7 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-            return repository.findByUsername(username);
+            return retailCustomerRepository.findByUsername(username);
         } catch (EmptyResultDataAccessException x) {
             throw new UsernameNotFoundException("Unable to find user");
         }
@@ -75,10 +80,16 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 
 	@Override
 	public EntryType find(Long retailCustomerId) {
-		// TODO Auto-generated method stub
+		retailCustomerRepository.findById(retailCustomerId);
 		return null;
 	}
 
+    @Override
+    public EntryType find(String retailCustomerId) {
+    	// TODO Auto-generated method stub
+        return null;
+    }
+    
 	@Override
 	public EntryTypeIterator find() {
 		// TODO Auto-generated method stub
@@ -86,13 +97,13 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 	}
 
 	@Override
-	public void add(ElectricPowerUsageSummary electricPowerUsageSummary) {
+	public void add(RetailCustomer retailCustomer) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(ElectricPowerUsageSummary electricPowerUsageSummary) {
+	public void delete(RetailCustomer retailCustomer) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -102,4 +113,6 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }

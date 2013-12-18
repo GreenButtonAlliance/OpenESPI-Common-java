@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import java.util.List;
 
 @Repository
@@ -52,4 +53,10 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
         return (UserDetails)this.em.createNamedQuery(RetailCustomer.QUERY_FIND_BY_USERNAME)
                 .setParameter("username", username).getSingleResult();
     }
+
+	@Override
+	public RetailCustomer findById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -18,13 +18,6 @@ public interface ExportService {
 	void exportSubscriptions(Long retailCustomerId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException;
 
-	void exportUsagePoint(Long retailCustomerId, Long usagePointId,
-			OutputStream stream, ExportFilter exportResourceFilter)
-			throws IOException;
-
-	void exportUsagePoints(Long retailCustomerId, OutputStream stream,
-			ExportFilter exportResourceFilter) throws IOException;
-
     public void exportApplicationInformation(Long applicationInformationId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException;
 
@@ -85,5 +78,20 @@ public interface ExportService {
 
 	void exportTimeConfigurations(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException;
+	
+	// UsagePoints
+	//
+	void exportUsagePoint(Long retailCustomerId, Long usagePointId,
+			OutputStream stream, ExportFilter exportResourceFilter)
+			throws IOException;
 
+	void exportUsagePoints(Long retailCustomerId, OutputStream stream,
+			ExportFilter exportResourceFilter) throws IOException;
+
+	void exportUsagePoint(Long usagePointId,
+			OutputStream stream, ExportFilter exportResourceFilter)
+			throws IOException;
+
+	void exportUsagePoints(OutputStream stream,
+			ExportFilter exportResourceFilter) throws IOException;
 }
