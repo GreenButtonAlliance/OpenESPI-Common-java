@@ -74,14 +74,14 @@ public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQual
 	}
 
 	@Override
-	public EntryType find(Long retailCustomerId, Long usagePointId,
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
 			Long electricPowerQualitySummaryId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId) {
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -35,10 +35,10 @@ public interface ElectricPowerUsageSummaryService {
 	// accessor services
 	public ElectricPowerUsageSummary findById(Long electricPowerUsageSummaryId);
 
-	public EntryType find(Long retailCustomerId, Long usagePointId,
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
 			Long electricPowerUsageSummaryId);
 
-	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId);
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
 
 	public void add(ElectricPowerUsageSummary electricPowerUsageSummary);
 

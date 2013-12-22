@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import java.util.List;
 
 @Repository
@@ -37,4 +38,22 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     public void merge(Authorization authorization) {
         em.merge(authorization);
     }
+
+	@Override
+	public Authorization findById(Long authorizationId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Long> findAllIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Long> findAllIds(Long retailCustomerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

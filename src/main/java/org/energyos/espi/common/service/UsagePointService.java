@@ -70,19 +70,13 @@ public interface UsagePointService {
 
 	public UsagePoint findById(Long retailCustomerId, Long usagePointId);
 
-	public EntryType find(Long retailCustomerId, Long usagePointId, ExportFilter params);
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId);
 	
-	public EntryType find(Long usagePointId, ExportFilter params);
+	public EntryType findEntryType(Long usagePointId);
 	
-	public EntryTypeIterator find(ExportFilter params);
-	
-	public UsagePoint findObject(Long retailCustomerId, Long usagePointId, ExportFilter params);
-	
-	public UsagePoint findObject(Long usagePointId, ExportFilter params);
+	public EntryTypeIterator findEntryTypeIterator();
 
-	public EntryTypeIterator find(Long retailCustomerId);
-	
-	public EntryTypeIterator find(String retailCustomerId);
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
 
 	public void add(UsagePoint usagePoint);
 

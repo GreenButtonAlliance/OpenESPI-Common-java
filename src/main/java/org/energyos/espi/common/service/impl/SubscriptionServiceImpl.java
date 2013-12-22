@@ -105,13 +105,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public EntryType find(Long retailCustomerId, Long subscriptionId) {
+	public EntryType findEntryType(Long retailCustomerId, Long subscriptionId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EntryTypeIterator find(Long retailCustomerId) {
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -139,5 +139,17 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		 result.add(subscription.getId());
 		 return result;
 		
+	}
+
+	@Override
+	public Subscription findById(long subscriptionId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Subscription findById(Long retailCustomerId, long subscriptionId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

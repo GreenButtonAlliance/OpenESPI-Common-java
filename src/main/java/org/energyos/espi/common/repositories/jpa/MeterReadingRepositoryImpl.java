@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,12 +17,17 @@
 package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.MeterReadingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -48,4 +53,57 @@ public class MeterReadingRepositoryImpl implements MeterReadingRepository {
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Long> findAllIds() {
+    	List<Long> temp;
+    	temp = (List<Long>)this.em.createNamedQuery(MeterReading.QUERY_FIND_ALL_IDS)
+        .getResultList();
+            return temp;
+        }
+
+	@Override
+	public void deleteById(Long id) {
+	       em.remove(findById(id));
+	}
+
+	@Override
+	public void createOrReplaceByUUID(MeterReading meterReading) {
+	        try {
+	            MeterReading existingMeterReading = findByUUID(meterReading.getUUID());
+	            meterReading.setId(existingMeterReading.getId());
+	            if (meterReading.getUsagePoint() == null) {
+	                meterReading.setUsagePoint(existingMeterReading.getUsagePoint());
+	            }
+
+	            if (existingMeterReading.getIntervalBlocks() != null) {
+	                meterReading.setIntervalBlocks(existingMeterReading.getIntervalBlocks());
+	            }
+
+	            if (existingMeterReading.getReadingType() != null) {
+	                meterReading.setReadingType(existingMeterReading.getReadingType());
+	            }
+
+	            if (existingMeterReading.getRelatedLinks() != null) {
+	            	meterReading.setRelatedLinks(existingMeterReading.getRelatedLinks());
+	            }
+	            
+	            if (existingMeterReading.getSelfLink() != null) {
+	                meterReading.setSelfLink(existingMeterReading.getSelfLink());
+	            }
+
+	            if (existingMeterReading.getUpLink() != null) {
+	                meterReading.setUpLink(existingMeterReading.getUpLink());
+	            }
+
+	            em.merge(meterReading);
+	        } catch (NoResultException e) {
+	            meterReading.setPublished(new GregorianCalendar());
+	            meterReading.setUpdated(new GregorianCalendar());
+	            persist(meterReading);
+	        }
+	
+	}
+	
 }

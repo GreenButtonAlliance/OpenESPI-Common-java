@@ -1,6 +1,7 @@
 package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.domain.Authorization;
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.Routes;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -8,11 +9,13 @@ import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.AuthorizationRepository;
 import org.energyos.espi.common.repositories.UsagePointRepository;
 import org.energyos.espi.common.service.AuthorizationService;
+import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +27,12 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     @Autowired
     private UsagePointRepository usagePointRepository;
 
-    // services setters
+	@Autowired
+	private ResourceService resourceService;
+	
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
 
     public void setAuthorizationRepository(AuthorizationRepository authorizationRepository) {
         this.authorizationRepository = authorizationRepository;
@@ -97,16 +105,71 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
-	public EntryType find(Long retailCustomerId, Long authorizationId) {
-		// TODO Auto-generated method stub
-		return null;
+	public EntryType findEntryType(Long retailCustomerId, Long authorizationId) {
+		EntryType result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			Authorization authorization = authorizationRepository.findById(authorizationId);
+			temp.add(authorization.getId());
+			result = (new EntryTypeIterator(resourceService, temp)).next();
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
 
 	@Override
-	public EntryTypeIterator find(Long retailCustomerId) {
-		// TODO Auto-generated method stub
-		return null;
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId) {
+		EntryTypeIterator result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp = authorizationRepository.findAllIds(retailCustomerId);
+			result = (new EntryTypeIterator(resourceService, temp));
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
+	}
+
+	@Override
+	public EntryType findRoot(Long authorizationId) {
+		EntryType result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			Authorization authorization = authorizationRepository.findById(authorizationId);
+			temp.add(authorization.getId());
+			result = (new EntryTypeIterator(resourceService, temp)).next();
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
+	}
+
+	@Override
+	public EntryTypeIterator findEntryTypeIterator() {
+		EntryTypeIterator result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp = authorizationRepository.findAllIds();
+			result = (new EntryTypeIterator(resourceService, temp));
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
 
 	@Override
@@ -124,6 +187,12 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	// import-exportResource services
 	@Override
 	public Authorization importResource(InputStream stream) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Authorization findById(Long retailCustomerId, long authorizationId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

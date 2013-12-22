@@ -68,7 +68,7 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 	}
 
 	@Override
-	public EntryType find(Long retailCustomerId, Long usagePointId,
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId, Long intervalBlockId) {
 		// TODO Auto-generated method stub
 		return null;
@@ -87,7 +87,7 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 	}
 
 	@Override
-	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId,
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId) {
 		// TODO Auto-generated method stub
 		return null;
@@ -101,6 +101,12 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 
 	@Override
 	public IntervalBlock importResource(InputStream stream) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IntervalBlock findById(long intervalBlockId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

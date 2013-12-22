@@ -60,7 +60,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 	private SubscriptionBuilder subscriptionBuilder;
 
 	@Autowired
-	private ResourceRepository epository;
+	private ResourceRepository repository;
 
 	@Autowired
 	private ResourceService resourceService;
@@ -168,21 +168,6 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public EntryTypeIterator find(Long retailCustomerId) {
-		EntryTypeIterator result = null;
-		try {
-			List<Long> allIdsForRetailCustomer = findAllIdsForRetailCustomer(retailCustomerId);
-			result = new EntryTypeIterator(resourceService,
-					allIdsForRetailCustomer);
-		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-			result = null;
-		}
-		return result;
-	}
-
-	@Override
 	public void add(UsagePoint usagePoint) {
 		// TODO Auto-generated method stub
 	}
@@ -204,7 +189,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public EntryType find(Long retailCustomerId, Long usagePointId, ExportFilter params) {
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId) {
 		EntryType result = null;
 		try {
 			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
@@ -221,7 +206,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public EntryTypeIterator find(ExportFilter params) {
+	public EntryTypeIterator findEntryTypeIterator() {
 		EntryTypeIterator result = null;
 		try {
 			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
@@ -237,7 +222,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 	
 	@Override
-	public EntryType find(Long usagePointId, ExportFilter params) {
+	public EntryType findEntryType(Long usagePointId) {
 		EntryType result = null;
 		try {
 			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
@@ -252,25 +237,13 @@ public class UsagePointServiceImpl implements UsagePointService {
 		return result;
 	}
 
-
 	@Override
-	public UsagePoint findObject(Long retailCustomerId, Long usagePointId, ExportFilter params) {
-		
-		return findById(usagePointId);
-	}
-
-	@Override
-	public UsagePoint findObject(Long usagePointId, ExportFilter params) {
-		
-		return findById(usagePointId);
-	}
-		
-	@Override
-	public EntryTypeIterator find(String retailCustomerId) {
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId) {
 		EntryTypeIterator result = null;
 		try {
-			List<Long> allIds = usagePointRepository.findAllIds();
-			result = new EntryTypeIterator(resourceService, allIds);
+			List<Long> allIdsForRetailCustomer = findAllIdsForRetailCustomer(retailCustomerId);
+			result = new EntryTypeIterator(resourceService,
+					allIdsForRetailCustomer);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found

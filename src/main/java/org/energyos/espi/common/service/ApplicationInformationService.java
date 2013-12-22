@@ -37,9 +37,9 @@ public interface ApplicationInformationService {
 	// accessor services
 	public ApplicationInformation findByURI(String uri);
 
-	public EntryType find(Long applicationInformationId);
+	public EntryType findEntryType(Long applicationInformationId);
 
-	public EntryTypeIterator find();
+	public EntryTypeIterator findEntryTypeIterator();
 
 	public void add(ApplicationInformation applicationInformation);
 

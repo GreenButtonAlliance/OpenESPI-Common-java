@@ -5,6 +5,8 @@ import org.energyos.espi.common.utils.ExportFilter;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.servlet.ServletOutputStream;
+
 public interface ExportService {
 	void exportSubscription(String subscriptionHashedId, OutputStream stream,
 			ExportFilter exportResourceFilter) throws IOException;
@@ -52,13 +54,23 @@ public interface ExportService {
 			Long meterReadingId, OutputStream stream, ExportFilter exportFilter)
 			throws IOException;
 
+	// MeterReading
+	//
 	public void exportMeterReading(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId, OutputStream stream, ExportFilter exportFilter)
 			throws IOException;
+	
+	void exportMeterReadings(ServletOutputStream outputStream,
+			ExportFilter exportFilter) throws IOException ;
 
+	void exportMeterReading(long meterReadingId,
+			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException ;
+	
 	public void exportMeterReadings(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException;
 
+	// ReadingType
+	//
 	public void exportReadingType(Long retailCustomerId, Long usagePointId,
 			Long meterTypeId, OutputStream stream, ExportFilter exportFilter)
 			throws IOException;
@@ -94,4 +106,42 @@ public interface ExportService {
 
 	void exportUsagePoints(OutputStream stream,
 			ExportFilter exportResourceFilter) throws IOException;
+
+	void exportApplicationInformations(Long retailCustomerId,
+			ServletOutputStream outputStream, ExportFilter exportFilter);
+
+	void exportApplicationInformation(Long retailCustomerId,
+			long authorizationId, ServletOutputStream outputStream,
+			ExportFilter exportFilter);
+
+	void exportElectricPowerQualitySummarys(ServletOutputStream outputStream,
+			ExportFilter exportFilter);
+
+	void exportElectricPowerQualitySummary(long electricPowerQualitySummaryId,
+			ServletOutputStream outputStream, ExportFilter exportFilter);
+
+	void exportElectricPowerUsageSummarys(ServletOutputStream outputStream,
+			ExportFilter exportFilter);
+
+	void exportElectricPowerUsageSummary(long electricPowerUsageSummaryId,
+			ServletOutputStream outputStream, ExportFilter exportFilter);
+
+	void exportIntervalBlocks(ServletOutputStream outputStream,
+			ExportFilter exportFilter);
+
+	void exportIntervalBlock(long intervalBlockId,
+			ServletOutputStream outputStream, ExportFilter exportFilter);
+
+	void exportReadingTypes(ServletOutputStream outputStream,
+			ExportFilter exportFilter);
+
+	void exportReadingType(long readingTypeId,
+			ServletOutputStream outputStream, ExportFilter exportFilter);
+
+	void exportTimeConfigurations(ServletOutputStream outputStream,
+			ExportFilter exportFilter);
+
+	void exportTimeConfiguration(long timeConfigurationId,
+			ServletOutputStream outputStream, ExportFilter exportFilter);
+
 }

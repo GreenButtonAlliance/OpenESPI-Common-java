@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RetailCustomerServiceImpl implements RetailCustomerService {
@@ -79,19 +80,19 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
     }
 
 	@Override
-	public EntryType find(Long retailCustomerId) {
+	public EntryType findEntryType(Long retailCustomerId) {
 		retailCustomerRepository.findById(retailCustomerId);
 		return null;
 	}
 
     @Override
-    public EntryType find(String retailCustomerId) {
+    public EntryType findEntryType(String retailCustomerId) {
     	// TODO Auto-generated method stub
         return null;
     }
     
 	@Override
-	public EntryTypeIterator find() {
+	public EntryTypeIterator findEntryTypeIterator() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -112,6 +113,12 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 	public RetailCustomer importResource(InputStream stream) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void associateByUUID(UUID uuid) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

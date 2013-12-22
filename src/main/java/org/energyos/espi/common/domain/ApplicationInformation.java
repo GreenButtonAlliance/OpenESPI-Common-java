@@ -34,6 +34,7 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
+
 import java.lang.Object;
 import java.util.*;
 
@@ -163,6 +164,7 @@ public class ApplicationInformation
     public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
     public static final String QUERY_FIND_BY_CLIENT_ID = "ApplicationInformation.findByClientId";
     public static final String QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID = "ApplicationInformation.findByDataCustodianClientId";
+	public static final String QUERY_FIND_ALL_IDS = "AppilcationInformation.findAllById";
 
     
     protected String dataCustodianApplicationStatus;

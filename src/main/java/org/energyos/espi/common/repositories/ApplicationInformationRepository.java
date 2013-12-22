@@ -35,4 +35,6 @@ public interface ApplicationInformationRepository {
 	public ApplicationInformation find(Long applicationInformationId);
 
 	public List<ApplicationInformation> find();
+
+	public List<Long> findAllIds();
 }

@@ -32,6 +32,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +79,8 @@ public class MeterReading extends IdentifiedObject
     public static final String QUERY_FIND_BY_RELATED_HREF = "MeterReading.findByAllParentsHref";
     public static final String QUERY_FIND_ALL_RELATED = "MeterReading.findAllRelated";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "MeterReading.findAllIdsByUsagePointId";
+	public static final String QUERY_FIND_ALL_IDS = "MeterReading.findAllIds";
+	
     @OneToMany(mappedBy = "meterReading", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @XmlTransient

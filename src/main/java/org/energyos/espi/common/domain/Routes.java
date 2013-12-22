@@ -62,7 +62,7 @@ public class Routes {
     //
     public static final String AUTHORIZATION_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Authorization";
     public static final String AUTHORIZATION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Authorization/{authorizationId}";
-    public static final String SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/Subscription";
+    public static final String SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Subscription";
     public static final String SUBSCRIPTION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Subscription/{subscriptionId}";
 
     // patterns for RESTful root access to Resources
