@@ -38,10 +38,10 @@ public interface IntervalBlockService {
 	public IntervalBlock findById(long retailCustomerId, long usagePointId,
 			long meterReadingId, long intervalBlockId);
 
-	public EntryType find(Long retailCustomerId, Long usagePointId,
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId, Long intervalBlockId);
 
-	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId,
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId);
 
 	public void delete(IntervalBlock intervalBlock);
@@ -50,6 +50,8 @@ public interface IntervalBlockService {
 
 	// import-exportResource services
 	public IntervalBlock importResource(InputStream stream);
+
+	IntervalBlock findById(long intervalBlockId);
 
 
 

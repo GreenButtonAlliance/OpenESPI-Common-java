@@ -41,9 +41,9 @@ public interface TimeConfigurationService {
 	// accessor services
 	public TimeConfiguration findById(Long timeConfigurationId);
 
-	public EntryType find(Long retailCustomerId, Long usagePointId, Long timeConfigurationId, ExportFilter params);
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId, Long timeConfigurationId, ExportFilter params);
 
-	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId, ExportFilter params);
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId, ExportFilter params);
 
 	public void add(TimeConfiguration timeConfiguration);
 

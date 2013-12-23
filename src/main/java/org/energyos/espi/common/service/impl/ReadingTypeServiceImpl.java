@@ -67,13 +67,13 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 	}
 
 	@Override
-	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId) {
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EntryType find(Long retailCustomerId, Long usagePointId,
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
 			Long readingTypeId) {
 		// TODO Auto-generated method stub
 		return null;

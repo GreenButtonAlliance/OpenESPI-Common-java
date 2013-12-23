@@ -17,6 +17,7 @@
 package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.ApplicationInformation;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,5 +74,11 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
 	public List<ApplicationInformation> find() {
 	    // TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Long> findAllIds() {
+        return (List<Long>)this.em.createNamedQuery(ApplicationInformation.QUERY_FIND_ALL_IDS)
+                .getResultList();
 	}
 }

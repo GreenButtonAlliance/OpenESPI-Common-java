@@ -13,4 +13,10 @@ public interface AuthorizationRepository {
     Authorization findByState(String state);
 
     void merge(Authorization authorization);
+
+	Authorization findById(Long authorizationId);
+
+	List<Long> findAllIds();
+
+	List<Long> findAllIds(Long retailCustomerId);
 }

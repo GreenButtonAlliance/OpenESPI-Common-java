@@ -35,9 +35,9 @@ public interface SubscriptionService {
 	// accessor services
 	public Subscription findById(String subscriptionId);
 
-	public EntryType find(Long retailCustomerId, Long subscriptionId);
+	public EntryType findEntryType(Long retailCustomerId, Long subscriptionId);
 
-	public EntryTypeIterator find(Long retailCustomerId);
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
 
 	public void add(Subscription subscription);
 
@@ -45,5 +45,9 @@ public interface SubscriptionService {
 
 	// import-exportResource services
 	public Subscription importResource(InputStream stream);
+
+	Subscription findById(long subscriptionId);
+
+	Subscription findById(Long retailCustomerId, long subscriptionId);
 
 }

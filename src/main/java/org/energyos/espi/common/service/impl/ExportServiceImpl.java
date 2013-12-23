@@ -11,6 +11,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
+import javax.servlet.ServletOutputStream;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamResult;
@@ -125,7 +126,7 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportSubscription(Long retailCustomerId, Long subscriptionId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(subscriptionService.find(retailCustomerId, subscriptionId), stream, exportFilter);
+		exportEntry(subscriptionService.findEntryType(retailCustomerId, subscriptionId), stream, exportFilter);
 		
 	}
 	
@@ -140,40 +141,40 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportApplicationInformation(Long applicationInformationId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(applicationInformationService.find(applicationInformationId), stream, exportFilter);
+		exportEntry(applicationInformationService.findEntryType(applicationInformationId), stream, exportFilter);
 	}
 
 	@Override
 	public void exportApplicationInformations(OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntries(applicationInformationService.find(), stream, exportFilter);		
+		exportEntries(applicationInformationService.findEntryTypeIterator(), stream, exportFilter);		
 
 	}
 
 	@Override
 	public void exportAuthorization(Long retailCustomerId, Long authorizationId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(authorizationService.find(retailCustomerId, authorizationId), stream, exportFilter);			
+		exportEntry(authorizationService.findEntryType(retailCustomerId, authorizationId), stream, exportFilter);			
 	}
 
 
 	@Override
 	public void exportAuthorizations(Long retailCustomerId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntries(authorizationService.find(retailCustomerId), stream, exportFilter);		
+		exportEntries(authorizationService.findEntryTypeIterator(retailCustomerId), stream, exportFilter);		
 	}
 
 	@Override
 	public void exportElectricPowerQualitySummary(Long retailCustomerId, Long usagePointId,
 			Long electricPowerQualitySummaryId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntry(electricPowerQualitySummaryService.find(retailCustomerId, usagePointId, electricPowerQualitySummaryId), stream, exportFilter);
+		exportEntry(electricPowerQualitySummaryService.findEntryType(retailCustomerId, usagePointId, electricPowerQualitySummaryId), stream, exportFilter);
 	}
 
 	@Override
 	public void exportElectricPowerQualitySummarys(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(electricPowerQualitySummaryService.find(retailCustomerId, usagePointId), stream, exportFilter);	
+		exportEntries(electricPowerQualitySummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter);	
 	}
 
 
@@ -181,20 +182,20 @@ public class ExportServiceImpl implements ExportService {
 	public void exportElectricPowerUsageSummary(Long retailCustomerId, Long usagePointId,
 			Long electricPowerUsageSummaryId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntry(electricPowerUsageSummaryService.find(retailCustomerId, usagePointId, electricPowerUsageSummaryId), stream, exportFilter);
+		exportEntry(electricPowerUsageSummaryService.findEntryType(retailCustomerId, usagePointId, electricPowerUsageSummaryId), stream, exportFilter);
 	}
 
 	@Override
 	public void exportElectricPowerUsageSummarys(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(electricPowerUsageSummaryService.find(retailCustomerId, usagePointId), stream, exportFilter);	
+		exportEntries(electricPowerUsageSummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter);	
 	}
 
 	@Override
 	public void exportIntervalBlock(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId, Long intervalBlockId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntry(intervalBlockService.find(retailCustomerId, usagePointId, meterReadingId, intervalBlockId), stream, exportFilter);
+		exportEntry(intervalBlockService.findEntryType(retailCustomerId, usagePointId, meterReadingId, intervalBlockId), stream, exportFilter);
 		
 	}
 
@@ -202,22 +203,36 @@ public class ExportServiceImpl implements ExportService {
 	public void exportIntervalBlocks(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId, OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntries(intervalBlockService.find(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter);
+		exportEntries(intervalBlockService.findEntryTypeIterator(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter);
 		
 	}
 
+	// MeterReading
+
+	@Override
+	public void exportMeterReadings(ServletOutputStream stream,
+			ExportFilter exportFilter) throws IOException {
+		exportEntries(meterReadingService.findEntryTypeIterator(exportFilter), stream, exportFilter);
+		
+	}
+
+	@Override
+	public void exportMeterReading(long meterReadingId, ServletOutputStream stream, ExportFilter exportFilter) throws IOException  {
+		exportEntry(meterReadingService.findEntryType(meterReadingId, exportFilter), stream, exportFilter);
+		
+	}
 
 	@Override
 	public void exportMeterReading(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId, OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntry(meterReadingService.find(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter);
+		exportEntry(meterReadingService.findEntryType(retailCustomerId, usagePointId, meterReadingId, exportFilter), stream, exportFilter);
 	}
 
 	@Override
 	public void exportMeterReadings(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(meterReadingService.find(retailCustomerId, usagePointId), stream, exportFilter);
+		exportEntries(meterReadingService.findEntryTypeIterator(retailCustomerId, usagePointId, exportFilter), stream, exportFilter);
 	}
 
 
@@ -225,26 +240,26 @@ public class ExportServiceImpl implements ExportService {
 	public void exportReadingType(Long retailCustomerId, Long usagePointId,
 			Long readingTypeId, OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntry(meterReadingService.find(retailCustomerId, usagePointId, readingTypeId), stream, exportFilter);
+		exportEntry(meterReadingService.findEntryType(retailCustomerId, usagePointId, readingTypeId, exportFilter), stream, exportFilter);
 	}
 
 	@Override
 	public void exportReadingTypes(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(readingTypeService.find(retailCustomerId, usagePointId), stream, exportFilter);
+		exportEntries(readingTypeService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter);
 	}
 
 
 	@Override
 	public void exportRetailCustomer(Long retailCustomerId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntry(retailCustomerService.find(retailCustomerId), stream, exportFilter);
+		exportEntry(retailCustomerService.findEntryType(retailCustomerId), stream, exportFilter);
 	}
 
 	@Override
 	public void exportRetailCustomers(OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntries(retailCustomerService.find(), stream, exportFilter);
+		exportEntries(retailCustomerService.findEntryTypeIterator(), stream, exportFilter);
 	}
 
 
@@ -253,13 +268,13 @@ public class ExportServiceImpl implements ExportService {
 	public void exportTimeConfiguration(Long retailCustomerId, Long usagePointId,
 			Long timeConfigurationId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntry(timeConfigurationService.find(retailCustomerId, usagePointId, timeConfigurationId, exportFilter), stream, exportFilter);	
+		exportEntry(timeConfigurationService.findEntryType(retailCustomerId, usagePointId, timeConfigurationId, exportFilter), stream, exportFilter);	
 	}
 
 	@Override
 	public void exportTimeConfigurations(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(timeConfigurationService.find(retailCustomerId, usagePointId, exportFilter), stream, exportFilter);	
+		exportEntries(timeConfigurationService.findEntryTypeIterator(retailCustomerId, usagePointId, exportFilter), stream, exportFilter);	
 	}
 	
 	// UsagePoints
@@ -267,26 +282,26 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportUsagePoint(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(usagePointService.find(retailCustomerId, usagePointId, exportFilter), stream, exportFilter);
+		exportEntry(usagePointService.findEntryType(retailCustomerId, usagePointId), stream, exportFilter);
 		
 	}
 
 	@Override
 	public void exportUsagePoints(Long retailCustomerId, 
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(usagePointService.find(retailCustomerId), stream, exportFilter);
+		exportEntries(usagePointService.findEntryTypeIterator(retailCustomerId), stream, exportFilter);
 	}
 	
 	@Override
 	public void exportUsagePoint(Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(usagePointService.find(usagePointId, exportFilter), stream, exportFilter);
+		exportEntry(usagePointService.findEntryType(usagePointId), stream, exportFilter);
 		
 	}
 
 	@Override
 	public void exportUsagePoints(OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(usagePointService.find(exportFilter), stream, exportFilter);
+		exportEntries(usagePointService.findEntryTypeIterator(), stream, exportFilter);
 	}
 	
     // worker functions
@@ -301,6 +316,7 @@ public class ExportServiceImpl implements ExportService {
             	exportEntry(entry, stream, exportFilter);        		
         	} catch (Exception e) {
         	  stream.write("/* TODO - Remove this message - let the error happenan error happened in exportEntry - it is caused by an assumption of required (TimeConfiguration) relationships */".getBytes());	
+              stream.write("</feed>".getBytes());
         	}
  
           }
@@ -321,6 +337,93 @@ public class ExportServiceImpl implements ExportService {
         } catch (Exception e) {
         	stream.write("/* an error happened in exportEntry */".getBytes());
         }
+	}
+
+	@Override
+	public void exportApplicationInformations(Long retailCustomerId,
+			ServletOutputStream outputStream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportApplicationInformation(Long retailCustomerId,
+			long authorizationId, ServletOutputStream outputStream,
+			ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportElectricPowerQualitySummarys(
+			ServletOutputStream outputStream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportElectricPowerQualitySummary(
+			long electricPowerQualitySummaryId,
+			ServletOutputStream outputStream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportElectricPowerUsageSummarys(
+			ServletOutputStream outputStream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportElectricPowerUsageSummary(
+			long electricPowerUsageSummaryId, ServletOutputStream outputStream,
+			ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportIntervalBlocks(ServletOutputStream outputStream,
+			ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportIntervalBlock(long intervalBlockId,
+			ServletOutputStream outputStream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportReadingTypes(ServletOutputStream outputStream,
+			ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportReadingType(long readingTypeId,
+			ServletOutputStream outputStream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportTimeConfigurations(ServletOutputStream outputStream,
+			ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportTimeConfiguration(long timeConfigurationId,
+			ServletOutputStream outputStream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

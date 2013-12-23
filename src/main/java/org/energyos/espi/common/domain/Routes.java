@@ -56,13 +56,16 @@ public class Routes {
     public static final String ROOT_SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/Subscription";
     public static final String ROOT_SUBSCRIPTION_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionId}";
     public static final String ROOT_APPLICATION_INFORMATION_COLLECTION = "/espi/1_1/resource/ApplicationInformation";
-    public static final String ROOT_APPLICATION_INFORMATION_MEMBER = "/espi/1_1/resource/Applicationinformation/{applicationInformationId}";
+    public static final String ROOT_APPLICATION_INFORMATION_MEMBER = "/espi/1_1/resource/ApplicationInformation/{applicationInformationId}";
+    public static final String ROOT_RETAIL_CUSTOMER_COLLECTION = "/espi/1_1/resource/RetailCustomer/";
+    public static final String ROOT_RETAIL_CUSTOMER_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}";
 
     // patterns for RESTful xpath access to management entities
     //
+    
     public static final String AUTHORIZATION_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Authorization";
     public static final String AUTHORIZATION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Authorization/{authorizationId}";
-    public static final String SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/Subscription";
+    public static final String SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Subscription";
     public static final String SUBSCRIPTION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Subscription/{subscriptionId}";
 
     // patterns for RESTful root access to Resources
@@ -86,10 +89,10 @@ public class Routes {
     public static final String USAGE_POINT_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}";
     public static final String METER_READING_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading";
     public static final String METER_READING_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}";
-    public static final String READING_TYPE_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/ReadingType";
-    public static final String READING_TYPE_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/ReadingType/{readingTypeId}";
-    public static final String INTERVAL_BLOCK_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/IntervalBlock";
-    public static final String INTERVAL_BLOCK_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/IntervalBlock/{intervalBlockId}";
+    public static final String READING_TYPE_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/ReadingType";
+    public static final String READING_TYPE_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/ReadingType/{readingTypeId}";
+    public static final String INTERVAL_BLOCK_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock";
+    public static final String INTERVAL_BLOCK_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}";
     public static final String TIME_CONFIGURATION_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/TimeConfiguration";
     public static final String TIME_CONFIGURATION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/TimeConfiguration/{timeConfigurationId}";
     public static final String ELECTRIC_POWER_QUALITY_SUMMARY_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/ElectricPowerQualitySummary";

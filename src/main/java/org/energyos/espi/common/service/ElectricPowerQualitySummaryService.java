@@ -37,10 +37,10 @@ public interface ElectricPowerQualitySummaryService {
 	public void persist(ElectricPowerQualitySummary electricPowerQualitySummary);
 
 	// accessor services
-	public EntryType find(Long retailCustomerId, Long usagePointId,
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
 			Long electricPowerQualitySummaryId);
 
-	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId);
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
 
 	public void add(ElectricPowerQualitySummary electricPowerQualitySummary);
 

@@ -36,11 +36,11 @@ public interface AuthorizationService {
 	public void merge(Authorization authorization);
 
 	// accessor services
-        public Authorization findById(Long authorizationId);
+    public Authorization findById(Long authorizationId);
 
-	public EntryType find(Long retailCustomerId, Long authorizationId);
+	public EntryType findEntryType(Long retailCustomerId, Long authorizationId);
 
-	public EntryTypeIterator find(Long retailCustomerId);
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
 
 	public void add(Authorization authorization);
 
@@ -48,5 +48,11 @@ public interface AuthorizationService {
 
 	// import-exportResource services
 	public Authorization importResource(InputStream stream);
+
+	public Authorization findById(Long retailCustomerId, long authorizationId);
+
+	EntryType findRoot(Long authorizationId);
+
+	EntryTypeIterator findEntryTypeIterator();
 
 }

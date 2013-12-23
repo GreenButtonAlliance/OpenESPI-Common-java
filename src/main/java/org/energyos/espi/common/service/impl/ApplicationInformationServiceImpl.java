@@ -4,6 +4,7 @@ import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
+import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +25,12 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
     @Autowired
     private ApplicationInformationRepository applicationInformationRepository;
 
+    @Autowired
+    private ResourceService resourceService;
+    
+    public void setResourceService(ResourceService resourceService) {
+    	this.resourceService = resourceService;
+    }
     public void setApplicationInformationRepository(ApplicationInformationRepository applicationInformationRepository) {
         this.applicationInformationRepository = applicationInformationRepository;
     }
@@ -95,15 +103,37 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 	}
 
 	@Override
-	public EntryType find(Long applicationInformationId) {
-		// TODO Auto-generated method stub
-		return null;
+	public EntryType findEntryType(Long applicationInformationId) {
+		EntryType result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			ApplicationInformation applicationInformation = applicationInformationRepository.findById(applicationInformationId);
+			temp.add(applicationInformation.getId());
+			result = (new EntryTypeIterator(resourceService, temp)).next();
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public EntryTypeIterator find() {
-		// TODO Auto-generated method stub
-		return null;
+	public EntryTypeIterator findEntryTypeIterator() {
+		EntryTypeIterator result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp = applicationInformationRepository.findAllIds();
+			result = (new EntryTypeIterator(resourceService, temp));
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
 
 	@Override

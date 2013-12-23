@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 public interface RetailCustomerService extends UserDetailsService {
 	// TODO: likely deprecated
@@ -46,11 +47,11 @@ public interface RetailCustomerService extends UserDetailsService {
 	
 	RetailCustomer findById(String retailCustomerId);
 
-	public EntryType find(Long retailCustomerId);
+	public EntryType findEntryType(Long retailCustomerId);
 	
-	public EntryType find(String retailCustomerId);
+	public EntryType findEntryType(String retailCustomerId);
 
-	public EntryTypeIterator find();
+	public EntryTypeIterator findEntryTypeIterator();
 
 	public void add(RetailCustomer retailCustomer);
 
@@ -58,5 +59,7 @@ public interface RetailCustomerService extends UserDetailsService {
 
 	// import-exportResource services
 	public RetailCustomer importResource(InputStream stream);
+
+	void associateByUUID(UUID uuid);
 
 }

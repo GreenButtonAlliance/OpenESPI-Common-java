@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
@@ -102,7 +103,8 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
         }
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public List<UsagePoint> findAllUpdatedFor(Subscription subscription) {
         return (List<UsagePoint>)this.em.createNamedQuery(UsagePoint.QUERY_FIND_ALL_UPDATED_FOR)
                 .setParameter("lastUpdate", subscription.getLastUpdate())
@@ -120,7 +122,8 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 .getSingleResult();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public List<Long> findAllIdsForRetailCustomer(Long retailCustomerId) {
         return (List<Long>)this.em.createNamedQuery(UsagePoint.QUERY_FIND_ALL_IDS_FOR_RETAIL_CUSTOMER)
                 .setParameter("retailCustomerId", retailCustomerId)
