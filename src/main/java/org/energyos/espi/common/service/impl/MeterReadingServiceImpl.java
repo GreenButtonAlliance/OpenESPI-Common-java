@@ -101,7 +101,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		try {
 			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-			temp = meterReadingRepository.findAllIds();
+			temp = resourceService.findAllIds(MeterReading.class);
 			result = (new EntryTypeIterator(resourceService, temp));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
@@ -128,7 +128,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 	}
 
 	private List<Long> findAllIds(Long meterReadingId) {
-	   return meterReadingRepository.findAllIds();
+	   return resourceService.findAllIds(MeterReading.class);
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		try {
 			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-			temp = meterReadingRepository.findAllIds();
+			temp = resourceService.findAllIds(MeterReading.class);
 			result = (new EntryTypeIterator(resourceService, temp));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
@@ -170,8 +170,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		try {
 			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-			MeterReading meterReading = meterReadingRepository.findById(meterReadingId);
-			temp.add(meterReading.getId());
+			temp.add(meterReadingId);
 			result = (new EntryTypeIterator(resourceService, temp)).next();
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
