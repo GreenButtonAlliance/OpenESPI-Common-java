@@ -152,7 +152,10 @@ import java.util.*;
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.id = :id"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.clientId = :clientId"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.dataCustodianId = :dataCustodianId"),
-        @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL, query = "SELECT info FROM ApplicationInformation info")
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL, query = "SELECT info FROM ApplicationInformation info"),
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL_IDS,
+		    query = "SELECT applicationInformation.id FROM ApplicationInformation applicationInformation")
+
 })
 public class ApplicationInformation
         extends IdentifiedObject implements ClientDetails {
@@ -164,7 +167,7 @@ public class ApplicationInformation
     public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
     public static final String QUERY_FIND_BY_CLIENT_ID = "ApplicationInformation.findByClientId";
     public static final String QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID = "ApplicationInformation.findByDataCustodianClientId";
-	public static final String QUERY_FIND_ALL_IDS = "AppilcationInformation.findAllById";
+	public static final String QUERY_FIND_ALL_IDS = "AppilcationInformation.findAllIds";
 
     
     protected String dataCustodianApplicationStatus;

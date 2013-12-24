@@ -97,6 +97,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
                 query = "SELECT summary FROM ElectricPowerUsageSummary summary WHERE summary.uuid = :uuid"),
         @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT summary.id FROM ElectricPowerUsageSummary summary WHERE summary.usagePoint.id = :usagePointId"),
+        @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_ALL_IDS,
+                query = "SELECT electricPowerUsageSummary.id FROM ElectricPowerUsageSummary electricPowerUsageSummary")
+
 })
 public class ElectricPowerUsageSummary
         extends IdentifiedObject
@@ -105,6 +108,7 @@ public class ElectricPowerUsageSummary
     public static final String QUERY_FIND_BY_ID = "ElectricPowerUsageSummary.findById";
     public static final String QUERY_FIND_BY_UUID = "ElectricPowerUsageSummary.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ElectricPowerUsageSummary.findAllIdsByUsagePointId";
+    public static final String QUERY_FIND_ALL_IDS = "ElectricPowerUsageSummary.findAllIds";
 
     protected Long billLastPeriod;
     protected Long billToDate;

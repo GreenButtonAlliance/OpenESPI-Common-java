@@ -104,13 +104,16 @@ import javax.xml.bind.annotation.*;
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID,
                 query = "SELECT authorization FROM Authorization authorization WHERE authorization.retailCustomer.id = :retailCustomerId AND authorization.subscriptionURI IS NOT NULL"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_STATE,
-                query = "SELECT authorization FROM Authorization authorization WHERE authorization.state = :state")
+		    query = "SELECT authorization FROM Authorization authorization WHERE authorization.state = :state"),
+        @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS,
+                query = "SELECT authorization.id FROM Authorization authorization")
 })
 public class Authorization
         extends IdentifiedObject {
 
     public static final String QUERY_FIND_BY_RETAIL_CUSTOMER_ID = "Authorization.findAllByRetailCustomerId";
     public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";
+    public static final String QUERY_FIND_ALL_IDS = "Authorization.findAllIds";
 
     @Embedded
     @AttributeOverrides({

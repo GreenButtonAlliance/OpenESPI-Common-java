@@ -3,6 +3,7 @@ package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.service.*;
+import org.energyos.espi.common.utils.DateConverter;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ import javax.xml.transform.stream.StreamResult;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+import java.util.UUID;
 
 @Service
 public class ExportServiceImpl implements ExportService {
@@ -307,9 +311,26 @@ public class ExportServiceImpl implements ExportService {
     // worker functions
     //
     private void exportEntries(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter) throws IOException {
-
+        String uuid = UUID.randomUUID().toString();
+        String selfRef = "<link rel=\"self\" href=\"";
+        selfRef += "";
+        selfRef += "\"</link>\n";
+    	GregorianCalendar updated = new GregorianCalendar();
+    	updated.setTimeZone(TimeZone.getTimeZone("UTC"));
+    	String temp = DateConverter.epoch().toString();
         stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
         stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">".getBytes());
+        stream.write("<id>urn:uuid:".getBytes());
+        stream.write(uuid.getBytes());
+        stream.write("</id>\n".getBytes());
+        stream.write("<title>Green Button Usage Feed</title>\n".getBytes());
+        stream.write("<updated>".getBytes());
+        stream.write(temp.getBytes());
+        stream.write("</updated>\n".getBytes());
+        stream.write(selfRef.getBytes());
+
+        if (entries != null) {
+        
         while (entries.hasNext()) {
         	try {
         		EntryType entry = entries.next();
@@ -320,7 +341,7 @@ public class ExportServiceImpl implements ExportService {
         	}
  
           }
-
+        }
         stream.write("</feed>".getBytes());
     }
     

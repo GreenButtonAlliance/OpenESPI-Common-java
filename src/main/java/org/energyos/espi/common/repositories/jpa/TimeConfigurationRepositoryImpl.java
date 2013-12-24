@@ -16,6 +16,7 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.TimeConfigurationRepository;
@@ -34,34 +35,28 @@ public class TimeConfigurationRepositoryImpl implements TimeConfigurationReposit
     @PersistenceContext
     protected EntityManager em;
 
+	@Override
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+	
     @Override
     public TimeConfiguration findById(Long timeConfigurationId) {
         return em.find(TimeConfiguration.class, timeConfigurationId);
     }
-
-    @Override
-    @Transactional
-    public void persist(TimeConfiguration timeConfiguration) {
-        em.persist(timeConfiguration);
-    }
-
+  
     @Override
     public TimeConfiguration findByUUID(UUID uuid) {
         return (TimeConfiguration) em.createNamedQuery(TimeConfiguration.QUERY_FIND_BY_UUID)
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }
-
-	@Override
-	public EntryType find(Long retailCustomerId, Long usagePointId, Long timeConfigurationId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+    @Override
+    @Transactional
+    public void persist(TimeConfiguration timeConfiguration) {
+        em.persist(timeConfiguration);
+    }
 
 }

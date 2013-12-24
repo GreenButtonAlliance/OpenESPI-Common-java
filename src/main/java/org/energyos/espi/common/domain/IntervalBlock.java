@@ -72,6 +72,8 @@ import java.util.List;
                 query = "SELECT block FROM IntervalBlock block WHERE block.uuid = :uuid"),
         @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT block.id FROM IntervalBlock block where block.meterReading.usagePoint.id = :usagePointId"),
+        @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS,
+                query = "SELECT intervalBlock.id FROM IntervalBlock intervalBlock")
 })
 @XmlRootElement(name = "IntervalBlock")
 @XmlJavaTypeAdapter(IntervalBlockAdapter.class)
@@ -82,6 +84,7 @@ public class IntervalBlock
     public static final String QUERY_FIND_BY_ID = "IntervalBlock.findById";
     public static final String QUERY_FIND_BY_UUID = "IntervalBlock.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "IntervalBlock.findAllIdsByUsagePointId";
+	public static final String QUERY_FIND_ALL_IDS = "IntervalBlock.findAllIds";
 
     @Embedded
     protected DateTimeInterval interval;

@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @Transactional
@@ -55,5 +56,23 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 	public List<Long> findAllIds(Long retailCustomerId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Authorization findByUUID(UUID uuid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void createOrReplaceByUUID(Authorization authorization) {
+		// TODO Auto-generated method stub
+		
 	}
 }

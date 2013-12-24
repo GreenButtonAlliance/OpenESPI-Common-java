@@ -58,13 +58,16 @@ import java.util.Set;
 @Table(name = "subscriptions")
 @NamedQueries(value = {
         @NamedQuery(name = Subscription.QUERY_FIND_ALL, query = "SELECT subscription FROM Subscription subscription"),
-        @NamedQuery(name = Subscription.QUERY_FIND_BY_HASHED_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.hashedId = :hashedId")
+        @NamedQuery(name = Subscription.QUERY_FIND_BY_HASHED_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.hashedId = :hashedId"),
+        @NamedQuery(name = Subscription.QUERY_FIND_ALL_IDS, query = "SELECT subscription.id FROM Subscription subscription")
 })
+
 public class Subscription
         extends IdentifiedObject {
 
     public final static String QUERY_FIND_ALL = "Subscription.findAll";
     public final static String QUERY_FIND_BY_HASHED_ID = "Subscription.findByHashedID";
+    public static final String QUERY_FIND_ALL_IDS = "Subscription.findAllIds";
 
     private String hashedId;
 

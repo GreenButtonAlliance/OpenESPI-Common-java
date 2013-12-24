@@ -102,6 +102,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
                 query = "SELECT readingType FROM ReadingType readingType WHERE readingType.uuid = :uuid"),
         @NamedQuery(name = ReadingType.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT meterReading.readingType.id FROM MeterReading meterReading WHERE meterReading.usagePoint.id = :usagePointId"),
+        @NamedQuery(name = ReadingType.QUERY_FIND_ALL_IDS,
+                query = "SELECT readingType.id FROM ReadingType readingType")
+
 })
 public class ReadingType
         extends IdentifiedObject
@@ -110,7 +113,7 @@ public class ReadingType
     public static final String QUERY_FIND_BY_ID = "ReadingType.findById";
     public static final String QUERY_FIND_BY_UUID = "ReadingType.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ReadingType.findAllIdsByUsagePointId";
-
+	public static final String QUERY_FIND_ALL_IDS = "ReadingType.findAllIds";
 
     protected String accumulationBehaviour;
     protected String commodity;

@@ -23,14 +23,16 @@ import java.util.List;
 
 public interface RetailCustomerRepository {
 
-    List<RetailCustomer> findAll();
+    public void deleteById(Long retailCustomerId);
 
-    void persist(RetailCustomer customer);
+    public List<RetailCustomer> findAll();
 
-    RetailCustomer findById(Long id);
-    
-	RetailCustomer findById(String id);
+    public RetailCustomer findById(Long retailCustomerId);
 
-    UserDetails findByUsername(String username);
+    public RetailCustomer findById(String retailCustomerId);
+
+    public UserDetails findByUsername(String userName);
+
+    public void persist(RetailCustomer retailCustomer);
 
 }

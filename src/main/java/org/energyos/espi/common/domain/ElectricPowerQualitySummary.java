@@ -91,6 +91,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
                 query = "SELECT summary FROM ElectricPowerQualitySummary summary WHERE summary.uuid = :uuid"),
         @NamedQuery(name = ElectricPowerQualitySummary.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT summary.id FROM ElectricPowerQualitySummary summary WHERE summary.usagePoint.id = :usagePointId"),
+        @NamedQuery(name = ElectricPowerQualitySummary.QUERY_FIND_ALL_IDS,
+        query = "SELECT electricPowerQualitySummary.id FROM ElectricPowerQualitySummary electricPowerQualitySummary")
 })
 public class ElectricPowerQualitySummary
         extends IdentifiedObject
@@ -99,6 +101,7 @@ public class ElectricPowerQualitySummary
     public static final String QUERY_FIND_BY_ID = "ElectricPowerQualitySummary.findById";
     public static final String QUERY_FIND_BY_UUID = "ElectricPowerQualitySummary.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ElectricPowerQualitySummary.findAllIdsByUsagePointId";
+	public static final String QUERY_FIND_ALL_IDS = "ElectricPowerQualitySummary.findAllIds";
 
     protected Long flickerPlt;
     protected Long flickerPst;

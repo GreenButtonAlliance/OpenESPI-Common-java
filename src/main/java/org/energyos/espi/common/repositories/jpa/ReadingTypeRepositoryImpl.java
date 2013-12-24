@@ -16,13 +16,18 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.repositories.ReadingTypeRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -48,4 +53,40 @@ public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }
+
+	@Override
+	public void createOrReplaceByUUID(ReadingType readingType) {
+        try {
+        	ReadingType existingReadingType = findByUUID(readingType.getUUID());
+        	readingType.setId(existingReadingType.getId());
+
+            if (existingReadingType.getSelfLink() != null) {
+            	readingType.setSelfLink(existingReadingType.getSelfLink());
+            }
+
+            if (existingReadingType.getUpLink() != null) {
+            	readingType.setUpLink(existingReadingType.getUpLink());
+            }
+
+            em.merge(readingType);
+        } catch (NoResultException e) {
+        	readingType.setPublished(new GregorianCalendar());
+        	readingType.setUpdated(new GregorianCalendar());
+            persist(readingType);
+        }
+		
+	}
+
+	@Override
+	public void deleteById(Long id) {
+	       em.remove(findById(id));
+	}
+
+	@Override
+	public List<Long> findAllIds() {
+    	List<Long> temp;
+    	temp = (List<Long>)this.em.createNamedQuery(MeterReading.QUERY_FIND_ALL_IDS)
+        .getResultList();
+            return temp;
+	}
 }

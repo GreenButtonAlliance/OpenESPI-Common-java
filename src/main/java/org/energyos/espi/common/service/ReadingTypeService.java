@@ -26,7 +26,7 @@ public interface ReadingTypeService {
 	void deleteById(long readingTypeId);
 
 	// persistence management services
-	public void setRepository(ReadingTypeRepository repository);
+	public void setReadingTypeRepository(ReadingTypeRepository repository);
 
 	public void persist(ReadingType readingType);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,19 +22,17 @@ import java.util.List;
 
 public interface ApplicationInformationRepository {
 
+    public void deleteById(Long id);
+
     public List<ApplicationInformation> findAll();
 
-    ApplicationInformation findById(Long id);
+    public List<Long> findAllIds();
 
-    void persist(ApplicationInformation applicationInformation);
-
-    ApplicationInformation findByClientId(String clientId);
+    public ApplicationInformation findByClientId(String clientId);
 
     ApplicationInformation findByDataCustodianClientId(String dataCustodianId);
 
-	public ApplicationInformation find(Long applicationInformationId);
+    public ApplicationInformation findById(Long applicationInformationId);
 
-	public List<ApplicationInformation> find();
-
-	public List<Long> findAllIds();
+    public void persist(ApplicationInformation applicationInformation);
 }
