@@ -228,7 +228,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = usagePointRepository.findAllIds();
-			result = (new EntryTypeIterator(resourceService, temp)).next();
+			result = (new EntryTypeIterator(resourceService, temp)).nextEntry(UsagePoint.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -252,4 +252,19 @@ public class UsagePointServiceImpl implements UsagePointService {
 		return result;
 	}
 
+	@Override
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId) {
+		EntryTypeIterator result = null;
+		List<Long> temp = new ArrayList<Long>();
+	    temp.add(usagePointId);
+		try {
+			List<Long> allIdsForRetailCustomer = findAllIdsForRetailCustomer(retailCustomerId);
+			result = (new EntryTypeIterator(resourceService, temp));
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
+	}
 }

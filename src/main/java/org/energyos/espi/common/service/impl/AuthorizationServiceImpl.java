@@ -110,11 +110,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	public EntryType findEntryType(Long retailCustomerId, Long authorizationId) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			Authorization authorization = authorizationRepository.findById(authorizationId);
 			temp.add(authorization.getId());
-			result = (new EntryTypeIterator(resourceService, temp)).next();
+			result = (new EntryTypeIterator(resourceService, temp)).nextEntry(Authorization.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found

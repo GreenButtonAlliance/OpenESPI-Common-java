@@ -1,6 +1,18 @@
 package org.energyos.espi.common.service.impl;
 
 
+import org.energyos.espi.common.domain.ApplicationInformation;
+import org.energyos.espi.common.domain.Authorization;
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.models.atom.DateTimeType;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.service.*;
 import org.energyos.espi.common.utils.DateConverter;
@@ -19,6 +31,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 import java.util.UUID;
@@ -117,7 +130,7 @@ public class ExportServiceImpl implements ExportService {
     
     @Override
     public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-        exportEntries(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter);
+        exportEntries(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter, Subscription.class);
     }
 
 	@Override
@@ -151,7 +164,7 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportApplicationInformations(OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntries(applicationInformationService.findEntryTypeIterator(), stream, exportFilter);		
+		exportEntries(applicationInformationService.findEntryTypeIterator(), stream, exportFilter, ApplicationInformation.class);		
 
 	}
 
@@ -165,7 +178,7 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportAuthorizations(Long retailCustomerId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntries(authorizationService.findEntryTypeIterator(retailCustomerId), stream, exportFilter);		
+		exportEntries(authorizationService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, Authorization.class);		
 	}
 
 	@Override
@@ -178,7 +191,7 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportElectricPowerQualitySummarys(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(electricPowerQualitySummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter);	
+		exportEntries(electricPowerQualitySummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ElectricPowerQualitySummary.class);	
 	}
 
 
@@ -192,7 +205,7 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportElectricPowerUsageSummarys(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(electricPowerUsageSummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter);	
+		exportEntries(electricPowerUsageSummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ElectricPowerUsageSummary.class);	
 	}
 
 	@Override
@@ -207,7 +220,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportIntervalBlocks(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId, OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntries(intervalBlockService.findEntryTypeIterator(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter);
+		exportEntries(intervalBlockService.findEntryTypeIterator(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter, IntervalBlock.class);
 		
 	}
 
@@ -216,13 +229,13 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportMeterReadings(ServletOutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntries(meterReadingService.findEntryTypeIterator(exportFilter), stream, exportFilter);
+		exportEntries(meterReadingService.findEntryTypeIterator(), stream, exportFilter, MeterReading.class);
 		
 	}
 
 	@Override
 	public void exportMeterReading(long meterReadingId, ServletOutputStream stream, ExportFilter exportFilter) throws IOException  {
-		exportEntry(meterReadingService.findEntryType(meterReadingId, exportFilter), stream, exportFilter);
+		exportEntry(meterReadingService.findEntryType(meterReadingId), stream, exportFilter);
 		
 	}
 
@@ -230,27 +243,27 @@ public class ExportServiceImpl implements ExportService {
 	public void exportMeterReading(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId, OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntry(meterReadingService.findEntryType(retailCustomerId, usagePointId, meterReadingId, exportFilter), stream, exportFilter);
+		exportEntry(meterReadingService.findEntryType(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter);
 	}
 
 	@Override
 	public void exportMeterReadings(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(meterReadingService.findEntryTypeIterator(retailCustomerId, usagePointId, exportFilter), stream, exportFilter);
+		exportEntries(meterReadingService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, MeterReading.class);
 	}
 
 
 	@Override
-	public void exportReadingType(Long retailCustomerId, Long usagePointId,
+	public void exportReadingType(Long retailCustomerId, Long usagePointId, Long meterReadingId,
 			Long readingTypeId, OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntry(meterReadingService.findEntryType(retailCustomerId, usagePointId, readingTypeId, exportFilter), stream, exportFilter);
+		exportEntry(readingTypeService.findEntryType(retailCustomerId, usagePointId, meterReadingId, readingTypeId), stream, exportFilter);
 	}
 
 	@Override
 	public void exportReadingTypes(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(readingTypeService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter);
+		exportEntries(readingTypeService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ReadingType.class);
 	}
 
 
@@ -263,7 +276,7 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportRetailCustomers(OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntries(retailCustomerService.findEntryTypeIterator(), stream, exportFilter);
+		exportEntries(retailCustomerService.findEntryTypeIterator(), stream, exportFilter, RetailCustomer.class);
 	}
 
 
@@ -278,7 +291,7 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportTimeConfigurations(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(timeConfigurationService.findEntryTypeIterator(retailCustomerId, usagePointId, exportFilter), stream, exportFilter);	
+		exportEntries(timeConfigurationService.findEntryTypeIterator(retailCustomerId, usagePointId, exportFilter), stream, exportFilter, TimeConfiguration.class);	
 	}
 	
 	// UsagePoints
@@ -293,7 +306,7 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportUsagePoints(Long retailCustomerId, 
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(usagePointService.findEntryTypeIterator(retailCustomerId), stream, exportFilter);
+		exportEntries(usagePointService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, UsagePoint.class);
 	}
 	
 	@Override
@@ -305,19 +318,73 @@ public class ExportServiceImpl implements ExportService {
 
 	@Override
 	public void exportUsagePoints(OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(usagePointService.findEntryTypeIterator(), stream, exportFilter);
+		exportEntries(usagePointService.findEntryTypeIterator(), stream, exportFilter, UsagePoint.class);
 	}
 	
     // worker functions
     //
-    private void exportEntries(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter) throws IOException {
-        String uuid = UUID.randomUUID().toString();
+    private void exportEntries(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter, Class resourceClass) throws IOException {
+    	DateTimeType updated = DateConverter.toDateTimeType(new Date());
+        String temp = updated.toString();
+    	String uuid = UUID.randomUUID().toString();
         String selfRef = "<link rel=\"self\" href=\"";
         selfRef += "";
         selfRef += "\"</link>\n";
-    	GregorianCalendar updated = new GregorianCalendar();
-    	updated.setTimeZone(TimeZone.getTimeZone("UTC"));
-    	String temp = DateConverter.epoch().toString();
+    	//GregorianCalendar updated = new GregorianCalendar();
+    	//updated.setTimeZone(TimeZone.getTimeZone("UTC"));
+    	//String temp = DateConverter.epoch().toString();
+        stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
+        stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">".getBytes());
+        stream.write("<id>urn:uuid:".getBytes());
+        stream.write(uuid.getBytes());
+        stream.write("</id>\n".getBytes());
+        stream.write("<title>Green Button Usage Feed</title>\n".getBytes());
+        stream.write("<updated>".getBytes());
+        stream.write(temp.getBytes());
+        stream.write("</updated>\n".getBytes());
+        stream.write(selfRef.getBytes());
+
+        if (entries != null) {
+        
+        while (entries.hasNext()) {
+        	try {
+        		EntryType entry = entries.nextEntry(resourceClass);
+            	exportEntry(entry, stream, exportFilter);        		
+        	} catch (Exception e) {
+        	  stream.write("/* The requested collection contains no resources */".getBytes());	
+              stream.write("</feed>".getBytes());
+        	}
+ 
+          }
+        }
+        stream.write("</feed>".getBytes());
+    }
+    
+    // to export a single entry (w/o the <feed>...</feed> wrappers
+    
+	private void exportEntry(EntryType entry, OutputStream stream,
+			ExportFilter exportFilter) throws IOException {
+
+		StreamResult result = new StreamResult(stream);
+        try {
+		if (exportFilter.matches(entry)) {
+			fragmentMarshaller.marshal(entry, result);
+		}
+        } catch (Exception e) {
+        	stream.write("/* an error happened in exportEntry */".getBytes());
+        }
+	}
+
+    private void exportEntriesFull(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter) throws IOException {
+    	DateTimeType updated = DateConverter.toDateTimeType(new Date());
+        String temp = updated.toString();
+    	String uuid = UUID.randomUUID().toString();
+        String selfRef = "<link rel=\"self\" href=\"";
+        selfRef += "";
+        selfRef += "\"</link>\n";
+    	//GregorianCalendar updated = new GregorianCalendar();
+    	//updated.setTimeZone(TimeZone.getTimeZone("UTC"));
+    	//String temp = DateConverter.epoch().toString();
         stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
         stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">".getBytes());
         stream.write("<id>urn:uuid:".getBytes());
@@ -336,7 +403,7 @@ public class ExportServiceImpl implements ExportService {
         		EntryType entry = entries.next();
             	exportEntry(entry, stream, exportFilter);        		
         	} catch (Exception e) {
-        	  stream.write("/* TODO - Remove this message - let the error happenan error happened in exportEntry - it is caused by an assumption of required (TimeConfiguration) relationships */".getBytes());	
+        	  stream.write("/* The requested collection contains no resources */".getBytes());	
               stream.write("</feed>".getBytes());
         	}
  
@@ -347,7 +414,7 @@ public class ExportServiceImpl implements ExportService {
     
     // to export a single entry (w/o the <feed>...</feed> wrappers
     
-	private void exportEntry(EntryType entry, OutputStream stream,
+	private void exportEntryFull(EntryType entry, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
 
 		StreamResult result = new StreamResult(stream);
@@ -447,4 +514,18 @@ public class ExportServiceImpl implements ExportService {
 		
 	}
 
+	@Override
+	public void exportUsagePointsFull(Long retailCustomerId,
+			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
+		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId), outputStream, exportFilter);
+		
+	}
+
+	@Override
+	public void exportUsagePointFull(Long usagePointId, Long retailCustomerId,
+			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
+		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId, usagePointId), outputStream, exportFilter);
+		
+	}
+	
 }

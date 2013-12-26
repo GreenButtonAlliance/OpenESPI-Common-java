@@ -105,13 +105,12 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 	}
 
 	@Override
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
-			Long readingTypeId) {
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId, Long meterReadingId, Long readingTypeId) {
 		EntryType result = null;
 		try {
 			List<Long> allIds = new ArrayList<Long>();
 			allIds.add(readingTypeId);
-			result = (new EntryTypeIterator(resourceService, allIds)).next();
+			result = (new EntryTypeIterator(resourceService, allIds)).nextEntry(ReadingType.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found

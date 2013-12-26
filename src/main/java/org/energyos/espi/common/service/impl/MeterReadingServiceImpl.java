@@ -96,7 +96,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 	}
 
 	@Override
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId, ExportFilter params) {
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId) {
 		EntryTypeIterator result = null;
 		try {
 			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
@@ -113,12 +113,12 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 
 	@Override
 	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
-			Long meterReadingId, ExportFilter params) {
+			Long meterReadingId) {
 		EntryType result = null;
 		try {
 			List<Long> allIds = new ArrayList<Long>();
 			allIds.add(meterReadingId);
-			result = (new EntryTypeIterator(resourceService, allIds)).next();
+			result = (new EntryTypeIterator(resourceService, allIds)).nextEntry(MeterReading.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -149,10 +149,10 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 	}
 
 	@Override
-	public EntryTypeIterator findEntryTypeIterator(ExportFilter params) {
+	public EntryTypeIterator findEntryTypeIterator() {
 		EntryTypeIterator result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = resourceService.findAllIds(MeterReading.class);
 			result = (new EntryTypeIterator(resourceService, temp));
@@ -165,13 +165,13 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 	}
 
 	@Override
-	public EntryType findEntryType(Long meterReadingId, ExportFilter params) {
+	public EntryType findEntryType(Long meterReadingId) {
 		EntryType result = null;
 		try {
 			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp.add(meterReadingId);
-			result = (new EntryTypeIterator(resourceService, temp)).next();
+			result = (new EntryTypeIterator(resourceService, temp)).nextEntry(MeterReading.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found

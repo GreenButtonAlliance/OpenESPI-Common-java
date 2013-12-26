@@ -72,7 +72,7 @@ public interface ExportService {
 	// ReadingType
 	//
 	public void exportReadingType(Long retailCustomerId, Long usagePointId,
-			Long meterTypeId, OutputStream stream, ExportFilter exportFilter)
+			Long meterTypeId, Long readingTypeId, OutputStream stream, ExportFilter exportFilter)
 			throws IOException;
 
 	public void exportReadingTypes(Long retailCustomerId, Long usagePointId,
@@ -143,5 +143,11 @@ public interface ExportService {
 
 	void exportTimeConfiguration(long timeConfigurationId,
 			ServletOutputStream outputStream, ExportFilter exportFilter);
+
+	void exportUsagePointsFull(Long retailCustomerId, ServletOutputStream outputStream,
+			ExportFilter exportFilter) throws IOException;
+
+	void exportUsagePointFull(Long usagePointId, Long RetailCustomerId,
+			ServletOutputStream outputStream, ExportFilter exportFilter)  throws IOException;
 
 }

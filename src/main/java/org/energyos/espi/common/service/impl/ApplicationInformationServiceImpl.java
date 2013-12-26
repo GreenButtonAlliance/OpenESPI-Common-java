@@ -110,7 +110,7 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 			List<Long> temp = new ArrayList<Long>();
 			ApplicationInformation applicationInformation = applicationInformationRepository.findById(applicationInformationId);
 			temp.add(applicationInformation.getId());
-			result = (new EntryTypeIterator(resourceService, temp)).next();
+			result = (new EntryTypeIterator(resourceService, temp)).nextEntry(ApplicationInformation.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found

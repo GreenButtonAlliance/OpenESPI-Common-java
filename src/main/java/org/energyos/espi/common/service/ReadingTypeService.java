@@ -33,7 +33,7 @@ public interface ReadingTypeService {
 	// accessor services
 	public ReadingType findById(Long readingTypeId);
 
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,Long meterReadingId,
 			Long readingTypeId);
 
 	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
