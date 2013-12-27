@@ -25,10 +25,16 @@
 package org.energyos.espi.common.domain;
 
 import org.energyos.espi.common.models.atom.adapters.ElectricPowerUsageSummaryAdapter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -47,7 +53,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *         &lt;element name="billLastPeriod" type="{http://naesb.org/espi}Int48" minOccurs="0"/>
  *         &lt;element name="billToDate" type="{http://naesb.org/espi}Int48" minOccurs="0"/>
  *         &lt;element name="costAdditionalLastPeriod" type="{http://naesb.org/espi}Int48" minOccurs="0"/>
+ *         &lt;element name="costAdditionalDetailLastPeriod" type="{http://naesb.org/espi}LineItem" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="currency" type="{http://naesb.org/espi}Currency" minOccurs="0"/>
+ *         &lt;element name="overallConsumptionLastPeriod" type="{http://naesb.org/espi}SummaryMeasurement" minOccurs="0"/>
  *         &lt;element name="currentBillingPeriodOverAllConsumption" type="{http://naesb.org/espi}SummaryMeasurement" minOccurs="0"/>
  *         &lt;element name="currentDayLastYearNetConsumption" type="{http://naesb.org/espi}SummaryMeasurement" minOccurs="0"/>
  *         &lt;element name="currentDayNetConsumption" type="{http://naesb.org/espi}SummaryMeasurement" minOccurs="0"/>
@@ -73,7 +81,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
         "billLastPeriod",
         "billToDate",
         "costAdditionalLastPeriod",
+        "costAdditionalDetailLastPeriod",
         "currency",
+        "overallConsumptionLastPeriod",
         "currentBillingPeriodOverAllConsumption",
         "currentDayLastYearNetConsumption",
         "currentDayNetConsumption",
@@ -113,7 +123,30 @@ public class ElectricPowerUsageSummary
     protected Long billLastPeriod;
     protected Long billToDate;
     protected Long costAdditionalLastPeriod;
+    
+    
+    @OneToMany(mappedBy = "electricPowerUsageSummary", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @XmlElementRefs({
+            @XmlElementRef(name = "costAdditionalDetailLastPeriod", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
+    })
+    @XmlAnyElement(lax = true)
+    protected List<LineItem> costAdditionalDetailLastPeriod = new ArrayList<>();
+    
+    
     protected String currency;
+    
+    @AttributeOverrides( {
+        @AttributeOverride(name="powerOfTenMultiplier", column = @Column(name="overallConsumptionLastPeriod_powerOfTenMultiplier") ),
+        @AttributeOverride(name="timeStamp", column = @Column(name="overallConsumptionLastPeriod_timeStamp") ),
+        @AttributeOverride(name="uom", column = @Column(name="overallConsumptionLastPeriod_uom") ),
+        @AttributeOverride(name="value", column = @Column(name="overallConsumptionLastPeriod_value") ),
+} )
+    @Embedded
+   protected SummaryMeasurement overallConsumptionLastPeriod;
+ 
+    
+    
     protected String qualityOfReading;
     protected long statusTimeStamp;
 
@@ -320,6 +353,35 @@ public class ElectricPowerUsageSummary
     public void setCostAdditionalLastPeriod(Long value) {
         this.costAdditionalLastPeriod = value;
     }
+    
+    /**
+     * Gets the value of the costAdditionalDetailLastPeriod property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the costAdditionalDetailLastPeriod property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCostAdditionalDetailLastPeriod().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link LineItem }
+     * 
+     * 
+     */
+    public List<LineItem> getCostAdditionalDetailLastPeriod() {
+        if (costAdditionalDetailLastPeriod == null) {
+            costAdditionalDetailLastPeriod = new ArrayList<LineItem>();
+        }
+        return this.costAdditionalDetailLastPeriod;
+    }
 
     /**
      * Gets the value of the currency property.
@@ -345,6 +407,33 @@ public class ElectricPowerUsageSummary
         this.currency = value;
     }
 
+    
+    /**
+     * Gets the value of the overallConsumptionLastPeriod property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SummaryMeasurement }
+     *     
+     */
+    public SummaryMeasurement getOverallConsumptionLastPeriod() {
+        return overallConsumptionLastPeriod;
+    }
+
+    /**
+     * Sets the value of the overallConsumptionLastPeriod property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SummaryMeasurement }
+     *     
+     */
+    public void setOverallConsumptionLastPeriod(SummaryMeasurement value) {
+        this.overallConsumptionLastPeriod = value;
+    }
+   
+    
+    
     /**
      * Gets the value of the currentBillingPeriodOverAllConsumption property.
      *

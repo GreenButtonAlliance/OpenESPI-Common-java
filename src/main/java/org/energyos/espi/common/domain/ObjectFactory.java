@@ -64,6 +64,7 @@ public class ObjectFactory {
     public final static QName UsagePoint_QNAME = new QName("http://naesb.org/espi", "UsagePoint");
     public final static QName BatchItemInfo_QNAME = new QName("http://naesb.org/espi", "BatchItemInfo");
     public final static QName ElectricPowerUsageSummary_QNAME = new QName("http://naesb.org/espi", "ElectricPowerUsageSummary");
+    public final static QName LineItem_QNAME = new QName("http://naesb.org/espi", "LineItem");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.naesb.espi
@@ -368,5 +369,10 @@ public class ObjectFactory {
     public JAXBElement<ElectricPowerUsageSummary> createElectricPowerUsageSummary(ElectricPowerUsageSummary value) {
         return new JAXBElement<ElectricPowerUsageSummary>(ElectricPowerUsageSummary_QNAME, ElectricPowerUsageSummary.class, null, value);
     }
+
+    @XmlElementDecl(namespace = "http://naesb.org/espi", name = "costAdditionalDetailLastPeriod")
+    public JAXBElement<LineItem> createLineItem(LineItem v) {
+        return new JAXBElement<LineItem>(LineItem_QNAME, LineItem.class, null, v);
+	}
 
 }
