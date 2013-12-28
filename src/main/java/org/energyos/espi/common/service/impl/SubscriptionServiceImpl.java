@@ -1,5 +1,6 @@
 package org.energyos.espi.common.service.impl;
 
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.models.atom.EntryType;
@@ -100,20 +101,39 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Subscription findById(String subscriptionId) {
-		// TODO Auto-generated method stub
-		return null;
+//		return subscriptionRepository.findById(subscriptionId);
+		
 	}
 
 	@Override
 	public EntryType findEntryType(Long retailCustomerId, Long subscriptionId) {
-		// TODO Auto-generated method stub
-		return null;
+		EntryType result = null;
+		try {
+			List<Long> allIds = new ArrayList<Long>();
+			allIds.add(subscriptionId);
+			result = (new EntryTypeIterator(resourceService, allIds)).nextEntry(Subscription.class);
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
 
 	@Override
 	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId) {
-		// TODO Auto-generated method stub
-		return null;
+		EntryTypeIterator result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp = resourceService.findAllIds(Subscription.class);
+			result = (new EntryTypeIterator(resourceService, temp));
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;	
 	}
 
 	@Override

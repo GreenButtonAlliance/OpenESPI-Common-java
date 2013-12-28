@@ -189,4 +189,9 @@ public class RetailCustomer implements UserDetails, Principal {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         return result;
     }
+
+	public void merge(RetailCustomer newRetailCustomer) {
+		// TODO Auto-generated method stub
+		
+	}
 }

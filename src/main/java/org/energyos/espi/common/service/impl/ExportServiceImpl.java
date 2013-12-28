@@ -128,33 +128,8 @@ public class ExportServiceImpl implements ExportService {
         this.fragmentMarshaller = fragmentMarshaller;
     }
     
-    @Override
-    public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-        exportEntries(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter, Subscription.class);
-    }
-
-	@Override
-	public void exportSubscriptions(OutputStream stream,
-			ExportFilter exportResourceFilter) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportSubscription(Long retailCustomerId, Long subscriptionId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(subscriptionService.findEntryType(retailCustomerId, subscriptionId), stream, exportFilter);
-		
-	}
-	
-	@Override
-	public void exportSubscriptions(Long retailCustomerId, OutputStream stream,
-			ExportFilter exportFilter) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-
+    // TODO Convert this block of functions to a Template system
+    //
 	@Override
 	public void exportApplicationInformation(Long applicationInformationId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
@@ -279,7 +254,31 @@ public class ExportServiceImpl implements ExportService {
 		exportEntries(retailCustomerService.findEntryTypeIterator(), stream, exportFilter, RetailCustomer.class);
 	}
 
+    @Override
+    public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportFilter) throws IOException {
+        exportEntriesFull(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter);
+    }
 
+	@Override
+	public void exportSubscriptions(OutputStream stream,
+			ExportFilter exportResourceFilter) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportSubscription(Long retailCustomerId, Long subscriptionId,
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntry(subscriptionService.findEntryType(retailCustomerId, subscriptionId), stream, exportFilter);
+		
+	}
+	
+	@Override
+	public void exportSubscriptions(Long retailCustomerId, OutputStream stream,
+			ExportFilter exportFilter) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void exportTimeConfiguration(Long retailCustomerId, Long usagePointId,
@@ -328,7 +327,7 @@ public class ExportServiceImpl implements ExportService {
         String temp = updated.toString();
     	String uuid = UUID.randomUUID().toString();
         String selfRef = "<link rel=\"self\" href=\"";
-        selfRef += "";
+        selfRef += "/espi/1_1/resource/xxxxTODOxxxx";
         selfRef += "\"</link>\n";
     	//GregorianCalendar updated = new GregorianCalendar();
     	//updated.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -371,7 +370,7 @@ public class ExportServiceImpl implements ExportService {
 			fragmentMarshaller.marshal(entry, result);
 		}
         } catch (Exception e) {
-        	stream.write("/* an error happened in exportEntry */".getBytes());
+        	throw(e);
         }
 	}
 
@@ -380,17 +379,17 @@ public class ExportServiceImpl implements ExportService {
         String temp = updated.toString();
     	String uuid = UUID.randomUUID().toString();
         String selfRef = "<link rel=\"self\" href=\"";
-        selfRef += "";
-        selfRef += "\"</link>\n";
+        selfRef += "/espi/1_1/resource/xxxTODOxxx/";
+        selfRef += "\"/>\n";
     	//GregorianCalendar updated = new GregorianCalendar();
     	//updated.setTimeZone(TimeZone.getTimeZone("UTC"));
     	//String temp = DateConverter.epoch().toString();
         stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
-        stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">".getBytes());
+        stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n".getBytes());
         stream.write("<id>urn:uuid:".getBytes());
         stream.write(uuid.getBytes());
         stream.write("</id>\n".getBytes());
-        stream.write("<title>Green Button Usage Feed</title>\n".getBytes());
+        stream.write("<title>Green Button Collection</title>\n".getBytes());
         stream.write("<updated>".getBytes());
         stream.write(temp.getBytes());
         stream.write("</updated>\n".getBytes());
@@ -401,7 +400,7 @@ public class ExportServiceImpl implements ExportService {
         while (entries.hasNext()) {
         	try {
         		EntryType entry = entries.next();
-            	exportEntry(entry, stream, exportFilter);        		
+            	exportEntryFull(entry, stream, exportFilter);        		
         	} catch (Exception e) {
         	  stream.write("/* The requested collection contains no resources */".getBytes());	
               stream.write("</feed>".getBytes());
@@ -423,7 +422,7 @@ public class ExportServiceImpl implements ExportService {
 			fragmentMarshaller.marshal(entry, result);
 		}
         } catch (Exception e) {
-        	stream.write("/* an error happened in exportEntry */".getBytes());
+        	throw(e);
         }
 	}
 
