@@ -101,7 +101,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Subscription findById(String subscriptionId) {
-//		return subscriptionRepository.findById(subscriptionId);
+	return subscriptionRepository.findByHashedId(subscriptionId);
 		
 	}
 
