@@ -22,6 +22,7 @@ import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.energyos.espi.common.repositories.UsagePointRepository;
+import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.UsagePointService;
 import org.energyos.espi.common.utils.ATOMMarshaller;
@@ -60,10 +61,17 @@ public class UsagePointServiceImpl implements UsagePointService {
 	private SubscriptionBuilder subscriptionBuilder;
 
 	@Autowired
+	private ImportService importService;
+	
+	@Autowired
 	private ResourceRepository repository;
 
 	@Autowired
 	private ResourceService resourceService;
+
+	public void setImportService(ImportService importService) {
+		this.importService = importService;
+	}
 
 	public void setRepository(UsagePointRepository usagePointRepository) {
 		this.usagePointRepository = usagePointRepository;
@@ -181,10 +189,15 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 	@Override
 	public UsagePoint importResource(InputStream stream) {
-		UsagePoint usagePoint = usagePointBuilder.newUsagePoint(xmlMarshaller
-				.unmarshal(stream, EntryType.class));
-		createOrReplaceByUUID(usagePoint);
 
+		UsagePoint usagePoint = null;
+		try {
+			importService.importData(stream);
+			usagePoint = importService.getEntries().get(0).getContent().getUsagePoint();
+
+		} catch (Exception e) {
+
+		}
 		return usagePoint;
 	}
 

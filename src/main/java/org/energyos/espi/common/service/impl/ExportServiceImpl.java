@@ -130,118 +130,181 @@ public class ExportServiceImpl implements ExportService {
     
     // TODO Convert this block of functions to a Template system
     //
+    
+    // ApplicationInformation
+
+    // - ROOT form
 	@Override
-	public void exportApplicationInformation(Long applicationInformationId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
+	public void exportApplicationInformation(Long applicationInformationId, OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntry(applicationInformationService.findEntryType(applicationInformationId), stream, exportFilter);
 	}
 
 	@Override
-	public void exportApplicationInformations(OutputStream stream, ExportFilter exportFilter)
-			throws IOException {
+	public void exportApplicationInformations(OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntries(applicationInformationService.findEntryTypeIterator(), stream, exportFilter, ApplicationInformation.class);		
+	}
 
+    // Authorization
+
+    // - ROOT form
+	@Override
+	public void exportAuthorization(Long authorizationId, OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntry(authorizationService.findEntryType(0L, authorizationId), stream, exportFilter);			
 	}
 
 	@Override
-	public void exportAuthorization(Long retailCustomerId, Long authorizationId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
+	public void exportAuthorizations(OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntries(authorizationService.findEntryTypeIterator(), stream, exportFilter, Authorization.class);		
+	}
+
+    // - XPath form
+	@Override
+	public void exportAuthorization(Long retailCustomerId, Long authorizationId, OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntry(authorizationService.findEntryType(retailCustomerId, authorizationId), stream, exportFilter);			
 	}
 
-
 	@Override
-	public void exportAuthorizations(Long retailCustomerId, OutputStream stream,
-			ExportFilter exportFilter) throws IOException {
+	public void exportAuthorizations(Long retailCustomerId, OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntries(authorizationService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, Authorization.class);		
 	}
 
+    // ElectricPowerQualitySummary
+
+    // - ROOT form
 	@Override
-	public void exportElectricPowerQualitySummary(Long retailCustomerId, Long usagePointId,
-			Long electricPowerQualitySummaryId, OutputStream stream,
-			ExportFilter exportFilter) throws IOException {
+	public void exportElectricPowerQualitySummary(Long electricPowerQualitySummaryId, OutputStream stream, ExportFilter exportFilter) throws IOException {
+	    exportEntry(electricPowerQualitySummaryService.findEntryType(0L, 0L, electricPowerQualitySummaryId), stream, exportFilter);
+	}
+
+	@Override
+	public void exportElectricPowerQualitySummarys(OutputStream stream, ExportFilter exportFilter) throws IOException {
+	    exportEntries(electricPowerQualitySummaryService.findEntryTypeIterator(0L, 0L), stream, exportFilter, ElectricPowerQualitySummary.class);	
+	}
+
+    // - XPath form
+	@Override
+	public void exportElectricPowerQualitySummary(Long retailCustomerId, Long usagePointId, Long electricPowerQualitySummaryId,
+						      OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntry(electricPowerQualitySummaryService.findEntryType(retailCustomerId, usagePointId, electricPowerQualitySummaryId), stream, exportFilter);
 	}
 
 	@Override
 	public void exportElectricPowerQualitySummarys(Long retailCustomerId, Long usagePointId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
+						       OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntries(electricPowerQualitySummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ElectricPowerQualitySummary.class);	
 	}
 
+    // ElectricPowerUsageSummary
+
+    // - ROOT form
+	@Override
+	public void exportElectricPowerUsageSummarys(ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
+		exportEntries(electricPowerUsageSummaryService.findEntryTypeIterator(0L, 0L), outputStream, exportFilter, ElectricPowerQualitySummary.class);	
+	}
 
 	@Override
-	public void exportElectricPowerUsageSummary(Long retailCustomerId, Long usagePointId,
-			Long electricPowerUsageSummaryId, OutputStream stream,
-			ExportFilter exportFilter) throws IOException {
+	public void exportElectricPowerUsageSummary(long electricPowerUsageSummaryId, ServletOutputStream outputStream,	ExportFilter exportFilter) throws IOException {
+		exportEntry(electricPowerUsageSummaryService.findEntryType(0L, 0L, electricPowerUsageSummaryId), outputStream, exportFilter);
+	}
+
+
+    // - XPath form
+	@Override
+	public void exportElectricPowerUsageSummary(Long retailCustomerId, Long usagePointId, Long electricPowerUsageSummaryId,
+						    OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntry(electricPowerUsageSummaryService.findEntryType(retailCustomerId, usagePointId, electricPowerUsageSummaryId), stream, exportFilter);
 	}
 
 	@Override
 	public void exportElectricPowerUsageSummarys(Long retailCustomerId, Long usagePointId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
+						     OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntries(electricPowerUsageSummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ElectricPowerUsageSummary.class);	
 	}
 
+    // IntervalBlock
+
+    // - ROOT form
 	@Override
-	public void exportIntervalBlock(Long retailCustomerId, Long usagePointId,
-			Long meterReadingId, Long intervalBlockId, OutputStream stream,
-			ExportFilter exportFilter) throws IOException {
-		exportEntry(intervalBlockService.findEntryType(retailCustomerId, usagePointId, meterReadingId, intervalBlockId), stream, exportFilter);
-		
+	public void exportIntervalBlock(Long intervalBlockId,
+					OutputStream stream, ExportFilter exportFilter) throws IOException {
+	    exportEntry(intervalBlockService.findEntryType(0L, 0L, 0L, intervalBlockId), stream, exportFilter);
 	}
 
 	@Override
-	public void exportIntervalBlocks(Long retailCustomerId, Long usagePointId,
-			Long meterReadingId, OutputStream stream, ExportFilter exportFilter)
-			throws IOException {
+	public void exportIntervalBlocks(OutputStream stream, ExportFilter exportFilter) throws IOException {
+	    exportEntries(intervalBlockService.findEntryTypeIterator(0L, 0L, 0L), stream, exportFilter, IntervalBlock.class);
+	}
+
+
+    // - XPath form
+	@Override
+	public void exportIntervalBlock(Long retailCustomerId, Long usagePointId, Long meterReadingId, Long intervalBlockId,
+					OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntry(intervalBlockService.findEntryType(retailCustomerId, usagePointId, meterReadingId, intervalBlockId), stream, exportFilter);
+	}
+
+	@Override
+	public void exportIntervalBlocks(Long retailCustomerId, Long usagePointId, Long meterReadingId,
+					 OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntries(intervalBlockService.findEntryTypeIterator(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter, IntervalBlock.class);
-		
 	}
 
 	// MeterReading
-
+    
+    // - ROOT form
 	@Override
-	public void exportMeterReadings(ServletOutputStream stream,
-			ExportFilter exportFilter) throws IOException {
+	public void exportMeterReadings(ServletOutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntries(meterReadingService.findEntryTypeIterator(), stream, exportFilter, MeterReading.class);
-		
 	}
 
 	@Override
 	public void exportMeterReading(long meterReadingId, ServletOutputStream stream, ExportFilter exportFilter) throws IOException  {
 		exportEntry(meterReadingService.findEntryType(meterReadingId), stream, exportFilter);
-		
 	}
 
+    // - XPath
 	@Override
-	public void exportMeterReading(Long retailCustomerId, Long usagePointId,
-			Long meterReadingId, OutputStream stream, ExportFilter exportFilter)
-			throws IOException {
+	public void exportMeterReading(Long retailCustomerId, Long usagePointId, Long meterReadingId,
+				       OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntry(meterReadingService.findEntryType(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter);
 	}
 
 	@Override
 	public void exportMeterReadings(Long retailCustomerId, Long usagePointId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
+					OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntries(meterReadingService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, MeterReading.class);
 	}
 
 
+    // ReadingType
+
+    // ROOT form
 	@Override
-	public void exportReadingType(Long retailCustomerId, Long usagePointId, Long meterReadingId,
-			Long readingTypeId, OutputStream stream, ExportFilter exportFilter)
-			throws IOException {
+	public void exportReadingType(Long readingTypeId, OutputStream stream, ExportFilter exportFilter) throws IOException {
+	    exportEntry(readingTypeService.findEntryType(0L, 0L, 0L, readingTypeId), stream, exportFilter);
+	}
+
+	@Override
+	public void exportReadingTypes(OutputStream stream, ExportFilter exportFilter) throws IOException {
+	    exportEntries(readingTypeService.findEntryTypeIterator(0L, 0L), stream, exportFilter, ReadingType.class);
+	}
+
+    // XPath form
+	@Override
+	public void exportReadingType(Long retailCustomerId, Long usagePointId, Long meterReadingId, Long readingTypeId,
+				      OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntry(readingTypeService.findEntryType(retailCustomerId, usagePointId, meterReadingId, readingTypeId), stream, exportFilter);
 	}
 
 	@Override
-	public void exportReadingTypes(Long retailCustomerId, Long usagePointId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
+	public void exportReadingTypes(Long retailCustomerId, Long usagePointId, OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntries(readingTypeService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ReadingType.class);
 	}
 
 
+    // RetailCustomer
+    
+    // ROOT form
 	@Override
 	public void exportRetailCustomer(Long retailCustomerId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
@@ -254,32 +317,56 @@ public class ExportServiceImpl implements ExportService {
 		exportEntries(retailCustomerService.findEntryTypeIterator(), stream, exportFilter, RetailCustomer.class);
 	}
 
+    // Subscription
+
+    // - Root form
+
+    // -- original Pivotal export function (used in pub/sub flow)
     @Override
     public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportFilter) throws IOException {
         exportEntriesFull(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter);
     }
 
 	@Override
-	public void exportSubscriptions(OutputStream stream,
-			ExportFilter exportResourceFilter) throws IOException {
-		// TODO Auto-generated method stub
+	public void exportSubscription(Long subscriptionId,
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntry(subscriptionService.findEntryType(0L, subscriptionId), stream, exportFilter);
 		
 	}
+	
+	@Override
+	public void exportSubscriptions(OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntries(subscriptionService.findEntryTypeIterator(0L), stream, exportFilter, RetailCustomer.class);
+	}
 
+    // - XPath form
 	@Override
 	public void exportSubscription(Long retailCustomerId, Long subscriptionId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
 		exportEntry(subscriptionService.findEntryType(retailCustomerId, subscriptionId), stream, exportFilter);
-		
 	}
 	
 	@Override
 	public void exportSubscriptions(Long retailCustomerId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		// TODO Auto-generated method stub
-		
+		exportEntries(subscriptionService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, RetailCustomer.class);
 	}
 
+    // TimeConfiguration
+
+    // - ROOT form
+	@Override
+	public void exportTimeConfiguration(Long timeConfigurationId, OutputStream stream,
+			ExportFilter exportFilter) throws IOException {
+	    exportEntry(timeConfigurationService.findEntryType(0L, 0L, timeConfigurationId, exportFilter), stream, exportFilter);	
+	}
+
+	@Override
+	public void exportTimeConfigurations(OutputStream stream, ExportFilter exportFilter) throws IOException {
+	    exportEntries(timeConfigurationService.findEntryTypeIterator(0L, 0L, exportFilter), stream, exportFilter, TimeConfiguration.class);	
+	}
+	
+    // - XPath form
 	@Override
 	public void exportTimeConfiguration(Long retailCustomerId, Long usagePointId,
 			Long timeConfigurationId, OutputStream stream,
@@ -293,21 +380,10 @@ public class ExportServiceImpl implements ExportService {
 		exportEntries(timeConfigurationService.findEntryTypeIterator(retailCustomerId, usagePointId, exportFilter), stream, exportFilter, TimeConfiguration.class);	
 	}
 	
+
 	// UsagePoints
 	//
-	@Override
-	public void exportUsagePoint(Long retailCustomerId, Long usagePointId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(usagePointService.findEntryType(retailCustomerId, usagePointId), stream, exportFilter);
-		
-	}
-
-	@Override
-	public void exportUsagePoints(Long retailCustomerId, 
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(usagePointService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, UsagePoint.class);
-	}
-	
+        // ROOT form
 	@Override
 	public void exportUsagePoint(Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
@@ -320,6 +396,34 @@ public class ExportServiceImpl implements ExportService {
 		exportEntries(usagePointService.findEntryTypeIterator(), stream, exportFilter, UsagePoint.class);
 	}
 	
+    // XPath form
+	@Override
+	public void exportUsagePoint(Long retailCustomerId, Long usagePointId,
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntry(usagePointService.findEntryType(retailCustomerId, usagePointId), stream, exportFilter);
+	}
+
+	@Override
+	public void exportUsagePoints(Long retailCustomerId, 
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		exportEntries(usagePointService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, UsagePoint.class);
+	}
+	
+    // export full usagepoint object tree 
+    //
+	@Override
+	public void exportUsagePointsFull(Long retailCustomerId,
+			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
+		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId), outputStream, exportFilter);
+	}
+
+	@Override
+	public void exportUsagePointFull(Long usagePointId, Long retailCustomerId,
+			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
+		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId, usagePointId), outputStream, exportFilter);
+		
+	}
+
     // worker functions
     //
     private void exportEntries(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter, Class resourceClass) throws IOException {
@@ -426,105 +530,4 @@ public class ExportServiceImpl implements ExportService {
         }
 	}
 
-	@Override
-	public void exportApplicationInformations(Long retailCustomerId,
-			ServletOutputStream outputStream, ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportApplicationInformation(Long retailCustomerId,
-			long authorizationId, ServletOutputStream outputStream,
-			ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportElectricPowerQualitySummarys(
-			ServletOutputStream outputStream, ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportElectricPowerQualitySummary(
-			long electricPowerQualitySummaryId,
-			ServletOutputStream outputStream, ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportElectricPowerUsageSummarys(
-			ServletOutputStream outputStream, ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportElectricPowerUsageSummary(
-			long electricPowerUsageSummaryId, ServletOutputStream outputStream,
-			ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportIntervalBlocks(ServletOutputStream outputStream,
-			ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportIntervalBlock(long intervalBlockId,
-			ServletOutputStream outputStream, ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportReadingTypes(ServletOutputStream outputStream,
-			ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportReadingType(long readingTypeId,
-			ServletOutputStream outputStream, ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportTimeConfigurations(ServletOutputStream outputStream,
-			ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportTimeConfiguration(long timeConfigurationId,
-			ServletOutputStream outputStream, ExportFilter exportFilter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exportUsagePointsFull(Long retailCustomerId,
-			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
-		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId), outputStream, exportFilter);
-		
-	}
-
-	@Override
-	public void exportUsagePointFull(Long usagePointId, Long retailCustomerId,
-			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
-		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId, usagePointId), outputStream, exportFilter);
-		
-	}
-	
 }
