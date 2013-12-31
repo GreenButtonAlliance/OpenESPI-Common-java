@@ -133,11 +133,12 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 
 	@Override
 	public MeterReading importResource(InputStream stream) {
-		try{
-		importService.importData(stream);
-		EntryType entry = importService.getEntries().get(0);
-		MeterReading meterReading = entry.getContent().getMeterReading();
-		return meterReading;
+		try {
+			importService.importData(stream);
+			EntryType entry = importService.getEntries().get(0);
+			MeterReading meterReading = entry.getContent().getMeterReading();
+			persist(meterReading);
+			return meterReading;
 		} catch (Exception e) {
 			return null;
 		}

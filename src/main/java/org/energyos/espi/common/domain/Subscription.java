@@ -24,6 +24,7 @@
 
 package org.energyos.espi.common.domain;
 
+import org.energyos.espi.common.models.atom.adapters.SubscriptionAdapter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -33,6 +34,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import java.util.Calendar;
 import java.util.Set;
 
@@ -56,6 +59,7 @@ import java.util.Set;
 @XmlType(name = "Subscription")
 @Entity
 @Table(name = "subscriptions")
+@XmlJavaTypeAdapter(SubscriptionAdapter.class)
 @NamedQueries(value = {
         @NamedQuery(name = Subscription.QUERY_FIND_ALL, query = "SELECT subscription FROM Subscription subscription"),
         @NamedQuery(name = Subscription.QUERY_FIND_BY_HASHED_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.hashedId = :hashedId"),
@@ -137,5 +141,15 @@ public class Subscription
 
     public void setAuthorization(Authorization authorization) {
         this.authorization = authorization;
+    }
+    
+    @Override
+    public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
+    	this.applicationInformation = ((Subscription)resource).applicationInformation;
+    	this.authorization = ((Subscription)resource).authorization;
+    	this.lastUpdate = ((Subscription)resource).lastUpdate;
+        this.retailCustomer = ((Subscription)resource).retailCustomer;
+        this.usagePoints = ((Subscription)resource).usagePoints;
     }
 }

@@ -26,4 +26,8 @@ public interface SubscriptionRepository {
     List<Subscription> findAll();
 
     Subscription findByHashedId(String hashedId);
+
+	Subscription findById(Long subscriptionId);
+
+	void deleteById(Long id);
 }

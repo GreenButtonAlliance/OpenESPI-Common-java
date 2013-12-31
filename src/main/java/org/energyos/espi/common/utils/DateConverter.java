@@ -34,6 +34,9 @@ public class DateConverter {
     public static DateTimeType toDateTimeType(GregorianCalendar gregorianCalendar) {
         DateTimeType dateTimeType = new DateTimeType();
         DatatypeFactory datatypeFactory;
+        if (gregorianCalendar == null) {
+        	gregorianCalendar = new GregorianCalendar();
+        }
 
         try {
             datatypeFactory = DatatypeFactory.newInstance();

@@ -17,9 +17,12 @@
 package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
+import org.energyos.espi.common.service.ImportService;
+import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.RetailCustomerService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
@@ -32,6 +35,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,6 +44,20 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 
     @Autowired
     private RetailCustomerRepository retailCustomerRepository;
+    
+    @Autowired
+    private ResourceService resourceService;
+    
+    @Autowired
+    private ImportService importService;
+    
+    public void setResourceService(ResourceService resourceService){
+    	this.resourceService = resourceService;
+    }
+
+    public void setImportService(ImportService importService){
+    	this.importService = importService;
+    }
 
     public void setRepository(RetailCustomerRepository retailCustomerRepository) {
         this.retailCustomerRepository = retailCustomerRepository;
@@ -93,8 +111,19 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
     
 	@Override
 	public EntryTypeIterator findEntryTypeIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		EntryTypeIterator result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			// TODO - make Retail Customer inherit from IdentifiedObject
+			// temp = resourceService.findAllIds(RetailCustomer.class);
+			result = (new EntryTypeIterator(resourceService, temp));
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;	
 	}
 
 	@Override
@@ -105,14 +134,23 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 
 	@Override
 	public void delete(RetailCustomer retailCustomer) {
-		// TODO Auto-generated method stub
+		retailCustomerRepository.deleteById(retailCustomer.getId());
 		
 	}
 
 	@Override
 	public RetailCustomer importResource(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
+		RetailCustomer retailCustomer = null;
+		try {
+			importService.importData(stream);
+			EntryType entry = importService.getEntries().get(0);
+			// TODO - add RetailCustomer to the entrytype structure
+//			RetailCustomer retailCustomer = entry.getContent().getRetailCustomer();
+//			persist(retailCustomer);
+		} catch (Exception e) {
+
+		}
+		return retailCustomer;
 	}
 
 	@Override

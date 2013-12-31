@@ -56,8 +56,7 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 
 	@Override
 	public IntervalBlock findById(long retailCustomerId, long usagePointId, long meterReadingId, long intervalBlockId) {
-		// TODO Auto-generated method stub
-		return null;
+        return intervalBlockRepository.findById(intervalBlockId);
 	}
 
 	@Override
@@ -140,6 +139,7 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 		importService.importData(stream);
 		EntryType entry = importService.getEntries().get(0);
 		List<IntervalBlock> intervalBlocks = entry.getContent().getIntervalBlocks();
+		persist(intervalBlocks.get(0));
 		return intervalBlocks.get(0);
 		} catch (Exception e) {
 			return null;
@@ -148,7 +148,7 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 
 	@Override
 	public IntervalBlock findById(long intervalBlockId) {
-		// TODO Auto-generated method stub
+		intervalBlockRepository.findById(intervalBlockId);
 		return null;
 	}
 

@@ -46,8 +46,8 @@ public interface SubscriptionService {
 	// import-exportResource services
 	public Subscription importResource(InputStream stream);
 
-	Subscription findById(long subscriptionId);
+	Subscription findById(Long subscriptionId);
 
-	Subscription findById(Long retailCustomerId, long subscriptionId);
+	Subscription findById(Long retailCustomerId, Long subscriptionId);
 
 }

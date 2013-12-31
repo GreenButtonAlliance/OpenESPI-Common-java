@@ -25,6 +25,7 @@
 package org.energyos.espi.common.models.atom;
 
 import com.google.common.collect.Lists;
+
 import org.energyos.espi.common.domain.*;
 
 import javax.xml.bind.JAXBElement;
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.namespace.QName;
+
 import java.lang.Object;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,6 +75,9 @@ import java.util.Map;
         "electricPowerQualitySummary",
         "readingType",
         "localTimeParameters",
+        "applicationInformation",
+        "authorization",
+        "subscription",
         "content"
 })
 @XmlSeeAlso({
@@ -101,6 +106,7 @@ public class ContentType {
     @XmlAnyElement(lax = true)
     protected MeterReading meterReading;
 
+    
     @XmlElementRefs({
             @XmlElementRef(name = "IntervalBlock", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
     })
@@ -130,6 +136,24 @@ public class ContentType {
     })
     @XmlAnyElement(lax = true)
     private TimeConfiguration localTimeParameters;
+
+    @XmlElementRefs({
+        @XmlElementRef(name = "ApplicationInformation", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
+     })
+    @XmlAnyElement(lax = true)
+    protected ApplicationInformation applicationInformation;
+
+    @XmlElementRefs({
+        @XmlElementRef(name = "Authorization", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
+     })
+    @XmlAnyElement(lax = true)
+    protected Authorization authorization;
+
+    @XmlElementRefs({
+        @XmlElementRef(name = "Subscription", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
+     })
+    @XmlAnyElement(lax = true)
+    protected Subscription subscription;
 
     @XmlMixed
     @XmlAnyElement(lax = true)
@@ -177,7 +201,28 @@ public class ContentType {
     public void setIntervalBlocks(List<IntervalBlock> intervalBlocks) {
         this.intervalBlocks = intervalBlocks;
     }
+    
+    public ApplicationInformation getApplicationInformation() {
+    	return this.applicationInformation;
+    }
+    
+    public void setApplicationInformation(ApplicationInformation applicationInformation){
+    	this.applicationInformation = applicationInformation;
+    }
 
+    public Authorization getAuthorization() {
+    	return this.authorization;
+    }
+    public void setAuthorization(Authorization authorization){
+    	this.authorization = authorization;
+    }
+    
+    public Subscription getSubscription() {
+    	return this.subscription;
+    }
+    public void setSubscription(Subscription subscription){
+    	this.subscription = subscription;
+    }
     /**
      * The Atom content construct is defined in section 4.1.3 of the format spec.
      * Gets the value of the content property.
@@ -371,6 +416,12 @@ public class ContentType {
             setElectricPowerQualitySummary((ElectricPowerQualitySummary) resource);
         } else if (resource instanceof ReadingType) {
             setReadingType((ReadingType) resource);
+        } else if (resource instanceof ApplicationInformation) {
+        	setApplicationInformation((ApplicationInformation) resource);
+        } else if (resource instanceof Authorization) {
+        	setAuthorization((Authorization) resource);
+        } else if (resource instanceof Subscription) {
+        	setSubscription((Subscription) resource);
         }
     }
 
@@ -386,4 +437,10 @@ public class ContentType {
             setResource(identifiedObjects.get(0));
         }
     }
+
+	public TimeConfiguration getTimeConfiguration() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

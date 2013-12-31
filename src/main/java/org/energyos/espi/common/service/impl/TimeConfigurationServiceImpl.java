@@ -1,6 +1,7 @@
 package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -89,6 +90,7 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	@Override
 	public void deleteById(long timeConfigurationId) {
@@ -148,8 +150,17 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 
 	@Override
 	public TimeConfiguration importResource(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
+		TimeConfiguration timeConfiguration = null;
+		try {
+			importService.importData(stream);
+			EntryType entry = importService.getEntries().get(0);
+			timeConfiguration = entry.getContent().getLocalTimeParameters();
+			persist(timeConfiguration);
+
+		} catch (Exception e) {
+
+		}
+		return timeConfiguration;
 	}
 
 }

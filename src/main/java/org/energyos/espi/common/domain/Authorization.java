@@ -24,8 +24,11 @@
 
 package org.energyos.espi.common.domain;
 
+import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -100,6 +103,7 @@ import javax.xml.bind.annotation.*;
 	    "thirdParty"
 	})@Entity
 @Table(name = "authorizations")
+@XmlJavaTypeAdapter(AuthorizationAdapter.class)
 @NamedQueries(value = {
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID,
                 query = "SELECT authorization FROM Authorization authorization WHERE authorization.retailCustomer.id = :retailCustomerId AND authorization.subscriptionURI IS NOT NULL"),
@@ -596,5 +600,35 @@ public class Authorization
     public String getSubscriptionId() {
         String[] pieces = subscriptionURI.split("/");
         return pieces[pieces.length-1];
+    }
+    
+    public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
+  	  this.accessToken = ((Authorization)resource).getAccessToken();
+  	  this.applicationInformation = ((Authorization)resource).getApplicationInformation();
+  	  this.authorizationURI = ((Authorization)resource).authorizationURI;
+  	  this.authorizedPeriod = ((Authorization)resource).getAuthorizedPeriod();
+  	  this.code = ((Authorization)resource).getCode();
+  	  this.description = ((Authorization)resource).getDescription();
+  	  this.error = ((Authorization)resource).getError();
+  	  this.errorDescription = ((Authorization)resource).getErrorDescription();
+  	  this.errorUri = ((Authorization)resource).getErrorUri();
+  	  this.expiresIn = ((Authorization)resource).getExpiresIn();
+  	  this.grantType = ((Authorization)resource).getGrantType();
+  	  this.href = ((Authorization)resource).getHref();
+  	  this.publishedPeriod = ((Authorization)resource).getPublishedPeriod();
+  	  this.refreshToken = ((Authorization)resource).getRefreshToken();
+  	  this.replyTo = ((Authorization)resource).getReplyTo();
+  	  this.resourceURI = ((Authorization)resource).getResourceURI();
+  	  this.responseRequired = ((Authorization)resource).getResponseRequired();
+  	  this.retailCustomer = ((Authorization)resource).getRetailCustomer();
+  	  this.scope = ((Authorization)resource).getScope();
+  	  this.signatureRequired = ((Authorization)resource).signatureRequired;
+  	  this.state = ((Authorization)resource).getState();
+  	  this.status = ((Authorization)resource).getStatus();
+  	  this.subscribable = ((Authorization)resource).subscribable;
+  	  this.subscriptionURI = ((Authorization)resource).getSubscriptionURI();
+  	  this.thirdParty = ((Authorization)resource).getThirdParty();
+  	  this.tokenType = ((Authorization)resource).getTokenType();
     }
 }

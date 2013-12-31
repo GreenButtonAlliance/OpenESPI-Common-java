@@ -155,4 +155,12 @@ public class MeterReading extends IdentifiedObject
     public void setRelatedLinks(List<LinkType> relatedLinks) {
         this.relatedLinks = relatedLinks;
     }
+    
+    @Override 
+    public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
+    	this.intervalBlocks = ((MeterReading)resource).intervalBlocks;
+    	this.readingType = ((MeterReading)resource).readingType;
+    	this.usagePoint = ((MeterReading)resource).usagePoint;
+    }
 }

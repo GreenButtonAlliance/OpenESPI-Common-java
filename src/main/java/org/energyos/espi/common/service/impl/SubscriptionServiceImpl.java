@@ -6,6 +6,8 @@ import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
+import org.energyos.espi.common.service.ExportService;
+import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.SubscriptionService;
 import org.energyos.espi.common.utils.DateConverter;
@@ -34,6 +36,18 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Autowired
     private ResourceService resourceService;
 
+	private ImportService importService;
+	
+	private ExportService exportService;
+	
+	public void setImportService (ImportService importService) {
+		this.importService = importService;
+	}
+
+	public void setExportService (ExportService exportService) {
+		this.exportService = exportService;
+	}
+	
     @Override
     public Subscription createSubscription(OAuth2Authentication authentication) {
         Subscription subscription = new Subscription();
@@ -144,14 +158,20 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public void delete(Subscription subscription) {
-		// TODO Auto-generated method stub
-		
+		subscriptionRepository.deleteById(subscription.getId());	
 	}
 
 	@Override
 	public Subscription importResource(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			importService.importData(stream);
+			EntryType entry = importService.getEntries().get(0);
+			Subscription subscription = entry.getContent().getSubscription();
+			persist(subscription);
+			return subscription;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	private List<Long> findAllIdsByRetailCustomer(String retailCustomerId){ 
 		 List<Long> result = new ArrayList<Long>();
@@ -162,14 +182,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public Subscription findById(long subscriptionId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Subscription findById(Long subscriptionId) {
+		return subscriptionRepository.findById(subscriptionId);
 	}
 
 	@Override
-	public Subscription findById(Long retailCustomerId, long subscriptionId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Subscription findById(Long retailCustomerId, Long subscriptionId) {
+		return subscriptionRepository.findById(subscriptionId);
 	}
 }

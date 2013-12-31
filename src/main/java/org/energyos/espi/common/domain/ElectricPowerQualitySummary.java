@@ -475,4 +475,24 @@ public class ElectricPowerQualitySummary
         usagePoint.addElectricPowerQualitySummary(this);
         setUsagePoint(usagePoint);
     }
+    
+    @Override
+    public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
+
+    	this.flickerPlt = ((ElectricPowerQualitySummary)resource).flickerPlt;
+    	this.flickerPst = ((ElectricPowerQualitySummary)resource).flickerPst;
+    	this.harmonicVoltage = ((ElectricPowerQualitySummary)resource).harmonicVoltage;
+    	this.longInterruptions = ((ElectricPowerQualitySummary)resource).longInterruptions;
+    	this.mainsVoltage = ((ElectricPowerQualitySummary)resource).mainsVoltage;
+    	this.measurementProtocol = ((ElectricPowerQualitySummary)resource).measurementProtocol;
+    	this.powerFrequency = ((ElectricPowerQualitySummary)resource).powerFrequency;
+    	this.rapidVoltageChanges = ((ElectricPowerQualitySummary)resource).rapidVoltageChanges;
+    	this.shortInterruptions = ((ElectricPowerQualitySummary)resource).shortInterruptions;
+    	this.summaryInterval = ((ElectricPowerQualitySummary)resource).summaryInterval;
+    	this.supplyVoltageDips = ((ElectricPowerQualitySummary)resource).supplyVoltageDips;
+    	this.supplyVoltageVariations = ((ElectricPowerQualitySummary)resource).supplyVoltageVariations;
+    	this.supplyVoltageImbalance = ((ElectricPowerQualitySummary)resource).supplyVoltageImbalance;
+    	this.tempOvervoltage = ((ElectricPowerQualitySummary)resource).tempOvervoltage;	
+    }
 }

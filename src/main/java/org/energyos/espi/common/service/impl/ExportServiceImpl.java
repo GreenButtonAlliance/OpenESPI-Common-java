@@ -428,11 +428,10 @@ public class ExportServiceImpl implements ExportService {
     //
     private void exportEntries(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter, Class resourceClass) throws IOException {
     	DateTimeType updated = DateConverter.toDateTimeType(new Date());
-        String temp = updated.toString();
+        String temp = updated.getValue().toXMLFormat();
     	String uuid = UUID.randomUUID().toString();
-        String selfRef = "<link rel=\"self\" href=\"";
-        selfRef += "/espi/1_1/resource/xxxxTODOxxxx";
-        selfRef += "\"</link>\n";
+        String selfRef = "<link rel=\"self\" href=\"/espi/1_1/resource/xxxxTODOxxxx\"</link>\n";
+
     	//GregorianCalendar updated = new GregorianCalendar();
     	//updated.setTimeZone(TimeZone.getTimeZone("UTC"));
     	//String temp = DateConverter.epoch().toString();

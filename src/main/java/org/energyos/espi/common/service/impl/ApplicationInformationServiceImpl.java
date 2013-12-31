@@ -1,9 +1,11 @@
 package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.domain.ApplicationInformation;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
+import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
@@ -27,6 +29,13 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 
     @Autowired
     private ResourceService resourceService;
+    
+    @Autowired
+    private ImportService importService;
+    
+    public void setImportService(ImportService importService) {
+    	this.importService = importService;
+    }
     
     public void setResourceService(ResourceService resourceService) {
     	this.resourceService = resourceService;
@@ -86,7 +95,7 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 
 	@Override
 	public void delete(ApplicationInformation applicationInformation) {
-		// TODO Auto-generated method stub
+	       applicationInformationRepository.deleteById(applicationInformation.getId());
 		
 	}
 
@@ -138,8 +147,16 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 
 	@Override
 	public ApplicationInformation importResource(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
+
+		ApplicationInformation applicationInformation = null;
+		try {
+			importService.importData(stream);
+			applicationInformation = importService.getEntries().get(0).getContent().getApplicationInformation();
+            persist(applicationInformation);
+		} catch (Exception e) {
+
+		}
+		return applicationInformation;
 	}
 
 }

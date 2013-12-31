@@ -179,4 +179,12 @@ public class IntervalBlock
         MeterReading meterReading = (MeterReading) resource;
         meterReading.addIntervalBlock(this);
     }
+    
+    @Override 
+    public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
+    	this.interval = ((IntervalBlock)resource).interval;
+    	this.intervalReadings = ((IntervalBlock)resource).intervalReadings;
+    	this.meterReading = ((IntervalBlock)resource).meterReading;
+    }
 }

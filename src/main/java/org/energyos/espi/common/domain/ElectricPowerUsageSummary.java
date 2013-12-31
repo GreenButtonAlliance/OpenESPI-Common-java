@@ -727,11 +727,27 @@ public class ElectricPowerUsageSummary
 
     @Override
     public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
         ElectricPowerUsageSummary newUsagePoint = (ElectricPowerUsageSummary)resource;
-        this.setSelfLink(newUsagePoint.getSelfLink());
-        this.setUpLink(newUsagePoint.getUpLink());
-        this.setDescription(newUsagePoint.getDescription());
-        this.setUpdated(newUsagePoint.getUpdated());
-        this.setPublished(newUsagePoint.getPublished());
+        this.billingPeriod = ((ElectricPowerUsageSummary)resource).billingPeriod;
+        this.billLastPeriod = ((ElectricPowerUsageSummary)resource).billLastPeriod;
+        this.billToDate = ((ElectricPowerUsageSummary)resource).billToDate;
+        this.costAdditionalDetailLastPeriod  = ((ElectricPowerUsageSummary)resource).costAdditionalDetailLastPeriod;
+        this.costAdditionalLastPeriod = ((ElectricPowerUsageSummary)resource).costAdditionalLastPeriod;
+        this.currency = ((ElectricPowerUsageSummary)resource).currency;
+        this.currentBillingPeriodOverAllConsumption = ((ElectricPowerUsageSummary)resource).currentBillingPeriodOverAllConsumption;
+        this.currentDayLastYearNetConsumption = ((ElectricPowerUsageSummary)resource).currentDayLastYearNetConsumption;
+        this.currentDayNetConsumption = ((ElectricPowerUsageSummary)resource).currentDayNetConsumption;
+        this.currentDayOverallConsumption = ((ElectricPowerUsageSummary)resource).currentDayOverallConsumption;
+        this.overallConsumptionLastPeriod = ((ElectricPowerUsageSummary)resource).overallConsumptionLastPeriod;
+        this.peakDemand = ((ElectricPowerUsageSummary)resource).peakDemand;
+        this.previousDayLastYearOverallConsumption = ((ElectricPowerUsageSummary)resource).previousDayLastYearOverallConsumption;
+        this.previousDayNetConsumption = ((ElectricPowerUsageSummary)resource).currentDayNetConsumption;
+        this.previousDayOverallConsumption = ((ElectricPowerUsageSummary)resource).previousDayOverallConsumption;
+        this.qualityOfReading = ((ElectricPowerUsageSummary)resource).qualityOfReading;
+        this.ratchetDemand = ((ElectricPowerUsageSummary)resource).ratchetDemand;
+        this.ratchetDemandPeriod = ((ElectricPowerUsageSummary)resource).ratchetDemandPeriod;
+        this.statusTimeStamp = ((ElectricPowerUsageSummary)resource).statusTimeStamp;
+        this.usagePoint = ((ElectricPowerUsageSummary)resource).usagePoint;
     }
 }

@@ -135,6 +135,7 @@ public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQual
 		importService.importData(stream);
 		EntryType entry = importService.getEntries().get(0);
 		ElectricPowerQualitySummary electricPowerQualitySummary = entry.getContent().getElectricPowerQualitySummary();
+        persist(electricPowerQualitySummary);
 		return electricPowerQualitySummary;
 		} catch (Exception e) {
 			return null;

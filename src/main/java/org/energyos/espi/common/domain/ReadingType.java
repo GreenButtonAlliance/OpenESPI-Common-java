@@ -501,4 +501,27 @@ public class ReadingType
     public String getParentQuery() {
         return MeterReading.QUERY_FIND_BY_RELATED_HREF;
     }
+    
+    @Override
+    public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
+    	this.accumulationBehaviour = ((ReadingType)resource).accumulationBehaviour;
+    	this.argument = ((ReadingType)resource).argument;
+    	this.commodity = ((ReadingType)resource).commodity;
+    	this.consumptionTier = ((ReadingType)resource).consumptionTier;
+    	this.cpp = ((ReadingType)resource).cpp;
+    	this.currency = ((ReadingType)resource).currency;
+    	this.dataQualifier = ((ReadingType)resource).dataQualifier;
+    	this.defaultQuality = ((ReadingType)resource).defaultQuality;
+    	this.flowDirection = ((ReadingType)resource).flowDirection;
+    	this.interharmonic = ((ReadingType)resource).interharmonic;
+    	this.intervalLength = ((ReadingType)resource).intervalLength;
+    	this.kind = ((ReadingType)resource).kind;
+    	this.measuringPeriod = ((ReadingType)resource).measuringPeriod;
+    	this.phase = ((ReadingType)resource).phase;
+    	this.powerOfTenMultiplier = ((ReadingType)resource).powerOfTenMultiplier;
+    	this.timeAttribute = ((ReadingType)resource).timeAttribute;
+    	this.tou = ((ReadingType)resource).tou;
+    	this.uom = ((ReadingType)resource).uom;
+    }
 }

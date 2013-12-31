@@ -190,8 +190,14 @@ public class RetailCustomer implements UserDetails, Principal {
         return result;
     }
 
-	public void merge(RetailCustomer newRetailCustomer) {
-		// TODO Auto-generated method stub
-		
+	public void merge(RetailCustomer resource) {
+		// TODO needs to inherit from Identified Object
+		// super.merge(resource)
+		this.enabled = ((RetailCustomer)resource).enabled;
+		this.firstName = ((RetailCustomer)resource).firstName;
+		this.lastName = ((RetailCustomer)resource).lastName;
+		this.password = ((RetailCustomer)resource).password;
+		this.role = ((RetailCustomer)resource).role;
+		this.username = ((RetailCustomer)resource).username;
 	}
 }

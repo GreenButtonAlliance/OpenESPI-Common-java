@@ -177,4 +177,13 @@ public class TimeConfiguration extends IdentifiedObject {
     public String getParentQuery() {
         return UsagePoint.QUERY_FIND_BY_RELATED_HREF;
     }
+    
+    @Override
+    public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
+    	this.setDstStartRule(((TimeConfiguration)resource).getDstStartRule());
+        this.setTzOffset(((TimeConfiguration)resource).getTzOffset());
+        this.setDstEndRule(((TimeConfiguration)resource).getDstEndRule());
+        this.setDstOffset(((TimeConfiguration)resource).getDstOffset());
+    }
 }
