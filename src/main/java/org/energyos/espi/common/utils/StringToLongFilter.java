@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
 @Component
-public class LongToStringFilter extends GenericFilterBean {	
+public class StringToLongFilter extends GenericFilterBean {	
 	
 	@Override
 	public void doFilter(ServletRequest request,
@@ -22,7 +22,7 @@ public class LongToStringFilter extends GenericFilterBean {
 		
         if (logger.isDebugEnabled()) {
         	
-        	logger.debug("LongtoStringFilter processing");
+        	logger.debug("StringToLongFilter processing");
         	
         	HttpServletRequest httpRequest = (HttpServletRequest) request;
         	HttpServletResponse httpResponse = (HttpServletResponse) response;
