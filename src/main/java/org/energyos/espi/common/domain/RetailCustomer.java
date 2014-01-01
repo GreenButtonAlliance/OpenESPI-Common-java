@@ -16,6 +16,7 @@
 
 package org.energyos.espi.common.domain;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -72,8 +73,8 @@ public class RetailCustomer implements UserDetails, Principal {
     @Column(name = "password")
     @Size(min = 5, max = 100)
     protected String password;
-
-    @Column(name = "enabled")
+    
+    @Column(name="enabled", columnDefinition = "BIT", length = 1)
     @NotNull
     protected Boolean enabled = Boolean.TRUE;
 
