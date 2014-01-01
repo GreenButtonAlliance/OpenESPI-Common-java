@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
+@Transactional
 public class MeterReadingRepositoryImpl implements MeterReadingRepository {
 
     @PersistenceContext
@@ -64,11 +65,13 @@ public class MeterReadingRepositoryImpl implements MeterReadingRepository {
         }
 
 	@Override
+        @Transactional
 	public void deleteById(Long id) {
 	       em.remove(findById(id));
 	}
 
 	@Override
+        @Transactional
 	public void createOrReplaceByUUID(MeterReading meterReading) {
 	        try {
 	            MeterReading existingMeterReading = findByUUID(meterReading.getUUID());

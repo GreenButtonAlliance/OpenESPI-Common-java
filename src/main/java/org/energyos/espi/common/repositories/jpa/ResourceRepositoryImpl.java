@@ -5,9 +5,11 @@ import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +23,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
     public void persist(IdentifiedObject resource) {
         em.persist(resource);
     }
+    
 
     @Override
     public List<IdentifiedObject> findAllParentsByRelatedHref(String href, Linkable linkable) {
@@ -87,6 +90,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
     }
 
 
+    @Transactional
     public void update(UsagePoint updatedUsagePoint) {
         UsagePoint originalUsagePoint = findByUUID(updatedUsagePoint.getUUID());
         originalUsagePoint.setDescription(updatedUsagePoint.getDescription());

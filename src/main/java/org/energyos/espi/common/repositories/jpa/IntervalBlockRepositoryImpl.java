@@ -48,6 +48,7 @@ public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 	}
 
 	@Override
+        @Transactional
 	public void persist(IntervalBlock intervalBlock) {
         em.persist(intervalBlock);
 		
@@ -70,8 +71,9 @@ public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 	}
 
 	@Override
+        @Transactional
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
+	       em.remove(findById(id));
 		
 	}
 

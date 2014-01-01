@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
+@Transactional
 public class ElectricPowerUsageSummaryRepositoryImpl implements ElectricPowerUsageSummaryRepository {
 
     @PersistenceContext
@@ -65,6 +66,7 @@ public class ElectricPowerUsageSummaryRepositoryImpl implements ElectricPowerUsa
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(Long id) {
 	       em.remove(findById(id));
 		

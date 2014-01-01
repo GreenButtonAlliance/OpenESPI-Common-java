@@ -25,20 +25,32 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 import java.util.UUID;
 
 @Repository
+@Transactional
+
 public class TimeConfigurationRepositoryImpl implements TimeConfigurationRepository {
 
     @PersistenceContext
+    
     protected EntityManager em;
 
+    public void setEntityManager(EntityManager em)
+      {
+      this.em = em;
+      }
+    
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
 		
+
+		TimeConfiguration tc = findById(id);
+	    em.remove(em.contains(tc) ? tc : em.merge(tc));
+	   //    em.remove(em.merge(tc));
 	}
 	
     @Override

@@ -36,6 +36,11 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
     @PersistenceContext
     protected EntityManager em;
 
+    public void setEntityManager(EntityManager em)
+      {
+      this.em = em;
+      }
+
     @SuppressWarnings("unchecked")
     public List<UsagePoint> findAllByRetailCustomerId(Long id) {
         return (List<UsagePoint>)this.em.createNamedQuery(UsagePoint.QUERY_FIND_ALL_BY_RETAIL_CUSTOMER_ID)
@@ -112,7 +117,8 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
     }
 
     public void deleteById(Long id) {
-        em.remove(findById(id));
+	    UsagePoint r = findById(id);
+	    em.remove(em.contains(r) ? r : em.merge(r));
     }
 
     @Override

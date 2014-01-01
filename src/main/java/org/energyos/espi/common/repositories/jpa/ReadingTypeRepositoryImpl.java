@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
+@Transactional
 public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
 
     @PersistenceContext
@@ -78,6 +79,7 @@ public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(Long id) {
 	       em.remove(findById(id));
 	}

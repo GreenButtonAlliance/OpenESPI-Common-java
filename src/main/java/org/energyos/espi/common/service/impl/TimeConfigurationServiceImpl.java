@@ -94,8 +94,7 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 
 	@Override
 	public void deleteById(long timeConfigurationId) {
-		// TODO Auto-generated method stub
-		
+	       timeConfigurationRepository.deleteById(timeConfigurationId);
 	}
 
 	@Override
@@ -155,10 +154,9 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 			importService.importData(stream);
 			EntryType entry = importService.getEntries().get(0);
 			timeConfiguration = entry.getContent().getLocalTimeParameters();
-			persist(timeConfiguration);
 
 		} catch (Exception e) {
-
+           
 		}
 		return timeConfiguration;
 	}

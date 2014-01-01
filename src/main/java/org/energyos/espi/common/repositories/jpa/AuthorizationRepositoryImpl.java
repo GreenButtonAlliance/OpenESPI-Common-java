@@ -19,6 +19,7 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     protected EntityManager em;
 
     @Override
+    @Transactional
     public void persist(Authorization authorization) {
         em.persist(authorization);
     }
@@ -36,6 +37,7 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     }
 
     @Override
+    @Transactional
     public void merge(Authorization authorization) {
         em.merge(authorization);
     }
@@ -65,9 +67,9 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 	}
 
 	@Override
+        @Transactional
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-		
+	       em.remove(findById(id));
 	}
 
 	@Override

@@ -29,10 +29,17 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@Transactional
+
 public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 
     @PersistenceContext
     protected EntityManager em;
+
+    public void setEntityManager(EntityManager em)
+      {
+      this.em = em;
+      }
 
     @SuppressWarnings("unchecked")
     public List<RetailCustomer> findAll() {
@@ -61,6 +68,7 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 		return null;
 	}
 
+        @Transactional
 	@Override
 	public void deleteById(Long retailCustomerId) {
 	       em.remove(findById(retailCustomerId));

@@ -19,6 +19,11 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
     @PersistenceContext
     protected EntityManager em;
 
+    public void setEntityManager(EntityManager em)
+      {
+      this.em = em;
+      }
+
     @Override
     public void persist(Subscription subscription) {
         if (subscription.getHashedId() == null) subscription.setHashedId(UUID.randomUUID().toString());
@@ -44,7 +49,8 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
 
 	@Override
 	public void deleteById(Long id) {
-	       em.remove(findById(id));
+	    Subscription r = findById(id);
+	    em.remove(em.contains(r) ? r : em.merge(r));
 		
 	}
 }

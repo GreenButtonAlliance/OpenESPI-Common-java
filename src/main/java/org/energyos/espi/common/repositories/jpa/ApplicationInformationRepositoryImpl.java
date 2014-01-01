@@ -48,6 +48,7 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
     }
 
     @Override
+    @Transactional
     public void persist(ApplicationInformation applicationInformation) {
         em.persist(applicationInformation);
     }
@@ -72,6 +73,7 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(Long id) {
 	       em.remove(findById(id));
 		
