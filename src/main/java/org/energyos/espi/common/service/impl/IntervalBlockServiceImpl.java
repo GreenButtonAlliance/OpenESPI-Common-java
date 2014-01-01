@@ -139,7 +139,6 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 		importService.importData(stream);
 		EntryType entry = importService.getEntries().get(0);
 		List<IntervalBlock> intervalBlocks = entry.getContent().getIntervalBlocks();
-		persist(intervalBlocks.get(0));
 		return intervalBlocks.get(0);
 		} catch (Exception e) {
 			return null;

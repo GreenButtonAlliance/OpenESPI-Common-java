@@ -152,7 +152,6 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 		try {
 			importService.importData(stream);
 			applicationInformation = importService.getEntries().get(0).getContent().getApplicationInformation();
-            persist(applicationInformation);
 		} catch (Exception e) {
 
 		}

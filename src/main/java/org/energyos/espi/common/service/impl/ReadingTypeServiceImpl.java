@@ -84,8 +84,7 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 
 	@Override
 	public void deleteById(long readingTypeId) {
-		// TODO Auto-generated method stub
-		
+		readingTypeRepository.deleteById(readingTypeId);
 	}
 
 	@Override
@@ -136,7 +135,6 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 		importService.importData(stream);
 		EntryType entry = importService.getEntries().get(0);
 		ReadingType readingType = entry.getContent().getReadingType();
-		persist(readingType);
 		return readingType;
 		} catch (Exception e) {
 			return null;

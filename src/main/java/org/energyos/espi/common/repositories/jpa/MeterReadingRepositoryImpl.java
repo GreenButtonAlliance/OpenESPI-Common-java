@@ -17,6 +17,7 @@
 package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.MeterReadingRepository;
 import org.springframework.stereotype.Repository;
@@ -65,13 +66,14 @@ public class MeterReadingRepositoryImpl implements MeterReadingRepository {
         }
 
 	@Override
-        @Transactional
+	@Transactional
 	public void deleteById(Long id) {
-	       em.remove(findById(id));
+		MeterReading mr = findById(id);
+		em.remove(em.contains(mr) ? mr : em.merge(mr));
 	}
 
 	@Override
-        @Transactional
+    @Transactional
 	public void createOrReplaceByUUID(MeterReading meterReading) {
 	        try {
 	            MeterReading existingMeterReading = findByUUID(meterReading.getUUID());

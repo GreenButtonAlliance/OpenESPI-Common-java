@@ -18,6 +18,7 @@ package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
@@ -64,14 +65,13 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 
 	@Override
 	public RetailCustomer findById(String id) {
-    // TODO (if needed)
-		return null;
+        return em.find(RetailCustomer.class,id);
 	}
 
         @Transactional
 	@Override
-	public void deleteById(Long retailCustomerId) {
-	       em.remove(findById(retailCustomerId));
-		
+	public void deleteById(Long id) {
+    		RetailCustomer rc = findById(id);
+    	    em.remove(em.contains(rc) ? rc : em.merge(rc));
 	}
 }

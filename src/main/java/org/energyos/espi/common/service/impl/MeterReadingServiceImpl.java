@@ -137,7 +137,6 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 			importService.importData(stream);
 			EntryType entry = importService.getEntries().get(0);
 			MeterReading meterReading = entry.getContent().getMeterReading();
-			persist(meterReading);
 			return meterReading;
 		} catch (Exception e) {
 			return null;

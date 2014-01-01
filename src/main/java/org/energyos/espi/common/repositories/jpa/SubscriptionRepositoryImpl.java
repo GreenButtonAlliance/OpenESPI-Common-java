@@ -25,6 +25,7 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
       }
 
     @Override
+    @Transactional
     public void persist(Subscription subscription) {
         if (subscription.getHashedId() == null) subscription.setHashedId(UUID.randomUUID().toString());
         em.persist(subscription);
@@ -48,6 +49,7 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(Long id) {
 	    Subscription r = findById(id);
 	    em.remove(em.contains(r) ? r : em.merge(r));

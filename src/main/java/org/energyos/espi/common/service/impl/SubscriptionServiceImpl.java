@@ -167,7 +167,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 			importService.importData(stream);
 			EntryType entry = importService.getEntries().get(0);
 			Subscription subscription = entry.getContent().getSubscription();
-			persist(subscription);
 			return subscription;
 		} catch (Exception e) {
 			return null;

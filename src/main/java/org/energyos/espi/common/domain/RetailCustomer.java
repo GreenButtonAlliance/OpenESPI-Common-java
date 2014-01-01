@@ -25,6 +25,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlTransient;
+
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,6 +33,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "retail_customers")
 @NamedQueries(value = {
+		@NamedQuery(name = RetailCustomer.QUERY_FIND_BY_ID, query = "SELECT customer FROM RetailCustomer customer WHERE customer.id = :id"),
         @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL, query = "SELECT customer FROM RetailCustomer customer"),
         @NamedQuery(name = RetailCustomer.QUERY_FIND_BY_USERNAME, query = "SELECT customer FROM RetailCustomer customer WHERE customer.username = :username"),
         @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS, query = "SELECT retailCustomer.id FROM RetailCustomer retailCustomer")
@@ -39,6 +41,7 @@ import java.util.Collection;
 })
 public class RetailCustomer implements UserDetails, Principal {
 
+    public final static String QUERY_FIND_BY_ID = "RetailCustomer.findById";
     public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
     public final static String QUERY_FIND_BY_USERNAME = "RetailCustomer.findByUsername";
     public static final String QUERY_FIND_ALL_IDS = "RetailCustomer.findAllIds";

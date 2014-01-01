@@ -78,7 +78,7 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 
 	@Override
 	public void delete(ElectricPowerUsageSummary electricPowerUsageSummary) {
-		// TODO Auto-generated method stub	
+	       electricPowerUsageSummaryRepository.deleteById(electricPowerUsageSummary.getId());
 	}
 
 	@Override
@@ -134,7 +134,6 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 			importService.importData(stream);
 			EntryType entry = importService.getEntries().get(0);
 			ElectricPowerUsageSummary electricPowerUsageSummary = entry.getContent().getElectricPowerUsageSummary();
-			persist(electricPowerUsageSummary);
 			return electricPowerUsageSummary;
 		} catch (Exception e) {
 			return null;

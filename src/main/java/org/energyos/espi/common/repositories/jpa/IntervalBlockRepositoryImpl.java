@@ -18,6 +18,7 @@ package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.IntervalBlockRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,10 +72,11 @@ public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 	}
 
 	@Override
-        @Transactional
+	@Transactional
 	public void deleteById(Long id) {
-	       em.remove(findById(id));
-		
+		IntervalBlock ib = findById(id);
+		em.remove(em.contains(ib) ? ib : em.merge(ib));
+
 	}
 
 	@Override

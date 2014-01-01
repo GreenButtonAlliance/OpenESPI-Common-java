@@ -198,7 +198,6 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 		try {
 			importService.importData(stream);
 			authorization = importService.getEntries().get(0).getContent().getAuthorization();
-            persist(authorization);
 		} catch (Exception e) {
 
 		}
