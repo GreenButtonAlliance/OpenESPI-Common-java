@@ -61,6 +61,8 @@ import java.util.Set;
 @Table(name = "subscriptions")
 @XmlJavaTypeAdapter(SubscriptionAdapter.class)
 @NamedQueries(value = {
+        @NamedQuery(name = Subscription.QUERY_FIND_BY_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.id = :id"),
+        @NamedQuery(name = Subscription.QUERY_FIND_BY_UUID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.uuid = :uuid"),
         @NamedQuery(name = Subscription.QUERY_FIND_ALL, query = "SELECT subscription FROM Subscription subscription"),
         @NamedQuery(name = Subscription.QUERY_FIND_BY_HASHED_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.hashedId = :hashedId"),
         @NamedQuery(name = Subscription.QUERY_FIND_ALL_IDS, query = "SELECT subscription.id FROM Subscription subscription")
@@ -69,7 +71,9 @@ import java.util.Set;
 public class Subscription
         extends IdentifiedObject {
 
-    public final static String QUERY_FIND_ALL = "Subscription.findAll";
+	public final static String QUERY_FIND_BY_UUID = "Subscription.findByUUID";
+    public static final String QUERY_FIND_BY_ID = "Subscription.findById";
+	public final static String QUERY_FIND_ALL = "Subscription.findAll";
     public final static String QUERY_FIND_BY_HASHED_ID = "Subscription.findByHashedID";
     public static final String QUERY_FIND_ALL_IDS = "Subscription.findAllIds";
 

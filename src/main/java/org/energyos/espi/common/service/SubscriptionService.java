@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 public interface SubscriptionService {
 	// TODO: likely deprecated
@@ -46,8 +47,10 @@ public interface SubscriptionService {
 	// import-exportResource services
 	public Subscription importResource(InputStream stream);
 
-	Subscription findById(Long subscriptionId);
+	public Subscription findById(Long subscriptionId);
 
-	Subscription findById(Long retailCustomerId, Long subscriptionId);
+	public Subscription findById(Long retailCustomerId, Long subscriptionId);
+
+	public Subscription findByUUID(UUID uuid);
 
 }

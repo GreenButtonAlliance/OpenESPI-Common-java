@@ -19,6 +19,7 @@ package org.energyos.espi.common.repositories;
 import org.energyos.espi.common.domain.Subscription;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface SubscriptionRepository {
     void persist(Subscription subscription);
@@ -30,4 +31,6 @@ public interface SubscriptionRepository {
 	Subscription findById(Long subscriptionId);
 
 	void deleteById(Long id);
+
+	Subscription findByUUID(UUID uuid);
 }

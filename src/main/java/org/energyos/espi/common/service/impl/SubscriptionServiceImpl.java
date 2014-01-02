@@ -1,5 +1,6 @@
 package org.energyos.espi.common.service.impl;
 
+import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
@@ -70,6 +71,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     	 subscriptionRepository.persist(subscription);
     }
 
+    @Override
+    public Subscription findByUUID(UUID uuid) {
+        return subscriptionRepository.findByUUID(uuid);
+    }
+    
     @Override
     public Subscription findByHashedId(String hashedId) {
         return  subscriptionRepository.findByHashedId(hashedId);

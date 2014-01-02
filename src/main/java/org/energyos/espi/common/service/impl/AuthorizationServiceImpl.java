@@ -58,6 +58,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
+    public Authorization findByUUID(UUID uuid) {
+        return authorizationRepository.findByUUID(uuid);
+    }
+    
+    @Override
     public Authorization createAuthorization(Subscription subscription, String accessToken) {
         Authorization authorization = new Authorization();
         authorization.setUUID(UUID.randomUUID());
@@ -206,7 +211,6 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
 	@Override
 	public Authorization findById(Long retailCustomerId, long authorizationId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.authorizationRepository.findById(authorizationId);
 	}
 }

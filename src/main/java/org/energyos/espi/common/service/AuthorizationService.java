@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 public interface AuthorizationService {
 	// residue from random stories
@@ -54,5 +55,7 @@ public interface AuthorizationService {
 	EntryType findRoot(Long authorizationId);
 
 	EntryTypeIterator findEntryTypeIterator();
+
+	Authorization findByUUID(UUID uuid);
 
 }

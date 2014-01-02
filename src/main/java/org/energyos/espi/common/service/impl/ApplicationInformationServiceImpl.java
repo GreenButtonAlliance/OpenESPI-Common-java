@@ -1,6 +1,7 @@
 package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.domain.ApplicationInformation;
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
@@ -19,6 +20,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -70,6 +72,11 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
         return applicationInformationRepository.findByDataCustodianClientId(dataCustodianClientId);
     }
 
+    @Override
+    public ApplicationInformation findByUUID(UUID uuid) {
+        return applicationInformationRepository.findByUUID(uuid);
+    }
+    
     @Override
     public ClientDetails loadClientByClientId(String clientId) {
         return findByClientId(clientId);
