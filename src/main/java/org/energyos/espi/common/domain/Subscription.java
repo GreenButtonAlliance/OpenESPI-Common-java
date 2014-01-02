@@ -134,11 +134,15 @@ public class Subscription
     public Set<UsagePoint> getUsagePoints() {
         return usagePoints;
     }
-
+    
     public void setUsagePoints(Set<UsagePoint> usagePoints) {
         this.usagePoints = usagePoints;
     }
 
+    public void removeUsagePoint(UsagePoint up) {
+    	usagePoints.remove(up);
+    }
+    
     public Authorization getAuthorization() {
         return authorization;
     }

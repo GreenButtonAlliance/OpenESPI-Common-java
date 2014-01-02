@@ -163,6 +163,12 @@ public class UsagePoint
         meterReadings.add(meterReading);
     }
 
+    public void removeMeterReading(MeterReading meterReading)
+    {
+        meterReading.setUsagePoint(null);
+        meterReadings.remove(meterReading);
+    }
+    
     @XmlTransient
     @ManyToOne
     @JoinColumn(name="retail_customer_id")
@@ -276,10 +282,20 @@ public class UsagePoint
         electricPowerUsageSummaries.add(electricPowerUsageSummary);
     }
 
+    public void removeElectricPowerUsageSummary(ElectricPowerUsageSummary electricPowerUsageSummary) {
+    	electricPowerUsageSummary.setUsagePoint(null);
+    	electricPowerUsageSummaries.remove(electricPowerUsageSummary);
+    }
+    
     public List<ElectricPowerQualitySummary> getElectricPowerQualitySummaries() {
         return electricPowerQualitySummaries;
     }
 
+    public void removeElectricPowerQualitySummary(ElectricPowerQualitySummary electricPowerQualitySummary) {
+    	electricPowerQualitySummary.setUsagePoint(null);
+    	electricPowerQualitySummaries.remove(electricPowerQualitySummary);
+    }
+    
     public void setElectricPowerQualitySummaries(List<ElectricPowerQualitySummary> electricPowerQualitySummaries) {
         this.electricPowerQualitySummaries = electricPowerQualitySummaries;
     }
@@ -332,6 +348,15 @@ public class UsagePoint
         this.subscriptions = subscriptions;
     }
 
+    public void addSubscription(Subscription subscription){
+    	this.subscriptions.add(subscription);
+    }
+    
+    public void removeSubscription(Subscription subscription) {
+    	this.subscriptions.remove(subscription);
+    	subscription.removeUsagePoint(this);
+    }
+    
     public void setRelatedLinks(List<LinkType> relatedLinks) {
         this.relatedLinks = relatedLinks;
     }

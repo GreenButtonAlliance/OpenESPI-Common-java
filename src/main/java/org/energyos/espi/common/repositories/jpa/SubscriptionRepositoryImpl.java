@@ -3,6 +3,7 @@ package org.energyos.espi.common.repositories.jpa;
 import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Repository
@@ -60,8 +63,14 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
 	@Override
 	@Transactional
 	public void deleteById(Long id) {
-	    Subscription r = findById(id);
-	    em.remove(em.contains(r) ? r : em.merge(r));
-		
+	    Subscription subscription = findById(id);
+	    Set<UsagePoint> ups = subscription.getUsagePoints();
+	    Iterator<UsagePoint> it = ups.iterator();
+	    while (it.hasNext()) {
+	    	UsagePoint up = it.next();
+	    	up.removeSubscription(subscription);
+	    	em.persist(em.contains(up)? up : em.merge(up));
+	    }	    
+	    em.remove(em.contains(subscription) ? subscription : em.merge(subscription));	
 	}
 }
