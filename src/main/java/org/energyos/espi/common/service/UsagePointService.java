@@ -77,6 +77,8 @@ public interface UsagePointService {
 	public EntryTypeIterator findEntryTypeIterator();
 
 	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
+	
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
 
 	public void add(UsagePoint usagePoint);
 

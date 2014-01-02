@@ -14,24 +14,24 @@ public class EntryTypeIterator {
 
     private EntryBuilder builder;
 
-    private Iterator<Long> usagePointIds;
+    private Iterator<Long> resourceIds;
     private Iterator<Pair<Long, Class>> childIds = new ArrayList<Pair<Long, Class>>().iterator();
     private ResourceService resourceService;
 
-    public EntryTypeIterator(ResourceService resourceService, List<Long> usagePointIds, EntryBuilder builder) {
+    public EntryTypeIterator(ResourceService resourceService, List<Long> ids, EntryBuilder builder) {
         this.resourceService = resourceService;
-        this.usagePointIds = usagePointIds.iterator();
+        this.resourceIds = ids.iterator();
         this.builder = builder;
     }
 
-    public EntryTypeIterator(ResourceService resourceService, List<Long> usagePointIds) {
+    public EntryTypeIterator(ResourceService resourceService, List<Long> ids) {
         this.resourceService = resourceService;
-        this.usagePointIds = usagePointIds.iterator();
+        this.resourceIds = ids.iterator();
         builder = new EntryBuilder();
     }
 
     public boolean hasNext() {
-        return childIds.hasNext() || usagePointIds.hasNext();
+        return childIds.hasNext() || resourceIds.hasNext();
     }
 
     public EntryType next()  {
@@ -40,11 +40,21 @@ public class EntryTypeIterator {
             Pair<Long, Class> pair = childIds.next();
             resource = resourceService.findById(pair.getKey(), pair.getValue());
         } else {
-            resource = resourceService.findById(usagePointIds.next(), UsagePoint.class);
+            resource = resourceService.findById(resourceIds.next(), UsagePoint.class);
             updateChildIds(resource.getId());
         }
 
         return builder.build(resource);
+    }
+
+    // For the RESTful interfaces, we don't want to build the whole child structure, 
+    // only the 1 resource is exported.
+    //
+    @SuppressWarnings("unchecked")
+	public EntryType nextEntry(Class resourceClass)  {
+        IdentifiedObject resource;
+        resource = resourceService.findById(resourceIds.next(), resourceClass);
+        return builder.buildEntry(resource);
     }
 
     private void updateChildIds(Long usagePointId) {

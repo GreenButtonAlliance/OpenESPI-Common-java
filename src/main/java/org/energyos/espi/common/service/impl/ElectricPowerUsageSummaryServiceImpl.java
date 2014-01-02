@@ -6,6 +6,8 @@ import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ElectricPowerUsageSummaryRepository;
 import org.energyos.espi.common.service.ElectricPowerUsageSummaryService;
+import org.energyos.espi.common.service.ImportService;
+import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +25,20 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 
     @Autowired
     protected ElectricPowerUsageSummaryRepository electricPowerUsageSummaryRepository;
+    
+    @Autowired
+	private ResourceService resourceService;
+    
+    @Autowired
+    private ImportService importService;
+    
+    public void setImportService(ImportService importService) {
+    	this.importService = importService;
+    }
+    
+    public void setResourceService(ResourceService resourceService) {
+    	this.resourceService = resourceService;
+    }
 
     public void setRepository(ElectricPowerUsageSummaryRepository electricPowerUsageSummaryRepository) {
         this.electricPowerUsageSummaryRepository = electricPowerUsageSummaryRepository;
@@ -61,7 +78,7 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 
 	@Override
 	public void delete(ElectricPowerUsageSummary electricPowerUsageSummary) {
-		// TODO Auto-generated method stub	
+	       electricPowerUsageSummaryRepository.deleteById(electricPowerUsageSummary.getId());
 	}
 
 	@Override
@@ -72,17 +89,38 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 	}
 
 	@Override
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
-			Long electricPowerUsageSummaryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId) {
+		EntryTypeIterator result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp = resourceService.findAllIds(ElectricPowerUsageSummary.class);
+			result = (new EntryTypeIterator(resourceService, temp));
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
 
 	@Override
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId) {
-		// TODO Auto-generated method stub
-		return null;
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
+			Long electricPowerUsageSummaryId) {
+		EntryType result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp.add(electricPowerUsageSummaryId);
+			result = (new EntryTypeIterator(resourceService, temp)).nextEntry(ElectricPowerUsageSummary.class);
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
+
 
 	@Override
 	public void add(ElectricPowerUsageSummary electricPowerUsageSummary) {
@@ -92,8 +130,14 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 
 	@Override
 	public ElectricPowerUsageSummary importResource(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			importService.importData(stream);
+			EntryType entry = importService.getEntries().get(0);
+			ElectricPowerUsageSummary electricPowerUsageSummary = entry.getContent().getElectricPowerUsageSummary();
+			return electricPowerUsageSummary;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

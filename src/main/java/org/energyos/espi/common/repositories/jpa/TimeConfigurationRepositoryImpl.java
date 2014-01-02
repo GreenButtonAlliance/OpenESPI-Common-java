@@ -16,6 +16,7 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.TimeConfigurationRepository;
@@ -24,44 +25,50 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 import java.util.UUID;
 
 @Repository
+@Transactional
+
 public class TimeConfigurationRepositoryImpl implements TimeConfigurationRepository {
 
     @PersistenceContext
+    
     protected EntityManager em;
 
+    public void setEntityManager(EntityManager em)
+      {
+      this.em = em;
+      }
+    
+	@Override
+	public void deleteById(Long id) {
+		
+
+		TimeConfiguration tc = findById(id);
+	    em.remove(em.contains(tc) ? tc : em.merge(tc));
+	   //    em.remove(em.merge(tc));
+	}
+	
     @Override
     public TimeConfiguration findById(Long timeConfigurationId) {
         return em.find(TimeConfiguration.class, timeConfigurationId);
     }
-
-    @Override
-    @Transactional
-    public void persist(TimeConfiguration timeConfiguration) {
-        em.persist(timeConfiguration);
-    }
-
+  
     @Override
     public TimeConfiguration findByUUID(UUID uuid) {
         return (TimeConfiguration) em.createNamedQuery(TimeConfiguration.QUERY_FIND_BY_UUID)
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }
-
-	@Override
-	public EntryType find(Long retailCustomerId, Long usagePointId, Long timeConfigurationId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public EntryTypeIterator find(Long retailCustomerId, Long usagePointId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+    @Override
+    @Transactional
+    public void persist(TimeConfiguration timeConfiguration) {
+        em.persist(timeConfiguration);
+    }
 
 }

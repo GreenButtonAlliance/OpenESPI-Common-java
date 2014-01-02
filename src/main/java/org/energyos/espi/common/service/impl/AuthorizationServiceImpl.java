@@ -1,5 +1,6 @@
 package org.energyos.espi.common.service.impl;
 
+import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.Routes;
@@ -9,6 +10,7 @@ import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.AuthorizationRepository;
 import org.energyos.espi.common.repositories.UsagePointRepository;
 import org.energyos.espi.common.service.AuthorizationService;
+import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,13 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
 	@Autowired
 	private ResourceService resourceService;
+	
+	@Autowired
+	private ImportService importService;
+	
+	public void setImportService(ImportService importService){
+		this.importService = importService;
+	}
 	
 	public void setResourceService(ResourceService resourceService) {
 		this.resourceService = resourceService;
@@ -102,19 +111,18 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
 	@Override
 	public Authorization findById(Long authorizationId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.authorizationRepository.findById(authorizationId);
 	}
 
 	@Override
 	public EntryType findEntryType(Long retailCustomerId, Long authorizationId) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			Authorization authorization = authorizationRepository.findById(authorizationId);
 			temp.add(authorization.getId());
-			result = (new EntryTypeIterator(resourceService, temp)).next();
+			result = (new EntryTypeIterator(resourceService, temp)).nextEntry(Authorization.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -180,15 +188,20 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
 	@Override
 	public void delete(Authorization authorization) {
-		// TODO Auto-generated method stub
-		
+	      authorizationRepository.deleteById(authorization.getId());
 	}
 
 	// import-exportResource services
 	@Override
 	public Authorization importResource(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
+		Authorization authorization = null;
+		try {
+			importService.importData(stream);
+			authorization = importService.getEntries().get(0).getContent().getAuthorization();
+		} catch (Exception e) {
+
+		}
+		return authorization;
 	}
 
 	@Override

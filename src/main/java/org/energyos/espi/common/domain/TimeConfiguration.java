@@ -70,15 +70,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
                 query = "SELECT config FROM TimeConfiguration config WHERE config.id = :id"),
         @NamedQuery(name = TimeConfiguration.QUERY_FIND_BY_UUID,
                 query = "SELECT config FROM TimeConfiguration config WHERE config.uuid = :uuid"),
-        @NamedQuery(name = TimeConfiguration.QUERY_FIND_ALL_IDS,
-                query = "SELECT config.id FROM TimeConfiguration config"),
         @NamedQuery(name = TimeConfiguration.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT usagePoint.localTimeParameters.id FROM UsagePoint usagePoint WHERE usagePoint.id = :usagePointId"),
+        @NamedQuery(name = TimeConfiguration.QUERY_FIND_ALL_IDS,
+                query = "SELECT timeConfiguration.id FROM TimeConfiguration timeConfiguration")
+
 })
 public class TimeConfiguration extends IdentifiedObject {
 
     public static final String QUERY_FIND_BY_ID = "TimeConfiguration.findById";
-    public static final String QUERY_FIND_ALL_IDS = "TimeConfiguration.findByAllIds";
+    public static final String QUERY_FIND_ALL_IDS = "TimeConfiguration.findAllIds";
     public static final String QUERY_FIND_BY_UUID = "TimeConfiguration.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "TimeConfiguration.findAllIdsByUsagePointId";
 
@@ -175,5 +176,14 @@ public class TimeConfiguration extends IdentifiedObject {
     @Override
     public String getParentQuery() {
         return UsagePoint.QUERY_FIND_BY_RELATED_HREF;
+    }
+    
+    @Override
+    public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
+    	this.setDstStartRule(((TimeConfiguration)resource).getDstStartRule());
+        this.setTzOffset(((TimeConfiguration)resource).getTzOffset());
+        this.setDstEndRule(((TimeConfiguration)resource).getDstEndRule());
+        this.setDstOffset(((TimeConfiguration)resource).getDstOffset());
     }
 }

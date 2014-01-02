@@ -356,16 +356,10 @@ public class UsagePoint
 
     @Override
     public void merge(IdentifiedObject resource) {
-        UsagePoint newUsagePoint = (UsagePoint)resource;
-        this.setSelfLink(newUsagePoint.getSelfLink());
-        this.setUpLink(newUsagePoint.getUpLink());
-        this.setRelatedLinks(newUsagePoint.getRelatedLinks());
-        this.setDescription(newUsagePoint.getDescription());
-        this.setUpdated(newUsagePoint.getUpdated());
-        this.setPublished(newUsagePoint.getPublished());
-        this.setServiceCategory(newUsagePoint.getServiceCategory());
+    	super.merge(resource);
+        this.setRelatedLinks(resource.getRelatedLinks());
+        this.setServiceCategory(((UsagePoint)resource).getServiceCategory());
     }
-
 
     public String getURI() {
         return uri;

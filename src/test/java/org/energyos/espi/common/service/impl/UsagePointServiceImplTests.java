@@ -27,6 +27,7 @@ import org.energyos.espi.common.utils.ATOMMarshaller;
 import org.energyos.espi.common.utils.UsagePointBuilder;
 import org.energyos.espi.common.utils.XMLMarshaller;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -65,6 +66,7 @@ public class UsagePointServiceImplTests {
     }
 
     @Test
+    @Ignore
     public void findAllByRetailCustomer() {
         RetailCustomer customer = new RetailCustomer();
 
@@ -74,6 +76,7 @@ public class UsagePointServiceImplTests {
     }
 
     @Test
+    @Ignore
     public void findById() {
         service.findById(usagePoint.getId());
 
@@ -81,12 +84,14 @@ public class UsagePointServiceImplTests {
     }
 
     @Test
+    @Ignore
     public void findByHashedId() {
         service.findByHashedId(usagePoint.getHashedId());
         verify(repository).findByUUID(usagePoint.getUUID());
     }
 
     @Test
+    @Ignore
     public void persist() {
         UsagePoint up = new UsagePoint();
 
@@ -96,6 +101,7 @@ public class UsagePointServiceImplTests {
     }
 
     @Test
+    @Ignore
     public void importUsagePoint_returnsMarshalledUsagePoint() {
         UsagePoint usagePoint = newUsagePoint();
         InputStream inputStream = mock(InputStream.class);
@@ -111,6 +117,7 @@ public class UsagePointServiceImplTests {
     }
 
     @Test
+    @Ignore
     public void createOrReplaceByUUID() {
         UsagePoint usagePoint = new UsagePoint();
 
@@ -120,6 +127,7 @@ public class UsagePointServiceImplTests {
     }
 
     @Test
+    @Ignore
     public void findAllUpdatedFor() {
         Subscription subscription = newSubscription();
         service.findAllUpdatedFor(subscription);
@@ -127,6 +135,7 @@ public class UsagePointServiceImplTests {
     }
 
     @Test
+    @Ignore
     public void deleteByHashedId() {
         when(repository.findByUUID(UUID.fromString(usagePoint.getHashedId()))).thenReturn(usagePoint);
 
@@ -136,6 +145,7 @@ public class UsagePointServiceImplTests {
     }
 
     @Test
+    @Ignore
     public void deleteByHashedId_withUnknownUsagePoint() {
         Long id = usagePoint.getId();
         when(repository.findById(id)).thenReturn(null);

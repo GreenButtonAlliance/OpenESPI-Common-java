@@ -107,6 +107,9 @@ import java.util.List;
                 query = "SELECT summary FROM ElectricPowerUsageSummary summary WHERE summary.uuid = :uuid"),
         @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT summary.id FROM ElectricPowerUsageSummary summary WHERE summary.usagePoint.id = :usagePointId"),
+        @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_ALL_IDS,
+                query = "SELECT electricPowerUsageSummary.id FROM ElectricPowerUsageSummary electricPowerUsageSummary")
+
 })
 public class ElectricPowerUsageSummary
         extends IdentifiedObject
@@ -115,6 +118,7 @@ public class ElectricPowerUsageSummary
     public static final String QUERY_FIND_BY_ID = "ElectricPowerUsageSummary.findById";
     public static final String QUERY_FIND_BY_UUID = "ElectricPowerUsageSummary.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ElectricPowerUsageSummary.findAllIdsByUsagePointId";
+    public static final String QUERY_FIND_ALL_IDS = "ElectricPowerUsageSummary.findAllIds";
 
     protected Long billLastPeriod;
     protected Long billToDate;
@@ -723,11 +727,27 @@ public class ElectricPowerUsageSummary
 
     @Override
     public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
         ElectricPowerUsageSummary newUsagePoint = (ElectricPowerUsageSummary)resource;
-        this.setSelfLink(newUsagePoint.getSelfLink());
-        this.setUpLink(newUsagePoint.getUpLink());
-        this.setDescription(newUsagePoint.getDescription());
-        this.setUpdated(newUsagePoint.getUpdated());
-        this.setPublished(newUsagePoint.getPublished());
+        this.billingPeriod = ((ElectricPowerUsageSummary)resource).billingPeriod;
+        this.billLastPeriod = ((ElectricPowerUsageSummary)resource).billLastPeriod;
+        this.billToDate = ((ElectricPowerUsageSummary)resource).billToDate;
+        this.costAdditionalDetailLastPeriod  = ((ElectricPowerUsageSummary)resource).costAdditionalDetailLastPeriod;
+        this.costAdditionalLastPeriod = ((ElectricPowerUsageSummary)resource).costAdditionalLastPeriod;
+        this.currency = ((ElectricPowerUsageSummary)resource).currency;
+        this.currentBillingPeriodOverAllConsumption = ((ElectricPowerUsageSummary)resource).currentBillingPeriodOverAllConsumption;
+        this.currentDayLastYearNetConsumption = ((ElectricPowerUsageSummary)resource).currentDayLastYearNetConsumption;
+        this.currentDayNetConsumption = ((ElectricPowerUsageSummary)resource).currentDayNetConsumption;
+        this.currentDayOverallConsumption = ((ElectricPowerUsageSummary)resource).currentDayOverallConsumption;
+        this.overallConsumptionLastPeriod = ((ElectricPowerUsageSummary)resource).overallConsumptionLastPeriod;
+        this.peakDemand = ((ElectricPowerUsageSummary)resource).peakDemand;
+        this.previousDayLastYearOverallConsumption = ((ElectricPowerUsageSummary)resource).previousDayLastYearOverallConsumption;
+        this.previousDayNetConsumption = ((ElectricPowerUsageSummary)resource).currentDayNetConsumption;
+        this.previousDayOverallConsumption = ((ElectricPowerUsageSummary)resource).previousDayOverallConsumption;
+        this.qualityOfReading = ((ElectricPowerUsageSummary)resource).qualityOfReading;
+        this.ratchetDemand = ((ElectricPowerUsageSummary)resource).ratchetDemand;
+        this.ratchetDemandPeriod = ((ElectricPowerUsageSummary)resource).ratchetDemandPeriod;
+        this.statusTimeStamp = ((ElectricPowerUsageSummary)resource).statusTimeStamp;
+        this.usagePoint = ((ElectricPowerUsageSummary)resource).usagePoint;
     }
 }

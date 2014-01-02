@@ -42,7 +42,8 @@ public class Routes {
     public static final String OAUTH_ERROR = "/oauth/error";
     public static final String RETAIL_CUSTOMER_HOME = "/RetailCustomer/{retailCustomerId}/home";
     public static final String TERMS_OF_SERVICE = "/TermsOfService";
-    public static final String USAGE_POINT_FEED = "/RetailCustomer/{retailCustomerId}/UsagePoint/feed";
+    public static final String USAGE_POINTS_FEED = "/RetailCustomer/{retailCustomerId}/UsagePoint/feed";
+    public static final String USAGE_POINT_FEED = "/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/feed";
     public static final String USAGE_POINT_INDEX = "/RetailCustomer/{retailCustomerId}/UsagePoint";
     public static final String USAGE_POINT_INDEX_TP = "/RetailCustomer/{retailCustomerId}/UsagePoint/show";
     public static final String USAGE_POINT_SHOW = "/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/show";

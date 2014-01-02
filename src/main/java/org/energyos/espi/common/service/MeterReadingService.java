@@ -36,13 +36,13 @@ public interface MeterReadingService {
 	
 	public MeterReading findById(long meterReadingId);
 	
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId, ExportFilter params);
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
 
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId, Long meterReadingId, ExportFilter params);
+	public EntryType findEntryType(Long retailCustomerId, Long usagePointId, Long meterReadingId);
 	
-	public EntryTypeIterator findEntryTypeIterator(ExportFilter params);
+	public EntryTypeIterator findEntryTypeIterator();
 	
-	public EntryType findEntryType(Long meterReadingId, ExportFilter params);
+	public EntryType findEntryType(Long meterReadingId);
 
 	public void delete(MeterReading meterReading);
 

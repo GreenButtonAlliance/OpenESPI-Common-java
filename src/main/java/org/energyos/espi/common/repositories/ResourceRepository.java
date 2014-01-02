@@ -25,4 +25,5 @@ public interface ResourceRepository {
     <T extends IdentifiedObject> List<Long> findAllIds(Class<T> clazz);
 
     <T extends IdentifiedObject> List<Long> findAllIdsByUsagePointId(Long usagePointId, Class<T> clazz);
+
 }

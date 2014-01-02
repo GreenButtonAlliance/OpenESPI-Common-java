@@ -24,6 +24,7 @@
 
 package org.energyos.espi.common.domain;
 
+import org.energyos.espi.common.models.atom.adapters.ApplicationInformationAdapter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -34,6 +35,7 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.lang.Object;
 import java.util.*;
@@ -148,11 +150,15 @@ import java.util.*;
 	})
 @Entity
 @Table(name = "application_information", uniqueConstraints = {@UniqueConstraint(columnNames = {"dataCustodianId", "clientID"})})
+@XmlJavaTypeAdapter(ApplicationInformationAdapter.class)
 @NamedQueries(value = {
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.id = :id"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.clientId = :clientId"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.dataCustodianId = :dataCustodianId"),
-        @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL, query = "SELECT info FROM ApplicationInformation info")
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL, query = "SELECT info FROM ApplicationInformation info"),
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL_IDS,
+		    query = "SELECT applicationInformation.id FROM ApplicationInformation applicationInformation")
+
 })
 public class ApplicationInformation
         extends IdentifiedObject implements ClientDetails {
@@ -164,7 +170,7 @@ public class ApplicationInformation
     public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
     public static final String QUERY_FIND_BY_CLIENT_ID = "ApplicationInformation.findByClientId";
     public static final String QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID = "ApplicationInformation.findByDataCustodianClientId";
-	public static final String QUERY_FIND_ALL_IDS = "AppilcationInformation.findAllById";
+	public static final String QUERY_FIND_ALL_IDS = "AppilcationInformation.findAllIds";
 
     
     protected String dataCustodianApplicationStatus;
@@ -293,6 +299,11 @@ public class ApplicationInformation
             return null;
         }
 
+        public void setResourceIds(Set<String> ids) {
+	    // TODO seems not to be implemented??
+	    //this.resourceIds = ids;
+        }
+
         @Override
         public boolean isSecretRequired() {
             return true;
@@ -313,6 +324,9 @@ public class ApplicationInformation
             return scope;
         }
 
+        public void setScope(Set<String> scope) {
+    	    this.scope = scope;
+        }
         public String[] getScopeArray() {
             if (scope == null)
                 return new String[] {};
@@ -326,11 +340,20 @@ public class ApplicationInformation
             return grantTypes;
         }
 
+        public void setAuthorizedGrantTypes (Set<String> authorizedGrantTypes) {
+        	// TODO seems not to be implemented ??
+	        // this.grantTypes = authorizedGrantTypes;
+        }
+
         @Override
         public Set<String> getRegisteredRedirectUri() {
             Set<String> uris = new HashSet<>();
             uris.add(getRedirectUri());
             return uris;
+        }
+
+        public void setRegisteredRedirectUri(Set<String> registeredRediredUri) {
+	         this.redirectUri = registeredRediredUri.toString();
         }
 
         @Override
@@ -340,23 +363,42 @@ public class ApplicationInformation
             return authorities;
         }
 
+    public void setAuthorities (Collection<GrantedAuthority> authorities) {
+   
+       // TODO this seems not to be implemented ??
+	// this.authorities = authorities;
+    } 
         @Override
         public Integer getAccessTokenValiditySeconds() {
             return Integer.valueOf(60*60*24*60);
         }
 
-        @Override
+        public void setAccessTokenValiditySeconds(Integer s) {   	
+         // TODO This seems not to be implemented ??
+        // this.accessTokenValiditySeconds = s
+        }
+        
+
+       @Override
         public Integer getRefreshTokenValiditySeconds() {
             return Integer.valueOf(60*60*24);
         }
 
+        public void setRefreshTokenValiditySeconds(Integer s) {
+            // TODO This seems not to be implemented ??
+            // this.accessTokenValiditySeconds = s
+        }
+        
         @Override
         public Map<String, Object> getAdditionalInformation() {
             return null;
         }   
    
-    
-    
+	public void setAdditionalInformation(Map<String, Object> additionalInformation) {
+        // TODO This seems not to be implemented ??
+       // this.additionalInformation = additionalInformation;
+	}
+
     /**
      * Gets the value of the dataCustodianApplicationStatus property.
      * 
@@ -1130,6 +1172,10 @@ public class ApplicationInformation
         return this.contacts;
     }
 
+    public void setContacts(List<String> contacts) {
+	this.contacts = (ArrayList<String>) contacts;
+    }
+
     /**
      * Gets the value of the tokenEndpointAuthMethod property.
      * 
@@ -1184,6 +1230,12 @@ public class ApplicationInformation
         return this.grantTypes;
     }
 
+
+	private void setGrantTypes(List<GrantType> grantTypes) {
+		this.grantTypes = (ArrayList<GrantType>) grantTypes;
+
+	}
+	
     /**
      * Gets the value of the responseTypes property.
      * 
@@ -1244,6 +1296,11 @@ public class ApplicationInformation
         return registrationAccessToken;
     }
 
+    private void setRegistrationAccessToken(java.lang.Object registrationAccessToken) {
+	    this.registrationAccessToken = registrationAccessToken.toString();
+    }
+   
+
     /**
      * Sets the value of the registrationAccessToken property.
      * 
@@ -1296,6 +1353,58 @@ public class ApplicationInformation
         this.dataCustodianId = value;
     }
 
-        
-    
+      
+   @Override
+    public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
+    	this.setDataCustodianId(((ApplicationInformation)resource).getDataCustodianId());
+    	this.setClientId(((ApplicationInformation)resource).getClientId());
+    	this.setResourceIds(((ApplicationInformation)resource).getResourceIds());
+    	this.setClientSecret(((ApplicationInformation)resource).getClientSecret());
+    	this.setScope(((ApplicationInformation)resource).getScope());
+    	this.setAuthorizedGrantTypes(((ApplicationInformation)resource).getAuthorizedGrantTypes());
+    	this.setRegisteredRedirectUri(((ApplicationInformation)resource).getRegisteredRedirectUri());
+    	this.setAuthorities(((ApplicationInformation)resource).getAuthorities());
+    	this.setAccessTokenValiditySeconds(((ApplicationInformation)resource).getAccessTokenValiditySeconds());
+    	this.setRefreshTokenValiditySeconds(((ApplicationInformation)resource).getRefreshTokenValiditySeconds());
+    	this.setAdditionalInformation(((ApplicationInformation)resource).getAdditionalInformation());
+    	this.setDataCustodianApplicationStatus(((ApplicationInformation)resource).getDataCustodianApplicationStatus());
+    	this.setDataCustodianDefaultBatchResource(((ApplicationInformation)resource).getDataCustodianDefaultBatchResource());
+    	this.setDataCustodianDefaultSubscriptionResource(((ApplicationInformation)resource).getDataCustodianDefaultSubscriptionResource());
+    	this.setThirdPartyApplicationDescription(((ApplicationInformation)resource).getThirdPartyApplicationDescription());
+    	this.setThirdPartyApplicationStatus(((ApplicationInformation)resource).getThirdPartyApplicationStatus());
+    	this.setThirdPartyApplicationType(((ApplicationInformation)resource).getThirdPartyApplicationType());
+    	this.setThirdPartyApplicationUse(((ApplicationInformation)resource).getThirdPartyApplicationUse());
+    	this.setThirdPartyPhone(((ApplicationInformation)resource).getThirdPartyPhone());
+    	this.setAuthorizationServerUri(((ApplicationInformation)resource).getAuthorizationServerUri());
+    	this.setThirdPartyNotifyUri(((ApplicationInformation)resource).getThirdPartyNotifyUri());
+    	this.setAuthorizationServerAuthorizationEndpoint(((ApplicationInformation)resource).getAuthorizationServerAuthorizationEndpoint());
+    	this.setAuthorizationServerRegistrationEndpoint(((ApplicationInformation)resource).getAuthorizationServerRegistrationEndpoint());
+    	this.setAuthorizationServerTokenEndpoint(((ApplicationInformation)resource).getAuthorizationServerTokenEndpoint());
+    	this.setDataCustodianBulkRequestURI(((ApplicationInformation)resource).getDataCustodianBulkRequestURI());
+    	this.setDataCustodianThirdPartySelectionScreenURI(((ApplicationInformation)resource).getDataCustodianThirdPartySelectionScreenURI());
+    	this.setDataCustodianResourceEndpoint(((ApplicationInformation)resource).getDataCustodianResourceEndpoint());
+    	this.setThirdPartyDataCustodianSelectionScreenURI(((ApplicationInformation)resource).getThirdPartyDataCustodianSelectionScreenURI());
+    	this.setThirdPartyLoginScreenURI(((ApplicationInformation)resource).getThirdPartyLoginScreenURI());
+    	this.setThirdPartyScopeSelectionScreenURI(((ApplicationInformation)resource).getThirdPartyScopeSelectionScreenURI());
+    	this.setThirdPartyUserPortalScreenURI(((ApplicationInformation)resource).getThirdPartyUserPortalScreenURI());
+    	this.setLogoUri(((ApplicationInformation)resource).getLogoUri());
+    	this.setClientName(((ApplicationInformation)resource).getClientName());
+    	this.setClientUri(((ApplicationInformation)resource).getClientUri());
+    	this.setRedirectUri(((ApplicationInformation)resource).getRedirectUri());
+    	this.setTosUri(((ApplicationInformation)resource).getTosUri());
+    	this.setPolicyUri(((ApplicationInformation)resource).getPolicyUri());
+    	this.setSoftwareId(((ApplicationInformation)resource).getSoftwareId());
+    	this.setSoftwareVersion(((ApplicationInformation)resource).getSoftwareVersion());
+    	this.setClientIdIssuedAt(((ApplicationInformation)resource).getClientIdIssuedAt());
+    	this.setClientSecretExpiresAt(((ApplicationInformation)resource).getClientSecretExpiresAt());
+    	this.setContacts(((ApplicationInformation)resource).getContacts());
+    	this.setTokenEndpointAuthMethod(((ApplicationInformation)resource).getTokenEndpointAuthMethod());
+    	this.setGrantTypes(((ApplicationInformation)resource).getGrantTypes());
+    	this.setResponseTypes(((ApplicationInformation)resource).getResponseTypes());
+    	this.setRegistrationClientUri(((ApplicationInformation)resource).getRegistrationClientUri());
+    	this.setRegistrationAccessToken(((ApplicationInformation)resource).getRegistrationAccessToken());
+    	this.setThirdPartyApplicationName(((ApplicationInformation)resource).getThirdPartyApplicationName());
+    }
+
 }

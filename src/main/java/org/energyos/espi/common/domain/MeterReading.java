@@ -70,7 +70,8 @@ import java.util.List;
                 query = "SELECT readingType FROM ReadingType readingType WHERE readingType.upLink.href in (:relatedLinkHrefs)"),
         @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT reading.id FROM MeterReading reading WHERE reading.usagePoint.id = :usagePointId"),
-
+        @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS,
+                query = "SELECT meterReading.id FROM MeterReading meterReading")
 })
 public class MeterReading extends IdentifiedObject
 {
@@ -153,5 +154,13 @@ public class MeterReading extends IdentifiedObject
 
     public void setRelatedLinks(List<LinkType> relatedLinks) {
         this.relatedLinks = relatedLinks;
+    }
+    
+    @Override 
+    public void merge(IdentifiedObject resource) {
+    	super.merge(resource);
+    	this.intervalBlocks = ((MeterReading)resource).intervalBlocks;
+    	this.readingType = ((MeterReading)resource).readingType;
+    	this.usagePoint = ((MeterReading)resource).usagePoint;
     }
 }

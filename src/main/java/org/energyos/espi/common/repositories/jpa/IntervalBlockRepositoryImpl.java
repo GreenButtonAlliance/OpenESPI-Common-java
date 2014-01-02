@@ -17,13 +17,17 @@
 package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.IntervalBlockRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @Transactional
@@ -32,9 +36,52 @@ public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
     @PersistenceContext
     protected EntityManager em;
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public List<IntervalBlock> findAllByMeterReadingId(Long meterReadingId) {
         return (List<IntervalBlock>)this.em.createNamedQuery(IntervalBlock.QUERY_ALL_BY_METER_READING_ID)
                 .setParameter("meterReadingId", meterReadingId).getResultList();
     }
+
+	@Override
+	public IntervalBlock findById(Long intervalBlockId) {
+        return em.find(IntervalBlock.class, intervalBlockId);
+	}
+
+	@Override
+        @Transactional
+	public void persist(IntervalBlock intervalBlock) {
+        em.persist(intervalBlock);
+		
+	}
+
+	@Override
+	public IntervalBlock findByUUID(UUID uuid) {
+        return (IntervalBlock) em.createNamedQuery(IntervalBlock.QUERY_FIND_BY_UUID)
+                .setParameter("uuid", uuid.toString().toUpperCase())
+                .getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Long> findAllIds() {
+    	List<Long> temp;
+    	temp = (List<Long>)this.em.createNamedQuery(IntervalBlock.QUERY_FIND_ALL_IDS)
+        .getResultList();
+            return temp;
+	}
+
+	@Override
+	@Transactional
+	public void deleteById(Long id) {
+		IntervalBlock ib = findById(id);
+		em.remove(em.contains(ib) ? ib : em.merge(ib));
+
+	}
+
+	@Override
+	public void createOrReplaceByUUID(IntervalBlock intervalBlock) {
+		// TODO Auto-generated method stub
+		
+	}
 }

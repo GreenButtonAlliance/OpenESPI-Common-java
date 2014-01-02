@@ -36,6 +36,11 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
     @PersistenceContext
     protected EntityManager em;
 
+    public void setEntityManager(EntityManager em)
+      {
+      this.em = em;
+      }
+
     @SuppressWarnings("unchecked")
     public List<UsagePoint> findAllByRetailCustomerId(Long id) {
         return (List<UsagePoint>)this.em.createNamedQuery(UsagePoint.QUERY_FIND_ALL_BY_RETAIL_CUSTOMER_ID)
@@ -43,16 +48,21 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 .getResultList();
     }
 
+    @Override
     public UsagePoint findById(Long id) {
         return (UsagePoint)this.em.createNamedQuery(UsagePoint.QUERY_FIND_BY_ID)
                 .setParameter("id", id)
                 .getSingleResult();
     }
 
+    @Transactional
+    @Override
     public void persist(UsagePoint up) {
         this.em.persist(up);
     }
 
+    @Override
+    @Transactional
     public void associateByUUID(RetailCustomer retailCustomer, UUID uuid) {
         try {
             UsagePoint existingUsagePoint = findByUUID(uuid);
@@ -67,6 +77,8 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
         }
     }
 
+    @Transactional
+    @Override
     public void createOrReplaceByUUID(UsagePoint usagePoint) {
         try {
             UsagePoint existingUsagePoint = findByUUID(usagePoint.getUUID());
@@ -111,8 +123,11 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 .getResultList();
     }
 
+    @Transactional
+    @Override
     public void deleteById(Long id) {
-        em.remove(findById(id));
+	    UsagePoint r = findById(id);
+	    em.remove(em.contains(r) ? r : em.merge(r));
     }
 
     @Override
@@ -144,6 +159,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 .getSingleResult();
     }
     @SuppressWarnings("unchecked")
+    @Override
     public List<Long> findAllIds() {
             return (List<Long>)this.em.createNamedQuery(UsagePoint.QUERY_FIND_ALL_IDS)
                     .getResultList();

@@ -16,16 +16,23 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.ReadingTypeRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
+@Transactional
 public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
 
     @PersistenceContext
@@ -48,4 +55,42 @@ public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }
+
+	@Override
+	public void createOrReplaceByUUID(ReadingType readingType) {
+        try {
+        	ReadingType existingReadingType = findByUUID(readingType.getUUID());
+        	readingType.setId(existingReadingType.getId());
+
+            if (existingReadingType.getSelfLink() != null) {
+            	readingType.setSelfLink(existingReadingType.getSelfLink());
+            }
+
+            if (existingReadingType.getUpLink() != null) {
+            	readingType.setUpLink(existingReadingType.getUpLink());
+            }
+
+            em.merge(readingType);
+        } catch (NoResultException e) {
+        	readingType.setPublished(new GregorianCalendar());
+        	readingType.setUpdated(new GregorianCalendar());
+            persist(readingType);
+        }
+		
+	}
+
+	@Override
+	@Transactional
+	public void deleteById(Long id) {
+		ReadingType rt = findById(id);
+	    em.remove(em.contains(rt) ? rt : em.merge(rt));
+	}
+
+	@Override
+	public List<Long> findAllIds() {
+    	List<Long> temp;
+    	temp = (List<Long>)this.em.createNamedQuery(MeterReading.QUERY_FIND_ALL_IDS)
+        .getResultList();
+            return temp;
+	}
 }

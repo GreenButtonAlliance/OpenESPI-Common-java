@@ -16,16 +16,24 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.ElectricPowerUsageSummaryRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
+@Transactional
 public class ElectricPowerUsageSummaryRepositoryImpl implements ElectricPowerUsageSummaryRepository {
 
     @PersistenceContext
@@ -48,4 +56,50 @@ public class ElectricPowerUsageSummaryRepositoryImpl implements ElectricPowerUsa
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Long> findAllIds() {
+    	List<Long> temp;
+    	temp = (List<Long>)this.em.createNamedQuery(ElectricPowerUsageSummary.QUERY_FIND_ALL_IDS)
+    	        .getResultList();
+            return temp;
+	}
+
+	@Override
+	@Transactional
+	public void deleteById(Long id) {
+		ElectricPowerUsageSummary us = findById(id);
+	    em.remove(em.contains(us) ? us : em.merge(us));
+	}
+
+	@Override
+	public void createOrReplaceByUUID(
+			ElectricPowerUsageSummary electricPowerUsageSummary) {
+
+	        try {
+	        	ElectricPowerUsageSummary existingElectricPowerUsageSummary = findByUUID(electricPowerUsageSummary.getUUID());
+	        	electricPowerUsageSummary.setId(existingElectricPowerUsageSummary.getId());
+	            if (electricPowerUsageSummary.getUsagePoint() == null) {
+	            	electricPowerUsageSummary.setUsagePoint(existingElectricPowerUsageSummary.getUsagePoint());
+	            }
+	            
+	            if (existingElectricPowerUsageSummary.getSelfLink() != null) {
+	            	electricPowerUsageSummary.setSelfLink(existingElectricPowerUsageSummary.getSelfLink());
+	            }
+
+	            if (existingElectricPowerUsageSummary.getUpLink() != null) {
+	            	electricPowerUsageSummary.setUpLink(existingElectricPowerUsageSummary.getUpLink());
+	            }
+
+	            em.merge(electricPowerUsageSummary);
+	        } catch (NoResultException e) {
+	        	electricPowerUsageSummary.setPublished(new GregorianCalendar());
+	        	electricPowerUsageSummary.setUpdated(new GregorianCalendar());
+	            persist(electricPowerUsageSummary);
+	        }
+
+	   }
+
 }
+

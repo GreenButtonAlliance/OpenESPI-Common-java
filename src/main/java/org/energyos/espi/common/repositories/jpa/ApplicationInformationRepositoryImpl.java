@@ -48,6 +48,7 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
     }
 
     @Override
+    @Transactional
     public void persist(ApplicationInformation applicationInformation) {
         em.persist(applicationInformation);
     }
@@ -64,21 +65,17 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
                 .setParameter("dataCustodianId", dataCustodianId).getSingleResult();
     }
 
-	@Override
-	public ApplicationInformation find(Long applicationInformationId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ApplicationInformation> find() {
-	    // TODO Auto-generated method stub
-		return null;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Long> findAllIds() {
         return (List<Long>)this.em.createNamedQuery(ApplicationInformation.QUERY_FIND_ALL_IDS)
                 .getResultList();
+	}
+
+	@Override
+	@Transactional
+	public void deleteById(Long id) {
+	       em.remove(findById(id));
+		
 	}
 }

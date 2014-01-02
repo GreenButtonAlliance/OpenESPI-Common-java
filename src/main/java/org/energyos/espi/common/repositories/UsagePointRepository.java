@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ public interface UsagePointRepository {
     List<UsagePoint> findAllByRetailCustomerId(Long id);
 
     UsagePoint findById(Long id);
+    
     void persist(UsagePoint up);
 
     UsagePoint findByUUID(UUID uuid);

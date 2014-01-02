@@ -17,15 +17,22 @@
 package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.ElectricPowerQualitySummaryRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
+@Transactional
 public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQualitySummaryRepository {
 
     @PersistenceContext
@@ -48,4 +55,46 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQ
                 .setParameter("uuid", uuid.toString().toUpperCase())
                 .getSingleResult();
     }
+
+	@Override
+	public List<Long> findAllIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public void deleteById(Long id) {
+		ElectricPowerQualitySummary qs = findById(id);
+	    em.remove(em.contains(qs) ? qs : em.merge(qs));
+	}
+
+	@Override
+        @Transactional
+	public void createOrReplaceByUUID(
+			ElectricPowerQualitySummary electricPowerQualitySummary) {
+        try {
+        	ElectricPowerQualitySummary existingElectricPowerQualitySummary = findByUUID(electricPowerQualitySummary.getUUID());
+        	electricPowerQualitySummary.setId(existingElectricPowerQualitySummary.getId());
+            if (electricPowerQualitySummary.getUsagePoint() == null) {
+            	electricPowerQualitySummary.setUsagePoint(existingElectricPowerQualitySummary.getUsagePoint());
+            }
+            
+            if (existingElectricPowerQualitySummary.getSelfLink() != null) {
+            	electricPowerQualitySummary.setSelfLink(existingElectricPowerQualitySummary.getSelfLink());
+            }
+
+            if (existingElectricPowerQualitySummary.getUpLink() != null) {
+            	electricPowerQualitySummary.setUpLink(existingElectricPowerQualitySummary.getUpLink());
+            }
+
+            em.merge(electricPowerQualitySummary);
+        } catch (NoResultException e) {
+        	electricPowerQualitySummary.setPublished(new GregorianCalendar());
+        	electricPowerQualitySummary.setUpdated(new GregorianCalendar());
+            persist(electricPowerQualitySummary);
+        }
+
+		
+	}
 }

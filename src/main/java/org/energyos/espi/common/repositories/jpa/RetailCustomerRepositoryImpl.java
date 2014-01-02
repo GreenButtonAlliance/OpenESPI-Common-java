@@ -16,7 +16,9 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
@@ -28,10 +30,17 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@Transactional
+
 public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 
     @PersistenceContext
     protected EntityManager em;
+
+    public void setEntityManager(EntityManager em)
+      {
+      this.em = em;
+      }
 
     @SuppressWarnings("unchecked")
     public List<RetailCustomer> findAll() {
@@ -56,7 +65,13 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 
 	@Override
 	public RetailCustomer findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+        return em.find(RetailCustomer.class,id);
+	}
+
+        @Transactional
+	@Override
+	public void deleteById(Long id) {
+    		RetailCustomer rc = findById(id);
+    	    em.remove(em.contains(rc) ? rc : em.merge(rc));
 	}
 }

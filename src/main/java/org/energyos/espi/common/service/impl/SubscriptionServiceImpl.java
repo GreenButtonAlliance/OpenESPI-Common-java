@@ -1,10 +1,13 @@
 package org.energyos.espi.common.service.impl;
 
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
+import org.energyos.espi.common.service.ExportService;
+import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.SubscriptionService;
 import org.energyos.espi.common.utils.DateConverter;
@@ -33,6 +36,18 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Autowired
     private ResourceService resourceService;
 
+	private ImportService importService;
+	
+	private ExportService exportService;
+	
+	public void setImportService (ImportService importService) {
+		this.importService = importService;
+	}
+
+	public void setExportService (ExportService exportService) {
+		this.exportService = exportService;
+	}
+	
     @Override
     public Subscription createSubscription(OAuth2Authentication authentication) {
         Subscription subscription = new Subscription();
@@ -100,20 +115,39 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Subscription findById(String subscriptionId) {
-		// TODO Auto-generated method stub
-		return null;
+	return subscriptionRepository.findByHashedId(subscriptionId);
+		
 	}
 
 	@Override
 	public EntryType findEntryType(Long retailCustomerId, Long subscriptionId) {
-		// TODO Auto-generated method stub
-		return null;
+		EntryType result = null;
+		try {
+			List<Long> allIds = new ArrayList<Long>();
+			allIds.add(subscriptionId);
+			result = (new EntryTypeIterator(resourceService, allIds)).nextEntry(Subscription.class);
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
 	}
 
 	@Override
 	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId) {
-		// TODO Auto-generated method stub
-		return null;
+		EntryTypeIterator result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp = resourceService.findAllIds(Subscription.class);
+			result = (new EntryTypeIterator(resourceService, temp));
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;	
 	}
 
 	@Override
@@ -124,14 +158,19 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public void delete(Subscription subscription) {
-		// TODO Auto-generated method stub
-		
+		subscriptionRepository.deleteById(subscription.getId());	
 	}
 
 	@Override
 	public Subscription importResource(InputStream stream) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			importService.importData(stream);
+			EntryType entry = importService.getEntries().get(0);
+			Subscription subscription = entry.getContent().getSubscription();
+			return subscription;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	private List<Long> findAllIdsByRetailCustomer(String retailCustomerId){ 
 		 List<Long> result = new ArrayList<Long>();
@@ -142,14 +181,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public Subscription findById(long subscriptionId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Subscription findById(Long subscriptionId) {
+		return subscriptionRepository.findById(subscriptionId);
 	}
 
 	@Override
-	public Subscription findById(Long retailCustomerId, long subscriptionId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Subscription findById(Long retailCustomerId, Long subscriptionId) {
+		return subscriptionRepository.findById(subscriptionId);
 	}
 }
