@@ -67,16 +67,16 @@ import java.util.*;
  *         &lt;element name="thirdPartyPhone" type="{http://naesb.org/espi}String32" minOccurs="0"/>
  *         &lt;element name="authorizationServerUri" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
  *         &lt;element name="thirdPartyNotifyUri" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="AuthorizationServerAuthorizationEndpoint" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="AuthorizationServerRegistrationEndpoint" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="AuthorizationServerTokenEndpoint" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="DataCustodianBulkRequestURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="DataCustodianThirdPartySelectionScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="DataCustodianResourceEndpoint" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="ThirdPartyDataCustodianSelectionScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="ThirdPartyLoginScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="ThirdPartyScopeSelectionScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="ThirdPartyUserPortalScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="authorizationServerAuthorizationEndpoint" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="authorizationServerRegistrationEndpoint" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="authorizationServerTokenEndpoint" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="dataCustodianBulkRequestURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="dataCustodianThirdPartySelectionScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="dataCustodianResourceEndpoint" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="thirdPartyDataCustodianSelectionScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="thirdPartyLoginScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="thirdPartyScopeSelectionScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
+ *         &lt;element name="thirdPartyUserPortalScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
  *         &lt;element name="client_secret" type="{http://naesb.org/espi}String512" minOccurs="0"/>
  *         &lt;element name="logo_uri" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
  *         &lt;element name="client_name" type="{http://naesb.org/espi}String256" minOccurs="0"/>
@@ -189,34 +189,34 @@ public class ApplicationInformation
     protected String authorizationServerUri;
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyNotifyUri;
-    @XmlElement(name = "AuthorizationServerAuthorizationEndpoint")
+    @XmlElement(name = "authorizationServerAuthorizationEndpoint")
     @XmlSchemaType(name = "anyURI")
     protected String authorizationServerAuthorizationEndpoint;
-    @XmlElement(name = "AuthorizationServerRegistrationEndpoint")
+    @XmlElement(name = "authorizationServerRegistrationEndpoint")
     @XmlSchemaType(name = "anyURI")
     protected String authorizationServerRegistrationEndpoint;
-    @XmlElement(name = "AuthorizationServerTokenEndpoint")
+    @XmlElement(name = "authorizationServerTokenEndpoint")
     @XmlSchemaType(name = "anyURI")
     protected String authorizationServerTokenEndpoint;
-    @XmlElement(name = "DataCustodianBulkRequestURI")
+    @XmlElement(name = "dataCustodianBulkRequestURI")
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianBulkRequestURI;
-    @XmlElement(name = "DataCustodianThirdPartySelectionScreenURI")
+    @XmlElement(name = "dataCustodianThirdPartySelectionScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianThirdPartySelectionScreenURI;
-    @XmlElement(name = "DataCustodianResourceEndpoint")
+    @XmlElement(name = "dataCustodianResourceEndpoint")
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianResourceEndpoint;
-    @XmlElement(name = "ThirdPartyDataCustodianSelectionScreenURI")
+    @XmlElement(name = "thirdPartyDataCustodianSelectionScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyDataCustodianSelectionScreenURI;
-    @XmlElement(name = "ThirdPartyLoginScreenURI")
+    @XmlElement(name = "thirdPartyLoginScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyLoginScreenURI;
-    @XmlElement(name = "ThirdPartyScopeSelectionScreenURI")
+    @XmlElement(name = "thirdPartyScopeSelectionScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyScopeSelectionScreenURI;
-    @XmlElement(name = "ThirdPartyUserPortalScreenURI")
+    @XmlElement(name = "thirdPartyUserPortalScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyUserPortalScreenURI;
     @XmlElement(name = "client_secret")
