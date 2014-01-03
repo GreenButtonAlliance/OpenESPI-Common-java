@@ -58,8 +58,6 @@ public class Routes {
     public static final String ROOT_SUBSCRIPTION_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionId}";
     public static final String ROOT_APPLICATION_INFORMATION_COLLECTION = "/espi/1_1/resource/ApplicationInformation";
     public static final String ROOT_APPLICATION_INFORMATION_MEMBER = "/espi/1_1/resource/ApplicationInformation/{applicationInformationId}";
-    public static final String ROOT_RETAIL_CUSTOMER_COLLECTION = "/espi/1_1/resource/RetailCustomer/";
-    public static final String ROOT_RETAIL_CUSTOMER_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}";
 
     // patterns for RESTful xpath access to management entities
     //
@@ -100,6 +98,12 @@ public class Routes {
     public static final String ELECTRIC_POWER_QUALITY_SUMMARY_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/ElectricPowerQualitySummary/{electricPowerQualitySummaryId}";
     public static final String ELECTRIC_POWER_USAGE_SUMMARY_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/ElectricPowerUsageSummary";
     public static final String ELECTRIC_POWER_USAGE_SUMMARY_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/ElectricPowerUsageSummary/{electricPowerUsageSummaryId}";
+
+    // patterns for RESTful RetailCustomer services
+    public static final String RETAIL_CUSTOMER_COLLECTION = "/espi/1_1/resource/RetailCustomer";
+    public static final String RETAIL_CUSTOMER_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}";
+    public static final String RETAIL_CUSTOMER_MEMBER_DOWNLOAD_MY_DATA = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/DownloadMyData";
+    public static final String RETAIL_CUSTOMER_MEMBER_UPLOAD_MY_DATA = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UploadMyData";
 
     public static String buildDataCustodianRESTUsagePointCollection(String retailCustomerHashedId) {
         return DATA_CUSTODIAN_REST_USAGE_POINT_COLLECTION.replace("{retailCustomerId}", retailCustomerHashedId);

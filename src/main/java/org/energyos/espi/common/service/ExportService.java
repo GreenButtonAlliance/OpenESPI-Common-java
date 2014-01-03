@@ -96,7 +96,7 @@ public interface ExportService {
 	void exportReadingType(Long readingTypeId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
 	// - XPath form
-	public void exportReadingType(Long retailCustomerId, Long usagePointId,	Long meterTypeId, Long readingTypeId,
+	public void exportReadingType(Long retailCustomerId, Long usagePointId,	Long meterReadingId, Long readingTypeId,
 				      OutputStream stream, ExportFilter exportFilter) throws IOException;
 
 	public void exportReadingTypes(Long retailCustomerId, Long usagePointId,
