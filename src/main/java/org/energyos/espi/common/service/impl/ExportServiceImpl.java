@@ -475,7 +475,7 @@ public class ExportServiceImpl implements ExportService {
         String temp = updated.getValue().toXMLFormat();
     	String uuid = UUID.randomUUID().toString();
     	
-        String selfRef = "<link rel=\"self\" href=\"/espi/1_1/resource" + hrefFragment + "\"</link>\n";
+        String selfRef = "<link rel=\"self\" href=\"/espi/1_1/resource" + hrefFragment + "\"/>\n";
       
     	//GregorianCalendar updated = new GregorianCalendar();
     	//updated.setTimeZone(TimeZone.getTimeZone("UTC"))
