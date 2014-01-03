@@ -154,10 +154,20 @@ public class Subscription
     @Override
     public void merge(IdentifiedObject resource) {
     	super.merge(resource);
-    	this.applicationInformation = ((Subscription)resource).applicationInformation;
-    	this.authorization = ((Subscription)resource).authorization;
-    	this.lastUpdate = ((Subscription)resource).lastUpdate;
-        this.retailCustomer = ((Subscription)resource).retailCustomer;
-        this.usagePoints = ((Subscription)resource).usagePoints;
+    	if (((Subscription)resource).applicationInformation != null) {
+    		this.applicationInformation = ((Subscription)resource).applicationInformation;
+    	}
+    	if (((Subscription)resource).authorization != null){
+    		this.authorization = ((Subscription)resource).authorization;
+    	}
+    	if (((Subscription)resource).lastUpdate != null) {
+    		this.lastUpdate = ((Subscription)resource).lastUpdate;
+    	}
+        if (((Subscription)resource).retailCustomer != null) {
+        	this.retailCustomer = ((Subscription)resource).retailCustomer;
+        }
+        if (((Subscription)resource).usagePoints != null) {
+        	this.usagePoints = ((Subscription)resource).usagePoints;
+        }
     }
 }

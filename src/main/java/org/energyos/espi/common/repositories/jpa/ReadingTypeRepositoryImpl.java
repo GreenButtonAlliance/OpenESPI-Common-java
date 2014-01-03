@@ -83,6 +83,7 @@ public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
 	@Transactional
 	public void deleteById(Long id) {
 		ReadingType rt = findById(id);
+		// TODO may need to find any/all MeterReadings that point to this ...
 	    em.remove(em.contains(rt) ? rt : em.merge(rt));
 	}
 

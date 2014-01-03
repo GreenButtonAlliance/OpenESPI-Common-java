@@ -494,5 +494,8 @@ public class ElectricPowerQualitySummary
     	this.supplyVoltageVariations = ((ElectricPowerQualitySummary)resource).supplyVoltageVariations;
     	this.supplyVoltageImbalance = ((ElectricPowerQualitySummary)resource).supplyVoltageImbalance;
     	this.tempOvervoltage = ((ElectricPowerQualitySummary)resource).tempOvervoltage;	
+        if (((ElectricPowerQualitySummary)resource).usagePoint != null) {
+        	this.usagePoint = ((ElectricPowerQualitySummary)resource).usagePoint;
+        }
     }
 }
