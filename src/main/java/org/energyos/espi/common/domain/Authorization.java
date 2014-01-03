@@ -105,6 +105,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @Table(name = "authorizations")
 @XmlJavaTypeAdapter(AuthorizationAdapter.class)
 @NamedQueries(value = {
+        @NamedQuery(name = Authorization.QUERY_FIND_BY_ID, query = "SELECT authorization FROM Authorization authorization WHERE authorization.id = :id"),
+        @NamedQuery(name = Authorization.QUERY_FIND_BY_UUID, query = "SELECT authorization FROM Authorization authorization WHERE authorization.uuid = :uuid"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID,
                 query = "SELECT authorization FROM Authorization authorization WHERE authorization.retailCustomer.id = :retailCustomerId AND authorization.subscriptionURI IS NOT NULL"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_STATE,
@@ -115,6 +117,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class Authorization
         extends IdentifiedObject {
 
+	public final static String QUERY_FIND_BY_UUID = "Authorization.findByUUID";
+    public static final String QUERY_FIND_BY_ID = "Authorization.findById";
     public static final String QUERY_FIND_BY_RETAIL_CUSTOMER_ID = "Authorization.findAllByRetailCustomerId";
     public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";
     public static final String QUERY_FIND_ALL_IDS = "Authorization.findAllIds";

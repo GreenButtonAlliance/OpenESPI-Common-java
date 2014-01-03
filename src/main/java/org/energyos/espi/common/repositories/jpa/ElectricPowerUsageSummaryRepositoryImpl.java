@@ -20,6 +20,7 @@ import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.ElectricPowerUsageSummaryRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,6 +71,9 @@ public class ElectricPowerUsageSummaryRepositoryImpl implements ElectricPowerUsa
 	@Transactional
 	public void deleteById(Long id) {
 		ElectricPowerUsageSummary us = findById(id);
+		UsagePoint up = us.getUsagePoint();
+		up.removeElectricPowerUsageSummary(us);
+		em.persist(em.contains(up) ? us : em.merge(up));
 	    em.remove(em.contains(us) ? us : em.merge(us));
 	}
 

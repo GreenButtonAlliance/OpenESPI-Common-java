@@ -149,10 +149,11 @@ import java.util.*;
 	    "thirdPartyApplicationName"
 	})
 @Entity
-@Table(name = "application_information", uniqueConstraints = {@UniqueConstraint(columnNames = {"dataCustodianId", "clientID"})})
+@Table(name = "application_information")
 @XmlJavaTypeAdapter(ApplicationInformationAdapter.class)
 @NamedQueries(value = {
-        @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.id = :id"),
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_ID, query = "SELECT appinfo FROM ApplicationInformation appinfo WHERE appinfo.id = :id"),
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_UUID, query = "SELECT appinfo FROM ApplicationInformation appinfo WHERE appinfo.uuid = :uuid"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.clientId = :clientId"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.dataCustodianId = :dataCustodianId"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL, query = "SELECT info FROM ApplicationInformation info"),
@@ -167,6 +168,7 @@ public class ApplicationInformation
 	 */
 	private static final long serialVersionUID = 1L;
 	public final static String QUERY_FIND_ALL = "ApplicationInformation.findAll";
+	public final static String QUERY_FIND_BY_UUID = "ApplicationInformation.findByUUID";
     public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
     public static final String QUERY_FIND_BY_CLIENT_ID = "ApplicationInformation.findByClientId";
     public static final String QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID = "ApplicationInformation.findByDataCustodianClientId";
@@ -272,9 +274,12 @@ public class ApplicationInformation
 
     
     @Size(min = 2, max = 64)
+    @XmlElement(name = "dataCustodianId")
 	protected String dataCustodianId;
+    
     @NotEmpty
     @Size(min = 2, max = 64)
+    @XmlElement(name = "thirdPartyApplicationName")
     protected String thirdPartyApplicationName;
 
     

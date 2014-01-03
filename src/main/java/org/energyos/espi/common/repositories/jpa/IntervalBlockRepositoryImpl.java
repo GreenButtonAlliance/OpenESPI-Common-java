@@ -75,8 +75,12 @@ public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 	@Transactional
 	public void deleteById(Long id) {
 		IntervalBlock ib = findById(id);
+		MeterReading mr = ib.getMeterReading();
+		if (mr != null) {
+			mr.removeIntervalBlock(ib);
+			em.persist(em.contains(mr) ? mr : em.merge(mr));
+		}
 		em.remove(em.contains(ib) ? ib : em.merge(ib));
-
 	}
 
 	@Override

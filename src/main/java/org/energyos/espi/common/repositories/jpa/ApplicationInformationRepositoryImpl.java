@@ -17,6 +17,7 @@
 package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.ApplicationInformation;
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.springframework.stereotype.Repository;
@@ -26,6 +27,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @Transactional
@@ -51,6 +53,13 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
     @Transactional
     public void persist(ApplicationInformation applicationInformation) {
         em.persist(applicationInformation);
+    }
+
+    @Override
+    public ApplicationInformation findByUUID(UUID uuid) {
+        return (ApplicationInformation) em.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_UUID)
+                .setParameter("uuid", uuid.toString().toUpperCase())
+                .getSingleResult();
     }
 
     @Override

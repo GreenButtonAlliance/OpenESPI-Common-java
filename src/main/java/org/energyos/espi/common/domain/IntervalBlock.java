@@ -185,6 +185,8 @@ public class IntervalBlock
     	super.merge(resource);
     	this.interval = ((IntervalBlock)resource).interval;
     	this.intervalReadings = ((IntervalBlock)resource).intervalReadings;
-    	this.meterReading = ((IntervalBlock)resource).meterReading;
+    	if (((IntervalBlock)resource).meterReading != null){
+    		this.meterReading = ((IntervalBlock)resource).meterReading;
+    	}
     }
 }
