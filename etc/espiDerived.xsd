@@ -3,12 +3,12 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20131111
+    Version: 0.7.20140103
      Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
 This product includes software developed within the EnergyOS Initiative
-Copyright (c) 2011, 2012, 2013 EnergyOS.Org
+Copyright (c) 2011, 2012, 2013, 2014 EnergyOS.Org
 
 Licensed by EnergyOS.Org under one or more contributor license agreements.
 See the NOTICE section file below for additional information
@@ -66,6 +66,11 @@ self link to this resource</xs:documentation>
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
 				<xs:sequence>
+					<xs:element name="dataCustodianId" type="String64" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Contains the identifier for the Data Custodian.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="dataCustodianApplicationStatus" type="DataCustodianApplicationStatus" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>A code indicating the current status of the application. This value is provided by Data Custodian, cannot be modified by Third Party.</xs:documentation>
@@ -124,57 +129,56 @@ self link to this resource</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!--Johns adds-->
-					<xs:element name="AuthorizationServerAuthorizationEndpoint" type="xs:anyURI" minOccurs="0">
+					<xs:element name="authorizationServerAuthorizationEndpoint" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>An OAuth 2.0 URI used by the client to obtain authorization from the resource owner via user-agent redirection. {AuthorizationServer}{AuthorizationPath}</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="AuthorizationServerRegistrationEndpoint" type="xs:anyURI" minOccurs="0">
+					<xs:element name="authorizationServerRegistrationEndpoint" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>A URI used by the client to register a Third Party with a Data Custodian via its {AuthorizationServer}{AuthorizationServer}{RegistrationPath}</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="AuthorizationServerTokenEndpoint" type="xs:anyURI" minOccurs="0">
+					<xs:element name="authorizationServerTokenEndpoint" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>An OAuth 2.0 URL used by the client to exchange an authorization grant for an access token, typically with client authentication.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="DataCustodianBulkRequestURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="dataCustodianBulkRequestURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>{DataCustodianBulkRequestURI}  URI of DataCustodian’s Bulk Request endpoint.  The value is provided by the Data Custodian and cannot be modified by the ThirdParty.  The field MUST be a valid URI.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="DataCustodianThirdPartySelectionScreenURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="dataCustodianThirdPartySelectionScreenURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>{DataCustodianThirdPartySelectionScreenURI} URI of Data Custodian’s Third Party Selection web page.  The field MUST be a valid URI.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="DataCustodianResourceEndpoint" type="xs:anyURI" minOccurs="0">
+					<xs:element name="dataCustodianResourceEndpoint" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>{ResourceServer}{ResourcePath}</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="ThirdPartyDataCustodianSelectionScreenURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="thirdPartyDataCustodianSelectionScreenURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>{ThirdPartyDataUsagePolicyURI}     URI that points to a human-readable Policy document for the ThirdParty.  The Data Custodian’s {AuthorizationServer} SHOULD display this URI to the end user.  The policy usually describes how an end user’s data will be used by the ThirdParty.  The value of the field MUST point to a valid web page.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="ThirdPartyLoginScreenURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="thirdPartyLoginScreenURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>URI of the Login Screen used by the Third Party to authenticate the identity of the Retail Customer.  The field MUST be a valid URI.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="ThirdPartyScopeSelectionScreenURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="thirdPartyScopeSelectionScreenURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>URI of the Scope Selection Screen used by the Retail Customer to select the characteristics of the Green Button data to be shared with the ThirdParty.  The field MUST be a valid URI.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="ThirdPartyUserPortalScreenURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="thirdPartyUserPortalScreenURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>URI of a Third Party’s web page the Retail Customer user-agent is returned to after authorizing the Third Party access to the Retail Customer’s energy usage information (EUI).  The value of this field MUST be a valid web page.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<!--End Johns adds-->
 					<!-- OAuth 2.0 fields -->
 					<xs:element name="client_secret" type="String512" minOccurs="0">
 						<xs:annotation>
@@ -201,7 +205,7 @@ self link to this resource</xs:documentation>
 							<xs:documentation>The default redirect back to the application after authorization grant (OAuth redirect uri).</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="client_id" type="String32" minOccurs="0">
+					<xs:element name="client_id" type="String64" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Contains the identifier for the Third Party (OAuth client_id).</xs:documentation>
 						</xs:annotation>
