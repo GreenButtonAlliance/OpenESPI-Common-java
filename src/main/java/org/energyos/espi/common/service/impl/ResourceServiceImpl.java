@@ -1,6 +1,8 @@
 package org.energyos.espi.common.service.impl;
 
+import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.ResourceRepository;
@@ -26,7 +28,10 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public List<IdentifiedObject> findByAllParentsHref(String relatedHref, Linkable linkable) {
         try {
-            if (linkable instanceof UsagePoint) {
+        	// note - for now, anything that will throw an error in the respository.findAllParentsByRelatedHref 
+        	// are handled by this special case. when it gets too long (or we figure out a better way to indicate no parent, then 
+        	// it should be changed. (a catch on the repository error would do it)
+            if ((linkable instanceof UsagePoint) || (linkable instanceof ApplicationInformation) || (linkable instanceof IntervalBlock)){
                 return new ArrayList<>();
             } else {
                 return repository.findAllParentsByRelatedHref(relatedHref, linkable);

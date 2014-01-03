@@ -69,6 +69,12 @@ public class MeterReadingRepositoryImpl implements MeterReadingRepository {
 	@Transactional
 	public void deleteById(Long id) {
 		MeterReading mr = findById(id);
+		UsagePoint up = mr.getUsagePoint();
+		mr.removeReadingType(mr.getReadingType());
+		if (up != null) {
+			up.removeMeterReading(mr);
+			em.persist(em.contains(up) ? up : em.merge(up));
+		}
 		em.remove(em.contains(mr) ? mr : em.merge(mr));
 	}
 

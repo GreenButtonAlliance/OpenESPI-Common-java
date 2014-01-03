@@ -386,6 +386,12 @@ public class ContentType {
             return getElectricPowerQualitySummary();
         } else if (getReadingType() != null) {
             return getReadingType();
+        } else if (getApplicationInformation() != null) {
+            return getApplicationInformation();
+        } else if (getAuthorization() != null) {
+            return getAuthorization();
+        } else if (getSubscription() != null) {
+            return getSubscription();
         }
         return null;
     }

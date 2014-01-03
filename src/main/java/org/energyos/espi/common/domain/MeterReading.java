@@ -116,6 +116,11 @@ public class MeterReading extends IdentifiedObject
         intervalBlocks.add(intervalBlock);
     }
 
+    public void removeIntervalBlock(IntervalBlock intervalBlock) {
+    	intervalBlock.setMeterReading(null);
+    	intervalBlocks.remove(intervalBlock);
+    }
+    
     public ReadingType getReadingType() {
         return readingType;
     }
@@ -124,6 +129,10 @@ public class MeterReading extends IdentifiedObject
         this.readingType = readingType;
     }
 
+    public void removeReadingType(ReadingType readingType) {
+    	this.readingType = null;
+    }
+    
     public List<IntervalBlock> getIntervalBlocks() {
         return intervalBlocks;
     }
@@ -159,8 +168,17 @@ public class MeterReading extends IdentifiedObject
     @Override 
     public void merge(IdentifiedObject resource) {
     	super.merge(resource);
-    	this.intervalBlocks = ((MeterReading)resource).intervalBlocks;
-    	this.readingType = ((MeterReading)resource).readingType;
-    	this.usagePoint = ((MeterReading)resource).usagePoint;
+    	if (((MeterReading)resource).intervalBlocks != null) {
+        	this.intervalBlocks = ((MeterReading)resource).intervalBlocks;
+    	}
+    	if (((MeterReading)resource).intervalBlocks != null) {
+    		this.intervalBlocks = ((MeterReading)resource).intervalBlocks;
+    	}
+    	if (((MeterReading)resource).readingType != null) {
+    		this.readingType = ((MeterReading)resource).readingType;
+    	}
+    	if (((MeterReading)resource).usagePoint != null) {
+    		this.usagePoint = ((MeterReading)resource).usagePoint;
+    	}
     }
 }

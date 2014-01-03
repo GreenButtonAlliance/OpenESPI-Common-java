@@ -1,6 +1,8 @@
 package org.energyos.espi.common.repositories.jpa;
 
+import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
+import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.repositories.AuthorizationRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,11 +62,12 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 		return null;
 	}
 
-	@Override
-	public Authorization findByUUID(UUID uuid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Authorization findByUUID(UUID uuid) {
+        return (Authorization) em.createNamedQuery(Authorization.QUERY_FIND_BY_UUID)
+                .setParameter("uuid", uuid.toString().toUpperCase())
+                .getSingleResult();
+    }
 
 	@Override
         @Transactional

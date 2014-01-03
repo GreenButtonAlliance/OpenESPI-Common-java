@@ -728,7 +728,6 @@ public class ElectricPowerUsageSummary
     @Override
     public void merge(IdentifiedObject resource) {
     	super.merge(resource);
-        ElectricPowerUsageSummary newUsagePoint = (ElectricPowerUsageSummary)resource;
         this.billingPeriod = ((ElectricPowerUsageSummary)resource).billingPeriod;
         this.billLastPeriod = ((ElectricPowerUsageSummary)resource).billLastPeriod;
         this.billToDate = ((ElectricPowerUsageSummary)resource).billToDate;
@@ -748,6 +747,8 @@ public class ElectricPowerUsageSummary
         this.ratchetDemand = ((ElectricPowerUsageSummary)resource).ratchetDemand;
         this.ratchetDemandPeriod = ((ElectricPowerUsageSummary)resource).ratchetDemandPeriod;
         this.statusTimeStamp = ((ElectricPowerUsageSummary)resource).statusTimeStamp;
-        this.usagePoint = ((ElectricPowerUsageSummary)resource).usagePoint;
+        if (((ElectricPowerUsageSummary)resource).usagePoint != null) {
+        	this.usagePoint = ((ElectricPowerUsageSummary)resource).usagePoint;
+        }
     }
 }

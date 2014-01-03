@@ -19,6 +19,7 @@ package org.energyos.espi.common.repositories;
 import org.energyos.espi.common.domain.ApplicationInformation;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ApplicationInformationRepository {
 
@@ -35,4 +36,6 @@ public interface ApplicationInformationRepository {
     public ApplicationInformation findById(Long applicationInformationId);
 
     public void persist(ApplicationInformation applicationInformation);
+
+	ApplicationInformation findByUUID(UUID uuid);
 }
