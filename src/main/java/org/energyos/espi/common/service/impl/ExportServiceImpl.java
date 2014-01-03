@@ -136,12 +136,14 @@ public class ExportServiceImpl implements ExportService {
     // - ROOT form
 	@Override
 	public void exportApplicationInformation(Long applicationInformationId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(applicationInformationService.findEntryType(applicationInformationId), stream, exportFilter);
+		String hrefFragment = "/ApplicationInformation/" + applicationInformationId;
+		exportEntry(applicationInformationService.findEntryType(applicationInformationId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportApplicationInformations(OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(applicationInformationService.findEntryTypeIterator(), stream, exportFilter, ApplicationInformation.class);		
+		String hrefFragment = "/ApplicationInformation";
+		exportEntries(applicationInformationService.findEntryTypeIterator(), stream, exportFilter, ApplicationInformation.class, hrefFragment);		
 	}
 
     // Authorization
@@ -149,23 +151,27 @@ public class ExportServiceImpl implements ExportService {
     // - ROOT form
 	@Override
 	public void exportAuthorization(Long authorizationId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(authorizationService.findEntryType(0L, authorizationId), stream, exportFilter);			
+		String hrefFragment = "/Authorization/" + authorizationId;
+		exportEntry(authorizationService.findEntryType(0L, authorizationId), stream, exportFilter, hrefFragment);			
 	}
 
 	@Override
 	public void exportAuthorizations(OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(authorizationService.findEntryTypeIterator(), stream, exportFilter, Authorization.class);		
+		String hrefFragment = "/Authorization";
+		exportEntries(authorizationService.findEntryTypeIterator(), stream, exportFilter, Authorization.class, hrefFragment);		
 	}
 
     // - XPath form
 	@Override
 	public void exportAuthorization(Long retailCustomerId, Long authorizationId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(authorizationService.findEntryType(retailCustomerId, authorizationId), stream, exportFilter);			
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/Authorization/" + authorizationId;
+		exportEntry(authorizationService.findEntryType(retailCustomerId, authorizationId), stream, exportFilter, hrefFragment);			
 	}
 
 	@Override
 	public void exportAuthorizations(Long retailCustomerId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(authorizationService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, Authorization.class);		
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/Authorization";
+		exportEntries(authorizationService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, Authorization.class, hrefFragment);		
 	}
 
     // ElectricPowerQualitySummary
@@ -173,25 +179,29 @@ public class ExportServiceImpl implements ExportService {
     // - ROOT form
 	@Override
 	public void exportElectricPowerQualitySummary(Long electricPowerQualitySummaryId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-	    exportEntry(electricPowerQualitySummaryService.findEntryType(0L, 0L, electricPowerQualitySummaryId), stream, exportFilter);
+	    String hrefFragment = "/ElectricPowerQualitySummary/" + electricPowerQualitySummaryId;
+		exportEntry(electricPowerQualitySummaryService.findEntryType(0L, 0L, electricPowerQualitySummaryId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportElectricPowerQualitySummarys(OutputStream stream, ExportFilter exportFilter) throws IOException {
-	    exportEntries(electricPowerQualitySummaryService.findEntryTypeIterator(0L, 0L), stream, exportFilter, ElectricPowerQualitySummary.class);	
+		String hrefFragment = "/ElectricPowerQualitySummary";
+	    exportEntries(electricPowerQualitySummaryService.findEntryTypeIterator(0L, 0L), stream, exportFilter, ElectricPowerQualitySummary.class, hrefFragment);	
 	}
 
     // - XPath form
 	@Override
 	public void exportElectricPowerQualitySummary(Long retailCustomerId, Long usagePointId, Long electricPowerQualitySummaryId,
 						      OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(electricPowerQualitySummaryService.findEntryType(retailCustomerId, usagePointId, electricPowerQualitySummaryId), stream, exportFilter);
+		String hrefFragment = "/RetailCustomer" + retailCustomerId + "/UsagePoint/" + usagePointId + "/ElectricPowerQualitySummary/" + electricPowerQualitySummaryId;
+		exportEntry(electricPowerQualitySummaryService.findEntryType(retailCustomerId, usagePointId, electricPowerQualitySummaryId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportElectricPowerQualitySummarys(Long retailCustomerId, Long usagePointId,
 						       OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(electricPowerQualitySummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ElectricPowerQualitySummary.class);	
+		String hrefFragment = "/RetailCustomer" + retailCustomerId + "/UsagePoint/" + usagePointId + "/ElectricPowerQualitySummary";
+		exportEntries(electricPowerQualitySummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ElectricPowerQualitySummary.class,  hrefFragment);	
 	}
 
     // ElectricPowerUsageSummary
@@ -199,12 +209,14 @@ public class ExportServiceImpl implements ExportService {
     // - ROOT form
 	@Override
 	public void exportElectricPowerUsageSummarys(ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
-		exportEntries(electricPowerUsageSummaryService.findEntryTypeIterator(0L, 0L), outputStream, exportFilter, ElectricPowerQualitySummary.class);	
+	    String hrefFragment = "/ElectricPowerUsageSummary";
+		exportEntries(electricPowerUsageSummaryService.findEntryTypeIterator(0L, 0L), outputStream, exportFilter, ElectricPowerQualitySummary.class, hrefFragment);	
 	}
 
 	@Override
 	public void exportElectricPowerUsageSummary(long electricPowerUsageSummaryId, ServletOutputStream outputStream,	ExportFilter exportFilter) throws IOException {
-		exportEntry(electricPowerUsageSummaryService.findEntryType(0L, 0L, electricPowerUsageSummaryId), outputStream, exportFilter);
+	    String hrefFragment = "/ElectricPowerUsageSummary/" + electricPowerUsageSummaryId;
+		exportEntry(electricPowerUsageSummaryService.findEntryType(0L, 0L, electricPowerUsageSummaryId), outputStream, exportFilter, hrefFragment);
 	}
 
 
@@ -212,13 +224,15 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportElectricPowerUsageSummary(Long retailCustomerId, Long usagePointId, Long electricPowerUsageSummaryId,
 						    OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(electricPowerUsageSummaryService.findEntryType(retailCustomerId, usagePointId, electricPowerUsageSummaryId), stream, exportFilter);
+	    String hrefFragment = "/RetailCustomer/"+ retailCustomerId + "/UsagePoint/" + usagePointId + "/ElectricPowerUsageSummary/" + electricPowerUsageSummaryId;
+		exportEntry(electricPowerUsageSummaryService.findEntryType(retailCustomerId, usagePointId, electricPowerUsageSummaryId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportElectricPowerUsageSummarys(Long retailCustomerId, Long usagePointId,
 						     OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(electricPowerUsageSummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ElectricPowerUsageSummary.class);	
+	    String hrefFragment = "/RetailCustomer/"+ retailCustomerId + "/UsagePoint/" + usagePointId + "/ElectricPowerUsageSummary";
+		exportEntries(electricPowerUsageSummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ElectricPowerUsageSummary.class, hrefFragment);	
 	}
 
     // IntervalBlock
@@ -227,12 +241,14 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportIntervalBlock(Long intervalBlockId,
 					OutputStream stream, ExportFilter exportFilter) throws IOException {
-	    exportEntry(intervalBlockService.findEntryType(0L, 0L, 0L, intervalBlockId), stream, exportFilter);
+		String hrefFragment = "/IntervalBlock/" + intervalBlockId;
+	    exportEntry(intervalBlockService.findEntryType(0L, 0L, 0L, intervalBlockId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportIntervalBlocks(OutputStream stream, ExportFilter exportFilter) throws IOException {
-	    exportEntries(intervalBlockService.findEntryTypeIterator(0L, 0L, 0L), stream, exportFilter, IntervalBlock.class);
+		String hrefFragment = "/IntervalBlock";
+	    exportEntries(intervalBlockService.findEntryTypeIterator(0L, 0L, 0L), stream, exportFilter, IntervalBlock.class, hrefFragment);
 	}
 
 
@@ -240,13 +256,15 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportIntervalBlock(Long retailCustomerId, Long usagePointId, Long meterReadingId, Long intervalBlockId,
 					OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(intervalBlockService.findEntryType(retailCustomerId, usagePointId, meterReadingId, intervalBlockId), stream, exportFilter);
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/IntervalBlock/" + intervalBlockId;
+		exportEntry(intervalBlockService.findEntryType(retailCustomerId, usagePointId, meterReadingId, intervalBlockId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportIntervalBlocks(Long retailCustomerId, Long usagePointId, Long meterReadingId,
 					 OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(intervalBlockService.findEntryTypeIterator(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter, IntervalBlock.class);
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/IntervalBlock";
+		exportEntries(intervalBlockService.findEntryTypeIterator(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter, IntervalBlock.class, hrefFragment);
 	}
 
 	// MeterReading
@@ -254,25 +272,29 @@ public class ExportServiceImpl implements ExportService {
     // - ROOT form
 	@Override
 	public void exportMeterReadings(ServletOutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(meterReadingService.findEntryTypeIterator(), stream, exportFilter, MeterReading.class);
+		String hrefFragment = "/MeterReading";
+		exportEntries(meterReadingService.findEntryTypeIterator(), stream, exportFilter, MeterReading.class, hrefFragment);
 	}
 
 	@Override
 	public void exportMeterReading(long meterReadingId, ServletOutputStream stream, ExportFilter exportFilter) throws IOException  {
-		exportEntry(meterReadingService.findEntryType(meterReadingId), stream, exportFilter);
+		String hrefFragment = "/MeterReading/" + meterReadingId;
+		exportEntry(meterReadingService.findEntryType(meterReadingId), stream, exportFilter, hrefFragment);
 	}
 
     // - XPath
 	@Override
 	public void exportMeterReading(Long retailCustomerId, Long usagePointId, Long meterReadingId,
 				       OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(meterReadingService.findEntryType(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter);
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/MeterReading/" + meterReadingId;
+		exportEntry(meterReadingService.findEntryType(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportMeterReadings(Long retailCustomerId, Long usagePointId,
 					OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(meterReadingService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, MeterReading.class);
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/MeterReading";
+		exportEntries(meterReadingService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, MeterReading.class, hrefFragment);
 	}
 
 
@@ -281,24 +303,28 @@ public class ExportServiceImpl implements ExportService {
     // ROOT form
 	@Override
 	public void exportReadingType(Long readingTypeId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-	    exportEntry(readingTypeService.findEntryType(0L, 0L, 0L, readingTypeId), stream, exportFilter);
+		String hrefFragment = "/Readingtype/" + readingTypeId;
+	    exportEntry(readingTypeService.findEntryType(0L, 0L, 0L, readingTypeId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportReadingTypes(OutputStream stream, ExportFilter exportFilter) throws IOException {
-	    exportEntries(readingTypeService.findEntryTypeIterator(0L, 0L), stream, exportFilter, ReadingType.class);
+		String hrefFragment = "/Readingtype";
+	    exportEntries(readingTypeService.findEntryTypeIterator(0L, 0L), stream, exportFilter, ReadingType.class, hrefFragment);
 	}
 
     // XPath form
 	@Override
 	public void exportReadingType(Long retailCustomerId, Long usagePointId, Long meterReadingId, Long readingTypeId,
 				      OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(readingTypeService.findEntryType(retailCustomerId, usagePointId, meterReadingId, readingTypeId), stream, exportFilter);
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/MeterReading/" + meterReadingId + "/Readingtype/" + readingTypeId;
+		exportEntry(readingTypeService.findEntryType(retailCustomerId, usagePointId, meterReadingId, readingTypeId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportReadingTypes(Long retailCustomerId, Long usagePointId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(readingTypeService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ReadingType.class);
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/Readingtype";
+		exportEntries(readingTypeService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ReadingType.class, hrefFragment);
 	}
 
 
@@ -308,13 +334,15 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportRetailCustomer(Long retailCustomerId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntry(retailCustomerService.findEntryType(retailCustomerId), stream, exportFilter);
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId;
+		exportEntry(retailCustomerService.findEntryType(retailCustomerId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportRetailCustomers(OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		exportEntries(retailCustomerService.findEntryTypeIterator(), stream, exportFilter, RetailCustomer.class);
+		String hrefFragment = "/RetailCustomer";
+		exportEntries(retailCustomerService.findEntryTypeIterator(), stream, exportFilter, RetailCustomer.class, hrefFragment);
 	}
 
     // Subscription
@@ -324,32 +352,37 @@ public class ExportServiceImpl implements ExportService {
     // -- original Pivotal export function (used in pub/sub flow)
     @Override
     public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-        exportEntriesFull(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter);
+		String hrefFragment = "/Subscription" + subscriptionHashedId;
+        exportEntriesFull(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter, hrefFragment);
     }
 
 	@Override
 	public void exportSubscription(Long subscriptionId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(subscriptionService.findEntryType(0L, subscriptionId), stream, exportFilter);
+		String hrefFragment = "/Subscription/" + subscriptionId;
+		exportEntry(subscriptionService.findEntryType(0L, subscriptionId), stream, exportFilter, hrefFragment);
 		
 	}
 	
 	@Override
 	public void exportSubscriptions(OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(subscriptionService.findEntryTypeIterator(0L), stream, exportFilter, RetailCustomer.class);
+		String hrefFragment = "/Subscription";
+		exportEntries(subscriptionService.findEntryTypeIterator(0L), stream, exportFilter, RetailCustomer.class, hrefFragment);
 	}
 
     // - XPath form
 	@Override
 	public void exportSubscription(Long retailCustomerId, Long subscriptionId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(subscriptionService.findEntryType(retailCustomerId, subscriptionId), stream, exportFilter);
+		String hrefFragment = "/RetailCustomer/ + retailCustomerId + "+ "/Subscription/" + subscriptionId;
+		exportEntry(subscriptionService.findEntryType(retailCustomerId, subscriptionId), stream, exportFilter, hrefFragment);
 	}
 	
 	@Override
 	public void exportSubscriptions(Long retailCustomerId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntries(subscriptionService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, RetailCustomer.class);
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/Subscription";
+		exportEntries(subscriptionService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, RetailCustomer.class, hrefFragment);
 	}
 
     // TimeConfiguration
@@ -358,12 +391,14 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportTimeConfiguration(Long timeConfigurationId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-	    exportEntry(timeConfigurationService.findEntryType(0L, 0L, timeConfigurationId, exportFilter), stream, exportFilter);	
+		String hrefFragment = "/TimeConfiguratoin/" + timeConfigurationId;
+	    exportEntry(timeConfigurationService.findEntryType(0L, 0L, timeConfigurationId, exportFilter), stream, exportFilter, hrefFragment);	
 	}
 
 	@Override
 	public void exportTimeConfigurations(OutputStream stream, ExportFilter exportFilter) throws IOException {
-	    exportEntries(timeConfigurationService.findEntryTypeIterator(0L, 0L, exportFilter), stream, exportFilter, TimeConfiguration.class);	
+		String hrefFragment = "/TimeConfiguration";
+	    exportEntries(timeConfigurationService.findEntryTypeIterator(0L, 0L, exportFilter), stream, exportFilter, TimeConfiguration.class, hrefFragment);	
 	}
 	
     // - XPath form
@@ -371,13 +406,15 @@ public class ExportServiceImpl implements ExportService {
 	public void exportTimeConfiguration(Long retailCustomerId, Long usagePointId,
 			Long timeConfigurationId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		exportEntry(timeConfigurationService.findEntryType(retailCustomerId, usagePointId, timeConfigurationId, exportFilter), stream, exportFilter);	
+		String hrefFragment = "/RetalCustomer" + retailCustomerId + "/UsagePoint/" + usagePointId + "/LocalTimeParameters/" + timeConfigurationId;
+		exportEntry(timeConfigurationService.findEntryType(retailCustomerId, usagePointId, timeConfigurationId, exportFilter), stream, exportFilter, hrefFragment);	
 	}
 
 	@Override
 	public void exportTimeConfigurations(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(timeConfigurationService.findEntryTypeIterator(retailCustomerId, usagePointId, exportFilter), stream, exportFilter, TimeConfiguration.class);	
+		String hrefFragment = "/RetalCustomer" + retailCustomerId + "/UsagePoint/" + usagePointId + "/LocalTimeParameters";
+		exportEntries(timeConfigurationService.findEntryTypeIterator(retailCustomerId, usagePointId, exportFilter), stream, exportFilter, TimeConfiguration.class, hrefFragment);	
 	}
 	
 
@@ -387,26 +424,30 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportUsagePoint(Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(usagePointService.findEntryType(usagePointId), stream, exportFilter);
+		String hrefFragment = "/UsagePoint/" + usagePointId;
+		exportEntry(usagePointService.findEntryType(usagePointId), stream, exportFilter, hrefFragment);
 		
 	}
 
 	@Override
 	public void exportUsagePoints(OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(usagePointService.findEntryTypeIterator(), stream, exportFilter, UsagePoint.class);
+		String hrefFragment = "/UsagePoint";
+		exportEntries(usagePointService.findEntryTypeIterator(), stream, exportFilter, UsagePoint.class, hrefFragment);
 	}
 	
     // XPath form
 	@Override
 	public void exportUsagePoint(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntry(usagePointService.findEntryType(retailCustomerId, usagePointId), stream, exportFilter);
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId;
+		exportEntry(usagePointService.findEntryType(retailCustomerId, usagePointId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportUsagePoints(Long retailCustomerId, 
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		exportEntries(usagePointService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, UsagePoint.class);
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint";
+		exportEntries(usagePointService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, UsagePoint.class, hrefFragment);
 	}
 	
     // export full usagepoint object tree 
@@ -414,26 +455,30 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportUsagePointsFull(Long retailCustomerId,
 			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
-		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId), outputStream, exportFilter);
+		String hrefFragment = "/Readingtype";
+		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId), outputStream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportUsagePointFull(Long usagePointId, Long retailCustomerId,
 			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
-		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId, usagePointId), outputStream, exportFilter);
+		String hrefFragment = "/Readingtype";
+		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId, usagePointId), outputStream, exportFilter, hrefFragment);
 		
 	}
 
     // worker functions
     //
-    private void exportEntries(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter, Class resourceClass) throws IOException {
+	
+	private void buildHeader (OutputStream stream, String hrefFragment) throws IOException {
     	DateTimeType updated = DateConverter.toDateTimeType(new Date());
         String temp = updated.getValue().toXMLFormat();
     	String uuid = UUID.randomUUID().toString();
-        String selfRef = "<link rel=\"self\" href=\"/espi/1_1/resource/xxxxTODOxxxx\"</link>\n";
-
+    	
+        String selfRef = "<link rel=\"self\" href=\"/espi/1_1/resource" + hrefFragment + "\"</link>\n";
+      
     	//GregorianCalendar updated = new GregorianCalendar();
-    	//updated.setTimeZone(TimeZone.getTimeZone("UTC"));
+    	//updated.setTimeZone(TimeZone.getTimeZone("UTC"))
     	//String temp = DateConverter.epoch().toString();
         stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
         stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">".getBytes());
@@ -445,13 +490,18 @@ public class ExportServiceImpl implements ExportService {
         stream.write(temp.getBytes());
         stream.write("</updated>\n".getBytes());
         stream.write(selfRef.getBytes());
+	}
+	
+    private void exportEntries(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter, Class resourceClass, String hrefFragment) throws IOException {
+ 
+    	buildHeader(stream, hrefFragment);
 
         if (entries != null) {
         
         while (entries.hasNext()) {
         	try {
         		EntryType entry = entries.nextEntry(resourceClass);
-            	exportEntry(entry, stream, exportFilter);        		
+            	exportEntry(entry, stream, exportFilter, hrefFragment);        		
         	} catch (Exception e) {
         	  stream.write("/* The requested collection contains no resources */".getBytes());	
               stream.write("</feed>".getBytes());
@@ -465,7 +515,7 @@ public class ExportServiceImpl implements ExportService {
     // to export a single entry (w/o the <feed>...</feed> wrappers
     
 	private void exportEntry(EntryType entry, OutputStream stream,
-			ExportFilter exportFilter) throws IOException {
+			ExportFilter exportFilter, String hrefFragment) throws IOException {
 
 		StreamResult result = new StreamResult(stream);
         try {
@@ -477,33 +527,16 @@ public class ExportServiceImpl implements ExportService {
         }
 	}
 
-    private void exportEntriesFull(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter) throws IOException {
-    	DateTimeType updated = DateConverter.toDateTimeType(new Date());
-        String temp = updated.toString();
-    	String uuid = UUID.randomUUID().toString();
-        String selfRef = "<link rel=\"self\" href=\"";
-        selfRef += "/espi/1_1/resource/xxxTODOxxx/";
-        selfRef += "\"/>\n";
-    	//GregorianCalendar updated = new GregorianCalendar();
-    	//updated.setTimeZone(TimeZone.getTimeZone("UTC"));
-    	//String temp = DateConverter.epoch().toString();
-        stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
-        stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n".getBytes());
-        stream.write("<id>urn:uuid:".getBytes());
-        stream.write(uuid.getBytes());
-        stream.write("</id>\n".getBytes());
-        stream.write("<title>Green Button Collection</title>\n".getBytes());
-        stream.write("<updated>".getBytes());
-        stream.write(temp.getBytes());
-        stream.write("</updated>\n".getBytes());
-        stream.write(selfRef.getBytes());
+    private void exportEntriesFull(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter, String hrefFragment) throws IOException {
+
+        buildHeader(stream, hrefFragment);
 
         if (entries != null) {
         
         while (entries.hasNext()) {
         	try {
         		EntryType entry = entries.next();
-            	exportEntryFull(entry, stream, exportFilter);        		
+            	exportEntryFull(entry, stream, exportFilter, hrefFragment);        		
         	} catch (Exception e) {
         	  stream.write("/* The requested collection contains no resources */".getBytes());	
               stream.write("</feed>".getBytes());
@@ -517,7 +550,7 @@ public class ExportServiceImpl implements ExportService {
     // to export a single entry (w/o the <feed>...</feed> wrappers
     
 	private void exportEntryFull(EntryType entry, OutputStream stream,
-			ExportFilter exportFilter) throws IOException {
+			ExportFilter exportFilter, String hrefFragement) throws IOException {
 
 		StreamResult result = new StreamResult(stream);
         try {
