@@ -354,7 +354,7 @@ public class ExportServiceImpl implements ExportService {
     // -- original Pivotal export function (used in pub/sub flow)
     @Override
     public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/Subscription" + subscriptionHashedId;
+		String hrefFragment = "/Subscription/" + subscriptionHashedId;
         exportEntriesFull(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter, hrefFragment);
     }
 
