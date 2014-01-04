@@ -9,6 +9,8 @@ public class AccessToken {
     private String tokenType;
     @JsonProperty("expires_in")
     private Long expiresIn;
+    @JsonProperty("refresh_token")
+    private String refreshToken;
     @JsonProperty("scope")
     private String scope;
     @JsonProperty("resourceURI")
@@ -40,6 +42,14 @@ public class AccessToken {
         this.expiresIn = expiresIn;
     }
 
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+    
     public String getScope() {
         return scope;
     }
