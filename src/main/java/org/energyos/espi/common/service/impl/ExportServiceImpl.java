@@ -18,6 +18,7 @@ import org.energyos.espi.common.service.*;
 import org.energyos.espi.common.utils.DateConverter;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
+import org.energyos.espi.common.utils.AtomMarshallerListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -26,6 +27,7 @@ import org.xml.sax.SAXException;
 
 import javax.servlet.ServletOutputStream;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamResult;
 
@@ -471,15 +473,12 @@ public class ExportServiceImpl implements ExportService {
     //
 	
 	private void buildHeader (OutputStream stream, String hrefFragment) throws IOException {
+	  
+		String selfRef = "<link ref=\"self\" href=\"" + applicationInformationService.getDataCustodianResourceEndpoint() + hrefFragment + "\"/>";
     	DateTimeType updated = DateConverter.toDateTimeType(new Date());
         String temp = updated.getValue().toXMLFormat();
     	String uuid = UUID.randomUUID().toString();
-    	
-        String selfRef = "<link rel=\"self\" href=\"/espi/1_1/resource" + hrefFragment + "\"/>\n";
-      
-    	//GregorianCalendar updated = new GregorianCalendar();
-    	//updated.setTimeZone(TimeZone.getTimeZone("UTC"))
-    	//String temp = DateConverter.epoch().toString();
+
         stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
         stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">".getBytes());
         stream.write("<id>urn:uuid:".getBytes());
@@ -492,31 +491,37 @@ public class ExportServiceImpl implements ExportService {
         stream.write(selfRef.getBytes());
 	}
 	
-    private void exportEntries(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter, Class resourceClass, String hrefFragment) throws IOException {
- 
-    	buildHeader(stream, hrefFragment);
+	private void exportEntries(EntryTypeIterator entries, OutputStream stream,
+			ExportFilter exportFilter, Class resourceClass, String hrefFragment)
+			throws IOException {
 
-        if (entries != null) {
-        
-        while (entries.hasNext()) {
-        	try {
-        		EntryType entry = entries.nextEntry(resourceClass);
-            	exportEntry(entry, stream, exportFilter, hrefFragment);        		
-        	} catch (Exception e) {
-        	  stream.write("/* The requested collection contains no resources */".getBytes());	
-              stream.write("</feed>".getBytes());
-        	}
- 
-          }
-        }
-        stream.write("</feed>".getBytes());
-    }
+		buildHeader(stream, hrefFragment);
+
+		if (entries != null) {
+
+			while (entries.hasNext()) {
+				try {
+					EntryType entry = entries.nextEntry(resourceClass);
+					exportEntry(entry, stream, exportFilter, hrefFragment);
+				} catch (Exception e) {
+					stream.write("/* The requested collection contains no resources */"
+							.getBytes());
+					stream.write("</feed>".getBytes());
+				}
+
+			}
+		}
+		stream.write("</feed>".getBytes());
+	}
     
     // to export a single entry (w/o the <feed>...</feed> wrappers
     
 	private void exportEntry(EntryType entry, OutputStream stream,
 			ExportFilter exportFilter, String hrefFragment) throws IOException {
 
+        AtomMarshallerListener uriListener = new AtomMarshallerListener(applicationInformationService.getDataCustodianResourceEndpoint() + hrefFragment);
+        fragmentMarshaller.setMarshallerListener(uriListener);
+        
 		StreamResult result = new StreamResult(stream);
         try {
 		if (exportFilter.matches(entry)) {
@@ -528,8 +533,10 @@ public class ExportServiceImpl implements ExportService {
 	}
 
     private void exportEntriesFull(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter, String hrefFragment) throws IOException {
-
-        buildHeader(stream, hrefFragment);
+        
+        // construct the <feed> header components
+        //
+    	buildHeader(stream, hrefFragment);
 
         if (entries != null) {
         
@@ -550,8 +557,13 @@ public class ExportServiceImpl implements ExportService {
     // to export a single entry (w/o the <feed>...</feed> wrappers
     
 	private void exportEntryFull(EntryType entry, OutputStream stream,
-			ExportFilter exportFilter, String hrefFragement) throws IOException {
-
+			ExportFilter exportFilter, String hrefFragment) throws IOException {
+         
+    	// setup a listener so that the adapters may later be fed the href fragment;
+    	//
+        AtomMarshallerListener uriListener = new AtomMarshallerListener(applicationInformationService.getDataCustodianResourceEndpoint() + hrefFragment);
+        fragmentMarshaller.setMarshallerListener(uriListener);
+        
 		StreamResult result = new StreamResult(stream);
         try {
 		if (exportFilter.matches(entry)) {
