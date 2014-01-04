@@ -49,6 +49,10 @@ public interface ApplicationInformationService {
 	// import-export services
 	public ApplicationInformation importResource(InputStream stream);
 
-	ApplicationInformation findByUUID(UUID uuid);
+	public ApplicationInformation findByUUID(UUID uuid);
+
+	public void setApplicationInformation(ApplicationInformation applicationInformation);
+
+	public String getDataCustodianResourceEndpoint();
 
 }
