@@ -466,6 +466,18 @@ public class Authorization
     }
 
     /**
+     * Sets the value of the tokenType property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link TokenType }
+     *
+     */
+    public void setTokenType(String value) {
+        this.tokenType = TokenType.fromValue(value);
+    }
+
+    /**
      * Gets the value of the code property.
      *
      * @return
