@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -18,12 +18,12 @@ package org.energyos.espi.common.models.atom.adapters;
 
 import org.energyos.espi.common.domain.ObjectFactory;
 import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.utils.AtomMarshallerListener;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-
 public class TimeConfigurationAdapter extends XmlAdapter<JAXBElement<TimeConfiguration>, TimeConfiguration> {
-
+    
     @Override
     public TimeConfiguration unmarshal(JAXBElement<TimeConfiguration> v) throws Exception {
         return v.getValue();
@@ -34,6 +34,7 @@ public class TimeConfigurationAdapter extends XmlAdapter<JAXBElement<TimeConfigu
         if(v == null) {
             return null;
         }
-        return new JAXBElement<>(ObjectFactory.LocalTimeParameters_QNAME, TimeConfiguration.class, v);
+        JAXBElement<TimeConfiguration> element = new JAXBElement<>(ObjectFactory.LocalTimeParameters_QNAME, TimeConfiguration.class, v);
+        return element;
     }
 }

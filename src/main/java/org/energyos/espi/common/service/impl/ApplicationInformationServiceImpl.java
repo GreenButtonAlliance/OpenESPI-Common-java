@@ -26,6 +26,10 @@ import java.util.UUID;
 @Transactional
 public class ApplicationInformationServiceImpl implements ApplicationInformationService {
 
+    // the cached operational object for this service
+	// 
+	private ApplicationInformation applicationInformation;
+	
     @Autowired
     private ApplicationInformationRepository applicationInformationRepository;
 
@@ -46,6 +50,23 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
         this.applicationInformationRepository = applicationInformationRepository;
     }
 
+    // configuration accessors
+    
+    @Override
+    public void setApplicationInformation(ApplicationInformation applicationInformation) {
+    	this.applicationInformation = applicationInformation;
+    }
+    
+    @Override
+    public String getDataCustodianResourceEndpoint() {
+    	if (this.applicationInformation == null) {
+    		// default it to the seed value
+    		this.setApplicationInformation(this.findById(1L));
+    	}
+    	return applicationInformation.getDataCustodianResourceEndpoint();
+    	// return "http://localhost:8080/DataCustodian/espi/1_1/resource";
+    }
+    
     @Override
     public List<ApplicationInformation> findAll() {
         return applicationInformationRepository.findAll();
