@@ -41,11 +41,13 @@ public class ResourceLinker {
                     if (resource instanceof TimeConfiguration) {
                         UsagePoint usagePoint = (UsagePoint)parentResource;
                         usagePoint.setLocalTimeParameters((TimeConfiguration)resource);
+                        ((TimeConfiguration)resource).setUsagePoint(usagePoint);
                     }
 
                     if (resource instanceof ReadingType) {
                         MeterReading meterReading = (MeterReading) parentResource;
                         meterReading.setReadingType((ReadingType) resource);
+                        ((ReadingType)resource).setMeterReading(meterReading);
                     }
                     resourceService.persist(parentResource);
                 }
