@@ -475,7 +475,7 @@ public class ExportServiceImpl implements ExportService {
 	
 	private void buildHeader (OutputStream stream, String hrefFragment) throws IOException {
 	  
-		String selfRef = "<link href=\"" + applicationInformationService.getDataCustodianResourceEndpoint() + hrefFragment + "\" rel=\"self\"/>";
+		String selfRef = "<link ref=\"self\" href=\"" + applicationInformationService.getDataCustodianResourceEndpoint() + hrefFragment + "\"/>";
     	DateTimeType updated = DateConverter.toDateTimeType(new Date());
         String temp = updated.getValue().toXMLFormat();
     	String uuid = UUID.randomUUID().toString();
