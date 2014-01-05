@@ -91,8 +91,20 @@ public class TimeConfiguration extends IdentifiedObject {
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
     protected byte[] dstStartRule;
     protected long tzOffset;
+    
+    @XmlTransient
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "usage_point_id")
+    private UsagePoint usagePoint;
 
-
+    public void setUsagePoint(UsagePoint usagePoint) {
+    	this.usagePoint = usagePoint;
+    }
+    
+    public UsagePoint getUsagePoint() {
+    	return this.usagePoint;
+    }
+    
     /**
      * Gets the value of the dstEndRule property.
      *
