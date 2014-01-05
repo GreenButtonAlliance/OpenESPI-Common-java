@@ -30,6 +30,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -115,6 +116,11 @@ public class ReadingType
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ReadingType.findAllIdsByUsagePointId";
 	public static final String QUERY_FIND_ALL_IDS = "ReadingType.findAllIds";
 
+    @XmlTransient
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "meter_reading_id")
+	private MeterReading meterReading;
+	
     protected String accumulationBehaviour;
     protected String commodity;
     protected String consumptionTier;
@@ -137,6 +143,14 @@ public class ReadingType
     @Embedded
     protected ReadingInterharmonic interharmonic;
 
+    public void setMeterReading(MeterReading meterReading) {
+    	this.meterReading = meterReading;
+    }
+    
+    public MeterReading getMeterReading() {
+    	return this.meterReading;
+    }
+    
     /**
      * Gets the value of the accumulationBehaviour property.
      *

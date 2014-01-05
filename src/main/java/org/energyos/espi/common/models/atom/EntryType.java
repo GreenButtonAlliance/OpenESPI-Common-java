@@ -24,6 +24,17 @@
 
 package org.energyos.espi.common.models.atom;
 
+import org.energyos.espi.common.domain.ApplicationInformation;
+import org.energyos.espi.common.domain.Authorization;
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.adapters.ContentAdapter;
 import org.energyos.espi.common.models.atom.adapters.LinkAdapter;
 import org.energyos.espi.common.models.atom.adapters.PublishedAdapter;
@@ -34,6 +45,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.namespace.QName;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -323,4 +335,5 @@ public class EntryType {
         }
         return upHref;
     }
+
 }
