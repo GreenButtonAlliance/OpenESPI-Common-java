@@ -65,7 +65,7 @@ public class ObjectFactory {
     public final static QName BatchItemInfo_QNAME = new QName("http://naesb.org/espi", "BatchItemInfo");
     public final static QName ElectricPowerUsageSummary_QNAME = new QName("http://naesb.org/espi", "ElectricPowerUsageSummary");
     public final static QName LineItem_QNAME = new QName("http://naesb.org/espi", "LineItem");
-
+    public final static QName RetailCustomer_QNAME = new QName("http://naesb.org/espi", "RetailCustomer");
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.naesb.espi
      */
@@ -199,6 +199,13 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link RetailCustomer }
+     */
+    public RetailCustomer createRetailCustomer() {
+        return new RetailCustomer();
+    }
+    
+    /**
      * Create an instance of {@link RationalNumber }
      */
     public RationalNumber createRationalNumber() {
@@ -258,6 +265,14 @@ public class ObjectFactory {
         return new JAXBElement<ReadingType>(ReadingType_QNAME, ReadingType.class, null, value);
     }
 
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RetailCustomer }{@code >}}
+     */
+    @XmlElementDecl(namespace = "http://naesb.org/espi", name = "RetailCustomer")
+    public JAXBElement<RetailCustomer> createRetailCustomer(RetailCustomer value) {
+        return new JAXBElement<RetailCustomer>(RetailCustomer_QNAME, RetailCustomer.class, null, value);
+    }
+    
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SummaryMeasurement }{@code >}}
      */

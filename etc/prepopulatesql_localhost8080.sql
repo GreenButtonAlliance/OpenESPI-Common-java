@@ -1,4 +1,6 @@
 USE `datacustodian`;
+
+# Populate kind
 INSERT INTO service_categories (kind) VALUES (0);
 INSERT INTO service_categories (kind) VALUES (1);
 INSERT INTO service_categories (kind) VALUES (2);

@@ -73,13 +73,14 @@ public class ExportServiceImpl implements ExportService {
     
     @Autowired
     private TimeConfigurationService timeConfigurationService;
-
+    
     @Autowired
     @Qualifier("fragmentMarshaller")
     private Jaxb2Marshaller fragmentMarshaller;
     
     // setup the services
     //
+    
     public void setSubscriptionService(SubscriptionService subscriptionService) {
         this.subscriptionService = subscriptionService;
     }
@@ -305,13 +306,13 @@ public class ExportServiceImpl implements ExportService {
     // ROOT form
 	@Override
 	public void exportReadingType(Long readingTypeId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/Readingtype/" + readingTypeId;
+		String hrefFragment = "/ReadingType/" + readingTypeId;
 	    exportEntry(readingTypeService.findEntryType(0L, 0L, 0L, readingTypeId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportReadingTypes(OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/Readingtype";
+		String hrefFragment = "/ReadingType";
 	    exportEntries(readingTypeService.findEntryTypeIterator(0L, 0L), stream, exportFilter, ReadingType.class, hrefFragment);
 	}
 
@@ -319,13 +320,13 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportReadingType(Long retailCustomerId, Long usagePointId, Long meterReadingId, Long readingTypeId,
 				      OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/MeterReading/" + meterReadingId + "/Readingtype/" + readingTypeId;
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/MeterReading/" + meterReadingId + "/ReadingType/" + readingTypeId;
 		exportEntry(readingTypeService.findEntryType(retailCustomerId, usagePointId, meterReadingId, readingTypeId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportReadingTypes(Long retailCustomerId, Long usagePointId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/Readingtype";
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/ReadingType";
 		exportEntries(readingTypeService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ReadingType.class, hrefFragment);
 	}
 
@@ -354,7 +355,7 @@ public class ExportServiceImpl implements ExportService {
     // -- original Pivotal export function (used in pub/sub flow)
     @Override
     public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/Subscription" + subscriptionHashedId;
+		String hrefFragment = "/Subscription/" + subscriptionHashedId;
         exportEntriesFull(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter, hrefFragment);
     }
 
@@ -457,14 +458,14 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportUsagePointsFull(Long retailCustomerId,
 			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/Readingtype";
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/DownloadMyData";
 		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId), outputStream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportUsagePointFull(Long usagePointId, Long retailCustomerId,
 			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/Readingtype";
+		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/DownloadMyData";
 		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId, usagePointId), outputStream, exportFilter, hrefFragment);
 		
 	}
@@ -474,13 +475,13 @@ public class ExportServiceImpl implements ExportService {
 	
 	private void buildHeader (OutputStream stream, String hrefFragment) throws IOException {
 	  
-		String selfRef = "<link ref=\"self\" href=\"" + applicationInformationService.getDataCustodianResourceEndpoint() + hrefFragment + "\"/>";
+		String selfRef = "<link href=\"" + applicationInformationService.getDataCustodianResourceEndpoint() + hrefFragment + "\" rel=\"self\"/>";
     	DateTimeType updated = DateConverter.toDateTimeType(new Date());
         String temp = updated.getValue().toXMLFormat();
     	String uuid = UUID.randomUUID().toString();
 
         stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
-        stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">".getBytes());
+        stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n".getBytes());
         stream.write("<id>urn:uuid:".getBytes());
         stream.write(uuid.getBytes());
         stream.write("</id>\n".getBytes());
@@ -496,24 +497,29 @@ public class ExportServiceImpl implements ExportService {
 			throws IOException {
 
 		buildHeader(stream, hrefFragment);
-
+		hrefFragment = adjustFragment(hrefFragment);
 		if (entries != null) {
 
 			while (entries.hasNext()) {
 				try {
 					EntryType entry = entries.nextEntry(resourceClass);
-					exportEntry(entry, stream, exportFilter, hrefFragment);
+					// export the Entry and put the right tail on the URI
+					exportEntry(entry, stream, exportFilter, hrefFragment + "/" + entry.getContent().getContentId(resourceClass));
 				} catch (Exception e) {
 					stream.write("/* The requested collection contains no resources */"
 							.getBytes());
 					stream.write("</feed>".getBytes());
 				}
-
 			}
 		}
 		stream.write("</feed>".getBytes());
 	}
     
+	private String adjustFragment(String fragment) {
+		// TODO there may be other setup things - Likely BatchList
+		// if that still exists.
+		return fragment.replace("DownloadMyData", "UsagePoint");
+	}
     // to export a single entry (w/o the <feed>...</feed> wrappers
     
 	private void exportEntry(EntryType entry, OutputStream stream,
@@ -537,7 +543,11 @@ public class ExportServiceImpl implements ExportService {
         // construct the <feed> header components
         //
     	buildHeader(stream, hrefFragment);
-
+    	
+    	// last minute fixup b/f doing the full dump
+    	// changing self of the feed to self of the root resource
+    	//
+        hrefFragment = adjustFragment(hrefFragment);
         if (entries != null) {
         
         while (entries.hasNext()) {
@@ -562,6 +572,8 @@ public class ExportServiceImpl implements ExportService {
     	// setup a listener so that the adapters may later be fed the href fragment;
     	//
         AtomMarshallerListener uriListener = new AtomMarshallerListener(applicationInformationService.getDataCustodianResourceEndpoint() + hrefFragment);
+        
+        uriListener.setRelList(entry.getContent().buildRelHref(hrefFragment));
         fragmentMarshaller.setMarshallerListener(uriListener);
         
 		StreamResult result = new StreamResult(stream);

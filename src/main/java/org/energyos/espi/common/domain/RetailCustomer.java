@@ -16,6 +16,7 @@
 
 package org.energyos.espi.common.domain;
 
+import org.energyos.espi.common.models.atom.adapters.RetailCustomerAdapter;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,14 +26,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@XmlRootElement(name="RetailCustomer")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "RetailCustomer")
 @Entity
 @Table(name = "retail_customers")
+@XmlJavaTypeAdapter(RetailCustomerAdapter.class)
 @NamedQueries(value = {
 		@NamedQuery(name = RetailCustomer.QUERY_FIND_BY_ID, query = "SELECT customer FROM RetailCustomer customer WHERE customer.id = :id"),
         @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL, query = "SELECT customer FROM RetailCustomer customer"),
@@ -40,7 +50,8 @@ import java.util.Collection;
         @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS, query = "SELECT retailCustomer.id FROM RetailCustomer retailCustomer")
 
 })
-public class RetailCustomer implements UserDetails, Principal {
+
+public class RetailCustomer implements UserDetails, Principal{
 
     public final static String QUERY_FIND_BY_ID = "RetailCustomer.findById";
     public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
@@ -49,7 +60,6 @@ public class RetailCustomer implements UserDetails, Principal {
 
     public final static String ROLE_USER = "ROLE_USER";
     public final static String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

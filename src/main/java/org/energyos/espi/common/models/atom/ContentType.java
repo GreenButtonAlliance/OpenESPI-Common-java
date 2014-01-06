@@ -78,6 +78,7 @@ import java.util.Map;
         "applicationInformation",
         "authorization",
         "subscription",
+        "retailCustomer",
         "content"
 })
 @XmlSeeAlso({
@@ -90,8 +91,13 @@ import java.util.Map;
         Subscription.class,
         ElectricPowerQualitySummary.class,
         IntervalBlock.class,
-        ReadingType.class
+        ReadingType.class,
+        ApplicationInformation.class,
+        Authorization.class,
+        Subscription.class,
+        RetailCustomer.class
 })
+
 public class ContentType {
 
     @XmlElementRefs({
@@ -155,6 +161,13 @@ public class ContentType {
     @XmlAnyElement(lax = true)
     protected Subscription subscription;
 
+    // TODO note that the namespace here may be incorrect??
+    @XmlElementRefs({
+        @XmlElementRef(name = "RetailCustomer", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
+     })
+    @XmlAnyElement(lax = true)
+    protected RetailCustomer retailCustomer;
+    
     @XmlMixed
     @XmlAnyElement(lax = true)
     protected List<Object> content;
@@ -217,12 +230,6 @@ public class ContentType {
     	this.authorization = authorization;
     }
     
-    public Subscription getSubscription() {
-    	return this.subscription;
-    }
-    public void setSubscription(Subscription subscription){
-    	this.subscription = subscription;
-    }
     /**
      * The Atom content construct is defined in section 4.1.3 of the format spec.
      * Gets the value of the content property.
@@ -341,6 +348,13 @@ public class ContentType {
         return otherAttributes;
     }
 
+    public RetailCustomer getRetailCustomer() {
+    	return this.retailCustomer;
+    }
+    public void setRetailCustomer(RetailCustomer retailCustomer){
+    	this.retailCustomer = retailCustomer;
+    }
+
     public void setReadingType(ReadingType readingType) {
         this.readingType = readingType;
     }
@@ -364,6 +378,14 @@ public class ContentType {
     public void setElectricPowerQualitySummary(ElectricPowerQualitySummary electricPowerQualitySummary) {
         this.electricPowerQualitySummary = electricPowerQualitySummary;
     }
+    
+    public Subscription getSubscription() {
+    	return this.subscription;
+    }
+    public void setSubscription(Subscription subscription){
+    	this.subscription = subscription;
+    }
+    
 
     public TimeConfiguration getLocalTimeParameters() {
         return localTimeParameters;
@@ -447,6 +469,170 @@ public class ContentType {
 	public TimeConfiguration getTimeConfiguration() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public Long getContentId(Class resourceClass) {
+		// TODO its ugly right now, clean it up when templates are done
+		Long result = 1L;
+		if (this.getApplicationInformation() != null) {
+			if (ApplicationInformation.class.equals(resourceClass)) {
+				return this.getApplicationInformation().getId();				
+			}
+		}
+		if (this.getAuthorization() != null) {
+			if (Authorization.class.equals(resourceClass)) {
+			    return this.getAuthorization().getId();
+			}
+		} 
+		if (this.getElectricPowerQualitySummary() != null) {
+			if (ElectricPowerQualitySummary.class.equals(resourceClass)) {
+		    	return this.getElectricPowerQualitySummary().getId();
+		  	}
+	    }
+		if (this.getElectricPowerUsageSummary() != null) {
+			if (ElectricPowerUsageSummary.class.equals(resourceClass)) {
+				return this.getElectricPowerUsageSummary().getId();
+			}
+		}
+		if (this.getIntervalBlocks() != null) {
+			// TODO this one is not right, but may not be needed??
+			if (IntervalBlock.class.equals(resourceClass)) {
+			    return this.getIntervalBlocks().get(0).getId();	
+			}
+		}
+		if (this.getLocalTimeParameters() != null) {
+			if (TimeConfiguration.class.equals(resourceClass)) {
+				return this.getLocalTimeParameters().getId();
+		    }
+		}
+		if (this.getMeterReading() != null) {
+			if (MeterReading.class.equals(resourceClass)) {
+				return this.getMeterReading().getId();
+			}
+		}
+		if (this.getReadingType() != null) {
+			if (ReadingType.class.equals(resourceClass)) {
+				return this.getReadingType().getId();
+			}
+		}
+		if (this.getRetailCustomer() != null) {
+			if (RetailCustomer.class.equals(resourceClass)) {
+				return this.getRetailCustomer().getId();
+			}
+		}
+		if (this.getSubscription() != null) {
+			if (Subscription.class.equals(resourceClass)) {
+				return this.getSubscription().getId();
+			}
+		}		
+		if (this.getUsagePoint() != null) {
+			if (UsagePoint.class.equals(resourceClass)) {
+				return this.getUsagePoint().getId();
+			}
+		}
+		return result;
+	}
+
+	public String buildSelfHref(String hrefFragment) {
+		// TODO its ugly right now, clean it up when templates are done
+		String result = "";
+		if (this.getApplicationInformation() != null) {
+				return "/ApplicationInformation/" + this.getApplicationInformation().getId();				
+		}
+		if (this.getAuthorization() != null) {
+			    return "/Authorization/" + this.getAuthorization().getId();
+		} 
+		if (this.getElectricPowerQualitySummary() != null) {
+		    UsagePoint usagePoint = this.getElectricPowerQualitySummary().getUsagePoint();
+		    RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+		    	return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/ElectricPowerQualitySummary/" + this.getElectricPowerQualitySummary().getId();
+	    }
+		if (this.getElectricPowerUsageSummary() != null) {
+			    UsagePoint usagePoint = this.getElectricPowerUsageSummary().getUsagePoint();
+			    RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+				return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/ElectricPowerUsageSummary/" + this.getElectricPowerUsageSummary().getId();
+		}
+		if (this.getIntervalBlocks() != null) {
+			MeterReading meterReading = this.getIntervalBlocks().get(0).getMeterReading();
+			UsagePoint usagePoint = meterReading.getUsagePoint();
+			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+			return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + meterReading.getId() + "/IntervalBlock/" + this.getIntervalBlocks().get(0).getId();	
+		}
+		if (this.getLocalTimeParameters() != null) {
+			UsagePoint usagePoint = this.getLocalTimeParameters().getUsagePoint();
+			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+				return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/LocalTimeParameters/" + this.getLocalTimeParameters().getId();
+		}
+		if (this.getMeterReading() != null) {
+			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
+			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+				return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId();
+		}
+		if (this.getReadingType() != null) {
+			MeterReading meterReading = this.getReadingType().getMeterReading();
+			UsagePoint usagePoint = meterReading.getUsagePoint();
+			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+				return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + meterReading.getId() + "/ReadingType/" + this.getReadingType().getId();
+		}
+		if (this.getRetailCustomer() != null) {
+				return "/RetailCustomer/" + this.getRetailCustomer().getId();
+		}
+		if (this.getSubscription() != null) {
+				return "/Subscription/" + this.getSubscription().getId();
+		
+		}		
+		if (this.getUsagePoint() != null) {
+			RetailCustomer retailCustomer = this.getUsagePoint().getRetailCustomer();
+				return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + this.getUsagePoint().getId();
+		}
+		return result;
+	}
+
+	public List<String> buildRelHref(String hrefFragment) {
+		// TODO its ugly right now, clean it up when templates are done
+		List<String> result = new ArrayList<String>();
+		
+		if (this.getApplicationInformation() != null) {
+				return result;				
+		}
+		if (this.getAuthorization() != null) {
+			    return result;
+		} 
+		if (this.getElectricPowerQualitySummary() != null) {
+		    	return result;
+	    }
+		if (this.getElectricPowerUsageSummary() != null) {
+	    	return result;
+		}
+		if (this.getIntervalBlocks() != null) {
+	    	return result;
+	    	}
+		if (this.getLocalTimeParameters() != null) {
+	    	return result;		}
+		if (this.getMeterReading() != null) {
+			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
+			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+			ReadingType readingType = this.getMeterReading().getReadingType();
+			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId() + "/IntervalBlock");
+			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId() + "/ReadingType/" + readingType.getId());
+	    	return result;		}
+		if (this.getReadingType() != null) {
+	    	return result;		}
+		if (this.getRetailCustomer() != null) {
+	    	return result;		}
+		if (this.getSubscription() != null) {
+	    	return result;		
+		}		
+		if (this.getUsagePoint() != null) {
+			RetailCustomer retailCustomer = this.getUsagePoint().getRetailCustomer();
+			TimeConfiguration timeConfiguration = this.getUsagePoint().getLocalTimeParameters();
+			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + this.getUsagePoint().getId() + "/MeterReading");
+			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + this.getUsagePoint().getId() + "/ElectricPowerQualitySummary");
+			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + this.getUsagePoint().getId() + "/ElectricPowerUsageSummary");
+			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + this.getUsagePoint().getId() + "/LocalTimeParameters/" + timeConfiguration.getId());
+			return result;	
+		}
+		return result;
 	}
 
 }
