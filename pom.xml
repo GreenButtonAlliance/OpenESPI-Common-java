@@ -29,6 +29,15 @@
                 <database>mysql</database>
             </properties>
         </profile>
+
+        <profile>
+            <id>devmysql-regeneratedatabase</id>
+            <properties>
+                <profile>devmysql-regeneratedatabase</profile>
+                <database>mysql</database>
+            </properties>
+        </profile>
+
         <profile>
             <id>greenbuttondata</id>
             <properties>
