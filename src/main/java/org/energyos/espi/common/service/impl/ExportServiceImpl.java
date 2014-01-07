@@ -526,6 +526,7 @@ public class ExportServiceImpl implements ExportService {
 			ExportFilter exportFilter, String hrefFragment) throws IOException {
 
         AtomMarshallerListener uriListener = new AtomMarshallerListener(applicationInformationService.getDataCustodianResourceEndpoint() + hrefFragment);
+        uriListener.setRelList(entry.getContent().buildRelHref(hrefFragment));
         fragmentMarshaller.setMarshallerListener(uriListener);
         
 		StreamResult result = new StreamResult(stream);
