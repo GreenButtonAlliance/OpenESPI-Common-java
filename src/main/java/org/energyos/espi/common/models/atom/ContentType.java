@@ -535,104 +535,145 @@ public class ContentType {
 
 	public String buildSelfHref(String hrefFragment) {
 		// TODO its ugly right now, clean it up when templates are done
-		String result = "";
-		if (this.getApplicationInformation() != null) {
-				return "/ApplicationInformation/" + this.getApplicationInformation().getId();				
-		}
-		if (this.getAuthorization() != null) {
-			    return "/Authorization/" + this.getAuthorization().getId();
-		} 
-		if (this.getElectricPowerQualitySummary() != null) {
-		    UsagePoint usagePoint = this.getElectricPowerQualitySummary().getUsagePoint();
-		    RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-		    	return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/ElectricPowerQualitySummary/" + this.getElectricPowerQualitySummary().getId();
-	    }
-		if (this.getElectricPowerUsageSummary() != null) {
-			    UsagePoint usagePoint = this.getElectricPowerUsageSummary().getUsagePoint();
-			    RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-				return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/ElectricPowerUsageSummary/" + this.getElectricPowerUsageSummary().getId();
-		}
-		if (this.getIntervalBlocks() != null) {
-			MeterReading meterReading = this.getIntervalBlocks().get(0).getMeterReading();
-			UsagePoint usagePoint = meterReading.getUsagePoint();
-			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-			return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + meterReading.getId() + "/IntervalBlock/" + this.getIntervalBlocks().get(0).getId();	
-		}
-		if (this.getLocalTimeParameters() != null) {
-			UsagePoint usagePoint = this.getLocalTimeParameters().getUsagePoint();
-			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-				return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/LocalTimeParameters/" + this.getLocalTimeParameters().getId();
-		}
-		if (this.getMeterReading() != null) {
-			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
-			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-				return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId();
-		}
-		if (this.getReadingType() != null) {
-			MeterReading meterReading = this.getReadingType().getMeterReading();
-			UsagePoint usagePoint = meterReading.getUsagePoint();
-			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-				return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + meterReading.getId() + "/ReadingType/" + this.getReadingType().getId();
-		}
-		if (this.getRetailCustomer() != null) {
-				return "/RetailCustomer/" + this.getRetailCustomer().getId();
-		}
-		if (this.getSubscription() != null) {
-				return "/Subscription/" + this.getSubscription().getId();
-		
-		}		
-		if (this.getUsagePoint() != null) {
-			RetailCustomer retailCustomer = this.getUsagePoint().getRetailCustomer();
-				return "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + this.getUsagePoint().getId();
+		// right now this is very specific to .../UsagePoint as seen in a download
+		String result = hrefFragment;
+		// if the last element of the fragment is a UsagePoint, the we may be doing a full dump
+		// and the fragement generation logic is a bit different
+		if (hrefFragment.lastIndexOf("UsagePoint") == (hrefFragment.length() - "UsagePoint".length())) {
+			if (this.getApplicationInformation() != null) {
+				return result + this.getApplicationInformation().getId();
+			}
+			if (this.getAuthorization() != null) {
+				return result + this.getAuthorization().getId();
+			}
+			if (this.getElectricPowerQualitySummary() != null) {
+				UsagePoint usagePoint = this.getElectricPowerQualitySummary()
+						.getUsagePoint();
+				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+				return result + "/" + usagePoint.getId()
+						+ "/ElectricPowerQualitySummary/"
+						+ this.getElectricPowerQualitySummary().getId();
+			}
+			if (this.getElectricPowerUsageSummary() != null) {
+				UsagePoint usagePoint = this.getElectricPowerUsageSummary()
+						.getUsagePoint();
+				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+				return result + "/" + usagePoint.getId()
+						+ "/ElectricPowerUsageSummary/"
+						+ this.getElectricPowerUsageSummary().getId();
+			}
+			if (this.getIntervalBlocks() != null) {
+				MeterReading meterReading = this.getIntervalBlocks().get(0)
+						.getMeterReading();
+				UsagePoint usagePoint = meterReading.getUsagePoint();
+				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+				return result + "/" + usagePoint.getId() + "/MeterReading/"
+						+ meterReading.getId() + "/IntervalBlock/"
+						+ this.getIntervalBlocks().get(0).getId();
+			}
+			if (this.getLocalTimeParameters() != null) {
+				UsagePoint usagePoint = this.getLocalTimeParameters()
+						.getUsagePoint();
+				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+				return result + "/" + usagePoint.getId()
+						+ "/LocalTimeParameters/"
+						+ this.getLocalTimeParameters().getId();
+			}
+			if (this.getMeterReading() != null) {
+				UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
+				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+				return result + "/" + usagePoint.getId() + "/MeterReading/"
+						+ this.getMeterReading().getId();
+			}
+			if (this.getReadingType() != null) {
+				MeterReading meterReading = this.getReadingType()
+						.getMeterReading();
+				UsagePoint usagePoint = meterReading.getUsagePoint();
+				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+				return result + "/" + usagePoint.getId() + "/MeterReading/"
+						+ meterReading.getId() + "/ReadingType/"
+						+ this.getReadingType().getId();
+			}
+			if (this.getRetailCustomer() != null) {
+				return result + "/" + this.getRetailCustomer().getId();
+			}
+			if (this.getSubscription() != null) {
+				return result + this.getSubscription().getId();
+
+			}
+			if (this.getUsagePoint() != null) {
+				RetailCustomer retailCustomer = this.getUsagePoint()
+						.getRetailCustomer();
+				return result + "/" + this.getUsagePoint().getId();
+			}
+		} else {
+			// we get here if we have a specific GET to a resource - in this
+			// case, the hrefFragment should be correct as it stands
+			result = hrefFragment;
 		}
 		return result;
 	}
-
+ 
+	
 	public List<String> buildRelHref(String hrefFragment) {
 		// TODO its ugly right now, clean it up when templates are done
+		// if the last element of the fragment is a UsagePoint, the we may be doing a full dump
+		// and the fragement generation logic is a bit different
+	
 		List<String> result = new ArrayList<String>();
-		
-		if (this.getApplicationInformation() != null) {
-				return result;				
-		}
-		if (this.getAuthorization() != null) {
-			    return result;
-		} 
-		if (this.getElectricPowerQualitySummary() != null) {
-		    	return result;
-	    }
-		if (this.getElectricPowerUsageSummary() != null) {
-	    	return result;
-		}
-		if (this.getIntervalBlocks() != null) {
-	    	return result;
-	    	}
-		if (this.getLocalTimeParameters() != null) {
-	    	return result;		}
+
 		if (this.getMeterReading() != null) {
 			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
 			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
 			ReadingType readingType = this.getMeterReading().getReadingType();
-			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId() + "/IntervalBlock");
-			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId() + "/ReadingType/" + readingType.getId());
-	    	return result;		}
+			String temp = hrefFragment;
+			if (hrefFragment.lastIndexOf("UsagePoint") == (hrefFragment.length() - "UsagePoint".length())) {
+				temp = temp  + "/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId();
+			} 
+			result.add(temp + "/IntervalBLock");
+			result.add(temp + "/ReadingType/" + readingType.getId());
+			}
+		
+		if (this.getUsagePoint() != null) {
+			RetailCustomer retailCustomer = this.getUsagePoint().getRetailCustomer();
+			TimeConfiguration timeConfiguration = this.getUsagePoint().getLocalTimeParameters();
+			String temp = hrefFragment;
+			if (hrefFragment.lastIndexOf("UsagePoint") == (hrefFragment.length() - "UsagePoint".length())) {
+				temp = temp + "/" + this.getUsagePoint().getId();
+			}
+			result.add(temp + "/MeterReading");
+			result.add(temp + "/ElectricPowerQualitySummary");
+			result.add(temp + "/ElectricPowerUsageSummary");
+			result.add(temp + "/LocalTimeParameters/" + timeConfiguration.getId());
+		}
+		/*
 		if (this.getReadingType() != null) {
 	    	return result;		}
 		if (this.getRetailCustomer() != null) {
 	    	return result;		}
 		if (this.getSubscription() != null) {
 	    	return result;		
-		}		
-		if (this.getUsagePoint() != null) {
-			RetailCustomer retailCustomer = this.getUsagePoint().getRetailCustomer();
-			TimeConfiguration timeConfiguration = this.getUsagePoint().getLocalTimeParameters();
-			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + this.getUsagePoint().getId() + "/MeterReading");
-			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + this.getUsagePoint().getId() + "/ElectricPowerQualitySummary");
-			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + this.getUsagePoint().getId() + "/ElectricPowerUsageSummary");
-			result.add("/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + this.getUsagePoint().getId() + "/LocalTimeParameters/" + timeConfiguration.getId());
-			return result;	
-		}
-		return result;
+		}	
+		if (this.getApplicationInformation() != null) {
+			return result;				
+	    }
+	    if (this.getAuthorization() != null) {
+		    return result;
+	    } 
+	    if (this.getElectricPowerQualitySummary() != null) {
+	    	return result;
+        }
+      	if (this.getElectricPowerUsageSummary() != null) {
+    	    return result;
+	    }
+	    if (this.getIntervalBlocks() != null) {
+    	    return result;
+    	}
+	    if (this.getLocalTimeParameters() != null) {
+    	    return result;		
+    	}
+    	*/
+      return result;
 	}
 
 }
