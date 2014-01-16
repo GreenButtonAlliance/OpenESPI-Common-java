@@ -97,8 +97,8 @@ public class Subscription
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<UsagePoint> usagePoints;
 
-    public Calendar lastUpdate;
-
+    public Calendar lastUpdate;    
+    
     public String getHashedId() {
         return hashedId;
     }
