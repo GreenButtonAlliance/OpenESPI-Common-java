@@ -17,6 +17,12 @@ public class AccessToken {
     private String resourceURI;
     @JsonProperty("authorizationURI")
     private String authorizationURI;
+    @JsonProperty("error")
+    private String error;
+    @JsonProperty("error_description")
+    private String errorDescription;
+    @JsonProperty("error_uri")
+    private String errorURI;
 
     public String getAccessToken() {
         return accessToken;
@@ -73,4 +79,28 @@ public class AccessToken {
     public void setAuthorizationURI(String authorizationURI) {
         this.authorizationURI = authorizationURI;
     }
+    
+    public String getError() {
+    	return error;
+    }
+    
+    public void setError(String error) {
+    	this.error = error;
+    }
+    
+    public String getErrorDescription() {
+    	return errorDescription;
+    }
+    
+    public void setErrorDescription(String errorDescription) {
+    	this.errorDescription = errorDescription;
+    }
+    
+    public String getErrorURI() {
+    	return errorURI;
+    }
+    
+    public void setErrorURI(String errorURI) {
+    	this.errorURI = errorURI;
+    }    
 }

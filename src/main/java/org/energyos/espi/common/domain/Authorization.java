@@ -322,6 +322,18 @@ public class Authorization
     }
 
     /**
+     * Sets the value of the grantType property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link GrantType }
+     *
+     */
+    public void setGrantType(String value) {
+        this.grantType = GrantType.fromValue(value);
+    }
+    
+    /**
      * Gets the value of the resource property.
      *
      * @return
@@ -442,6 +454,18 @@ public class Authorization
     }
 
     /**
+     * Sets the value of the responseType property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link ResponseType }
+     *
+     */
+    public void setResponseType(String value) {
+        this.responseType = ResponseType.fromValue(value);
+    }    
+    
+    /**
      * Gets the value of the tokenType property.
      *
      * @return
@@ -525,6 +549,19 @@ public class Authorization
         this.error = value;
     }
 
+
+    /**
+     * Sets the value of the error property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link OAuthError }
+     *
+     */
+    public void setError(String value) {
+        this.error = OAuthError.fromValue(value);
+    }    
+    
     /**
      * Gets the value of the errorDescription property.
      *
@@ -580,7 +617,7 @@ public class Authorization
     public void setAuthorizationURI(String authorizationServerURI) {
         this.authorizationURI = authorizationServerURI;
     }
-
+    
     public String getThirdParty() {
         return thirdParty;
     }
