@@ -4,7 +4,9 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
+import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.energyos.espi.common.utils.EntryTypeIterator;
@@ -20,8 +22,6 @@ public interface SubscriptionService {
 	Subscription findByHashedId(String hashedId);
 
 	EntryTypeIterator findEntriesByHashedId(String hashedId);
-
-	EntryTypeIterator findEntriesByRetailCustomerId(Long retailCustomerId);
 
 	EntryTypeIterator find(String subscriptionHashedId);
 

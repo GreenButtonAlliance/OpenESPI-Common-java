@@ -5,6 +5,7 @@ import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
@@ -348,16 +349,10 @@ public class ExportServiceImpl implements ExportService {
 		exportEntries(retailCustomerService.findEntryTypeIterator(), stream, exportFilter, RetailCustomer.class, hrefFragment);
 	}
 
+	
     // Subscription
 
     // - Root form
-
-    // -- original Pivotal export function (used in pub/sub flow)
-    @Override
-    public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/Subscription/" + subscriptionHashedId;
-        exportEntriesFull(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter, hrefFragment);
-    }
 
 	@Override
 	public void exportSubscription(Long subscriptionId,
@@ -453,19 +448,42 @@ public class ExportServiceImpl implements ExportService {
 		exportEntries(usagePointService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, UsagePoint.class, hrefFragment);
 	}
 	
+	// Special forms for Subscription, Bulk, Download
+	//
+    // -- original Pivotal export function (used in pub/sub flow)
+    @Override
+    public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportFilter) throws IOException {
+		String hrefFragment = "/Subscription/" + subscriptionHashedId;
+        exportEntriesFull(subscriptionService.findEntriesByHashedId(subscriptionHashedId), stream, exportFilter, hrefFragment);
+    }
+    
+    @Override
+    public void exportBatchSubscription(long subscriptionId, OutputStream stream, ExportFilter exportFilter) throws IOException {
+		String hrefFragment = "/Batch/Subscription/" + subscriptionId;
+        exportEntriesFull(subscriptionService.findEntryTypeIterator(subscriptionId), stream, exportFilter, hrefFragment);
+    }
+    
+	@Override
+	public void exportBatchBulk(long bulkId, OutputStream outputStream, ExportFilter exportFilter) throws IOException {
+		// TODO Work with bulkService rather than subscriptionService
+		String hrefFragment = "/Batch/Bulk/" + bulkId;
+		exportEntriesFull(subscriptionService.findEntryTypeIterator(bulkId), outputStream, exportFilter, hrefFragment);
+	}
+
+	
     // export full usagepoint object tree 
     //
 	@Override
 	public void exportUsagePointsFull(Long retailCustomerId,
 			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/DownloadMyData";
+		String hrefFragment = "/Batch/RetailCustomer/" + retailCustomerId;
 		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId), outputStream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportUsagePointFull(Long usagePointId, Long retailCustomerId,
 			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/DownloadMyData";
+		String hrefFragment = "/Batch/RetailCustomer/" + retailCustomerId + "/UsagePoint" + usagePointId;
 		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId, usagePointId), outputStream, exportFilter, hrefFragment);
 		
 	}
@@ -497,7 +515,7 @@ public class ExportServiceImpl implements ExportService {
 			throws IOException {
 
 		buildHeader(stream, hrefFragment);
-		hrefFragment = adjustFragment(hrefFragment);
+		// hrefFragment = adjustFragment(hrefFragment);
 		if (entries != null) {
 
 			while (entries.hasNext()) {
@@ -515,10 +533,34 @@ public class ExportServiceImpl implements ExportService {
 		stream.write("</feed>".getBytes());
 	}
     
-	private String adjustFragment(String fragment) {
+	private String adjustFragment(String fragment, EntryType entry ) {
 		// TODO there may be other setup things - Likely BatchList
 		// if that still exists.
-		return fragment.replace("DownloadMyData", "UsagePoint");
+		String result = fragment;
+		if (fragment.contains("DownloadMyData")) {
+			result.replace("DownloadMyData", "UsagePoint");
+		}
+		if (fragment.contains("Batch")) {
+			if (fragment.contains("Bulk")) {
+				// ToDo need the proper URI fragement for a Bulk
+				UsagePoint up = entry.getContent().getUsagePoint();
+				RetailCustomer rc = up.getRetailCustomer();
+				// TODO here need the proper URI fragment for a subscription
+				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint/" + up.getId();			}
+			if (fragment.contains("Subscription")) {
+				UsagePoint up = entry.getContent().getUsagePoint();
+				RetailCustomer rc = up.getRetailCustomer();
+				// TODO here need the proper URI fragment for a subscription
+				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint/" + up.getId();
+			}
+			if (fragment.contains("/Batch/RetailCustomer")) {
+                result = fragment.replace("/Batch",  "");
+                if (!(fragment.contains("/UsagePoint"))) {
+                	result = result + "/UsagePoint";
+                }
+			}
+		}
+		return result;
 	}
     // to export a single entry (w/o the <feed>...</feed> wrappers
     
@@ -539,31 +581,36 @@ public class ExportServiceImpl implements ExportService {
         }
 	}
 
-    private void exportEntriesFull(EntryTypeIterator entries, OutputStream stream, ExportFilter exportFilter, String hrefFragment) throws IOException {
-        
-        // construct the <feed> header components
-        //
-    	buildHeader(stream, hrefFragment);
-    	
-    	// last minute fixup b/f doing the full dump
-    	// changing self of the feed to self of the root resource
-    	//
-        hrefFragment = adjustFragment(hrefFragment);
-        if (entries != null) {
-        
-        while (entries.hasNext()) {
-        	try {
-        		EntryType entry = entries.next();
-            	exportEntryFull(entry, stream, exportFilter, hrefFragment);        		
-        	} catch (Exception e) {
-        	  stream.write("/* The requested collection contains no resources */".getBytes());	
-              stream.write("</feed>".getBytes());
-        	}
- 
-          }
-        }
-        stream.write("</feed>".getBytes());
-    }
+	private void exportEntriesFull(EntryTypeIterator entries,
+			OutputStream stream, ExportFilter exportFilter, String hrefFragment)
+			throws IOException {
+
+		// construct the <feed> header components
+		//
+		buildHeader(stream, hrefFragment);
+
+		if (entries != null) {
+
+			while (entries.hasNext()) {
+				try {
+					EntryType entry = entries.next();
+					// last minute fixup b/f doing the full dump
+					// changing self of the feed to self of the root resource
+					//
+					if (entry.getContent().getUsagePoint() != null) {
+					      hrefFragment = adjustFragment(hrefFragment, entry);
+					}
+					exportEntryFull(entry, stream, exportFilter, hrefFragment);
+				} catch (Exception e) {
+					stream.write("/* The requested collection contains no resources */"
+							.getBytes());
+					stream.write("</feed>".getBytes());
+				}
+
+			}
+		}
+		stream.write("</feed>".getBytes());
+	}
     
     // to export a single entry (w/o the <feed>...</feed> wrappers
     

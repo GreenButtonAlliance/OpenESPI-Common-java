@@ -1,9 +1,11 @@
 package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.domain.Authorization;
+import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -93,13 +96,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-    public EntryTypeIterator findEntriesByRetailCustomerId(Long retailCustomerId) {
-        List<Long> allIdsForRetailCustomer = findAllIdsForRetailCustomer(retailCustomerId);
-
-        return new EntryTypeIterator(resourceService, allIdsForRetailCustomer);
-    }
 
     public void setRepository(SubscriptionRepository  subscriptionRepository) {
         this.subscriptionRepository = subscriptionRepository;
@@ -195,4 +191,5 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	public Subscription findById(Long retailCustomerId, Long subscriptionId) {
 		return subscriptionRepository.findById(subscriptionId);
 	}
+
 }
