@@ -3,6 +3,7 @@ package org.energyos.espi.common.repositories.jpa;
 import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.repositories.AuthorizationRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +38,12 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
       return (Authorization)em.createNamedQuery(Authorization.QUERY_FIND_BY_STATE)
               .setParameter("state", state).getSingleResult();
     }
+    
+    @Override
+    public Authorization findByScope(String scope) {
+    	return (Authorization)em.createNamedQuery(Authorization.QUERY_FIND_BY_SCOPE)
+    			.setParameter("scope", scope).getSingleResult();
+    }
 
     @Override
     @Transactional
@@ -46,8 +53,8 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 
 	@Override
 	public Authorization findById(Long authorizationId) {
-		// TODO Auto-generated method stub
-		return null;
+        return (Authorization)em.createNamedQuery(Authorization.QUERY_FIND_BY_ID)
+                .setParameter("id", authorizationId).getSingleResult();
 	}
 
 	@Override
@@ -70,9 +77,9 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     }
 
 	@Override
-        @Transactional
+    @Transactional
 	public void deleteById(Long id) {
-	       em.remove(findById(id));
+		em.remove(findById(id));
 	}
 
 	@Override

@@ -106,7 +106,7 @@ public class Subscription
     public void setHashedId(String hashedId) {
         this.hashedId = hashedId;
     }
-
+    
     public RetailCustomer getRetailCustomer() {
         return retailCustomer;
     }
@@ -170,4 +170,5 @@ public class Subscription
         	this.usagePoints = ((Subscription)resource).usagePoints;
         }
     }
+
 }

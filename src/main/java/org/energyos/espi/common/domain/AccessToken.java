@@ -1,6 +1,7 @@
 package org.energyos.espi.common.domain;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 
 public class AccessToken {
     @JsonProperty("access_token")
@@ -10,7 +11,7 @@ public class AccessToken {
     @JsonProperty("expires_in")
     private Long expiresIn;
     @JsonProperty("refresh_token")
-    private String refreshToken;
+    private OAuth2RefreshToken refreshToken;
     @JsonProperty("scope")
     private String scope;
     @JsonProperty("resourceURI")
@@ -48,11 +49,11 @@ public class AccessToken {
         this.expiresIn = expiresIn;
     }
 
-    public String getRefreshToken() {
+    public OAuth2RefreshToken getRefreshToken() {
         return refreshToken;
     }
 
-    public void setRefreshToken(String refreshToken) {
+    public void setRefreshToken(OAuth2RefreshToken refreshToken) {
         this.refreshToken = refreshToken;
     }
     
