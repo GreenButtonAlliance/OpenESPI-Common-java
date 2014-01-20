@@ -25,11 +25,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Iterator;
-=======
 import java.util.GregorianCalendar;
->>>>>>> ef2e5e29d420c54916e738e052ea7b7deb6ee6a3
 import java.util.List;
 import java.util.UUID;
 
