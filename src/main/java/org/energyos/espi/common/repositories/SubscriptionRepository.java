@@ -23,6 +23,8 @@ import java.util.UUID;
 
 public interface SubscriptionRepository {
     void persist(Subscription subscription);
+    
+    void merge(Subscription subscription);
 
     List<Subscription> findAll();
 

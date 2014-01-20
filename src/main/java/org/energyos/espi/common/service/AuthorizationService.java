@@ -21,6 +21,8 @@ public interface AuthorizationService {
 			String accessToken);
 
 	public Authorization findByState(String state);
+	
+	public Authorization findByScope(String scope);
 
 	public List<Authorization> findAll();
 
@@ -57,5 +59,6 @@ public interface AuthorizationService {
 	EntryTypeIterator findEntryTypeIterator();
 
 	Authorization findByUUID(UUID uuid);
+
 
 }

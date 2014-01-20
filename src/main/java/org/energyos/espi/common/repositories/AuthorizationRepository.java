@@ -28,6 +28,8 @@ public interface AuthorizationRepository {
     List findAllByRetailCustomerId(Long retailCustomerId);
 
     Authorization findByState(String state);
+    
+    Authorization findByScope(String scope);
 
     void merge(Authorization authorization);
 

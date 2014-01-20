@@ -66,8 +66,6 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     public Authorization createAuthorization(Subscription subscription, String accessToken) {
         Authorization authorization = new Authorization();
         authorization.setUUID(UUID.randomUUID());
-        authorization.setAccessToken(accessToken);
-        authorization.setResourceURI(Routes.DATA_CUSTODIAN_SUBSCRIPTION.replace("{SubscriptionID}", subscription.getUUID().toString()));
         authorizationRepository.persist(authorization);
 
         return authorization;
@@ -76,6 +74,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     @Override
     public Authorization findByState(String state) {
         return authorizationRepository.findByState(state);
+    }
+    
+    @Override
+    public Authorization findByScope(String scope) {
+    	return authorizationRepository.findByScope(scope);
     }
 
 	@Override
