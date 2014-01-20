@@ -161,4 +161,8 @@ public interface ExportService {
 	void exportUsagePointFull(Long usagePointId, Long RetailCustomerId,
 			ServletOutputStream outputStream, ExportFilter exportFilter)  throws IOException;
 
+	public void exportBatchBulk(long bulkId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
+
+	public void exportBatchSubscription(long subscriptionId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
+
 }

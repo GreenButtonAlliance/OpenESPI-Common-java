@@ -636,14 +636,16 @@ public class ContentType {
 		
 		if (this.getUsagePoint() != null) {
 			RetailCustomer retailCustomer = this.getUsagePoint().getRetailCustomer();
+			List <ElectricPowerQualitySummary> qualityList = this.getUsagePoint().getElectricPowerQualitySummaries();
+			List <ElectricPowerUsageSummary> usageList = this.getUsagePoint().getElectricPowerUsageSummaries();
 			TimeConfiguration timeConfiguration = this.getUsagePoint().getLocalTimeParameters();
 			String temp = hrefFragment;
 			if (hrefFragment.lastIndexOf("UsagePoint") == (hrefFragment.length() - "UsagePoint".length())) {
 				temp = temp + "/" + this.getUsagePoint().getId();
 			}
 			result.add(temp + "/MeterReading");
-			result.add(temp + "/ElectricPowerQualitySummary");
-			result.add(temp + "/ElectricPowerUsageSummary");
+			if (!(qualityList.isEmpty())) result.add(temp + "/ElectricPowerQualitySummary");
+			if (!(usageList.isEmpty())) result.add(temp + "/ElectricPowerUsageSummary");
 			result.add(temp + "/LocalTimeParameters/" + timeConfiguration.getId());
 		}
 		/*

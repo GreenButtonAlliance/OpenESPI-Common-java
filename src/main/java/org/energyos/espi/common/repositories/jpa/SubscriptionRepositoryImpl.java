@@ -47,7 +47,8 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
                 .getSingleResult();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public List<Subscription> findAll() {
         return (List<Subscription>)this.em.createNamedQuery(Subscription.QUERY_FIND_ALL).getResultList();
     }
@@ -78,4 +79,5 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
 	    }	    
 	    em.remove(em.contains(subscription) ? subscription : em.merge(subscription));	
 	}
+
 }
