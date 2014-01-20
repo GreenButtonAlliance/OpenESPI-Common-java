@@ -40,6 +40,8 @@ public interface SubscriptionService {
 	public void add(Subscription subscription);
 
 	public void delete(Subscription subscription);
+	
+	public void merge(Subscription subscription);
 
 	// import-exportResource services
 	public Subscription importResource(InputStream stream);

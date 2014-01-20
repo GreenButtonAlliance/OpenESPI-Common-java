@@ -55,7 +55,7 @@ public class Routes {
     public static final String ROOT_AUTHORIZATION_COLLECTION = "/espi/1_1/resource/Authorization";
     public static final String ROOT_AUTHORIZATION_MEMBER = "/espi/1_1/resource/Authorization/{authorizationId}";
     public static final String ROOT_SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/Subscription";
-    public static final String ROOT_SUBSCRIPTION_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionId}";
+    public static final String ROOT_SUBSCRIPTION_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionHashedId}";
     public static final String ROOT_APPLICATION_INFORMATION_COLLECTION = "/espi/1_1/resource/ApplicationInformation";
     public static final String ROOT_APPLICATION_INFORMATION_MEMBER = "/espi/1_1/resource/ApplicationInformation/{applicationInformationId}";
 
@@ -65,7 +65,7 @@ public class Routes {
     public static final String AUTHORIZATION_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Authorization";
     public static final String AUTHORIZATION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Authorization/{authorizationId}";
     public static final String SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Subscription";
-    public static final String SUBSCRIPTION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Subscription/{subscriptionId}";
+    public static final String SUBSCRIPTION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/Subscription/{subscriptionHashedId}";
 
     // patterns for RESTful root access to Resources
     public static final String ROOT_USAGE_POINT_COLLECTION = "/espi/1_1/resource/UsagePoint";

@@ -24,7 +24,11 @@
 
 package org.energyos.espi.common.domain;
 
+import java.util.Calendar;
+import java.util.Set;
+
 import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
+import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -105,23 +109,28 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @Table(name = "authorizations")
 @XmlJavaTypeAdapter(AuthorizationAdapter.class)
 @NamedQueries(value = {
-        @NamedQuery(name = Authorization.QUERY_FIND_BY_ID, query = "SELECT authorization FROM Authorization authorization WHERE authorization.id = :id"),
-        @NamedQuery(name = Authorization.QUERY_FIND_BY_UUID, query = "SELECT authorization FROM Authorization authorization WHERE authorization.uuid = :uuid"),
+        @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS,
+                query = "SELECT authorization.id FROM Authorization authorization"),		
+        @NamedQuery(name = Authorization.QUERY_FIND_BY_ID, 
+        		query = "SELECT authorization FROM Authorization authorization WHERE authorization.id = :id"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID,
                 query = "SELECT authorization FROM Authorization authorization WHERE authorization.retailCustomer.id = :retailCustomerId AND authorization.subscriptionURI IS NOT NULL"),
+        @NamedQuery(name = Authorization.QUERY_FIND_BY_SCOPE,
+        		query = "SELECT authorization FROM Authorization authorization WHERE authorization.scope = :scope"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_STATE,
-		    query = "SELECT authorization FROM Authorization authorization WHERE authorization.state = :state"),
-        @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS,
-                query = "SELECT authorization.id FROM Authorization authorization")
+		    	query = "SELECT authorization FROM Authorization authorization WHERE authorization.state = :state"),
+		@NamedQuery(name = Authorization.QUERY_FIND_BY_UUID, 
+        		query = "SELECT authorization FROM Authorization authorization WHERE authorization.uuid = :uuid")
 })
 public class Authorization
         extends IdentifiedObject {
 
-	public final static String QUERY_FIND_BY_UUID = "Authorization.findByUUID";
-    public static final String QUERY_FIND_BY_ID = "Authorization.findById";
-    public static final String QUERY_FIND_BY_RETAIL_CUSTOMER_ID = "Authorization.findAllByRetailCustomerId";
-    public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";
     public static final String QUERY_FIND_ALL_IDS = "Authorization.findAllIds";
+    public static final String QUERY_FIND_BY_ID = "Authorization.findById";
+    public static final String QUERY_FIND_BY_RETAIL_CUSTOMER_ID = "Authorization.findAllByRetailCustomerId";    
+	public static final String QUERY_FIND_BY_SCOPE = "Authorization.findByScope";
+    public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";	
+	public final static String QUERY_FIND_BY_UUID = "Authorization.findByUUID";
 
     @Embedded
     @AttributeOverrides({
@@ -136,46 +145,66 @@ public class Authorization
     	@AttributeOverride(name="duration", column=@Column(name="pp_duration"))
     })
 	protected DateTimeInterval publishedPeriod;
+    
     @Column(name = "access_token")
     protected String accessToken;
+    
     @Column(name = "authorization_uri")
     @XmlSchemaType(name = "anyURI")
+    
     protected String authorizationURI;
-
     @XmlSchemaType(name = "anyURI")
+    
     protected String resourceURI;
+    
     @Column(name = "status")
     protected String status;
+    
     @Column(name = "third_party")
     protected String thirdParty;
+    
     @ManyToOne @JoinColumn(name = "retail_customer_id")
     @XmlElement(name = "referenceID")
     protected RetailCustomer retailCustomer;
 
     @XmlElement(name = "expires_in")
     protected Long expiresIn;
+    
     @XmlElement(name = "grant_type")
     protected GrantType grantType;
+    
     @XmlElement(name = "refresh_token")
     protected String refreshToken;
-    protected String scope;
+    
+    @Column(name = "scope")
+    private String scope;
+    
     @Column(name = "state")
     private String state;
+    
     @XmlElement(name = "response_type")
     protected ResponseType responseType;
+    
     @XmlElement(name = "token_type")
     protected TokenType tokenType;
+    
     protected String code;
+    
+    @XmlElement(name = "error")
     protected OAuthError error;
+    
     @XmlElement(name = "error_description")
     protected String errorDescription;
+    
     @XmlElement(name = "error_uri")
     @XmlSchemaType(name = "anyURI")
     protected String errorUri;
+    
     @ManyToOne @JoinColumn(name = "application_information_id")
     @XmlTransient
     private ApplicationInformation applicationInformation;
-    private String subscriptionURI;
+    
+    private String subscriptionURI;    
 
     /**
      * Gets the value of the authorizedPeriod property.
@@ -372,13 +401,15 @@ public class Authorization
     /**
      * Sets the value of the refreshToken property.
      *
-     * @param value
+     * @param oAuth2RefreshToken
      *     allowed object is
      *     {@link String }
      *
      */
-    public void setRefreshToken(String value) {
-        this.refreshToken = value;
+    public void setRefreshToken(OAuth2RefreshToken oAuth2RefreshToken) {
+    	if(oAuth2RefreshToken != null) {
+    		this.refreshToken = oAuth2RefreshToken.toString();
+    	}
     }
 
     /**
@@ -608,8 +639,8 @@ public class Authorization
      */
     public void setErrorUri(String value) {
         this.errorUri = value;
-    }
-
+    }  
+    
     public String getAuthorizationURI() {
         return authorizationURI;
     }

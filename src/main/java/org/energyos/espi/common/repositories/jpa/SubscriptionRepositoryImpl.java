@@ -34,6 +34,11 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
         if (subscription.getHashedId() == null) subscription.setHashedId(UUID.randomUUID().toString());
         em.persist(subscription);
     }
+    
+    @Override
+    public void merge(Subscription subscription) {
+    	em.merge(subscription);
+    }
 
     @Override
     public Subscription findByUUID(UUID uuid) {
