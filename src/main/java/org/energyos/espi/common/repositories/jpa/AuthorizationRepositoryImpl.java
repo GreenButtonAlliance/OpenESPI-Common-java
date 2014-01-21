@@ -3,6 +3,7 @@ package org.energyos.espi.common.repositories.jpa;
 import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.repositories.AuthorizationRepository;
 import org.springframework.stereotype.Repository;
@@ -40,9 +41,9 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     }
     
     @Override
-    public Authorization findByScope(String scope) {
+    public Authorization findByScope(String scope, Long retailCustomerId) {
     	return (Authorization)em.createNamedQuery(Authorization.QUERY_FIND_BY_SCOPE)
-    			.setParameter("scope", scope).getSingleResult();
+    			.setParameter("scope", scope).setParameter("retailCustomerId", retailCustomerId).getSingleResult();
     }
 
     @Override

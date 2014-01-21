@@ -1,6 +1,7 @@
 package org.energyos.espi.common.service;
 
 import org.energyos.espi.common.domain.Authorization;
+import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.utils.EntryTypeIterator;
@@ -10,6 +11,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +24,7 @@ public interface AuthorizationService {
 
 	public Authorization findByState(String state);
 	
-	public Authorization findByScope(String scope);
+	public Authorization findByScope(String scope, Long retailCustomerId);
 
 	public List<Authorization> findAll();
 

@@ -17,7 +17,9 @@
 package org.energyos.espi.common.repositories;
 
 import org.energyos.espi.common.domain.Authorization;
+import org.energyos.espi.common.domain.RetailCustomer;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,7 +31,7 @@ public interface AuthorizationRepository {
 
     Authorization findByState(String state);
     
-    Authorization findByScope(String scope);
+    Authorization findByScope(String scope, Long retailCustomerId);
 
     void merge(Authorization authorization);
 
@@ -44,4 +46,5 @@ public interface AuthorizationRepository {
     void deleteById(Long id);
 
     void createOrReplaceByUUID(Authorization authorization);
+
 }

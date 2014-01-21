@@ -3,6 +3,7 @@ package org.energyos.espi.common.service.impl;
 import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Routes;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -77,8 +79,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
     
     @Override
-    public Authorization findByScope(String scope) {
-    	return authorizationRepository.findByScope(scope);
+    public Authorization findByScope(String scope, Long retailCustomerId) {
+    	return authorizationRepository.findByScope(scope, retailCustomerId);
     }
 
 	@Override
