@@ -538,7 +538,7 @@ public class ContentType {
 		// right now this is very specific to .../UsagePoint as seen in a download
 		String result = hrefFragment;
 		// if the last element of the fragment is a UsagePoint, the we may be doing a full dump
-		// and the fragement generation logic is a bit different
+		// and the fragment generation logic is a bit different
 		if (hrefFragment.lastIndexOf("UsagePoint") == (hrefFragment.length() - "UsagePoint".length())) {
 			if (this.getApplicationInformation() != null) {
 				return result + this.getApplicationInformation().getId();

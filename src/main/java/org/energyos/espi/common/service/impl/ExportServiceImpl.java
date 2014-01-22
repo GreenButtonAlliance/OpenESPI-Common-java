@@ -546,12 +546,12 @@ public class ExportServiceImpl implements ExportService {
 				UsagePoint up = entry.getContent().getUsagePoint();
 				RetailCustomer rc = up.getRetailCustomer();
 				// TODO here need the proper URI fragment for a subscription
-				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint/" + up.getId();			}
+				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint";			}
 			if (fragment.contains("Subscription")) {
 				UsagePoint up = entry.getContent().getUsagePoint();
 				RetailCustomer rc = up.getRetailCustomer();
 				// TODO here need the proper URI fragment for a subscription
-				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint/" + up.getId();
+				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint";
 			}
 			if (fragment.contains("/Batch/RetailCustomer")) {
                 result = fragment.replace("/Batch",  "");
