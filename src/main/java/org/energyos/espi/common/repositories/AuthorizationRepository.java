@@ -29,7 +29,7 @@ public interface AuthorizationRepository {
 
     Authorization findByState(String state);
     
-    Authorization findByScope(String scope);
+    Authorization findByScope(String scope, Long retailCustomerId);
 
     void merge(Authorization authorization);
 

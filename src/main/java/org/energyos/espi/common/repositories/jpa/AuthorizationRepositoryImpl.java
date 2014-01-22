@@ -40,9 +40,11 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     }
     
     @Override
-    public Authorization findByScope(String scope) {
+    public Authorization findByScope(String scope, Long retailCustomerId) {
     	return (Authorization)em.createNamedQuery(Authorization.QUERY_FIND_BY_SCOPE)
-    			.setParameter("scope", scope).getSingleResult();
+    			.setParameter("scope", scope)
+    			.setParameter("retailCustomerId", retailCustomerId)
+    			.getSingleResult();
     }
 
     @Override

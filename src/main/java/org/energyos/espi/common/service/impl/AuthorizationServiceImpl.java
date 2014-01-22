@@ -77,8 +77,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
     
     @Override
-    public Authorization findByScope(String scope) {
-    	return authorizationRepository.findByScope(scope);
+    public Authorization findByScope(String scope, Long retailCustomerId) {
+    	return authorizationRepository.findByScope(scope, retailCustomerId);
     }
 
 	@Override

@@ -121,7 +121,7 @@ public class UsagePoint
 
     @XmlTransient
     @OneToMany(mappedBy = "usagePoint", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<MeterReading> meterReadings = new ArrayList<>();
 
     @XmlTransient
@@ -141,7 +141,7 @@ public class UsagePoint
 
     @XmlTransient
     @ManyToMany(mappedBy = "usagePoints")
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Set<Subscription> subscriptions = new HashSet<>();
 
     @XmlTransient

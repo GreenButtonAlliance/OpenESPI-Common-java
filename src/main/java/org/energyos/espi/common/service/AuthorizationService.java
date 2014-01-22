@@ -22,7 +22,7 @@ public interface AuthorizationService {
 
 	public Authorization findByState(String state);
 	
-	public Authorization findByScope(String scope);
+	public Authorization findByScope(String scope, Long retailCustomerId);
 
 	public List<Authorization> findAll();
 
