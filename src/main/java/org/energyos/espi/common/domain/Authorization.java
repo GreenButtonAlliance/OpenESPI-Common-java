@@ -114,7 +114,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
         @NamedQuery(name = Authorization.QUERY_FIND_BY_ID, 
         		query = "SELECT authorization FROM Authorization authorization WHERE authorization.id = :id"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID,
-                query = "SELECT authorization FROM Authorization authorization WHERE authorization.retailCustomer.id = :retailCustomerId AND authorization.subscriptionURI IS NOT NULL"),
+                query = "SELECT authorization FROM Authorization authorization WHERE authorization.retailCustomer.id = :retailCustomerId AND authorization.resourceURI IS NOT NULL"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_SCOPE,
         		query = "SELECT authorization FROM Authorization authorization WHERE authorization.scope = :scope AND authorization.retailCustomer.id = :retailCustomerId"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_STATE,

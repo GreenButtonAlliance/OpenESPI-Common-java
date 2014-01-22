@@ -24,7 +24,7 @@ public class Routes {
     public static final String DATA_CUSTODIAN_RETAIL_CUSTOMER_USAGE_POINTS_CREATE = "/custodian/retailcustomers/{retailCustomerId}/usagepoints/create";
     public static final String DATA_CUSTODIAN_RETAIL_CUSTOMER_USAGE_POINTS_FORM = "/custodian/retailcustomers/{retailCustomerId}/usagepoints/form";
     public static final String DATA_CUSTODIAN_SCOPE_SELECTION_SCREEN = "/RetailCustomer/ScopeSelectionList";
-    public static final String DATA_CUSTODIAN_SUBSCRIPTION = "/espi/1_1/resource/Subscription/{subscriptionHashedId}";
+    public static final String DATA_CUSTODIAN_SUBSCRIPTION = "/espi/1_1/resource/Subscription/{subscriptionId}";
     public static final String DATA_CUSTODIAN_UPLOAD = "/custodian/upload";
 
     public static final String THIRD_PARTY_AUTHORIZATION = "/RetailCustomer/{retailCustomerID}/AuthorizationList";
