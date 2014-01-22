@@ -630,7 +630,7 @@ public class ContentType {
 			if (hrefFragment.lastIndexOf("UsagePoint") == (hrefFragment.length() - "UsagePoint".length())) {
 				temp = temp  + "/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId();
 			} 
-			result.add(temp + "/IntervalBLock");
+			result.add(temp + "/IntervalBlock");
 			result.add(temp + "/ReadingType/" + readingType.getId());
 			}
 		
