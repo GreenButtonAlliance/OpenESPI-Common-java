@@ -83,7 +83,7 @@ public class MeterReading extends IdentifiedObject
 	public static final String QUERY_FIND_ALL_IDS = "MeterReading.findAllIds";
 	
     @OneToMany(mappedBy = "meterReading", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     @XmlTransient
     private List<IntervalBlock> intervalBlocks = new ArrayList<>();
 
