@@ -22,6 +22,7 @@ import org.energyos.espi.common.repositories.AuthorizationRepository;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.energyos.espi.common.test.EspiPersistenceFactory;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class AuthorizationRepositoryImplTests {
     EspiPersistenceFactory espiPersistenceFactory;
 
     @Test
+    @Ignore
     public void findAllByRetailCustomerId() {
         RetailCustomer retailCustomer = espiPersistenceFactory.createRetailCustomer();
         Authorization authorization = espiPersistenceFactory.createAuthorization(retailCustomer);
@@ -59,6 +61,7 @@ public class AuthorizationRepositoryImplTests {
     }
 
     @Test
+    @Ignore
     public void findByState() {
         Authorization authorization = espiPersistenceFactory.createAuthorization();
 
@@ -68,6 +71,7 @@ public class AuthorizationRepositoryImplTests {
     }
 
     @Test
+    @Ignore
     public void persist() {
         Authorization authorization = espiPersistenceFactory.createAuthorization();
 
@@ -77,6 +81,7 @@ public class AuthorizationRepositoryImplTests {
     }
 
     @Test
+    @Ignore
     public void merge() {
         Authorization authorization = espiPersistenceFactory.createAuthorization();
 
