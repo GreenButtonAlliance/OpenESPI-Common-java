@@ -40,14 +40,18 @@ public class ResourceLinker {
                 if (parentResource != null) {
                     if (resource instanceof TimeConfiguration) {
                         UsagePoint usagePoint = (UsagePoint)parentResource;
-                        usagePoint.setLocalTimeParameters((TimeConfiguration)resource);
-                        ((TimeConfiguration)resource).setUsagePoint(usagePoint);
+                        if (usagePoint.getLocalTimeParameters() == null) {
+                           usagePoint.setLocalTimeParameters((TimeConfiguration)resource);
+                           ((TimeConfiguration)resource).setUsagePoint(usagePoint);
+                        }
                     }
 
                     if (resource instanceof ReadingType) {
                         MeterReading meterReading = (MeterReading) parentResource;
-                        meterReading.setReadingType((ReadingType) resource);
-                        ((ReadingType)resource).setMeterReading(meterReading);
+                        if (meterReading.getReadingType() == null) {
+                          meterReading.setReadingType((ReadingType) resource);
+                          ((ReadingType)resource).setMeterReading(meterReading);
+                        }
                     }
                     resourceService.persist(parentResource);
                 }
