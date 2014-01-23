@@ -24,7 +24,7 @@ INSERT INTO retail_customers (username, first_name, last_name, password, enabled
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('charles', 'Charles', 'Babbage',     'koala', TRUE, 'ROLE_USER');
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('john',    'John',    'von Neumann', 'koala', TRUE, 'ROLE_USER');
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('marian',  'Marian',  'Rejewski',    'koala', TRUE, 'ROLE_USER');
-INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('vint',    'Vint',    'Cerf',        'koala', TRUE, 'ROLE_USER');
+INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('vinny',   'Vint',    'Koala',       'koala', TRUE, 'ROLE_USER');
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('johnny',  'Johnny',  'Koala',       'koala', TRUE, 'ROLE_USER');
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('don',     'Don',     'Koala',       'koala', TRUE, 'ROLE_USER');
 
