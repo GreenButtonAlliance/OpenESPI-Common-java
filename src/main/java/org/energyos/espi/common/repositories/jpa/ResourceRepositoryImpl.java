@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +90,51 @@ class ResourceRepositoryImpl implements ResourceRepository {
         return findByUUID(uuid, UsagePoint.class);
     }
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1, Class<T> clazz) {
+        try {
+            String queryFindAllIdsByUsagePointId = (String) clazz.getDeclaredField("QUERY_FIND_ALL_IDS_BY_XPATH_1").get(String.class);
+            Query query = em.createNamedQuery(queryFindAllIdsByUsagePointId).setParameter("retailCustomerId", id1);
+            return query.getResultList();
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1, Long id2, Class<T> clazz) {
+	        try {
+	            String queryFindAllIdsByUsagePointId = (String) clazz.getDeclaredField("QUERY_FIND_ALL_IDS_BY_XPATH_2").get(String.class);
+                Query query = em.createNamedQuery(queryFindAllIdsByUsagePointId)
+	            		          .setParameter("retailCustomerId", id1)
+	            		           .setParameter("usagePointId", id2);
+	            return query.getResultList();
+	        } catch (NoSuchFieldException | IllegalAccessException e) {
+	            throw new RuntimeException(e);
+	        }
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1,
+			Long id2, Long id3, Class<T> clazz) {
+        try {
+            String queryFindAllIdsByUsagePointId = (String) clazz.getDeclaredField("QUERY_FIND_ALL_IDS_BY_XPATH_3").get(String.class);
+            Query query = em.createNamedQuery(queryFindAllIdsByUsagePointId)
+            		.setParameter("retailCustomerId", id1)
+            		.setParameter("usagePointId", id2)
+            		.setParameter("meterReadingId", id3);
+            return query.getResultList();
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+	}
+	
 
     @Transactional
     public void update(UsagePoint updatedUsagePoint) {

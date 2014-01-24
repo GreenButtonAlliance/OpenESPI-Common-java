@@ -32,6 +32,7 @@ import javax.persistence.*;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +74,11 @@ import java.util.List;
         @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT block.id FROM IntervalBlock block where block.meterReading.usagePoint.id = :usagePointId"),
         @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS,
-                query = "SELECT intervalBlock.id FROM IntervalBlock intervalBlock")
+                query = "SELECT intervalBlock.id FROM IntervalBlock intervalBlock"),
+                @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_XPATH_1, query = "SELECT u.id FROM UsagePoint u WHERE u.retailCustomer.id = :retailCustomerId"),
+                @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :retailCustomerId AND  m.usagePoint.id = :usagePointId"),
+                @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_XPATH_3, query = "SELECT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :retailCustomerId AND m.usagePoint.id = :usagePointId AND i.meterReading.id = :meterReadingId")
+
 })
 @XmlRootElement(name = "IntervalBlock")
 @XmlJavaTypeAdapter(IntervalBlockAdapter.class)
@@ -85,6 +90,9 @@ public class IntervalBlock
     public static final String QUERY_FIND_BY_UUID = "IntervalBlock.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "IntervalBlock.findAllIdsByUsagePointId";
 	public static final String QUERY_FIND_ALL_IDS = "IntervalBlock.findAllIds";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_1 = "IntervalBlock.findAllIdsByXpath1";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "IntervalBlock.findAllIdsByXpath2";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_3 = "IntervalBlock.findAllIdsByXpath3";
 
     @Embedded
     protected DateTimeInterval interval;

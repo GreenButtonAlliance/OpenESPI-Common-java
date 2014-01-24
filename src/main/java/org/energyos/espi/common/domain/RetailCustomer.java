@@ -47,7 +47,11 @@ import java.util.Collection;
 		@NamedQuery(name = RetailCustomer.QUERY_FIND_BY_ID, query = "SELECT customer FROM RetailCustomer customer WHERE customer.id = :id"),
         @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL, query = "SELECT customer FROM RetailCustomer customer"),
         @NamedQuery(name = RetailCustomer.QUERY_FIND_BY_USERNAME, query = "SELECT customer FROM RetailCustomer customer WHERE customer.username = :username"),
-        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS, query = "SELECT retailCustomer.id FROM RetailCustomer retailCustomer")
+        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS, query = "SELECT retailCustomer.id FROM RetailCustomer retailCustomer"),
+        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS_BY_XPATH_1, query = "SELECT u.id FROM UsagePoint u WHERE u.retailCustomer.id = :retailCustomerId"),
+        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :retailCustomerId AND  m.usagePoint.id = :usagePointId"),
+        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS_BY_XPATH_3, query = "SELECT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :retailCustomerId AND m.usagePoint.id = :usagePointId AND i.meterReading.id = :meterReadingId")
+      
 
 })
 
@@ -57,6 +61,9 @@ public class RetailCustomer implements UserDetails, Principal{
     public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
     public final static String QUERY_FIND_BY_USERNAME = "RetailCustomer.findByUsername";
     public static final String QUERY_FIND_ALL_IDS = "RetailCustomer.findAllIds";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_1 = "RetailCustomer.findAllIdsByXpath1";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "RetailCustomer.findAllIdsByXpath2";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_3 = "RetailCustomer.findAllIdsByXpath3";
 
     public final static String ROLE_USER = "ROLE_USER";
     public final static String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
