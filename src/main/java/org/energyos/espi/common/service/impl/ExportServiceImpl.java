@@ -34,14 +34,19 @@ import javax.xml.transform.stream.StreamResult;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.UUID;
 
 @Service
 public class ExportServiceImpl implements ExportService {
 
+	@Autowired
+	private ResourceService resourceService;
+	
     @Autowired
     private SubscriptionService subscriptionService;
     
@@ -81,6 +86,10 @@ public class ExportServiceImpl implements ExportService {
     
     // setup the services
     //
+    
+    public void setResourceService(ResourceService resourceService) {
+    	this.resourceService = resourceService;
+    }
     
     public void setSubscriptionService(SubscriptionService subscriptionService) {
         this.subscriptionService = subscriptionService;
@@ -268,7 +277,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportIntervalBlocks(Long retailCustomerId, Long usagePointId, Long meterReadingId,
 					 OutputStream stream, ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/IntervalBlock";
-		exportEntries(intervalBlockService.findEntryTypeIterator(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter, IntervalBlock.class, hrefFragment);
+		exportEntries(findEntryTypeIteratorXPath(retailCustomerId, usagePointId, meterReadingId, IntervalBlock.class), stream, exportFilter, IntervalBlock.class, hrefFragment);
 	}
 
 	// MeterReading
@@ -298,7 +307,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportMeterReadings(Long retailCustomerId, Long usagePointId,
 					OutputStream stream, ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/MeterReading";
-		exportEntries(meterReadingService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, MeterReading.class, hrefFragment);
+		exportEntries(findEntryTypeIteratorXPath(retailCustomerId, usagePointId, 0L, MeterReading.class), stream, exportFilter, MeterReading.class, hrefFragment);
 	}
 
 
@@ -445,7 +454,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportUsagePoints(Long retailCustomerId, 
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint";
-		exportEntries(usagePointService.findEntryTypeIterator(retailCustomerId), stream, exportFilter, UsagePoint.class, hrefFragment);
+		exportEntries(findEntryTypeIteratorXPath(retailCustomerId, 0L, 0L, UsagePoint.class), stream, exportFilter, UsagePoint.class, hrefFragment);
 	}
 	
 	// Special forms for Subscription, Bulk, Download
@@ -632,6 +641,29 @@ public class ExportServiceImpl implements ExportService {
         } catch (Exception e) {
         	throw(e);
         }
+	}
+	
+	@SuppressWarnings("unchecked")
+	
+	private EntryTypeIterator findEntryTypeIteratorXPath(Long id1, Long id2, Long id3, Class clazz) {
+		EntryTypeIterator result = null;
+		List<Long> temp = new ArrayList<Long>();
+		try {
+			if (id2 != 0) {
+				if (id3 != 0) {
+					temp = resourceService.findAllIdsByXPath(id1, id2, id3, clazz);
+				} else {
+					temp = resourceService.findAllIdsByXPath(id1, id2, clazz);
+				}
+			} else {
+				temp = resourceService.findAllIdsByXPath(id1, clazz);
+			}
+			result = (new EntryTypeIterator(resourceService, temp));
+		} catch (Exception e) {
+			System.out.printf("**** Error in Query: %s", e.toString());
+			result = null;
+		}
+		return result;		
 	}
 
 }

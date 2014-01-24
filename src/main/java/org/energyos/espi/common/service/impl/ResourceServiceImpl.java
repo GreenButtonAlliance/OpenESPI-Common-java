@@ -70,6 +70,24 @@ public class ResourceServiceImpl implements ResourceService {
         return repository.findAllIdsByUsagePointId(id, clazz);
     }
 
+	@Override
+	public <T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1,
+			Class<T> clazz) {
+		return repository.findAllIdsByXPath(id1, clazz);
+	}
+
+	@Override
+	public <T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1,
+			Long id2, Class<T> clazz) {
+		return repository.findAllIdsByXPath(id1, id2, clazz);
+	}
+
+	@Override
+	public <T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1,
+			Long id2, Long id3, Class<T> clazz) {
+		return repository.findAllIdsByXPath(id1, id2, id3, clazz);
+	}
+	
     public void setRepository(ResourceRepository repository) {
         this.repository = repository;
     }
