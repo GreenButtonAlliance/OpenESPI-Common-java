@@ -22,4 +22,11 @@ public interface ResourceService {
 
 	<T extends IdentifiedObject> List<Long> findAllIdsByUsagePointId(Long id,
 			Class<T> clazz);
+	
+	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1, Class<T> clazz);
+	
+	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1, Long id2, Class<T> clazz);
+	
+	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1, Long id2, Long id3, Class<T> clazz);
+	
 }

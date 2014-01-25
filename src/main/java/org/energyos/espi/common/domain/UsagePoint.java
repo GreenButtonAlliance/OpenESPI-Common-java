@@ -33,6 +33,7 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -87,9 +88,13 @@ import java.util.Set;
                 query = "SELECT point FROM UsagePoint point WHERE point.uri = :uri"),
         @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_FOR_RETAIL_CUSTOMER,
                 query = "SELECT point.id from UsagePoint point where point.retailCustomer.id = :retailCustomerId"),
-        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS,
-                query = "SELECT point.id from UsagePoint point")
+        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS, query = "SELECT point.id from UsagePoint point"),
+        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_BY_XPATH_1, query = "SELECT u.id FROM UsagePoint u WHERE u.retailCustomer.id = :retailCustomerId"),
+        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :retailCustomerId AND  m.usagePoint.id = :usagePointId"),
+        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_BY_XPATH_3, query = "SELECT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :retailCustomerId AND m.usagePoint.id = :usagePointId AND i.meterReading.id = :meterReadingId")
+
 })
+
 @XmlJavaTypeAdapter(UsagePointAdapter.class)
 public class UsagePoint
         extends IdentifiedObject
@@ -103,6 +108,9 @@ public class UsagePoint
     public static final String QUERY_FIND_BY_URI = "UsagePoint.findByURI";
     public static final String QUERY_FIND_ALL_IDS_FOR_RETAIL_CUSTOMER = "UsagePoint.findAllIdsForRetailCustomer";
     public static final String QUERY_FIND_ALL_IDS = "UsagePoint.findAllIds";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_1 = "UsagePoint.findAllIdsByXpath1";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "UsagePoint.findAllIdsByXpath2";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_3 = "UsagePoint.findAllIdsByXpath3";
 
     @XmlElement(type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
