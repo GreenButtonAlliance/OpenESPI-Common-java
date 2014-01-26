@@ -1,11 +1,16 @@
 
 package org.energyos.espi.common.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.xml.bind.Marshaller;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.energyos.espi.common.models.atom.ContentType;
+import org.energyos.espi.common.models.atom.DateTimeType;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.models.atom.LinkType;
 
@@ -46,6 +51,14 @@ public class AtomMarshallerListener extends Marshaller.Listener {
             	((LinkType) source).setHref(relRefList.remove(0));
             }
     	}
+    	
+    	if ((source instanceof DateTimeType)) {
+    		// Normalize the calendar so it will print the "Z" correctly
+            XMLGregorianCalendar xmlCal = ((DateTimeType)source).getValue();
+            XMLGregorianCalendar xmlCal1 = xmlCal.normalize();
+            ((DateTimeType)source).setValue(xmlCal1);
+    	}
+
     }
 
     @Override
