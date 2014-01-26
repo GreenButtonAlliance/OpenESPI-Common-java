@@ -96,36 +96,7 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
             throw new UsernameNotFoundException("Unable to find user");
         }
     }
-
-	@Override
-	public EntryType findEntryType(Long retailCustomerId) {
-		retailCustomerRepository.findById(retailCustomerId);
-		return null;
-	}
-
-    @Override
-    public EntryType findEntryType(String retailCustomerId) {
-    	// TODO Auto-generated method stub
-        return null;
-    }
     
-	@Override
-	public EntryTypeIterator findEntryTypeIterator() {
-		EntryTypeIterator result = null;
-		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
-			List<Long> temp = new ArrayList<Long>();
-			// TODO - make Retail Customer inherit from IdentifiedObject
-			// temp = resourceService.findAllIds(RetailCustomer.class);
-			result = (new EntryTypeIterator(resourceService, temp));
-		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-			result = null;
-		}
-		return result;	
-	}
-
 	@Override
 	public void add(RetailCustomer retailCustomer) {
 		// TODO Auto-generated method stub

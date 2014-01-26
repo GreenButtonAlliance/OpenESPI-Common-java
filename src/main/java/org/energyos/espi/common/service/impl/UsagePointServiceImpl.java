@@ -209,7 +209,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 			List<Long> temp = new ArrayList<Long>();
 		    temp.add(usagePointId);
 			findAllIdsForRetailCustomer(retailCustomerId);
-			result = (new EntryTypeIterator(resourceService, temp)).next();
+			result = (new EntryTypeIterator(resourceService, temp, UsagePoint.class)).next();
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -225,7 +225,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = usagePointRepository.findAllIds();
-			result = new EntryTypeIterator(resourceService, temp);
+			result = new EntryTypeIterator(resourceService, temp, UsagePoint.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -241,7 +241,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = usagePointRepository.findAllIds();
-			result = (new EntryTypeIterator(resourceService, temp)).nextEntry(UsagePoint.class);
+			result = (new EntryTypeIterator(resourceService, temp, UsagePoint.class)).nextEntry(UsagePoint.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -256,7 +256,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 		try {
 			List<Long> allIdsForRetailCustomer = findAllIdsForRetailCustomer(retailCustomerId);
 			result = new EntryTypeIterator(resourceService,
-					allIdsForRetailCustomer);
+					allIdsForRetailCustomer, UsagePoint.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -272,7 +272,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 	    temp.add(usagePointId);
 		try {
 			List<Long> allIdsForRetailCustomer = findAllIdsForRetailCustomer(retailCustomerId);
-			result = (new EntryTypeIterator(resourceService, temp));
+			result = (new EntryTypeIterator(resourceService, temp, UsagePoint.class));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found

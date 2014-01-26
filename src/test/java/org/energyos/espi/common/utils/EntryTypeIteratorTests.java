@@ -35,7 +35,7 @@ public class EntryTypeIteratorTests extends BaseTest {
     public void next_returnsTheUsagePoint() {
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
 
-        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         assertThat(find(iterator, usagePoint), is(notNullValue()));
     }
@@ -46,7 +46,7 @@ public class EntryTypeIteratorTests extends BaseTest {
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
         TimeConfiguration localTimeParameters = usagePoint.getLocalTimeParameters();
 
-        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         assertIteratorContains(iterator, localTimeParameters);
     }
@@ -57,7 +57,7 @@ public class EntryTypeIteratorTests extends BaseTest {
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
         TimeConfiguration localTimeParameters = usagePoint.getLocalTimeParameters();
 
-        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         assertIteratorNotContains(iterator, wrongTimeParameters);
     }
@@ -67,7 +67,7 @@ public class EntryTypeIteratorTests extends BaseTest {
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
         MeterReading meterReading = usagePoint.getMeterReadings().get(0);
 
-        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         assertThat(find(iterator, meterReading), is(notNullValue()));
     }
@@ -77,7 +77,7 @@ public class EntryTypeIteratorTests extends BaseTest {
         MeterReading wrongMeterReading = espiPersistenceFactory.createUsagePoint().getMeterReadings().get(0);
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
 
-        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         assertIteratorNotContains(iterator, wrongMeterReading);
     }
@@ -87,7 +87,7 @@ public class EntryTypeIteratorTests extends BaseTest {
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
         IntervalBlock intervalBlock = usagePoint.getMeterReadings().get(0).getIntervalBlocks().get(0);
 
-        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         assertThat(find(iterator, intervalBlock), is(notNullValue()));
     }
@@ -97,7 +97,7 @@ public class EntryTypeIteratorTests extends BaseTest {
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
         ElectricPowerUsageSummary electricPowerUsageSummary = usagePoint.getElectricPowerUsageSummaries().get(0);
 
-        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         assertThat(find(iterator, electricPowerUsageSummary), is(notNullValue()));
     }
@@ -107,7 +107,7 @@ public class EntryTypeIteratorTests extends BaseTest {
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
         ElectricPowerQualitySummary electricPowerQualitySummary = usagePoint.getElectricPowerQualitySummaries().get(0);
 
-        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         assertThat(find(iterator, electricPowerQualitySummary), is(notNullValue()));
     }
@@ -117,7 +117,7 @@ public class EntryTypeIteratorTests extends BaseTest {
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
         ReadingType readingType = usagePoint.getMeterReadings().get(0).getReadingType();
 
-        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         assertThat(find(iterator, readingType), is(notNullValue()));
     }
@@ -126,7 +126,7 @@ public class EntryTypeIteratorTests extends BaseTest {
     public void entry_hasLinks() throws Exception {
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
 
-        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()));
+        EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         UsagePoint usagePointFromEntry = find(iterator, usagePoint).getContent().getUsagePoint();
         assertThat(usagePointFromEntry.getSelfLink().getHref(), is(not(nullValue())));

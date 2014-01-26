@@ -108,7 +108,9 @@ import java.util.List;
         @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT summary.id FROM ElectricPowerUsageSummary summary WHERE summary.usagePoint.id = :usagePointId"),
         @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_ALL_IDS,
-                query = "SELECT electricPowerUsageSummary.id FROM ElectricPowerUsageSummary electricPowerUsageSummary")
+                query = "SELECT electricPowerUsageSummary.id FROM ElectricPowerUsageSummary electricPowerUsageSummary"),
+        @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT e.id FROM UsagePoint u, ElectricPowerUsageSummary e WHERE u.retailCustomer.id = :o1Id AND  e.usagePoint.id = :o2Id"),
+        @NamedQuery(name = ElectricPowerUsageSummary.QUERY_FIND_ID_BY_XPATH, query = "SELECT e.id FROM UsagePoint u, ElectricPowerUsageSummary e WHERE u.retailCustomer.id = :o1Id AND e.usagePoint.id = :o2Id AND e.id = :o3Id")
 
 })
 public class ElectricPowerUsageSummary
@@ -119,6 +121,8 @@ public class ElectricPowerUsageSummary
     public static final String QUERY_FIND_BY_UUID = "ElectricPowerUsageSummary.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ElectricPowerUsageSummary.findAllIdsByUsagePointId";
     public static final String QUERY_FIND_ALL_IDS = "ElectricPowerUsageSummary.findAllIds";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "ElectricPowerUsageSummary.findAllIdsByXpath2";
+    public static final String QUERY_FIND_ID_BY_XPATH = "ElectricPowerUsageSummary.findIdByXpath";
 
     protected Long billLastPeriod;
     protected Long billToDate;

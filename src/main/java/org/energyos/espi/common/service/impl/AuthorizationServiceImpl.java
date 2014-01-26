@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013, 2014 EnergyOS.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.domain.ApplicationInformation;
@@ -130,7 +146,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 			List<Long> temp = new ArrayList<Long>();
 			Authorization authorization = authorizationRepository.findById(authorizationId);
 			temp.add(authorization.getId());
-			result = (new EntryTypeIterator(resourceService, temp)).nextEntry(Authorization.class);
+			result = (new EntryTypeIterator(resourceService, temp, Authorization.class)).nextEntry(Authorization.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -146,7 +162,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = authorizationRepository.findAllIds(retailCustomerId);
-			result = (new EntryTypeIterator(resourceService, temp));
+			result = (new EntryTypeIterator(resourceService, temp, Authorization.class));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -163,7 +179,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 			List<Long> temp = new ArrayList<Long>();
 			Authorization authorization = authorizationRepository.findById(authorizationId);
 			temp.add(authorization.getId());
-			result = (new EntryTypeIterator(resourceService, temp)).next();
+			result = (new EntryTypeIterator(resourceService, temp, Authorization.class)).next();
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -179,7 +195,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = authorizationRepository.findAllIds();
-			result = (new EntryTypeIterator(resourceService, temp));
+			result = (new EntryTypeIterator(resourceService, temp, Authorization.class));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found

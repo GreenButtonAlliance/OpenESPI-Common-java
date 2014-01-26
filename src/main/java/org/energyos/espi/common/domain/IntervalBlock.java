@@ -75,9 +75,8 @@ import java.util.List;
                 query = "SELECT block.id FROM IntervalBlock block where block.meterReading.usagePoint.id = :usagePointId"),
         @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS,
                 query = "SELECT intervalBlock.id FROM IntervalBlock intervalBlock"),
-                @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_XPATH_1, query = "SELECT u.id FROM UsagePoint u WHERE u.retailCustomer.id = :retailCustomerId"),
-                @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :retailCustomerId AND  m.usagePoint.id = :usagePointId"),
-                @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_XPATH_3, query = "SELECT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :retailCustomerId AND m.usagePoint.id = :usagePointId AND i.meterReading.id = :meterReadingId")
+        @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_XPATH_3, query = "SELECT DISTINCT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id AND i.meterReading.id = :o3Id"),
+        @NamedQuery(name = IntervalBlock.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id AND i.meterReading.id = :o3Id AND i.id = :o4Id")
 
 })
 @XmlRootElement(name = "IntervalBlock")
@@ -93,6 +92,7 @@ public class IntervalBlock
     public static final String QUERY_FIND_ALL_IDS_BY_XPATH_1 = "IntervalBlock.findAllIdsByXpath1";
     public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "IntervalBlock.findAllIdsByXpath2";
     public static final String QUERY_FIND_ALL_IDS_BY_XPATH_3 = "IntervalBlock.findAllIdsByXpath3";
+    public static final String QUERY_FIND_ID_BY_XPATH = "IntervalBlock.findIdByXpath";
 
     @Embedded
     protected DateTimeInterval interval;
