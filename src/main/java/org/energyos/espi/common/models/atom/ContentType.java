@@ -642,6 +642,7 @@ public class ContentType {
 				temp = temp  + "/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId();
 			} 
 			result.add(temp + "/IntervalBlock");
+			temp = temp.substring(0, temp.indexOf("/RetailCustomer"));
 			result.add(temp + "/ReadingType/" + readingType.getId());
 			}
 		
@@ -657,6 +658,9 @@ public class ContentType {
 			result.add(temp + "/MeterReading");
 			if (!(qualityList.isEmpty())) result.add(temp + "/ElectricPowerQualitySummary");
 			if (!(usageList.isEmpty())) result.add(temp + "/ElectricPowerUsageSummary");
+			// for LocalTimeParameters - maket it a ROOT access
+			//
+			temp = temp.substring(0, temp.indexOf("/RetailCustomer"));
 			result.add(temp + "/LocalTimeParameters/" + timeConfiguration.getId());
 		}
 		/*
