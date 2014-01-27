@@ -24,6 +24,7 @@ public class EntryTypeIterator {
     private Iterator<Long> resourceIds;
     private Iterator<Pair<Long, Class>> childIds = new ArrayList<Pair<Long, Class>>().iterator();
     private ResourceService resourceService;
+    private Class rootClass;
 
     public EntryTypeIterator(ResourceService resourceService, List<Long> ids, EntryBuilder builder) {
         this.resourceService = resourceService;
@@ -31,10 +32,11 @@ public class EntryTypeIterator {
         this.builder = builder;
     }
 
-    public EntryTypeIterator(ResourceService resourceService, List<Long> ids) {
+    public EntryTypeIterator(ResourceService resourceService, List<Long> ids, Class clazz) {
         this.resourceService = resourceService;
         this.resourceIds = ids.iterator();
         builder = new EntryBuilder();
+        rootClass = clazz;
     }
 
     public boolean hasNext() {
@@ -43,11 +45,12 @@ public class EntryTypeIterator {
 
     public EntryType next()  {
         IdentifiedObject resource;
+        // TODO there are some Class maint. things needed here
         if(childIds.hasNext()) {
             Pair<Long, Class> pair = childIds.next();
             resource = resourceService.findById(pair.getKey(), pair.getValue());
         } else {
-            resource = resourceService.findById(resourceIds.next(), UsagePoint.class);
+            resource = resourceService.findById(resourceIds.next(), rootClass);
             updateChildIds(resource.getId());
         }
 

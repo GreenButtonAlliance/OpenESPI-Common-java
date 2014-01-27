@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,7 +16,13 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+
 import java.util.UUID;
+
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.repositories.TimeConfigurationRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013, 2014 EnergyOS.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package org.energyos.espi.common.service.impl;
 
 
@@ -274,7 +290,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportIntervalBlock(Long retailCustomerId, Long usagePointId, Long meterReadingId, Long intervalBlockId,
 					OutputStream stream, ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/IntervalBlock/" + intervalBlockId;
-		exportEntry(intervalBlockService.findEntryType(retailCustomerId, usagePointId, meterReadingId, intervalBlockId), stream, exportFilter, hrefFragment);
+		exportEntry(findEntryTypeXPath(retailCustomerId, usagePointId, meterReadingId, intervalBlockId, IntervalBlock.class), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
@@ -304,7 +320,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportMeterReading(Long retailCustomerId, Long usagePointId, Long meterReadingId,
 				       OutputStream stream, ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/MeterReading/" + meterReadingId;
-		exportEntry(meterReadingService.findEntryType(retailCustomerId, usagePointId, meterReadingId), stream, exportFilter, hrefFragment);
+		exportEntry(findEntryTypeXPath(retailCustomerId, usagePointId, meterReadingId, 0L, MeterReading.class), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
@@ -352,14 +368,14 @@ public class ExportServiceImpl implements ExportService {
 	public void exportRetailCustomer(Long retailCustomerId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/RetailCustomer/" + retailCustomerId;
-		exportEntry(retailCustomerService.findEntryType(retailCustomerId), stream, exportFilter, hrefFragment);
+		exportEntry(findEntryTypeXPath(retailCustomerId, 0L, 0L, 0L, RetailCustomer.class), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
 	public void exportRetailCustomers(OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
 		String hrefFragment = "/RetailCustomer";
-		exportEntries(retailCustomerService.findEntryTypeIterator(), stream, exportFilter, RetailCustomer.class, hrefFragment);
+		exportEntries(findEntryTypeIteratorXPath(0L, 0L, 0L, RetailCustomer.class), stream, exportFilter, UsagePoint.class, hrefFragment);
 	}
 
 	
@@ -402,7 +418,7 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportTimeConfiguration(Long timeConfigurationId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/TimeConfiguratoin/" + timeConfigurationId;
+		String hrefFragment = "/TimeConfiguration/" + timeConfigurationId;
 	    exportEntry(timeConfigurationService.findEntryType(0L, 0L, timeConfigurationId, exportFilter), stream, exportFilter, hrefFragment);	
 	}
 
@@ -417,7 +433,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportTimeConfiguration(Long retailCustomerId, Long usagePointId,
 			Long timeConfigurationId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetalCustomer" + retailCustomerId + "/UsagePoint/" + usagePointId + "/LocalTimeParameters/" + timeConfigurationId;
+     	String hrefFragment = "/RetalCustomer" + retailCustomerId + "/UsagePoint/" + usagePointId + "/LocalTimeParameters/" + timeConfigurationId;
 		exportEntry(timeConfigurationService.findEntryType(retailCustomerId, usagePointId, timeConfigurationId, exportFilter), stream, exportFilter, hrefFragment);	
 	}
 
@@ -451,7 +467,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportUsagePoint(Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId;
-		exportEntry(usagePointService.findEntryType(retailCustomerId, usagePointId), stream, exportFilter, hrefFragment);
+		exportEntry(findEntryTypeXPath(retailCustomerId, usagePointId, 0L, 0L, UsagePoint.class), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
@@ -649,22 +665,51 @@ public class ExportServiceImpl implements ExportService {
 	
 	@SuppressWarnings("unchecked")
 	
+	private EntryType findEntryTypeXPath(Long id1, Long id2, Long id3, Long id4, Class clazz) {
+		EntryType result = null;
+		List<Long> temp = new ArrayList<Long>();
+		try {
+				
+			if (id4 != 0) {
+				temp.add(resourceService.findIdByXPath(id1, id2, id3, id4, clazz));
+			} else {
+				if (id3 != 0) {
+					temp.add(resourceService.findIdByXPath(id1, id2, id3, clazz));
+				} else {
+					if (id2 != 0) {
+					   temp.add(resourceService.findIdByXPath(id1, id2, clazz));
+				    } else {
+				       temp.add(resourceService.findIdByXPath(id1, clazz));
+			        }
+				}
+			}
+			result = null;
+		} catch (Exception e) {
+			System.out.printf("**** Error in Query: %s\n", e.toString());
+			result = null;
+		}
+		if (temp != null) {
+			result = (new EntryTypeIterator(resourceService, temp, clazz)).nextEntry(clazz);
+		}
+		return result;		
+	}
+	
 	private EntryTypeIterator findEntryTypeIteratorXPath(Long id1, Long id2, Long id3, Class clazz) {
 		EntryTypeIterator result = null;
 		List<Long> temp = new ArrayList<Long>();
 		try {
-			if (id2 != 0) {
-				if (id3 != 0) {
-					temp = resourceService.findAllIdsByXPath(id1, id2, id3, clazz);
-				} else {
-					temp = resourceService.findAllIdsByXPath(id1, id2, clazz);
-				}
+			if (id3 != 0) {
+				temp = resourceService.findAllIdsByXPath(id1, id2, id3, clazz);
 			} else {
-				temp = resourceService.findAllIdsByXPath(id1, clazz);
+				if (id2 != 0) {
+					temp = resourceService.findAllIdsByXPath(id1, id2, clazz);
+				} else {
+					temp = resourceService.findAllIdsByXPath(id1, clazz);
+				}
 			}
-			result = (new EntryTypeIterator(resourceService, temp));
+			result = (new EntryTypeIterator(resourceService, temp, clazz));
 		} catch (Exception e) {
-			System.out.printf("**** Error in Query: %s", e.toString());
+			System.out.printf("**** Error in Query: %s\n", e.toString());
 			result = null;
 		}
 		return result;		

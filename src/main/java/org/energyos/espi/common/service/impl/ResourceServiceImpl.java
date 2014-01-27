@@ -67,6 +67,14 @@ public class ResourceServiceImpl implements ResourceService {
         return repository.findAllIdsByUsagePointId(id, clazz);
     }
 
+    // XPath Accessors
+    //
+    
+	@Override
+	public <T extends IdentifiedObject> List<Long> findAllIdsByXPath(Class<T> clazz) {
+		return repository.findAllIdsByXPath(clazz);
+	}
+	
 	@Override
 	public <T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1,
 			Class<T> clazz) {
@@ -85,7 +93,33 @@ public class ResourceServiceImpl implements ResourceService {
 		return repository.findAllIdsByXPath(id1, id2, id3, clazz);
 	}
 	
+	@Override
+	public <T extends IdentifiedObject> Long findIdByXPath(Long id1,
+			Class<T> clazz) {
+		return repository.findIdByXPath(id1, clazz);
+	}
+
+	@Override
+	public <T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2,
+			Class<T> clazz) {
+		return repository.findIdByXPath(id1, id2, clazz);
+	}
+
+	@Override
+	public <T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2,
+			Long id3, Class<T> clazz) {
+		return repository.findIdByXPath(id1, id2, id3, clazz);
+	}
+
+	@Override
+	public <T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2,
+			Long id3, Long id4, Class<T> clazz) {
+		return repository.findIdByXPath(id1, id2, id3, id4, clazz);
+	}
+	
     public void setRepository(ResourceRepository repository) {
         this.repository = repository;
     }
+
+
 }

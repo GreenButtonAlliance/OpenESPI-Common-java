@@ -16,8 +16,10 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+import java.text.SimpleDateFormat;
 
 import org.energyos.espi.common.models.atom.DateTimeType;
 import org.joda.time.DateTime;
@@ -32,6 +34,9 @@ public class DateTimeAdapter extends XmlAdapter<JAXBElement<DateTimeType>, DateT
 
     @Override
     public JAXBElement<DateTimeType> marshal(DateTime v) throws Exception {
+        SimpleDateFormat fmt = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" );
+  
+        String dateFormatted = fmt.format(v.toDate());
         return null;
     }
 }

@@ -88,9 +88,8 @@ import org.hibernate.annotations.LazyCollectionOption;
                 query = "SELECT reading.id FROM MeterReading reading WHERE reading.usagePoint.id = :usagePointId"),
         @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS,
                 query = "SELECT meterReading.id FROM MeterReading meterReading"),
-                @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_XPATH_1, query = "SELECT u.id FROM UsagePoint u WHERE u.retailCustomer.id = :retailCustomerId"),
-                @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :retailCustomerId AND  m.usagePoint.id = :usagePointId"),
-                @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_XPATH_3, query = "SELECT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :retailCustomerId AND m.usagePoint.id = :usagePointId AND i.meterReading.id = :meterReadingId")
+        @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT DISTINCT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :o1Id AND  m.usagePoint.id = :o2Id"),
+        @NamedQuery(name = MeterReading.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id AND m.id = :o3Id")
 
 })
 public class MeterReading extends IdentifiedObject
@@ -101,10 +100,9 @@ public class MeterReading extends IdentifiedObject
     public static final String QUERY_FIND_ALL_RELATED = "MeterReading.findAllRelated";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "MeterReading.findAllIdsByUsagePointId";
 	public static final String QUERY_FIND_ALL_IDS = "MeterReading.findAllIds";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_1 = "MeterReading.findAllIdsByXpath1";
     public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "MeterReading.findAllIdsByXpath2";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_3 = "MeterReading.findAllIdsByXpath3";
-	
+    public static final String QUERY_FIND_ID_BY_XPATH = "MeterReading.findIdByXpath";
+    
     @OneToMany(mappedBy = "meterReading", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.TRUE)
     @XmlTransient

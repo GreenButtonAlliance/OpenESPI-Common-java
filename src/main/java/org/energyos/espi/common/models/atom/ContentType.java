@@ -593,12 +593,17 @@ public class ContentType {
 						+ this.getIntervalBlocks().get(0).getId();
 			}
 			if (this.getLocalTimeParameters() != null) {
+				// here, we assume "result" has got the right mutated hrefFragment ...
+				return result + "/LocalTimeParameters/" + this.getLocalTimeParameters().getId();
+/*
+ *              // if one had a normal structure, one would have ...
 				UsagePoint usagePoint = this.getLocalTimeParameters()
 						.getUsagePoint();
 				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
 				return result + "/" + usagePoint.getId()
 						+ "/LocalTimeParameters/"
 						+ this.getLocalTimeParameters().getId();
+*/
 			}
 			if (this.getMeterReading() != null) {
 				UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
@@ -607,6 +612,11 @@ public class ContentType {
 						+ this.getMeterReading().getId();
 			}
 			if (this.getReadingType() != null) {
+				// here, we assume "result" has got the right mutated hrefFragment ...
+				return result + "/ReadingType/" + this.getReadingType().getId();
+				/*
+				 *              // if one had a normal structure, one would have ...
+
 				MeterReading meterReading = this.getReadingType()
 						.getMeterReading();
 				UsagePoint usagePoint = meterReading.getUsagePoint();
@@ -614,6 +624,7 @@ public class ContentType {
 				return result + "/" + usagePoint.getId() + "/MeterReading/"
 						+ meterReading.getId() + "/ReadingType/"
 						+ this.getReadingType().getId();
+				*/
 			}
 			if (this.getRetailCustomer() != null) {
 				return result + "/" + this.getRetailCustomer().getId();
@@ -652,6 +663,7 @@ public class ContentType {
 				temp = temp  + "/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId();
 			} 
 			result.add(temp + "/IntervalBlock");
+			temp = temp.substring(0, temp.indexOf("/RetailCustomer"));
 			result.add(temp + "/ReadingType/" + readingType.getId());
 			}
 		
@@ -667,6 +679,9 @@ public class ContentType {
 			result.add(temp + "/MeterReading");
 			if (!(qualityList.isEmpty())) result.add(temp + "/ElectricPowerQualitySummary");
 			if (!(usageList.isEmpty())) result.add(temp + "/ElectricPowerUsageSummary");
+			// for LocalTimeParameters - maket it a ROOT access
+			//
+			temp = temp.substring(0, temp.indexOf("/RetailCustomer"));
 			result.add(temp + "/LocalTimeParameters/" + timeConfiguration.getId());
 		}
 		/*

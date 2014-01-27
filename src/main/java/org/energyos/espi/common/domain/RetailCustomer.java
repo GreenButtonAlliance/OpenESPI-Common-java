@@ -54,11 +54,9 @@ import org.springframework.security.core.userdetails.UserDetails;
         @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL, query = "SELECT customer FROM RetailCustomer customer"),
         @NamedQuery(name = RetailCustomer.QUERY_FIND_BY_USERNAME, query = "SELECT customer FROM RetailCustomer customer WHERE customer.username = :username"),
         @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS, query = "SELECT retailCustomer.id FROM RetailCustomer retailCustomer"),
-        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS_BY_XPATH_1, query = "SELECT u.id FROM UsagePoint u WHERE u.retailCustomer.id = :retailCustomerId"),
-        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :retailCustomerId AND  m.usagePoint.id = :usagePointId"),
-        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS_BY_XPATH_3, query = "SELECT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :retailCustomerId AND m.usagePoint.id = :usagePointId AND i.meterReading.id = :meterReadingId")
+        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS_BY_XPATH_0, query = "SELECT DISTINCT r.id FROM RetailCustomer r"),
+        @NamedQuery(name = RetailCustomer.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT r.id FROM RetailCustomer r WHERE r.id = :o1Id")
       
-
 })
 
 public class RetailCustomer implements UserDetails, Principal{
@@ -67,10 +65,9 @@ public class RetailCustomer implements UserDetails, Principal{
     public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
     public final static String QUERY_FIND_BY_USERNAME = "RetailCustomer.findByUsername";
     public static final String QUERY_FIND_ALL_IDS = "RetailCustomer.findAllIds";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_1 = "RetailCustomer.findAllIdsByXpath1";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "RetailCustomer.findAllIdsByXpath2";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_3 = "RetailCustomer.findAllIdsByXpath3";
-
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_0 = "RetailCustomer.findAllIdsByXpath0";
+    public static final String QUERY_FIND_ID_BY_XPATH = "RetailCustomer.findIdsByXpath";
+    
     public final static String ROLE_USER = "ROLE_USER";
     public final static String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
 

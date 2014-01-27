@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -106,9 +106,8 @@ import org.hibernate.annotations.LazyCollectionOption;
         @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_FOR_RETAIL_CUSTOMER,
                 query = "SELECT point.id from UsagePoint point where point.retailCustomer.id = :retailCustomerId"),
         @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS, query = "SELECT point.id from UsagePoint point"),
-        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_BY_XPATH_1, query = "SELECT u.id FROM UsagePoint u WHERE u.retailCustomer.id = :retailCustomerId"),
-        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :retailCustomerId AND  m.usagePoint.id = :usagePointId"),
-        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_BY_XPATH_3, query = "SELECT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :retailCustomerId AND m.usagePoint.id = :usagePointId AND i.meterReading.id = :meterReadingId")
+        @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_BY_XPATH_1, query = "SELECT DISTINCT u.id FROM UsagePoint u WHERE u.retailCustomer.id = :o1Id"),
+        @NamedQuery(name = UsagePoint.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT u.id FROM UsagePoint u WHERE u.retailCustomer.id = :o1Id AND u.id = :o2Id")
 
 })
 
@@ -126,9 +125,9 @@ public class UsagePoint
     public static final String QUERY_FIND_ALL_IDS_FOR_RETAIL_CUSTOMER = "UsagePoint.findAllIdsForRetailCustomer";
     public static final String QUERY_FIND_ALL_IDS = "UsagePoint.findAllIds";
     public static final String QUERY_FIND_ALL_IDS_BY_XPATH_1 = "UsagePoint.findAllIdsByXpath1";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "UsagePoint.findAllIdsByXpath2";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_3 = "UsagePoint.findAllIdsByXpath3";
+    public static final String QUERY_FIND_ID_BY_XPATH = "UsagePoint.findIdByXpath";
 
+    
     @XmlElement(type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
     protected byte[] roleFlags;

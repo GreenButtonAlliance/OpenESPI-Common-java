@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -42,12 +42,6 @@ public interface RetailCustomerService extends UserDetailsService {
 	RetailCustomer findById(Long retailCustomerId);
 	
 	RetailCustomer findById(String retailCustomerId);
-
-	public EntryType findEntryType(Long retailCustomerId);
-	
-	public EntryType findEntryType(String retailCustomerId);
-
-	public EntryTypeIterator findEntryTypeIterator();
 
 	public void add(RetailCustomer retailCustomer);
 

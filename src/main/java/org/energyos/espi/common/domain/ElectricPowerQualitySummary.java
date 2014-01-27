@@ -103,7 +103,10 @@ import org.energyos.espi.common.models.atom.adapters.ElectricPowerQualitySummary
         @NamedQuery(name = ElectricPowerQualitySummary.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT summary.id FROM ElectricPowerQualitySummary summary WHERE summary.usagePoint.id = :usagePointId"),
         @NamedQuery(name = ElectricPowerQualitySummary.QUERY_FIND_ALL_IDS,
-        query = "SELECT electricPowerQualitySummary.id FROM ElectricPowerQualitySummary electricPowerQualitySummary")
+        query = "SELECT electricPowerQualitySummary.id FROM ElectricPowerQualitySummary electricPowerQualitySummary"),
+        @NamedQuery(name = ElectricPowerQualitySummary.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT e.id FROM UsagePoint u, ElectricPowerQualitySummary e WHERE u.retailCustomer.id = :o1Id AND  e.usagePoint.id = :o2Id"),
+        @NamedQuery(name = ElectricPowerQualitySummary.QUERY_FIND_ID_BY_XPATH, query = "SELECT e.id FROM UsagePoint u, ElectricPowerQualitySummary e WHERE u.retailCustomer.id = :o1Id AND e.usagePoint.id = :o2Id AND e.id = :o3Id")
+
 })
 public class ElectricPowerQualitySummary
         extends IdentifiedObject
@@ -113,6 +116,8 @@ public class ElectricPowerQualitySummary
     public static final String QUERY_FIND_BY_UUID = "ElectricPowerQualitySummary.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ElectricPowerQualitySummary.findAllIdsByUsagePointId";
 	public static final String QUERY_FIND_ALL_IDS = "ElectricPowerQualitySummary.findAllIds";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "ElectricPowerQualitySummary.findAllIdsByXpath2";
+    public static final String QUERY_FIND_ID_BY_XPATH = "ElectricPowerQualitySummary.findIdByXpath";
 
     protected Long flickerPlt;
     protected Long flickerPst;
