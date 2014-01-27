@@ -1,12 +1,12 @@
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.support.TestUtils;
-import org.junit.Test;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.energyos.espi.common.support.TestUtils;
+import org.junit.Test;
 
 public class ElectricPowerQualitySummaryPersistenceTests {
     @Test

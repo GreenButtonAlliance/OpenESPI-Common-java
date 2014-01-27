@@ -1,12 +1,12 @@
 package org.energyos.espi.common.service.impl;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class ApplicationInformationServiceImplTest {
     private ApplicationInformationServiceImpl service;
@@ -56,10 +56,10 @@ public class ApplicationInformationServiceImplTest {
         verify(repository).findByDataCustodianClientId("39");
     }
 
-    @Test
-    public void loadClientByClientId() throws Exception {
-        service.loadClientByClientId("99");
-
-        verify(repository).findByClientId("99");
-    }
+//    @Test
+//    public void loadClientByClientId() throws Exception {
+//        service.loadClientByClientId("99");
+//
+//        verify(repository).findByClientId("99");
+//    }
 }

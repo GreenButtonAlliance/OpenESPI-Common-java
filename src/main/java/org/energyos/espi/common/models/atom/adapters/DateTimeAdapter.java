@@ -16,13 +16,13 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+
 import org.energyos.espi.common.models.atom.DateTimeType;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.chrono.ISOChronology;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 public class DateTimeAdapter extends XmlAdapter<JAXBElement<DateTimeType>, DateTime> {
     @Override

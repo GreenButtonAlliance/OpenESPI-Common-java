@@ -16,11 +16,11 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
-import org.energyos.espi.common.models.atom.ContentType;
-import org.energyos.espi.common.models.atom.ObjectFactory;
-
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import org.energyos.espi.common.models.atom.ContentType;
+import org.energyos.espi.common.models.atom.ObjectFactory;
 
 public class ContentAdapter extends XmlAdapter<JAXBElement<ContentType>, ContentType> {
     @Override

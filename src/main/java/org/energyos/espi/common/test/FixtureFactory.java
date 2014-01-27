@@ -1,14 +1,14 @@
 package org.energyos.espi.common.test;
 
-import org.apache.commons.io.FileUtils;
-import org.springframework.core.io.ClassPathResource;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.io.FileUtils;
+import org.springframework.core.io.ClassPathResource;
 
 public class FixtureFactory {
     private FixtureFactory() {}

@@ -16,19 +16,15 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.TimeConfiguration;
-import org.energyos.espi.common.models.atom.EntryType;
-import org.energyos.espi.common.repositories.TimeConfigurationRepository;
-import org.energyos.espi.common.utils.EntryTypeIterator;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
-import java.util.UUID;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.repositories.TimeConfigurationRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional

@@ -1,20 +1,21 @@
 package org.energyos.espi.common.utils;
 
-import org.energyos.espi.common.BaseTest;
-import org.energyos.espi.common.models.atom.EntryType;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.transform.stream.StreamSource;
-import java.io.InputStream;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import java.io.InputStream;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.transform.stream.StreamSource;
+
+import org.energyos.espi.common.BaseTest;
+import org.energyos.espi.common.models.atom.EntryType;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 public class XMLMarshallerTest extends BaseTest {
     @Mock

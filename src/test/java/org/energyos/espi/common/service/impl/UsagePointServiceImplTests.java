@@ -17,6 +17,19 @@
 package org.energyos.espi.common.service.impl;
 
 
+import static org.energyos.espi.common.test.EspiFactory.newSubscription;
+import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.io.InputStream;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -29,15 +42,6 @@ import org.energyos.espi.common.utils.XMLMarshaller;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import java.io.InputStream;
-import java.util.UUID;
-
-import static org.energyos.espi.common.test.EspiFactory.newSubscription;
-import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
 
 public class UsagePointServiceImplTests {
 

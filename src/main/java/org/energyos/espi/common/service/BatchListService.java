@@ -1,8 +1,8 @@
 package org.energyos.espi.common.service;
 
-import org.energyos.espi.common.domain.BatchList;
-
 import java.util.List;
+
+import org.energyos.espi.common.domain.BatchList;
 
 public interface BatchListService {
 

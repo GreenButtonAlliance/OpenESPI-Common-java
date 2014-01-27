@@ -1,10 +1,10 @@
 package org.energyos.espi.common.service;
 
-import org.energyos.espi.common.domain.IdentifiedObject;
-import org.energyos.espi.common.domain.Linkable;
-
 import java.util.List;
 import java.util.UUID;
+
+import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.Linkable;
 
 public interface ResourceService {
 	void persist(IdentifiedObject resource);

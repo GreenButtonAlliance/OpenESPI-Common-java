@@ -1,17 +1,17 @@
 package org.energyos.espi.common;
 
 
-import org.energyos.espi.common.domain.RetailCustomer;
-import org.energyos.espi.common.service.ImportService;
-import org.energyos.espi.common.service.RetailCustomerService;
-import org.energyos.espi.common.service.UsagePointService;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 import java.util.UUID;
+
+import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.service.ImportService;
+import org.energyos.espi.common.service.RetailCustomerService;
+import org.energyos.espi.common.service.UsagePointService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class SeedDataGenerator {
     @Autowired

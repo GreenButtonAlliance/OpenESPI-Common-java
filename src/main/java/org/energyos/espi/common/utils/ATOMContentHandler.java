@@ -1,5 +1,15 @@
 package org.energyos.espi.common.utils;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.UnmarshallerHandler;
+
 import org.energyos.espi.common.models.atom.EntryType;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
@@ -7,12 +17,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.NamespaceSupport;
 import org.xml.sax.helpers.XMLFilterImpl;
-
-import javax.xml.bind.*;
-
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
 
 public class ATOMContentHandler extends XMLFilterImpl {
     private final JAXBContext context;

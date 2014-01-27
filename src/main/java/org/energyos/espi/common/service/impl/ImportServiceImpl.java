@@ -1,5 +1,13 @@
 package org.energyos.espi.common.service.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
+
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
@@ -15,14 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParserFactory;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 @Service
 @Transactional

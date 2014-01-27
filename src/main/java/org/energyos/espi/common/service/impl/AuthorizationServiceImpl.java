@@ -1,9 +1,11 @@
 package org.energyos.espi.common.service.impl;
 
-import org.energyos.espi.common.domain.ApplicationInformation;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.Authorization;
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.Routes;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
@@ -15,11 +17,6 @@ import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class AuthorizationServiceImpl implements AuthorizationService {

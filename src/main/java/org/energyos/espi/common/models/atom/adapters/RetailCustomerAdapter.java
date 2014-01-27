@@ -16,11 +16,11 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
-import org.energyos.espi.common.domain.ObjectFactory;
-import org.energyos.espi.common.domain.RetailCustomer;
-
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import org.energyos.espi.common.domain.ObjectFactory;
+import org.energyos.espi.common.domain.RetailCustomer;
 
 public class RetailCustomerAdapter extends XmlAdapter<JAXBElement< RetailCustomer>,  RetailCustomer> {
     @Override

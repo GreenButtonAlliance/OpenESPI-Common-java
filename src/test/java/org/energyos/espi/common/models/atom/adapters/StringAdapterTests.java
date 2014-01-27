@@ -16,14 +16,14 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
-import org.energyos.espi.common.models.atom.TextType;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
-import static org.junit.Assert.assertTrue;
+import org.energyos.espi.common.models.atom.TextType;
+import org.junit.Before;
+import org.junit.Test;
 
 public class StringAdapterTests {
 

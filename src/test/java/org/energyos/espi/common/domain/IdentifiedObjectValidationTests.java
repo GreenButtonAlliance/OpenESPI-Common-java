@@ -1,17 +1,18 @@
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.support.TestUtils;
-import org.junit.Test;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+
+import java.util.Set;
+import java.util.UUID;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
-import java.util.UUID;
 
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
+import org.energyos.espi.common.support.TestUtils;
+import org.junit.Test;
 
 public class IdentifiedObjectValidationTests {
     @Test

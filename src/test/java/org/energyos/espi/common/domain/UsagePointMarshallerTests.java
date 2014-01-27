@@ -16,6 +16,15 @@
 
 package org.energyos.espi.common.domain;
 
+import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
+import static org.energyos.espi.common.test.Asserts.assertXpathValue;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.transform.stream.StreamResult;
+
 import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.energyos.espi.common.atom.XMLTest;
 import org.energyos.espi.common.support.TestUtils;
@@ -28,14 +37,6 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xml.sax.SAXException;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.transform.stream.StreamResult;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
-import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
-import static org.energyos.espi.common.test.Asserts.assertXpathValue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")

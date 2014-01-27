@@ -1,15 +1,16 @@
 package org.energyos.espi.common.utils;
 
-import org.energyos.espi.common.models.atom.DateTimeType;
-import org.joda.time.DateTime;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import org.energyos.espi.common.models.atom.DateTimeType;
+import org.joda.time.DateTime;
 
 public class DateConverter {
     public static DateTimeType toDateTimeType(Date date) {

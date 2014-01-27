@@ -16,18 +16,22 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.*;
-import org.energyos.espi.common.repositories.UsagePointRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.UUID;
+import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.ServiceCategory;
+import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.repositories.UsagePointRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional

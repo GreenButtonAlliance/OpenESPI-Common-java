@@ -17,17 +17,19 @@
 package org.energyos.espi.common.service;
 
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.energyos.espi.common.service.impl.RetailCustomerServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 public class RetailCustomerServiceTests {
 

@@ -16,15 +16,16 @@
 
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.atom.XMLTest;
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import java.util.Set;
 
-import static org.junit.Assert.assertTrue;
+import org.energyos.espi.common.atom.XMLTest;
+import org.junit.Test;
 
 public class ReadingQualityValidationTests extends XMLTest {
 

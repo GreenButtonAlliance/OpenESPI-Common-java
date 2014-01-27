@@ -16,11 +16,11 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
-import org.energyos.espi.common.models.atom.EntryType;
-import org.energyos.espi.common.models.atom.ObjectFactory;
-
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import org.energyos.espi.common.models.atom.EntryType;
+import org.energyos.espi.common.models.atom.ObjectFactory;
 
 public class EntryAdapter extends XmlAdapter<JAXBElement<EntryType>, EntryType> {
     @Override

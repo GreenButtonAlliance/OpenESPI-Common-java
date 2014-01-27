@@ -1,14 +1,14 @@
 package org.energyos.espi.common.utils;
 
-import org.energyos.espi.common.models.atom.EntryType;
-import org.energyos.espi.common.models.atom.LinkType;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.energyos.espi.common.models.atom.EntryType;
+import org.energyos.espi.common.models.atom.LinkType;
+import org.junit.Test;
 
 public class EntryLookupTableTests {
 

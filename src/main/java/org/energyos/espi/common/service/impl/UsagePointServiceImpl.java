@@ -16,6 +16,11 @@
 
 package org.energyos.espi.common.service.impl;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -27,7 +32,6 @@ import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.UsagePointService;
 import org.energyos.espi.common.utils.ATOMMarshaller;
 import org.energyos.espi.common.utils.EntryTypeIterator;
-import org.energyos.espi.common.utils.ExportFilter;
 import org.energyos.espi.common.utils.SubscriptionBuilder;
 import org.energyos.espi.common.utils.UsagePointBuilder;
 import org.energyos.espi.common.utils.XMLMarshaller;
@@ -36,14 +40,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sun.syndication.io.FeedException;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 @Service
 @Transactional

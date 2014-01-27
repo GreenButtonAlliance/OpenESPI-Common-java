@@ -16,18 +16,17 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.IntervalBlock;
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.TimeConfiguration;
-import org.energyos.espi.common.repositories.IntervalBlockRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import java.util.List;
-import java.util.UUID;
+import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.repositories.IntervalBlockRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional

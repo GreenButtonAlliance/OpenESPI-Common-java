@@ -16,11 +16,9 @@
 
 package org.energyos.espi.common.repositories;
 
-import org.energyos.espi.common.domain.TimeConfiguration;
-import org.energyos.espi.common.models.atom.EntryType;
-import org.energyos.espi.common.utils.EntryTypeIterator;
-
 import java.util.UUID;
+
+import org.energyos.espi.common.domain.TimeConfiguration;
 
 public interface TimeConfigurationRepository {
 

@@ -1,16 +1,13 @@
 package org.energyos.espi.common.service;
 
+import java.io.InputStream;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ReadingTypeRepository;
 import org.energyos.espi.common.utils.EntryTypeIterator;
-import org.energyos.espi.common.utils.ExportFilter;
-
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
-import java.util.UUID;
 
 public interface ReadingTypeService {
 	// TODO: likely deprecated

@@ -1,19 +1,16 @@
 package org.energyos.espi.common.service.impl;
 
-import org.energyos.espi.common.domain.ApplicationInformation;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.IdentifiedObject;
-import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.energyos.espi.common.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {

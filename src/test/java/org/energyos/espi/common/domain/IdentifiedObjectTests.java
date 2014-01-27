@@ -1,12 +1,13 @@
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.support.TestUtils;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.energyos.espi.common.support.TestUtils;
+import org.junit.Test;
 
 public class IdentifiedObjectTests {
     @Test

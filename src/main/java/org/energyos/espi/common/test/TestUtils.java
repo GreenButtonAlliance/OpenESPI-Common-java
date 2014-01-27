@@ -1,19 +1,23 @@
 package org.energyos.espi.common.test;
 
-import org.custommonkey.xmlunit.SimpleNamespaceContext;
-import org.custommonkey.xmlunit.XMLUnit;
-import org.xml.sax.InputSource;
+import static org.energyos.espi.common.domain.Configuration.ATOM_PREFIX;
+import static org.energyos.espi.common.domain.Configuration.ESPI_PREFIX;
+import static org.energyos.espi.common.domain.Configuration.HTTP_NAESB_ORG_ESPI;
+import static org.energyos.espi.common.domain.Configuration.HTTP_WWW_W3_ORG_2005_ATOM;
 
-import javax.xml.namespace.NamespaceContext;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static org.energyos.espi.common.domain.Configuration.*;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
+import org.custommonkey.xmlunit.SimpleNamespaceContext;
+import org.custommonkey.xmlunit.XMLUnit;
+import org.xml.sax.InputSource;
 
 public class TestUtils {
     public static void setupXMLUnit() {

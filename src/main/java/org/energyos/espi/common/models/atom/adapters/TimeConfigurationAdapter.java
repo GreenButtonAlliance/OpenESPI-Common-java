@@ -16,12 +16,11 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
-import org.energyos.espi.common.domain.ObjectFactory;
-import org.energyos.espi.common.domain.TimeConfiguration;
-import org.energyos.espi.common.utils.AtomMarshallerListener;
-
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import org.energyos.espi.common.domain.ObjectFactory;
+import org.energyos.espi.common.domain.TimeConfiguration;
 public class TimeConfigurationAdapter extends XmlAdapter<JAXBElement<TimeConfiguration>, TimeConfiguration> {
     
     @Override

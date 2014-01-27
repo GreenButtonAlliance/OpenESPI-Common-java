@@ -1,10 +1,10 @@
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.support.TestUtils;
-import org.junit.Test;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import org.energyos.espi.common.support.TestUtils;
+import org.junit.Test;
 
 public class RetailCustomerPersistenceTests {
 

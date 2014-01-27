@@ -1,8 +1,24 @@
 package org.energyos.espi.common.utils;
 
-import com.google.common.collect.Lists;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.energyos.espi.common.BaseTest;
-import org.energyos.espi.common.domain.*;
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.test.EspiPersistenceFactory;
@@ -14,11 +30,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+import com.google.common.collect.Lists;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

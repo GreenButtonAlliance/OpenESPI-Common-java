@@ -1,14 +1,21 @@
 package org.energyos.espi.common.utils;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-import org.energyos.espi.common.domain.*;
-import org.energyos.espi.common.models.atom.EntryType;
-import org.energyos.espi.common.service.ResourceService;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.models.atom.EntryType;
+import org.energyos.espi.common.service.ResourceService;
 
 public class EntryTypeIterator {
 

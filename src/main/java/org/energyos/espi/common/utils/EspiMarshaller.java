@@ -16,11 +16,16 @@
 
 package org.energyos.espi.common.utils;
 
-import com.sun.syndication.io.FeedException;
-
-import javax.xml.bind.*;
 import java.io.ByteArrayInputStream;
 import java.io.StringWriter;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
+import com.sun.syndication.io.FeedException;
 
 public class EspiMarshaller {
 

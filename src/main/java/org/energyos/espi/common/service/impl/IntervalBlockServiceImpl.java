@@ -1,5 +1,10 @@
 package org.energyos.espi.common.service.impl;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.models.atom.EntryType;
@@ -8,16 +13,8 @@ import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.IntervalBlockService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
-import org.energyos.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class IntervalBlockServiceImpl implements IntervalBlockService {

@@ -1,9 +1,9 @@
 package org.energyos.espi.common.domain;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.energyos.espi.common.support.TestUtils;
 import org.junit.Test;
-
-import javax.xml.bind.annotation.XmlTransient;
 
 public class MeterReadingMarshallingTests {
     @Test

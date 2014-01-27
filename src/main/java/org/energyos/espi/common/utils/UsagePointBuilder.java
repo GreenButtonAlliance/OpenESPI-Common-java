@@ -16,15 +16,22 @@
 
 package org.energyos.espi.common.utils;
 
-import org.energyos.espi.common.domain.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.ContentType;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.models.atom.FeedType;
 import org.energyos.espi.common.models.atom.LinkType;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class UsagePointBuilder {

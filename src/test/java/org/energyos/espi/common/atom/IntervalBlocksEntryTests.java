@@ -17,17 +17,19 @@
 package org.energyos.espi.common.atom;
 
 
-import com.sun.syndication.io.FeedException;
+import static org.energyos.espi.common.test.EspiFactory.newMeterReadingWithUsagePoint;
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBException;
-import java.util.List;
-
-import static org.energyos.espi.common.test.EspiFactory.newMeterReadingWithUsagePoint;
-import static org.junit.Assert.assertEquals;
+import com.sun.syndication.io.FeedException;
 
 public class IntervalBlocksEntryTests extends XMLTest {
 

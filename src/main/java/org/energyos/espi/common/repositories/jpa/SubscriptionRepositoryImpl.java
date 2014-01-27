@@ -1,20 +1,18 @@
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.ApplicationInformation;
-import org.energyos.espi.common.domain.MeterReading;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 @Repository
 @Transactional

@@ -16,8 +16,9 @@
 
 package org.energyos.espi.common.atom;
 
-import com.sun.syndication.io.FeedException;
 import org.energyos.espi.common.domain.MeterReading;
+
+import com.sun.syndication.io.FeedException;
 
 public class MeterReadingEntry extends EspiEntry<MeterReading> {
 

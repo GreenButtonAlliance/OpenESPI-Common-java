@@ -16,18 +16,16 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.RetailCustomer;
-import org.energyos.espi.common.domain.TimeConfiguration;
-import org.energyos.espi.common.repositories.RetailCustomerRepository;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import java.util.List;
+import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.repositories.RetailCustomerRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional

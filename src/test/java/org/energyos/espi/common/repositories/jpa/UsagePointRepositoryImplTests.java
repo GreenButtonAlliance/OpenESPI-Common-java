@@ -17,7 +17,35 @@
 package org.energyos.espi.common.repositories.jpa;
 
 
-import org.energyos.espi.common.domain.*;
+import static org.energyos.espi.common.test.EspiFactory.newMeterReading;
+import static org.energyos.espi.common.test.EspiFactory.newSubscription;
+import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
+import static org.energyos.espi.common.test.IsEmpty.isEmpty;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.energyos.espi.common.domain.ApplicationInformation;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.ServiceCategory;
+import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.LinkType;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
@@ -33,16 +61,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.UUID;
-
-import static org.energyos.espi.common.test.EspiFactory.*;
-import static org.energyos.espi.common.test.IsEmpty.isEmpty;
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")

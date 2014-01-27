@@ -1,13 +1,18 @@
 package org.energyos.espi.common.utils.factories;
 
+import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.TimeZone;
+
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.FeedType;
 import org.energyos.espi.common.utils.DateConverter;
 import org.energyos.espi.common.utils.FeedBuilder;
-
-import java.util.*;
-
-import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
 
 public class ATOMFactory {
     private ATOMFactory() {
