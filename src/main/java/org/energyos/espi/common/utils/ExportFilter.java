@@ -56,11 +56,10 @@ public class ExportFilter {
         }
 
         if (hasParam("start-index")) {
-        	if (!(params.get("start-index").equals("1"))) {
-        		if (matchedCounter < Integer.valueOf(params.get("start-index"))) {
+        	if (matchedCounter < Integer.valueOf(params.get("start-index"))) {
                     matchedCounter++;
                     return false;
-        		}
+        		
         	}
         }
 

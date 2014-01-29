@@ -106,7 +106,8 @@ public class Routes {
     public static final String RETAIL_CUSTOMER_MEMBER_UPLOAD_MY_DATA = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UploadMyData";
     
     // paterns for RESTful Batch services
-    public static final String BATCH_DOWNLOAD_MY_DATA = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}";
+    public static final String BATCH_DOWNLOAD_MY_DATA_COLLECTION = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}";
+    public static final String BATCH_DOWNLOAD_MY_DATA_MEMBER = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}";
     public static final String BATCH_UPLOAD_MY_DATA = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}";
     public static final String BATCH_BULK_MEMBER = "/espi/1_1/resource/Batch/Bulk/{bulkId}";
     public static final String BATCH_SUBSCRIPTION = "/espi/1_1/resource/Batch/Subscription/{subscriptionId}";
