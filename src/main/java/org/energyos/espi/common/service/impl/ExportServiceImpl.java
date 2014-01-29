@@ -508,7 +508,7 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportUsagePointFull(Long usagePointId, Long retailCustomerId,
 			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/Batch/RetailCustomer/" + retailCustomerId + "/UsagePoint" + usagePointId;
+		String hrefFragment = "/Batch/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId;
 		exportEntriesFull(usagePointService.findEntryTypeIterator(retailCustomerId, usagePointId), outputStream, exportFilter, hrefFragment);
 		
 	}
