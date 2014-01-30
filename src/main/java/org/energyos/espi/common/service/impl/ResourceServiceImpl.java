@@ -11,6 +11,7 @@ import org.energyos.espi.common.repositories.ResourceRepository;
 import org.energyos.espi.common.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {
@@ -53,6 +54,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    @Transactional( readOnly = true)  
     public <T extends IdentifiedObject> T findById(Long id, Class<T> clazz) {
         return repository.findById(id, clazz);
     }
