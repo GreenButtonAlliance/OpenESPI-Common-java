@@ -106,7 +106,9 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
             if (existingUsagePoint.getUpLink() != null) {
                 usagePoint.setUpLink(existingUsagePoint.getUpLink());
             }
-
+            usagePoint.setPublished(existingUsagePoint.getPublished());
+            usagePoint.setUpdated(existingUsagePoint.getUpdated());
+            
             em.merge(usagePoint);
         } catch (NoResultException e) {
             usagePoint.setPublished(new GregorianCalendar());

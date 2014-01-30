@@ -56,8 +56,15 @@ public class ResourceServiceImpl implements ResourceService {
         return repository.findByUUID(uuid, clazz);
     }
 
-    @Override
+    // the following is used to query for the existence of the object in the DB within 
+    // a closed transactional space. Callers will need a Catch on the NoResultExecption for failure.
+	@Override
     @Transactional( readOnly = true)  
+	public <T extends IdentifiedObject> T testById(Long id, Class<T> clazz) {
+		return repository.findById(id, clazz);
+	}
+	
+    @Override
     public <T extends IdentifiedObject> T findById(Long id, Class<T> clazz) {
         return repository.findById(id, clazz);
     }
@@ -125,6 +132,8 @@ public class ResourceServiceImpl implements ResourceService {
     public void setRepository(ResourceRepository repository) {
         this.repository = repository;
     }
+
+
 
 
 }
