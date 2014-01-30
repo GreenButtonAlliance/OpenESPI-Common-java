@@ -10,6 +10,7 @@ import org.energyos.espi.common.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    @Transactional( readOnly = true)  
     public <T extends IdentifiedObject> T findById(Long id, Class<T> clazz) {
         return repository.findById(id, clazz);
     }
