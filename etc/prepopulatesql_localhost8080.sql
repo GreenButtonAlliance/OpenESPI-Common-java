@@ -20,6 +20,16 @@ INSERT INTO retail_customers (username, first_name, last_name, password, enabled
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('charles', 'Charles', 'Babbage',     'koala', TRUE, 'ROLE_USER');
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('john',    'John',    'von Neumann', 'koala', TRUE, 'ROLE_USER');
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('marian',  'Marian',  'Rejewski',    'koala', TRUE, 'ROLE_USER');
+INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('vinny',   'Vint',    'Koala',       'koala', TRUE, 'ROLE_USER');
+INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('johnny',  'Johnny',  'Koala',       'koala', TRUE, 'ROLE_USER');
+INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('don',     'Don',     'Koala',       'koala', TRUE, 'ROLE_USER');
+
+INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('marty',    'Marty',  'Koala',       'koala', TRUE, 'ROLE_USER');
+INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('ron',      'Ron',    'Koala',       'koala', TRUE, 'ROLE_USER');
+INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('dave',     'Dave',   'Koala',       'koala', TRUE, 'ROLE_USER');
+
+INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('net0',     'net0',   'NIST',        'koala', TRUE, 'ROLE_USER');
+
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('grace',   'Grace',   'Hopper',      'koala', TRUE, 'ROLE_CUSTODIAN');
 
 /* Add application_information */ 
@@ -27,7 +37,7 @@ INSERT INTO application_information (`id`,`description`,`published`,`self_link_h
 
 /* Add application_information_scopes */ 
 INSERT INTO application_information_scopes (application_information_id, scope) VALUES (1, 'FB=4_5_15;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13');
-INSERT INTO application_information_scopes (application_information_id, scope) VALUES (1, 'FB=4_5_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13');
+INSERT INTO application_information_scopes (application_information_id, scope) VALUES (1, 'FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=13');
 
 USE `thirdparty`;
 
@@ -57,5 +67,5 @@ INSERT INTO `application_information` (`id`,`description`,`published`,`self_link
 
 /* Add application_information_scopes */ 
 INSERT INTO application_information_scopes (application_information_id, scope) VALUES (1, 'FB=4_5_15;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13');
-INSERT INTO application_information_scopes (application_information_id, scope) VALUES (1, 'FB=4_5_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13');
-INSERT INTO application_information_scopes (application_information_id, scope) VALUES (2, 'FB=4_5_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13');
+INSERT INTO application_information_scopes (application_information_id, scope) VALUES (1, 'FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=13');
+INSERT INTO application_information_scopes (application_information_id, scope) VALUES (2, 'FB=4_5_12_15_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13');
