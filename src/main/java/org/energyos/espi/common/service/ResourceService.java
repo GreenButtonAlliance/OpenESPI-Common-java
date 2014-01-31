@@ -16,6 +16,8 @@ public interface ResourceService {
 
 	<T> T findByUUID(UUID uuid, Class<T> clazz);
 
+	<T extends IdentifiedObject> T testById(Long id, Class<T> clazz);
+	
 	<T extends IdentifiedObject> T findById(Long id, Class<T> clazz);
 
 	<T extends IdentifiedObject> List<Long> findAllIds(Class<T> clazz);
