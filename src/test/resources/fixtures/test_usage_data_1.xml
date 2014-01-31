@@ -1,0 +1,4609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="GreenButtonDataStyleSheet.xslt"?>
+<!--
+=========================================================
+=========================================================
+=========================================================
+=========================================================
+=========================================================
+=========================================================
+
+To view this data file in a browser in a more readable tabluar form
+please download the GreenButtonDataStyleSheet.xslt file by copying and
+pasting the following link in your browser and place the file in the same
+directory as this XML file:
+=====|
+http://www.greenbuttondata.org/data/downloading.aspx?file=GreenButtonDataStyleSheet.xslt
+|=====
+
+Please leave this heading comment section in this file.
+
+=========================================================
+=========================================================
+=========================================================
+=========================================================
+=========================================================
+=========================================================
+-->
+<!--
+==========================================================================
+Sample Green Button Data File:  test_usage_data.xml
+Version: 0.7 20130208
+     Author: Ron Pasquarelli, Marty Burns (Hypertek for EnerNex)
+     Notice: This is draft prototype developed for SGIP by the Administrator Technical Team (EnerNex)
+==========================================================================
+Copyright (c) 2012,2013 EnergyOS.org
+
+Licensed by EnergyOS.org under one or more contributor license agreements.
+
+See the NOTICE file distributed with this work for additional 
+information regarding copyright ownership. The EnergyOS.org licenses this 
+file to you under the Apache License, Version 2.0 (the "; License; "); 
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at:
+http://www.apache.org/licenses/LICENSE-2.0
+  
+Unless required by applicable law or agreed to in writing, software 
+distributed under the License is distributed on an "AS IS" BASIS, 
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+implied.  See the License for the specific language governing 
+permissions and limitations under the License.
+-->
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<id>urn:uuid:15B0A4ED-CCF4-4521-A0A1-9FF650EC8A6B</id>
+	<title>Green Button Subscription Feed</title>
+	<updated>2012-10-24T00:00:00Z</updated>
+	<link rel="self" href="/espi/1_1/resource/Subscription/83e269c1"/>
+	<entry>
+		<id>urn:uuid:48C2A019-5598-4E16-B0F9-49E4FF27F5FB</id>
+		<link rel="self" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F"/>
+		<link rel="up" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint"/>
+		<link rel="related" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading"/>
+		<link rel="related" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/ElectricPowerUsageSummary"/>
+		<link rel="related" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/ElectricPowerQualitySummary"/>
+		<link rel="related" href="/espi/1_1/resource/LocalTimeParameters/01"/>
+		<title>Front Electric Meter</title>
+		<content>
+			<UsagePoint xmlns="http://naesb.org/espi">
+				<ServiceCategory>
+					<kind>0</kind>
+				</ServiceCategory>
+			</UsagePoint>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+	<entry>
+		<id>urn:uuid:54C62EBE-2DB6-4D4F-B6BF-1973A079C841</id>
+		<link rel="self" href="/espi/1_1/resource/LocalTimeParameters/01"/>
+		<link rel="up" href="/espi/1_1/resource/LocalTimeParameters"/>
+		<title>DST For North America</title>
+		<content>
+			<LocalTimeParameters xmlns="http://naesb.org/espi">
+				<dstEndRule>B40E2000</dstEndRule>
+				<dstOffset>3600</dstOffset>
+				<dstStartRule>360E2000</dstStartRule>
+				<tzOffset>-18000</tzOffset>
+			</LocalTimeParameters>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+	<entry>
+		<id>urn:uuid:F77FBF34-A09E-4EBC-9606-FF1A59A17CAE</id>
+		<link rel="self" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01"/>
+		<link rel="up" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading"/>
+		<link rel="related" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock"/>
+		<link rel="related" href="/espi/1_1/resource/ReadingType/07"/>
+		<title>Fifteen Minute Electricity Consumption</title>
+		<content>
+			<MeterReading xmlns="http://naesb.org/espi"/>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+	<entry>
+		<id>urn:uuid:3430B025-65D5-493A-BEC2-053603C91CD7</id>
+		<link rel="self" href="/espi/1_1/resource/ReadingType/07"/>
+		<link rel="up" href="/espi/1_1/resource/ReadingType"/>
+		<title>Type of Meter Reading Data</title>
+		<content>
+			<ReadingType xmlns="http://naesb.org/espi">
+				<accumulationBehaviour>4</accumulationBehaviour>
+				<commodity>1</commodity>
+				<currency>840</currency>
+				<dataQualifier>12</dataQualifier>
+				<flowDirection>1</flowDirection>
+				<intervalLength>900</intervalLength>
+				<kind>12</kind>
+				<phase>769</phase>
+				<powerOfTenMultiplier>0</powerOfTenMultiplier>
+				<timeAttribute>0</timeAttribute>
+				<uom>72</uom>
+				<interharmonic>
+					<numerator>600</numerator>
+					<denominator>800</denominator>
+				</interharmonic>
+				<argument>
+					<numerator>1</numerator>
+					<denominator>2</denominator>
+				</argument>
+			</ReadingType>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+	<entry>
+		<id>urn:uuid:FE9A61BB-6913-42D4-88BE-9634A218EF53</id>
+		<link rel="self" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock/173"/>
+		<link rel="up" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock"/>
+		<title/>
+		<content>
+			<IntervalBlock xmlns="http://naesb.org/espi">
+				<interval>
+					<duration>86400</duration>
+					<start>1330578000</start>
+					<!-- start date: 3/1/2012 5:00:00 AM -->
+				</interval>
+				<IntervalReading>
+					<cost>974</cost>
+					<ReadingQuality>
+						<quality>8</quality>
+					</ReadingQuality>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330578000</start>
+						<!-- 3/1/2012 5:00:00 AM  -->
+					</timePeriod>
+					<value>282</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>965</cost>
+					<ReadingQuality>
+						<quality>7</quality>
+					</ReadingQuality>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330578900</start>
+						<!-- 3/1/2012 5:15:00 AM  -->
+					</timePeriod>
+					<value>323</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>884</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330579800</start>
+						<!-- 3/1/2012 5:30:00 AM  -->
+					</timePeriod>
+					<value>294</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>995</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330580700</start>
+						<!-- 3/1/2012 5:45:00 AM  -->
+					</timePeriod>
+					<value>331</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>965</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330581600</start>
+						<!-- 3/1/2012 6:00:00 AM  -->
+					</timePeriod>
+					<value>321</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>948</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330582500</start>
+						<!-- 3/1/2012 6:15:00 AM  -->
+					</timePeriod>
+					<value>316</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>898</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330583400</start>
+						<!-- 3/1/2012 6:30:00 AM  -->
+					</timePeriod>
+					<value>299</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>976</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330584300</start>
+						<!-- 3/1/2012 6:45:00 AM  -->
+					</timePeriod>
+					<value>325</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>991</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330585200</start>
+						<!-- 3/1/2012 7:00:00 AM  -->
+					</timePeriod>
+					<value>330</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>828</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330586100</start>
+						<!-- 3/1/2012 7:15:00 AM  -->
+					</timePeriod>
+					<value>276</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>892</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330587000</start>
+						<!-- 3/1/2012 7:30:00 AM  -->
+					</timePeriod>
+					<value>297</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>875</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330587900</start>
+						<!-- 3/1/2012 7:45:00 AM  -->
+					</timePeriod>
+					<value>291</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>978</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330588800</start>
+						<!-- 3/1/2012 8:00:00 AM  -->
+					</timePeriod>
+					<value>326</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>954</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330589700</start>
+						<!-- 3/1/2012 8:15:00 AM  -->
+					</timePeriod>
+					<value>318</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>839</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330590600</start>
+						<!-- 3/1/2012 8:30:00 AM  -->
+					</timePeriod>
+					<value>279</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>821</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330591500</start>
+						<!-- 3/1/2012 8:45:00 AM  -->
+					</timePeriod>
+					<value>273</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>910</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330592400</start>
+						<!-- 3/1/2012 9:00:00 AM  -->
+					</timePeriod>
+					<value>303</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>977</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330593300</start>
+						<!-- 3/1/2012 9:15:00 AM  -->
+					</timePeriod>
+					<value>325</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>987</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330594200</start>
+						<!-- 3/1/2012 9:30:00 AM  -->
+					</timePeriod>
+					<value>329</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>858</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330595100</start>
+						<!-- 3/1/2012 9:45:00 AM  -->
+					</timePeriod>
+					<value>286</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2561</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330596000</start>
+						<!-- 3/1/2012 10:00:00 AM  -->
+					</timePeriod>
+					<value>853</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2558</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330596900</start>
+						<!-- 3/1/2012 10:15:00 AM  -->
+					</timePeriod>
+					<value>852</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2542</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330597800</start>
+						<!-- 3/1/2012 10:30:00 AM  -->
+					</timePeriod>
+					<value>847</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2630</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330598700</start>
+						<!-- 3/1/2012 10:45:00 AM  -->
+					</timePeriod>
+					<value>876</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9643</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330599600</start>
+						<!-- 3/1/2012 11:00:00 AM  -->
+					</timePeriod>
+					<value>1607</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9787</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330600500</start>
+						<!-- 3/1/2012 11:15:00 AM  -->
+					</timePeriod>
+					<value>1631</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9547</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330601400</start>
+						<!-- 3/1/2012 11:30:00 AM  -->
+					</timePeriod>
+					<value>1591</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9574</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330602300</start>
+						<!-- 3/1/2012 11:45:00 AM  -->
+					</timePeriod>
+					<value>1595</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8282</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330603200</start>
+						<!-- 3/1/2012 12:00:00 PM  -->
+					</timePeriod>
+					<value>1380</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9330</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330604100</start>
+						<!-- 3/1/2012 12:15:00 PM  -->
+					</timePeriod>
+					<value>1555</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8667</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330605000</start>
+						<!-- 3/1/2012 12:30:00 PM  -->
+					</timePeriod>
+					<value>1444</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8544</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330605900</start>
+						<!-- 3/1/2012 12:45:00 PM  -->
+					</timePeriod>
+					<value>1424</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8332</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330606800</start>
+						<!-- 3/1/2012 1:00:00 PM  -->
+					</timePeriod>
+					<value>1388</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9694</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330607700</start>
+						<!-- 3/1/2012 1:15:00 PM  -->
+					</timePeriod>
+					<value>1615</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8304</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330608600</start>
+						<!-- 3/1/2012 1:30:00 PM  -->
+					</timePeriod>
+					<value>1384</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9711</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330609500</start>
+						<!-- 3/1/2012 1:45:00 PM  -->
+					</timePeriod>
+					<value>1618</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8682</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330610400</start>
+						<!-- 3/1/2012 2:00:00 PM  -->
+					</timePeriod>
+					<value>1447</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8427</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330611300</start>
+						<!-- 3/1/2012 2:15:00 PM  -->
+					</timePeriod>
+					<value>1404</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9584</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330612200</start>
+						<!-- 3/1/2012 2:30:00 PM  -->
+					</timePeriod>
+					<value>1597</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8448</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330613100</start>
+						<!-- 3/1/2012 2:45:00 PM  -->
+					</timePeriod>
+					<value>1408</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5292</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330614000</start>
+						<!-- 3/1/2012 3:00:00 PM  -->
+					</timePeriod>
+					<value>882</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5123</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330614900</start>
+						<!-- 3/1/2012 3:15:00 PM  -->
+					</timePeriod>
+					<value>853</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5963</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330615800</start>
+						<!-- 3/1/2012 3:30:00 PM  -->
+					</timePeriod>
+					<value>993</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5641</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330616700</start>
+						<!-- 3/1/2012 3:45:00 PM  -->
+					</timePeriod>
+					<value>940</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5656</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330617600</start>
+						<!-- 3/1/2012 4:00:00 PM  -->
+					</timePeriod>
+					<value>942</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5677</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330618500</start>
+						<!-- 3/1/2012 4:15:00 PM  -->
+					</timePeriod>
+					<value>946</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5075</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330619400</start>
+						<!-- 3/1/2012 4:30:00 PM  -->
+					</timePeriod>
+					<value>845</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5168</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330620300</start>
+						<!-- 3/1/2012 4:45:00 PM  -->
+					</timePeriod>
+					<value>861</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5877</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330621200</start>
+						<!-- 3/1/2012 5:00:00 PM  -->
+					</timePeriod>
+					<value>979</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5611</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330622100</start>
+						<!-- 3/1/2012 5:15:00 PM  -->
+					</timePeriod>
+					<value>935</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5932</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330623000</start>
+						<!-- 3/1/2012 5:30:00 PM  -->
+					</timePeriod>
+					<value>988</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5243</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330623900</start>
+						<!-- 3/1/2012 5:45:00 PM  -->
+					</timePeriod>
+					<value>873</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5599</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330624800</start>
+						<!-- 3/1/2012 6:00:00 PM  -->
+					</timePeriod>
+					<value>933</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5786</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330625700</start>
+						<!-- 3/1/2012 6:15:00 PM  -->
+					</timePeriod>
+					<value>964</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5475</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330626600</start>
+						<!-- 3/1/2012 6:30:00 PM  -->
+					</timePeriod>
+					<value>912</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5592</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330627500</start>
+						<!-- 3/1/2012 6:45:00 PM  -->
+					</timePeriod>
+					<value>932</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>11422</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330628400</start>
+						<!-- 3/1/2012 7:00:00 PM  -->
+					</timePeriod>
+					<value>951</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>11026</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330629300</start>
+						<!-- 3/1/2012 7:15:00 PM  -->
+					</timePeriod>
+					<value>918</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>10592</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330630200</start>
+						<!-- 3/1/2012 7:30:00 PM  -->
+					</timePeriod>
+					<value>882</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>10094</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330631100</start>
+						<!-- 3/1/2012 7:45:00 PM  -->
+					</timePeriod>
+					<value>841</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>16299</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330632000</start>
+						<!-- 3/1/2012 8:00:00 PM  -->
+					</timePeriod>
+					<value>905</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17502</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330632900</start>
+						<!-- 3/1/2012 8:15:00 PM  -->
+					</timePeriod>
+					<value>972</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>15167</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330633800</start>
+						<!-- 3/1/2012 8:30:00 PM  -->
+					</timePeriod>
+					<value>842</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>14879</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330634700</start>
+						<!-- 3/1/2012 8:45:00 PM  -->
+					</timePeriod>
+					<value>826</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>20511</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330635600</start>
+						<!-- 3/1/2012 9:00:00 PM  -->
+					</timePeriod>
+					<value>854</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>21834</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330636500</start>
+						<!-- 3/1/2012 9:15:00 PM  -->
+					</timePeriod>
+					<value>909</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>23895</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330637400</start>
+						<!-- 3/1/2012 9:30:00 PM  -->
+					</timePeriod>
+					<value>995</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>21110</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330638300</start>
+						<!-- 3/1/2012 9:45:00 PM  -->
+					</timePeriod>
+					<value>879</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>33485</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330639200</start>
+						<!-- 3/1/2012 10:00:00 PM  -->
+					</timePeriod>
+					<value>1116</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>37850</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330640100</start>
+						<!-- 3/1/2012 10:15:00 PM  -->
+					</timePeriod>
+					<value>1261</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>39192</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330641000</start>
+						<!-- 3/1/2012 10:30:00 PM  -->
+					</timePeriod>
+					<value>1306</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>34924</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330641900</start>
+						<!-- 3/1/2012 10:45:00 PM  -->
+					</timePeriod>
+					<value>1164</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>44125</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330642800</start>
+						<!-- 3/1/2012 11:00:00 PM  -->
+					</timePeriod>
+					<value>1470</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>47955</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330643700</start>
+						<!-- 3/1/2012 11:15:00 PM  -->
+					</timePeriod>
+					<value>1598</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>45117</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330644600</start>
+						<!-- 3/1/2012 11:30:00 PM  -->
+					</timePeriod>
+					<value>1503</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>45246</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330645500</start>
+						<!-- 3/1/2012 11:45:00 PM  -->
+					</timePeriod>
+					<value>1508</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>35606</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330646400</start>
+						<!-- 3/2/2012  -->
+					</timePeriod>
+					<value>1483</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>34141</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330647300</start>
+						<!-- 3/2/2012 12:15:00 AM  -->
+					</timePeriod>
+					<value>1422</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>38734</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330648200</start>
+						<!-- 3/2/2012 12:30:00 AM  -->
+					</timePeriod>
+					<value>1613</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>38415</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330649100</start>
+						<!-- 3/2/2012 12:45:00 AM  -->
+					</timePeriod>
+					<value>1600</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>27463</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330650000</start>
+						<!-- 3/2/2012 1:00:00 AM  -->
+					</timePeriod>
+					<value>1525</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>29200</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330650900</start>
+						<!-- 3/2/2012 1:15:00 AM  -->
+					</timePeriod>
+					<value>1622</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>29211</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330651800</start>
+						<!-- 3/2/2012 1:30:00 AM  -->
+					</timePeriod>
+					<value>1622</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>29495</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330652700</start>
+						<!-- 3/2/2012 1:45:00 AM  -->
+					</timePeriod>
+					<value>1638</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>19146</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330653600</start>
+						<!-- 3/2/2012 2:00:00 AM  -->
+					</timePeriod>
+					<value>1595</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>18504</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330654500</start>
+						<!-- 3/2/2012 2:15:00 AM  -->
+					</timePeriod>
+					<value>1542</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>18624</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330655400</start>
+						<!-- 3/2/2012 2:30:00 AM  -->
+					</timePeriod>
+					<value>1552</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>19830</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330656300</start>
+						<!-- 3/2/2012 2:45:00 AM  -->
+					</timePeriod>
+					<value>1652</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5833</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330657200</start>
+						<!-- 3/2/2012 3:00:00 AM  -->
+					</timePeriod>
+					<value>972</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5919</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330658100</start>
+						<!-- 3/2/2012 3:15:00 AM  -->
+					</timePeriod>
+					<value>986</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5012</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330659000</start>
+						<!-- 3/2/2012 3:30:00 AM  -->
+					</timePeriod>
+					<value>835</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5262</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330659900</start>
+						<!-- 3/2/2012 3:45:00 AM  -->
+					</timePeriod>
+					<value>877</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>934</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330660800</start>
+						<!-- 3/2/2012 4:00:00 AM  -->
+					</timePeriod>
+					<value>311</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>839</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330661700</start>
+						<!-- 3/2/2012 4:15:00 AM  -->
+					</timePeriod>
+					<value>279</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>835</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330662600</start>
+						<!-- 3/2/2012 4:30:00 AM  -->
+					</timePeriod>
+					<value>278</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>974</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330663500</start>
+						<!-- 3/2/2012 4:45:00 AM  -->
+					</timePeriod>
+					<value>324</value>
+				</IntervalReading>
+			</IntervalBlock>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+	<entry>
+		<id>urn:uuid:0E49B341-CABD-445B-8F88-7ACF791B1863</id>
+		<link rel="self" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock/174"/>
+		<link rel="up" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock"/>
+		<title/>
+		<content>
+			<IntervalBlock xmlns="http://naesb.org/espi">
+				<interval>
+					<duration>86400</duration>
+					<start>1330664400</start>
+					<!-- start date: 3/2/2012 5:00:00 AM -->
+				</interval>
+				<IntervalReading>
+					<cost>938</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330664400</start>
+						<!-- 3/2/2012 5:00:00 AM  -->
+					</timePeriod>
+					<value>312</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>888</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330665300</start>
+						<!-- 3/2/2012 5:15:00 AM  -->
+					</timePeriod>
+					<value>296</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>909</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330666200</start>
+						<!-- 3/2/2012 5:30:00 AM  -->
+					</timePeriod>
+					<value>303</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>862</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330667100</start>
+						<!-- 3/2/2012 5:45:00 AM  -->
+					</timePeriod>
+					<value>287</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>991</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330668000</start>
+						<!-- 3/2/2012 6:00:00 AM  -->
+					</timePeriod>
+					<value>330</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>901</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330668900</start>
+						<!-- 3/2/2012 6:15:00 AM  -->
+					</timePeriod>
+					<value>300</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>945</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330669800</start>
+						<!-- 3/2/2012 6:30:00 AM  -->
+					</timePeriod>
+					<value>315</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>931</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330670700</start>
+						<!-- 3/2/2012 6:45:00 AM  -->
+					</timePeriod>
+					<value>310</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>839</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330671600</start>
+						<!-- 3/2/2012 7:00:00 AM  -->
+					</timePeriod>
+					<value>279</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>877</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330672500</start>
+						<!-- 3/2/2012 7:15:00 AM  -->
+					</timePeriod>
+					<value>292</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>872</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330673400</start>
+						<!-- 3/2/2012 7:30:00 AM  -->
+					</timePeriod>
+					<value>290</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>911</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330674300</start>
+						<!-- 3/2/2012 7:45:00 AM  -->
+					</timePeriod>
+					<value>303</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>939</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330675200</start>
+						<!-- 3/2/2012 8:00:00 AM  -->
+					</timePeriod>
+					<value>313</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>863</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330676100</start>
+						<!-- 3/2/2012 8:15:00 AM  -->
+					</timePeriod>
+					<value>287</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>827</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330677000</start>
+						<!-- 3/2/2012 8:30:00 AM  -->
+					</timePeriod>
+					<value>275</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>988</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330677900</start>
+						<!-- 3/2/2012 8:45:00 AM  -->
+					</timePeriod>
+					<value>329</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>928</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330678800</start>
+						<!-- 3/2/2012 9:00:00 AM  -->
+					</timePeriod>
+					<value>309</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>826</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330679700</start>
+						<!-- 3/2/2012 9:15:00 AM  -->
+					</timePeriod>
+					<value>275</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>834</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330680600</start>
+						<!-- 3/2/2012 9:30:00 AM  -->
+					</timePeriod>
+					<value>278</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>965</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330681500</start>
+						<!-- 3/2/2012 9:45:00 AM  -->
+					</timePeriod>
+					<value>321</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2590</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330682400</start>
+						<!-- 3/2/2012 10:00:00 AM  -->
+					</timePeriod>
+					<value>863</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2767</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330683300</start>
+						<!-- 3/2/2012 10:15:00 AM  -->
+					</timePeriod>
+					<value>922</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2658</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330684200</start>
+						<!-- 3/2/2012 10:30:00 AM  -->
+					</timePeriod>
+					<value>886</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2774</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330685100</start>
+						<!-- 3/2/2012 10:45:00 AM  -->
+					</timePeriod>
+					<value>924</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8727</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330686000</start>
+						<!-- 3/2/2012 11:00:00 AM  -->
+					</timePeriod>
+					<value>1454</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9158</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330686900</start>
+						<!-- 3/2/2012 11:15:00 AM  -->
+					</timePeriod>
+					<value>1526</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8866</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330687800</start>
+						<!-- 3/2/2012 11:30:00 AM  -->
+					</timePeriod>
+					<value>1477</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8441</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330688700</start>
+						<!-- 3/2/2012 11:45:00 AM  -->
+					</timePeriod>
+					<value>1406</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8521</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330689600</start>
+						<!-- 3/2/2012 12:00:00 PM  -->
+					</timePeriod>
+					<value>1420</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9036</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330690500</start>
+						<!-- 3/2/2012 12:15:00 PM  -->
+					</timePeriod>
+					<value>1506</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8284</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330691400</start>
+						<!-- 3/2/2012 12:30:00 PM  -->
+					</timePeriod>
+					<value>1380</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9859</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330692300</start>
+						<!-- 3/2/2012 12:45:00 PM  -->
+					</timePeriod>
+					<value>1643</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9327</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330693200</start>
+						<!-- 3/2/2012 1:00:00 PM  -->
+					</timePeriod>
+					<value>1554</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8208</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330694100</start>
+						<!-- 3/2/2012 1:15:00 PM  -->
+					</timePeriod>
+					<value>1368</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8268</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330695000</start>
+						<!-- 3/2/2012 1:30:00 PM  -->
+					</timePeriod>
+					<value>1378</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8796</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330695900</start>
+						<!-- 3/2/2012 1:45:00 PM  -->
+					</timePeriod>
+					<value>1466</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9058</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330696800</start>
+						<!-- 3/2/2012 2:00:00 PM  -->
+					</timePeriod>
+					<value>1509</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8967</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330697700</start>
+						<!-- 3/2/2012 2:15:00 PM  -->
+					</timePeriod>
+					<value>1494</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8399</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330698600</start>
+						<!-- 3/2/2012 2:30:00 PM  -->
+					</timePeriod>
+					<value>1399</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8882</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330699500</start>
+						<!-- 3/2/2012 2:45:00 PM  -->
+					</timePeriod>
+					<value>1480</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5775</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330700400</start>
+						<!-- 3/2/2012 3:00:00 PM  -->
+					</timePeriod>
+					<value>962</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5321</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330701300</start>
+						<!-- 3/2/2012 3:15:00 PM  -->
+					</timePeriod>
+					<value>886</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5867</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330702200</start>
+						<!-- 3/2/2012 3:30:00 PM  -->
+					</timePeriod>
+					<value>977</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5518</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330703100</start>
+						<!-- 3/2/2012 3:45:00 PM  -->
+					</timePeriod>
+					<value>919</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5078</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330704000</start>
+						<!-- 3/2/2012 4:00:00 PM  -->
+					</timePeriod>
+					<value>846</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5896</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330704900</start>
+						<!-- 3/2/2012 4:15:00 PM  -->
+					</timePeriod>
+					<value>982</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5699</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330705800</start>
+						<!-- 3/2/2012 4:30:00 PM  -->
+					</timePeriod>
+					<value>949</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5978</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330706700</start>
+						<!-- 3/2/2012 4:45:00 PM  -->
+					</timePeriod>
+					<value>996</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5189</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330707600</start>
+						<!-- 3/2/2012 5:00:00 PM  -->
+					</timePeriod>
+					<value>864</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5715</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330708500</start>
+						<!-- 3/2/2012 5:15:00 PM  -->
+					</timePeriod>
+					<value>952</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4961</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330709400</start>
+						<!-- 3/2/2012 5:30:00 PM  -->
+					</timePeriod>
+					<value>826</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5775</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330710300</start>
+						<!-- 3/2/2012 5:45:00 PM  -->
+					</timePeriod>
+					<value>962</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5712</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330711200</start>
+						<!-- 3/2/2012 6:00:00 PM  -->
+					</timePeriod>
+					<value>952</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5769</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330712100</start>
+						<!-- 3/2/2012 6:15:00 PM  -->
+					</timePeriod>
+					<value>961</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5649</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330713000</start>
+						<!-- 3/2/2012 6:30:00 PM  -->
+					</timePeriod>
+					<value>941</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5784</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330713900</start>
+						<!-- 3/2/2012 6:45:00 PM  -->
+					</timePeriod>
+					<value>964</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>10354</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330714800</start>
+						<!-- 3/2/2012 7:00:00 PM  -->
+					</timePeriod>
+					<value>862</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>11809</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330715700</start>
+						<!-- 3/2/2012 7:15:00 PM  -->
+					</timePeriod>
+					<value>984</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>11145</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330716600</start>
+						<!-- 3/2/2012 7:30:00 PM  -->
+					</timePeriod>
+					<value>928</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>10607</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330717500</start>
+						<!-- 3/2/2012 7:45:00 PM  -->
+					</timePeriod>
+					<value>883</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17272</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330718400</start>
+						<!-- 3/2/2012 8:00:00 PM  -->
+					</timePeriod>
+					<value>959</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17788</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330719300</start>
+						<!-- 3/2/2012 8:15:00 PM  -->
+					</timePeriod>
+					<value>988</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17744</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330720200</start>
+						<!-- 3/2/2012 8:30:00 PM  -->
+					</timePeriod>
+					<value>985</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>16424</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330721100</start>
+						<!-- 3/2/2012 8:45:00 PM  -->
+					</timePeriod>
+					<value>912</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>20751</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330722000</start>
+						<!-- 3/2/2012 9:00:00 PM  -->
+					</timePeriod>
+					<value>864</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>23622</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330722900</start>
+						<!-- 3/2/2012 9:15:00 PM  -->
+					</timePeriod>
+					<value>984</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>19714</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330723800</start>
+						<!-- 3/2/2012 9:30:00 PM  -->
+					</timePeriod>
+					<value>821</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>21403</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330724700</start>
+						<!-- 3/2/2012 9:45:00 PM  -->
+					</timePeriod>
+					<value>891</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>35235</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330725600</start>
+						<!-- 3/2/2012 10:00:00 PM  -->
+					</timePeriod>
+					<value>1174</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>37458</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330726500</start>
+						<!-- 3/2/2012 10:15:00 PM  -->
+					</timePeriod>
+					<value>1248</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>33041</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330727400</start>
+						<!-- 3/2/2012 10:30:00 PM  -->
+					</timePeriod>
+					<value>1101</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>39082</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330728300</start>
+						<!-- 3/2/2012 10:45:00 PM  -->
+					</timePeriod>
+					<value>1302</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>45871</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330729200</start>
+						<!-- 3/2/2012 11:00:00 PM  -->
+					</timePeriod>
+					<value>1529</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>45108</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330730100</start>
+						<!-- 3/2/2012 11:15:00 PM  -->
+					</timePeriod>
+					<value>1503</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>46485</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330731000</start>
+						<!-- 3/2/2012 11:30:00 PM  -->
+					</timePeriod>
+					<value>1549</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>44524</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330731900</start>
+						<!-- 3/2/2012 11:45:00 PM  -->
+					</timePeriod>
+					<value>1484</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>18237</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330732800</start>
+						<!-- 3/3/2012  -->
+					</timePeriod>
+					<value>1519</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17062</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330733700</start>
+						<!-- 3/3/2012 12:15:00 AM  -->
+					</timePeriod>
+					<value>1421</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>19129</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330734600</start>
+						<!-- 3/3/2012 12:30:00 AM  -->
+					</timePeriod>
+					<value>1594</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17080</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330735500</start>
+						<!-- 3/3/2012 12:45:00 AM  -->
+					</timePeriod>
+					<value>1423</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>14028</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330736400</start>
+						<!-- 3/3/2012 1:00:00 AM  -->
+					</timePeriod>
+					<value>1558</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>13576</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330737300</start>
+						<!-- 3/3/2012 1:15:00 AM  -->
+					</timePeriod>
+					<value>1508</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>12636</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330738200</start>
+						<!-- 3/3/2012 1:30:00 AM  -->
+					</timePeriod>
+					<value>1404</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>14019</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330739100</start>
+						<!-- 3/3/2012 1:45:00 AM  -->
+					</timePeriod>
+					<value>1557</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9793</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330740000</start>
+						<!-- 3/3/2012 2:00:00 AM  -->
+					</timePeriod>
+					<value>1632</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8672</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330740900</start>
+						<!-- 3/3/2012 2:15:00 AM  -->
+					</timePeriod>
+					<value>1445</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8993</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330741800</start>
+						<!-- 3/3/2012 2:30:00 AM  -->
+					</timePeriod>
+					<value>1498</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9790</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330742700</start>
+						<!-- 3/3/2012 2:45:00 AM  -->
+					</timePeriod>
+					<value>1631</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4855</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330743600</start>
+						<!-- 3/3/2012 3:00:00 AM  -->
+					</timePeriod>
+					<value>1618</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4625</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330744500</start>
+						<!-- 3/3/2012 3:15:00 AM  -->
+					</timePeriod>
+					<value>1541</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4269</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330745400</start>
+						<!-- 3/3/2012 3:30:00 AM  -->
+					</timePeriod>
+					<value>1423</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4785</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330746300</start>
+						<!-- 3/3/2012 3:45:00 AM  -->
+					</timePeriod>
+					<value>1595</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2494</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330747200</start>
+						<!-- 3/3/2012 4:00:00 AM  -->
+					</timePeriod>
+					<value>831</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2753</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330748100</start>
+						<!-- 3/3/2012 4:15:00 AM  -->
+					</timePeriod>
+					<value>917</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2783</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330749000</start>
+						<!-- 3/3/2012 4:30:00 AM  -->
+					</timePeriod>
+					<value>927</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2958</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330749900</start>
+						<!-- 3/3/2012 4:45:00 AM  -->
+					</timePeriod>
+					<value>986</value>
+				</IntervalReading>
+			</IntervalBlock>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+	<entry>
+		<id>urn:uuid:1A1A106F-7108-4532-A5A6-FD48F7DA3B8D</id>
+		<link rel="self" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock/175"/>
+		<link rel="up" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock"/>
+		<title/>
+		<content>
+			<IntervalBlock xmlns="http://naesb.org/espi">
+				<interval>
+					<duration>86400</duration>
+					<start>1330750800</start>
+					<!-- start date: 3/3/2012 5:00:00 AM -->
+				</interval>
+				<IntervalReading>
+					<cost>944</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330750800</start>
+						<!-- 3/3/2012 5:00:00 AM  -->
+					</timePeriod>
+					<value>314</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>931</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330751700</start>
+						<!-- 3/3/2012 5:15:00 AM  -->
+					</timePeriod>
+					<value>310</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>967</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330752600</start>
+						<!-- 3/3/2012 5:30:00 AM  -->
+					</timePeriod>
+					<value>322</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>859</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330753500</start>
+						<!-- 3/3/2012 5:45:00 AM  -->
+					</timePeriod>
+					<value>286</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>854</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330754400</start>
+						<!-- 3/3/2012 6:00:00 AM  -->
+					</timePeriod>
+					<value>284</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>845</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330755300</start>
+						<!-- 3/3/2012 6:15:00 AM  -->
+					</timePeriod>
+					<value>281</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>887</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330756200</start>
+						<!-- 3/3/2012 6:30:00 AM  -->
+					</timePeriod>
+					<value>295</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>885</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330757100</start>
+						<!-- 3/3/2012 6:45:00 AM  -->
+					</timePeriod>
+					<value>295</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>913</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330758000</start>
+						<!-- 3/3/2012 7:00:00 AM  -->
+					</timePeriod>
+					<value>304</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>838</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330758900</start>
+						<!-- 3/3/2012 7:15:00 AM  -->
+					</timePeriod>
+					<value>279</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>982</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330759800</start>
+						<!-- 3/3/2012 7:30:00 AM  -->
+					</timePeriod>
+					<value>327</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>965</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330760700</start>
+						<!-- 3/3/2012 7:45:00 AM  -->
+					</timePeriod>
+					<value>321</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>892</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330761600</start>
+						<!-- 3/3/2012 8:00:00 AM  -->
+					</timePeriod>
+					<value>297</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>843</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330762500</start>
+						<!-- 3/3/2012 8:15:00 AM  -->
+					</timePeriod>
+					<value>281</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>829</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330763400</start>
+						<!-- 3/3/2012 8:30:00 AM  -->
+					</timePeriod>
+					<value>276</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>975</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330764300</start>
+						<!-- 3/3/2012 8:45:00 AM  -->
+					</timePeriod>
+					<value>325</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>986</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330765200</start>
+						<!-- 3/3/2012 9:00:00 AM  -->
+					</timePeriod>
+					<value>328</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>961</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330766100</start>
+						<!-- 3/3/2012 9:15:00 AM  -->
+					</timePeriod>
+					<value>320</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>955</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330767000</start>
+						<!-- 3/3/2012 9:30:00 AM  -->
+					</timePeriod>
+					<value>318</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>842</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330767900</start>
+						<!-- 3/3/2012 9:45:00 AM  -->
+					</timePeriod>
+					<value>280</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2649</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330768800</start>
+						<!-- 3/3/2012 10:00:00 AM  -->
+					</timePeriod>
+					<value>883</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2478</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330769700</start>
+						<!-- 3/3/2012 10:15:00 AM  -->
+					</timePeriod>
+					<value>826</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2771</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330770600</start>
+						<!-- 3/3/2012 10:30:00 AM  -->
+					</timePeriod>
+					<value>923</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2518</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330771500</start>
+						<!-- 3/3/2012 10:45:00 AM  -->
+					</timePeriod>
+					<value>839</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8627</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330772400</start>
+						<!-- 3/3/2012 11:00:00 AM  -->
+					</timePeriod>
+					<value>1437</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8351</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330773300</start>
+						<!-- 3/3/2012 11:15:00 AM  -->
+					</timePeriod>
+					<value>1391</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9174</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330774200</start>
+						<!-- 3/3/2012 11:30:00 AM  -->
+					</timePeriod>
+					<value>1529</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8421</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330775100</start>
+						<!-- 3/3/2012 11:45:00 AM  -->
+					</timePeriod>
+					<value>1403</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9496</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330776000</start>
+						<!-- 3/3/2012 12:00:00 PM  -->
+					</timePeriod>
+					<value>1582</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8797</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330776900</start>
+						<!-- 3/3/2012 12:15:00 PM  -->
+					</timePeriod>
+					<value>1466</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8189</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330777800</start>
+						<!-- 3/3/2012 12:30:00 PM  -->
+					</timePeriod>
+					<value>1364</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8953</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330778700</start>
+						<!-- 3/3/2012 12:45:00 PM  -->
+					</timePeriod>
+					<value>1492</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8374</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330779600</start>
+						<!-- 3/3/2012 1:00:00 PM  -->
+					</timePeriod>
+					<value>1395</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9391</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330780500</start>
+						<!-- 3/3/2012 1:15:00 PM  -->
+					</timePeriod>
+					<value>1565</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9744</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330781400</start>
+						<!-- 3/3/2012 1:30:00 PM  -->
+					</timePeriod>
+					<value>1624</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9236</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330782300</start>
+						<!-- 3/3/2012 1:45:00 PM  -->
+					</timePeriod>
+					<value>1539</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9448</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330783200</start>
+						<!-- 3/3/2012 2:00:00 PM  -->
+					</timePeriod>
+					<value>1574</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9917</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330784100</start>
+						<!-- 3/3/2012 2:15:00 PM  -->
+					</timePeriod>
+					<value>1652</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8252</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330785000</start>
+						<!-- 3/3/2012 2:30:00 PM  -->
+					</timePeriod>
+					<value>1375</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8468</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330785900</start>
+						<!-- 3/3/2012 2:45:00 PM  -->
+					</timePeriod>
+					<value>1411</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9800</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330786800</start>
+						<!-- 3/3/2012 3:00:00 PM  -->
+					</timePeriod>
+					<value>1633</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9729</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330787700</start>
+						<!-- 3/3/2012 3:15:00 PM  -->
+					</timePeriod>
+					<value>1621</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8482</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330788600</start>
+						<!-- 3/3/2012 3:30:00 PM  -->
+					</timePeriod>
+					<value>1413</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9229</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330789500</start>
+						<!-- 3/3/2012 3:45:00 PM  -->
+					</timePeriod>
+					<value>1538</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9059</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330790400</start>
+						<!-- 3/3/2012 4:00:00 PM  -->
+					</timePeriod>
+					<value>1509</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9595</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330791300</start>
+						<!-- 3/3/2012 4:15:00 PM  -->
+					</timePeriod>
+					<value>1599</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9157</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330792200</start>
+						<!-- 3/3/2012 4:30:00 PM  -->
+					</timePeriod>
+					<value>1526</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8665</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330793100</start>
+						<!-- 3/3/2012 4:45:00 PM  -->
+					</timePeriod>
+					<value>1444</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8645</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330794000</start>
+						<!-- 3/3/2012 5:00:00 PM  -->
+					</timePeriod>
+					<value>1440</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8545</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330794900</start>
+						<!-- 3/3/2012 5:15:00 PM  -->
+					</timePeriod>
+					<value>1424</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8757</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330795800</start>
+						<!-- 3/3/2012 5:30:00 PM  -->
+					</timePeriod>
+					<value>1459</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8267</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330796700</start>
+						<!-- 3/3/2012 5:45:00 PM  -->
+					</timePeriod>
+					<value>1377</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9636</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330797600</start>
+						<!-- 3/3/2012 6:00:00 PM  -->
+					</timePeriod>
+					<value>1606</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8440</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330798500</start>
+						<!-- 3/3/2012 6:15:00 PM  -->
+					</timePeriod>
+					<value>1406</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8164</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330799400</start>
+						<!-- 3/3/2012 6:30:00 PM  -->
+					</timePeriod>
+					<value>1360</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9592</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330800300</start>
+						<!-- 3/3/2012 6:45:00 PM  -->
+					</timePeriod>
+					<value>1598</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>13937</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330801200</start>
+						<!-- 3/3/2012 7:00:00 PM  -->
+					</timePeriod>
+					<value>1548</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>14878</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330802100</start>
+						<!-- 3/3/2012 7:15:00 PM  -->
+					</timePeriod>
+					<value>1653</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>12450</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330803000</start>
+						<!-- 3/3/2012 7:30:00 PM  -->
+					</timePeriod>
+					<value>1383</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>12937</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330803900</start>
+						<!-- 3/3/2012 7:45:00 PM  -->
+					</timePeriod>
+					<value>1437</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17780</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330804800</start>
+						<!-- 3/3/2012 8:00:00 PM  -->
+					</timePeriod>
+					<value>1481</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17587</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330805700</start>
+						<!-- 3/3/2012 8:15:00 PM  -->
+					</timePeriod>
+					<value>1465</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>16467</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330806600</start>
+						<!-- 3/3/2012 8:30:00 PM  -->
+					</timePeriod>
+					<value>1372</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17447</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330807500</start>
+						<!-- 3/3/2012 8:45:00 PM  -->
+					</timePeriod>
+					<value>1453</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>23372</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330808400</start>
+						<!-- 3/3/2012 9:00:00 PM  -->
+					</timePeriod>
+					<value>1558</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>23082</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330809300</start>
+						<!-- 3/3/2012 9:15:00 PM  -->
+					</timePeriod>
+					<value>1538</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>22938</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330810200</start>
+						<!-- 3/3/2012 9:30:00 PM  -->
+					</timePeriod>
+					<value>1529</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>21596</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330811100</start>
+						<!-- 3/3/2012 9:45:00 PM  -->
+					</timePeriod>
+					<value>1439</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>22727</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330812000</start>
+						<!-- 3/3/2012 10:00:00 PM  -->
+					</timePeriod>
+					<value>1515</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>20932</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330812900</start>
+						<!-- 3/3/2012 10:15:00 PM  -->
+					</timePeriod>
+					<value>1395</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>24644</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330813800</start>
+						<!-- 3/3/2012 10:30:00 PM  -->
+					</timePeriod>
+					<value>1642</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>22780</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330814700</start>
+						<!-- 3/3/2012 10:45:00 PM  -->
+					</timePeriod>
+					<value>1518</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>24075</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330815600</start>
+						<!-- 3/3/2012 11:00:00 PM  -->
+					</timePeriod>
+					<value>1605</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>21463</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330816500</start>
+						<!-- 3/3/2012 11:15:00 PM  -->
+					</timePeriod>
+					<value>1430</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>24060</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330817400</start>
+						<!-- 3/3/2012 11:30:00 PM  -->
+					</timePeriod>
+					<value>1604</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>22632</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330818300</start>
+						<!-- 3/3/2012 11:45:00 PM  -->
+					</timePeriod>
+					<value>1508</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17823</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330819200</start>
+						<!-- 3/4/2012  -->
+					</timePeriod>
+					<value>1485</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>16881</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330820100</start>
+						<!-- 3/4/2012 12:15:00 AM  -->
+					</timePeriod>
+					<value>1406</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>16689</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330821000</start>
+						<!-- 3/4/2012 12:30:00 AM  -->
+					</timePeriod>
+					<value>1390</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>18839</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330821900</start>
+						<!-- 3/4/2012 12:45:00 AM  -->
+					</timePeriod>
+					<value>1569</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>14422</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330822800</start>
+						<!-- 3/4/2012 1:00:00 AM  -->
+					</timePeriod>
+					<value>1602</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>12943</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330823700</start>
+						<!-- 3/4/2012 1:15:00 AM  -->
+					</timePeriod>
+					<value>1438</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>12893</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330824600</start>
+						<!-- 3/4/2012 1:30:00 AM  -->
+					</timePeriod>
+					<value>1432</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>12731</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330825500</start>
+						<!-- 3/4/2012 1:45:00 AM  -->
+					</timePeriod>
+					<value>1414</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9773</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330826400</start>
+						<!-- 3/4/2012 2:00:00 AM  -->
+					</timePeriod>
+					<value>1628</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9267</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330827300</start>
+						<!-- 3/4/2012 2:15:00 AM  -->
+					</timePeriod>
+					<value>1544</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9231</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330828200</start>
+						<!-- 3/4/2012 2:30:00 AM  -->
+					</timePeriod>
+					<value>1538</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8450</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330829100</start>
+						<!-- 3/4/2012 2:45:00 AM  -->
+					</timePeriod>
+					<value>1408</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4179</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330830000</start>
+						<!-- 3/4/2012 3:00:00 AM  -->
+					</timePeriod>
+					<value>1393</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4738</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330830900</start>
+						<!-- 3/4/2012 3:15:00 AM  -->
+					</timePeriod>
+					<value>1579</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4233</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330831800</start>
+						<!-- 3/4/2012 3:30:00 AM  -->
+					</timePeriod>
+					<value>1411</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4891</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330832700</start>
+						<!-- 3/4/2012 3:45:00 AM  -->
+					</timePeriod>
+					<value>1630</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2849</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330833600</start>
+						<!-- 3/4/2012 4:00:00 AM  -->
+					</timePeriod>
+					<value>949</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2767</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330834500</start>
+						<!-- 3/4/2012 4:15:00 AM  -->
+					</timePeriod>
+					<value>922</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2772</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330835400</start>
+						<!-- 3/4/2012 4:30:00 AM  -->
+					</timePeriod>
+					<value>924</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2904</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330836300</start>
+						<!-- 3/4/2012 4:45:00 AM  -->
+					</timePeriod>
+					<value>968</value>
+				</IntervalReading>
+			</IntervalBlock>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+	<entry>
+		<id>urn:uuid:45745604-814D-49A1-8D4B-856D5D44B7AF</id>
+		<link rel="self" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock/176"/>
+		<link rel="up" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock"/>
+		<title/>
+		<content>
+			<IntervalBlock xmlns="http://naesb.org/espi">
+				<interval>
+					<duration>86400</duration>
+					<start>1330837200</start>
+					<!-- start date: 3/4/2012 5:00:00 AM -->
+				</interval>
+				<IntervalReading>
+					<cost>902</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330837200</start>
+						<!-- 3/4/2012 5:00:00 AM  -->
+					</timePeriod>
+					<value>300</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>979</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330838100</start>
+						<!-- 3/4/2012 5:15:00 AM  -->
+					</timePeriod>
+					<value>326</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>869</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330839000</start>
+						<!-- 3/4/2012 5:30:00 AM  -->
+					</timePeriod>
+					<value>289</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>821</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330839900</start>
+						<!-- 3/4/2012 5:45:00 AM  -->
+					</timePeriod>
+					<value>273</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>865</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330840800</start>
+						<!-- 3/4/2012 6:00:00 AM  -->
+					</timePeriod>
+					<value>288</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>931</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330841700</start>
+						<!-- 3/4/2012 6:15:00 AM  -->
+					</timePeriod>
+					<value>310</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>989</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330842600</start>
+						<!-- 3/4/2012 6:30:00 AM  -->
+					</timePeriod>
+					<value>329</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>948</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330843500</start>
+						<!-- 3/4/2012 6:45:00 AM  -->
+					</timePeriod>
+					<value>316</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>891</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330844400</start>
+						<!-- 3/4/2012 7:00:00 AM  -->
+					</timePeriod>
+					<value>297</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>954</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330845300</start>
+						<!-- 3/4/2012 7:15:00 AM  -->
+					</timePeriod>
+					<value>318</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>854</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330846200</start>
+						<!-- 3/4/2012 7:30:00 AM  -->
+					</timePeriod>
+					<value>284</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>872</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330847100</start>
+						<!-- 3/4/2012 7:45:00 AM  -->
+					</timePeriod>
+					<value>290</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>966</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330848000</start>
+						<!-- 3/4/2012 8:00:00 AM  -->
+					</timePeriod>
+					<value>322</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>865</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330848900</start>
+						<!-- 3/4/2012 8:15:00 AM  -->
+					</timePeriod>
+					<value>288</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>931</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330849800</start>
+						<!-- 3/4/2012 8:30:00 AM  -->
+					</timePeriod>
+					<value>310</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>889</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330850700</start>
+						<!-- 3/4/2012 8:45:00 AM  -->
+					</timePeriod>
+					<value>296</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>942</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330851600</start>
+						<!-- 3/4/2012 9:00:00 AM  -->
+					</timePeriod>
+					<value>314</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>901</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330852500</start>
+						<!-- 3/4/2012 9:15:00 AM  -->
+					</timePeriod>
+					<value>300</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>980</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330853400</start>
+						<!-- 3/4/2012 9:30:00 AM  -->
+					</timePeriod>
+					<value>326</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>868</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330854300</start>
+						<!-- 3/4/2012 9:45:00 AM  -->
+					</timePeriod>
+					<value>289</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2585</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330855200</start>
+						<!-- 3/4/2012 10:00:00 AM  -->
+					</timePeriod>
+					<value>861</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2695</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330856100</start>
+						<!-- 3/4/2012 10:15:00 AM  -->
+					</timePeriod>
+					<value>898</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2592</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330857000</start>
+						<!-- 3/4/2012 10:30:00 AM  -->
+					</timePeriod>
+					<value>864</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2731</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330857900</start>
+						<!-- 3/4/2012 10:45:00 AM  -->
+					</timePeriod>
+					<value>910</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9738</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330858800</start>
+						<!-- 3/4/2012 11:00:00 AM  -->
+					</timePeriod>
+					<value>1623</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9802</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330859700</start>
+						<!-- 3/4/2012 11:15:00 AM  -->
+					</timePeriod>
+					<value>1633</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8600</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330860600</start>
+						<!-- 3/4/2012 11:30:00 AM  -->
+					</timePeriod>
+					<value>1433</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9686</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330861500</start>
+						<!-- 3/4/2012 11:45:00 AM  -->
+					</timePeriod>
+					<value>1614</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8886</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330862400</start>
+						<!-- 3/4/2012 12:00:00 PM  -->
+					</timePeriod>
+					<value>1481</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8331</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330863300</start>
+						<!-- 3/4/2012 12:15:00 PM  -->
+					</timePeriod>
+					<value>1388</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9230</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330864200</start>
+						<!-- 3/4/2012 12:30:00 PM  -->
+					</timePeriod>
+					<value>1538</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8714</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330865100</start>
+						<!-- 3/4/2012 12:45:00 PM  -->
+					</timePeriod>
+					<value>1452</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9497</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330866000</start>
+						<!-- 3/4/2012 1:00:00 PM  -->
+					</timePeriod>
+					<value>1582</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8426</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330866900</start>
+						<!-- 3/4/2012 1:15:00 PM  -->
+					</timePeriod>
+					<value>1404</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9050</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330867800</start>
+						<!-- 3/4/2012 1:30:00 PM  -->
+					</timePeriod>
+					<value>1508</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9388</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330868700</start>
+						<!-- 3/4/2012 1:45:00 PM  -->
+					</timePeriod>
+					<value>1564</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9343</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330869600</start>
+						<!-- 3/4/2012 2:00:00 PM  -->
+					</timePeriod>
+					<value>1557</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9179</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330870500</start>
+						<!-- 3/4/2012 2:15:00 PM  -->
+					</timePeriod>
+					<value>1529</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8181</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330871400</start>
+						<!-- 3/4/2012 2:30:00 PM  -->
+					</timePeriod>
+					<value>1363</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8283</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330872300</start>
+						<!-- 3/4/2012 2:45:00 PM  -->
+					</timePeriod>
+					<value>1380</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9741</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330873200</start>
+						<!-- 3/4/2012 3:00:00 PM  -->
+					</timePeriod>
+					<value>1623</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9930</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330874100</start>
+						<!-- 3/4/2012 3:15:00 PM  -->
+					</timePeriod>
+					<value>1655</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9620</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330875000</start>
+						<!-- 3/4/2012 3:30:00 PM  -->
+					</timePeriod>
+					<value>1603</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9667</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330875900</start>
+						<!-- 3/4/2012 3:45:00 PM  -->
+					</timePeriod>
+					<value>1611</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8890</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330876800</start>
+						<!-- 3/4/2012 4:00:00 PM  -->
+					</timePeriod>
+					<value>1481</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8483</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330877700</start>
+						<!-- 3/4/2012 4:15:00 PM  -->
+					</timePeriod>
+					<value>1413</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8279</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330878600</start>
+						<!-- 3/4/2012 4:30:00 PM  -->
+					</timePeriod>
+					<value>1379</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9423</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330879500</start>
+						<!-- 3/4/2012 4:45:00 PM  -->
+					</timePeriod>
+					<value>1570</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8364</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330880400</start>
+						<!-- 3/4/2012 5:00:00 PM  -->
+					</timePeriod>
+					<value>1394</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8844</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330881300</start>
+						<!-- 3/4/2012 5:15:00 PM  -->
+					</timePeriod>
+					<value>1474</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9484</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330882200</start>
+						<!-- 3/4/2012 5:30:00 PM  -->
+					</timePeriod>
+					<value>1580</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8463</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330883100</start>
+						<!-- 3/4/2012 5:45:00 PM  -->
+					</timePeriod>
+					<value>1410</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9173</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330884000</start>
+						<!-- 3/4/2012 6:00:00 PM  -->
+					</timePeriod>
+					<value>1528</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9459</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330884900</start>
+						<!-- 3/4/2012 6:15:00 PM  -->
+					</timePeriod>
+					<value>1576</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9850</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330885800</start>
+						<!-- 3/4/2012 6:30:00 PM  -->
+					</timePeriod>
+					<value>1641</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8442</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330886700</start>
+						<!-- 3/4/2012 6:45:00 PM  -->
+					</timePeriod>
+					<value>1407</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>12413</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330887600</start>
+						<!-- 3/4/2012 7:00:00 PM  -->
+					</timePeriod>
+					<value>1379</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>12347</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330888500</start>
+						<!-- 3/4/2012 7:15:00 PM  -->
+					</timePeriod>
+					<value>1371</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>14151</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330889400</start>
+						<!-- 3/4/2012 7:30:00 PM  -->
+					</timePeriod>
+					<value>1572</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>14627</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330890300</start>
+						<!-- 3/4/2012 7:45:00 PM  -->
+					</timePeriod>
+					<value>1625</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>16483</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330891200</start>
+						<!-- 3/4/2012 8:00:00 PM  -->
+					</timePeriod>
+					<value>1373</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>19600</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330892100</start>
+						<!-- 3/4/2012 8:15:00 PM  -->
+					</timePeriod>
+					<value>1633</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>19686</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330893000</start>
+						<!-- 3/4/2012 8:30:00 PM  -->
+					</timePeriod>
+					<value>1640</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>19909</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330893900</start>
+						<!-- 3/4/2012 8:45:00 PM  -->
+					</timePeriod>
+					<value>1659</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>23093</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330894800</start>
+						<!-- 3/4/2012 9:00:00 PM  -->
+					</timePeriod>
+					<value>1539</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>24265</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330895700</start>
+						<!-- 3/4/2012 9:15:00 PM  -->
+					</timePeriod>
+					<value>1617</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>22889</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330896600</start>
+						<!-- 3/4/2012 9:30:00 PM  -->
+					</timePeriod>
+					<value>1525</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>24853</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330897500</start>
+						<!-- 3/4/2012 9:45:00 PM  -->
+					</timePeriod>
+					<value>1656</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>21769</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330898400</start>
+						<!-- 3/4/2012 10:00:00 PM  -->
+					</timePeriod>
+					<value>1451</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>24577</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330899300</start>
+						<!-- 3/4/2012 10:15:00 PM  -->
+					</timePeriod>
+					<value>1638</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>20465</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330900200</start>
+						<!-- 3/4/2012 10:30:00 PM  -->
+					</timePeriod>
+					<value>1364</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>24114</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330901100</start>
+						<!-- 3/4/2012 10:45:00 PM  -->
+					</timePeriod>
+					<value>1607</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>21939</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330902000</start>
+						<!-- 3/4/2012 11:00:00 PM  -->
+					</timePeriod>
+					<value>1462</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>22265</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330902900</start>
+						<!-- 3/4/2012 11:15:00 PM  -->
+					</timePeriod>
+					<value>1484</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>24871</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330903800</start>
+						<!-- 3/4/2012 11:30:00 PM  -->
+					</timePeriod>
+					<value>1658</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>24159</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330904700</start>
+						<!-- 3/4/2012 11:45:00 PM  -->
+					</timePeriod>
+					<value>1610</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>38333</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330905600</start>
+						<!-- 3/5/2012  -->
+					</timePeriod>
+					<value>1597</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>39176</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330906500</start>
+						<!-- 3/5/2012 12:15:00 AM  -->
+					</timePeriod>
+					<value>1632</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>34748</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330907400</start>
+						<!-- 3/5/2012 12:30:00 AM  -->
+					</timePeriod>
+					<value>1447</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>38769</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330908300</start>
+						<!-- 3/5/2012 12:45:00 AM  -->
+					</timePeriod>
+					<value>1615</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>25573</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330909200</start>
+						<!-- 3/5/2012 1:00:00 AM  -->
+					</timePeriod>
+					<value>1420</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>27272</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330910100</start>
+						<!-- 3/5/2012 1:15:00 AM  -->
+					</timePeriod>
+					<value>1515</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>25146</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330911000</start>
+						<!-- 3/5/2012 1:30:00 AM  -->
+					</timePeriod>
+					<value>1397</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>27716</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330911900</start>
+						<!-- 3/5/2012 1:45:00 AM  -->
+					</timePeriod>
+					<value>1539</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>18006</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330912800</start>
+						<!-- 3/5/2012 2:00:00 AM  -->
+					</timePeriod>
+					<value>1500</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17879</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330913700</start>
+						<!-- 3/5/2012 2:15:00 AM  -->
+					</timePeriod>
+					<value>1489</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>18124</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330914600</start>
+						<!-- 3/5/2012 2:30:00 AM  -->
+					</timePeriod>
+					<value>1510</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17567</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330915500</start>
+						<!-- 3/5/2012 2:45:00 AM  -->
+					</timePeriod>
+					<value>1463</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5815</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330916400</start>
+						<!-- 3/5/2012 3:00:00 AM  -->
+					</timePeriod>
+					<value>969</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5612</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330917300</start>
+						<!-- 3/5/2012 3:15:00 AM  -->
+					</timePeriod>
+					<value>935</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5936</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330918200</start>
+						<!-- 3/5/2012 3:30:00 AM  -->
+					</timePeriod>
+					<value>989</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5748</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330919100</start>
+						<!-- 3/5/2012 3:45:00 AM  -->
+					</timePeriod>
+					<value>958</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>875</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330920000</start>
+						<!-- 3/5/2012 4:00:00 AM  -->
+					</timePeriod>
+					<value>291</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>824</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330920900</start>
+						<!-- 3/5/2012 4:15:00 AM  -->
+					</timePeriod>
+					<value>274</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>909</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330921800</start>
+						<!-- 3/5/2012 4:30:00 AM  -->
+					</timePeriod>
+					<value>303</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>847</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330922700</start>
+						<!-- 3/5/2012 4:45:00 AM  -->
+					</timePeriod>
+					<value>282</value>
+				</IntervalReading>
+			</IntervalBlock>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+	<entry>
+		<id>urn:uuid:298F995F-849A-4DEE-B339-988B2CD4BA5F</id>
+		<link rel="self" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock/177"/>
+		<link rel="up" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/MeterReading/01/IntervalBlock"/>
+		<title/>
+		<content>
+			<IntervalBlock xmlns="http://naesb.org/espi">
+				<interval>
+					<duration>86400</duration>
+					<start>1330923600</start>
+					<!-- start date: 3/5/2012 5:00:00 AM -->
+				</interval>
+				<IntervalReading>
+					<cost>852</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330923600</start>
+						<!-- 3/5/2012 5:00:00 AM  -->
+					</timePeriod>
+					<value>284</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>915</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330924500</start>
+						<!-- 3/5/2012 5:15:00 AM  -->
+					</timePeriod>
+					<value>305</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>974</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330925400</start>
+						<!-- 3/5/2012 5:30:00 AM  -->
+					</timePeriod>
+					<value>324</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>948</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330926300</start>
+						<!-- 3/5/2012 5:45:00 AM  -->
+					</timePeriod>
+					<value>316</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>975</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330927200</start>
+						<!-- 3/5/2012 6:00:00 AM  -->
+					</timePeriod>
+					<value>325</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>951</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330928100</start>
+						<!-- 3/5/2012 6:15:00 AM  -->
+					</timePeriod>
+					<value>317</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>973</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330929000</start>
+						<!-- 3/5/2012 6:30:00 AM  -->
+					</timePeriod>
+					<value>324</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>864</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330929900</start>
+						<!-- 3/5/2012 6:45:00 AM  -->
+					</timePeriod>
+					<value>288</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>992</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330930800</start>
+						<!-- 3/5/2012 7:00:00 AM  -->
+					</timePeriod>
+					<value>330</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>924</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330931700</start>
+						<!-- 3/5/2012 7:15:00 AM  -->
+					</timePeriod>
+					<value>308</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>845</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330932600</start>
+						<!-- 3/5/2012 7:30:00 AM  -->
+					</timePeriod>
+					<value>281</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>832</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330933500</start>
+						<!-- 3/5/2012 7:45:00 AM  -->
+					</timePeriod>
+					<value>277</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>930</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330934400</start>
+						<!-- 3/5/2012 8:00:00 AM  -->
+					</timePeriod>
+					<value>310</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>901</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330935300</start>
+						<!-- 3/5/2012 8:15:00 AM  -->
+					</timePeriod>
+					<value>300</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>855</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330936200</start>
+						<!-- 3/5/2012 8:30:00 AM  -->
+					</timePeriod>
+					<value>285</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>840</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330937100</start>
+						<!-- 3/5/2012 8:45:00 AM  -->
+					</timePeriod>
+					<value>280</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>837</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330938000</start>
+						<!-- 3/5/2012 9:00:00 AM  -->
+					</timePeriod>
+					<value>279</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>889</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330938900</start>
+						<!-- 3/5/2012 9:15:00 AM  -->
+					</timePeriod>
+					<value>296</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>904</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330939800</start>
+						<!-- 3/5/2012 9:30:00 AM  -->
+					</timePeriod>
+					<value>301</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>880</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330940700</start>
+						<!-- 3/5/2012 9:45:00 AM  -->
+					</timePeriod>
+					<value>293</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2789</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330941600</start>
+						<!-- 3/5/2012 10:00:00 AM  -->
+					</timePeriod>
+					<value>929</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2787</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330942500</start>
+						<!-- 3/5/2012 10:15:00 AM  -->
+					</timePeriod>
+					<value>929</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2920</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330943400</start>
+						<!-- 3/5/2012 10:30:00 AM  -->
+					</timePeriod>
+					<value>973</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>2647</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330944300</start>
+						<!-- 3/5/2012 10:45:00 AM  -->
+					</timePeriod>
+					<value>882</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8831</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330945200</start>
+						<!-- 3/5/2012 11:00:00 AM  -->
+					</timePeriod>
+					<value>1471</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8694</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330946100</start>
+						<!-- 3/5/2012 11:15:00 AM  -->
+					</timePeriod>
+					<value>1449</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8901</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330947000</start>
+						<!-- 3/5/2012 11:30:00 AM  -->
+					</timePeriod>
+					<value>1483</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8779</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330947900</start>
+						<!-- 3/5/2012 11:45:00 AM  -->
+					</timePeriod>
+					<value>1463</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9806</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330948800</start>
+						<!-- 3/5/2012 12:00:00 PM  -->
+					</timePeriod>
+					<value>1634</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9166</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330949700</start>
+						<!-- 3/5/2012 12:15:00 PM  -->
+					</timePeriod>
+					<value>1527</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8633</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330950600</start>
+						<!-- 3/5/2012 12:30:00 PM  -->
+					</timePeriod>
+					<value>1438</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8407</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330951500</start>
+						<!-- 3/5/2012 12:45:00 PM  -->
+					</timePeriod>
+					<value>1401</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9466</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330952400</start>
+						<!-- 3/5/2012 1:00:00 PM  -->
+					</timePeriod>
+					<value>1577</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9564</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330953300</start>
+						<!-- 3/5/2012 1:15:00 PM  -->
+					</timePeriod>
+					<value>1594</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9756</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330954200</start>
+						<!-- 3/5/2012 1:30:00 PM  -->
+					</timePeriod>
+					<value>1626</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9421</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330955100</start>
+						<!-- 3/5/2012 1:45:00 PM  -->
+					</timePeriod>
+					<value>1570</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8233</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330956000</start>
+						<!-- 3/5/2012 2:00:00 PM  -->
+					</timePeriod>
+					<value>1372</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>8285</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330956900</start>
+						<!-- 3/5/2012 2:15:00 PM  -->
+					</timePeriod>
+					<value>1380</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9034</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330957800</start>
+						<!-- 3/5/2012 2:30:00 PM  -->
+					</timePeriod>
+					<value>1505</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>9404</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330958700</start>
+						<!-- 3/5/2012 2:45:00 PM  -->
+					</timePeriod>
+					<value>1567</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5907</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330959600</start>
+						<!-- 3/5/2012 3:00:00 PM  -->
+					</timePeriod>
+					<value>984</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4968</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330960500</start>
+						<!-- 3/5/2012 3:15:00 PM  -->
+					</timePeriod>
+					<value>828</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5704</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330961400</start>
+						<!-- 3/5/2012 3:30:00 PM  -->
+					</timePeriod>
+					<value>950</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5320</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330962300</start>
+						<!-- 3/5/2012 3:45:00 PM  -->
+					</timePeriod>
+					<value>886</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5556</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330963200</start>
+						<!-- 3/5/2012 4:00:00 PM  -->
+					</timePeriod>
+					<value>926</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5901</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330964100</start>
+						<!-- 3/5/2012 4:15:00 PM  -->
+					</timePeriod>
+					<value>983</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5718</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330965000</start>
+						<!-- 3/5/2012 4:30:00 PM  -->
+					</timePeriod>
+					<value>953</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5812</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330965900</start>
+						<!-- 3/5/2012 4:45:00 PM  -->
+					</timePeriod>
+					<value>968</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>4922</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330966800</start>
+						<!-- 3/5/2012 5:00:00 PM  -->
+					</timePeriod>
+					<value>820</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5541</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330967700</start>
+						<!-- 3/5/2012 5:15:00 PM  -->
+					</timePeriod>
+					<value>923</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5147</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330968600</start>
+						<!-- 3/5/2012 5:30:00 PM  -->
+					</timePeriod>
+					<value>857</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5141</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330969500</start>
+						<!-- 3/5/2012 5:45:00 PM  -->
+					</timePeriod>
+					<value>856</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5659</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330970400</start>
+						<!-- 3/5/2012 6:00:00 PM  -->
+					</timePeriod>
+					<value>943</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5258</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330971300</start>
+						<!-- 3/5/2012 6:15:00 PM  -->
+					</timePeriod>
+					<value>876</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5929</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330972200</start>
+						<!-- 3/5/2012 6:30:00 PM  -->
+					</timePeriod>
+					<value>988</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5447</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330973100</start>
+						<!-- 3/5/2012 6:45:00 PM  -->
+					</timePeriod>
+					<value>907</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>11525</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330974000</start>
+						<!-- 3/5/2012 7:00:00 PM  -->
+					</timePeriod>
+					<value>960</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>10834</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330974900</start>
+						<!-- 3/5/2012 7:15:00 PM  -->
+					</timePeriod>
+					<value>902</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>10809</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330975800</start>
+						<!-- 3/5/2012 7:30:00 PM  -->
+					</timePeriod>
+					<value>900</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>10514</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330976700</start>
+						<!-- 3/5/2012 7:45:00 PM  -->
+					</timePeriod>
+					<value>876</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>16117</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330977600</start>
+						<!-- 3/5/2012 8:00:00 PM  -->
+					</timePeriod>
+					<value>895</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>16185</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330978500</start>
+						<!-- 3/5/2012 8:15:00 PM  -->
+					</timePeriod>
+					<value>899</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>14910</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330979400</start>
+						<!-- 3/5/2012 8:30:00 PM  -->
+					</timePeriod>
+					<value>828</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>15216</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330980300</start>
+						<!-- 3/5/2012 8:45:00 PM  -->
+					</timePeriod>
+					<value>845</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>20900</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330981200</start>
+						<!-- 3/5/2012 9:00:00 PM  -->
+					</timePeriod>
+					<value>870</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>19819</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330982100</start>
+						<!-- 3/5/2012 9:15:00 PM  -->
+					</timePeriod>
+					<value>825</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>23788</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330983000</start>
+						<!-- 3/5/2012 9:30:00 PM  -->
+					</timePeriod>
+					<value>991</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>22485</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330983900</start>
+						<!-- 3/5/2012 9:45:00 PM  -->
+					</timePeriod>
+					<value>936</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>35850</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330984800</start>
+						<!-- 3/5/2012 10:00:00 PM  -->
+					</timePeriod>
+					<value>1195</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>39313</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330985700</start>
+						<!-- 3/5/2012 10:15:00 PM  -->
+					</timePeriod>
+					<value>1310</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>38146</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330986600</start>
+						<!-- 3/5/2012 10:30:00 PM  -->
+					</timePeriod>
+					<value>1271</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>35287</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330987500</start>
+						<!-- 3/5/2012 10:45:00 PM  -->
+					</timePeriod>
+					<value>1176</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>44109</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330988400</start>
+						<!-- 3/5/2012 11:00:00 PM  -->
+					</timePeriod>
+					<value>1470</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>43965</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330989300</start>
+						<!-- 3/5/2012 11:15:00 PM  -->
+					</timePeriod>
+					<value>1465</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>41996</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330990200</start>
+						<!-- 3/5/2012 11:30:00 PM  -->
+					</timePeriod>
+					<value>1399</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>45469</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330991100</start>
+						<!-- 3/5/2012 11:45:00 PM  -->
+					</timePeriod>
+					<value>1515</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>35241</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330992000</start>
+						<!-- 3/6/2012  -->
+					</timePeriod>
+					<value>1468</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>34724</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330992900</start>
+						<!-- 3/6/2012 12:15:00 AM  -->
+					</timePeriod>
+					<value>1446</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>38514</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330993800</start>
+						<!-- 3/6/2012 12:30:00 AM  -->
+					</timePeriod>
+					<value>1604</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>34484</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330994700</start>
+						<!-- 3/6/2012 12:45:00 AM  -->
+					</timePeriod>
+					<value>1436</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>24875</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330995600</start>
+						<!-- 3/6/2012 1:00:00 AM  -->
+					</timePeriod>
+					<value>1381</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>27741</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330996500</start>
+						<!-- 3/6/2012 1:15:00 AM  -->
+					</timePeriod>
+					<value>1541</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>28617</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330997400</start>
+						<!-- 3/6/2012 1:30:00 AM  -->
+					</timePeriod>
+					<value>1589</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>29871</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330998300</start>
+						<!-- 3/6/2012 1:45:00 AM  -->
+					</timePeriod>
+					<value>1659</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>17571</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1330999200</start>
+						<!-- 3/6/2012 2:00:00 AM  -->
+					</timePeriod>
+					<value>1464</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>18440</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331000100</start>
+						<!-- 3/6/2012 2:15:00 AM  -->
+					</timePeriod>
+					<value>1536</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>18672</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331001000</start>
+						<!-- 3/6/2012 2:30:00 AM  -->
+					</timePeriod>
+					<value>1556</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>16482</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331001900</start>
+						<!-- 3/6/2012 2:45:00 AM  -->
+					</timePeriod>
+					<value>1373</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5200</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331002800</start>
+						<!-- 3/6/2012 3:00:00 AM  -->
+					</timePeriod>
+					<value>866</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5704</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331003700</start>
+						<!-- 3/6/2012 3:15:00 AM  -->
+					</timePeriod>
+					<value>950</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5481</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331004600</start>
+						<!-- 3/6/2012 3:30:00 AM  -->
+					</timePeriod>
+					<value>913</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>5479</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331005500</start>
+						<!-- 3/6/2012 3:45:00 AM  -->
+					</timePeriod>
+					<value>913</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>920</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331006400</start>
+						<!-- 3/6/2012 4:00:00 AM  -->
+					</timePeriod>
+					<value>306</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>959</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331007300</start>
+						<!-- 3/6/2012 4:15:00 AM  -->
+					</timePeriod>
+					<value>319</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>969</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331008200</start>
+						<!-- 3/6/2012 4:30:00 AM  -->
+					</timePeriod>
+					<value>323</value>
+				</IntervalReading>
+				<IntervalReading>
+					<cost>912</cost>
+					<timePeriod>
+						<duration>900</duration>
+						<start>1331009100</start>
+						<!-- 3/6/2012 4:45:00 AM  -->
+					</timePeriod>
+					<value>304</value>
+				</IntervalReading>
+			</IntervalBlock>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+	<entry>
+		<id>urn:uuid:621D4BDF-FE3D-418B-8C98-276D941D3D45</id>
+		<link rel="self" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/ElectricPowerUsageSummary/01"/>
+		<link rel="up" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/ElectricPowerUsageSummary"/>
+		<title>Usage Summary</title>
+		<content>
+			<ElectricPowerUsageSummary xmlns="http://naesb.org/espi">
+				<billingPeriod>
+					<duration>1119600</duration>
+					<start>1330578000</start>
+				</billingPeriod>
+				<billLastPeriod>15252000</billLastPeriod>
+				<billToDate>1149000</billToDate>
+				<costAdditionalLastPeriod>1346000</costAdditionalLastPeriod>
+				<currency>840</currency>
+				<overallConsumptionLastPeriod>
+					<powerOfTenMultiplier>0</powerOfTenMultiplier>
+					<uom>72</uom>
+					<value>1298640</value>
+				</overallConsumptionLastPeriod>
+				<currentBillingPeriodOverAllConsumption>
+					<powerOfTenMultiplier>0</powerOfTenMultiplier>
+					<timeStamp>1331784000</timeStamp>
+					<uom>72</uom>
+					<value>93026</value>
+				</currentBillingPeriodOverAllConsumption>
+				<qualityOfReading>14</qualityOfReading>
+				<statusTimeStamp>1331784000</statusTimeStamp>
+			</ElectricPowerUsageSummary>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+	<entry>
+		<id>urn:uuid:DEB0A337-C1B5-4658-99BA-4688E253A99B</id>
+		<link rel="self" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/ElectricPowerQualitySummary/01"/>
+		<link rel="up" type="" href="/espi/1_1/resource/RetailCustomer/9B6C7066/UsagePoint/5446AF3F/ElectricPowerQualitySummary"/>
+		<title>Quality Summary</title>
+		<content>
+			<ElectricPowerQualitySummary xmlns="http://naesb.org/espi">
+				<flickerPlt>1</flickerPlt>
+				<flickerPst>2</flickerPst>
+				<harmonicVoltage>3</harmonicVoltage>
+				<longInterruptions>4</longInterruptions>
+				<mainsVoltage>5</mainsVoltage>
+				<measurementProtocol>6</measurementProtocol>
+				<powerFrequency>7</powerFrequency>
+				<rapidVoltageChanges>8</rapidVoltageChanges>
+				<shortInterruptions>9</shortInterruptions>
+				<summaryInterval>
+					<duration>2119600</duration>
+					<start>2330578000</start>
+				</summaryInterval>
+				<supplyVoltageDips>10</supplyVoltageDips>
+				<supplyVoltageImbalance>11</supplyVoltageImbalance>
+				<supplyVoltageVariations>12</supplyVoltageVariations>
+				<tempOvervoltage>13</tempOvervoltage>
+			</ElectricPowerQualitySummary>
+		</content>
+		<published>2012-10-24T00:00:00Z</published>
+		<updated>2012-10-24T00:00:00Z</updated>
+	</entry>
+</feed>
