@@ -73,7 +73,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
         @NamedQuery(name = TimeConfiguration.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT usagePoint.localTimeParameters.id FROM UsagePoint usagePoint WHERE usagePoint.id = :usagePointId"),
         @NamedQuery(name = TimeConfiguration.QUERY_FIND_ALL_IDS,
-                query = "SELECT timeConfiguration.id FROM TimeConfiguration timeConfiguration")
+                query = "SELECT timeConfiguration.id FROM TimeConfiguration timeConfiguration"),
+        @NamedQuery(name = TimeConfiguration.QUERY_FIND_ALL_IDS_BY_XPATH_0, query = "SELECT DISTINCT t.id FROM TimeConfiguration t"),
+        @NamedQuery(name = TimeConfiguration.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT t.id FROM TimeConfiguration t WHERE t.id = :o1Id")
 
 })
 public class TimeConfiguration extends IdentifiedObject {
@@ -82,7 +84,9 @@ public class TimeConfiguration extends IdentifiedObject {
     public static final String QUERY_FIND_ALL_IDS = "TimeConfiguration.findAllIds";
     public static final String QUERY_FIND_BY_UUID = "TimeConfiguration.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "TimeConfiguration.findAllIdsByUsagePointId";
-
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_0 = "TimeConfiguration.findAllIdsByXpath0";
+    public static final String QUERY_FIND_ID_BY_XPATH = "TimeConfiguration.findIdsByXpath";
+    
     @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(HexBinaryAdapter.class)
     protected byte[] dstEndRule;
