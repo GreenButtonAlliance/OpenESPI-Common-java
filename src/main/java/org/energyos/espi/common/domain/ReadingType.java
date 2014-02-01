@@ -104,7 +104,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
         @NamedQuery(name = ReadingType.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT meterReading.readingType.id FROM MeterReading meterReading WHERE meterReading.usagePoint.id = :usagePointId"),
         @NamedQuery(name = ReadingType.QUERY_FIND_ALL_IDS,
-                query = "SELECT readingType.id FROM ReadingType readingType")
+                query = "SELECT readingType.id FROM ReadingType readingType"),
+        @NamedQuery(name = ReadingType.QUERY_FIND_ALL_IDS_BY_XPATH_0, query = "SELECT DISTINCT r.id FROM ReadingType r"),
+        @NamedQuery(name = ReadingType.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT r.id FROM ReadingType r WHERE r.id = :o1Id")
 
 })
 public class ReadingType
@@ -115,6 +117,8 @@ public class ReadingType
     public static final String QUERY_FIND_BY_UUID = "ReadingType.findByUUID";
     public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "ReadingType.findAllIdsByUsagePointId";
 	public static final String QUERY_FIND_ALL_IDS = "ReadingType.findAllIds";
+    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_0 = "ReadingType.findAllIdsByXpath0";
+    public static final String QUERY_FIND_ID_BY_XPATH = "ReadingType.findIdsByXpath";
 
     @XmlTransient
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
