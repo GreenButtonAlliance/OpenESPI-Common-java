@@ -534,101 +534,126 @@ public class ContentType {
 	}
 
 	public String buildSelfHref(String hrefFragment) {
-		// TODO its ugly right now, clean it up when templates are done
+		// TODO its ugly right now (and getting uglier:( , clean it up when templates are done
 		// right now this is very specific to .../UsagePoint as seen in a download
 		String result = hrefFragment;
-		// if the last element of the fragment is a UsagePoint, the we may be doing a full dump
-		// and the fragment generation logic is a bit different
-		if (hrefFragment.lastIndexOf("UsagePoint") == (hrefFragment.length() - "UsagePoint".length())) {
-			if (this.getApplicationInformation() != null) {
-				return result + this.getApplicationInformation().getId();
-			}
-			if (this.getAuthorization() != null) {
-				return result + this.getAuthorization().getId();
-			}
-			if (this.getElectricPowerQualitySummary() != null) {
-				UsagePoint usagePoint = this.getElectricPowerQualitySummary()
-						.getUsagePoint();
-				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-				return result + "/" + usagePoint.getId()
-						+ "/ElectricPowerQualitySummary/"
-						+ this.getElectricPowerQualitySummary().getId();
-			}
-			if (this.getElectricPowerUsageSummary() != null) {
-				UsagePoint usagePoint = this.getElectricPowerUsageSummary()
-						.getUsagePoint();
-				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-				return result + "/" + usagePoint.getId()
-						+ "/ElectricPowerUsageSummary/"
-						+ this.getElectricPowerUsageSummary().getId();
-			}
-			if (this.getIntervalBlocks() != null) {
-				MeterReading meterReading = this.getIntervalBlocks().get(0)
-						.getMeterReading();
-				UsagePoint usagePoint = meterReading.getUsagePoint();
-				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-				return result + "/" + usagePoint.getId() + "/MeterReading/"
-						+ meterReading.getId() + "/IntervalBlock/"
-						+ this.getIntervalBlocks().get(0).getId();
-			}
-			if (this.getLocalTimeParameters() != null) {
-				// here, we assume "result" has got the right mutated hrefFragment ...
-				return result + "/LocalTimeParameters/" + this.getLocalTimeParameters().getId();
-/*
- *              // if one had a normal structure, one would have ...
-				UsagePoint usagePoint = this.getLocalTimeParameters()
-						.getUsagePoint();
-				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-				return result + "/" + usagePoint.getId()
-						+ "/LocalTimeParameters/"
-						+ this.getLocalTimeParameters().getId();
-*/
-			}
-			if (this.getMeterReading() != null) {
-				UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
-				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-				return result + "/" + usagePoint.getId() + "/MeterReading/"
-						+ this.getMeterReading().getId();
-			}
-			if (this.getReadingType() != null) {
-				// here, we assume "result" has got the right mutated hrefFragment ...
-				return result + "/ReadingType/" + this.getReadingType().getId();
-				/*
-				 *              // if one had a normal structure, one would have ...
-
-				MeterReading meterReading = this.getReadingType()
-						.getMeterReading();
-				UsagePoint usagePoint = meterReading.getUsagePoint();
-				RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-				return result + "/" + usagePoint.getId() + "/MeterReading/"
-						+ meterReading.getId() + "/ReadingType/"
-						+ this.getReadingType().getId();
-				*/
-			}
-			if (this.getRetailCustomer() != null) {
-				return result + "/" + this.getRetailCustomer().getId();
-			}
-			if (this.getSubscription() != null) {
-				return result + this.getSubscription().getId();
-
-			}
-			if (this.getUsagePoint() != null) {
-				RetailCustomer retailCustomer = this.getUsagePoint()
-						.getRetailCustomer();
-				return result + "/" + this.getUsagePoint().getId();
-			}
-		} else {
-			// we get here if we have a specific GET to a resource - in this
-			// case, the hrefFragment should be correct as it stands
-			result = hrefFragment;
+		String usagePointId = "";
+		Boolean usagePointId_P = false;
+		
+		// if the last element of the fragment is a UsagePoint, we will need to add a usagePointId to the URI
+		if (hrefFragment.lastIndexOf("UsagePoint") == (hrefFragment.length() - "UsagePoint".length()))
+		    {
+              usagePointId_P = true;
+		    }
+		
+		// now do the right thing for each resource (there will be only one non-null resource in the ContentType
+		
+		if (this.getApplicationInformation() != null) {
+			result = result + this.getApplicationInformation().getId();
 		}
+		
+		if (this.getAuthorization() != null) {
+			result = result + this.getAuthorization().getId();
+		}
+		
+		if (this.getElectricPowerQualitySummary() != null) {
+			if (usagePointId_P) {
+				
+				UsagePoint usagePoint = this.getElectricPowerQualitySummary().getUsagePoint();
+				usagePointId = "/" + usagePoint.getId();
+			}
+			result = result + usagePointId + "/ElectricPowerQualitySummary/" + this.getElectricPowerQualitySummary().getId();
+		}
+		
+	    if (this.getElectricPowerUsageSummary() != null) {
+		    if (usagePointId_P) {
+					
+				UsagePoint usagePoint = this.getElectricPowerUsageSummary().getUsagePoint();
+				usagePointId = "/" + usagePoint.getId();
+			}
+				
+		    result = result + usagePointId + "/ElectricPowerUsageSummary/" + this.getElectricPowerUsageSummary().getId();
+		}
+			
+	    if (this.getIntervalBlocks() != null) {
+			MeterReading meterReading = this.getIntervalBlocks().get(0) .getMeterReading();
+			if (usagePointId_P) {
+
+				UsagePoint usagePoint = meterReading.getUsagePoint();	
+				usagePointId = "/" + usagePoint.getId();
+			}
+
+			result = result + usagePointId + "/MeterReading/" + meterReading.getId() + "/IntervalBlock/" + this.getIntervalBlocks().get(0).getId();
+		}
+	    
+		if (this.getLocalTimeParameters() != null) {
+			// here, we assume "result" has got the right mutated hrefFragment ...
+			String temp = result.substring(0, result.indexOf("/RetailCustomer"));
+			// temp now has only the .../espi/1_1/resource  in it.
+			result = temp + "/LocalTimeParameters/" + this.getLocalTimeParameters().getId();
+            /*
+            // if one had a normal structure, one would have ...
+			UsagePoint usagePoint = this.getLocalTimeParameters()
+					.getUsagePoint();
+			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+			result = result + "/" + usagePoint.getId()
+								+ "/LocalTimeParameters/"
+			  			+ this.getLocalTimeParameters().getId();
+                */
+		}
+			
+		if (this.getMeterReading() != null) {
+			if (usagePointId_P) {
+
+				UsagePoint usagePoint = meterReading.getUsagePoint();	
+				usagePointId = "/" + usagePoint.getId();
+			}
+
+			result = result + usagePointId + "/MeterReading/" + this.getMeterReading().getId();
+		}
+		
+        if (this.getReadingType() != null) {
+			// here, we assume "result" has got the right mutated hrefFragment ...
+			String temp = result.substring(0, result.indexOf("/RetailCustomer"));
+			// temp now has only the .../espi/1_1/resource  in it.
+			result = temp + "/ReadingType/" + this.getReadingType().getId();
+			/*
+			 *              // if one had a normal structure, one would have ...
+
+			MeterReading meterReading = this.getReadingType()
+					.getMeterReading();
+			UsagePoint usagePoint = meterReading.getUsagePoint();
+			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+			result = result + "/" + usagePoint.getId() + "/MeterReading/"
+					+ meterReading.getId() + "/ReadingType/"
+					+ this.getReadingType().getId();
+			*/
+		}
+        
+		if (this.getRetailCustomer() != null) {
+			result = result + "/" + this.getRetailCustomer().getId();
+		}
+		
+		if (this.getSubscription() != null) {
+			result = result + this.getSubscription().getId();
+
+		}
+			
+		if (this.getUsagePoint() != null) {
+			result = result + "/" + this.getUsagePoint().getId();
+			}
+		
 		return result;
-	}
+		
+	} 
+	
+		
+	
  
 	
 	public List<String> buildRelHref(String hrefFragment) {
 		// TODO its ugly right now, clean it up when templates are done
-		// if the last element of the fragment is a UsagePoint, the we may be doing a full dump
+		// if the last element of the fragment is a UsagePoint, then we may be doing a full dump
 		// and the fragement generation logic is a bit different
 	
 		List<String> result = new ArrayList<String>();
@@ -638,10 +663,14 @@ public class ContentType {
 			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
 			ReadingType readingType = this.getMeterReading().getReadingType();
 			String temp = hrefFragment;
+			String usagePointId = "";
 			if (hrefFragment.lastIndexOf("UsagePoint") == (hrefFragment.length() - "UsagePoint".length())) {
-				temp = temp  + "/" + usagePoint.getId() + "/MeterReading/" + this.getMeterReading().getId();
-			} 
+				usagePointId = "/" + usagePoint.getId();
+			}
+			
+			temp = temp  + usagePointId + "/MeterReading/" + this.getMeterReading().getId();
 			result.add(temp + "/IntervalBlock");
+			
 			temp = temp.substring(0, temp.indexOf("/RetailCustomer"));
 			result.add(temp + "/ReadingType/" + readingType.getId());
 			}
@@ -652,13 +681,17 @@ public class ContentType {
 			List <ElectricPowerUsageSummary> usageList = this.getUsagePoint().getElectricPowerUsageSummaries();
 			TimeConfiguration timeConfiguration = this.getUsagePoint().getLocalTimeParameters();
 			String temp = hrefFragment;
+			String usagePointId = "";
+			
 			if (hrefFragment.lastIndexOf("UsagePoint") == (hrefFragment.length() - "UsagePoint".length())) {
-				temp = temp + "/" + this.getUsagePoint().getId();
+				usagePointId =  "/" + this.getUsagePoint().getId();
 			}
+			temp = temp + usagePointId;
+			
 			result.add(temp + "/MeterReading");
 			if (!(qualityList.isEmpty())) result.add(temp + "/ElectricPowerQualitySummary");
 			if (!(usageList.isEmpty())) result.add(temp + "/ElectricPowerUsageSummary");
-			// for LocalTimeParameters - maket it a ROOT access
+			// for LocalTimeParameters - make it a ROOT access
 			//
 			temp = temp.substring(0, temp.indexOf("/RetailCustomer"));
 			result.add(temp + "/LocalTimeParameters/" + timeConfiguration.getId());
