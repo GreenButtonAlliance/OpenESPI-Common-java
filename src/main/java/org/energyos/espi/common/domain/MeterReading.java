@@ -89,7 +89,7 @@ import org.hibernate.annotations.LazyCollectionOption;
         @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS,
                 query = "SELECT meterReading.id FROM MeterReading meterReading"),
         @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT DISTINCT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id"),
-        @NamedQuery(name = MeterReading.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT m.id FROM  UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :o1ID AND m.usagePoint.id = :o2Id AND m.id = :o3Id")
+        @NamedQuery(name = MeterReading.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT m.id FROM  UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id AND m.id = :o3Id")
 
 })
 public class MeterReading extends IdentifiedObject

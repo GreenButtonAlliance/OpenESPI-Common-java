@@ -7,6 +7,7 @@ import org.energyos.espi.common.models.atom.EntryType;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 
+@SuppressWarnings("restriction")
 public class ExportFilter {
     private Map<String, String> params;
     private int matchedCounter = 0, emittedCounter = 0;
@@ -56,8 +57,7 @@ public class ExportFilter {
         }
 
         if (hasParam("start-index")) {
-        	if (matchedCounter < Integer.valueOf(params.get("start-index"))) {
-                    matchedCounter++;
+        	if (++matchedCounter < Integer.valueOf(params.get("start-index"))) {
                     return false;
         		
         	}
@@ -78,7 +78,8 @@ public class ExportFilter {
         return params.get(paramName) != null;
     }
 
-    private long toTime(String key) {
+    @SuppressWarnings("restriction")
+	private long toTime(String key) {
         String param = params.get(key);
 
         return XMLGregorianCalendarImpl.parse(param).toGregorianCalendar().getTimeInMillis();
