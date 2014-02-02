@@ -35,6 +35,7 @@ import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.DateTimeType;
