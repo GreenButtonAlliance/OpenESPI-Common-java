@@ -1,12 +1,15 @@
 package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.domain.ApplicationInformation;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.energyos.espi.common.service.ResourceService;
+import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -133,7 +136,33 @@ public class ResourceServiceImpl implements ResourceService {
         this.repository = repository;
     }
 
+	@Override
+	public <T extends IdentifiedObject> EntryTypeIterator findEntryTypeIterator(Class<T> clazz) {
+		List<Long> idList = repository.findAllIds(clazz);
+		EntryTypeIterator result = null;
+		try {
+			result = (new EntryTypeIterator(this, idList, clazz));
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
+	}
 
-
-
+	@Override
+	public <T extends IdentifiedObject> EntryType findEntryType(long id1, Class<T> clazz) {
+		EntryType result = null;
+		try {
+			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp.add(id1);
+			result = (new EntryTypeIterator(this, temp, clazz)).nextEntry(clazz);
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;
+	}
 }
