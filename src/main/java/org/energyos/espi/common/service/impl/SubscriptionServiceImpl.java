@@ -32,6 +32,7 @@ import org.energyos.espi.common.service.SubscriptionService;
 import org.energyos.espi.common.utils.DateConverter;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -75,6 +76,16 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscription.setUUID(UUID.randomUUID());
         subscription.setApplicationInformation(applicationInformationService.findByClientId(authentication.getOAuth2Request().getClientId()));
         subscription.setRetailCustomer((RetailCustomer)authentication.getPrincipal());
+        subscription.setUsagePoints(new ArrayList<UsagePoint> ());
+        // set up the subscription's usagePoints list. Keep in mind that right 
+        // now this is ALL usage points belonging to the RetailCustomer. 
+        // TODO - scope this to only a selected (proper) subset of the usagePoints.
+        List <Long> upIds = resourceService.findAllIdsByXPath(subscription.getRetailCustomer().getId(), UsagePoint.class);
+        Iterator <Long> it = upIds.iterator();
+        while (it.hasNext()) {
+        	UsagePoint usagePoint = resourceService.findById(it.next(), UsagePoint.class);
+        	subscription.getUsagePoints().add(usagePoint);
+        }
         subscription.setLastUpdate(new GregorianCalendar());
         subscriptionRepository.persist(subscription);
 
@@ -212,6 +223,19 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public Subscription findById(Long retailCustomerId, Long subscriptionId) {
 		return subscriptionRepository.findById(subscriptionId);
+	}
+
+	@Override
+	public List<Long> findUsagePointIds(Long subscriptionId) {
+		
+		List<Long> result = new ArrayList<Long>();
+		Subscription subscription = subscriptionRepository.findById(subscriptionId);
+		Iterator<UsagePoint> it = subscription.getUsagePoints().iterator();
+		while (it.hasNext()) {
+			result.add(it.next().getId());
+		}
+
+		return result;
 	}
 
 }

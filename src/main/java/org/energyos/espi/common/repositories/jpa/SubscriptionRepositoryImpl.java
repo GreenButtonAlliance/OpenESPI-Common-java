@@ -70,7 +70,7 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
 	@Transactional
 	public void deleteById(Long id) {
 	    Subscription subscription = findById(id);
-	    Set<UsagePoint> ups = subscription.getUsagePoints();
+	    List<UsagePoint> ups = subscription.getUsagePoints();
 	    Iterator<UsagePoint> it = ups.iterator();
 	    while (it.hasNext()) {
 	    	UsagePoint up = it.next();

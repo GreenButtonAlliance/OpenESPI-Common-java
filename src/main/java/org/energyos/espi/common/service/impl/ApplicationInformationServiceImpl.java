@@ -202,4 +202,12 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 		return applicationInformation;
 	}
 
+	@Override
+	public String getThirdPartyNotifyURI() {
+		ApplicationInformation applicationInformation;
+		// TODO note the assumption on the first (seed) entry
+		applicationInformation = resourceService.findById(1L, ApplicationInformation.class);
+		return applicationInformation.getThirdPartyNotifyUri();
+	}
+
 }
