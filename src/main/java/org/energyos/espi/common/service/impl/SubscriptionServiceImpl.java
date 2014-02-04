@@ -19,11 +19,13 @@ package org.energyos.espi.common.service.impl;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
@@ -33,9 +35,7 @@ import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.SubscriptionService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
-
 import org.hibernate.mapping.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
