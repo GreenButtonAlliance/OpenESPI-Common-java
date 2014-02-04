@@ -24,9 +24,6 @@
 
 package org.energyos.espi.common.domain;
 
-import java.util.Calendar;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -45,6 +42,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.energyos.espi.common.models.atom.adapters.SubscriptionAdapter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Defines the parameters of a subscription between Third Party and Data Custodian.
@@ -101,8 +103,8 @@ public class Subscription
 
     @XmlTransient
     @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<UsagePoint> usagePoints;
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private List<UsagePoint> usagePoints;
 
     public Calendar lastUpdate;    
     
@@ -138,11 +140,11 @@ public class Subscription
         return lastUpdate;
     }
 
-    public Set<UsagePoint> getUsagePoints() {
+    public List<UsagePoint> getUsagePoints() {
         return usagePoints;
     }
     
-    public void setUsagePoints(Set<UsagePoint> usagePoints) {
+    public void setUsagePoints(List<UsagePoint> usagePoints) {
         this.usagePoints = usagePoints;
     }
 
