@@ -139,6 +139,12 @@ public class ResourceServiceImpl implements ResourceService {
 	@Override
 	public <T extends IdentifiedObject> EntryTypeIterator findEntryTypeIterator(Class<T> clazz) {
 		List<Long> idList = repository.findAllIds(clazz);
+        return findEntryTypeIterator(idList, clazz);
+	}
+
+	@Override
+	public <T extends IdentifiedObject> EntryTypeIterator findEntryTypeIterator(List<Long> ids, Class<T> clazz) {
+		List<Long> idList = ids;
 		EntryTypeIterator result = null;
 		try {
 			result = (new EntryTypeIterator(this, idList, clazz));
@@ -149,7 +155,7 @@ public class ResourceServiceImpl implements ResourceService {
 		}
 		return result;
 	}
-
+	
 	@Override
 	public <T extends IdentifiedObject> EntryType findEntryType(long id1, Class<T> clazz) {
 		EntryType result = null;

@@ -485,7 +485,9 @@ public class ExportServiceImpl implements ExportService {
     @Override
     public void exportBatchSubscription(long subscriptionId, OutputStream stream, ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/Batch/Subscription/" + subscriptionId;
-        exportEntriesFull(subscriptionService.findEntryTypeIterator(subscriptionId), stream, exportFilter, hrefFragment);
+		// first find all the usagePointIds this subscription is related to
+		List<Long> usagePointIdList = subscriptionService.findUsagePointIds(subscriptionId);
+        exportEntriesFull(resourceService.findEntryTypeIterator(usagePointIdList, UsagePoint.class), stream, exportFilter, hrefFragment);
     }
     
 	@Override
@@ -574,9 +576,11 @@ public class ExportServiceImpl implements ExportService {
 				// TODO here need the proper URI fragment for a subscription
 				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint";			}
 			if (fragment.contains("Subscription")) {
+				// the entry contains a valid usagepoint at this stage
+				// 
 				UsagePoint up = entry.getContent().getUsagePoint();
 				RetailCustomer rc = up.getRetailCustomer();
-				// TODO here need the proper URI fragment for a subscription
+
 				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint";
 			}
 			if (fragment.contains("/Batch/RetailCustomer")) {

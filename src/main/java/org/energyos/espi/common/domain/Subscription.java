@@ -36,7 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -94,8 +96,8 @@ public class Subscription
 
     @XmlTransient
     @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<UsagePoint> usagePoints;
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private List<UsagePoint> usagePoints;
 
     public Calendar lastUpdate;    
     
@@ -131,11 +133,11 @@ public class Subscription
         return lastUpdate;
     }
 
-    public Set<UsagePoint> getUsagePoints() {
+    public List<UsagePoint> getUsagePoints() {
         return usagePoints;
     }
     
-    public void setUsagePoints(Set<UsagePoint> usagePoints) {
+    public void setUsagePoints(List<UsagePoint> usagePoints) {
         this.usagePoints = usagePoints;
     }
 

@@ -54,5 +54,7 @@ public interface ApplicationInformationService {
 	public void setApplicationInformation(ApplicationInformation applicationInformation);
 
 	public String getDataCustodianResourceEndpoint();
+	
+	public String getThirdPartyNotifyURI();
 
 }

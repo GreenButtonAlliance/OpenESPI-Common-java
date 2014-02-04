@@ -51,5 +51,7 @@ public interface SubscriptionService {
 	public Subscription findById(Long retailCustomerId, Long subscriptionId);
 
 	public Subscription findByUUID(UUID uuid);
+	
+	public List<Long> findUsagePointIds(Long subscriptionId);
 
 }

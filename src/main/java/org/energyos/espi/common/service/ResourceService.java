@@ -44,6 +44,8 @@ public interface ResourceService {
 	<T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2, Long id3, Long id4, Class<T> clazz);
 
 	<T extends IdentifiedObject> EntryTypeIterator findEntryTypeIterator(Class<T> clazz);
+	
+	<T extends IdentifiedObject> EntryTypeIterator findEntryTypeIterator(List<Long> ids, Class<T> clazz);
 
 	<T extends IdentifiedObject> EntryType findEntryType(long id1, Class<T> clazz);
 	
