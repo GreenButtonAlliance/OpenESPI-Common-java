@@ -5,4 +5,4 @@
 # then populates tables with initial data
 #
 # Copy the appropriate version of prepopulatesql_<host><port>.sql to prepopulatesql.sql for your installation
-mysql -u root -p < setupdatabases.sql
+mysql --user=root --password=password < setupdatabases.sql
