@@ -98,7 +98,12 @@ public class ATOMContentHandler extends XMLFilterImpl {
                         throw new SAXException("Unbale to unmarshall <entry>", x);
                     }
                     procssor.process(result.getValue());
-                    entries.add(result.getValue());
+                    // stash the UsagePoints for later processing of retailCustomer Binding
+                    // and subscription notification
+                    //
+                    if (result.getValue().getContent().getUsagePoint() != null) {
+                         entries.add(result.getValue());
+                    }
                 }
 
                 unmarshallerHandler = null;
