@@ -120,7 +120,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
         @NamedQuery(name = Authorization.QUERY_FIND_BY_STATE,
 		    	query = "SELECT authorization FROM Authorization authorization WHERE authorization.state = :state"),
 		@NamedQuery(name = Authorization.QUERY_FIND_BY_UUID, 
-        		query = "SELECT authorization FROM Authorization authorization WHERE authorization.uuid = :uuid")
+        		query = "SELECT authorization FROM Authorization authorization WHERE authorization.uuid = :uuid"),
+        @NamedQuery(name = Authorization.QUERY_FIND_BY_RESOURCE_URI, 
+                query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI = :uri")
 })
 public class Authorization
         extends IdentifiedObject {
@@ -131,6 +133,7 @@ public class Authorization
 	public static final String QUERY_FIND_BY_SCOPE = "Authorization.findByScope";
     public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";	
 	public final static String QUERY_FIND_BY_UUID = "Authorization.findByUUID";
+	public static final String QUERY_FIND_BY_RESOURCE_URI = "Authorization.findByResourceUri";
 
     @Embedded
     @AttributeOverrides({

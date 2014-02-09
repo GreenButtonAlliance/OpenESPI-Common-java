@@ -1,9 +1,22 @@
+/*
+ * Copyright 2013, 2014 EnergyOS.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package org.energyos.espi.common.service.impl;
 
-import org.energyos.espi.common.domain.ApplicationInformation;
-import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 import org.energyos.espi.common.domain.IdentifiedObject;
-import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
@@ -11,7 +24,6 @@ import org.energyos.espi.common.repositories.ResourceRepository;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -149,8 +161,7 @@ public class ResourceServiceImpl implements ResourceService {
 		try {
 			result = (new EntryTypeIterator(this, idList, clazz));
 		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
+			System.out.printf("**** Entry Type Iterator Not Found: %s: %s\n", clazz.toString(), e.toString());
 			result = null;
 		}
 		return result;
@@ -160,15 +171,19 @@ public class ResourceServiceImpl implements ResourceService {
 	public <T extends IdentifiedObject> EntryType findEntryType(long id1, Class<T> clazz) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp.add(id1);
 			result = (new EntryTypeIterator(this, temp, clazz)).nextEntry(clazz);
 		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
+			System.out.printf("**** Entry Type Not Found: %d - %s: %s\n", id1, clazz.toString(), e.toString());
 			result = null;
 		}
 		return result;
+	}
+
+	@Override
+	public <T extends IdentifiedObject> T findByResourceUri(String uri,
+			Class<T> clazz) {
+		return repository.findByResourceUri(uri, clazz);
 	}
 }

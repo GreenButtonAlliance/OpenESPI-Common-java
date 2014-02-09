@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013, 2014 EnergyOS.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package org.energyos.espi.common.repositories.jpa;
 
 import org.energyos.espi.common.domain.IdentifiedObject;
@@ -26,12 +42,14 @@ class ResourceRepositoryImpl implements ResourceRepository {
     }
     
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public List<IdentifiedObject> findAllParentsByRelatedHref(String href, Linkable linkable) {
         return em.createNamedQuery(linkable.getParentQuery()).setParameter("href", href).getResultList();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public List<IdentifiedObject> findAllRelated(Linkable linkable) {
         if (linkable.getRelatedLinkHrefs().isEmpty()) {
             return new ArrayList<>();
@@ -39,7 +57,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
         return em.createNamedQuery(linkable.getAllRelatedQuery()).setParameter("relatedLinkHrefs", linkable.getRelatedLinkHrefs()).getResultList();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public <T> T findByUUID(UUID uuid, Class<T> clazz) {
         try {
             String queryFindById = (String) clazz.getDeclaredField("QUERY_FIND_BY_UUID").get(String.class);
@@ -51,7 +70,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public <T extends IdentifiedObject> T findById(Long id, Class<T> clazz) {
         try {
             String queryFindById = (String) clazz.getDeclaredField("QUERY_FIND_BY_ID").get(String.class);
@@ -63,7 +83,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public <T extends IdentifiedObject> List<Long> findAllIds(Class<T> clazz) {
         try {
             String queryFindById = (String) clazz.getDeclaredField("QUERY_FIND_ALL_IDS").get(String.class);
@@ -225,6 +246,21 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
         em.merge(originalUsagePoint);
     }
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends IdentifiedObject> T findByResourceUri(String uri,
+			Class<T> clazz) {
+        try {
+            String findByResourceURI = (String) clazz.getDeclaredField("QUERY_FIND_BY_RESOURCE_URI").get(String.class);
+            Query query = em.createNamedQuery(findByResourceURI)
+            		.setParameter("uri", uri);
+            return (T) query.getSingleResult();
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+	}
 
 
 }

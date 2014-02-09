@@ -33,6 +33,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -57,14 +58,31 @@ public class ImportServiceImpl implements ImportService {
     // this import
     private List<EntryType> entries;
     
-    @Override
+    // Min Updated <== used on time scoping the subscriptions
+    //
+    private XMLGregorianCalendar minUpdated = null;
     
+    // Max Updated <== used on time scoping the subscriptions
+    //
+    private XMLGregorianCalendar maxUpdated = null;
+    
+    @Override
     public List <EntryType> getEntries() {
     	List<EntryType> result = entries;
     	entries = null;
     	return result;
     }
 
+    @Override
+    public XMLGregorianCalendar getMinUpdated() {
+    	return this.minUpdated;
+    }
+    
+    @Override
+    public XMLGregorianCalendar getMaxUpdated() {
+    	return this.maxUpdated;
+    }
+    
     @Transactional
     @Override
     public void importData(InputStream stream) throws IOException, SAXException, ParserConfigurationException {
@@ -82,6 +100,11 @@ public class ImportServiceImpl implements ImportService {
         reader.parse(new InputSource(stream));
         
         entries = atomContentHandler.getEntries();
+        
+        minUpdated = atomContentHandler.getMinUpdated();
+        
+        maxUpdated = atomContentHandler.getMaxUpdated();
+       
 
     }
 }

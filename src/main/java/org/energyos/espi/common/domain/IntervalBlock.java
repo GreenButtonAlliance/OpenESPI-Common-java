@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -193,6 +194,13 @@ public class IntervalBlock
     	super.merge(resource);
     	this.interval = ((IntervalBlock)resource).interval;
     	this.intervalReadings = ((IntervalBlock)resource).intervalReadings;
+    	Iterator<IntervalReading> readings = this.intervalReadings.iterator();
+    	
+    	while (readings.hasNext()) {
+    		IntervalReading reading = readings.next();
+    		reading.setIntervalBlock(this);
+    	}
+    	
     	if (((IntervalBlock)resource).meterReading != null){
     		this.meterReading = ((IntervalBlock)resource).meterReading;
     	}
