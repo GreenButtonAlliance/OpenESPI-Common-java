@@ -550,27 +550,45 @@ public class ContentType {
 
 			UsagePoint usagePoint = this.getElectricPowerQualitySummary().getUsagePoint();
 			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-			result = result + "/RetailCustomer/" + retailCustomer.getId() 
-					+ "/UsagePoint/" + usagePoint.getId() 
-					+ "/ElectricPowerQualitySummary/" + this.getElectricPowerQualitySummary().getId();
+			if (retailCustomer != null) {
+				result = result + "/RetailCustomer/" + retailCustomer.getId();
+
+			    if (usagePoint != null) {
+			   	    result = result + "/UsagePoint/" + usagePoint.getId();
+			    }
+			}
+			result = result + "/ElectricPowerQualitySummary/" + this.getElectricPowerQualitySummary().getId();
 		}
 		
 	    if (this.getElectricPowerUsageSummary() != null) {
 			UsagePoint usagePoint = this.getElectricPowerUsageSummary().getUsagePoint();
 			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-			result = result + "/RetailCustomer/" + retailCustomer.getId() 
-					+ "/UsagePoint/" + usagePoint.getId() 
-					+ "/ElectricPowerUsageSummary/" + this.getElectricPowerUsageSummary().getId();
+			if (retailCustomer != null) {
+				result = result + "/RetailCustomer/" + retailCustomer.getId();
+
+			    if (usagePoint != null) {
+			   	    result = result + "/UsagePoint/" + usagePoint.getId();
+			    }
+			}
+			result = result + "/ElectricPowerUsageSummary/" + this.getElectricPowerUsageSummary().getId();
 		}
 			
 	    if (this.getIntervalBlocks() != null) {
-			MeterReading meterReading = this.getIntervalBlocks().get(0) .getMeterReading();
+			MeterReading meterReading = this.getIntervalBlocks().get(0).getMeterReading();
 			UsagePoint usagePoint = meterReading.getUsagePoint();
 			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-			result = result + "/RetailCustomer/" + retailCustomer.getId() 
-					+ "/UsagePoint/" + usagePoint.getId() 
-					+ "/MeterReading/" + meterReading.getId() 
-					+ "/IntervalBlock/" + this.getIntervalBlocks().get(0).getId();
+			if (retailCustomer != null) {
+				result = result + "/RetailCustomer/" + retailCustomer.getId();
+
+			    if (usagePoint != null) {
+			   	    result = result + "/UsagePoint/" + usagePoint.getId();
+			   	    
+			   	    if (meterReading != null) {
+			   	    	result = result + "/MeterReading/" + meterReading.getId();
+			   	    }
+			    }
+			}
+			result = result + "/IntervalBlock/" + this.getIntervalBlocks().get(0).getId();
 		}
 	    
 		if (this.getLocalTimeParameters() != null) {
@@ -583,9 +601,14 @@ public class ContentType {
 
 			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
 			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-			result = result + "/RetailCustomer/" + retailCustomer.getId() 
-					+ "/UsagePoint/" + usagePoint.getId() 
-					+ "/MeterReading/" + meterReading.getId();
+			if (retailCustomer != null) {
+				result = result + "/RetailCustomer/" + retailCustomer.getId();
+
+			    if (usagePoint != null) {
+			   	    result = result + "/UsagePoint/" + usagePoint.getId();
+			    }
+			}
+			result = result + "/MeterReading/" + meterReading.getId();
 		}
 		
         if (this.getReadingType() != null) {
@@ -598,22 +621,19 @@ public class ContentType {
 		
 		if (this.getSubscription() != null) {
 			result = result + "/Subscription/" + this.getSubscription().getId();
-
 		}
 			
 		if (this.getUsagePoint() != null) {
 			RetailCustomer retailCustomer = this.getUsagePoint().getRetailCustomer();
-			result = result + "/RetailCustomer/" + retailCustomer.getId() 
-					+ "/UsagePoint/" + this.getUsagePoint().getId();
+			if (retailCustomer != null) {
+				result = result + "/RetailCustomer/" + retailCustomer.getId();
+			}
+			result = result + "/UsagePoint/" + this.getUsagePoint().getId();
 		}
 		
 		return result;
 		
 	} 
-	
-		
-	
- 
 	
 	public List<String> buildRelHref(String hrefFragment) {
 		// only MeterReading and UsagePoint have "related" references
@@ -621,6 +641,7 @@ public class ContentType {
 		List<String> result = new ArrayList<String>();
 
 		if (this.getMeterReading() != null) {
+			
 			// get the objects
 			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
 			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
@@ -637,14 +658,23 @@ public class ContentType {
 				temp = temp.substring(0, temp.indexOf("/MeterReading"));
 			}
 			
-			// build the full path
-			temp = temp + "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId() + "/MeterReading/" + meterReading.getId();
+			// build the full path (with consideration that if we have a floating resource, we don't have full XPath information
+			//
+			if (retailCustomer != null) {
+				temp = temp + "/RetailCustomer/" + retailCustomer.getId();
+				if (usagePoint != null) {
+					temp = temp + "/UsagePoint/" + usagePoint.getId();
+				}
+			}
+			temp = temp + "/MeterReading/" + meterReading.getId();
 
 			result.add(temp + "/IntervalBlock");
 			
-            // for ReadingType, make it ROOT access			
-			result.add(temp.substring(0, temp.indexOf("/RetailCustomer")) + "/ReadingType/" + readingType.getId());
+            // for ReadingType, make it ROOT access	
+			if (readingType != null) {
+			     result.add(temp.substring(0, temp.indexOf("/resource") + "/resource".length()) + "/ReadingType/" + readingType.getId());
 			}
+		}
 		
 		if (this.getUsagePoint() != null) {
 			// get the objects
@@ -662,15 +692,21 @@ public class ContentType {
 				// ROOT form
 				temp = temp.substring(0, temp.indexOf("/UsagePoint"));
 			}
-			// build the full path
-			temp = temp + "/RetailCustomer/" + retailCustomer.getId() + "/UsagePoint/" + usagePoint.getId();
+			// build the full path (with consideration that if we have a floating resource, we don't have full XPath information
+			//
+			if (retailCustomer != null) {
+				temp = temp + "/RetailCustomer/" + retailCustomer.getId();
+			}
+			temp = temp + "/UsagePoint/" + usagePoint.getId();
 
 			result.add(temp + "/MeterReading");
 			if (!(qualityList.isEmpty())) result.add(temp + "/ElectricPowerQualitySummary");
 			if (!(usageList.isEmpty())) result.add(temp + "/ElectricPowerUsageSummary");
 			// for LocalTimeParameters - make it a ROOT access
 			//
-			result.add(temp.substring(0, temp.indexOf("/RetailCustomer")) + "/LocalTimeParameters/" + timeConfiguration.getId());
+			if (timeConfiguration != null) {
+			   result.add(temp.substring(0, temp.indexOf("/resource") + "/resource".length()) + "/LocalTimeParameters/" + timeConfiguration.getId());
+			}
 		}
 
       return result;

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013, 2014 EnergyOS.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package org.energyos.espi.common.service.impl;
 
 import org.energyos.espi.common.models.atom.EntryType;
@@ -17,6 +33,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -30,19 +47,43 @@ public class ImportServiceImpl implements ImportService {
     @Autowired
     @Qualifier("atomMarshaller")
     private Jaxb2Marshaller marshaller;
+    
     @Autowired
     private ResourceLinker resourceLinker;
+    
     @Autowired
     private ResourceService resourceService;
     
+    // this is a list of the UsagePointIds referenced during
+    // this import
     private List<EntryType> entries;
     
-    @Override
+    // Min Updated <== used on time scoping the subscriptions
+    //
+    private XMLGregorianCalendar minUpdated = null;
     
-    public List<EntryType> getEntries() {
-    	return entries;
+    // Max Updated <== used on time scoping the subscriptions
+    //
+    private XMLGregorianCalendar maxUpdated = null;
+    
+    @Override
+    public List <EntryType> getEntries() {
+    	List<EntryType> result = entries;
+    	entries = null;
+    	return result;
     }
 
+    @Override
+    public XMLGregorianCalendar getMinUpdated() {
+    	return this.minUpdated;
+    }
+    
+    @Override
+    public XMLGregorianCalendar getMaxUpdated() {
+    	return this.maxUpdated;
+    }
+    
+    @Transactional
     @Override
     public void importData(InputStream stream) throws IOException, SAXException, ParserConfigurationException {
         
@@ -60,5 +101,10 @@ public class ImportServiceImpl implements ImportService {
         
         entries = atomContentHandler.getEntries();
         
+        minUpdated = atomContentHandler.getMinUpdated();
+        
+        maxUpdated = atomContentHandler.getMaxUpdated();
+       
+
     }
 }
