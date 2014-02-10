@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013, 2014 EnergyOS.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package org.energyos.espi.common.utils;
 
 import java.util.ArrayList;
@@ -9,8 +25,11 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.UnmarshallerHandler;
+import javax.xml.datatype.DatatypeConstants;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.energyos.espi.common.models.atom.EntryType;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
@@ -26,6 +45,8 @@ public class ATOMContentHandler extends XMLFilterImpl {
     private NamespaceSupport namespaces = new NamespaceSupport();
     private EntryProcessor procssor;
     private List <EntryType> entries = new ArrayList<EntryType>();
+    private XMLGregorianCalendar minUpdated = null;
+    private XMLGregorianCalendar maxUpdated = null;
 
     public ATOMContentHandler(JAXBContext context, EntryProcessor procssor) {
         this.context = context;
@@ -36,6 +57,14 @@ public class ATOMContentHandler extends XMLFilterImpl {
     	return entries;
     }
     
+    public XMLGregorianCalendar getMinUpdated() {
+    	return minUpdated;
+    }
+    
+    public XMLGregorianCalendar getMaxUpdated() {
+    	return maxUpdated;
+    }
+     
     public void startElement(String namespaceURI, String localName, String qName, Attributes atts)
             throws SAXException {
 
@@ -58,10 +87,11 @@ public class ATOMContentHandler extends XMLFilterImpl {
 
             unmarshallerHandler.startDocument();
             unmarshallerHandler.setDocumentLocator(locator);
-
-            Enumeration e = namespaces.getPrefixes();
+        
+            @SuppressWarnings("unchecked")
+			Enumeration<String> e = namespaces.getPrefixes();
             while (e.hasMoreElements()) {
-                String prefix = (String) e.nextElement();
+                String prefix = e.nextElement();
                 String uri = namespaces.getURI(prefix);
 
                 unmarshallerHandler.startPrefixMapping(prefix, uri);
@@ -76,15 +106,16 @@ public class ATOMContentHandler extends XMLFilterImpl {
         }
     }
 
-    public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
+	@SuppressWarnings("unchecked")
+	public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
         super.endElement(namespaceURI, localName, qName);
 
         if (depth != 0) {
             depth--;
             if (depth == 0) {
-                Enumeration e = namespaces.getPrefixes();
+                Enumeration<String> e = namespaces.getPrefixes();
                 while (e.hasMoreElements()) {
-                    String prefix = (String) e.nextElement();
+                    String prefix = e.nextElement();
                     unmarshallerHandler.endPrefixMapping(prefix);
                 }
                 String defaultURI = namespaces.getURI("");
@@ -102,7 +133,19 @@ public class ATOMContentHandler extends XMLFilterImpl {
                         throw new SAXException("Unbale to unmarshall <entry>", x);
                     }
                     procssor.process(result.getValue());
-                    entries.add(result.getValue());
+                    // stash the UsagePoints for later processing of retailCustomer Binding
+                    // and subscription notification
+                    //
+                    if (result.getValue().getContent().getUsagePoint() != null) {
+                         entries.add(result.getValue());
+                    }
+                    // and update the min/max import range for later subscription publication
+                    if ((minUpdated == null) || (result.getValue().getPublished().getValue().compare(minUpdated) == DatatypeConstants.LESSER)) {
+                    	minUpdated = result.getValue().getPublished().getValue();
+                    }
+                    if ((maxUpdated == null) || (result.getValue().getUpdated().getValue().compare(maxUpdated) == DatatypeConstants.GREATER)) {
+                    	maxUpdated = result.getValue().getUpdated().getValue();
+                    }
                 }
 
                 unmarshallerHandler = null;
