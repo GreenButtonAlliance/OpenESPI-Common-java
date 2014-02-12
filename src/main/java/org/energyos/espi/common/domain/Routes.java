@@ -118,10 +118,8 @@ public class Routes {
     // patterns for RESTful RetailCustomer services
     public static final String RETAIL_CUSTOMER_COLLECTION = "/espi/1_1/resource/RetailCustomer";
     public static final String RETAIL_CUSTOMER_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}";
-    public static final String RETAIL_CUSTOMER_MEMBER_DOWNLOAD_MY_DATA = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/DownloadMyData";
-    public static final String RETAIL_CUSTOMER_MEMBER_UPLOAD_MY_DATA = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UploadMyData";
-    
-    // paterns for RESTful Batch services
+  
+    // patterns for RESTful Batch services
     public static final String BATCH_DOWNLOAD_MY_DATA_COLLECTION = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}/UsagePoint";
     public static final String BATCH_DOWNLOAD_MY_DATA_MEMBER = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}";
     public static final String BATCH_UPLOAD_MY_DATA = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}";

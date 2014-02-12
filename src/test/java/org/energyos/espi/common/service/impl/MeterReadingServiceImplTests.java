@@ -17,14 +17,14 @@
 package org.energyos.espi.common.service.impl;
 
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.repositories.MeterReadingRepository;
 import org.energyos.espi.common.service.MeterReadingService;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class MeterReadingServiceImplTests {
 

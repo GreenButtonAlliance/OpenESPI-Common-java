@@ -16,18 +16,20 @@
 
 package org.energyos.espi.common.utils;
 
-import com.sun.syndication.io.FeedException;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.io.StringWriter;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Component;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.InputStream;
-import java.io.StringReader;
-import java.io.StringWriter;
+import com.sun.syndication.io.FeedException;
 
 @Component
 public class XMLMarshaller {

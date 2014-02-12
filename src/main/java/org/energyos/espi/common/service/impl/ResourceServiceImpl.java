@@ -16,6 +16,10 @@
 
 package org.energyos.espi.common.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -26,10 +30,6 @@ import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {
@@ -57,6 +57,7 @@ public class ResourceServiceImpl implements ResourceService {
             // transactional semantics as null (though that needs proven) in tests for 
             // ApplicationInformation and IntervalBlock
         } catch (Exception e) {
+        	System.out.printf("****Exception 001: %s\n", e.toString());
             return new ArrayList<>();
         }
     }
@@ -74,7 +75,7 @@ public class ResourceServiceImpl implements ResourceService {
     // the following is used to query for the existence of the object in the DB within 
     // a closed transactional space. Callers will need a Catch on the NoResultExecption for failure.
 	@Override
-    @Transactional( readOnly = true)  
+    @Transactional ( readOnly = true)  
 	public <T extends IdentifiedObject> T testById(Long id, Class<T> clazz) {
 		return repository.findById(id, clazz);
 	}
@@ -185,5 +186,11 @@ public class ResourceServiceImpl implements ResourceService {
 	public <T extends IdentifiedObject> T findByResourceUri(String uri,
 			Class<T> clazz) {
 		return repository.findByResourceUri(uri, clazz);
+	}
+
+	@Override
+	public void flush() {
+		repository.flush();
+		
 	}
 }

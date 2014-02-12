@@ -16,10 +16,11 @@
 
 package org.energyos.espi.common.test;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 public class WebDriverSingleton {
     private WebDriverSingleton() { }

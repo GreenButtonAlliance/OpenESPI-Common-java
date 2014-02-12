@@ -16,22 +16,29 @@
 
 package org.energyos.espi.common.utils.factories;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import static junit.framework.Assert.assertNull;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.energyos.espi.common.domain.ServiceCategory;
 import org.energyos.espi.common.domain.UsagePoint;
-import org.energyos.espi.common.models.atom.*;
+import org.energyos.espi.common.models.atom.ContentType;
+import org.energyos.espi.common.models.atom.DateTimeType;
+import org.energyos.espi.common.models.atom.EntryType;
+import org.energyos.espi.common.models.atom.FeedType;
+import org.energyos.espi.common.models.atom.LinkType;
 import org.energyos.espi.common.test.EspiFactory;
 import org.energyos.espi.common.utils.UsagePointBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import static junit.framework.Assert.assertNull;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 
 public class UsagePointBuilderTests {
 

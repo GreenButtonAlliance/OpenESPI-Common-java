@@ -16,8 +16,11 @@
 
 package org.energyos.espi.common.service.impl;
 
-import org.energyos.espi.common.domain.IntervalBlock;
-import org.energyos.espi.common.domain.MeterReading;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -30,13 +33,6 @@ import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class TimeConfigurationServiceImpl implements TimeConfigurationService {
@@ -131,6 +127,7 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
+        	System.out.printf("****Exception 014: %s\n", e.toString());
 			result = null;
 		}
 		return result;
@@ -147,6 +144,7 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
+        	System.out.printf("****Exception 015: %s\n", e.toString());
 			result = null;
 		}
 		return result;
@@ -167,12 +165,12 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 	public TimeConfiguration importResource(InputStream stream) {
 		TimeConfiguration timeConfiguration = null;
 		try {
-			importService.importData(stream);
+			importService.importData(stream, null);
 			EntryType entry = importService.getEntries().get(0);
 			timeConfiguration = entry.getContent().getLocalTimeParameters();
 
 		} catch (Exception e) {
-           
+        	System.out.printf("****Exception 016: %s\n", e.toString());
 		}
 		return timeConfiguration;
 	}

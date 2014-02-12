@@ -1,20 +1,26 @@
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.test.EspiFactory;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.junit.Test;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import static org.energyos.espi.common.support.TestUtils.assertAnnotationPresent;
+import static org.energyos.espi.common.support.TestUtils.assertSizeValidation;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import java.util.Set;
 
-import static org.energyos.espi.common.support.TestUtils.assertAnnotationPresent;
-import static org.energyos.espi.common.support.TestUtils.assertSizeValidation;
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import org.energyos.espi.common.test.EspiFactory;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.junit.Test;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class ApplicationInformationTests {
     

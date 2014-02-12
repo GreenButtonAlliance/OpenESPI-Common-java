@@ -1,23 +1,23 @@
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.ApplicationInformation;
-import org.energyos.espi.common.domain.MeterReading;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 @Repository
-@Transactional
+@Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class SubscriptionRepositoryImpl implements SubscriptionRepository {
 
     @PersistenceContext
@@ -29,7 +29,9 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
       }
 
     @Override
-    @Transactional
+    @Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void persist(Subscription subscription) {
         if (subscription.getHashedId() == null) subscription.setHashedId(UUID.randomUUID().toString());
         em.persist(subscription);
@@ -67,7 +69,9 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
 	}
 
 	@Override
-	@Transactional
+	@Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 	public void deleteById(Long id) {
 	    Subscription subscription = findById(id);
 	    List<UsagePoint> ups = subscription.getUsagePoints();
@@ -78,6 +82,12 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
 	    	em.persist(em.contains(up)? up : em.merge(up));
 	    }	    
 	    em.remove(em.contains(subscription) ? subscription : em.merge(subscription));	
+	}
+
+	@Override
+	public Subscription findByAuthorizationId(Long id) {
+        return (Subscription)em.createNamedQuery(Subscription.QUERY_FIND_BY_AUTHORIZATION_ID)
+                .setParameter("id", id).getSingleResult();
 	}
 
 }

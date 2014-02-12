@@ -1,5 +1,15 @@
 package org.energyos.espi.common.domain;
 
+import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
+import static org.energyos.espi.common.test.Asserts.assertXpathValue;
+import static org.energyos.espi.common.test.EspiFactory.newIntervalBlockWithUsagePoint;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.energyos.espi.common.atom.XMLTest;
 import org.energyos.espi.common.models.atom.adapters.IntervalBlockAdapter;
@@ -8,15 +18,6 @@ import org.energyos.espi.common.utils.EspiMarshaller;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlTransient;
-import java.io.IOException;
-
-import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
-import static org.energyos.espi.common.test.Asserts.assertXpathValue;
-import static org.energyos.espi.common.test.EspiFactory.newIntervalBlockWithUsagePoint;
-import static org.junit.Assert.assertEquals;
 
 public class IntervalBlockTests extends XMLTest {
     static final String XML_INPUT =

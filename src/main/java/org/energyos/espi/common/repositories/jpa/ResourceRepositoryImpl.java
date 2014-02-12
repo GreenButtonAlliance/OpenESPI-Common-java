@@ -16,20 +16,21 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Repository
 class ResourceRepositoryImpl implements ResourceRepository {
@@ -41,6 +42,12 @@ class ResourceRepositoryImpl implements ResourceRepository {
         em.persist(resource);
     }
     
+
+	@Override
+	public void flush() {
+		em.flush();	
+	}
+
 
     @SuppressWarnings("unchecked")
 	@Override
@@ -65,6 +72,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
             return (T) em.createNamedQuery(queryFindById).setParameter("uuid", uuid.toString().toUpperCase()).getSingleResult();
         } catch (IllegalAccessException | NoSuchFieldException e) {
+        	System.out.printf("****Exception 002: %s\n", e.toString());
             throw new RuntimeException(e);
         }
 
@@ -78,6 +86,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
             return (T) em.createNamedQuery(queryFindById).setParameter("id", id).getSingleResult();
         } catch (NoSuchFieldException | IllegalAccessException e) {
+        	System.out.printf("****Exception 003: %s\n", e.toString());
             throw new RuntimeException(e);
         }
 
@@ -236,7 +245,9 @@ class ResourceRepositoryImpl implements ResourceRepository {
         }
 	}
 
-    @Transactional
+    @Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void update(UsagePoint updatedUsagePoint) {
         UsagePoint originalUsagePoint = findByUUID(updatedUsagePoint.getUUID());
         originalUsagePoint.setDescription(updatedUsagePoint.getDescription());
@@ -261,6 +272,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
             throw new RuntimeException(e);
         }
 	}
+
 
 
 }

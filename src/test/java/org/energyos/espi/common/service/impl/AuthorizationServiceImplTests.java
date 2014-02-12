@@ -17,6 +17,11 @@
 package org.energyos.espi.common.service.impl;
 
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+
 import org.energyos.espi.common.BaseTest;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.Routes;
@@ -24,14 +29,9 @@ import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.repositories.AuthorizationRepository;
 import org.energyos.espi.common.test.EspiFactory;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.mockito.Mock;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
 
 public class AuthorizationServiceImplTests extends BaseTest {
 

@@ -16,10 +16,10 @@
 
 package org.energyos.espi.common.domain;
 
+import javax.persistence.Id;
+
 import org.energyos.espi.common.support.TestUtils;
 import org.junit.Test;
-
-import javax.persistence.Id;
 
 public class ServiceCategoryPersistenceTests {
 

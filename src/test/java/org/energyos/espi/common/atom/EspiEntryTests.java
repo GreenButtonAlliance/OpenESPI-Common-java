@@ -17,9 +17,13 @@
 package org.energyos.espi.common.atom;
 
 
-import com.sun.syndication.feed.atom.Content;
-import com.sun.syndication.feed.atom.Link;
-import com.sun.syndication.io.FeedException;
+import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
+
 import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -27,10 +31,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import java.io.IOException;
-
-import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
-import static org.junit.Assert.*;
+import com.sun.syndication.feed.atom.Content;
+import com.sun.syndication.feed.atom.Link;
+import com.sun.syndication.io.FeedException;
 
 public class EspiEntryTests extends XMLTest {
 

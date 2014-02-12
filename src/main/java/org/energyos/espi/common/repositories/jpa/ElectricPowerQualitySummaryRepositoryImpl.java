@@ -16,24 +16,25 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.UUID;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.ElectricPowerQualitySummaryRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.UUID;
-
 @Repository
-@Transactional
+@Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQualitySummaryRepository {
 
     @PersistenceContext
@@ -45,7 +46,9 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQ
     }
 
     @Override
-    @Transactional
+    @Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void persist(ElectricPowerQualitySummary electricPowerQualitySummary) {
         em.persist(electricPowerQualitySummary);
     }
@@ -64,7 +67,9 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQ
 	}
 
 	@Override
-	@Transactional
+	@Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 	public void deleteById(Long id) {
 		ElectricPowerQualitySummary qs = findById(id);
 		UsagePoint up = qs.getUsagePoint();
@@ -74,7 +79,9 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQ
 	}
 
 	@Override
-        @Transactional
+        @Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 	public void createOrReplaceByUUID(
 			ElectricPowerQualitySummary electricPowerQualitySummary) {
         try {

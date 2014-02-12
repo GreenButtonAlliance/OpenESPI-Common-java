@@ -16,6 +16,18 @@
 
 package org.energyos.espi.common.utils;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.UnmarshallerHandler;
+import javax.xml.datatype.DatatypeConstants;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.energyos.espi.common.models.atom.EntryType;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
@@ -23,14 +35,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.NamespaceSupport;
 import org.xml.sax.helpers.XMLFilterImpl;
-
-import javax.xml.bind.*;
-import javax.xml.datatype.DatatypeConstants;
-import javax.xml.datatype.XMLGregorianCalendar;
-
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
 
 public class ATOMContentHandler extends XMLFilterImpl {
     private final JAXBContext context;
@@ -74,6 +78,7 @@ public class ATOMContentHandler extends XMLFilterImpl {
             try {
                 unmarshaller = context.createUnmarshaller();
             } catch (JAXBException e) {
+            	System.out.printf("****Exception 000: %s\n", e.toString());
                 throw new SAXException(e);
             }
             unmarshallerHandler = unmarshaller.getUnmarshallerHandler();
@@ -125,6 +130,7 @@ public class ATOMContentHandler extends XMLFilterImpl {
                     try {
                         result = (JAXBElement<EntryType>) unmarshallerHandler.getResult();
                     } catch (JAXBException x) {
+                    	System.out.printf("****Exception 0001: %s\n", e.toString());
                         throw new SAXException("Unbale to unmarshall <entry>", x);
                     }
                     procssor.process(result.getValue());

@@ -1,5 +1,7 @@
 package org.energyos.espi.common.test;
 
+import java.io.IOException;
+
 import org.custommonkey.xmlunit.XMLUnit;
 import org.custommonkey.xmlunit.XpathEngine;
 import org.custommonkey.xmlunit.exceptions.XpathException;
@@ -7,8 +9,6 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-
-import java.io.IOException;
 
 public class Asserts {
     public static void assertXpathValue(String expectedValue, String xpathExpression, String inXMLString) throws SAXException, IOException, XpathException {

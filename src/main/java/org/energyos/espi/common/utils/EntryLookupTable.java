@@ -1,12 +1,12 @@
 package org.energyos.espi.common.utils;
 
-import org.energyos.espi.common.models.atom.EntryType;
-import org.energyos.espi.common.models.atom.LinkType;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.energyos.espi.common.models.atom.EntryType;
+import org.energyos.espi.common.models.atom.LinkType;
 
 class EntryLookupTable {
     private Map<String, EntryType> entryMap;

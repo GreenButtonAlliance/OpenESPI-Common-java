@@ -16,21 +16,23 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import java.util.List;
+import java.util.UUID;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.IntervalBlockRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import java.util.List;
-import java.util.UUID;
-
 @Repository
-@Transactional
+@Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 
     @PersistenceContext
@@ -49,7 +51,9 @@ public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 	}
 
 	@Override
-        @Transactional
+        @Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 	public void persist(IntervalBlock intervalBlock) {
         em.persist(intervalBlock);
 		
@@ -72,7 +76,9 @@ public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 	}
 
 	@Override
-	@Transactional
+	@Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 	public void deleteById(Long id) {
 		IntervalBlock ib = findById(id);
 		MeterReading mr = ib.getMeterReading();

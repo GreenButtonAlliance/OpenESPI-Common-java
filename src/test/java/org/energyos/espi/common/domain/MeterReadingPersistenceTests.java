@@ -1,10 +1,15 @@
 package org.energyos.espi.common.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import org.energyos.espi.common.support.TestUtils;
 import org.hibernate.annotations.LazyCollection;
 import org.junit.Test;
-
-import javax.persistence.*;
 
 public class MeterReadingPersistenceTests {
     @Test

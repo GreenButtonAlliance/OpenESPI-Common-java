@@ -25,7 +25,6 @@ import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.IntervalBlock;
-import org.energyos.espi.common.domain.IntervalReading;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.domain.TimeConfiguration;
@@ -118,6 +117,7 @@ public class EntryProcessor {
                 link(existingResource);
                 
             } catch (EmptyResultDataAccessException x) {
+            	System.out.printf("****Exception 007: %s\n", x.toString());
                 link(resource);
             }
         }

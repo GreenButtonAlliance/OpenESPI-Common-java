@@ -1,11 +1,11 @@
 package org.energyos.espi.common.utils;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import java.util.Map;
 
 import org.energyos.espi.common.models.atom.DateTimeType;
 import org.energyos.espi.common.models.atom.EntryType;
 
-import java.util.Map;
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 
 @SuppressWarnings("restriction")
 public class ExportFilter {

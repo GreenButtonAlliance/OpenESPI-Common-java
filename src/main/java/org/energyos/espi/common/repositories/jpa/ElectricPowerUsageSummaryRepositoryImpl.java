@@ -16,25 +16,25 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.UUID;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.repositories.ElectricPowerUsageSummaryRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.UUID;
-
 @Repository
-@Transactional
+@Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class ElectricPowerUsageSummaryRepositoryImpl implements ElectricPowerUsageSummaryRepository {
 
     @PersistenceContext
@@ -46,7 +46,9 @@ public class ElectricPowerUsageSummaryRepositoryImpl implements ElectricPowerUsa
     }
 
     @Override
-    @Transactional
+    @Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void persist(ElectricPowerUsageSummary electricPowerUsageSummary) {
         em.persist(electricPowerUsageSummary);
     }
@@ -68,7 +70,9 @@ public class ElectricPowerUsageSummaryRepositoryImpl implements ElectricPowerUsa
 	}
 
 	@Override
-	@Transactional
+	@Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 	public void deleteById(Long id) {
 		ElectricPowerUsageSummary us = findById(id);
 		UsagePoint up = us.getUsagePoint();

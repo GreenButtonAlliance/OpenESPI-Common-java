@@ -16,10 +16,10 @@
 
 package org.energyos.espi.common.repositories;
 
-import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
-
 import java.util.List;
 import java.util.UUID;
+
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 
 public interface ElectricPowerUsageSummaryRepository {
     ElectricPowerUsageSummary findById(Long electricPowerUsageSummaryId);

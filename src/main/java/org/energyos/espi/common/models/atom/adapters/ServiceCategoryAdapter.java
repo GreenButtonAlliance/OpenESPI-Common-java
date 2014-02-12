@@ -16,10 +16,10 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
-import org.energyos.espi.common.domain.ServiceCategory;
-
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import org.energyos.espi.common.domain.ServiceCategory;
 
 public class ServiceCategoryAdapter extends XmlAdapter<JAXBElement<ServiceCategory>, ServiceCategory> {
     @Override

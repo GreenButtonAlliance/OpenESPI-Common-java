@@ -1,14 +1,15 @@
 package org.energyos.espi.common.atom;
 
-import com.sun.syndication.feed.atom.Content;
-import com.sun.syndication.io.FeedException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.utils.EspiMarshaller;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.sun.syndication.feed.atom.Content;
+import com.sun.syndication.io.FeedException;
 
 public class IntervalBlocksEntry extends EspiEntry<IntervalBlock> {
 

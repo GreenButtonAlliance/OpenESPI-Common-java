@@ -1,11 +1,23 @@
 package org.energyos.espi.common.test;
 
-import org.energyos.espi.common.domain.*;
-import org.energyos.espi.common.service.*;
+import java.util.Calendar;
+
+import org.energyos.espi.common.domain.ApplicationInformation;
+import org.energyos.espi.common.domain.Authorization;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.service.ApplicationInformationService;
+import org.energyos.espi.common.service.AuthorizationService;
+import org.energyos.espi.common.service.MeterReadingService;
+import org.energyos.espi.common.service.ResourceService;
+import org.energyos.espi.common.service.RetailCustomerService;
+import org.energyos.espi.common.service.SubscriptionService;
+import org.energyos.espi.common.service.UsagePointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Calendar;
 
 @Component
 public class EspiPersistenceFactory {

@@ -16,9 +16,12 @@
 
 package org.energyos.espi.common.utils;
 
-import com.sun.syndication.feed.atom.Feed;
-import com.sun.syndication.io.FeedException;
-import com.sun.syndication.io.WireFeedOutput;
+import java.io.InputStream;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.transform.stream.StreamSource;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.energyos.espi.common.models.atom.FeedType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +29,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Component;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.transform.stream.StreamSource;
-import java.io.InputStream;
+import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.io.FeedException;
+import com.sun.syndication.io.WireFeedOutput;
 
 @Component
 public class ATOMMarshaller {

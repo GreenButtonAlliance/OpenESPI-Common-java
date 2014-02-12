@@ -1,8 +1,8 @@
 package org.energyos.espi.common.service.impl;
 
-import org.energyos.espi.common.service.StateService;
-
 import java.util.UUID;
+
+import org.energyos.espi.common.service.StateService;
 
 public class StateServiceImpl implements StateService {
 

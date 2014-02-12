@@ -1,9 +1,9 @@
 package org.energyos.espi.common.domain;
 
+import javax.persistence.Embeddable;
+
 import org.energyos.espi.common.support.TestUtils;
 import org.junit.Test;
-
-import javax.persistence.Embeddable;
 
 public class SummaryMeasurementPersistenceTests {
     @Test

@@ -1,9 +1,26 @@
 package org.energyos.espi.common.utils;
 
-import com.sun.syndication.io.FeedException;
+import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
+import static org.energyos.espi.common.utils.factories.FeedFactory.newFeed;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import javax.xml.bind.JAXBException;
+
 import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.energyos.espi.common.atom.XMLTest;
-import org.energyos.espi.common.domain.*;
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.ContentType;
 import org.energyos.espi.common.models.atom.FeedType;
 import org.junit.Test;
@@ -14,16 +31,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBException;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-
-import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
-import static org.energyos.espi.common.utils.factories.FeedFactory.newFeed;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import com.sun.syndication.io.FeedException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

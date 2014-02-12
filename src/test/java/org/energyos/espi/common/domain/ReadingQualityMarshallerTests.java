@@ -16,7 +16,13 @@
 
 package org.energyos.espi.common.domain;
 
-import com.sun.syndication.io.FeedException;
+import static org.energyos.espi.common.test.Asserts.assertXpathValue;
+import static org.energyos.espi.common.test.EspiFactory.newIntervalReading;
+
+import java.io.IOException;
+
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.energyos.espi.common.atom.XMLTest;
 import org.energyos.espi.common.support.TestUtils;
@@ -24,11 +30,7 @@ import org.energyos.espi.common.utils.EspiMarshaller;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.annotation.XmlTransient;
-import java.io.IOException;
-
-import static org.energyos.espi.common.test.Asserts.assertXpathValue;
-import static org.energyos.espi.common.test.EspiFactory.newIntervalReading;
+import com.sun.syndication.io.FeedException;
 
 public class ReadingQualityMarshallerTests extends XMLTest {
     @Test

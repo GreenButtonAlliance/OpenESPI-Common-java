@@ -24,32 +24,31 @@
 
 package org.energyos.espi.common.models.atom;
 
-import org.energyos.espi.common.domain.ApplicationInformation;
-import org.energyos.espi.common.domain.Authorization;
-import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
-import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
-import org.energyos.espi.common.domain.IntervalBlock;
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.ReadingType;
-import org.energyos.espi.common.domain.RetailCustomer;
-import org.energyos.espi.common.domain.Subscription;
-import org.energyos.espi.common.domain.TimeConfiguration;
-import org.energyos.espi.common.domain.UsagePoint;
-import org.energyos.espi.common.models.atom.adapters.ContentAdapter;
-import org.energyos.espi.common.models.atom.adapters.LinkAdapter;
-import org.energyos.espi.common.models.atom.adapters.PublishedAdapter;
-import org.energyos.espi.common.models.atom.adapters.UpdatedAdapter;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import javax.xml.namespace.QName;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyAttribute;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.namespace.QName;
+
+import org.energyos.espi.common.models.atom.adapters.ContentAdapter;
+import org.energyos.espi.common.models.atom.adapters.LinkAdapter;
+import org.energyos.espi.common.models.atom.adapters.PublishedAdapter;
+import org.energyos.espi.common.models.atom.adapters.UpdatedAdapter;
 
 
 /**

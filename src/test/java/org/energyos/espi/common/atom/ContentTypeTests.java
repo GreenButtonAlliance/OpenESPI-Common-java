@@ -1,16 +1,32 @@
 package org.energyos.espi.common.atom;
 
-import com.google.common.collect.Lists;
-import org.energyos.espi.common.domain.*;
+import static org.energyos.espi.common.test.EspiFactory.newElectricPowerQualitySummary;
+import static org.energyos.espi.common.test.EspiFactory.newElectricPowerUsageSummary;
+import static org.energyos.espi.common.test.EspiFactory.newIntervalBlock;
+import static org.energyos.espi.common.test.EspiFactory.newLocalTimeParameters;
+import static org.energyos.espi.common.test.EspiFactory.newMeterReading;
+import static org.energyos.espi.common.test.EspiFactory.newReadingType;
+import static org.energyos.espi.common.test.EspiFactory.newSimpleUsagePoint;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+
+import java.util.List;
+
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.IntervalBlock;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.ContentType;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
-import static org.energyos.espi.common.test.EspiFactory.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import com.google.common.collect.Lists;
 
 public class ContentTypeTests {
 

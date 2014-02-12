@@ -1,5 +1,7 @@
 package org.energyos.espi.common.service.impl;
 
+import java.util.List;
+
 import org.energyos.espi.common.domain.BatchList;
 import org.energyos.espi.common.repositories.BatchListRepository;
 import org.energyos.espi.common.service.BatchListService;
@@ -7,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class BatchListServiceImpl implements BatchListService {
 
     @Autowired

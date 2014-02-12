@@ -17,7 +17,11 @@
 package org.energyos.espi.common.atom;
 
 
-import com.sun.syndication.io.FeedException;
+import static org.energyos.espi.common.test.EspiFactory.newMeterReadingWithUsagePoint;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+
 import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.support.TestUtils;
@@ -26,10 +30,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import java.io.IOException;
-
-import static org.energyos.espi.common.test.EspiFactory.newMeterReadingWithUsagePoint;
-import static org.junit.Assert.assertEquals;
+import com.sun.syndication.io.FeedException;
 
 public class MeterReadingEntryTests extends XMLTest {
 

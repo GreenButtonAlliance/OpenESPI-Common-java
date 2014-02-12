@@ -16,15 +16,16 @@
 
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.utils.EspiMarshaller;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import javax.xml.bind.JAXBException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import javax.xml.bind.JAXBException;
+
+import org.energyos.espi.common.utils.EspiMarshaller;
+import org.junit.Test;
 
 public class TimeConfigurationMarshallingTests {
 

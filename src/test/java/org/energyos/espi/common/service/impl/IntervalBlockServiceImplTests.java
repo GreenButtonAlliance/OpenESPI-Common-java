@@ -17,12 +17,12 @@
 package org.energyos.espi.common.service.impl;
 
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import org.energyos.espi.common.repositories.IntervalBlockRepository;
 import org.energyos.espi.common.service.IntervalBlockService;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class IntervalBlockServiceImplTests {
 

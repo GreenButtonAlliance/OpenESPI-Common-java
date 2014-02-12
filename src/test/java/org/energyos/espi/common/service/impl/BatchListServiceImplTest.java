@@ -1,14 +1,14 @@
 package org.energyos.espi.common.service.impl;
 
+import static org.energyos.espi.common.test.EspiFactory.newBatchList;
+import static org.mockito.Mockito.verify;
+
 import org.energyos.espi.common.domain.BatchList;
 import org.energyos.espi.common.repositories.BatchListRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import static org.energyos.espi.common.test.EspiFactory.newBatchList;
-import static org.mockito.Mockito.verify;
 
 public class BatchListServiceImplTest {
 

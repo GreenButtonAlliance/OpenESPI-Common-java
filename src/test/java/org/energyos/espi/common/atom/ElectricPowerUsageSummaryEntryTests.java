@@ -16,15 +16,16 @@
 
 package org.energyos.espi.common.atom;
 
-import com.sun.syndication.io.FeedException;
+import static org.energyos.espi.common.test.EspiFactory.newElectricPowerUsageSummaryWithUsagePoint;
+import static org.junit.Assert.assertEquals;
+
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBException;
-
-import static org.energyos.espi.common.test.EspiFactory.newElectricPowerUsageSummaryWithUsagePoint;
-import static org.junit.Assert.assertEquals;
+import com.sun.syndication.io.FeedException;
 
 public class ElectricPowerUsageSummaryEntryTests {
 

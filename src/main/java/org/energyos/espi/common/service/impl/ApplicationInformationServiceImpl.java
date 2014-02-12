@@ -16,30 +16,27 @@
 
 package org.energyos.espi.common.service.impl;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.ApplicationInformation;
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
 import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
-import org.energyos.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 @Service
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class ApplicationInformationServiceImpl implements ApplicationInformationService {
 
     // the cached operational object for this service
@@ -194,7 +191,7 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 
 		ApplicationInformation applicationInformation = null;
 		try {
-			importService.importData(stream);
+			importService.importData(stream, null);
 			applicationInformation = importService.getEntries().get(0).getContent().getApplicationInformation();
 		} catch (Exception e) {
 

@@ -17,6 +17,10 @@
 package org.energyos.espi.common.utils;
 
 
+import static org.energyos.espi.common.utils.factories.ATOMFactory.newFeedType;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.FeedType;
 import org.junit.Before;
@@ -25,10 +29,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import static org.energyos.espi.common.utils.factories.ATOMFactory.newFeedType;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

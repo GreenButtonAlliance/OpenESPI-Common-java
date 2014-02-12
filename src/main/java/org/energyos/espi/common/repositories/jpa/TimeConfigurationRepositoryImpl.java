@@ -16,18 +16,21 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import java.util.UUID;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.TimeConfigurationRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import java.util.UUID;
-
 @Repository
-@Transactional
+@Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 
 public class TimeConfigurationRepositoryImpl implements TimeConfigurationRepository {
 
@@ -62,7 +65,9 @@ public class TimeConfigurationRepositoryImpl implements TimeConfigurationReposit
     }
 	
     @Override
-    @Transactional
+    @Transactional (rollbackFor= {JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void persist(TimeConfiguration timeConfiguration) {
         em.persist(timeConfiguration);
     }
