@@ -32,7 +32,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {JAXBException.class}, 
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQualitySummaryRepository {
@@ -46,7 +46,7 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQ
     }
 
     @Override
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     public void persist(ElectricPowerQualitySummary electricPowerQualitySummary) {
@@ -67,7 +67,7 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQ
 	}
 
 	@Override
-	@Transactional (rollbackFor= {JAXBException.class}, 
+	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 	public void deleteById(Long id) {
@@ -79,7 +79,7 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQ
 	}
 
 	@Override
-        @Transactional (rollbackFor= {JAXBException.class}, 
+        @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 	public void createOrReplaceByUUID(

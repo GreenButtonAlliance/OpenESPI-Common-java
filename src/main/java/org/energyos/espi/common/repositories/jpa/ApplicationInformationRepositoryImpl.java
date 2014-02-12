@@ -29,7 +29,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {JAXBException.class}, 
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class ApplicationInformationRepositoryImpl implements ApplicationInformationRepository {
@@ -52,7 +52,7 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
     }
 
     @Override
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     public void persist(ApplicationInformation applicationInformation) {
@@ -86,7 +86,7 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
 	}
 
 	@Override
-	@Transactional (rollbackFor= {JAXBException.class}, 
+	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 	public void deleteById(Long id) {

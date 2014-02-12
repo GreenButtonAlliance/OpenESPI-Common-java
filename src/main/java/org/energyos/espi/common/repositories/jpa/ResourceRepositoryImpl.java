@@ -245,7 +245,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
         }
 	}
 
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     public void update(UsagePoint updatedUsagePoint) {

@@ -32,7 +32,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {JAXBException.class}, 
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
@@ -46,7 +46,7 @@ public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
     }
 
     @Override
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     public void persist(ReadingType readingType) {
@@ -84,7 +84,7 @@ public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
 	}
 
 	@Override
-	@Transactional (rollbackFor= {JAXBException.class}, 
+	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 	public void deleteById(Long id) {

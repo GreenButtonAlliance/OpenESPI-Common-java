@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {JAXBException.class}, 
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class AuthorizationRepositoryImpl implements AuthorizationRepository {
@@ -22,7 +22,7 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     protected EntityManager em;
 
     @Override
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     public void persist(Authorization authorization) {
@@ -50,7 +50,7 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     }
 
     @Override
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     public void merge(Authorization authorization) {
@@ -83,7 +83,7 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     }
 
 	@Override
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 	public void deleteById(Long id) {

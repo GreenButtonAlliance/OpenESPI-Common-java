@@ -35,7 +35,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {JAXBException.class}, 
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class UsagePointRepositoryImpl implements UsagePointRepository {
@@ -62,7 +62,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 .getSingleResult();
     }
 
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     @Override
@@ -71,7 +71,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
     }
 
     @Override
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     public void associateByUUID(RetailCustomer retailCustomer, UUID uuid) {
@@ -88,7 +88,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
         }
     }
 
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     @Override
@@ -138,7 +138,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 .getResultList();
     }
 
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     @Override

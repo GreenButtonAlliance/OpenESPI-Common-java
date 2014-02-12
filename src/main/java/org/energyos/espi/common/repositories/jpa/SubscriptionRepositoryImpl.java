@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {JAXBException.class}, 
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class SubscriptionRepositoryImpl implements SubscriptionRepository {
@@ -29,7 +29,7 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
       }
 
     @Override
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     public void persist(Subscription subscription) {
@@ -69,7 +69,7 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
 	}
 
 	@Override
-	@Transactional (rollbackFor= {JAXBException.class}, 
+	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 	public void deleteById(Long id) {

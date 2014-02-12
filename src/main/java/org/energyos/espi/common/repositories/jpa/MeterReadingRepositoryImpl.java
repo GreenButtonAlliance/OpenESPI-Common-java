@@ -32,7 +32,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {JAXBException.class}, 
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class MeterReadingRepositoryImpl implements MeterReadingRepository {
@@ -46,7 +46,7 @@ public class MeterReadingRepositoryImpl implements MeterReadingRepository {
     }
 
     @Override
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
     public void persist(MeterReading meterReading) {
@@ -70,7 +70,7 @@ public class MeterReadingRepositoryImpl implements MeterReadingRepository {
         }
 
 	@Override
-	@Transactional (rollbackFor= {JAXBException.class}, 
+	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 	public void deleteById(Long id) {
@@ -85,7 +85,7 @@ public class MeterReadingRepositoryImpl implements MeterReadingRepository {
 	}
 
 	@Override
-    @Transactional (rollbackFor= {JAXBException.class}, 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 	public void createOrReplaceByUUID(MeterReading meterReading) {
