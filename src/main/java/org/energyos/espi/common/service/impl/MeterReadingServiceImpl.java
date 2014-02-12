@@ -116,7 +116,6 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-        	System.out.printf("****Exception 017: %s\n", e.toString());
 			result = null;
 		}
 		return result;	
@@ -133,7 +132,6 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-        	System.out.printf("****Exception 018: %s\n", e.toString());
 			result = null;
 		}
 		return result;
@@ -151,7 +149,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 			MeterReading meterReading = entry.getContent().getMeterReading();
 			return meterReading;
 		} catch (Exception e) {
-        	System.out.printf("****Exception 019: %s\n", e.toString());
+
 			return null;
 		}
 	}
@@ -172,7 +170,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-        	System.out.printf("****Exception 020: %s\n", e.toString());
+
 			result = null;
 		}
 		return result;
@@ -189,7 +187,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-        	System.out.printf("****Exception 021: %s\n", e.toString());
+
 			result = null;
 		}
 		return result;

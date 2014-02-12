@@ -118,7 +118,6 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-        	System.out.printf("****Exception 010: %s\n", e.toString());
 			result = null;
 		}
 		return result;	
@@ -136,7 +135,6 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-        	System.out.printf("****Exception 011: %s\n", e.toString());
 			result = null;
 		}
 		return result;
@@ -156,7 +154,6 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 		List<IntervalBlock> intervalBlocks = entry.getContent().getIntervalBlocks();
 		return intervalBlocks.get(0);
 		} catch (Exception e) {
-        	System.out.printf("****Exception 012: %s\n", e.toString());
 			return null;
 		}
 	}

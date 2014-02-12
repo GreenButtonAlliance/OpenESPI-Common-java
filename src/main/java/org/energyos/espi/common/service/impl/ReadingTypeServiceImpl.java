@@ -108,7 +108,6 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-        	System.out.printf("****Exception 008: %s\n", e.toString());
 			result = null;
 		}
 		return result;	
@@ -124,7 +123,6 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-        	System.out.printf("****Exception 009: %s\n", e.toString());
 			result = null;
 		}
 		return result;

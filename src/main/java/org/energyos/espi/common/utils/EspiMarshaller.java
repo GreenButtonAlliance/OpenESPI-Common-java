@@ -46,7 +46,6 @@ public class EspiMarshaller {
         try {
             getMarshaller().marshal(entity, sw);
         } catch (JAXBException e) {
-        	System.out.printf("****Exception 013: %s\n", e.toString());
             throw new FeedException("Invalid " + entity.getClass().toString() + ". Could not serialize.");
         }
         return sw.toString();

@@ -127,7 +127,6 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-        	System.out.printf("****Exception 014: %s\n", e.toString());
 			result = null;
 		}
 		return result;
@@ -144,7 +143,6 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-        	System.out.printf("****Exception 015: %s\n", e.toString());
 			result = null;
 		}
 		return result;
@@ -170,7 +168,7 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 			timeConfiguration = entry.getContent().getLocalTimeParameters();
 
 		} catch (Exception e) {
-        	System.out.printf("****Exception 016: %s\n", e.toString());
+           e.printStackTrace();
 		}
 		return timeConfiguration;
 	}

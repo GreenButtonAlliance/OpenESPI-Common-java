@@ -149,7 +149,6 @@ public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQual
 		ElectricPowerQualitySummary electricPowerQualitySummary = entry.getContent().getElectricPowerQualitySummary();
 		return electricPowerQualitySummary;
 		} catch (Exception e) {
-        	System.out.printf("****Exception 006: %s\n", e.toString());
 			return null;
 		}
 	}

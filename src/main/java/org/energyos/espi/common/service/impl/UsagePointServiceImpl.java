@@ -233,7 +233,6 @@ public class UsagePointServiceImpl implements UsagePointService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-			System.out.printf("****Exception: 031: %s\n", e.toString());
 			result = null;
 		}
 		return result;
@@ -250,7 +249,6 @@ public class UsagePointServiceImpl implements UsagePointService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-			System.out.printf("****Exception: 032: %s\n", e.toString());
 			result = null;
 		}
 		return result;
@@ -266,7 +264,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-			System.out.printf("****Exception: 033: %s\n", e.toString());
+
 			result = null;
 		}
 		return result;
@@ -283,7 +281,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
-			System.out.printf("****Exception: 034: %s\n", e.toString());
+
 			result = null;
 		}
 		return result;

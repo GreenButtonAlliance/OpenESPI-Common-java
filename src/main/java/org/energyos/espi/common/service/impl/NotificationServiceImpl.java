@@ -91,7 +91,7 @@ public class NotificationServiceImpl implements NotificationService {
 					// the propagation chain
 					// TODO: if we want to continue the propagation forward, we
 					// just need to hook in the subscription substructure
-					System.out.printf("**** ThirdParty Authorization w/o Subscription: %s: %d\n", retailCustomer.getName(), retailCustomer.getId());
+
 				}
 				if (subscription != null) {
 					notify (subscription, startDate, endDate);
@@ -108,7 +108,7 @@ public class NotificationServiceImpl implements NotificationService {
         try {
             restTemplate.postForLocation(thirdPartyNotificationURI, batchList);
         } catch (Exception e) {
-        	System.out.printf("Notification Exception: %s --> %s :: %s\n", thirdPartyNotificationURI, e.toString());
+        	
         }
 		
 	}

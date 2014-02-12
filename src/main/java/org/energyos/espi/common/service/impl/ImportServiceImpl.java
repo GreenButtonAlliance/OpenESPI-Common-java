@@ -131,9 +131,9 @@ public class ImportServiceImpl implements ImportService {
         reader.setContentHandler(atomContentHandler);
 
         // do the parse/import
-        System.out.printf("**** Before the Parse of the Stream *****************************\n");
+;
         reader.parse(new InputSource(stream));
-        System.out.printf("**** After the Parse of the Stream ******************************\n");
+
         // context of the import used for linking things up
         // and establishing notifications
         //
@@ -205,9 +205,6 @@ public class ImportServiceImpl implements ImportService {
 					// the propagation chain
 					// TODO: if we want to continue the propagation forward, we
 					// just need to hook in the subscription substructure
-					System.out.printf("**** Exception 040: %s\n", e.toString());
-					System.out
-							.printf("**** ThirdParty Authorization w/o Subscription: %s: %d\n", retailCustomer.getName(), retailCustomer.getId());
 				}
 				if (subscription != null) {
 					String resourceUri = authorization.getResourceURI();

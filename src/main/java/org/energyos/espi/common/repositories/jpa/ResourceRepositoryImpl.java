@@ -72,7 +72,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
             return (T) em.createNamedQuery(queryFindById).setParameter("uuid", uuid.toString().toUpperCase()).getSingleResult();
         } catch (IllegalAccessException | NoSuchFieldException e) {
-        	System.out.printf("****Exception 002: %s\n", e.toString());
             throw new RuntimeException(e);
         }
 
@@ -86,7 +85,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
             return (T) em.createNamedQuery(queryFindById).setParameter("id", id).getSingleResult();
         } catch (NoSuchFieldException | IllegalAccessException e) {
-        	System.out.printf("****Exception 003: %s\n", e.toString());
             throw new RuntimeException(e);
         }
 
