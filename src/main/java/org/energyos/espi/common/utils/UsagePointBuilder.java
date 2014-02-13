@@ -44,7 +44,7 @@ public class UsagePointBuilder {
         lookup = new EntryLookupTable(feed.getEntries());
 
         associate(feed);
-
+        
         return usagePoints;
     }
 
