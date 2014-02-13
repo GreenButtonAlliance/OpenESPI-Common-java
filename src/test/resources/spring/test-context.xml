@@ -125,4 +125,6 @@
 
     <bean id="validator"
                 class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
-</beans>
+        <bean id="restTemplate" name="restTemplate" class="org.springframework.web.client.RestTemplate" autowire-candidate="true"/>
+    </beans>
+    
