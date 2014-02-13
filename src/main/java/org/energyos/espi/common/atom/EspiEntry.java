@@ -16,15 +16,16 @@
 
 package org.energyos.espi.common.atom;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.utils.EspiMarshaller;
+
 import com.sun.syndication.feed.atom.Content;
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Link;
 import com.sun.syndication.io.FeedException;
-import org.energyos.espi.common.domain.IdentifiedObject;
-import org.energyos.espi.common.utils.EspiMarshaller;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class EspiEntry<T extends IdentifiedObject> extends Entry {
     private Link selfLink = new Link();

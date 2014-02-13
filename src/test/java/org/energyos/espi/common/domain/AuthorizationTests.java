@@ -16,17 +16,6 @@
 
 package org.energyos.espi.common.domain;
 
-import org.junit.Test;
-
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import java.util.Set;
-
 import static org.energyos.espi.common.support.TestUtils.assertAnnotationPresent;
 import static org.energyos.espi.common.support.TestUtils.assertColumnAnnotation;
 import static org.energyos.espi.common.test.EspiFactory.newAuthorization;
@@ -35,6 +24,18 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+
+import org.junit.Test;
 
 public class AuthorizationTests {
 

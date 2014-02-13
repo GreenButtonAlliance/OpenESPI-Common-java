@@ -16,18 +16,19 @@
 
 package org.energyos.espi.common.domain;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.junit.Test;
+import static org.energyos.espi.common.support.TestUtils.assertAnnotationPresent;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
-import static org.energyos.espi.common.support.TestUtils.assertAnnotationPresent;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.junit.Test;
 
 public class RetailCustomerValidationTests {
 

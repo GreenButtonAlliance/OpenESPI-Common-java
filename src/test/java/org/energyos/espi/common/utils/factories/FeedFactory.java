@@ -1,16 +1,17 @@
 package org.energyos.espi.common.utils.factories;
 
-import com.sun.syndication.feed.atom.Feed;
-import com.sun.syndication.feed.atom.Link;
-import com.sun.syndication.io.FeedException;
-import org.energyos.espi.common.domain.UsagePoint;
-import org.energyos.espi.common.utils.SubscriptionBuilder;
+import static org.energyos.espi.common.test.EspiFactory.newUsagePointWithId;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.energyos.espi.common.test.EspiFactory.newUsagePointWithId;
+import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.utils.SubscriptionBuilder;
+
+import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.feed.atom.Link;
+import com.sun.syndication.io.FeedException;
 
 public class FeedFactory {
     private FeedFactory() {}

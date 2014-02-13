@@ -1,28 +1,30 @@
 package org.energyos.espi.common.repositories.jpa;
 
-import org.energyos.espi.common.domain.ApplicationInformation;
+import java.util.List;
+import java.util.UUID;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.domain.Authorization;
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.repositories.AuthorizationRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import java.util.List;
-import java.util.UUID;
-
 @Repository
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 
     @PersistenceContext
     protected EntityManager em;
 
     @Override
-    @Transactional
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void persist(Authorization authorization) {
         em.persist(authorization);
     }
@@ -48,7 +50,9 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     }
 
     @Override
-    @Transactional
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void merge(Authorization authorization) {
         em.merge(authorization);
     }
@@ -79,7 +83,9 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
     }
 
 	@Override
-    @Transactional
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 	public void deleteById(Long id) {
 		em.remove(findById(id));
 	}

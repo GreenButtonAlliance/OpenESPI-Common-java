@@ -1,9 +1,9 @@
 package org.energyos.espi.common.domain;
 
 
-import org.energyos.espi.common.models.atom.LinkType;
-
 import java.util.List;
+
+import org.energyos.espi.common.models.atom.LinkType;
 
 public interface Linkable {
     LinkType getUpLink();

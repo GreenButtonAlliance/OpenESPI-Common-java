@@ -17,11 +17,20 @@
 package org.energyos.espi.common.service.impl;
 
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletOutputStream;
+import javax.xml.transform.stream.StreamResult;
+
 import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
-import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
@@ -31,31 +40,27 @@ import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.DateTimeType;
 import org.energyos.espi.common.models.atom.EntryType;
-import org.energyos.espi.common.service.*;
+import org.energyos.espi.common.service.ApplicationInformationService;
+import org.energyos.espi.common.service.AuthorizationService;
+import org.energyos.espi.common.service.ElectricPowerQualitySummaryService;
+import org.energyos.espi.common.service.ElectricPowerUsageSummaryService;
+import org.energyos.espi.common.service.ExportService;
+import org.energyos.espi.common.service.IntervalBlockService;
+import org.energyos.espi.common.service.MeterReadingService;
+import org.energyos.espi.common.service.ReadingTypeService;
+import org.energyos.espi.common.service.ResourceService;
+import org.energyos.espi.common.service.RetailCustomerService;
+import org.energyos.espi.common.service.SubscriptionService;
+import org.energyos.espi.common.service.TimeConfigurationService;
+import org.energyos.espi.common.service.UsagePointService;
+import org.energyos.espi.common.utils.AtomMarshallerListener;
 import org.energyos.espi.common.utils.DateConverter;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
-import org.energyos.espi.common.utils.AtomMarshallerListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
-import org.xml.sax.SAXException;
-
-import javax.servlet.ServletOutputStream;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamResult;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.TimeZone;
-import java.util.UUID;
 
 @Service
 public class ExportServiceImpl implements ExportService {

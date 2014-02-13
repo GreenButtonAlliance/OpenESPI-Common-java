@@ -17,6 +17,10 @@
 package org.energyos.espi.common.repositories.jpa;
 
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.repositories.IntervalBlockRepository;
@@ -28,13 +32,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
-
-import static org.junit.Assert.assertEquals;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class IntervalBlockRepositoryImplTests {
 
     @Autowired

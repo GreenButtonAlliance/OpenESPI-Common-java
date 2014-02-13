@@ -1,13 +1,14 @@
 package org.energyos.espi.common.domain;
 
+import static org.junit.Assert.assertEquals;
+
+import java.math.BigInteger;
+
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.utils.EspiMarshaller;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.xml.bind.JAXBException;
-import java.math.BigInteger;
-
-import static org.junit.Assert.assertEquals;
 
 public class ReadingTypeMarshallingTests {
     static final String XML_INPUT = "<ReadingType xmlns=\"http://naesb.org/espi\">" +

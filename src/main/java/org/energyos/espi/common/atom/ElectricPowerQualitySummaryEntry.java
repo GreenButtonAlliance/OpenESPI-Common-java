@@ -16,8 +16,9 @@
 
 package org.energyos.espi.common.atom;
 
-import com.sun.syndication.io.FeedException;
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+
+import com.sun.syndication.io.FeedException;
 
 @SuppressWarnings("serial")
 public class ElectricPowerQualitySummaryEntry extends EspiEntry<ElectricPowerQualitySummary> {

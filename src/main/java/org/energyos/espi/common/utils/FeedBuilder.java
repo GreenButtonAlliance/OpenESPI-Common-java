@@ -15,12 +15,12 @@ package org.energyos.espi.common.utils;
  *    limitations under the License.
  */
 
+import java.util.List;
+
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.models.atom.FeedType;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class FeedBuilder {

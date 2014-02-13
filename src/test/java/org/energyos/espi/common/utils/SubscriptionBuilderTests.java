@@ -17,9 +17,16 @@
 package org.energyos.espi.common.utils;
 
 
-import com.sun.syndication.feed.atom.Feed;
-import com.sun.syndication.io.FeedException;
-import org.energyos.espi.common.atom.*;
+import static org.energyos.espi.common.utils.factories.FeedFactory.newFeed;
+import static org.junit.Assert.assertTrue;
+
+import org.energyos.espi.common.atom.ElectricPowerQualitySummaryEntry;
+import org.energyos.espi.common.atom.ElectricPowerUsageSummaryEntry;
+import org.energyos.espi.common.atom.IntervalBlocksEntry;
+import org.energyos.espi.common.atom.MeterReadingEntry;
+import org.energyos.espi.common.atom.ReadingTypeEntry;
+import org.energyos.espi.common.atom.TimeConfigurationEntry;
+import org.energyos.espi.common.atom.UsagePointEntry;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,8 +34,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import static org.energyos.espi.common.utils.factories.FeedFactory.newFeed;
-import static org.junit.Assert.assertTrue;
+import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.io.FeedException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

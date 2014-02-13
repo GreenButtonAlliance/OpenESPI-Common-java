@@ -16,17 +16,18 @@
 
 package org.energyos.espi.common.service;
 
-import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import java.util.List;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 
-import java.util.List;
-import java.util.UUID;
-
 public interface ResourceService {
 	void persist(IdentifiedObject resource);
+	
+	void flush();
 
 	List<IdentifiedObject> findByAllParentsHref(String relatedHref,
 			Linkable linkable);
@@ -67,5 +68,7 @@ public interface ResourceService {
 	
 	// currently used only finding the Authorization associated with a given resource URI
 	<T extends IdentifiedObject> T findByResourceUri(String uri, Class<T> clazz);
+
+
 	
 }

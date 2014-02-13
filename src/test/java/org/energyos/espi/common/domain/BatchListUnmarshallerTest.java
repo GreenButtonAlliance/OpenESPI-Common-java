@@ -1,6 +1,14 @@
 package org.energyos.espi.common.domain;
 
-import com.sun.syndication.io.FeedException;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
+
+import java.io.InputStreamReader;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.transform.stream.StreamSource;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,13 +19,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.transform.stream.StreamSource;
-import java.io.InputStreamReader;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
+import com.sun.syndication.io.FeedException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")

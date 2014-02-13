@@ -16,14 +16,15 @@
 
 package org.energyos.espi.common.domain;
 
-import com.sun.syndication.io.FeedException;
+import static org.junit.Assert.assertEquals;
+
+import javax.xml.bind.JAXBException;
+
 import org.energyos.espi.common.utils.EspiMarshaller;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBException;
-
-import static org.junit.Assert.assertEquals;
+import com.sun.syndication.io.FeedException;
 
 public class ElectricPowerQualitySummaryMarshallingTests {
 

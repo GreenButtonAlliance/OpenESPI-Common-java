@@ -1,13 +1,14 @@
 package org.energyos.espi.common.domain;
 
-import org.junit.Test;
+import static junit.framework.TestCase.assertTrue;
+
+import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import java.util.Set;
 
-import static junit.framework.TestCase.assertTrue;
+import org.junit.Test;
 
 public class ReadingTypeValidationTests {
     @Test

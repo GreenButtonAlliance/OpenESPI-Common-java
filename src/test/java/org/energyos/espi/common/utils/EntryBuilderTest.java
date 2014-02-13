@@ -15,18 +15,31 @@ package org.energyos.espi.common.utils;
  *    limitations under the License.
  */
 
-import org.energyos.espi.common.domain.*;
+import static org.energyos.espi.common.test.EspiFactory.newElectricPowerQualitySummary;
+import static org.energyos.espi.common.test.EspiFactory.newElectricPowerUsageSummary;
+import static org.energyos.espi.common.test.EspiFactory.newLocalTimeParameters;
+import static org.energyos.espi.common.test.EspiFactory.newMeterReading;
+import static org.energyos.espi.common.test.EspiFactory.newReadingType;
+import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
+
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.DateTimeType;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.models.atom.LinkType;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
-
-import static org.energyos.espi.common.test.EspiFactory.*;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
 
 public class EntryBuilderTest {
 

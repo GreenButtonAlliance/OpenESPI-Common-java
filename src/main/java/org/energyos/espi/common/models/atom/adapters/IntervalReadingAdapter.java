@@ -16,12 +16,12 @@
 
 package org.energyos.espi.common.models.atom.adapters;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+
 import org.energyos.espi.common.domain.IntervalReading;
 import org.energyos.espi.common.domain.ObjectFactory;
 import org.energyos.espi.common.domain.ReadingQuality;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 public class IntervalReadingAdapter extends XmlAdapter<JAXBElement<IntervalReading>, IntervalReading> {
 

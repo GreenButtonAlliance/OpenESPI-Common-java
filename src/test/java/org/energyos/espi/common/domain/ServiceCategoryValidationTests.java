@@ -1,16 +1,19 @@
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.atom.XMLTest;
-import org.junit.Test;
+import static org.energyos.espi.common.test.EspiFactory.newServiceCategory;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertThat;
+
+import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import java.util.Set;
 
-import static org.energyos.espi.common.test.EspiFactory.newServiceCategory;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+import org.energyos.espi.common.atom.XMLTest;
+import org.junit.Test;
 
 public class ServiceCategoryValidationTests extends XMLTest {
     @Test

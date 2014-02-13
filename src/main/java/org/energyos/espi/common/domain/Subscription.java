@@ -24,11 +24,17 @@
 
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.models.atom.adapters.SubscriptionAdapter;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import java.util.Calendar;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -36,10 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
+import org.energyos.espi.common.models.atom.adapters.SubscriptionAdapter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * Defines the parameters of a subscription between Third Party and Data Custodian.
@@ -67,7 +72,8 @@ import java.util.Set;
         @NamedQuery(name = Subscription.QUERY_FIND_BY_UUID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.uuid = :uuid"),
         @NamedQuery(name = Subscription.QUERY_FIND_ALL, query = "SELECT subscription FROM Subscription subscription"),
         @NamedQuery(name = Subscription.QUERY_FIND_BY_HASHED_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.hashedId = :hashedId"),
-        @NamedQuery(name = Subscription.QUERY_FIND_ALL_IDS, query = "SELECT subscription.id FROM Subscription subscription")
+        @NamedQuery(name = Subscription.QUERY_FIND_ALL_IDS, query = "SELECT subscription.id FROM Subscription subscription"),
+        @NamedQuery(name = Subscription.QUERY_FIND_BY_AUTHORIZATION_ID, query = "SELECT subscription from Subscription subscription WHERE subscription.authorization.id = :id")
 })
 
 public class Subscription
@@ -78,6 +84,7 @@ public class Subscription
 	public final static String QUERY_FIND_ALL = "Subscription.findAll";
     public final static String QUERY_FIND_BY_HASHED_ID = "Subscription.findByHashedID";
     public static final String QUERY_FIND_ALL_IDS = "Subscription.findAllIds";
+    public static final String QUERY_FIND_BY_AUTHORIZATION_ID = "Subscription.findByAuthorizationId";
 
     private String hashedId;
 

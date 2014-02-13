@@ -16,15 +16,15 @@
 
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.atom.XMLTest;
-import org.junit.Test;
+import static org.energyos.espi.common.support.TestUtils.assertAnnotationPresent;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import static org.energyos.espi.common.support.TestUtils.assertAnnotationPresent;
+import org.energyos.espi.common.atom.XMLTest;
+import org.junit.Test;
 
 public class ReadingQualityPersistenceTests extends XMLTest {
 

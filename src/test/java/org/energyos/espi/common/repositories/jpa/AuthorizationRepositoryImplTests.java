@@ -16,6 +16,11 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.repositories.AuthorizationRepository;
@@ -30,14 +35,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class AuthorizationRepositoryImplTests {
 
     @Autowired

@@ -16,9 +16,9 @@
 
 package org.energyos.espi.common.repositories;
 
-import org.energyos.espi.common.domain.BatchList;
-
 import java.util.List;
+
+import org.energyos.espi.common.domain.BatchList;
 
 
 public interface BatchListRepository {

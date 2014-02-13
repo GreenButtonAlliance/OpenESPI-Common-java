@@ -16,9 +16,13 @@
 
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.support.TestUtils;
-import org.energyos.espi.common.test.EspiFactory;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -28,13 +32,10 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.energyos.espi.common.support.TestUtils;
+import org.energyos.espi.common.test.EspiFactory;
+import org.junit.Test;
 
 public class SubscriptionTests {
 

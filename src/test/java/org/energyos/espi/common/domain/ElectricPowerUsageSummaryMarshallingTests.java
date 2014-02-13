@@ -1,12 +1,12 @@
 package org.energyos.espi.common.domain;
 
-import org.energyos.espi.common.utils.EspiMarshaller;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import javax.xml.bind.JAXBException;
 
-import static org.junit.Assert.assertEquals;
+import org.energyos.espi.common.utils.EspiMarshaller;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ElectricPowerUsageSummaryMarshallingTests {
     static final String XML_INPUT = "<ElectricPowerUsageSummary xmlns=\"http://naesb.org/espi\">" +

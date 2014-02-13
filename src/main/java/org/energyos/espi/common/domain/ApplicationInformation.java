@@ -24,6 +24,28 @@
 
 package org.energyos.espi.common.domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import org.energyos.espi.common.models.atom.adapters.ApplicationInformationAdapter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -31,14 +53,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
-
-import javax.persistence.*;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import java.lang.Object;
-import java.util.*;
 
 
 
@@ -254,21 +268,27 @@ public class ApplicationInformation
     @XmlElement(name = "token_endpoint_auth_method")
     protected String tokenEndpointAuthMethod;
     
+    // TODO Implement ApplicationInformaion.additionalInformation
+    
+    //@XmlElement(name = "additional_information")
+    //Map<String, java.lang.Object> additionalInformation = null; 
+    
  //   @XmlTransient
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
     @CollectionTable(name="application_information_scopes", joinColumns=@JoinColumn(name="application_information_id"))
     private Set<String> scope = new HashSet<>();   
     
-    
-    
     @XmlElement(name = "grant_types")
     protected ArrayList<GrantType> grantTypes;
+    
     @XmlElement(name = "response_types")
     protected ResponseType responseTypes;
+    
     @XmlElement(name = "registration_client_uri")
     @XmlSchemaType(name = "anyURI")
     protected String registrationClientUri;
+    
     @XmlElement(name = "registration_access_token")
     protected String registrationAccessToken;
 
@@ -281,6 +301,10 @@ public class ApplicationInformation
     @Size(min = 2, max = 64)
     @XmlElement(name = "thirdPartyApplicationName")
     protected String thirdPartyApplicationName;
+    
+	// private Integer accessTokenValiditySeconds;
+	// TODO implement ApplicationInformation.authorities
+	// private Collection<GrantedAuthority> authorities;
 
     
     
@@ -345,9 +369,9 @@ public class ApplicationInformation
             return grantTypes;
         }
 
-        public void setAuthorizedGrantTypes (Set<String> authorizedGrantTypes) {
-        	// TODO seems not to be implemented ??
-	        // this.grantTypes = authorizedGrantTypes;
+        public void setAuthorizedGrantTypes (Set<String>  authorizedGrantTypes) {
+            // TODO seems not to be implemented ??                                                                                                                              
+            // this.grantTypes = authorizedGrantTypes; 
         }
 
         @Override
@@ -369,9 +393,9 @@ public class ApplicationInformation
         }
 
     public void setAuthorities (Collection<GrantedAuthority> authorities) {
-   
-       // TODO this seems not to be implemented ??
-	// this.authorities = authorities;
+
+        // TODO this seems not to be implemented ??                                                                                                                                  
+         // this.authorities = authorities; 
     } 
         @Override
         public Integer getAccessTokenValiditySeconds() {
@@ -379,8 +403,8 @@ public class ApplicationInformation
         }
 
         public void setAccessTokenValiditySeconds(Integer s) {   	
-         // TODO This seems not to be implemented ??
-        // this.accessTokenValiditySeconds = s
+            // TODO This seems not to be implemented ??                                                                                                                                
+            // this.accessTokenValiditySeconds = s  
         }
         
 
@@ -390,18 +414,20 @@ public class ApplicationInformation
         }
 
         public void setRefreshTokenValiditySeconds(Integer s) {
-            // TODO This seems not to be implemented ??
-            // this.accessTokenValiditySeconds = s
+            // TODO This seems not to be implemented ??                                                                                                                             
+            // this.accessTokenValiditySeconds = s    
         }
         
         @Override
-        public Map<String, Object> getAdditionalInformation() {
-            return null;
+        public Map<String, java.lang.Object> getAdditionalInformation() {
+           // TODO Implement ApplicationInformaion.additionalInformation
+           //  return this.additionalInformation;
+        	return null;
         }   
    
-	public void setAdditionalInformation(Map<String, Object> additionalInformation) {
-        // TODO This seems not to be implemented ??
-       // this.additionalInformation = additionalInformation;
+	public void setAdditionalInformation(Map<String, java.lang.Object> additionalInformation) {
+       // TODO This seems not to be implemented ??                                                                                                                                 
+       // this.additionalInformation = additionalInformation; 
 	}
 
     /**
@@ -1236,10 +1262,10 @@ public class ApplicationInformation
     }
 
 
-	private void setGrantTypes(List<GrantType> grantTypes) {
-		this.grantTypes = (ArrayList<GrantType>) grantTypes;
+        private void setGrantTypes(List<GrantType> grantTypes) {
+                this.grantTypes = (ArrayList<GrantType>) grantTypes;
 
-	}
+        }
 	
     /**
      * Gets the value of the responseTypes property.
@@ -1411,5 +1437,5 @@ public class ApplicationInformation
     	this.setRegistrationAccessToken(((ApplicationInformation)resource).getRegistrationAccessToken());
     	this.setThirdPartyApplicationName(((ApplicationInformation)resource).getThirdPartyApplicationName());
     }
-
+   
 }

@@ -16,10 +16,10 @@
 
 package org.energyos.espi.common.repositories;
 
-import org.energyos.espi.common.domain.ApplicationInformation;
-
 import java.util.List;
 import java.util.UUID;
+
+import org.energyos.espi.common.domain.ApplicationInformation;
 
 public interface ApplicationInformationRepository {
 

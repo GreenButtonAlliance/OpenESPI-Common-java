@@ -16,8 +16,12 @@
 
 package org.energyos.espi.common.service.impl;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
-import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ElectricPowerUsageSummaryRepository;
@@ -25,16 +29,8 @@ import org.energyos.espi.common.service.ElectricPowerUsageSummaryService;
 import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
-import org.energyos.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageSummaryService {
@@ -147,7 +143,7 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 	@Override
 	public ElectricPowerUsageSummary importResource(InputStream stream) {
 		try {
-			importService.importData(stream);
+			importService.importData(stream, null);
 			EntryType entry = importService.getEntries().get(0);
 			ElectricPowerUsageSummary electricPowerUsageSummary = entry.getContent().getElectricPowerUsageSummary();
 			return electricPowerUsageSummary;

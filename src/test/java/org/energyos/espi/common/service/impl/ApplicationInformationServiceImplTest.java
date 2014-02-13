@@ -1,12 +1,12 @@
 package org.energyos.espi.common.service.impl;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class ApplicationInformationServiceImplTest {
     private ApplicationInformationServiceImpl service;

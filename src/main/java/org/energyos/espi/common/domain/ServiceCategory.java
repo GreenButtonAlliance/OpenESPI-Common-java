@@ -24,6 +24,9 @@
 
 package org.energyos.espi.common.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -32,8 +35,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**

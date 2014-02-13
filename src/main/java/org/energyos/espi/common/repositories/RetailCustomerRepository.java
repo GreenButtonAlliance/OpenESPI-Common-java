@@ -16,10 +16,10 @@
 
 package org.energyos.espi.common.repositories;
 
+import java.util.List;
+
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.List;
 
 public interface RetailCustomerRepository {
 

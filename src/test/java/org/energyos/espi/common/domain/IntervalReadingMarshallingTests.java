@@ -16,14 +16,14 @@
 
 package org.energyos.espi.common.domain;
 
+import static org.junit.Assert.assertEquals;
+
+import javax.xml.bind.JAXBElement;
+
 import org.energyos.espi.common.models.atom.adapters.IntervalReadingAdapter;
 import org.energyos.espi.common.utils.EspiMarshaller;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.xml.bind.JAXBElement;
-
-import static org.junit.Assert.assertEquals;
 
 public class IntervalReadingMarshallingTests {
 

@@ -16,13 +16,13 @@
 
 package org.energyos.espi.common.utils;
 
+import static org.energyos.espi.common.test.Asserts.assertXpathValue;
+
 import org.custommonkey.xmlunit.XMLAssert;
 import org.energyos.espi.common.atom.XMLTest;
 import org.energyos.espi.common.domain.ServiceCategory;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.junit.Test;
-
-import static org.energyos.espi.common.test.Asserts.assertXpathValue;
 
 public class EspiMarshallerTests extends XMLTest {
 

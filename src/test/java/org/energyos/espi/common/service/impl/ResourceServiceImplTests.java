@@ -17,17 +17,16 @@
 package org.energyos.espi.common.service.impl;
 
 
-import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.UsagePoint;
-import org.energyos.espi.common.repositories.ResourceRepository;
-import org.energyos.espi.common.service.impl.ResourceServiceImpl;
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.repositories.ResourceRepository;
+import org.junit.Test;
 
 public class ResourceServiceImplTests {
 

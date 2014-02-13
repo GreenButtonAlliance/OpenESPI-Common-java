@@ -1,14 +1,22 @@
 package org.energyos.espi.common.utils;
 
-import org.energyos.espi.common.domain.*;
+import java.util.List;
+
+import javax.xml.bind.JAXBException;
+
+import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.TimeConfiguration;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 @Component
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class ResourceLinker {
     @Autowired
     private ResourceService resourceService;

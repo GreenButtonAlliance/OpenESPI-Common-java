@@ -15,13 +15,13 @@ package org.energyos.espi.common.domain;
  *    limitations under the License.
  */
 
-import org.energyos.espi.common.atom.XMLTest;
-import org.energyos.espi.common.models.atom.LinkType;
-import org.junit.Test;
-
 import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import org.energyos.espi.common.atom.XMLTest;
+import org.energyos.espi.common.models.atom.LinkType;
+import org.junit.Test;
 
 public class UsagePointTests extends XMLTest {
 

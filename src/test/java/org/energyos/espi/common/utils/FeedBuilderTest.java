@@ -15,17 +15,17 @@ package org.energyos.espi.common.utils;
  *    limitations under the License.
  */
 
-import org.energyos.espi.common.domain.UsagePoint;
-import org.energyos.espi.common.models.atom.EntryType;
-import org.energyos.espi.common.models.atom.FeedType;
-import org.junit.Test;
+import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.energyos.espi.common.test.EspiFactory.newUsagePoint;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.models.atom.EntryType;
+import org.energyos.espi.common.models.atom.FeedType;
+import org.junit.Test;
 
 public class FeedBuilderTest {
 

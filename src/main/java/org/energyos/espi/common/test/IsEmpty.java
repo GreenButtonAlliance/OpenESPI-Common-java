@@ -1,11 +1,11 @@
 package org.energyos.espi.common.test;
 
+import java.util.List;
+
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-
-import java.util.List;
 
 public class IsEmpty extends TypeSafeMatcher<List> {
 

@@ -17,37 +17,15 @@
 package org.energyos.espi.common.service.impl;
 
 
-import com.google.common.collect.Lists;
-
 import org.energyos.espi.common.BaseTest;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
-import org.energyos.espi.common.repositories.SubscriptionRepository;
-import org.energyos.espi.common.repositories.UsagePointRepository;
 import org.energyos.espi.common.repositories.jpa.SubscriptionRepositoryImpl;
 import org.energyos.espi.common.service.ApplicationInformationService;
 import org.energyos.espi.common.service.UsagePointService;
-import org.energyos.espi.common.utils.DateConverter;
-import org.energyos.espi.common.utils.EntryTypeIterator;
-import org.junit.Before;
-import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Request;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import static org.energyos.espi.common.test.EspiFactory.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class SubscriptionServiceImplTests extends BaseTest {
 

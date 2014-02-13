@@ -16,15 +16,17 @@
 
 package org.energyos.espi.common.support;
 
-import com.sun.syndication.feed.atom.Link;
-import org.energyos.espi.common.atom.EspiEntry;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
+
+import org.energyos.espi.common.atom.EspiEntry;
+
+import com.sun.syndication.feed.atom.Link;
 
 @SuppressWarnings("rawtypes")
 public class TestUtils {
