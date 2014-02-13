@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -48,6 +49,6 @@ public interface RetailCustomerService extends UserDetailsService {
 	// import-exportResource services
 	public RetailCustomer importResource(InputStream stream);
 
-	void associateByUUID(UUID uuid);
+	Subscription associateByUUID(Long retailCustomerId, UUID uuId, String description);
 
 }

@@ -67,6 +67,8 @@ public class EntryTypeIterator {
     }
 
     private void updateChildIds(Long usagePointId) {
+    	// TODO: Deal with these Class warnings...
+    	
         List<Pair<Long, Class>> pairs = new ArrayList<>();
         for(Long id : resourceService.findAllIdsByUsagePointId(usagePointId, TimeConfiguration.class)) {
             pairs.add(new ImmutablePair<Long, Class>(id, TimeConfiguration.class));

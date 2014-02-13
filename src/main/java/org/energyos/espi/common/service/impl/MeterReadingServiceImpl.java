@@ -52,10 +52,12 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 	public void setImportService(ImportService importService) {
 		this.importService = importService;
 	}
+	
     public void setRepository(MeterReadingRepository meterReadingRepository) {
         this.meterReadingRepository = meterReadingRepository;
     }
     
+
     @Override
     public MeterReading findByUUID(UUID uuid) {
         return meterReadingRepository.findByUUID(uuid);

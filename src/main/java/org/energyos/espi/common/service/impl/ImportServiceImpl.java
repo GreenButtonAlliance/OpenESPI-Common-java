@@ -61,7 +61,6 @@ import org.xml.sax.XMLReader;
 public class ImportServiceImpl implements ImportService {
     @Autowired
     @Qualifier("atomMarshaller")
-
     private Jaxb2Marshaller marshaller;
     
     @Autowired
@@ -249,6 +248,10 @@ public class ImportServiceImpl implements ImportService {
     
     public void setAuthoirzationService(AuthorizationService authorizationService) {
         this.authorizationService = authorizationService;
+    }
+    
+    public void setNotificationService(NotificationService notificationService) {
+        this.notificationService = notificationService;
     }
 
 }
