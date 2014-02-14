@@ -419,13 +419,13 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportTimeConfiguration(Long timeConfigurationId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/TimeConfiguration/" + timeConfigurationId;
+		String hrefFragment = "/LocalTimeParameters/" + timeConfigurationId;
 	    exportEntry(resourceService.findEntryType(timeConfigurationId, TimeConfiguration.class), stream, exportFilter, hrefFragment);	
 	}
 
 	@Override
 	public void exportTimeConfigurations(OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/TimeConfiguration";
+		String hrefFragment = "/LocalTimeParameters";
 	    exportEntries(resourceService.findEntryTypeIterator(TimeConfiguration.class), stream, exportFilter, TimeConfiguration.class, hrefFragment);	
 	}
 	
