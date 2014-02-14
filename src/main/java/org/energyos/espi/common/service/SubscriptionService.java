@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.energyos.espi.common.utils.EntryTypeIterator;
