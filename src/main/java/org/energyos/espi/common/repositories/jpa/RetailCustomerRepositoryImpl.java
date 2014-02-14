@@ -20,7 +20,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.xml.bind.JAXBException;
 
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;

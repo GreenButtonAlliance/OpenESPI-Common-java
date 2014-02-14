@@ -23,9 +23,7 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.xml.bind.JAXBException;
 
-import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.repositories.ReadingTypeRepository;
 import org.springframework.stereotype.Repository;
@@ -93,10 +91,11 @@ public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
 	    em.remove(em.contains(rt) ? rt : em.merge(rt));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Long> findAllIds() {
     	List<Long> temp;
-    	temp = (List<Long>)this.em.createNamedQuery(MeterReading.QUERY_FIND_ALL_IDS)
+    	temp = (List<Long>)this.em.createNamedQuery(ReadingType.QUERY_FIND_ALL_IDS)
         .getResultList();
             return temp;
 	}

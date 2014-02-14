@@ -41,7 +41,6 @@ public class SubscriptionBuilder {
 
     private Feed feed;
 
-    @SuppressWarnings("unchecked")
     public Feed buildFeed(List<UsagePoint> usagePointList) throws FeedException {
         feed = new Feed();
 
@@ -54,7 +53,9 @@ public class SubscriptionBuilder {
         return feed;
     }
 
-    private void populateEntries(List<UsagePoint> usagePointList) throws FeedException {
+    @SuppressWarnings("unchecked")
+    // TODO: need to fix the typing 
+	private void populateEntries(List<UsagePoint> usagePointList) throws FeedException {
         for (UsagePoint usagePoint : usagePointList) {
             feed.getEntries().add(new UsagePointEntry(usagePoint));
 
@@ -65,26 +66,30 @@ public class SubscriptionBuilder {
         }
     }
 
-    private void populateTimeConfigurationEntry(UsagePoint usagePoint) throws FeedException {
+    @SuppressWarnings("unchecked")
+	private void populateTimeConfigurationEntry(UsagePoint usagePoint) throws FeedException {
         TimeConfiguration timeConfiguration = usagePoint.getLocalTimeParameters();
         if (timeConfiguration != null) {
             feed.getEntries().add(new TimeConfigurationEntry(timeConfiguration));
         }
     }
 
-    private void populateElectricPowerQualitySummaryEntries(UsagePoint usagePoint) throws FeedException {
+    @SuppressWarnings("unchecked")
+	private void populateElectricPowerQualitySummaryEntries(UsagePoint usagePoint) throws FeedException {
         for (ElectricPowerQualitySummary summary : usagePoint.getElectricPowerQualitySummaries()) {
             feed.getEntries().add(new ElectricPowerQualitySummaryEntry(summary));
         }
     }
 
-    private void populateElectricPowerUsageSummaryEntries(UsagePoint usagePoint) throws FeedException {
+    @SuppressWarnings("unchecked")
+	private void populateElectricPowerUsageSummaryEntries(UsagePoint usagePoint) throws FeedException {
         for (ElectricPowerUsageSummary summary : usagePoint.getElectricPowerUsageSummaries()) {
             feed.getEntries().add(new ElectricPowerUsageSummaryEntry(summary));
         }
     }
 
-    private void populateMeterReadingEntries(UsagePoint usagePoint) throws FeedException {
+    @SuppressWarnings("unchecked")
+	private void populateMeterReadingEntries(UsagePoint usagePoint) throws FeedException {
         for (MeterReading meterReading : usagePoint.getMeterReadings()) {
             feed.getEntries().add(new MeterReadingEntry(meterReading));
 
@@ -93,13 +98,15 @@ public class SubscriptionBuilder {
         }
     }
 
-    private void populateIntervalBlocksEntry(MeterReading meterReading) throws FeedException {
+    @SuppressWarnings("unchecked")
+	private void populateIntervalBlocksEntry(MeterReading meterReading) throws FeedException {
         if (meterReading.getIntervalBlocks().size() > 0) {
             feed.getEntries().add(new IntervalBlocksEntry(meterReading.getIntervalBlocks()));
         }
     }
 
-    private void populateReadingTypeEntry(MeterReading meterReading) throws FeedException {
+    @SuppressWarnings("unchecked")
+	private void populateReadingTypeEntry(MeterReading meterReading) throws FeedException {
         if (meterReading.getReadingType() != null) {
             feed.getEntries().add(new ReadingTypeEntry(meterReading.getReadingType()));
         }

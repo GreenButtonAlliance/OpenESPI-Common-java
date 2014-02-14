@@ -543,6 +543,8 @@ public class ExportServiceImpl implements ExportService {
         stream.write(selfRef.getBytes());
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	//TODO: this needs to be templated and RetailCustomer inherited from IdentifiedObject to remove the above supress warnings
 	private void exportEntries(EntryTypeIterator entries, OutputStream stream,
 			ExportFilter exportFilter, Class resourceClass, String hrefFragment)
 			throws IOException {
@@ -575,13 +577,13 @@ public class ExportServiceImpl implements ExportService {
 		}
 		if (fragment.contains("Batch")) {
 			if (fragment.contains("Bulk")) {
-				// ToDo need the proper URI fragement for a Bulk
+				// ToDo need the proper URI fragment for a Bulk
 				UsagePoint up = entry.getContent().getUsagePoint();
 				RetailCustomer rc = up.getRetailCustomer();
 				// TODO here need the proper URI fragment for a subscription
 				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint";			}
 			if (fragment.contains("Subscription")) {
-				// the entry contains a valid usagepoint at this stage
+				// the entry contains a valid usage point at this stage
 				// 
 				UsagePoint up = entry.getContent().getUsagePoint();
 				RetailCustomer rc = up.getRetailCustomer();
@@ -652,7 +654,7 @@ public class ExportServiceImpl implements ExportService {
 	private void exportEntryFull(EntryType entry, OutputStream stream,
 			ExportFilter exportFilter, String hrefFragment) throws IOException {
          
-    	// setup a listener so that the adapters may later be fed the href fragment;
+    	// setup a listener so that the adapters may later be fed the fragment;
     	//
         AtomMarshallerListener uriListener = new AtomMarshallerListener(applicationInformationService.getDataCustodianResourceEndpoint() + hrefFragment);
         
@@ -670,8 +672,8 @@ public class ExportServiceImpl implements ExportService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	
-	private EntryType findEntryTypeXPath(Long id1, Long id2, Long id3, Long id4, Class clazz) {
+	// TODO: need to make RetailCustomer inherit from IdentifiedObject to remove the above
+	private EntryType findEntryTypeXPath(Long id1, Long id2, Long id3, Long id4, @SuppressWarnings("rawtypes") Class clazz) {
 		EntryType result = null;
 		List<Long> temp = new ArrayList<Long>();
 		try {
@@ -700,7 +702,10 @@ public class ExportServiceImpl implements ExportService {
 		return result;		
 	}
 	
-	private EntryTypeIterator findEntryTypeIteratorXPath(Long id1, Long id2, Long id3, Class clazz) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	// TODO: need to make RetailCustomer inherit from IdentifiedObject to remove the above @Suppress
+	private EntryTypeIterator findEntryTypeIteratorXPath(Long id1, Long id2, Long id3, 
+			Class clazz) {
 		EntryTypeIterator result = null;
 		List<Long> temp = new ArrayList<Long>();
 		try {

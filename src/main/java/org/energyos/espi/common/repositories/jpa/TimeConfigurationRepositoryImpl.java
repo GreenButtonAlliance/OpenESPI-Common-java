@@ -20,7 +20,6 @@ import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.xml.bind.JAXBException;
 
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.TimeConfigurationRepository;

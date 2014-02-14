@@ -44,7 +44,9 @@ public class TestUtils {
                 return null;
             }
 
-            @Override
+            @SuppressWarnings("rawtypes")
+            // TODO: Type this class strongly and hook back into the xml name world
+			@Override
             public Iterator getPrefixes(String namespaceURI) {
                 return null;
             }

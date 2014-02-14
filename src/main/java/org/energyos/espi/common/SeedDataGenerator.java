@@ -36,7 +36,8 @@ public class SeedDataGenerator {
     public static String newUsagePointXML(UUID uuid, String name) throws IOException {
         InputStream in = SeedDataGenerator.class.getClassLoader().getResourceAsStream("fixtures/test_usage_data.xml");
 
-        String xml = new Scanner(in,"UTF-8").useDelimiter("\\A").next();
+        @SuppressWarnings("resource")
+		String xml = new Scanner(in,"UTF-8").useDelimiter("\\A").next();
         xml = xml.replaceFirst("48C2A019-5598-4E16-B0F9-49E4FF27F5FB", uuid.toString());
         xml = xml.replaceFirst("Front Electric Meter", name);
 

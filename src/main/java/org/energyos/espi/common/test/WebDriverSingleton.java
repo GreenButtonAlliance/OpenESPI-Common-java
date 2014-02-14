@@ -30,7 +30,9 @@ public class WebDriverSingleton {
         public static HtmlUnitDriver HTML_UNIT;
         public static ChromeDriver CHROME;
 
-        public static ChromeDriver chrome() {
+        @SuppressWarnings("unused")
+        // TODO: clean the code of needing this as external web testing strategy is in place
+		public static ChromeDriver chrome() {
             if (CHROME == null) {
                 CHROME = new ChromeDriver();
                 System.out.println("********************************************************");

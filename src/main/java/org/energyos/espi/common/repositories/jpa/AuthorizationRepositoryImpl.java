@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.xml.bind.JAXBException;
 
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.repositories.AuthorizationRepository;
@@ -29,8 +28,9 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
         em.persist(authorization);
     }
 
-    @Override
-    public List findAllByRetailCustomerId(Long retailCustomerId) {
+    @SuppressWarnings("unchecked")
+	@Override
+    public List<Authorization> findAllByRetailCustomerId(Long retailCustomerId) {
       return em.createNamedQuery(Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID)
               .setParameter("retailCustomerId", retailCustomerId).getResultList();
     }
