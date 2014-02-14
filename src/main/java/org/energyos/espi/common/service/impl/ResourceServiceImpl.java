@@ -188,7 +188,13 @@ public class ResourceServiceImpl implements ResourceService {
 
 	@Override
 	public void flush() {
-		repository.flush();
 		
+		repository.flush();	
+	}
+
+	@Override
+	public <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz) {
+		
+		   repository.deleteById(id, clazz);
 	}
 }
