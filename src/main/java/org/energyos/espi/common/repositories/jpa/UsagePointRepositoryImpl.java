@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBException;
 
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.RetailCustomer;
@@ -34,7 +35,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class UsagePointRepositoryImpl implements UsagePointRepository {
 
     @PersistenceContext
@@ -59,14 +62,18 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 .getSingleResult();
     }
 
-    @Transactional
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     @Override
     public void persist(UsagePoint up) {
         this.em.persist(up);
     }
 
     @Override
-    @Transactional
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void associateByUUID(RetailCustomer retailCustomer, UUID uuid) {
         try {
             UsagePoint existingUsagePoint = findByUUID(uuid);
@@ -81,7 +88,9 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
         }
     }
 
-    @Transactional
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     @Override
     public void createOrReplaceByUUID(UsagePoint usagePoint) {
         try {
@@ -129,7 +138,9 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
                 .getResultList();
     }
 
-    @Transactional
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     @Override
     public void deleteById(Long id) {
 	    UsagePoint r = findById(id);
@@ -170,4 +181,5 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
             return (List<Long>)this.em.createNamedQuery(UsagePoint.QUERY_FIND_ALL_IDS)
                     .getResultList();
         }
+		
 }

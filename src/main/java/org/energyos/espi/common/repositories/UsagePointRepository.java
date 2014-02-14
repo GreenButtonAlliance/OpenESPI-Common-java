@@ -49,4 +49,5 @@ public interface UsagePointRepository {
     List<Long> findAllIdsForRetailCustomer(Long retailCustomerId);
 
 	List<Long> findAllIds();
+
 }

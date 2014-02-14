@@ -142,7 +142,7 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 	@Override
 	public ReadingType importResource(InputStream stream) {
 		try{
-		importService.importData(stream);
+		importService.importData(stream, null);
 		EntryType entry = importService.getEntries().get(0);
 		ReadingType readingType = entry.getContent().getReadingType();
 		return readingType;

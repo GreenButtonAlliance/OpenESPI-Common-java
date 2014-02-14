@@ -8,11 +8,15 @@ import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.service.ResourceService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 @Component
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class ResourceLinker {
     @Autowired
     private ResourceService resourceService;

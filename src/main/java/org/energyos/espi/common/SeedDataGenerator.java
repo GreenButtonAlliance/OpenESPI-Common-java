@@ -24,9 +24,9 @@ public class SeedDataGenerator {
     public void init() throws Exception {
         RetailCustomer retailCustomer = retailCustomerService.findById(1L);
         usagePointService.associateByUUID(retailCustomer, UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C2"));
-        importService.importData(newUsagePointInputStream(UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C2")));
+        importService.importData(newUsagePointInputStream(UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C2")), retailCustomer.getId());
         usagePointService.associateByUUID(retailCustomer, UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C3"));
-        importService.importData(newUsagePointInputStream(UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C3")));
+        importService.importData(newUsagePointInputStream(UUID.fromString("7BC41774-7190-4864-841C-861AC76D46C3")), retailCustomer.getId());
     }
 
     public static InputStream newUsagePointInputStream(UUID uuid) throws IOException {

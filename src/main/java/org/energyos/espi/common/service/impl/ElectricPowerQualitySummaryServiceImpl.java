@@ -144,7 +144,7 @@ public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQual
 	@Override
 	public ElectricPowerQualitySummary importResource(InputStream stream) {
 		try{
-		importService.importData(stream);
+		importService.importData(stream, null);
 		EntryType entry = importService.getEntries().get(0);
 		ElectricPowerQualitySummary electricPowerQualitySummary = entry.getContent().getElectricPowerQualitySummary();
 		return electricPowerQualitySummary;

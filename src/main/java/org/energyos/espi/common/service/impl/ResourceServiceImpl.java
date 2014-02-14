@@ -58,6 +58,7 @@ public class ResourceServiceImpl implements ResourceService {
             // transactional semantics as null (though that needs proven) in tests for 
             // ApplicationInformation and IntervalBlock
         } catch (Exception e) {
+
             return new ArrayList<>();
         }
     }
@@ -75,7 +76,7 @@ public class ResourceServiceImpl implements ResourceService {
     // the following is used to query for the existence of the object in the DB within 
     // a closed transactional space. Callers will need a Catch on the NoResultExecption for failure.
 	@Override
-    @Transactional( readOnly = true)  
+    @Transactional ( readOnly = true)  
 	public <T extends IdentifiedObject> T testById(Long id, Class<T> clazz) {
 		return repository.findById(id, clazz);
 	}
@@ -162,7 +163,6 @@ public class ResourceServiceImpl implements ResourceService {
 		try {
 			result = (new EntryTypeIterator(this, idList, clazz));
 		} catch (Exception e) {
-			System.out.printf("**** Entry Type Iterator Not Found: %s: %s\n", clazz.toString(), e.toString());
 			result = null;
 		}
 		return result;
@@ -176,7 +176,6 @@ public class ResourceServiceImpl implements ResourceService {
 			temp.add(id1);
 			result = (new EntryTypeIterator(this, temp, clazz)).nextEntry(clazz);
 		} catch (Exception e) {
-			System.out.printf("**** Entry Type Not Found: %d - %s: %s\n", id1, clazz.toString(), e.toString());
 			result = null;
 		}
 		return result;
@@ -186,5 +185,11 @@ public class ResourceServiceImpl implements ResourceService {
 	public <T extends IdentifiedObject> T findByResourceUri(String uri,
 			Class<T> clazz) {
 		return repository.findByResourceUri(uri, clazz);
+	}
+
+	@Override
+	public void flush() {
+		repository.flush();
+		
 	}
 }

@@ -25,7 +25,6 @@ import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.IntervalBlock;
-import org.energyos.espi.common.domain.IntervalReading;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.domain.TimeConfiguration;
@@ -56,7 +55,6 @@ public class EntryProcessor {
             try {
                 IdentifiedObject existingResource = resourceService.findByUUID(resource.getUUID(), resource.getClass());
                	
-                System.out.printf("**** Importing an Existing Resource: %s\n", resource.getUUID());
                 // merge the new into the old and throw the new away
                 //
                 existingResource.merge(resource);
@@ -73,7 +71,7 @@ public class EntryProcessor {
                 }
                 
                 if (existingResource instanceof IntervalBlock) {
-                   	System.out.printf("**** Importing an Existing IntervalBlock: %s\n", resource.getUUID());
+                   	
                     List <IntervalBlock> intervalBlocks = entry.getContent().getIntervalBlocks();
                     List <IntervalBlock> newList = new ArrayList<IntervalBlock> ();
                     Iterator<IntervalBlock> blocks = intervalBlocks.iterator();
@@ -91,27 +89,27 @@ public class EntryProcessor {
                 }
                 
                 if (existingResource instanceof ReadingType) {              
-                	System.out.printf("**** Importing an Existing ReadingType: %s\n", resource.getUUID()); 
+                	
                 	entry.getContent().setReadingType((ReadingType) existingResource); 
                 }
                 
                 if (existingResource instanceof TimeConfiguration) {
-                	System.out.printf("**** Importing an Existing TimeConfiguration: %s\n", resource.getUUID());
+                	
                     entry.getContent().setLocalTimeParameters((TimeConfiguration) existingResource);
                 }
                 
                 if (existingResource instanceof ElectricPowerUsageSummary) {
-                	System.out.printf("**** Importing an Existing ElectricPowerUsageSummary: %s\n", resource.getUUID());                	
+                          	
                 	entry.getContent().setElectricPowerUsageSummary((ElectricPowerUsageSummary) existingResource);               
                 }
                 
                 if (existingResource instanceof ElectricPowerQualitySummary) {
-                	System.out.printf("**** Importing an Existing ElectricPowerQualitySummary: %s\n", resource.getUUID());                	
+                       	
                 	entry.getContent().setElectricPowerQualitySummary((ElectricPowerQualitySummary) existingResource);               
                 }
                 
                 if (existingResource instanceof ApplicationInformation) {
-                	System.out.printf("**** Importing an Existing ApplicationInformation: %s\n", resource.getUUID());                	
+                 	
                 	entry.getContent().setApplicationInformation((ApplicationInformation) existingResource);               
                 }
                 

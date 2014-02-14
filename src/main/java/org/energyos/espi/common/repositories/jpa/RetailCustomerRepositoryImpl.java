@@ -23,12 +23,15 @@ import javax.persistence.PersistenceContext;
 
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 
 public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 
@@ -45,7 +48,9 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
         return (List<RetailCustomer>)this.em.createNamedQuery(RetailCustomer.QUERY_FIND_ALL).getResultList();
     }
 
-    @Transactional
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void persist(RetailCustomer customer) {
         this.em.persist(customer);
     }
@@ -66,7 +71,9 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
         return em.find(RetailCustomer.class,id);
 	}
 
-        @Transactional
+        @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 	@Override
 	public void deleteById(Long id) {
     		RetailCustomer rc = findById(id);

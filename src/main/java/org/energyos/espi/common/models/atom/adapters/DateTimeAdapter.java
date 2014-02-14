@@ -21,6 +21,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.text.SimpleDateFormat;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+
 import org.energyos.espi.common.models.atom.DateTimeType;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;

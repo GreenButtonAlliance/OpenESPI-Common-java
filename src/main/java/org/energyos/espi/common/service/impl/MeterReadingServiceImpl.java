@@ -52,10 +52,12 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 	public void setImportService(ImportService importService) {
 		this.importService = importService;
 	}
+	
     public void setRepository(MeterReadingRepository meterReadingRepository) {
         this.meterReadingRepository = meterReadingRepository;
     }
     
+
     @Override
     public MeterReading findByUUID(UUID uuid) {
         return meterReadingRepository.findByUUID(uuid);
@@ -144,11 +146,12 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 	@Override
 	public MeterReading importResource(InputStream stream) {
 		try {
-			importService.importData(stream);
+			importService.importData(stream, null);
 			EntryType entry = importService.getEntries().get(0);
 			MeterReading meterReading = entry.getContent().getMeterReading();
 			return meterReading;
 		} catch (Exception e) {
+
 			return null;
 		}
 	}
@@ -169,6 +172,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
+
 			result = null;
 		}
 		return result;
@@ -185,6 +189,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
+
 			result = null;
 		}
 		return result;

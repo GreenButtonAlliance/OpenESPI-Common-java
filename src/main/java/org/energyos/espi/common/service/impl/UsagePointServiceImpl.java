@@ -35,6 +35,7 @@ import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.SubscriptionBuilder;
 import org.energyos.espi.common.utils.UsagePointBuilder;
 import org.energyos.espi.common.utils.XMLMarshaller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,17 +43,23 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sun.syndication.io.FeedException;
 
 @Service
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class UsagePointServiceImpl implements UsagePointService {
 
 	@Autowired
 	private XMLMarshaller xmlMarshaller;
+	
 	@Autowired
 	private UsagePointRepository usagePointRepository;
+	
 	@Autowired
 	private ATOMMarshaller marshaller;
+	
 	@Autowired
 	private UsagePointBuilder usagePointBuilder;
+	
 	@Autowired
 	private SubscriptionBuilder subscriptionBuilder;
 
@@ -188,7 +195,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 		UsagePoint usagePoint = null;
 		try {
-			importService.importData(stream);
+			importService.importData(stream, null);
 			usagePoint = importService.getEntries().get(0).getContent().getUsagePoint();
 
 		} catch (Exception e) {
@@ -256,6 +263,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
+
 			result = null;
 		}
 		return result;
@@ -272,6 +280,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
+
 			result = null;
 		}
 		return result;

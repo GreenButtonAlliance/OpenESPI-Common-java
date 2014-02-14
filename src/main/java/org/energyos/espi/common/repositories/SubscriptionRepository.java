@@ -35,4 +35,6 @@ public interface SubscriptionRepository {
 	void deleteById(Long id);
 
 	Subscription findByUUID(UUID uuid);
+
+	Subscription findByAuthorizationId(Long id);
 }

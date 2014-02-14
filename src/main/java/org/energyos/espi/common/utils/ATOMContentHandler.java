@@ -79,6 +79,7 @@ public class ATOMContentHandler extends XMLFilterImpl {
             try {
                 unmarshaller = context.createUnmarshaller();
             } catch (JAXBException e) {
+
                 throw new SAXException(e);
             }
             unmarshallerHandler = unmarshaller.getUnmarshallerHandler();
@@ -133,12 +134,9 @@ public class ATOMContentHandler extends XMLFilterImpl {
                         throw new SAXException("Unbale to unmarshall <entry>", x);
                     }
                     procssor.process(result.getValue());
-                    // stash the UsagePoints for later processing of retailCustomer Binding
-                    // and subscription notification
-                    //
-                    if (result.getValue().getContent().getUsagePoint() != null) {
-                         entries.add(result.getValue());
-                    }
+
+                    entries.add(result.getValue());
+                    
                     // and update the min/max import range for later subscription publication
                     if ((minUpdated == null) || (result.getValue().getPublished().getValue().compare(minUpdated) == DatatypeConstants.LESSER)) {
                     	minUpdated = result.getValue().getPublished().getValue();

@@ -1,10 +1,7 @@
 
 package org.energyos.espi.common.utils;
 
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.xml.bind.Marshaller;
 import javax.xml.datatype.XMLGregorianCalendar;

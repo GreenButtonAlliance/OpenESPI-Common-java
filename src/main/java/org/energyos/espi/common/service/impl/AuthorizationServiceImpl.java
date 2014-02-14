@@ -217,7 +217,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	public Authorization importResource(InputStream stream) {
 		Authorization authorization = null;
 		try {
-			importService.importData(stream);
+			importService.importData(stream, null);
 			authorization = importService.getEntries().get(0).getContent().getAuthorization();
 		} catch (Exception e) {
 

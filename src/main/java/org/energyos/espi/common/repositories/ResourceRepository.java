@@ -26,6 +26,8 @@ import org.energyos.espi.common.domain.UsagePoint;
 public interface ResourceRepository {
     void persist(IdentifiedObject resource);
 
+	void flush();
+
     List<IdentifiedObject> findAllParentsByRelatedHref(String href, Linkable linkable);
 
     List<IdentifiedObject> findAllRelated(Linkable linkable);
@@ -59,4 +61,5 @@ public interface ResourceRepository {
 	<T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2, Long id3, Long id4, Class<T> clazz);
 
     <T extends IdentifiedObject> T findByResourceUri(String uri, Class<T> clazz);
+
 }

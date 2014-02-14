@@ -163,12 +163,12 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 	public TimeConfiguration importResource(InputStream stream) {
 		TimeConfiguration timeConfiguration = null;
 		try {
-			importService.importData(stream);
+			importService.importData(stream, null);
 			EntryType entry = importService.getEntries().get(0);
 			timeConfiguration = entry.getContent().getLocalTimeParameters();
 
 		} catch (Exception e) {
-           
+           e.printStackTrace();
 		}
 		return timeConfiguration;
 	}

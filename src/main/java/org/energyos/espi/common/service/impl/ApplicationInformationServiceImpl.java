@@ -34,7 +34,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class ApplicationInformationServiceImpl implements ApplicationInformationService {
 
     // the cached operational object for this service
@@ -199,7 +201,7 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 
 		ApplicationInformation applicationInformation = null;
 		try {
-			importService.importData(stream);
+			importService.importData(stream, null);
 			applicationInformation = importService.getEntries().get(0).getContent().getApplicationInformation();
 		} catch (Exception e) {
 

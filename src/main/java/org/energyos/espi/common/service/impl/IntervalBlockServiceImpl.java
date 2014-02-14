@@ -149,7 +149,7 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 	@Override
 	public IntervalBlock importResource(InputStream stream) {
 		try{
-		importService.importData(stream);
+		importService.importData(stream, null);
 		EntryType entry = importService.getEntries().get(0);
 		List<IntervalBlock> intervalBlocks = entry.getContent().getIntervalBlocks();
 		return intervalBlocks.get(0);

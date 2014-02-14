@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBException;
 
 import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
@@ -28,11 +29,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class ApplicationInformationRepositoryImpl implements ApplicationInformationRepository {
 
     @PersistenceContext
     protected EntityManager em;
+
 
     @Override
     public ApplicationInformation findById(Long id) {
@@ -48,7 +52,9 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
     }
 
     @Override
-    @Transactional
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void persist(ApplicationInformation applicationInformation) {
         em.persist(applicationInformation);
     }
@@ -80,7 +86,9 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
 	}
 
 	@Override
-	@Transactional
+	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 	public void deleteById(Long id) {
 	       em.remove(findById(id));
 		

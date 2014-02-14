@@ -143,7 +143,7 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 	@Override
 	public ElectricPowerUsageSummary importResource(InputStream stream) {
 		try {
-			importService.importData(stream);
+			importService.importData(stream, null);
 			EntryType entry = importService.getEntries().get(0);
 			ElectricPowerUsageSummary electricPowerUsageSummary = entry.getContent().getElectricPowerUsageSummary();
 			return electricPowerUsageSummary;

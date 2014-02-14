@@ -23,6 +23,7 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBException;
 
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
@@ -31,7 +32,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
+@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
 
     @PersistenceContext
@@ -43,7 +46,9 @@ public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
     }
 
     @Override
-    @Transactional
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public void persist(ReadingType readingType) {
         em.persist(readingType);
     }
@@ -79,7 +84,9 @@ public class ReadingTypeRepositoryImpl implements ReadingTypeRepository {
 	}
 
 	@Override
-	@Transactional
+	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
 	public void deleteById(Long id) {
 		ReadingType rt = findById(id);
 		// TODO may need to find any/all MeterReadings that point to this ...
