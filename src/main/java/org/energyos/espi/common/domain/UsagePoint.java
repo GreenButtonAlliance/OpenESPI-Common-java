@@ -345,25 +345,6 @@ public class UsagePoint
         this.serviceDeliveryPoint = serviceDeliveryPoint;
     }
 
-
-    private void addMeterReadingLinks(List<LinkType> links) {
-        if(meterReadings.size() > 0) {
-            links.add(new LinkType("related", getSelfHref() + "/MeterReading"));
-        }
-    }
-
-    private void addElectricPowerUsageSummaryLinks(List<LinkType> links) {
-        if(electricPowerUsageSummaries.size() > 0) {
-            links.add(new LinkType("related", getSelfHref() + "/ElectricPowerUsageSummary"));
-        }
-    }
-
-    private void addElectricPowerQualitySummaryLinks(List<LinkType> links) {
-        if(electricPowerQualitySummaries.size() > 0) {
-            links.add(new LinkType("related", getSelfHref() + "/ElectricPowerQualitySummary"));
-        }
-    }
-
     public Set<Subscription> getSubscriptions() {
         return subscriptions;
     }

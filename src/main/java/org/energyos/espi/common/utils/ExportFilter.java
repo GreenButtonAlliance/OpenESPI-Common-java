@@ -78,8 +78,7 @@ public class ExportFilter {
         return params.get(paramName) != null;
     }
 
-    @SuppressWarnings("restriction")
-	private long toTime(String key) {
+    private long toTime(String key) {
         String param = params.get(key);
 
         return XMLGregorianCalendarImpl.parse(param).toGregorianCalendar().getTimeInMillis();

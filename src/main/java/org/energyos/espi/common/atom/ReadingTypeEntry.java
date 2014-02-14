@@ -23,7 +23,6 @@ import com.sun.syndication.io.FeedException;
 @SuppressWarnings("serial")
 public class ReadingTypeEntry extends EspiEntry<ReadingType> {
 
-    @SuppressWarnings("unchecked")
     public ReadingTypeEntry(ReadingType espiObject) throws FeedException {
         super(espiObject);
     }

@@ -25,7 +25,7 @@ public interface AuthorizationRepository {
 
     void persist(Authorization authorization);
 
-    List findAllByRetailCustomerId(Long retailCustomerId);
+    List<Authorization> findAllByRetailCustomerId(Long retailCustomerId);
 
     Authorization findByState(String state);
     

@@ -69,6 +69,6 @@ public interface ResourceService {
 	// currently used only finding the Authorization associated with a given resource URI
 	<T extends IdentifiedObject> T findByResourceUri(String uri, Class<T> clazz);
 
-
+	<T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz);
 	
 }

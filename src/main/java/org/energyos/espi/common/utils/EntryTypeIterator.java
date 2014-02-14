@@ -21,9 +21,14 @@ public class EntryTypeIterator {
     private EntryBuilder builder;
 
     private Iterator<Long> resourceIds;
-    private Iterator<Pair<Long, Class>> childIds = new ArrayList<Pair<Long, Class>>().iterator();
+    @SuppressWarnings("rawtypes")
+
+	private Iterator<Pair<Long, Class>> childIds = new ArrayList<Pair<Long, Class>>().iterator();
     private ResourceService resourceService;
-    private Class rootClass;
+    
+    @SuppressWarnings("rawtypes")
+    // TODO: fix the EntryTypeIterator Typing System
+	private Class rootClass;
 
     public EntryTypeIterator(ResourceService resourceService, List<Long> ids, EntryBuilder builder) {
         this.resourceService = resourceService;
@@ -31,7 +36,9 @@ public class EntryTypeIterator {
         this.builder = builder;
     }
 
-    public EntryTypeIterator(ResourceService resourceService, List<Long> ids, Class clazz) {
+    @SuppressWarnings("rawtypes")
+    // TODO: fix the EntryTypeIterator Typing System
+	public EntryTypeIterator(ResourceService resourceService, List<Long> ids, Class clazz) {
         this.resourceService = resourceService;
         this.resourceIds = ids.iterator();
         builder = new EntryBuilder();
@@ -42,9 +49,11 @@ public class EntryTypeIterator {
         return childIds.hasNext() || resourceIds.hasNext();
     }
 
-    public EntryType next()  {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    // TODO: fix the EntryTypeIterator Typing System
+	public EntryType next()  {
         IdentifiedObject resource;
-        // TODO there are some Class maint. things needed here
+
         if(childIds.hasNext()) {
             Pair<Long, Class> pair = childIds.next();
             resource = resourceService.findById(pair.getKey(), pair.getValue());
@@ -59,14 +68,17 @@ public class EntryTypeIterator {
     // For the RESTful interfaces, we don't want to build the whole child structure, 
     // only the 1 resource is exported.
     //
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    // TODO: fix the EntryTypeIterator Typing System
 	public EntryType nextEntry(Class resourceClass)  {
         IdentifiedObject resource;
         resource = resourceService.findById(resourceIds.next(), resourceClass);
         return builder.buildEntry(resource);
     }
 
-    private void updateChildIds(Long usagePointId) {
+    @SuppressWarnings("rawtypes")
+    // TODO: fix the EntryTypeIterator Typing System
+	private void updateChildIds(Long usagePointId) {
     	// TODO: Deal with these Class warnings...
     	
         List<Pair<Long, Class>> pairs = new ArrayList<>();

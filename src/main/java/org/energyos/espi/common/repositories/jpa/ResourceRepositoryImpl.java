@@ -23,7 +23,6 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.xml.bind.JAXBException;
 
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.Linkable;
@@ -48,7 +47,12 @@ class ResourceRepositoryImpl implements ResourceRepository {
 		em.flush();	
 	}
 
-
+	@Override
+	public <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz) {
+	  T temp = findById(id, clazz);
+	  em.remove(temp);
+	}
+	
     @SuppressWarnings("unchecked")
 	@Override
     public List<IdentifiedObject> findAllParentsByRelatedHref(String href, Linkable linkable) {
@@ -270,7 +274,5 @@ class ResourceRepositoryImpl implements ResourceRepository {
             throw new RuntimeException(e);
         }
 	}
-
-
 
 }

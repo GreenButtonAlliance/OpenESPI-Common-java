@@ -23,7 +23,6 @@ import com.sun.syndication.io.FeedException;
 @SuppressWarnings("serial")
 public class TimeConfigurationEntry extends EspiEntry<TimeConfiguration> {
 
-    @SuppressWarnings("unchecked")
     public TimeConfigurationEntry(TimeConfiguration espiObject) throws FeedException {
         super(espiObject);
     }

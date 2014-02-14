@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.xml.bind.JAXBException;
-
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -276,12 +274,11 @@ public class UsagePointServiceImpl implements UsagePointService {
 		List<Long> temp = new ArrayList<Long>();
 	    temp.add(usagePointId);
 		try {
-			List<Long> allIdsForRetailCustomer = findAllIdsForRetailCustomer(retailCustomerId);
+			// make the call to insure it is a valid usagePointId
+			resourceService.findAllIdsByXPath(retailCustomerId, usagePointId, UsagePoint.class);
 			result = (new EntryTypeIterator(resourceService, temp, UsagePoint.class));
 		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-
+            System.out.printf("****UsagePointService: Seraching for an invalide UsagePointId - %d: %s\n", usagePointId, e.toString());
 			result = null;
 		}
 		return result;
