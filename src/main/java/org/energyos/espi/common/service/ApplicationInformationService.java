@@ -52,6 +52,8 @@ public interface ApplicationInformationService {
 
 	public String getDataCustodianResourceEndpoint();
 	
+	public String getAuthorizationServerTokenEndpoint();
+	
 	public String getThirdPartyNotifyURI();
 
 }

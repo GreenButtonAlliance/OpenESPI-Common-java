@@ -76,7 +76,17 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
     	}
     	return applicationInformation.getDataCustodianResourceEndpoint();
     	// return "http://localhost:8080/DataCustodian/espi/1_1/resource";
-    }
+    }    
+
+	@Override
+	public String getAuthorizationServerTokenEndpoint() {
+    	if (this.applicationInformation == null) {
+    		// default it to the seed value
+    		this.setApplicationInformation(this.findById(1L));
+    	}
+    	return applicationInformation.getAuthorizationServerTokenEndpoint();
+    	// return "http://localhost:8080/DataCustodian/oauth/token";
+	}    
     
     @Override
     public List<ApplicationInformation> findAll() {
