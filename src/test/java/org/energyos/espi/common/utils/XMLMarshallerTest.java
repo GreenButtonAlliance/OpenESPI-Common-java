@@ -28,7 +28,8 @@ public class XMLMarshallerTest extends BaseTest {
         XMLMarshaller xmlMarshaller = new XMLMarshaller();
         xmlMarshaller.setMarshaller(marshaller);
 
-        JAXBElement jaxbElement = mock(JAXBElement.class);
+        @SuppressWarnings("rawtypes")
+		JAXBElement jaxbElement = mock(JAXBElement.class);
         EntryType entryType = new EntryType();
         when(jaxbElement.getValue()).thenReturn(entryType);
         when(marshaller.unmarshal(any(StreamSource.class))).thenReturn(jaxbElement);
@@ -41,7 +42,8 @@ public class XMLMarshallerTest extends BaseTest {
         XMLMarshaller xmlMarshaller = new XMLMarshaller();
         xmlMarshaller.setMarshaller(marshaller);
 
-        JAXBElement jaxbElement = mock(JAXBElement.class);
+        @SuppressWarnings("rawtypes")
+		JAXBElement jaxbElement = mock(JAXBElement.class);
         EntryType entryType = new EntryType();
         when(jaxbElement.getValue()).thenReturn(entryType);
         when(marshaller.unmarshal(any(StreamSource.class))).thenReturn(jaxbElement);

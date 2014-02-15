@@ -58,7 +58,9 @@ public class XMLMarshaller {
         this.marshaller = marshaller;
     }
 
-    private <T extends Object> T unmarshal(StreamSource streamSource, Class<T> type) {
+    @SuppressWarnings("rawtypes")
+    // TODO: the Type cast here is problematic - may need RetailCustomer to inherit from IdentifiedObject to Fix
+	private <T extends Object> T unmarshal(StreamSource streamSource, Class<T> type) {
         JAXBElement jaxbElement = (JAXBElement)marshaller.unmarshal(streamSource);
         return type.cast(jaxbElement.getValue());
     }

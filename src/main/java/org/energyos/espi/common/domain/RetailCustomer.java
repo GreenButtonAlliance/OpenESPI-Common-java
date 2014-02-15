@@ -43,6 +43,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@SuppressWarnings("serial")
+// the above surpress warnings is b/c the serial will get pushed on through the the db...
 @XmlRootElement(name="RetailCustomer")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RetailCustomer")

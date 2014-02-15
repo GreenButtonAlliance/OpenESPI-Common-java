@@ -14,7 +14,12 @@ import com.sun.syndication.io.FeedException;
 public class IntervalBlocksEntry extends EspiEntry<IntervalBlock> {
 
 
-    public IntervalBlocksEntry(List<IntervalBlock> intervalBlocks) throws FeedException {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public IntervalBlocksEntry(List<IntervalBlock> intervalBlocks) throws FeedException {
         super(intervalBlocks.get(0));
 
         this.setContents(buildContents(intervalBlocks));

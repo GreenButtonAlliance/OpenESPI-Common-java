@@ -16,7 +16,8 @@ import com.sun.syndication.io.FeedException;
 public class FeedFactory {
     private FeedFactory() {}
 
-    public static Feed newFeed() throws FeedException {
+    @SuppressWarnings({ "deprecation", "unchecked" })
+	public static Feed newFeed() throws FeedException {
         SubscriptionBuilder subscriptionBuilder = new SubscriptionBuilder();
         List<UsagePoint> usagePoints = new ArrayList<>();
         usagePoints.add(newUsagePointWithId());

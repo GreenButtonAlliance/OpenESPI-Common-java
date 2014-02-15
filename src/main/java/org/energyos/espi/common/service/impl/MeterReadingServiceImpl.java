@@ -139,10 +139,6 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		return result;
 	}
 
-	private List<Long> findAllIds(Long meterReadingId) {
-	   return resourceService.findAllIds(MeterReading.class);
-	}
-
 	@Override
 	public MeterReading importResource(InputStream stream) {
 		try {

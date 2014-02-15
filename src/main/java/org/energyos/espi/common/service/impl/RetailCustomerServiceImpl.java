@@ -27,7 +27,6 @@ import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.ServiceCategory;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
-import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
 import org.energyos.espi.common.service.AuthorizationService;
 import org.energyos.espi.common.service.ImportService;
@@ -136,12 +135,13 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 		RetailCustomer retailCustomer = null;
 		try {
 			importService.importData(stream, null);
-			EntryType entry = importService.getEntries().get(0);
-			// TODO - add RetailCustomer to the entrytype structure
-//			RetailCustomer retailCustomer = entry.getContent().getRetailCustomer();
-//			persist(retailCustomer);
-		} catch (Exception e) {
+			// TODO - Make RetailCustomer inherit from IdentifiedObject and add RetailCustomer to the entrytype structure
 
+			// EntryType entry = importService.getEntries().get(0);
+            // RetailCustomer retailCustomer = entry.getContent().getRetailCustomer();
+            // persist(retailCustomer);
+		} catch (Exception e) {
+          System.out.printf("**** RetailCustomerService:importResource Failed %s\n", e.toString());
 		}
 		return retailCustomer;
 	}

@@ -22,7 +22,12 @@ import com.sun.syndication.io.FeedException;
 
 public class MeterReadingEntry extends EspiEntry<MeterReading> {
 
-    public MeterReadingEntry(MeterReading espiObject) throws FeedException {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public MeterReadingEntry(MeterReading espiObject) throws FeedException {
         super(espiObject);
 
     }

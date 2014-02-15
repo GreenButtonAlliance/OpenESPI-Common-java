@@ -239,6 +239,19 @@ public class ImportServiceImpl implements ImportService {
 		}
     }
     
+    
+    public void setResourceLinker(ResourceLinker resourceLinker) {
+        this.resourceLinker = resourceLinker;
+    }
+    
+    public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+    }
+    
+    public void setAuthorizationService(AuthorizationService authorizationService) {
+        this.authorizationService = authorizationService;
+    }
+    
     public void setSubscriptionService(SubscriptionService subscriptionService) {
         this.subscriptionService = subscriptionService;
     }
@@ -247,9 +260,9 @@ public class ImportServiceImpl implements ImportService {
         this.usagePointService = usagePointService;
     }
     
-    public void setAuthoirzationService(AuthorizationService authorizationService) {
-        this.authorizationService = authorizationService;
-    }
+    public void setRetailCustomerService(RetailCustomerService retailCustomerService) {
+        this.retailCustomerService = retailCustomerService;
+    }  
     
     public void setNotificationService(NotificationService notificationService) {
         this.notificationService = notificationService;

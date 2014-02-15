@@ -28,13 +28,18 @@ import com.sun.syndication.feed.atom.Link;
 import com.sun.syndication.io.FeedException;
 
 public abstract class EspiEntry<T extends IdentifiedObject> extends Entry {
-    private Link selfLink = new Link();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Link selfLink = new Link();
     private Link upLink = new Link();
     private List<Link> relatedLinks = new ArrayList<>();
 
     protected T espiObject;
 
-    public EspiEntry(T espiObject) throws FeedException {
+    @SuppressWarnings("unchecked")
+	public EspiEntry(T espiObject) throws FeedException {
         this.espiObject = espiObject;
         this.setTitle(espiObject.getDescription());
         this.setId(espiObject.getMRID());
@@ -82,7 +87,8 @@ public abstract class EspiEntry<T extends IdentifiedObject> extends Entry {
         return relatedLinks;
     }
 
-    protected void addRelatedLink(String href) {
+    @SuppressWarnings("unchecked")
+	protected void addRelatedLink(String href) {
         Link link = new Link();
         link.setRel("related");
         link.setHref(href);

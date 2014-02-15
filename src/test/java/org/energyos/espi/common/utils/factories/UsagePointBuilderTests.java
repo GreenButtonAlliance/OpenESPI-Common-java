@@ -40,6 +40,7 @@ import org.junit.Test;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 
+@SuppressWarnings("restriction")
 public class UsagePointBuilderTests {
 
     private UsagePointBuilder builder;
@@ -128,14 +129,16 @@ public class UsagePointBuilderTests {
         assertEquals(title, builder.newUsagePoint(entry).getDescription());
     }
 
-    @Test
+    @SuppressWarnings("deprecation")
+	@Test
     public void newUsagePoint_givenEntryWithNoContent_returnsNull() {
         EntryType entry = newEntry("Nothing");
         entry.setContent(null);
         assertNull(builder.newUsagePoint(entry));
     }
 
-    @Test
+    @SuppressWarnings("deprecation")
+	@Test
     public void newUsagePoint_givenEntryWithNonUsagePoint_returnsNull() {
         EntryType entryType = newEntry("Wrong Content");
         ContentType content = new ContentType();

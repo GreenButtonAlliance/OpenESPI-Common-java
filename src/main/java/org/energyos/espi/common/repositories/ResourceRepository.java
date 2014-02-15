@@ -37,6 +37,8 @@ public interface ResourceRepository {
     UsagePoint findByUUID(UUID uuid);
 
     void update(UsagePoint resource);
+    
+    <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz);
 
     <T extends IdentifiedObject> T findById(Long id, Class<T> clazz);
 

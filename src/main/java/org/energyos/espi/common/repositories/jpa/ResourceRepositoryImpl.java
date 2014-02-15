@@ -48,7 +48,12 @@ class ResourceRepositoryImpl implements ResourceRepository {
 		em.flush();	
 	}
 
-
+	@Override
+	public <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz) {
+	  T temp = findById(id, clazz);
+	  em.remove(temp);
+	}
+	
     @SuppressWarnings("unchecked")
 	@Override
     public List<IdentifiedObject> findAllParentsByRelatedHref(String href, Linkable linkable) {
@@ -270,7 +275,5 @@ class ResourceRepositoryImpl implements ResourceRepository {
             throw new RuntimeException(e);
         }
 	}
-
-
 
 }

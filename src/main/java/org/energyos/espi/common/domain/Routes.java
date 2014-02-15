@@ -92,8 +92,8 @@ public class Routes {
     public static final String ROOT_READING_TYPE_MEMBER = "/espi/1_1/resource/ReadingType/{readingTypeId}";
     public static final String ROOT_INTERVAL_BLOCK_COLLECTION = "/espi/1_1/resource/IntervalBlock";
     public static final String ROOT_INTERVAL_BLOCK_MEMBER = "/espi/1_1/resource/IntervalBlock/{intervalBlockId}";
-    public static final String ROOT_TIME_CONFIGURATION_COLLECTION = "/espi/1_1/resource/TimeConfiguration";
-    public static final String ROOT_TIME_CONFIGURATION_MEMBER = "/espi/1_1/resource/TimeConfiguration/{timeConfigurationId}";
+    public static final String ROOT_TIME_CONFIGURATION_COLLECTION = "/espi/1_1/resource/LocalTimeParameters";
+    public static final String ROOT_TIME_CONFIGURATION_MEMBER = "/espi/1_1/resource/LocalTimeParameters/{timeConfigurationId}";
     public static final String ROOT_ELECTRIC_POWER_QUALITY_SUMMARY_COLLECTION = "/espi/1_1/resource/ElectricPowerQualitySummary";
     public static final String ROOT_ELECTRIC_POWER_QUALITY_SUMMARY_MEMBER = "/espi/1_1/resource/ElectricPowerQualitySummary/{electricPowerQualitySummaryId}";
     public static final String ROOT_ELECTRIC_POWER_USAGE_SUMMARY_COLLECTION = "/espi/1_1/resource/ElectricPowerUsageSummary";
@@ -108,8 +108,8 @@ public class Routes {
     public static final String READING_TYPE_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/ReadingType/{readingTypeId}";
     public static final String INTERVAL_BLOCK_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock";
     public static final String INTERVAL_BLOCK_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}";
-    public static final String TIME_CONFIGURATION_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/TimeConfiguration";
-    public static final String TIME_CONFIGURATION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/TimeConfiguration/{timeConfigurationId}";
+    public static final String TIME_CONFIGURATION_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/LocalTimeParameters";
+    public static final String TIME_CONFIGURATION_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/LocalTimeParameters/{timeConfigurationId}";
     public static final String ELECTRIC_POWER_QUALITY_SUMMARY_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/ElectricPowerQualitySummary";
     public static final String ELECTRIC_POWER_QUALITY_SUMMARY_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/ElectricPowerQualitySummary/{electricPowerQualitySummaryId}";
     public static final String ELECTRIC_POWER_USAGE_SUMMARY_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}/ElectricPowerUsageSummary";

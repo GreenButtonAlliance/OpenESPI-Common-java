@@ -84,11 +84,11 @@ public class SubscriptionBuilderTests {
         assertHasEntry(feed, TimeConfigurationEntry.class);
     }
 
-    public void assertHasEntry(Feed feed, Class expected) {
+    public void assertHasEntry(Feed feed, @SuppressWarnings("rawtypes") Class expected) {
         assertTrue(hasEntry(feed, expected));
     }
 
-    private boolean hasEntry(Feed feed, Class expected) {
+    private boolean hasEntry(Feed feed, @SuppressWarnings("rawtypes") Class expected) {
         for (Object entry : feed.getEntries()) {
             if (entry.getClass().equals(expected)) {
                 return true;

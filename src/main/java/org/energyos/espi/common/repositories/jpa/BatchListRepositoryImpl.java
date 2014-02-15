@@ -24,7 +24,9 @@ public class BatchListRepositoryImpl implements BatchListRepository {
         em.persist(batchList);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+    // as BatchList is an orphaned object.  unchecked is needed.
+	@Override
     public List<BatchList> findAll() {
         String selectAll = "select list from BatchList list";
         return (List<BatchList>)this.em.createQuery(selectAll).getResultList();

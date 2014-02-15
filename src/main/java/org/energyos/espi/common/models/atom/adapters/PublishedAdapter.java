@@ -30,6 +30,6 @@ public class PublishedAdapter extends XmlAdapter<JAXBElement<DateTimeType>, Date
 
     @Override
     public JAXBElement<DateTimeType> marshal(DateTimeType v) throws Exception {
-        return new JAXBElement(ObjectFactory.EntryTypePublished_QNAME, DateTimeType.class, v);
+        return new JAXBElement<DateTimeType>(ObjectFactory.EntryTypePublished_QNAME, DateTimeType.class, v);
     }
 }

@@ -69,8 +69,6 @@ public class EntryTypeIteratorTests extends BaseTest {
     public void next_doesntReturnWrongTimeConfiguration() {
         TimeConfiguration wrongTimeParameters = espiPersistenceFactory.createLocalTimeParameters();
         UsagePoint usagePoint = espiPersistenceFactory.createUsagePoint();
-        TimeConfiguration localTimeParameters = usagePoint.getLocalTimeParameters();
-
         EntryTypeIterator iterator = new EntryTypeIterator(resourceService, Lists.newArrayList(usagePoint.getId()), UsagePoint.class);
 
         assertIteratorNotContains(iterator, wrongTimeParameters);
