@@ -44,7 +44,7 @@ public class AtomMarshallerListener extends Marshaller.Listener {
     		((LinkType) source).setHref(mutateFragment((LinkType) source, this.entryFragment, 1));
     	}
     	if ((source instanceof LinkType) && (((LinkType) source).getRel().equals("related"))) {
-            if ((this.relRefList != null) && (this.relRefList.get(0) != null)){
+            if ((this.relRefList != null) && (!this.relRefList.isEmpty()) && (this.relRefList.get(0) != null)){
             	((LinkType) source).setHref(relRefList.remove(0));
             }
     	}

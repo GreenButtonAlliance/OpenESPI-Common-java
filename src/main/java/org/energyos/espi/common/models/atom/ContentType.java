@@ -619,9 +619,11 @@ public class ContentType {
 		}
 			
 		if (this.getMeterReading() != null) {
-
+			RetailCustomer retailCustomer = null;
 			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
-			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+			if (usagePoint != null) {
+				retailCustomer = usagePoint.getRetailCustomer();
+			}
 			if (retailCustomer != null) {
 				result = result + "/RetailCustomer/" + retailCustomer.getId();
 
@@ -660,13 +662,17 @@ public class ContentType {
 		// only MeterReading and UsagePoint have "related" references
 	
 		List<String> result = new ArrayList<String>();
+		RetailCustomer retailCustomer = null;
 
 		if (this.getMeterReading() != null) {
 			
 			// get the objects
 			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
-			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-			ReadingType readingType = this.getMeterReading().getReadingType();
+			if (usagePoint != null) {
+				retailCustomer = usagePoint.getRetailCustomer();
+			}
+
+			this.getMeterReading().getReadingType();
 			
 			String temp = hrefFragment;
 
@@ -699,7 +705,7 @@ public class ContentType {
 		
 		if (this.getUsagePoint() != null) {
 			// get the objects
-			RetailCustomer retailCustomer = this.getUsagePoint().getRetailCustomer();
+			retailCustomer = this.getUsagePoint().getRetailCustomer();
 			List <ElectricPowerQualitySummary> qualityList = this.getUsagePoint().getElectricPowerQualitySummaries();
 			List <ElectricPowerUsageSummary> usageList = this.getUsagePoint().getElectricPowerUsageSummaries();
 			TimeConfiguration timeConfiguration = this.getUsagePoint().getLocalTimeParameters();
