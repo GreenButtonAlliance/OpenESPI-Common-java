@@ -45,18 +45,12 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public List<IdentifiedObject> findByAllParentsHref(String relatedHref, Linkable linkable) {
         try {
-        	// note - for now, anything that will throw an error in the respository.findAllParentsByRelatedHref 
-        	// are handled by this special case. when it gets too long (or we figure out a better way to indicate no parent, then 
-        	// it should be changed. (a catch on the repository error would do it)
+
             if (linkable instanceof UsagePoint){
                 return new ArrayList<>();
             } else {
                 return repository.findAllParentsByRelatedHref(relatedHref, linkable);
             }
-  //      } catch(EmptyResultDataAccessException x) {
-            // I think the EmptyResultDataAccessException is going to have the same
-            // transactional semantics as null (though that needs proven) in tests for 
-            // ApplicationInformation and IntervalBlock
         } catch (Exception e) {
 
             return new ArrayList<>();
@@ -65,7 +59,8 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public List<IdentifiedObject> findAllRelated(Linkable linkable) {
-        return repository.findAllRelated(linkable);
+    	List <IdentifiedObject> temp = repository.findAllRelated(linkable);
+        return temp;
     }
 
     @Override
@@ -73,8 +68,6 @@ public class ResourceServiceImpl implements ResourceService {
         return repository.findByUUID(uuid, clazz);
     }
 
-    // the following is used to query for the existence of the object in the DB within 
-    // a closed transactional space. Callers will need a Catch on the NoResultExecption for failure.
 	@Override
     @Transactional ( readOnly = true)  
 	public <T extends IdentifiedObject> T testById(Long id, Class<T> clazz) {

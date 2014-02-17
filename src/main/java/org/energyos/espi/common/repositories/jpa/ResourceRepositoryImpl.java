@@ -66,7 +66,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
         if (linkable.getRelatedLinkHrefs().isEmpty()) {
             return new ArrayList<>();
         }
-        return em.createNamedQuery(linkable.getAllRelatedQuery()).setParameter("relatedLinkHrefs", linkable.getRelatedLinkHrefs()).getResultList();
+    	List <IdentifiedObject> temp = em.createNamedQuery(linkable.getAllRelatedQuery()).setParameter("relatedLinkHrefs", linkable.getRelatedLinkHrefs()).getResultList();
+        return temp;
     }
 
     @SuppressWarnings("unchecked")

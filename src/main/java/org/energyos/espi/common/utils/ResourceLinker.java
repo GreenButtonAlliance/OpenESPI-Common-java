@@ -7,6 +7,7 @@ import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.models.atom.LinkType;
 import org.energyos.espi.common.service.ResourceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,11 @@ public class ResourceLinker {
     private ResourceService resourceService;
 
     public void link(IdentifiedObject resource) {
+
         linkUp(resource);
         linkUpMember(resource);
         resourceService.persist(resource);
-        linkRelatedCollection(resource);
+        linkRelatedCollection(resource);;
     }
 
     public void linkUp(IdentifiedObject resource) {
@@ -61,19 +63,31 @@ public class ResourceLinker {
                           ((ReadingType)resource).setMeterReading(meterReading);
                         }
                     }
+
                     resourceService.persist(parentResource);
+
                 }
             }
         }
     }
 
     public void linkRelatedCollection(IdentifiedObject resource) {
-            List<IdentifiedObject> relatedResources = resourceService.findAllRelated(resource);
+
+        List<IdentifiedObject> relatedResources = resourceService.findAllRelated(resource);
 
             for(IdentifiedObject relatedResource : relatedResources) {
-                relatedResource.setUpResource(resource);
+            	if (resource instanceof UsagePoint) {
+            	    ((UsagePoint) resource).setLocalTimeParameters((TimeConfiguration) relatedResource);
+            	}
+            	if (resource instanceof MeterReading) {
+
+            		((MeterReading) resource).setReadingType((ReadingType) relatedResource);
+            	}
+
                 resourceService.persist(relatedResource);
+
             }
+          
     }
 
     public void setResourceService(ResourceService resourceService) {

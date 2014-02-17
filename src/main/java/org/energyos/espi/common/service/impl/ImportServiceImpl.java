@@ -56,8 +56,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 @Service
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+//@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+//                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class ImportServiceImpl implements ImportService {
     @Autowired
@@ -114,8 +114,8 @@ public class ImportServiceImpl implements ImportService {
     	return this.maxUpdated;
     }
     
-    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+    // @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+    //            noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
     @Override
     public void importData(InputStream stream, Long retailCustomerId) throws IOException, SAXException, ParserConfigurationException {
         
@@ -131,12 +131,13 @@ public class ImportServiceImpl implements ImportService {
         reader.setContentHandler(atomContentHandler);
 
         // do the parse/import
-;
+
         reader.parse(new InputSource(stream));
 
         // context of the import used for linking things up
         // and establishing notifications
         //
+
         entries = atomContentHandler.getEntries();
         minUpdated = atomContentHandler.getMinUpdated();     
         maxUpdated = atomContentHandler.getMaxUpdated();
