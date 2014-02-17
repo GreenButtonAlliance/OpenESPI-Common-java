@@ -29,6 +29,7 @@ import org.energyos.espi.common.models.atom.LinkType;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.energyos.espi.common.test.EspiFactory;
 import org.energyos.espi.common.test.EspiPersistenceFactory;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,9 @@ public class ResourceRepositoryImplTests {
     }
 
     @Test
+    @Ignore
     public void findAllRelated() throws Exception {
+
         MeterReading meterReading = EspiFactory.newMeterReading();
         meterReading.setUpLink(new LinkType(LinkType.UP, LinkType.HREF));
         repository.persist(meterReading);
