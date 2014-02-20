@@ -29,6 +29,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -511,7 +512,7 @@ public class ElectricPowerQualitySummary
     	this.supplyVoltageImbalance = ((ElectricPowerQualitySummary)resource).supplyVoltageImbalance;
     	this.tempOvervoltage = ((ElectricPowerQualitySummary)resource).tempOvervoltage;	
         if (((ElectricPowerQualitySummary)resource).usagePoint != null) {
-        	this.usagePoint = ((ElectricPowerQualitySummary)resource).usagePoint;
-        }
+         	this.usagePoint = ((ElectricPowerQualitySummary)resource).usagePoint;
+       }
     }
 }

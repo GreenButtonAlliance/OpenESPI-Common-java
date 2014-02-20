@@ -22,6 +22,7 @@ import java.util.UUID;
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.domain.UsagePoint;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface ResourceRepository {
     void persist(IdentifiedObject resource);
@@ -36,10 +37,10 @@ public interface ResourceRepository {
 
     UsagePoint findByUUID(UUID uuid);
 
+    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+            noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
     void update(UsagePoint resource);
     
-    <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz);
-
     <T extends IdentifiedObject> T findById(Long id, Class<T> clazz);
 
     <T extends IdentifiedObject> List<Long> findAllIds(Class<T> clazz);
@@ -63,5 +64,14 @@ public interface ResourceRepository {
 	<T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2, Long id3, Long id4, Class<T> clazz);
 
     <T extends IdentifiedObject> T findByResourceUri(String uri, Class<T> clazz);
+      
+    @Transactional
+    <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz);
+
+    <T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2, Class<T> clazz);
+    
+    <T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2, Long id3, Class<T> clazz);
+    
+    <T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2, Long id3, Long id4, Class<T> clazz);
 
 }

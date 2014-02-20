@@ -20,15 +20,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.Linkable;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.domain.UsagePoint;
+import org.energyos.espi.common.models.atom.LinkType;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
@@ -47,12 +53,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 		em.flush();	
 	}
 
-	@Override
-	public <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz) {
-	  T temp = findById(id, clazz);
-	  em.remove(temp);
-	}
-	
     @SuppressWarnings("unchecked")
 	@Override
     public List<IdentifiedObject> findAllParentsByRelatedHref(String href, Linkable linkable) {
@@ -90,6 +90,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
             return (T) em.createNamedQuery(queryFindById).setParameter("id", id).getSingleResult();
         } catch (NoSuchFieldException | IllegalAccessException e) {
+        	System.out.printf("**** FindbyId Exception: %s - %s\n", clazz.toString(), e.toString());
             throw new RuntimeException(e);
         }
 
@@ -103,6 +104,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
             return em.createNamedQuery(queryFindById).getResultList();
         } catch (NoSuchFieldException | IllegalAccessException e) {
+        	System.out.printf("**** FindAllIds Exception: %s - %s\n", clazz.toString(), e.toString());
             throw new RuntimeException(e);
         }
     }
@@ -115,6 +117,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
             return em.createNamedQuery(queryFindAllIdsByUsagePointId).setParameter("usagePointId", usagePointId).getResultList();
         } catch (NoSuchFieldException | IllegalAccessException e) {
+        	System.out.printf("**** FindAllIdsByUsagePoint Exception: %s - %s\n", clazz.toString(), e.toString());
             throw new RuntimeException(e);
         }
     }
@@ -274,6 +277,67 @@ class ResourceRepositoryImpl implements ResourceRepository {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+	}
+
+	@Override
+	public <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz) {
+
+		try {
+			T temp = findById(id, clazz);
+			if (temp instanceof MeterReading) {
+				((MeterReading) temp).getIntervalBlocks().clear();
+				((MeterReading) temp).getRelatedLinks().clear();
+				((MeterReading) temp).setReadingType(null);
+				((MeterReading) temp).setUsagePoint(null);
+			}
+			
+			if (temp instanceof UsagePoint) {
+				((UsagePoint) temp).getRelatedLinks().clear();
+				((UsagePoint) temp).getElectricPowerQualitySummaries().clear();
+				((UsagePoint) temp).getElectricPowerUsageSummaries().clear();
+				((UsagePoint) temp).getMeterReadings().clear();
+				
+				((UsagePoint) temp).setRetailCustomer(null);
+				((UsagePoint) temp).getSubscriptions().clear();
+				
+			}
+			em.remove(temp);
+			
+		} catch (Exception e) {
+			System.out.printf("**** FindAllIds Exception: %s - %s\n",
+					clazz.toString(), e.toString());
+			throw new RuntimeException(e);
+		}
+
+	}
+
+   	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Class<T> clazz) {
+		Long id = findIdByXPath(id1, id2, clazz);
+		if (id != null) {
+			deleteById(id, clazz);
+		}
+	}
+
+	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Long id3, Class<T> clazz) {
+		Long id = findIdByXPath(id1, id2, id3, clazz);
+		if (id != null) {
+			deleteById(id, clazz);
+		}
+		
+	}
+
+	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Long id3, Long id4, Class<T> clazz) {
+		Long id = findIdByXPath(id1, id2, id3, id4, clazz);
+		if (id != null) {
+			deleteById(id, clazz);
+		}
+		
 	}
 
 }

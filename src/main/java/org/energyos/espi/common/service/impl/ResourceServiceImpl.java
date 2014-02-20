@@ -184,10 +184,35 @@ public class ResourceServiceImpl implements ResourceService {
 		
 		repository.flush();	
 	}
-
+	
+	@Transactional
 	@Override
 	public <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz) {
 		
 		   repository.deleteById(id, clazz);
+	}
+
+	@Transactional
+	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Class<T> clazz) {
+		repository.deleteByXPathId(id1, id2, clazz);
+		
+	}
+
+	@Transactional
+	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Long id3, Class<T> clazz) {
+		repository.deleteByXPathId(id1, id2, id3, clazz);
+		
+	}
+
+	@Transactional
+	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Long id3, Long id4, Class<T> clazz) {
+		repository.deleteByXPathId(id1, id2, id3, id4, clazz);
+		
 	}
 }

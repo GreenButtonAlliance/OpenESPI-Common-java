@@ -103,7 +103,7 @@ public class MeterReading extends IdentifiedObject
     public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "MeterReading.findAllIdsByXpath2";
     public static final String QUERY_FIND_ID_BY_XPATH = "MeterReading.findIdByXpath";
     
-    @OneToMany(mappedBy = "meterReading", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "meterReading", cascade = {CascadeType.ALL}, orphanRemoval=true)
     @LazyCollection(LazyCollectionOption.TRUE)
     @XmlTransient
     private List<IntervalBlock> intervalBlocks = new ArrayList<>();
@@ -202,4 +202,5 @@ public class MeterReading extends IdentifiedObject
     		this.usagePoint = ((MeterReading)resource).usagePoint;
     	}
     }
+    
 }

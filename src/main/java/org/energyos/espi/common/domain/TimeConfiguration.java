@@ -30,6 +30,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -109,18 +110,18 @@ public class TimeConfiguration extends IdentifiedObject {
     protected byte[] dstStartRule;
     protected long tzOffset;
     
-    @XmlTransient
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "usage_point_id")
-    private UsagePoint usagePoint;
+    //@XmlTransient
+    //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
+    //@JoinColumn(name = "usage_point_id")
+    //private UsagePoint usagePoint;
 
-    public void setUsagePoint(UsagePoint usagePoint) {
-    	this.usagePoint = usagePoint;
-    }
+    //public void setUsagePoint(UsagePoint usagePoint) {
+    //	this.usagePoint = usagePoint;
+    //}
     
-    public UsagePoint getUsagePoint() {
-    	return this.usagePoint;
-    }
+    //public UsagePoint getUsagePoint() {
+    //	return this.usagePoint;
+    //}
     
     /**
      * Gets the value of the dstEndRule property.

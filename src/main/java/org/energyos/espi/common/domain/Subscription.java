@@ -27,6 +27,7 @@ package org.energyos.espi.common.domain;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -102,7 +103,7 @@ public class Subscription
     private ApplicationInformation applicationInformation;
 
     @XmlTransient
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.DETACH)
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<UsagePoint> usagePoints;
 
