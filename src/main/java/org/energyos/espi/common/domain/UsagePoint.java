@@ -150,12 +150,12 @@ public class UsagePoint
 
     @XmlTransient
     @OneToMany(mappedBy = "usagePoint", cascade = {CascadeType.ALL}, orphanRemoval=true)
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ElectricPowerUsageSummary> electricPowerUsageSummaries = new ArrayList<>();
 
     @XmlTransient
     @OneToMany(mappedBy = "usagePoint", cascade = {CascadeType.ALL}, orphanRemoval=true)
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ElectricPowerQualitySummary> electricPowerQualitySummaries = new ArrayList<>();
 
     @XmlTransient
@@ -165,7 +165,7 @@ public class UsagePoint
 
     @XmlTransient
     @ManyToMany(mappedBy = "usagePoints")
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Set<Subscription> subscriptions = new HashSet<>();
 
     @XmlTransient

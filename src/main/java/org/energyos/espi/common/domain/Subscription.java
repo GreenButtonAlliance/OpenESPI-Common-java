@@ -104,7 +104,7 @@ public class Subscription
 
     @XmlTransient
     @ManyToMany (cascade = CascadeType.DETACH)
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<UsagePoint> usagePoints;
 
     public Calendar lastUpdate;    

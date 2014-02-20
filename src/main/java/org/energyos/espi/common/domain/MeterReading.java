@@ -120,7 +120,7 @@ public class MeterReading extends IdentifiedObject
     private UsagePoint usagePoint;
 
     @XmlTransient
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "reading_type_id")
     private ReadingType readingType;
 
