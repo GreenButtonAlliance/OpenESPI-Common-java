@@ -100,7 +100,7 @@ import org.hibernate.annotations.LazyCollectionOption;
         @NamedQuery(name = UsagePoint.QUERY_FIND_BY_RELATED_HREF,
                 query = "SELECT point FROM UsagePoint point join point.relatedLinks link WHERE link.href = :href"),
         @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_RELATED,
-                query = "SELECT meterReading FROM MeterReading meterReading WHERE meterReading.upLink.href in (:relatedLinkHrefs)"),
+                query = "SELECT timeConfiguration FROM TimeConfiguration timeConfiguration WHERE timeConfiguration.selfLink.href in (:relatedLinkHrefs)"),
         @NamedQuery(name = UsagePoint.QUERY_FIND_BY_URI,
                 query = "SELECT point FROM UsagePoint point WHERE point.uri = :uri"),
         @NamedQuery(name = UsagePoint.QUERY_FIND_ALL_IDS_FOR_RETAIL_CUSTOMER,

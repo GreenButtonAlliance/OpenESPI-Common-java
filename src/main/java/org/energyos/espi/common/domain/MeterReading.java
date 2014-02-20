@@ -83,7 +83,7 @@ import org.hibernate.annotations.LazyCollectionOption;
         @NamedQuery(name = MeterReading.QUERY_FIND_BY_RELATED_HREF,
                 query = "SELECT reading FROM MeterReading reading join reading.relatedLinks link WHERE link.href = :href"),
         @NamedQuery(name = MeterReading.QUERY_FIND_ALL_RELATED,
-                query = "SELECT readingType FROM ReadingType readingType WHERE readingType.upLink.href in (:relatedLinkHrefs)"),
+                query = "SELECT readingType FROM ReadingType readingType WHERE readingType.selfLink.href in (:relatedLinkHrefs)"),
         @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
                 query = "SELECT reading.id FROM MeterReading reading WHERE reading.usagePoint.id = :usagePointId"),
         @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS,

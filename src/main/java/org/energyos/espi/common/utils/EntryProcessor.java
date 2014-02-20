@@ -50,14 +50,17 @@ public class EntryProcessor {
     }
 
     public EntryType process(EntryType entry) {
+
         convert(entry);
         for(IdentifiedObject resource : entry.getContent().getResources()) {
             try {
+
                 IdentifiedObject existingResource = resourceService.findByUUID(resource.getUUID(), resource.getClass());
-               	
+              	
                 // merge the new into the old and throw the new away
                 //
-                existingResource.merge(resource);
+
+          	   existingResource.merge(resource);
 
                 // now put the existing resource back into the structure so it will 
                 // be available for later processing
@@ -65,13 +68,13 @@ public class EntryProcessor {
                 if (existingResource instanceof UsagePoint) {
                     entry.getContent().setUsagePoint((UsagePoint) existingResource);
                 }
-                
+
                 if (existingResource instanceof MeterReading) {
                 	entry.getContent().setMeterReading((MeterReading) existingResource);
                 }
-                
+ 
                 if (existingResource instanceof IntervalBlock) {
-                   	
+               	   
                     List <IntervalBlock> intervalBlocks = entry.getContent().getIntervalBlocks();
                     List <IntervalBlock> newList = new ArrayList<IntervalBlock> ();
                     Iterator<IntervalBlock> blocks = intervalBlocks.iterator();
@@ -87,12 +90,12 @@ public class EntryProcessor {
                        }
                     }
                 }
-                
+
                 if (existingResource instanceof ReadingType) {              
                 	
                 	entry.getContent().setReadingType((ReadingType) existingResource); 
                 }
-                
+
                 if (existingResource instanceof TimeConfiguration) {
                 	
                     entry.getContent().setLocalTimeParameters((TimeConfiguration) existingResource);
@@ -119,7 +122,7 @@ public class EntryProcessor {
                 link(resource);
             }
         }
-        return entry;
+       return entry;
     }
 
     public void link(IdentifiedObject resources) {
@@ -128,5 +131,6 @@ public class EntryProcessor {
 
     public void convert(EntryType entry) {
         resourceConverter.convert(entry);
+
     }
 }
