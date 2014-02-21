@@ -14,6 +14,9 @@ cd OpenESPI-Common
 Then install the OpenESPI-Common JAR in your local repository:
 ```bash
 mvn clean install
+
+# or for a specific profile
+mvn -P <profile name> -Dmaven.test.skip=true clean install
 ```
 
 ## IDE Setup
