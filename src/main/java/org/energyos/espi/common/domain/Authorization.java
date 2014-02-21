@@ -420,9 +420,9 @@ public class Authorization
      *     {@link String }
      *
      */
-    public void setRefreshToken(OAuth2RefreshToken oAuth2RefreshToken) {
-    	if(oAuth2RefreshToken != null) {
-    		this.refreshToken = oAuth2RefreshToken.toString();
+    public void setRefreshToken(String value) {
+    	if(value != null) {
+    		this.refreshToken = value;
     	}
     }
 
