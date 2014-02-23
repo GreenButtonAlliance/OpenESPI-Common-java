@@ -51,7 +51,7 @@
     <properties>
         <!-- Spring -->
         <spring.version>4.0.1.RELEASE</spring.version>
-        <spring.security.version>3.2.0.RELEASE</spring.security.version>
+        <spring.security.version>3.2.1.RELEASE</spring.security.version>
         <spring-security-oauth.version>2.0.0.BUILD-SNAPSHOT</spring-security-oauth.version>
 
         <!-- Hibernate / JPA -->
