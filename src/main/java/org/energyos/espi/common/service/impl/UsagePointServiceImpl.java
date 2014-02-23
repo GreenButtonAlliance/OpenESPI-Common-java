@@ -276,7 +276,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 	    temp.add(usagePointId);
 		try {
 			// make the call to insure it is a valid usagePointId
-			resourceService.findAllIdsByXPath(retailCustomerId, usagePointId, UsagePoint.class);
+			resourceService.findIdByXPath(retailCustomerId, usagePointId, UsagePoint.class);
 			result = (new EntryTypeIterator(resourceService, temp, UsagePoint.class));
 		} catch (Exception e) {
             System.out.printf("****UsagePointService: Seraching for an invalide UsagePointId - %d: %s\n", usagePointId, e.toString());
