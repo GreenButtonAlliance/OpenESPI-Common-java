@@ -26,6 +26,7 @@ package org.energyos.espi.common.domain;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -177,7 +178,7 @@ public class Authorization
     @Column(name = "third_party")
     protected String thirdParty;
     
-    @ManyToOne @JoinColumn(name = "retail_customer_id")
+    @ManyToOne (cascade = CascadeType.DETACH) @JoinColumn(name = "retail_customer_id")
     @XmlElement(name = "referenceID")
     protected RetailCustomer retailCustomer;
 
@@ -214,7 +215,7 @@ public class Authorization
     @XmlSchemaType(name = "anyURI")
     protected String errorUri;
     
-    @ManyToOne @JoinColumn(name = "application_information_id")
+    @ManyToOne (cascade = CascadeType.DETACH) @JoinColumn(name = "application_information_id")
     @XmlTransient
     private ApplicationInformation applicationInformation;
     
@@ -729,4 +730,5 @@ public class Authorization
   	  this.thirdParty = ((Authorization)resource).getThirdParty();
   	  this.tokenType = ((Authorization)resource).getTokenType();
     }
+    
 }

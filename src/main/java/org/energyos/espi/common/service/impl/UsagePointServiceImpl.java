@@ -30,7 +30,6 @@ import org.energyos.espi.common.repositories.UsagePointRepository;
 import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.UsagePointService;
-import org.energyos.espi.common.utils.ATOMMarshaller;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.SubscriptionBuilder;
 import org.energyos.espi.common.utils.UsagePointBuilder;
@@ -54,9 +53,6 @@ public class UsagePointServiceImpl implements UsagePointService {
 	private UsagePointRepository usagePointRepository;
 	
 	@Autowired
-	private ATOMMarshaller marshaller;
-	
-	@Autowired
 	private UsagePointBuilder usagePointBuilder;
 	
 	@Autowired
@@ -77,10 +73,6 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 	public void setRepository(UsagePointRepository usagePointRepository) {
 		this.usagePointRepository = usagePointRepository;
-	}
-
-	public void setMarshaller(ATOMMarshaller marshaller) {
-		this.marshaller = marshaller;
 	}
 
 	public void setXMLMarshaller(XMLMarshaller xmlMarshaller) {

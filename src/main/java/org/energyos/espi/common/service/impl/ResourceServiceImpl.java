@@ -20,8 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.energyos.espi.common.domain.Authorization;
+import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
+import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.Linkable;
+import org.energyos.espi.common.domain.MeterReading;
+import org.energyos.espi.common.domain.ReadingType;
+import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ResourceRepository;
@@ -33,6 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {
+		
     @Autowired
     private ResourceRepository repository;
 
@@ -62,6 +71,78 @@ public class ResourceServiceImpl implements ResourceService {
         return temp;
     }
 
+    /**
+     * Returns an list of the resources contained in the primary children collection
+     * of the a parent resource. The resources are returned within a transactional context
+     * allowing for persistent mutation.
+     *
+     * @param  Long parentResourceID used to retrieve the Resource
+     * @param  Class the class of the parent resource
+     * @return      List<Resources> of class appropriate to the children of the parent resource
+     * @see         IdentifiedObject and Resource
+     */
+    public <T extends IdentifiedObject> List<IdentifiedObject> findAllContainedChildren(Long id, Class <T> parentClass) {
+    	List<IdentifiedObject> result = new ArrayList<IdentifiedObject>();
+        
+        if (UsagePoint.class.equals(parentClass)) {
+        	// the children are the MeterReadings
+        	UsagePoint p = findById(id, UsagePoint.class);
+        	for (MeterReading o : p.getMeterReadings()) {
+        		result.add((IdentifiedObject) o);
+        	}
+        }
+        
+        if (MeterReading.class.equals(parentClass)) {
+        	// the children are the MeterReadings
+        	MeterReading p = findById(id, MeterReading.class);
+        	for (IntervalBlock o : p.getIntervalBlocks()) {
+        		result.add((IdentifiedObject) o);
+        	}
+        }
+        
+        if (ReadingType.class.equals(parentClass)) {
+           // ReadingType doesn't have any	
+        }
+        
+        if (IntervalBlock.class.equals(parentClass)) {
+        	// IntervalBlock doesn't have any IdentfiedObject children
+        	// but we may want to return the IntervalReadings
+        }
+        
+        if (ElectricPowerQualitySummary.class.equals(parentClass)) {
+        	// ElectricPowerQualitySummary doesn't have any	
+        }
+        
+        if (ElectricPowerUsageSummary.class.equals(parentClass)) {
+        	// ElectricPowerUsageSummary doesn't have any	
+        }
+        
+        
+        if (TimeConfiguration.class.equals(parentClass)) {
+        	// the children are the UsagePoints
+        	// TODO: find all usage points in this local time
+        }
+        
+        if (Subscription.class.equals(parentClass)) {
+        	// the children are the Subscription
+        	Subscription p = findById(id, Subscription.class);
+        	for (UsagePoint o : p.getUsagePoints()) {
+        		result.add((IdentifiedObject) o);
+        	}
+        }
+        
+        if (Authorization.class.equals(parentClass)) {
+        	// Authorizations have no children (yet)
+        }
+        
+        if (MeterReading.class.equals(parentClass)) {
+        	
+        }
+        
+    	return result;
+    	
+    }
+    
     @Override
     public <T> T findByUUID(UUID uuid, Class<T> clazz) {
         return repository.findByUUID(uuid, clazz);
@@ -184,10 +265,41 @@ public class ResourceServiceImpl implements ResourceService {
 		
 		repository.flush();	
 	}
-
+	
+	@Transactional
 	@Override
 	public <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz) {
 		
 		   repository.deleteById(id, clazz);
+	}
+
+	@Transactional
+	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Class<T> clazz) {
+		repository.deleteByXPathId(id1, id2, clazz);
+		
+	}
+
+	@Transactional
+	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Long id3, Class<T> clazz) {
+		repository.deleteByXPathId(id1, id2, id3, clazz);
+		
+	}
+
+	@Transactional
+	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Long id3, Long id4, Class<T> clazz) {
+		repository.deleteByXPathId(id1, id2, id3, id4, clazz);
+		
+	}
+
+	@Override
+	public<T extends IdentifiedObject> T merge(IdentifiedObject resource) {
+		return repository.merge(resource);
+		
 	}
 }

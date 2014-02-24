@@ -774,4 +774,11 @@ public class ElectricPowerUsageSummary
         	this.usagePoint = ((ElectricPowerUsageSummary)resource).usagePoint;
         }
     }
+    
+    @Override
+    public void unlink() {
+    	super.unlink();
+    	usagePoint.removeElectricPowerUsageSummary(this);
+    	this.usagePoint = null;
+    }
 }

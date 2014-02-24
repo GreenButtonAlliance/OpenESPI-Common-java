@@ -30,7 +30,6 @@ import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.SubscriptionRepository;
 import org.energyos.espi.common.repositories.UsagePointRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
-import org.energyos.espi.common.service.ExportService;
 import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.SubscriptionService;
@@ -60,10 +59,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		this.importService = importService;
 	}
 
-	public void setExportService (ExportService exportService) {
-	}
-	
-    @Override
+	@Override
+	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
+                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+
     public Subscription createSubscription(OAuth2Authentication authentication) {
         Subscription subscription = new Subscription();
         subscription.setUUID(UUID.randomUUID());
@@ -224,7 +223,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 	public Subscription addUsagePoint(Subscription subscription, UsagePoint usagePoint) {
-		// we want to just set the subscription id in the usagepoint directly
 		
 		subscription.getUsagePoints().add(usagePoint);
 		return subscription;

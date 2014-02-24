@@ -511,7 +511,14 @@ public class ElectricPowerQualitySummary
     	this.supplyVoltageImbalance = ((ElectricPowerQualitySummary)resource).supplyVoltageImbalance;
     	this.tempOvervoltage = ((ElectricPowerQualitySummary)resource).tempOvervoltage;	
         if (((ElectricPowerQualitySummary)resource).usagePoint != null) {
-        	this.usagePoint = ((ElectricPowerQualitySummary)resource).usagePoint;
-        }
+         	this.usagePoint = ((ElectricPowerQualitySummary)resource).usagePoint;
+       }
+    }
+    
+    @Override
+    public void unlink() {
+    	super.unlink();
+    	usagePoint.removeElectricPowerQualitySummary(this);
+    	this.usagePoint = null;
     }
 }

@@ -34,28 +34,22 @@ import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.service.AuthorizationService;
+import org.energyos.espi.common.service.EntryProcessorService;
 import org.energyos.espi.common.service.ImportService;
-import org.energyos.espi.common.service.NotificationService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.RetailCustomerService;
 import org.energyos.espi.common.service.SubscriptionService;
 import org.energyos.espi.common.service.UsagePointService;
 import org.energyos.espi.common.utils.ATOMContentHandler;
-import org.energyos.espi.common.utils.EntryProcessor;
-import org.energyos.espi.common.utils.ResourceConverter;
-import org.energyos.espi.common.utils.ResourceLinker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 @Service
-//@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-//                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class ImportServiceImpl implements ImportService {
     @Autowired
@@ -63,16 +57,10 @@ public class ImportServiceImpl implements ImportService {
     private Jaxb2Marshaller marshaller;
     
     @Autowired
-    private ResourceLinker resourceLinker;
-    
-    @Autowired
     private AuthorizationService authorizationService; 
     
     @Autowired
     private SubscriptionService subscriptionService;
-    
-    @Autowired
-    private NotificationService notificationService;
     
     @Autowired
     private UsagePointService usagePointService;
@@ -82,6 +70,9 @@ public class ImportServiceImpl implements ImportService {
     
     @Autowired
     private ResourceService resourceService;
+    
+    @Autowired
+    private EntryProcessorService entryProcessorService;
     
     // this is a list of the UsagePointIds referenced during
     // this import
@@ -117,15 +108,15 @@ public class ImportServiceImpl implements ImportService {
     @Override
     public void importData(InputStream stream, Long retailCustomerId) throws IOException, SAXException, ParserConfigurationException {
         
-    	// setup the parser
-    	JAXBContext context = marshaller.getJaxbContext();
+        // setup the parser                                                                                                                                  
+	    JAXBContext context = marshaller.getJaxbContext();
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
-        factory.setNamespaceAware(true);
+	    factory.setNamespaceAware(true);
         XMLReader reader = factory.newSAXParser().getXMLReader();
 
-        EntryProcessor processor = new EntryProcessor(resourceLinker, new ResourceConverter(), resourceService);
-        ATOMContentHandler atomContentHandler = new ATOMContentHandler(context, processor);
+	    // EntryProcessor processor = new EntryProcessor(resourceLinker, new ResourceConverter(), resourceService);
+        ATOMContentHandler atomContentHandler = new ATOMContentHandler(context, entryProcessorService);
         reader.setContentHandler(atomContentHandler);
 
         // do the parse/import
@@ -140,8 +131,10 @@ public class ImportServiceImpl implements ImportService {
         minUpdated = atomContentHandler.getMinUpdated();     
         maxUpdated = atomContentHandler.getMaxUpdated();
        
-        // cleanup/end processing    // there are a variety of end processing steps to perform
-        // TODO: implement a hook to allow incremental addition of end processing steps
+        // cleanup/end processing
+        // 1 - associate to usage points to the right retail customer
+        // 2 - make sure authorization/subscriptions have the right URIs
+        // 3 - place the imported usagePoints in to the subscriptions 
         //
 		List<UsagePoint> usagePointList = new ArrayList<UsagePoint>();
 		
@@ -190,59 +183,45 @@ public class ImportServiceImpl implements ImportService {
 			//
 			List<Authorization> authorizationList = authorizationService
 					.findAllByRetailCustomerId(retailCustomer.getId());
-			Iterator<Authorization> authorizationIterator = authorizationList
-					.iterator();
-
-			while (authorizationIterator.hasNext()) {
-				Authorization authorization = authorizationIterator.next();
-
+			for (Authorization authorization : authorizationList) {
+	
 				try {
-					subscription = subscriptionService
-							.findByAuthorizationId(authorization.getId());
+					subscription = subscriptionService.findByAuthorizationId(authorization.getId());
 				} catch (Exception e) {
 					// an Authorization w/o an associated subscription breaks
 					// the propagation chain
-					// TODO: if we want to continue the propagation forward, we
-					// just need to hook in the subscription substructure
+					System.out.printf("**** End of Notification Propgation Chain\n");
 				}
 				if (subscription != null) {
 					String resourceUri = authorization.getResourceURI();
 					// this is the first time this authorization has been in
-					// effect.
-					// We
-					// must set up the appropriate resource links
+					// effect.  We must set up the appropriate resource links
 					if (resourceUri == null) {
-
 						ApplicationInformation applicationInformation = authorization.getApplicationInformation();
 						resourceUri = applicationInformation.getDataCustodianResourceEndpoint();
 						resourceUri = resourceUri + "/Batch/Subscription/" + subscription.getId();
 						authorization.setResourceURI(resourceUri);
+						
+						resourceService.merge(authorization);
 					}
 
-					// make sure the UsagePoints we just imported are linked up
+					// make sure the UsagePoint(s) we just imported are linked up
 					// with
 					// the Subscription
 
-					Iterator<UsagePoint> usagePointIterator = usagePointList.iterator();
-
-					while (usagePointIterator.hasNext()) {
-						UsagePoint usagePoint = usagePointIterator.next();
-
+					for (UsagePoint usagePoint : usagePointList) {
+						
 						if (!(subscription.getUsagePoints().contains(usagePoint))) {
-							subscription = subscriptionService.addUsagePoint(subscription, usagePoint);
-							resourceService.persist(subscription);
+							
+                            subscriptionService.addUsagePoint(subscription, usagePoint);
+							
 						}
 					}
 				}
 			}
 		}
     }
-    
-    
-    public void setResourceLinker(ResourceLinker resourceLinker) {
-        this.resourceLinker = resourceLinker;
-    }
-    
+        
     public void setResourceService(ResourceService resourceService) {
         this.resourceService = resourceService;
     }
@@ -263,8 +242,8 @@ public class ImportServiceImpl implements ImportService {
         this.retailCustomerService = retailCustomerService;
     }  
     
-    public void setNotificationService(NotificationService notificationService) {
-        this.notificationService = notificationService;
+    public void setEntryProcessorService (EntryProcessorService entryProcessorService) {
+    	this.entryProcessorService = entryProcessorService;
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -83,6 +83,11 @@ import org.energyos.espi.common.models.atom.LinkType;
 })
 @MappedSuperclass
 public class IdentifiedObject extends Resource implements Linkable {
+	
+	public interface ResourceEnumClass {
+		   ResourceEnum getEnumType();
+	}
+	
     @XmlTransient
     protected String description;
 
@@ -114,7 +119,26 @@ public class IdentifiedObject extends Resource implements Linkable {
             @AttributeOverride(name="href", column = @Column(name="self_link_href") ),
     } )
     private LinkType selfLink;
+    
+    @XmlTransient
+    // an enum to support class dispatching across the library
+    //
+    public enum ResourceEnum {
+  	  RetailCustomer(0), UsagePoint(1), MeterReadingC(2), IntervalBlock(3),
+  	  TimeConfiguration(4), ElectricPowerQualitySummary(5), ElectricPowerUsageSummary(6),
+  	  ReadingType(7), Subscription(8), Authorization(9), ApplicationInformation(10);
 
+  	  private int value;
+
+  	  private ResourceEnum(final int value) {
+  	    this.value = value;
+  	  }
+
+  	  public int getValue() {
+  	    return value;
+  	  }
+    }
+    	  
     public Long getId() {
         return id;
     }
@@ -253,4 +277,9 @@ public class IdentifiedObject extends Resource implements Linkable {
     public void setSelfLink(LinkType selfLink) {
         this.selfLink = selfLink;
     }
+
+	public void unlink() {
+		// there is really nothing to unlink here
+		// so this is a stub for now
+	}
 }

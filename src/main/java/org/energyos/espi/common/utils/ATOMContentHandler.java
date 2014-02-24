@@ -29,6 +29,7 @@ import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.energyos.espi.common.models.atom.EntryType;
+import org.energyos.espi.common.service.EntryProcessorService;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
@@ -37,17 +38,18 @@ import org.xml.sax.helpers.NamespaceSupport;
 import org.xml.sax.helpers.XMLFilterImpl;
 
 public class ATOMContentHandler extends XMLFilterImpl {
+	
     private final JAXBContext context;
     private int depth;
     private UnmarshallerHandler unmarshallerHandler;
     private Locator locator;
     private NamespaceSupport namespaces = new NamespaceSupport();
-    private EntryProcessor procssor;
+    private EntryProcessorService procssor;
     private List <EntryType> entries = new ArrayList<EntryType>();
     private XMLGregorianCalendar minUpdated = null;
     private XMLGregorianCalendar maxUpdated = null;
 
-    public ATOMContentHandler(JAXBContext context, EntryProcessor procssor) {
+    public ATOMContentHandler(JAXBContext context, EntryProcessorService procssor) {
         this.context = context;
         this.procssor = procssor;
     }
@@ -166,5 +168,9 @@ public class ATOMContentHandler extends XMLFilterImpl {
         namespaces.popContext();
 
         super.endPrefixMapping(prefix);
+    }
+    
+    public void setEntryProcessorService (EntryProcessorService entryProcessorService) {
+    	this.procssor = entryProcessorService;
     }
 }

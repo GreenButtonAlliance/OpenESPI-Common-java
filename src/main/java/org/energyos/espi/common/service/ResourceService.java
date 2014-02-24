@@ -69,6 +69,16 @@ public interface ResourceService {
 	// currently used only finding the Authorization associated with a given resource URI
 	<T extends IdentifiedObject> T findByResourceUri(String uri, Class<T> clazz);
 
+	// a collection of interfaces that delete resources (by both XPATH and ROOT form)
+	//
 	<T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz);
+
+	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2,Class<T> clazz);
+	
+	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2, Long id3, Class<T> clazz);
+	
+	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2, Long id3, Long id4, Class<T> clazz);
+
+	<T extends IdentifiedObject> T merge(IdentifiedObject existingResource);
 	
 }

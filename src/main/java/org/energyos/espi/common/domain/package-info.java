@@ -30,3 +30,4 @@
 ) package org.energyos.espi.common.domain;
 
 import javax.xml.bind.annotation.XmlNs;
+
