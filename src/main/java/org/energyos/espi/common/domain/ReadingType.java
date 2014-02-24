@@ -24,14 +24,15 @@
 
 package org.energyos.espi.common.domain;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -130,9 +131,8 @@ public class ReadingType
     public static final String QUERY_FIND_ID_BY_XPATH = "ReadingType.findIdsByXpath";
 
     @XmlTransient
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "meter_reading_id")
-	private MeterReading meterReading;
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private List<MeterReading> meterReadings;
 	
     protected String accumulationBehaviour;
     protected String commodity;
@@ -156,13 +156,13 @@ public class ReadingType
     @Embedded
     protected ReadingInterharmonic interharmonic;
 
-    public void setMeterReading(MeterReading meterReading) {
-    	this.meterReading = meterReading;
-    }
+    //public void setMeterReading(MeterReading meterReading) {
+    //	this.meterReading = meterReading;
+    //}
     
-    public MeterReading getMeterReading() {
-    	return this.meterReading;
-    }
+    //public MeterReading getMeterReading() {
+    //	return this.meterReading;
+    //}
     
     /**
      * Gets the value of the accumulationBehaviour property.

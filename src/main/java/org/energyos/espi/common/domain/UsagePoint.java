@@ -134,38 +134,38 @@ public class UsagePoint
 
     @XmlElement(name = "ServiceCategory")
     @NotNull
-    @ManyToOne
+    @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.REFRESH})
     protected ServiceCategory serviceCategory;
 
     @XmlElement(name = "ServiceDeliveryPoint")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.ALL})
     protected ServiceDeliveryPoint serviceDeliveryPoint;
 
     protected Short status;
 
     @XmlTransient
-    @OneToMany(mappedBy = "usagePoint", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usagePoint", cascade = {CascadeType.ALL}, orphanRemoval=true)
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<MeterReading> meterReadings = new ArrayList<>();
 
     @XmlTransient
-    @OneToMany(mappedBy = "usagePoint", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usagePoint", cascade = {CascadeType.ALL}, orphanRemoval=true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ElectricPowerUsageSummary> electricPowerUsageSummaries = new ArrayList<>();
 
     @XmlTransient
-    @OneToMany(mappedBy = "usagePoint", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usagePoint", cascade = {CascadeType.ALL}, orphanRemoval=true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ElectricPowerQualitySummary> electricPowerQualitySummaries = new ArrayList<>();
 
     @XmlTransient
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "local_time_parameters_id")
+    @ManyToOne(cascade = {CascadeType.ALL})
+    //@JoinColumn(name = "local_time_parameters_id")
     private TimeConfiguration localTimeParameters;
 
     @XmlTransient
     @ManyToMany(mappedBy = "usagePoints")
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Set<Subscription> subscriptions = new HashSet<>();
 
     @XmlTransient
@@ -302,12 +302,12 @@ public class UsagePoint
     }
 
     public void addElectricPowerUsageSummary(ElectricPowerUsageSummary electricPowerUsageSummary) {
-        electricPowerUsageSummary.setUsagePoint(this);
+        //electricPowerUsageSummary.setUsagePoint(this);
         electricPowerUsageSummaries.add(electricPowerUsageSummary);
     }
 
     public void removeElectricPowerUsageSummary(ElectricPowerUsageSummary electricPowerUsageSummary) {
-    	electricPowerUsageSummary.setUsagePoint(null);
+    	//electricPowerUsageSummary.setUsagePoint(null);
     	electricPowerUsageSummaries.remove(electricPowerUsageSummary);
     }
     
@@ -316,7 +316,7 @@ public class UsagePoint
     }
 
     public void removeElectricPowerQualitySummary(ElectricPowerQualitySummary electricPowerQualitySummary) {
-    	electricPowerQualitySummary.setUsagePoint(null);
+    	//electricPowerQualitySummary.setUsagePoint(null);
     	electricPowerQualitySummaries.remove(electricPowerQualitySummary);
     }
     
@@ -325,7 +325,7 @@ public class UsagePoint
     }
 
     public void addElectricPowerQualitySummary(ElectricPowerQualitySummary electricPowerQualitySummary) {
-        electricPowerQualitySummary.setUsagePoint(this);
+        //electricPowerQualitySummary.setUsagePoint(this);
         electricPowerQualitySummaries.add(electricPowerQualitySummary);
     }
 
@@ -391,6 +391,20 @@ public class UsagePoint
         this.setServiceCategory(((UsagePoint)resource).getServiceCategory());
     }
 
+	@Override
+	public void unlink() {
+		super.unlink();
+
+		getRelatedLinks().clear();
+		getElectricPowerQualitySummaries().clear();
+		getElectricPowerUsageSummaries().clear();
+		getMeterReadings().clear();
+
+		setRetailCustomer(null);
+		getSubscriptions().clear();
+
+	}
+    
     public String getURI() {
         return uri;
     }
@@ -406,4 +420,5 @@ public class UsagePoint
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
     }
+	
 }

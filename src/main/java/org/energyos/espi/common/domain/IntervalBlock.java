@@ -114,7 +114,7 @@ public class IntervalBlock
     @Embedded
     protected DateTimeInterval interval;
 
-    @OneToMany(mappedBy = "intervalBlock", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "intervalBlock", cascade = {CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
     @XmlElementRefs({
             @XmlElementRef(name = "IntervalReading", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),

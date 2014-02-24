@@ -48,16 +48,12 @@ class ResourceRepositoryImpl implements ResourceRepository {
 		em.flush();	
 	}
 
-	@Override
-	public <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz) {
-	  T temp = findById(id, clazz);
-	  em.remove(temp);
-	}
-	
     @SuppressWarnings("unchecked")
 	@Override
     public List<IdentifiedObject> findAllParentsByRelatedHref(String href, Linkable linkable) {
-        return em.createNamedQuery(linkable.getParentQuery()).setParameter("href", href).getResultList();
+    	String queryString = linkable.getParentQuery();
+    	List<IdentifiedObject> result = em.createNamedQuery(queryString).setParameter("href", href).getResultList();
+        return result;
     }
 
     @SuppressWarnings("unchecked")
@@ -91,6 +87,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
             return (T) em.createNamedQuery(queryFindById).setParameter("id", id).getSingleResult();
         } catch (NoSuchFieldException | IllegalAccessException e) {
+        	System.out.printf("**** FindbyId Exception: %s - %s\n", clazz.toString(), e.toString());
             throw new RuntimeException(e);
         }
 
@@ -104,6 +101,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
             return em.createNamedQuery(queryFindById).getResultList();
         } catch (NoSuchFieldException | IllegalAccessException e) {
+        	System.out.printf("**** FindAllIds Exception: %s - %s\n", clazz.toString(), e.toString());
             throw new RuntimeException(e);
         }
     }
@@ -116,6 +114,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
             return em.createNamedQuery(queryFindAllIdsByUsagePointId).setParameter("usagePointId", usagePointId).getResultList();
         } catch (NoSuchFieldException | IllegalAccessException e) {
+        	System.out.printf("**** FindAllIdsByUsagePoint Exception: %s - %s\n", clazz.toString(), e.toString());
             throw new RuntimeException(e);
         }
     }
@@ -275,6 +274,60 @@ class ResourceRepositoryImpl implements ResourceRepository {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+	}
+
+	@Override
+	public <T extends IdentifiedObject> void deleteById(Long id, Class<T> clazz) {
+
+		try {
+			T temp = findById(id, clazz);
+			
+			em.merge(temp);
+			temp.unlink();
+			em.remove(temp);
+			
+		} catch (Exception e) {
+			System.out.printf("**** FindAllIds Exception: %s - %s\n",
+					clazz.toString(), e.toString());
+			throw new RuntimeException(e);
+		}
+
+	}
+
+   	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Class<T> clazz) {
+		Long id = findIdByXPath(id1, id2, clazz);
+		if (id != null) {
+			deleteById(id, clazz);
+		}
+	}
+
+	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Long id3, Class<T> clazz) {
+		Long id = findIdByXPath(id1, id2, id3, clazz);
+		if (id != null) {
+			deleteById(id, clazz);
+		}
+		
+	}
+
+	@Override
+	public <T extends IdentifiedObject> void deleteByXPathId(Long id1,
+			Long id2, Long id3, Long id4, Class<T> clazz) {
+		Long id = findIdByXPath(id1, id2, id3, id4, clazz);
+		if (id != null) {
+			deleteById(id, clazz);
+		}
+		
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends IdentifiedObject> T merge(IdentifiedObject resource) {
+		return (T) em.merge(resource);
 	}
 
 }

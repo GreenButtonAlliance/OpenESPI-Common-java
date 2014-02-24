@@ -634,7 +634,7 @@ public class ContentType {
 			result = result + "/MeterReading/" + meterReading.getId();
 		}
 		
-        if (this.getReadingType() != null) {
+		if (this.getReadingType() != null) {
            result = result + "/ReadingType/" + this.getReadingType().getId();
 		}
         
@@ -672,7 +672,7 @@ public class ContentType {
 				retailCustomer = usagePoint.getRetailCustomer();
 			}
 
-			this.getMeterReading().getReadingType();
+			ReadingType readingType = this.getMeterReading().getReadingType();
 			
 			String temp = hrefFragment;
 

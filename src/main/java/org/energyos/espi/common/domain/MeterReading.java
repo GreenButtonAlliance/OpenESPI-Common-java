@@ -37,7 +37,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -103,7 +102,7 @@ public class MeterReading extends IdentifiedObject
     public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "MeterReading.findAllIdsByXpath2";
     public static final String QUERY_FIND_ID_BY_XPATH = "MeterReading.findIdByXpath";
     
-    @OneToMany(mappedBy = "meterReading", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "meterReading", cascade = {CascadeType.ALL}, orphanRemoval=true)
     @LazyCollection(LazyCollectionOption.TRUE)
     @XmlTransient
     private List<IntervalBlock> intervalBlocks = new ArrayList<>();
@@ -120,7 +119,7 @@ public class MeterReading extends IdentifiedObject
     private UsagePoint usagePoint;
 
     @XmlTransient
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "reading_type_id")
     private ReadingType readingType;
 
@@ -189,12 +188,16 @@ public class MeterReading extends IdentifiedObject
     @Override 
     public void merge(IdentifiedObject resource) {
     	super.merge(resource);
-    	if (((MeterReading)resource).intervalBlocks != null) {
-        	this.intervalBlocks = ((MeterReading)resource).intervalBlocks;
+        
+    	for (IntervalBlock bl : ((MeterReading)resource).getIntervalBlocks()) {
+    		
+    		// TODO: Validate that the UUIDs are equal!!
+    		if (this.intervalBlocks.contains(bl)) {
+    			this.intervalBlocks.remove(bl);
+    		}    	
+    		this.intervalBlocks.add(bl);
     	}
-    	if (((MeterReading)resource).intervalBlocks != null) {
-    		this.intervalBlocks = ((MeterReading)resource).intervalBlocks;
-    	}
+
     	if (((MeterReading)resource).readingType != null) {
     		this.readingType = ((MeterReading)resource).readingType;
     	}
@@ -202,4 +205,16 @@ public class MeterReading extends IdentifiedObject
     		this.usagePoint = ((MeterReading)resource).usagePoint;
     	}
     }
+    
+	@Override
+	public void unlink() {
+        super.unlink();
+        
+		getIntervalBlocks().clear();
+		getRelatedLinks().clear();
+		setReadingType(null);
+		setUsagePoint(null);
+
+	}
+    
 }
