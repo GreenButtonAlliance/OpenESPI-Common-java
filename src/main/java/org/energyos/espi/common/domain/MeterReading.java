@@ -189,12 +189,16 @@ public class MeterReading extends IdentifiedObject
     @Override 
     public void merge(IdentifiedObject resource) {
     	super.merge(resource);
-    	if (((MeterReading)resource).intervalBlocks != null) {
-        	this.intervalBlocks = ((MeterReading)resource).intervalBlocks;
+        
+    	for (IntervalBlock bl : ((MeterReading)resource).getIntervalBlocks()) {
+    		
+    		// TODO: Validate that the UUIDs are equal!!
+    		if (this.intervalBlocks.contains(bl)) {
+    			this.intervalBlocks.remove(bl);
+    		}    	
+    		this.intervalBlocks.add(bl);
     	}
-    	if (((MeterReading)resource).intervalBlocks != null) {
-    		this.intervalBlocks = ((MeterReading)resource).intervalBlocks;
-    	}
+
     	if (((MeterReading)resource).readingType != null) {
     		this.readingType = ((MeterReading)resource).readingType;
     	}
@@ -202,5 +206,16 @@ public class MeterReading extends IdentifiedObject
     		this.usagePoint = ((MeterReading)resource).usagePoint;
     	}
     }
+    
+	@Override
+	public void unlink() {
+        super.unlink();
+        
+		getIntervalBlocks().clear();
+		getRelatedLinks().clear();
+		setReadingType(null);
+		setUsagePoint(null);
+
+	}
     
 }

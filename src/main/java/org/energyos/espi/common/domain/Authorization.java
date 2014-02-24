@@ -730,4 +730,5 @@ public class Authorization
   	  this.thirdParty = ((Authorization)resource).getThirdParty();
   	  this.tokenType = ((Authorization)resource).getTokenType();
     }
+    
 }

@@ -20,21 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.energyos.espi.common.domain.IdentifiedObject;
-import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.domain.UsagePoint;
-import org.energyos.espi.common.models.atom.LinkType;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
@@ -56,7 +51,9 @@ class ResourceRepositoryImpl implements ResourceRepository {
     @SuppressWarnings("unchecked")
 	@Override
     public List<IdentifiedObject> findAllParentsByRelatedHref(String href, Linkable linkable) {
-        return em.createNamedQuery(linkable.getParentQuery()).setParameter("href", href).getResultList();
+    	String queryString = linkable.getParentQuery();
+    	List<IdentifiedObject> result = em.createNamedQuery(queryString).setParameter("href", href).getResultList();
+        return result;
     }
 
     @SuppressWarnings("unchecked")
@@ -284,23 +281,9 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
 		try {
 			T temp = findById(id, clazz);
-			if (temp instanceof MeterReading) {
-				((MeterReading) temp).getIntervalBlocks().clear();
-				((MeterReading) temp).getRelatedLinks().clear();
-				((MeterReading) temp).setReadingType(null);
-				((MeterReading) temp).setUsagePoint(null);
-			}
 			
-			if (temp instanceof UsagePoint) {
-				((UsagePoint) temp).getRelatedLinks().clear();
-				((UsagePoint) temp).getElectricPowerQualitySummaries().clear();
-				((UsagePoint) temp).getElectricPowerUsageSummaries().clear();
-				((UsagePoint) temp).getMeterReadings().clear();
-				
-				((UsagePoint) temp).setRetailCustomer(null);
-				((UsagePoint) temp).getSubscriptions().clear();
-				
-			}
+			em.merge(temp);
+			temp.unlink();
 			em.remove(temp);
 			
 		} catch (Exception e) {
@@ -338,6 +321,13 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			deleteById(id, clazz);
 		}
 		
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends IdentifiedObject> T merge(IdentifiedObject resource) {
+		return (T) em.merge(resource);
 	}
 
 }

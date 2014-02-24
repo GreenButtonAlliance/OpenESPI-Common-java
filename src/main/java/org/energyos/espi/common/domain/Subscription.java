@@ -180,5 +180,12 @@ public class Subscription
         	this.usagePoints = ((Subscription)resource).usagePoints;
         }
     }
+    
+    @Override
+    public void unlink() {
+    	super.unlink();
+    	this.usagePoints.clear();
+    	this.authorization = null;
+    }
 
 }

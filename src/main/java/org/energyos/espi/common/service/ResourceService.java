@@ -21,7 +21,6 @@ import java.util.UUID;
 
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.Linkable;
-import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 
@@ -79,5 +78,7 @@ public interface ResourceService {
 	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2, Long id3, Class<T> clazz);
 	
 	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2, Long id3, Long id4, Class<T> clazz);
+
+	<T extends IdentifiedObject> T merge(IdentifiedObject existingResource);
 	
 }

@@ -215,4 +215,10 @@ public class ResourceServiceImpl implements ResourceService {
 		repository.deleteByXPathId(id1, id2, id3, id4, clazz);
 		
 	}
+
+	@Override
+	public<T extends IdentifiedObject> T merge(IdentifiedObject resource) {
+		return repository.merge(resource);
+		
+	}
 }

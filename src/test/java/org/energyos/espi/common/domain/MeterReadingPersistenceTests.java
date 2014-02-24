@@ -32,7 +32,7 @@ public class MeterReadingPersistenceTests {
 
     @Test
     public void readingType() {
-        TestUtils.assertAnnotationPresent(MeterReading.class, "readingType", OneToOne.class);
+        TestUtils.assertAnnotationPresent(MeterReading.class, "readingType", ManyToOne.class);
         TestUtils.assertAnnotationPresent(MeterReading.class, "readingType", JoinColumn.class);
     }
 }

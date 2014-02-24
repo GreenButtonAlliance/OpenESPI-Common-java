@@ -515,4 +515,11 @@ public class ElectricPowerQualitySummary
          	this.usagePoint = ((ElectricPowerQualitySummary)resource).usagePoint;
        }
     }
+    
+    @Override
+    public void unlink() {
+    	super.unlink();
+    	usagePoint.removeElectricPowerQualitySummary(this);
+    	this.usagePoint = null;
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -253,4 +253,9 @@ public class IdentifiedObject extends Resource implements Linkable {
     public void setSelfLink(LinkType selfLink) {
         this.selfLink = selfLink;
     }
+
+	public void unlink() {
+		// there is really nothing to unlink here
+		// so this is a stub for now
+	}
 }

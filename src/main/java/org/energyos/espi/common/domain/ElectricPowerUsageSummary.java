@@ -745,7 +745,7 @@ public class ElectricPowerUsageSummary
     public void setUpResource(IdentifiedObject resource) {
         UsagePoint usagePoint = (UsagePoint) resource;
         usagePoint.addElectricPowerUsageSummary(this);
-        //setUsagePoint((UsagePoint) resource);
+        setUsagePoint((UsagePoint) resource);
     }
 
     @Override
@@ -770,8 +770,15 @@ public class ElectricPowerUsageSummary
         this.ratchetDemand = ((ElectricPowerUsageSummary)resource).ratchetDemand;
         this.ratchetDemandPeriod = ((ElectricPowerUsageSummary)resource).ratchetDemandPeriod;
         this.statusTimeStamp = ((ElectricPowerUsageSummary)resource).statusTimeStamp;
-        //if (((ElectricPowerUsageSummary)resource).usagePoint != null) {
-        //	this.usagePoint = ((ElectricPowerUsageSummary)resource).usagePoint;
-        //}
+        if (((ElectricPowerUsageSummary)resource).usagePoint != null) {
+        	this.usagePoint = ((ElectricPowerUsageSummary)resource).usagePoint;
+        }
+    }
+    
+    @Override
+    public void unlink() {
+    	super.unlink();
+    	usagePoint.removeElectricPowerUsageSummary(this);
+    	this.usagePoint = null;
     }
 }

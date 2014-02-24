@@ -122,7 +122,7 @@ public class Routes {
     // patterns for RESTful Batch services
     public static final String BATCH_DOWNLOAD_MY_DATA_COLLECTION = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}/UsagePoint";
     public static final String BATCH_DOWNLOAD_MY_DATA_MEMBER = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}";
-    public static final String BATCH_UPLOAD_MY_DATA = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}";
+    public static final String BATCH_UPLOAD_MY_DATA = "/espi/1_1/resource/Batch/RetailCustomer/{retailCustomerId}/UsagePoint";
     public static final String BATCH_BULK_MEMBER = "/espi/1_1/resource/Batch/Bulk/{bulkId}";
     public static final String BATCH_SUBSCRIPTION = "/espi/1_1/resource/Batch/Subscription/{subscriptionId}";
 

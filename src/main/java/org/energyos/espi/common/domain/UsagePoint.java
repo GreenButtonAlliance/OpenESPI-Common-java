@@ -391,6 +391,20 @@ public class UsagePoint
         this.setServiceCategory(((UsagePoint)resource).getServiceCategory());
     }
 
+	@Override
+	public void unlink() {
+		super.unlink();
+
+		getRelatedLinks().clear();
+		getElectricPowerQualitySummaries().clear();
+		getElectricPowerUsageSummaries().clear();
+		getMeterReadings().clear();
+
+		setRetailCustomer(null);
+		getSubscriptions().clear();
+
+	}
+    
     public String getURI() {
         return uri;
     }
