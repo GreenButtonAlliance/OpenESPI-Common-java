@@ -31,3 +31,4 @@
 ) package org.energyos.espi.common.models.atom;
 
 import javax.xml.bind.annotation.XmlNs;
+
