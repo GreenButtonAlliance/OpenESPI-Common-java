@@ -74,7 +74,7 @@ public class EntryProcessorServiceImpl implements EntryProcessorService {
                 }
  
                 if (existingResource instanceof IntervalBlock) {
-               	    System.out.printf("*****We have an existing IntervalBlock??: %s\n", existingResource.toString());
+               	    // System.out.printf("*****We have an existing IntervalBlock??: %s\n", existingResource.toString());
                     List <IntervalBlock> intervalBlocks = entry.getContent().getIntervalBlocks();
                     List <IntervalBlock> newList = new ArrayList<IntervalBlock> ();
                     Iterator<IntervalBlock> blocks = intervalBlocks.iterator();
