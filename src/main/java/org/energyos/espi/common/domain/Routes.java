@@ -68,6 +68,7 @@ public class Routes {
 
     // patterns for RESTful root access to management entities
     //
+    public static final String ROOT_SERVICE_STATUS = "/espi/1_1/authorize/ReadServiceStatus";
     public static final String ROOT_AUTHORIZATION_COLLECTION = "/espi/1_1/resource/Authorization";
     public static final String ROOT_AUTHORIZATION_MEMBER = "/espi/1_1/resource/Authorization/{authorizationId}";
     public static final String ROOT_SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/Subscription";
