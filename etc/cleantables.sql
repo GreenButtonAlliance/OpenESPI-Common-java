@@ -2,7 +2,7 @@ SET FOREIGN_KEY_CHECKS=0;
 
 USE datacustodian
 DELETE FROM authorizations;
-DELETE FROM batchlist;
+DELETE FROM BatchList;
 DELETE FROM electric_power_quality_summaries;
 DELETE FROM electric_power_usage_summaries;
 DELETE FROM interval_readings;
@@ -27,7 +27,7 @@ DELETE FROM application_information;
 
 ALTER TABLE application_information AUTO_INCREMENT = 1;
 ALTER TABLE authorizations AUTO_INCREMENT = 1;
-ALTER TABLE batchlist  AUTO_INCREMENT = 1;
+ALTER TABLE BatchList  AUTO_INCREMENT = 1;
 ALTER TABLE electric_power_quality_summaries  AUTO_INCREMENT = 1;
 ALTER TABLE electric_power_usage_summaries AUTO_INCREMENT = 1;
 ALTER TABLE interval_blocks AUTO_INCREMENT = 1;
@@ -46,7 +46,7 @@ ALTER TABLE usage_points AUTO_INCREMENT = 1;
 
 USE thirdparty
 DELETE FROM authorizations;
-DELETE FROM batchlist;
+DELETE FROM BatchList;
 DELETE FROM electric_power_quality_summaries;
 DELETE FROM electric_power_usage_summaries;
 DELETE FROM interval_readings;
@@ -71,7 +71,7 @@ DELETE FROM application_information;
 
 ALTER TABLE application_information AUTO_INCREMENT = 1;
 ALTER TABLE authorizations AUTO_INCREMENT = 1;
-ALTER TABLE batchlist  AUTO_INCREMENT = 1;
+ALTER TABLE BatchList  AUTO_INCREMENT = 1;
 ALTER TABLE electric_power_quality_summaries  AUTO_INCREMENT = 1;
 ALTER TABLE electric_power_usage_summaries AUTO_INCREMENT = 1;
 ALTER TABLE interval_blocks AUTO_INCREMENT = 1;
