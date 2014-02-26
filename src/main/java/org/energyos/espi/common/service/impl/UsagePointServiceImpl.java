@@ -31,7 +31,6 @@ import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.UsagePointService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
-import org.energyos.espi.common.utils.SubscriptionBuilder;
 import org.energyos.espi.common.utils.XMLMarshaller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,9 +49,6 @@ public class UsagePointServiceImpl implements UsagePointService {
 	
 	@Autowired
 	private UsagePointRepository usagePointRepository;
-	
-	@Autowired
-	private SubscriptionBuilder subscriptionBuilder;
 
 	@Autowired
 	private ImportService importService;
@@ -73,10 +69,6 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 	public void setXMLMarshaller(XMLMarshaller xmlMarshaller) {
 		this.xmlMarshaller = xmlMarshaller;
-	}
-
-	public void setSubscriptionBuilder(SubscriptionBuilder subscriptionBuilder) {
-		this.subscriptionBuilder = subscriptionBuilder;
 	}
 
 	public void setResourceService(ResourceService resourceService) {
