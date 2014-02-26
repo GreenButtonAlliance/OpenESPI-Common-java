@@ -538,6 +538,14 @@ DROP TABLE IF EXISTS `retail_customers`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `retail_customers` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `published` datetime DEFAULT NULL,
+  `self_link_href` varchar(255) DEFAULT NULL,
+  `self_link_rel` varchar(255) DEFAULT NULL,
+  `up_link_href` varchar(255) DEFAULT NULL,
+  `up_link_rel` varchar(255) DEFAULT NULL,
+  `updated` datetime DEFAULT NULL,
+  `uuid` varchar(255) NOT NULL,
   `enabled` bit(1) NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,

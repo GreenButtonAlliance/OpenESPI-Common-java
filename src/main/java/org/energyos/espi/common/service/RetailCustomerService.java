@@ -49,6 +49,6 @@ public interface RetailCustomerService extends UserDetailsService {
 	// import-exportResource services
 	public RetailCustomer importResource(InputStream stream);
 
-	Subscription associateByUUID(Long retailCustomerId, UUID uuId, String description);
+	Subscription associateByUUID(Long retailCustomerId, UUID uuId);
 
 }
