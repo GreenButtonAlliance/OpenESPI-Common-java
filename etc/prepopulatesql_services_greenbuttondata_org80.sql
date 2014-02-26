@@ -52,7 +52,7 @@ INSERT INTO service_categories (kind) VALUES (9);
 
 /* Add retail customers */ 
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('alan',    'Alan',    'Turing',       'koala', TRUE, 'ROLE_USER');
-INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('marissa', 'Marissa',  'Meyer',       'koala', TRUE, 'ROLE_USER');
+INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('joe',     'Joe',      'Black',       'koala', TRUE, 'ROLE_USER');
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('sam',     'Sam',      'White',       'koala', TRUE, 'ROLE_USER');
 INSERT INTO retail_customers (username, first_name, last_name, password, enabled, role) VALUES ('grace',   'Grace',    'Hopper',      'koala', TRUE, 'ROLE_CUSTODIAN');
 
