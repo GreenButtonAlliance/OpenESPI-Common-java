@@ -24,9 +24,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.energyos.espi.common.atom.EspiEntry;
-
-import com.sun.syndication.feed.atom.Link;
 
 @SuppressWarnings("rawtypes")
 public class TestUtils {
@@ -106,15 +103,6 @@ public class TestUtils {
         }
 
         return foundAnnotation;
-    }
-
-    public static <T extends EspiEntry<?>> String findRelatedHref(T entry, String type) {
-        for (Link link : entry.getRelatedLinks()) {
-            if (link.getHref().contains(type)) {
-                return link.getHref();
-            }
-        }
-        return null;
     }
 
     public static void assertFieldNotMarshallable(Class clazz, String field) {
