@@ -31,7 +31,6 @@ import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.UsagePointService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
-import org.energyos.espi.common.utils.XMLMarshaller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,9 +42,6 @@ import com.sun.syndication.io.FeedException;
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class UsagePointServiceImpl implements UsagePointService {
-
-	@Autowired
-	private XMLMarshaller xmlMarshaller;
 	
 	@Autowired
 	private UsagePointRepository usagePointRepository;
@@ -67,9 +63,6 @@ public class UsagePointServiceImpl implements UsagePointService {
 		this.usagePointRepository = usagePointRepository;
 	}
 
-	public void setXMLMarshaller(XMLMarshaller xmlMarshaller) {
-		this.xmlMarshaller = xmlMarshaller;
-	}
 
 	public void setResourceService(ResourceService resourceService) {
 		this.resourceService = resourceService;
