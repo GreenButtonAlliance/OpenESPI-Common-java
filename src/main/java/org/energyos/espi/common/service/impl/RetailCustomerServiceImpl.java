@@ -147,55 +147,61 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 
 	@Transactional
 	@Override
-	public Subscription associateByUUID(Long retailCustomerId, UUID uuId, String description) {
+	public Subscription associateByUUID(Long retailCustomerId, UUID uuid) {
         Subscription subscription = null;
-        UsagePoint usagePoint = new UsagePoint();
-        usagePoint.setUUID(uuId);
-        usagePoint.setDescription(description);
+        RetailCustomer retailCustomer = null;
+        UsagePoint usagePoint = null;
+        
+       try {
+    	   retailCustomer = resourceService.findById(retailCustomerId, RetailCustomer.class);
+           try {
+        	   
+    	       usagePoint = resourceService.findByUUID(uuid, UsagePoint.class);
+    	       
+           } catch (Exception e) {
+        	   
+        	   usagePoint = new UsagePoint();
+        	   usagePoint.setUUID(uuid);
+        	   usagePoint.setDescription("A Temporary UsagePoint Description");
+        	   usagePoint.setServiceCategory(new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE))	;
+        	   resourceService.persist(usagePoint);
+        	   
+           }
+           usagePoint.setRetailCustomer(retailCustomer);
+           resourceService.merge(usagePoint);
+           
 
-        RetailCustomer retailCustomer = findById(retailCustomerId);
-        usagePoint.setServiceCategory(new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE));
-        usagePoint.setRetailCustomer(retailCustomer);
-        usagePointService.createOrReplaceByUUID(usagePoint);
-        
-        // now retrieve the result and use it for any pending subscriptions
-        usagePoint = usagePointService.findByUUID(uuId);
-        
-        // now see if there are any authorizations for this information
-        //
-        try {
-        
-        	List<Authorization> authorizationList = authorizationService.findAllByRetailCustomerId(retailCustomer.getId());
-        	Iterator<Authorization> authorizationIterator = authorizationList.iterator();
-        
-        	while (authorizationIterator.hasNext()) {
-        	
-        		Authorization authorization = authorizationIterator.next();
-        		subscription = subscriptionService.findByAuthorizationId(authorization.getId()); 
-        		String resourceUri = authorization.getResourceURI();
-        		if (resourceUri == null) {
-			
-        			// this is the first time this authorization has been in effect. We
-        			// must set up the appropriate resource links
-        			ApplicationInformation applicationInformation = authorization.getApplicationInformation();
-        			resourceUri = applicationInformation.getDataCustodianResourceEndpoint();
-        			resourceUri = resourceUri + "/Batch/Subscription/" + subscription.getId();	
-        			authorization.setResourceURI(resourceUri);
-        		}
+           // now see if there are any authorizations for this information
+           //
+           try {
+           
+           	for (Authorization authorization : authorizationService.findAllByRetailCustomerId(retailCustomer.getId())) {
+ 
+ 
+           		String resourceUri = authorization.getResourceURI();
+           		if (resourceUri == null) {
+ 
+           			authorization.setResourceURI(authorization.getApplicationInformation().getDataCustodianResourceEndpoint()
+           					+ "/Batch/Subscription/" + subscription.getId());	
+           			resourceService.merge(authorization);
+           			
+           		}
 
-        		// make sure the UsagePoints we just imported are linked up with
-        		//  the subscription if any
-        		subscription = subscriptionService.addUsagePoint(subscription, usagePoint);
-        		resourceService.persist(subscription);
-        		resourceService.persist(usagePoint);
-        	}      	
-	      } catch (Exception e){
-	    	  // we don't expect any problems here, and if we do have an exception,
-	    	  // it will rollback the transaction.
-	    	  e.printStackTrace();
-	    	  return null;
-	      }
-        
+           		subscription = subscriptionService.findByAuthorizationId(authorization.getId());
+
+           		subscription.getUsagePoints().add(usagePoint);
+           		resourceService.merge(subscription);
+           	}      	
+   	      } catch (Exception e){
+              // we get here if we don't have a subscription
+   	    	  return null;
+   	      }
+           
+      
+        } catch (Exception e) {
+        	System.out.printf("****Error Associating UsagePoint: %s - %s\n", retailCustomer.toString(), usagePoint.toString());
+        }
+     
         return subscription;
 	}
 

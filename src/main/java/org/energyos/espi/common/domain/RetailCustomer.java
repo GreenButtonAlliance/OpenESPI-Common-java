@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ import org.springframework.security.core.userdetails.UserDetails;
       
 })
 
-public class RetailCustomer implements UserDetails, Principal{
+public class RetailCustomer extends IdentifiedObject implements UserDetails, Principal{
 
     public final static String QUERY_FIND_BY_ID = "RetailCustomer.findById";
     public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
@@ -73,11 +73,13 @@ public class RetailCustomer implements UserDetails, Principal{
     public final static String ROLE_USER = "ROLE_USER";
     public final static String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
 
+    /*
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @XmlTransient
     protected Long id;
-
+    */
+    
     @Column(name = "username")
     @Size(min = 4, max = 30)
     protected String username;

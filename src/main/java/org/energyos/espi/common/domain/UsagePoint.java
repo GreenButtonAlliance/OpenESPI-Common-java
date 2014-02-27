@@ -159,7 +159,7 @@ public class UsagePoint
     private List<ElectricPowerQualitySummary> electricPowerQualitySummaries = new ArrayList<>();
 
     @XmlTransient
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     //@JoinColumn(name = "local_time_parameters_id")
     private TimeConfiguration localTimeParameters;
 
