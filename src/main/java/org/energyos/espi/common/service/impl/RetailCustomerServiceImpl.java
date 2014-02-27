@@ -154,14 +154,16 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
         
        try {
     	   retailCustomer = resourceService.findById(retailCustomerId, RetailCustomer.class);
-
-    	   usagePoint = resourceService.findByUUID(uuid, UsagePoint.class);
-    	   
-           if (usagePoint == null) {
+           try {
+        	   
+    	       usagePoint = resourceService.findByUUID(uuid, UsagePoint.class);
+    	       
+           } catch (Exception e) {
         	   
         	   usagePoint = new UsagePoint();
         	   usagePoint.setUUID(uuid);
         	   usagePoint.setDescription("A Temporary UsagePoint Description");
+        	   usagePoint.setServiceCategory(new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE))	;
         	   resourceService.persist(usagePoint);
         	   
            }
