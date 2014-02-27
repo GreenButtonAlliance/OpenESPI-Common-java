@@ -148,11 +148,10 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 
 	@Transactional
 	@Override
-	public Subscription associateByUUID(Long retailCustomerId, UUID uuId, String description) {
+	public Subscription associateByUUID(Long retailCustomerId, UUID uuId) {
         Subscription subscription = null;
         UsagePoint usagePoint = new UsagePoint();
         usagePoint.setUUID(uuId);
-        usagePoint.setDescription(description);
 
         RetailCustomer retailCustomer = findById(retailCustomerId);
         usagePoint.setServiceCategory(new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE));
