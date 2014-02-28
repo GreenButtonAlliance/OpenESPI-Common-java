@@ -132,5 +132,18 @@ public class NotificationServiceImpl implements NotificationService {
     public void setSubscriptionService(SubscriptionService subscriptionService) {
     	this.subscriptionService = subscriptionService;
     }
+
+	@Override
+	public void notifyAllNeed() {
+	
+		List <Long> authList = resourceService.findAllIds(Authorization.class);
+		
+		for (Long id : authList) {
+			Authorization authorization = resourceService.findById(id, Authorization.class);
+			
+			notify(authorization.getSubscription(), null, null);
+		}
+		
+	}
     
 }
