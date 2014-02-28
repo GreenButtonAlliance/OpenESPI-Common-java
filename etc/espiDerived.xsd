@@ -959,10 +959,10 @@ Basic Types
 	</xs:simpleType>
 	<xs:simpleType name="String512">
 		<xs:annotation>
-			<xs:documentation>[extension] Character string of max length 256</xs:documentation>
+			<xs:documentation>[extension] Character string of max length 512</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:maxLength value="256"/>
+			<xs:maxLength value="512"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="String256">
