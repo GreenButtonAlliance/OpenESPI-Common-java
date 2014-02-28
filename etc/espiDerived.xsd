@@ -3,7 +3,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20140103
+    Version: 0.7.20140228
      Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -4333,6 +4333,12 @@ Enumerations
 					<xs:enumeration value="1">
 						<xs:annotation>
 							<xs:appinfo>Active</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Denied</xs:appinfo>
 							<xs:documentation/>
 						</xs:annotation>
 					</xs:enumeration>
