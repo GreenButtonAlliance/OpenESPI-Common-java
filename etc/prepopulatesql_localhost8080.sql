@@ -81,6 +81,6 @@ INSERT INTO application_information_scopes (application_information_id, scope) V
 USE `tokenstore`;
 
 /* Add oauth_client_details */
-INSERT INTO oauth_client_details (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove) VALUES ('third_party', NULL, 'secret', 'FB=4_5_15;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13 FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=13 FB=4_5_12_15_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13', 'authorization_code refresh_token', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO oauth_client_details (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove) VALUES ('third_party', NULL, 'secret', 'FB=4_5_15;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13,FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=13,FB=4_5_12_15_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13', 'authorization_code,refresh_token', 'http://localhost:8080/ThirdParty/espi/1_1/OAuthCallBack', 'ROLE_USER', '360', '3600', NULL, 'FALSE');
 
 
