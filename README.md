@@ -7,7 +7,7 @@ Common run-time and test code shared between [OpenESPI-DataCustodian](https://gi
 First clone the project from github:
 
 ```bash
-git clone https://github.com/energyos/OpenESPI-Common.git
+git clone https://github.com/energyos/OpenESPI-Common-java.git
 cd OpenESPI-Common
 ```
 

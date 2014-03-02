@@ -132,7 +132,7 @@ public class ATOMContentHandler extends XMLFilterImpl {
                     try {
                         result = (JAXBElement<EntryType>) unmarshallerHandler.getResult();
                     } catch (JAXBException x) {
-                        throw new SAXException("Unbale to unmarshall <entry>", x);
+                        throw new SAXException("Unable to unmarshall <entry>", x);
                     }
                     procssor.process(result.getValue());
 

@@ -95,6 +95,7 @@ public class Subscription
     @XmlTransient
     protected RetailCustomer retailCustomer;
 
+    @XmlTransient
     @OneToOne
     private Authorization authorization;
 

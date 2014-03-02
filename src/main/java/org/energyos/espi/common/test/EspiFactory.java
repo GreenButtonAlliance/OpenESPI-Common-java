@@ -423,7 +423,7 @@ public class EspiFactory {
                 new HashSet<String>(),
                 new HashSet<String>(),
                 "redirect",
-                new HashMap<String, Serializable>()
+                null, new HashMap<String, Serializable>()
         );
     }
 

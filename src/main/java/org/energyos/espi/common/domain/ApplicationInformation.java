@@ -25,10 +25,8 @@
 package org.energyos.espi.common.domain;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -51,8 +49,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.oauth2.provider.ClientDetails;
+
 
 
 
@@ -176,7 +173,7 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 
 })
 public class ApplicationInformation
-        extends IdentifiedObject implements ClientDetails {
+        extends IdentifiedObject {
     /**
 	 * 
 	 */
@@ -306,129 +303,169 @@ public class ApplicationInformation
 	// TODO implement ApplicationInformation.authorities
 	// private Collection<GrantedAuthority> authorities;
 
+//    @Override
+    public String getClientId() {
+        return clientId;
+    }
+
+//    @Override
+//    public Set<String> getResourceIds() {
+//        return null;
+//    }
+
+//    public void setResourceIds(Set<String> ids) {
+//    	// TODO seems not to be implemented??
+//	    //this.resourceIds = ids;
+//    }
+
+
+//    @Override
+//    public boolean isSecretRequired() {
+//        return true;
+//    }
+
+//        @Override
+//        public Set<String> getAuthorizedGrantTypes() {
+//            Set<String> grantTypes = new HashSet<>();
+//            grantTypes.add("authorization_code");
+//            return grantTypes;
+//        }
+
+//        public void setAuthorizedGrantTypes (Set<String>  authorizedGrantTypes) {
+//            // TODO seems not to be implemented ??                                                                                                                              
+//            // this.grantTypes = authorizedGrantTypes; 
+//        }
+
+
+//    @Override
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+//    @Override
+//    public boolean isScoped() {
+//        return true;
+//    }
+
+
+//    @Override
+    public Set<String> getScope() {
+        return scope;
+    }
+
+    public void setScope(Set<String> scope) {
+    	this.scope = scope;
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    /*
-     * OAuth 2 ClientDetails overrides
-     * */
+    public String[] getScopeArray() {
+    	if (scope == null)
+    		return new String[] {};
+        return scope.toArray(new String[scope.size()]);
+    }
 
-        @Override
-        public String getClientId() {
-            return clientId;
-        }
+//    @Override
+//    public Set<String> getAuthorizedGrantTypes() {
+//    	Set<String> grantTypes = new HashSet<>();
+//    	grantTypes.add("authorization_code");
+//    	return grantTypes;
+//    }
 
-        @Override
-        public Set<String> getResourceIds() {
-            return null;
-        }
+//    public void setAuthorizedGrantTypes (Set<String> authorizedGrantTypes) {
+//    	// TODO seems not to be implemented ??
+//    	// this.grantTypes = authorizedGrantTypes;
+//    }
 
-        public void setResourceIds(Set<String> ids) {
-	    // TODO seems not to be implemented??
-	    //this.resourceIds = ids;
-        }
+//    @Override
+//    public Set<String> getRegisteredRedirectUri() {
+//    	Set<String> uris = new HashSet<>();
+//    	uris.add(getRedirectUri());
+//    	return uris;
+//    }
 
-        @Override
-        public boolean isSecretRequired() {
-            return true;
-        }
+//    public void setRegisteredRedirectUri(Set<String> registeredRediredUri) {
+//    	this.redirectUri = registeredRediredUri.toString();
+//    }
 
-        @Override
-        public String getClientSecret() {
-            return clientSecret;
-        }
+//    @Override
+//    public Collection<GrantedAuthority> getAuthorities() {
+//    	Collection<GrantedAuthority> authorities = new ArrayList<>();
+//    	authorities.add(new SimpleGrantedAuthority("ROLE_CLIENT"));
+//    	return authorities;
+//    }
 
-        @Override
-        public boolean isScoped() {
-            return true;
-        }
+//    public void setAuthorities (Collection<GrantedAuthority> authorities) {
+//    	// TODO this seems not to be implemented ??
+//    	// this.authorities = authorities;
+//    }
+        
+//    @Override
+//    public Integer getAccessTokenValiditySeconds() {
+//    	return Integer.valueOf(60*60*24*60);
+//    }
 
-        @Override
-        public Set<String> getScope() {
-            return scope;
-        }
+//    public void setAccessTokenValiditySeconds(Integer s) {   	
+//    	// TODO This seems not to be implemented ??
+//    	// this.accessTokenValiditySeconds = s
+//    }
+        
+//    @Override
+//    public Integer getRefreshTokenValiditySeconds() {
+//    	return Integer.valueOf(60*60*24);
+//    }
 
-        public void setScope(Set<String> scope) {
-    	    this.scope = scope;
-        }
-        public String[] getScopeArray() {
-            if (scope == null)
-                return new String[] {};
-            return scope.toArray(new String[scope.size()]);
-        }
+//    public void setRefreshTokenValiditySeconds(Integer s) {
+//    	// TODO This seems not to be implemented ??
+//    	// this.accessTokenValiditySeconds = s
+//    }
+        
+//    @Override
+//    public Map<String, java.lang.Object> getAdditionalInformation() {
+//    	return null;
+//    }   
+   
+//    public void setAdditionalInformation(Map<String, java.lang.Object> map) {
+//    	// TODO This seems not to be implemented ??
+//    	// this.additionalInformation = additionalInformation;
+//    }
 
-        @Override
-        public Set<String> getAuthorizedGrantTypes() {
-            Set<String> grantTypes = new HashSet<>();
-            grantTypes.add("authorization_code");
-            return grantTypes;
-        }
-
-        public void setAuthorizedGrantTypes (Set<String>  authorizedGrantTypes) {
-            // TODO seems not to be implemented ??                                                                                                                              
-            // this.grantTypes = authorizedGrantTypes; 
-        }
-
-        @Override
-        public Set<String> getRegisteredRedirectUri() {
-            Set<String> uris = new HashSet<>();
-            uris.add(getRedirectUri());
-            return uris;
-        }
-
-        public void setRegisteredRedirectUri(Set<String> registeredRediredUri) {
-	         this.redirectUri = registeredRediredUri.toString();
-        }
-
-        @Override
-        public Collection<GrantedAuthority> getAuthorities() {
-            Collection<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority("ROLE_CLIENT"));
-            return authorities;
-        }
-
-    public void setAuthorities (Collection<GrantedAuthority> authorities) {
+//    public void setAuthorities (Collection<GrantedAuthority> authorities) {
 
         // TODO this seems not to be implemented ??                                                                                                                                  
          // this.authorities = authorities; 
-    } 
-        @Override
-        public Integer getAccessTokenValiditySeconds() {
-            return Integer.valueOf(60*60*24*60);
-        }
+//    } 
+    
+//        @Override
+//        public Integer getAccessTokenValiditySeconds() {
+//            return Integer.valueOf(60*60*24*60);
+//        }
 
-        public void setAccessTokenValiditySeconds(Integer s) {   	
-            // TODO This seems not to be implemented ??                                                                                                                                
-            // this.accessTokenValiditySeconds = s  
-        }
+//        public void setAccessTokenValiditySeconds(Integer s) {   	
+//            // TODO This seems not to be implemented ??                                                                                                                                
+//            // this.accessTokenValiditySeconds = s  
+//        }
         
 
-       @Override
-        public Integer getRefreshTokenValiditySeconds() {
-            return Integer.valueOf(60*60*24);
-        }
+//       @Override
+//        public Integer getRefreshTokenValiditySeconds() {
+//            return Integer.valueOf(60*60*24);
+//        }
 
-        public void setRefreshTokenValiditySeconds(Integer s) {
-            // TODO This seems not to be implemented ??                                                                                                                             
-            // this.accessTokenValiditySeconds = s    
-        }
+//        public void setRefreshTokenValiditySeconds(Integer s) {
+//            // TODO This seems not to be implemented ??                                                                                                                             
+//            // this.accessTokenValiditySeconds = s    
+//        }
         
-        @Override
-        public Map<String, java.lang.Object> getAdditionalInformation() {
-           // TODO Implement ApplicationInformaion.additionalInformation
-           //  return this.additionalInformation;
-        	return null;
-        }   
+//        @Override
+//        public Map<String, java.lang.Object> getAdditionalInformation() {
+//           // TODO Implement ApplicationInformaion.additionalInformation
+//           //  return this.additionalInformation;
+//        	return null;
+//        }   
    
-	public void setAdditionalInformation(Map<String, java.lang.Object> additionalInformation) {
-       // TODO This seems not to be implemented ??                                                                                                                                 
-       // this.additionalInformation = additionalInformation; 
-	}
+//	public void setAdditionalInformation(Map<String, java.lang.Object> additionalInformation) {
+//       // TODO This seems not to be implemented ??                                                                                                                                 
+//       // this.additionalInformation = additionalInformation; 
+//	}
 
     /**
      * Gets the value of the dataCustodianApplicationStatus property.
@@ -1385,20 +1422,22 @@ public class ApplicationInformation
     }
 
       
-   @Override
+	@Override
     public void merge(IdentifiedObject resource) {
     	super.merge(resource);
     	this.setDataCustodianId(((ApplicationInformation)resource).getDataCustodianId());
     	this.setClientId(((ApplicationInformation)resource).getClientId());
-    	this.setResourceIds(((ApplicationInformation)resource).getResourceIds());
+//    	this.setResourceIds(((ApplicationInformation)resource).getResourceIds());
     	this.setClientSecret(((ApplicationInformation)resource).getClientSecret());
     	this.setScope(((ApplicationInformation)resource).getScope());
-    	this.setAuthorizedGrantTypes(((ApplicationInformation)resource).getAuthorizedGrantTypes());
-    	this.setRegisteredRedirectUri(((ApplicationInformation)resource).getRegisteredRedirectUri());
-    	this.setAuthorities(((ApplicationInformation)resource).getAuthorities());
-    	this.setAccessTokenValiditySeconds(((ApplicationInformation)resource).getAccessTokenValiditySeconds());
-    	this.setRefreshTokenValiditySeconds(((ApplicationInformation)resource).getRefreshTokenValiditySeconds());
-    	this.setAdditionalInformation(((ApplicationInformation)resource).getAdditionalInformation());
+//    	this.setAuthorizedGrantTypes(((ApplicationInformation)resource).getAuthorizedGrantTypes());
+    	this.setGrantTypes(((ApplicationInformation)resource).getGrantTypes());
+//    	this.setRegisteredRedirectUri(((ApplicationInformation)resource).getRegisteredRedirectUri());
+    	this.setRedirectUri(((ApplicationInformation)resource).getRedirectUri());
+//    	this.setAuthorities(((ApplicationInformation)resource).getAuthorities());
+//    	this.setAccessTokenValiditySeconds(((ApplicationInformation)resource).getAccessTokenValiditySeconds());
+//    	this.setRefreshTokenValiditySeconds(((ApplicationInformation)resource).getRefreshTokenValiditySeconds());
+//    	this.setAdditionalInformation(((ApplicationInformation)resource).getAdditionalInformation());
     	this.setDataCustodianApplicationStatus(((ApplicationInformation)resource).getDataCustodianApplicationStatus());
     	this.setDataCustodianDefaultBatchResource(((ApplicationInformation)resource).getDataCustodianDefaultBatchResource());
     	this.setDataCustodianDefaultSubscriptionResource(((ApplicationInformation)resource).getDataCustodianDefaultSubscriptionResource());

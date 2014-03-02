@@ -23,6 +23,7 @@ import java.util.UUID;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface RetailCustomerService extends UserDetailsService {

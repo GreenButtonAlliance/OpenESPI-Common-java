@@ -35,6 +35,7 @@ import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
