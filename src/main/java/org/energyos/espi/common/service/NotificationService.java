@@ -12,4 +12,6 @@ public interface NotificationService {
     
     void notify(RetailCustomer retailCustomer, XMLGregorianCalendar startDate, XMLGregorianCalendar endDate);
     
+    void notifyAllNeed();
+    
 }

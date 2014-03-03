@@ -25,6 +25,7 @@ import javax.persistence.PersistenceContext;
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.repositories.IntervalBlockRepository;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

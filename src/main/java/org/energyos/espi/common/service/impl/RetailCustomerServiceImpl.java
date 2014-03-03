@@ -17,11 +17,9 @@
 package org.energyos.espi.common.service.impl;
 
 import java.io.InputStream;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.ServiceCategory;
@@ -90,6 +88,9 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 
     @Override
     public void persist(RetailCustomer customer) {
+    	if (customer.getUUID() == null) {
+    		customer.setUUID(UUID.randomUUID());
+    	}
     	retailCustomerRepository.persist(customer);
     }
 

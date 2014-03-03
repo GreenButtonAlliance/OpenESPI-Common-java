@@ -20,7 +20,7 @@ public interface ApplicationInformationService {
 
 	public ApplicationInformation findByClientId(String clientId);
 
-	public ClientDetails loadClientByClientId(String clientId);
+//	public ClientDetails loadClientByClientId(String clientId);
 
 	public ApplicationInformation findByDataCustodianClientId(
 			String dataCustodianClientId);
@@ -51,6 +51,8 @@ public interface ApplicationInformationService {
 	public void setApplicationInformation(ApplicationInformation applicationInformation);
 
 	public String getDataCustodianResourceEndpoint();
+	
+	public String getAuthorizationServerTokenEndpoint();
 	
 	public String getThirdPartyNotifyURI();
 

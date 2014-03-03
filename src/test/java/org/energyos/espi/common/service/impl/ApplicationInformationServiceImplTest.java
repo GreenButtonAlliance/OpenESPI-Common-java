@@ -56,10 +56,10 @@ public class ApplicationInformationServiceImplTest {
         verify(repository).findByDataCustodianClientId("39");
     }
 
-    @Test
-    public void loadClientByClientId() throws Exception {
-        service.loadClientByClientId("99");
-
-        verify(repository).findByClientId("99");
-    }
+//    @Test
+//    public void loadClientByClientId() throws Exception {
+//        service.loadClientByClientId("99");
+//
+//        verify(repository).findByClientId("99");
+//    }
 }

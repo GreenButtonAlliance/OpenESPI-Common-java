@@ -34,6 +34,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -44,7 +45,6 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
-import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 
 
 /**
@@ -182,6 +182,10 @@ public class Authorization
     @XmlElement(name = "referenceID")
     protected RetailCustomer retailCustomer;
 
+    @OneToOne (cascade = CascadeType.DETACH) @JoinColumn(name = "subscription_id")
+    @XmlTransient
+    protected Subscription subscription;
+    
     @XmlElement(name = "expires_in")
     protected Long expiresIn;
     
@@ -221,6 +225,14 @@ public class Authorization
     
     private String subscriptionURI;    
 
+    public Subscription getSubscription () {
+    	return this.subscription;
+    }
+    
+    public void setSubscription (Subscription subscription) {
+    	this.subscription = subscription;
+    }
+    
     /**
      * Gets the value of the authorizedPeriod property.
      *
@@ -421,9 +433,9 @@ public class Authorization
      *     {@link String }
      *
      */
-    public void setRefreshToken(OAuth2RefreshToken oAuth2RefreshToken) {
-    	if(oAuth2RefreshToken != null) {
-    		this.refreshToken = oAuth2RefreshToken.toString();
+    public void setRefreshToken(String value) {
+    	if(value != null) {
+    		this.refreshToken = value;
     	}
     }
 
