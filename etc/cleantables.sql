@@ -49,3 +49,12 @@ TRUNCATE TABLE usage_points;
 TRUNCATE TABLE application_information_scopes;
 TRUNCATE TABLE application_information;
 
+USE tokenstore
+
+TRUNCATE TABLE oauth_client_details;
+TRUNCATE TABLE oauth_client_token;
+TRUNCATE TABLE oauth_access_token;
+TRUNCATE TABLE oauth_refresh_token;
+TRUNCATE TABLE oauth_code;
+TRUNCATE TABLE oauth_approvals;
+TRUNCATE TABLE ClientDetails;
