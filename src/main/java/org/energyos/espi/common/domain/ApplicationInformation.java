@@ -48,7 +48,6 @@ import org.energyos.espi.common.models.atom.adapters.ApplicationInformationAdapt
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.security.core.GrantedAuthority;
 
 
 
@@ -177,7 +176,7 @@ public class ApplicationInformation
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	// private static final long serialVersionUID = 1L;
 	public final static String QUERY_FIND_ALL = "ApplicationInformation.findAll";
 	public final static String QUERY_FIND_BY_UUID = "ApplicationInformation.findByUUID";
     public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
