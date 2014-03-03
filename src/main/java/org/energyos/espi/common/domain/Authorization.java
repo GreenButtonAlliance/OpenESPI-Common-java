@@ -45,7 +45,6 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
-import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 
 
 /**
