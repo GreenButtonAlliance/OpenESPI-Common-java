@@ -382,7 +382,7 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 					</xs:element>
 					<xs:element name="authorizationURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>URI that can be used to update thor delete this Authorization</xs:documentation>
+							<xs:documentation>URI that can be used to update or delete this Authorization</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
