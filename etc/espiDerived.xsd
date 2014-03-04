@@ -3,7 +3,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20140228
+    Version: 0.7.20140304
      Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -290,7 +290,7 @@ self link to this resource
 rel corresponding ApplicationInformation (if this is the client access containing token instance)
 rel corresponding to the authorized resource (if this is the access_token containing instance for a customer resource)
 
-Note: for privacy there is no identifier of the RetailCustomer in this structure but an implementation will have consider how to maintain a correspendance between a RetailCustomer and his authorization.</xs:documentation>
+Note: for privacy there is no identifier of the RetailCustomer in this structure but an implementation will have consider how to maintain a correspondence between a RetailCustomer and his authorization.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
@@ -337,7 +337,7 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 					</xs:element>
 					<xs:element name="scope" type="String256" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Negotiated scope of the authroization</xs:documentation>
+							<xs:documentation>Negotiated scope of the authorization</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="state" type="String256" minOccurs="0">
@@ -372,12 +372,12 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 					</xs:element>
 					<xs:element name="error_uri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>speciic error URI for last returned erorr</xs:documentation>
+							<xs:documentation>specific error URI for last returned error</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="resourceURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>resrouceURI that represents the data set authorized. Can be used in a GET of the resrouce subscription.</xs:documentation>
+							<xs:documentation>resourceURI that represents the data set authorized. Can be used in a GET of the resource subscription.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="authorizationURI" type="xs:anyURI" minOccurs="0">
@@ -510,7 +510,7 @@ Specific format and valid values per the standard are specified in QualityOfRead
 					<xs:element name="measuringPeriod" type="TimeAttributeKind" minOccurs="0" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>[extension] Time attribute inherent or fundamental to the reading value (as opposed to 'macroPeriod' that supplies an "adjective" to describe aspects of a time period with regard to the measurement). It refers to the way the value was originally measured and not to the frequency at which it is reported or presented. For example, an hourly interval of consumption data would have value 'hourly' as an attribute. However in the case of an hourly sampled voltage value, the meterReadings schema would carry the 'hourly' interval size information.
-It is common for meters to report demand in a form that is measured over the course of a portion of an hour, while enterprise applications however commonly assume the demand (in kW or kVAr) normalised to 1 hour. The sytem that receives readings directly from the meter therefore must perform this transformation before publishing readings for use by the other enterprise systems. The scalar used is chosen based on the block size (not any sub-interval size).</xs:documentation>
+It is common for meters to report demand in a form that is measured over the course of a portion of an hour, while enterprise applications however commonly assume the demand (in kW or kVAr) normalized to 1 hour. The system that receives readings directly from the meter therefore must perform this transformation before publishing readings for use by the other enterprise systems. The scalar used is chosen based on the block size (not any sub-interval size).</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="argument" type="RationalNumber" minOccurs="0">
@@ -552,7 +552,7 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 	</xs:complexType>
 	<xs:complexType name="ElectricPowerQualitySummary">
 		<xs:annotation>
-			<xs:documentation>A summary of power quality events. This information represents a summary of power quality information typically required by customer facility energy management systems. It is not intended to satisfy the detailed requirements of power quality monitoring. All values are as defined by measurementProtocol during the period. The standards typically also give ranges of allowed values; the information attributes are the raw measurements, not the &quot;yes/no&quot; determination by the various standards. See referenced standards for definition, measurement protocol and period.</xs:documentation>
+			<xs:documentation>A summary of power quality events. This information represents a summary of power quality information typically required by customer facility energy management systems. It is not intended to satisfy the detailed requirements of power quality monitoring. All values are as defined by measurementProtocol during the period. The standards typically also give ranges of allowed values; the information attributes are the raw measurements, not the “yes/no” determination by the various standards. See referenced standards for definition, measurement protocol and period.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
@@ -584,7 +584,7 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 					</xs:element>
 					<xs:element name="measurementProtocol" type="UInt8" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>A reference to the source standard used as the measurement protocol definition. Examples are: 0 = &quot;IEEE1519-2009&quot; 1 = &quot;EN50160&quot;</xs:documentation>
+							<xs:documentation>A reference to the source standard used as the measurement protocol definition. Examples are: 0 = “IEEE1519-2009” 1 = “EN50160”</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="powerFrequency" type="Int48" minOccurs="0">
@@ -788,7 +788,7 @@ Other EUI Types
 					<xs:element name="ReadingQuality" type="ReadingQuality" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="timePeriod" type="DateTimeInterval" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The date time and duration of a reading. If not specified, readings for each &quot;intervalLength&quot; in ReadingType are present.</xs:documentation>
+							<xs:documentation>The date time and duration of a reading. If not specified, readings for each “intervalLength” in ReadingType are present.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="value" type="Int48" minOccurs="0">
@@ -841,7 +841,7 @@ Other EUI Types
 				<xs:sequence>
 					<xs:element name="powerOfTenMultiplier" type="UnitMultiplierKind" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The multiplier part of the unit of measure, e.g. &quot;kilo&quot; (k)</xs:documentation>
+							<xs:documentation>The multiplier part of the unit of measure, e.g. “kilo” (k)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="timeStamp" type="TimeType" minOccurs="0">
@@ -851,7 +851,7 @@ Other EUI Types
 					</xs:element>
 					<xs:element name="uom" type="UnitSymbolKind" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The units of the reading, e.g. &quot;Wh&quot;</xs:documentation>
+							<xs:documentation>The units of the reading, e.g. “Wh”</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="value" type="Int48" minOccurs="0">
@@ -1225,7 +1225,7 @@ Enumerations
 					<xs:enumeration value="1">
 						<xs:annotation>
 							<xs:appinfo>bulkQuantity</xs:appinfo>
-							<xs:documentation>A value from a register which represents the bulk quantity of a commodity. This quantity is computed as the integral of the commodity usage rate. This value is typically used as the basis for the dial reading at the meter, and as a result, will roll over upon reaching a maximum dial value. Note 1: With the metering system, the roll-over behaviour typically implies a roll-under behavior so that the value presented is always a positive value (e.g. unsigned integer or positive decimal.) However, when communicating data between enterprise applications a negative value might occur in a case such as net metering.Note 2: A BulkQuantity refers primarily to the dial reading and not the consumption over a specific period of time.</xs:documentation>
+							<xs:documentation>A value from a register which represents the bulk quantity of a commodity. This quantity is computed as the integral of the commodity usage rate. This value is typically used as the basis for the dial reading at the meter, and as a result, will roll over upon reaching a maximum dial value. Note 1: With the metering system, the roll-over behaviour typically implies a roll-under behaviour so that the value presented is always a positive value (e.g. unsigned integer or positive decimal.) However, when communicating data between enterprise applications a negative value might occur in a case such as net metering. Note 2: A BulkQuantity refers primarily to the dial reading and not the consumption over a specific period of time.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="2">
@@ -1237,7 +1237,7 @@ Enumerations
 					<xs:enumeration value="3">
 						<xs:annotation>
 							<xs:appinfo>cumulative</xs:appinfo>
-							<xs:documentation>The sum of the previous billing period values. Note: “Cumulative” is commonly used in conjunction with “demand.” Each demand reset causes the maximum demand value for the present billing period (since the last demand reset) to accumulate as an accumulative total of all maximum demands. So instead of “zeroing” the demand register, a demand reset has the affect of adding the present maximum demand to this accumulating total.</xs:documentation>
+							<xs:documentation>The sum of the previous billing period values. Note: “Cumulative” is commonly used in conjunction with “demand.” Each demand reset causes the maximum demand value for the present billing period (since the last demand reset) to accumulate as an accumulative total of all maximum demands. So instead of “zeroing” the demand register, a demand reset has the effect of adding the present maximum demand to this accumulating total.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="4">
@@ -1273,7 +1273,7 @@ Enumerations
 					<xs:enumeration value="13">
 						<xs:annotation>
 							<xs:appinfo>latchingQuantity</xs:appinfo>
-							<xs:documentation>When this description is applied to a metered value, it implies that the value is a time-independent cumulative quantity much a BulkQuantity, except that it latches upon the maximum value upon reaching that value. Any additional accumulation (positive or negative) is discarded until a reset occurs. Note: A LatchingQuantity may also occur in the downward direction – upon reaching a minimum value. The terms “maximum” or “minimum” will usually be included as an attribute when this type of accumulation behaviour is present.When this description is applied to an encoded value (UOM= “Code”), it implies that the value has one or more bits which are latching. The condition that caused the bit to be set may have long since evaporated.In either case, the timestamp that accompanies the value may not coincide with the moment the value was initially set.In both cases a system will need to perform an operation to clear the latched value.</xs:documentation>
+							<xs:documentation>When this description is applied to a metered value, it implies that the value is a time-independent cumulative quantity much a BulkQuantity, except that it latches upon the maximum value upon reaching that value. Any additional accumulation (positive or negative) is discarded until a reset occurs. Note: A LatchingQuantity may also occur in the downward direction – upon reaching a minimum value. The terms “maximum” or “minimum” will usually be included as an attribute when this type of accumulation behaviour is present. When this description is applied to an encoded value (UOM= “Code”), it implies that the value has one or more bits which are latching. The condition that caused the bit to be set may have long since evaporated. In either case, the timestamp that accompanies the value may not coincide with the moment the value was initially set. In both cases a system will need to perform an operation to clear the latched value.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="14">
@@ -1307,7 +1307,7 @@ Enumerations
 					</xs:enumeration>
 					<xs:enumeration value="2">
 						<xs:annotation>
-							<xs:appinfo>electricity PrimaryMetere</xs:appinfo>
+							<xs:appinfo>electricity PrimaryMetered</xs:appinfo>
 							<xs:documentation>It is possible for a meter to be outfitted with an external VT and/or CT. The meter might not be aware of these devices, and the display not compensate for their presence. Ultimately, when these scalars are applied, the value that represents the service value is called the “primary metered” value. The “index” in sub-category 3 mirrors those of sub-category 0.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
@@ -1665,19 +1665,19 @@ Enumerations
 					<xs:enumeration value="1">
 						<xs:annotation>
 							<xs:appinfo>forward</xs:appinfo>
-							<xs:documentation>"Delivered," or "Imported" as defined 61968-2.Forward Active Energy is a positive kWh value as one would naturally expect to find as energy is supplied by the utility and consumed at the service.Forward Reactive Energy is a positive VArh value as one would naturally expect to find in the presence of inductive loading.In polyphase metering, the forward energy register is incremented when the sum of the phase energies is greater than zero.</xs:documentation>
+							<xs:documentation>"Delivered," or "Imported" as defined 61968-2.Forward Active Energy is a positive kWh value as one would naturally expect to find as energy is supplied by the utility and consumed at the service. Forward Reactive Energy is a positive VArh value as one would naturally expect to find in the presence of inductive loading. In polyphase metering, the forward energy register is incremented when the sum of the phase energies is greater than zero.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="2">
 						<xs:annotation>
 							<xs:appinfo>lagging</xs:appinfo>
-							<xs:documentation>Typically used to describe that a power factor is lagging the reference value. Note 1: When used to describe VA, “lagging” describes a form of measurement where reactive power is considered in all four quadrants, but real power is considered only in quadrants I and IV.Note 2: When used to describe power factor, the term “Lagging” implies that the PF is negative. The term “lagging” in this case takes the place of the negative sign. If a signed PF value is to be passed by the data producer, then the direction of flow enumeration zero (none) should be used in order to avoid the possibility of creating an expression that employs a double negative. The data consumer should be able to tell from the sign of the data if the PF is leading or lagging. This principle is analogous to the concept that “Reverse” energy is an implied negative value, and to publish a negative reverse value would be ambiguous.Note 3: Lagging power factors typically indicate inductive loading.</xs:documentation>
+							<xs:documentation>Typically used to describe that a power factor is lagging the reference value. Note 1: When used to describe VA, “lagging” describes a form of measurement where reactive power is considered in all four quadrants, but real power is considered only in quadrants I and IV. Note 2: When used to describe power factor, the term “Lagging” implies that the PF is negative. The term “lagging” in this case takes the place of the negative sign. If a signed PF value is to be passed by the data producer, then the direction of flow enumeration zero (none) should be used in order to avoid the possibility of creating an expression that employs a double negative. The data consumer should be able to tell from the sign of the data if the PF is leading or lagging. This principle is analogous to the concept that “Reverse” energy is an implied negative value, and to publish a negative reverse value would be ambiguous. Note 3: Lagging power factors typically indicate inductive loading.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="3">
 						<xs:annotation>
 							<xs:appinfo>leading</xs:appinfo>
-							<xs:documentation>Typically used to describe that a power factor is leading the reference value.Note: Leading power factors typically indicate capacitive loading.</xs:documentation>
+							<xs:documentation>Typically used to describe that a power factor is leading the reference value. Note: Leading power factors typically indicate capacitive loading.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="4">
@@ -1767,19 +1767,19 @@ Enumerations
 					<xs:enumeration value="19">
 						<xs:annotation>
 							<xs:appinfo>reverse</xs:appinfo>
-							<xs:documentation>Reverse Active Energy is equivalent to "Received," or "Exported" as defined in 61968-2.Reverse Active Energy is a positive kWh value as one would expect to find when energy is backfed by the service onto the utility network.Reverse Reactive Energy is a positive VArh value as one would expect to find in the presence of capacitive loading and a leading Power Factor.In polyphase metering, the reverse energy register is incremented when the sum of the phase energies is less than zero.Note: The value passed as a reverse value is always a positive value. It is understood by the label “reverse” that it represents negative flow.</xs:documentation>
+							<xs:documentation>Reverse Active Energy is equivalent to "Received," or "Exported" as defined in 61968-2. Reverse Active Energy is a positive kWh value as one would expect to find when energy is backfed by the service onto the utility network. Reverse Reactive Energy is a positive VArh value as one would expect to find in the presence of capacitive loading and a leading Power Factor. In polyphase metering, the reverse energy register is incremented when the sum of the phase energies is less than zero. Note: The value passed as a reverse value is always a positive value. It is understood by the label “reverse” that it represents negative flow.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="20">
 						<xs:annotation>
 							<xs:appinfo>total</xs:appinfo>
-							<xs:documentation>|Forward| + |Reverse|, See 61968-2.The sum of the commodity in all quadrants Q1+Q2+Q3+Q4.In polyphase metering, the total energy register is incremented when the absolute value of the sum of the phase energies is greater than zero.</xs:documentation>
+							<xs:documentation>|Forward| + |Reverse|, See 61968-2. The sum of the commodity in all quadrants Q1+Q2+Q3+Q4. In polyphase metering, the total energy register is incremented when the absolute value of the sum of the phase energies is greater than zero.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="21">
 						<xs:annotation>
 							<xs:appinfo>totalByPhase</xs:appinfo>
-							<xs:documentation>In polyphase metering, the total by phase energy register is incremented when the sum of the absolute values of the phase energies is greater than zero.In single phase metering, the formulas for “Total” and “Total by phase” collapse to the same expression. For communication purposes however, the “Total” enumeration should be used with single phase meter data.</xs:documentation>
+							<xs:documentation>In polyphase metering, the total by phase energy register is incremented when the sum of the absolute values of the phase energies is greater than zero. In single phase metering, the formulas for “Total” and “Total by phase” collapse to the same expression. For communication purposes however, the “Total” enumeration should be used with single phase meter data.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -2549,7 +2549,7 @@ Enumerations
 	</xs:simpleType>
 	<xs:simpleType name="PhaseCodeKind">
 		<xs:annotation>
-			<xs:documentation>Enumeration of phase identifiers. Allows designation of phases for both transmission and distribution equipment, circuits and loads.Residential and small commercial loads are often served from single-phase, or split-phase, secondary circuits. Phases 1 and 2 refer to hot wires that are 180 degrees out of phase, while N refers to the neutral wire. Through single-phase transformer connections, these secondary circuits may be served from one or two of the primary phases A, B, and C. For three-phase loads, use the A, B, C phase codes instead of s12N.</xs:documentation>
+			<xs:documentation>Enumeration of phase identifiers. Allows designation of phases for both transmission and distribution equipment, circuits and loads. Residential and small commercial loads are often served from single-phase, or split-phase, secondary circuits. Phases 1 and 2 refer to hot wires that are 180 degrees out of phase, while N refers to the neutral wire. Through single-phase transformer connections, these secondary circuits may be served from one or two of the primary phases A, B, and C. For three-phase loads, use the A, B, C phase codes instead of s12N.</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="UInt16">
 			<xs:simpleType>
@@ -2707,7 +2707,7 @@ Enumerations
 					<xs:enumeration value="40">
 						<xs:annotation>
 							<xs:appinfo>CAv</xs:appinfo>
-							<xs:documentation>hase C current or voltage relative to Phase A voltage</xs:documentation>
+							<xs:documentation>Phase C current or voltage relative to Phase A voltage</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="17">
@@ -3302,7 +3302,7 @@ Enumerations
 					<xs:enumeration value="38">
 						<xs:annotation>
 							<xs:appinfo>W</xs:appinfo>
-							<xs:documentation>Real power, Watt. By definition, one Watt equals oneJoule per second. Electrical power may have real and reactive components. The real portion of electrical power (I²R) or VIcos?, is expressed in Watts. (See also apparent power and reactive power.), W</xs:documentation>
+							<xs:documentation>Real power, Watt. By definition, one Watt equals one Joule per second. Electrical power may have real and reactive components. The real portion of electrical power (I²R) or VIcos?, is expressed in Watts. (See also apparent power and reactive power.), W</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="63">
@@ -3362,7 +3362,7 @@ Enumerations
 					<xs:enumeration value="23">
 						<xs:annotation>
 							<xs:appinfo>degC</xs:appinfo>
-							<xs:documentation>Relative temperature in degrees Celsius. In the SI unit system the symbol is ºC. Electric charge is measured in coulomb that has the unit symbol C. To destinguish degree Celsius form coulomb the symbol used in the UML is degC. Reason for not using ºC is the special character º is difficult to manage in software.</xs:documentation>
+							<xs:documentation>Relative temperature in degrees Celsius. In the SI unit system the symbol is ºC. Electric charge is measured in coulomb that has the unit symbol C. To distinguish degree Celsius from coulomb the symbol used in the UML is degC. Reason for not using ºC is the special character º is difficult to manage in software.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="27">
@@ -3487,7 +3487,7 @@ Enumerations
 					</xs:enumeration>
 					<xs:enumeration value="103">
 						<xs:annotation>
-							<xs:appinfo>aPerM</xs:appinfo>
+							<xs:appinfo>APerM</xs:appinfo>
 							<xs:documentation>A/m, magnetic field strength, Ampere per metre, A/m</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
@@ -3554,7 +3554,7 @@ Enumerations
 					<xs:enumeration value="65">
 						<xs:annotation>
 							<xs:appinfo>cosTheta</xs:appinfo>
-							<xs:documentation>Power factor, Dimensionless <img src="HTS_1.PNG" width="64" height="29" border="0" alt="graphic"/>, cos?</xs:documentation>
+							<xs:documentation>Power factor, Dimensionless, cos?</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="111">
@@ -3920,7 +3920,7 @@ Enumerations
 					<xs:enumeration value="109">
 						<xs:annotation>
 							<xs:appinfo>status</xs:appinfo>
-							<xs:documentation>State, "1" = "true", "live", "on", "high", "set"; "0" = "false", "dead", "off", "low", "cleared"Note: A Boolean value is preferred but other values may be supported, status</xs:documentation>
+							<xs:documentation>State, "1" = "true", "live", "on", "high", "set"; "0" = "false", "dead", "off", "low", "cleared". Note: A Boolean value is preferred but other values may be supported, status</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="24">
@@ -4138,7 +4138,7 @@ Enumerations
 	</xs:simpleType>
 	<xs:simpleType name="CRUDOperation">
 		<xs:annotation>
-			<xs:documentation>Specifies the operation requrested of this item</xs:documentation>
+			<xs:documentation>Specifies the operation requested of this item</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="UInt16">
 			<xs:simpleType>
@@ -4263,7 +4263,7 @@ Enumerations
 					<xs:enumeration value="3">
 						<xs:annotation>
 							<xs:appinfo>Mobile</xs:appinfo>
-							<xs:documentation>The application is on a mobil device</xs:documentation>
+							<xs:documentation>The application is on a mobile device</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="4">
