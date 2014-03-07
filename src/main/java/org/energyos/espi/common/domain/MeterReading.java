@@ -50,6 +50,7 @@ import org.energyos.espi.common.models.atom.LinkType;
 import org.energyos.espi.common.models.atom.adapters.MeterReadingAdapter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -154,7 +155,7 @@ public class MeterReading extends IdentifiedObject
     }
     
     public List<IntervalBlock> getIntervalBlocks() {
-        return intervalBlocks;
+          return intervalBlocks;
     }
 
     public void setIntervalBlocks(List<IntervalBlock> intervalBlocks) {
@@ -185,8 +186,10 @@ public class MeterReading extends IdentifiedObject
         this.relatedLinks = relatedLinks;
     }
     
+    @Transactional
     @Override 
     public void merge(IdentifiedObject resource) {
+    	
     	super.merge(resource);
         
     	for (IntervalBlock bl : ((MeterReading)resource).getIntervalBlocks()) {
