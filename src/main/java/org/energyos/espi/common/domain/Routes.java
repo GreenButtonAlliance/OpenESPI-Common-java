@@ -25,7 +25,8 @@ public class Routes {
     public static final String DATA_CUSTODIAN_API_FEED = "/api/feed";
     public static final String DATA_CUSTODIAN_AUTHORIZATION = "/espi/1_1/resource/Authorization/{AuthorizationID}";
     public static final String DATA_CUSTODIAN_HOME = "/custodian/home";
-    public static final String DATA_CUSTODIAN_NOTIFY_THIRD_PARTY = "/espi/1_1/NotifyThirdParty";
+    public static final String DATA_CUSTODIAN_NOTIFY_THIRD_PARTYS = "/espi/1_1/NotifyThirdParty";
+    public static final String DATA_CUSTODIAN_NOTIFY_THIRD_PARTY = "/espi/1_1/NotifyThirdParty/{applicationInformationId}";
 //    public static final String DATA_CUSTODIAN_REMOVE_ALL_OAUTH_TOKENS = "/custodian/oauth/users/{user}/tokens/{token}";
     public static final String DATA_CUSTODIAN_REST_SUBSCRIPTION_GET = "/espi/1_1/resource/Subscription/{subscriptionHashedId}";
     public static final String DATA_CUSTODIAN_REST_USAGE_POINT_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint";
