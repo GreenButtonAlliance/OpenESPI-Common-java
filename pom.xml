@@ -6,7 +6,7 @@
 
     <groupId>org.energyos</groupId>
     <artifactId>Common</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Common</name>
@@ -50,8 +50,8 @@
 
     <properties>
         <!-- Spring -->
-        <spring.version>4.0.1.RELEASE</spring.version>
-        <spring.security.version>3.2.1.RELEASE</spring.security.version>
+        <spring.version>4.0.3.RELEASE</spring.version>
+        <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <spring-security-oauth.version>2.0.0.BUILD-SNAPSHOT</spring-security-oauth.version>
 
         <!-- Hibernate / JPA -->
