@@ -27,6 +27,8 @@ package org.energyos.espi.common.domain;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -58,8 +60,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "ServiceCategory")
 @XmlAccessorType(XmlAccessType.FIELD)
-@Entity
-@Table(name = "service_categories")
+@Embeddable
+//@Entity
+//@Table(name = "service_categories")
 public class ServiceCategory {
     public final static Long ELECTRICITY_SERVICE = 0L;
     public final static Long GAS_SERVICE = 1L;
@@ -96,7 +99,8 @@ public class ServiceCategory {
 
     @XmlElement(required = true)
     @NotNull
-    @Id
+    @Column( name = "serviceCategory_kind")
+//    @Id
     protected Long kind;
 
     /**
