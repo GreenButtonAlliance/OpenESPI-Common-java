@@ -30,6 +30,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -134,9 +135,11 @@ public class UsagePoint
 
     @XmlElement(name = "ServiceCategory")
     @NotNull
-    @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.REFRESH})
+//    @Column(name="servicecategory_kind", columnDefinition="bigint(20) NOT NULL")
     protected ServiceCategory serviceCategory;
-
+    
+    
+    
     @XmlElement(name = "ServiceDeliveryPoint")
     @OneToOne(cascade = {CascadeType.ALL})
     protected ServiceDeliveryPoint serviceDeliveryPoint;

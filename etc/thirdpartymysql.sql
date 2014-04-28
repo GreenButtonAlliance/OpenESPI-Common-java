@@ -118,27 +118,12 @@ CREATE TABLE `usage_points` (
   UNIQUE KEY `UK_d3b5c06a4b994ad8906ead9757f` (`uuid`),
   KEY `FK_9fa5cbe1eaeb4dbfb7209cb0213` (`localTimeParameters_id`),
   KEY `FK_41107ba4248e4bf79b62c405385` (`retail_customer_id`),
-  KEY `FK_ee69b6e3d91e410eae347404250` (`serviceCategory_kind`),
   KEY `FK_c3909436c6934c8bb14da2bb93b` (`serviceDeliveryPoint_id`),
   KEY `FK_53bcef9479ff4522b63a46e018c` (`subscription_id`),
   CONSTRAINT `FK_53bcef9479ff4522b63a46e018c` FOREIGN KEY (`subscription_id`) REFERENCES `subscriptions` (`id`),
   CONSTRAINT `FK_41107ba4248e4bf79b62c405385` FOREIGN KEY (`retail_customer_id`) REFERENCES `retail_customers` (`id`),
   CONSTRAINT `FK_9fa5cbe1eaeb4dbfb7209cb0213` FOREIGN KEY (`localTimeParameters_id`) REFERENCES `time_configurations` (`id`),
-  CONSTRAINT `FK_c3909436c6934c8bb14da2bb93b` FOREIGN KEY (`serviceDeliveryPoint_id`) REFERENCES `service_delivery_points` (`id`),
-  CONSTRAINT `FK_ee69b6e3d91e410eae347404250` FOREIGN KEY (`serviceCategory_kind`) REFERENCES `service_categories` (`kind`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `service_categories`
---
-
-DROP TABLE IF EXISTS `service_categories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `service_categories` (
-  `kind` bigint(20) NOT NULL,
-  PRIMARY KEY (`kind`)
+  CONSTRAINT `FK_c3909436c6934c8bb14da2bb93b` FOREIGN KEY (`serviceDeliveryPoint_id`) REFERENCES `service_delivery_points` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

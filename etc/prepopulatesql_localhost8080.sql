@@ -1,16 +1,5 @@
 USE `datacustodian`;
 
-/* Add service kind */ 
-INSERT INTO service_categories (kind) VALUES (0);
-INSERT INTO service_categories (kind) VALUES (1);
-INSERT INTO service_categories (kind) VALUES (2);
-INSERT INTO service_categories (kind) VALUES (3);
-INSERT INTO service_categories (kind) VALUES (4);
-INSERT INTO service_categories (kind) VALUES (5);
-INSERT INTO service_categories (kind) VALUES (6);
-INSERT INTO service_categories (kind) VALUES (7);
-INSERT INTO service_categories (kind) VALUES (8);
-INSERT INTO service_categories (kind) VALUES (9);
 
 /* Add retail customers */ 
 INSERT INTO retail_customers (`id`,`description`,`published`,`self_link_href`,`self_link_rel`,`up_link_href`,`up_link_rel`,`updated`,`uuid`, enabled, username, first_name, last_name, password, role) VALUES (1, '', '2014-01-02 05:00:00', '/RetailCustomer/1','self','/RetailCustomer','up','2014-01-02 05:00:00','106E8B03-0299-467E-972A-A883ECDCC575', TRUE, 'alan', 'Alan', 'Turing', 'koala', 'ROLE_USER');
@@ -38,17 +27,7 @@ INSERT INTO application_information_scopes (application_information_id, scope) V
 
 USE `thirdparty`;
 
-/* Add service kind */ 
-INSERT INTO service_categories (kind) VALUES (0);
-INSERT INTO service_categories (kind) VALUES (1);
-INSERT INTO service_categories (kind) VALUES (2);
-INSERT INTO service_categories (kind) VALUES (3);
-INSERT INTO service_categories (kind) VALUES (4);
-INSERT INTO service_categories (kind) VALUES (5);
-INSERT INTO service_categories (kind) VALUES (6);
-INSERT INTO service_categories (kind) VALUES (7);
-INSERT INTO service_categories (kind) VALUES (8);
-INSERT INTO service_categories (kind) VALUES (9);
+
 
 /* Add retail customers */ 
 INSERT INTO retail_customers (`id`,`description`,`published`,`self_link_href`,`self_link_rel`,`up_link_href`,`up_link_rel`,`updated`,`uuid`, enabled, username, first_name, last_name, password, role) VALUES (1, '', '2014-01-02 05:00:00', '/RetailCustomer/1','self','/RetailCustomer','up','2014-01-02 05:00:00','106E8B03-0299-467E-972A-A883ECDCC575', TRUE, 'alan', 'Alan', 'Turing', 'koala', 'ROLE_USER');
