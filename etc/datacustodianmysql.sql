@@ -118,7 +118,6 @@ CREATE TABLE `usage_points` (
   UNIQUE KEY `UK_d3b5c06a4b994ad8906ead9757f` (`uuid`),
   KEY `FK_9fa5cbe1eaeb4dbfb7209cb0213` (`localTimeParameters_id`),
   KEY `FK_41107ba4248e4bf79b62c405385` (`retail_customer_id`),
-  KEY `FK_ee69b6e3d91e410eae347404250` (`serviceCategory_kind`),
   KEY `FK_c3909436c6934c8bb14da2bb93b` (`serviceDeliveryPoint_id`),
   KEY `FK_53bcef9479ff4522b63a46e018c` (`subscription_id`),
   CONSTRAINT `FK_53bcef9479ff4522b63a46e018c` FOREIGN KEY (`subscription_id`) REFERENCES `subscriptions` (`id`),
