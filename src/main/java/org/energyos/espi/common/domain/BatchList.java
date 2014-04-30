@@ -31,7 +31,7 @@ public class BatchList {
     @LazyCollection(LazyCollectionOption.FALSE)
     @CollectionTable(name = "resources", joinColumns=@JoinColumn(name="id"))
     @Column(name = "uri")
-    @XmlElement(name = "resource")
+    @XmlElement(name = "resources")
     private List<String> resources = new ArrayList<>();
 
     public List<String> getResources() {
