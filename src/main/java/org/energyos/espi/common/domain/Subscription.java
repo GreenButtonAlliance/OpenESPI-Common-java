@@ -189,4 +189,7 @@ public class Subscription
     	this.authorization = null;
     }
 
+    public boolean equals (Subscription s) {
+    	return (this.getId() == s.getId());
+    }
 }

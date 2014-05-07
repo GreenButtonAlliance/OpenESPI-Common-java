@@ -225,16 +225,16 @@ public class ExportServiceImpl implements ExportService {
 
     // - XPath form
 	@Override
-	public void exportElectricPowerQualitySummary(Long retailCustomerId, Long usagePointId, Long electricPowerQualitySummaryId,
+	public void exportElectricPowerQualitySummary(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long electricPowerQualitySummaryId,
 						      OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer" + retailCustomerId + "/UsagePoint/" + usagePointId + "/ElectricPowerQualitySummary/" + electricPowerQualitySummaryId;
+		String hrefFragment = "/Subscription" + subscriptionId + "/UsagePoint/" + usagePointId + "/ElectricPowerQualitySummary/" + electricPowerQualitySummaryId;
 		exportEntry(electricPowerQualitySummaryService.findEntryType(retailCustomerId, usagePointId, electricPowerQualitySummaryId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
-	public void exportElectricPowerQualitySummarys(Long retailCustomerId, Long usagePointId,
+	public void exportElectricPowerQualitySummarys(Long subscriptionId, Long retailCustomerId, Long usagePointId,
 						       OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer" + retailCustomerId + "/UsagePoint/" + usagePointId + "/ElectricPowerQualitySummary";
+		String hrefFragment = "/Subscription" + subscriptionId + "/UsagePoint/" + usagePointId + "/ElectricPowerQualitySummary";
 		exportEntries(electricPowerQualitySummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ElectricPowerQualitySummary.class,  hrefFragment);	
 	}
 
@@ -256,16 +256,16 @@ public class ExportServiceImpl implements ExportService {
 
     // - XPath form
 	@Override
-	public void exportElectricPowerUsageSummary(Long retailCustomerId, Long usagePointId, Long electricPowerUsageSummaryId,
+	public void exportElectricPowerUsageSummary(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long electricPowerUsageSummaryId,
 						    OutputStream stream, ExportFilter exportFilter) throws IOException {
-	    String hrefFragment = "/RetailCustomer/"+ retailCustomerId + "/UsagePoint/" + usagePointId + "/ElectricPowerUsageSummary/" + electricPowerUsageSummaryId;
+	    String hrefFragment = "/Subscription/"+ subscriptionId + "/UsagePoint/" + usagePointId + "/ElectricPowerUsageSummary/" + electricPowerUsageSummaryId;
 		exportEntry(electricPowerUsageSummaryService.findEntryType(retailCustomerId, usagePointId, electricPowerUsageSummaryId), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
-	public void exportElectricPowerUsageSummarys(Long retailCustomerId, Long usagePointId,
+	public void exportElectricPowerUsageSummarys(Long subscriptionId, Long retailCustomerId, Long usagePointId,
 						     OutputStream stream, ExportFilter exportFilter) throws IOException {
-	    String hrefFragment = "/RetailCustomer/"+ retailCustomerId + "/UsagePoint/" + usagePointId + "/ElectricPowerUsageSummary";
+	    String hrefFragment = "/Subscription/"+ subscriptionId + "/UsagePoint/" + usagePointId + "/ElectricPowerUsageSummary";
 		exportEntries(electricPowerUsageSummaryService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ElectricPowerUsageSummary.class, hrefFragment);	
 	}
 
@@ -288,17 +288,17 @@ public class ExportServiceImpl implements ExportService {
 
     // - XPath form
 	@Override
-	public void exportIntervalBlock(Long retailCustomerId, Long usagePointId, Long meterReadingId, Long intervalBlockId,
+	public void exportIntervalBlock(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long meterReadingId, Long intervalBlockId,
 					OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/IntervalBlock/" + intervalBlockId;
+		String hrefFragment = "/Subscription/" + subscriptionId + "/UsagePoint/" + usagePointId + "/IntervalBlock/" + intervalBlockId;
 		exportEntry(findEntryTypeXPath(retailCustomerId, usagePointId, meterReadingId, intervalBlockId, IntervalBlock.class), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
-	public void exportIntervalBlocks(Long retailCustomerId, Long usagePointId, Long meterReadingId,
+	public void exportIntervalBlocks(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long meterReadingId,
 					 OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/IntervalBlock";
-		exportEntries(findEntryTypeIteratorXPath(retailCustomerId, usagePointId, meterReadingId, IntervalBlock.class), stream, exportFilter, IntervalBlock.class, hrefFragment);
+		String hrefFragment = "/Subscription/" + subscriptionId + "/UsagePoint/" + usagePointId + "/IntervalBlock";
+		exportEntries(findEntryTypeIteratorXPath(subscriptionId, retailCustomerId, usagePointId, meterReadingId, IntervalBlock.class), stream, exportFilter, IntervalBlock.class, hrefFragment);
 	}
 
 	// MeterReading
@@ -318,17 +318,17 @@ public class ExportServiceImpl implements ExportService {
 
     // - XPath
 	@Override
-	public void exportMeterReading(Long retailCustomerId, Long usagePointId, Long meterReadingId,
+	public void exportMeterReading(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long meterReadingId,
 				       OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/MeterReading/" + meterReadingId;
+		String hrefFragment = "/Subscription/" + subscriptionId + "/UsagePoint/" + usagePointId + "/MeterReading/" + meterReadingId;
 		exportEntry(findEntryTypeXPath(retailCustomerId, usagePointId, meterReadingId, 0L, MeterReading.class), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
-	public void exportMeterReadings(Long retailCustomerId, Long usagePointId,
+	public void exportMeterReadings(Long subscriptionId, Long retailCustomerId, Long usagePointId,
 					OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/MeterReading";
-		exportEntries(findEntryTypeIteratorXPath(retailCustomerId, usagePointId, 0L, MeterReading.class), stream, exportFilter, MeterReading.class, hrefFragment);
+		String hrefFragment = "/Subscription/" + subscriptionId + "/UsagePoint/" + usagePointId + "/MeterReading";
+		exportEntries(findEntryTypeIteratorXPath(subscriptionId, retailCustomerId, usagePointId, 0L, MeterReading.class), stream, exportFilter, MeterReading.class, hrefFragment);
 	}
 
 
@@ -347,21 +347,6 @@ public class ExportServiceImpl implements ExportService {
 	    exportEntries(resourceService.findEntryTypeIterator(ReadingType.class), stream, exportFilter, ReadingType.class, hrefFragment);
 	}
 
-    // XPath form
-	@Override
-	public void exportReadingType(Long retailCustomerId, Long usagePointId, Long meterReadingId, Long readingTypeId,
-				      OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/MeterReading/" + meterReadingId + "/ReadingType/" + readingTypeId;
-		exportEntry(readingTypeService.findEntryType(retailCustomerId, usagePointId, meterReadingId, readingTypeId), stream, exportFilter, hrefFragment);
-	}
-
-	@Override
-	public void exportReadingTypes(Long retailCustomerId, Long usagePointId, OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId + "/ReadingType";
-		exportEntries(readingTypeService.findEntryTypeIterator(retailCustomerId, usagePointId), stream, exportFilter, ReadingType.class, hrefFragment);
-	}
-
-
     // RetailCustomer
     
     // ROOT form
@@ -376,7 +361,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportRetailCustomers(OutputStream stream, ExportFilter exportFilter)
 			throws IOException {
 		String hrefFragment = "/RetailCustomer";
-		exportEntries(findEntryTypeIteratorXPath(0L, 0L, 0L, RetailCustomer.class), stream, exportFilter, UsagePoint.class, hrefFragment);
+		exportEntries(findEntryTypeIteratorXPath(0L, 0L, 0L, 0L, RetailCustomer.class), stream, exportFilter, UsagePoint.class, hrefFragment);
 	}
 
 	
@@ -429,23 +414,6 @@ public class ExportServiceImpl implements ExportService {
 	    exportEntries(resourceService.findEntryTypeIterator(TimeConfiguration.class), stream, exportFilter, TimeConfiguration.class, hrefFragment);	
 	}
 	
-    // - XPath form
-	@Override
-	public void exportTimeConfiguration(Long retailCustomerId, Long usagePointId,
-			Long timeConfigurationId, OutputStream stream,
-			ExportFilter exportFilter) throws IOException {
-     	String hrefFragment = "/RetalCustomer" + retailCustomerId + "/UsagePoint/" + usagePointId + "/LocalTimeParameters/" + timeConfigurationId;
-		exportEntry(timeConfigurationService.findEntryType(retailCustomerId, usagePointId, timeConfigurationId, exportFilter), stream, exportFilter, hrefFragment);	
-	}
-
-	@Override
-	public void exportTimeConfigurations(Long retailCustomerId, Long usagePointId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetalCustomer" + retailCustomerId + "/UsagePoint/" + usagePointId + "/LocalTimeParameters";
-		exportEntries(timeConfigurationService.findEntryTypeIterator(retailCustomerId, usagePointId, exportFilter), stream, exportFilter, TimeConfiguration.class, hrefFragment);	
-	}
-	
-
 	// UsagePoints
 	//
         // ROOT form
@@ -465,17 +433,18 @@ public class ExportServiceImpl implements ExportService {
 	
     // XPath form
 	@Override
-	public void exportUsagePoint(Long retailCustomerId, Long usagePointId,
+	public void exportUsagePoint(Long subscriptionId, Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint/" + usagePointId;
+		String hrefFragment = "/Subscription/" + subscriptionId + "/UsagePoint/" + usagePointId;
 		exportEntry(findEntryTypeXPath(retailCustomerId, usagePointId, 0L, 0L, UsagePoint.class), stream, exportFilter, hrefFragment);
 	}
 
 	@Override
-	public void exportUsagePoints(Long retailCustomerId, 
+	public void exportUsagePoints(Long subscriptionId, Long retailCustomerId, 
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/RetailCustomer/" + retailCustomerId + "/UsagePoint";
-		exportEntries(findEntryTypeIteratorXPath(retailCustomerId, 0L, 0L, UsagePoint.class), stream, exportFilter, UsagePoint.class, hrefFragment);
+		// here we need to get only a subset of the usagepoints are obtained
+		String hrefFragment = "/Subscription/" + subscriptionId + "/UsagePoint";
+		exportEntries(findEntryTypeIteratorXPath(subscriptionId, retailCustomerId, 0L, 0L, UsagePoint.class), stream, exportFilter, UsagePoint.class, hrefFragment);
 	}
 	
 	// Special forms for Subscription, Bulk, Download
@@ -704,7 +673,7 @@ public class ExportServiceImpl implements ExportService {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	// TODO: need to make RetailCustomer inherit from IdentifiedObject to remove the above @Suppress
-	private EntryTypeIterator findEntryTypeIteratorXPath(Long id1, Long id2, Long id3, 
+	private EntryTypeIterator findEntryTypeIteratorXPath(Long subscriptionId, Long id1, Long id2, Long id3, 
 			Class clazz) {
 		EntryTypeIterator result = null;
 		List<Long> temp = new ArrayList<Long>();
@@ -715,15 +684,31 @@ public class ExportServiceImpl implements ExportService {
 				if (id2 != 0) {
 					temp = resourceService.findAllIdsByXPath(id1, id2, clazz);
 				} else {
-					temp = resourceService.findAllIdsByXPath(id1, clazz);
+					if (id1 != 0) {
+						// temp = resourceService.findAllIdsByXPath(id1, clazz);
+						Subscription subscription = resourceService.findById(subscriptionId, clazz);
+						for (UsagePoint up : subscription.getUsagePoints()) {
+							temp.add(up.getId());
+						}
+					} else {
+						temp = resourceService.findAllIdsByXPath(RetailCustomer.class);
+					}
 				}
 			}
+			
 			result = (new EntryTypeIterator(resourceService, temp, clazz));
 		} catch (Exception e) {
 			System.out.printf("**** Error in Query: %s\n", e.toString());
 			result = null;
 		}
 		return result;		
+	}
+	
+	private boolean validateSubscription(Long subscriptionId, Long usagePointId) {
+		Subscription subscription = resourceService.findById(subscriptionId, Subscription.class);
+		UsagePoint usagePoint = resourceService.findById(usagePointId,  UsagePoint.class);
+		return subscription.getUsagePoints().contains(usagePoint);
+		
 	}
 
 }
