@@ -140,10 +140,10 @@ public interface ExportService {
 			ExportFilter exportResourceFilter) throws IOException;
 
 	// - Full Export form
-	void exportUsagePointsFull(Long retailCustomerId, ServletOutputStream outputStream,
+	void exportUsagePointsFull(Long subscriptionId, Long retailCustomerId, ServletOutputStream outputStream,
 			ExportFilter exportFilter) throws IOException;
 
-	void exportUsagePointFull(Long usagePointId, Long RetailCustomerId,
+	void exportUsagePointFull(Long subscriptionId, Long usagePointId, Long RetailCustomerId,
 			ServletOutputStream outputStream, ExportFilter exportFilter)  throws IOException;
 
 	public void exportBatchBulk(long bulkId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
