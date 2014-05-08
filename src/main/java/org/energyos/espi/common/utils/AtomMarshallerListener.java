@@ -16,6 +16,7 @@ public class AtomMarshallerListener extends Marshaller.Listener {
     private String hrefFragment;
     private String entryFragment;
     private List<String> relRefList;
+    private Long subscriptionId;
     
     long depth;
 
@@ -27,13 +28,17 @@ public class AtomMarshallerListener extends Marshaller.Listener {
     	this.relRefList = relRefList;
     }
     
+    public void setSubscriptionId(Long subscriptionId) {
+    	this.subscriptionId = subscriptionId;
+    }
+    
     @Override
     public void beforeMarshal(Object source) {
         depth++;
         if (source instanceof EntryType) {
         	// set up the fragment for this particular entry.contents
         	ContentType content = ((EntryType)source).getContent();
-        	this.entryFragment = content.buildSelfHref(hrefFragment);
+        	this.entryFragment = content.buildSelfHref(subscriptionId, hrefFragment);
         	
         }
     	if ((source instanceof LinkType) && (((LinkType) source).getRel().equals("self"))) {

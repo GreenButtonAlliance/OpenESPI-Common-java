@@ -553,7 +553,7 @@ public class ContentType {
 		return result;
 	}
 
-	public String buildSelfHref(String hrefFragment) {
+	public String buildSelfHref(Long subscriptionId, String hrefFragment) {
 		// strip the result down to the "..../resource" 
 		String result = hrefFragment.substring(0, hrefFragment.indexOf("/resource") + "/resource".length());
 		
@@ -571,26 +571,41 @@ public class ContentType {
 
 			UsagePoint usagePoint = this.getElectricPowerQualitySummary().getUsagePoint();
 			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-			if (retailCustomer != null) {
-				result = result + "/RetailCustomer/" + retailCustomer.getId();
-
+			
+			if (subscriptionId != 0L) {
+				result = result + "/Subscription/" + subscriptionId;
 			    if (usagePoint != null) {
 			   	    result = result + "/UsagePoint/" + usagePoint.getId();
 			    }
+			} else {
+			    if (retailCustomer != null) {
+				    result = result + "/RetailCustomer/" + retailCustomer.getId();
+				    if (usagePoint != null) {
+				   	    result = result + "/UsagePoint/" + usagePoint.getId();
+				    }
+			    }
 			}
+
 			result = result + "/ElectricPowerQualitySummary/" + this.getElectricPowerQualitySummary().getId();
 		}
 		
 	    if (this.getElectricPowerUsageSummary() != null) {
 			UsagePoint usagePoint = this.getElectricPowerUsageSummary().getUsagePoint();
 			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-			if (retailCustomer != null) {
-				result = result + "/RetailCustomer/" + retailCustomer.getId();
-
-			    if (usagePoint != null) {
+			if (subscriptionId != 0L) {
+				result = result + "/Subscription/" + subscriptionId;
+				if (usagePoint != null) {
 			   	    result = result + "/UsagePoint/" + usagePoint.getId();
 			    }
+			} else {
+			    if (retailCustomer != null) {
+				    result = result + "/RetailCustomer/" + retailCustomer.getId();
+				    if (usagePoint != null) {
+				   	    result = result + "/UsagePoint/" + usagePoint.getId();
+				    }
+			    }
 			}
+		    
 			result = result + "/ElectricPowerUsageSummary/" + this.getElectricPowerUsageSummary().getId();
 		}
 			
@@ -598,9 +613,9 @@ public class ContentType {
 			MeterReading meterReading = this.getIntervalBlocks().get(0).getMeterReading();
 			UsagePoint usagePoint = meterReading.getUsagePoint();
 			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
-			if (retailCustomer != null) {
-				result = result + "/RetailCustomer/" + retailCustomer.getId();
-
+			
+			if (subscriptionId != 0L) {
+				result = result + "/Subscription/" + subscriptionId;
 			    if (usagePoint != null) {
 			   	    result = result + "/UsagePoint/" + usagePoint.getId();
 			   	    
@@ -608,7 +623,19 @@ public class ContentType {
 			   	    	result = result + "/MeterReading/" + meterReading.getId();
 			   	    }
 			    }
+			} else {
+			    if (retailCustomer != null) {
+				    result = result + "/RetailCustomer/" + retailCustomer.getId();
+				    if (usagePoint != null) {
+				   	    result = result + "/UsagePoint/" + usagePoint.getId();
+				   	    
+				   	    if (meterReading != null) {
+				   	    	result = result + "/MeterReading/" + meterReading.getId();
+				   	    }
+				    }
+			    }
 			}
+
 			result = result + "/IntervalBlock/" + this.getIntervalBlocks().get(0).getId();
 		}
 	    
@@ -619,16 +646,21 @@ public class ContentType {
 		}
 			
 		if (this.getMeterReading() != null) {
-			RetailCustomer retailCustomer = null;
-			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
-			if (usagePoint != null) {
-				retailCustomer = usagePoint.getRetailCustomer();
-			}
-			if (retailCustomer != null) {
-				result = result + "/RetailCustomer/" + retailCustomer.getId();
 
+			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
+			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+			
+			if (subscriptionId != 0L) {
+				result = result + "/Subscription/" + subscriptionId;
 			    if (usagePoint != null) {
 			   	    result = result + "/UsagePoint/" + usagePoint.getId();
+			    }
+			} else {
+			    if (retailCustomer != null) {
+				    result = result + "/RetailCustomer/" + retailCustomer.getId();
+				    if (usagePoint != null) {
+				   	    result = result + "/UsagePoint/" + usagePoint.getId();
+				    }
 			    }
 			}
 			result = result + "/MeterReading/" + meterReading.getId();
@@ -648,8 +680,13 @@ public class ContentType {
 			
 		if (this.getUsagePoint() != null) {
 			RetailCustomer retailCustomer = this.getUsagePoint().getRetailCustomer();
-			if (retailCustomer != null) {
-				result = result + "/RetailCustomer/" + retailCustomer.getId();
+			if (subscriptionId != 0L) {
+				result = result + "/Subscription/" + subscriptionId;
+
+			} else {
+			    if (retailCustomer != null) {
+				    result = result + "/RetailCustomer/" + retailCustomer.getId();
+			    }
 			}
 			result = result + "/UsagePoint/" + this.getUsagePoint().getId();
 		}
@@ -658,7 +695,7 @@ public class ContentType {
 		
 	} 
 	
-	public List<String> buildRelHref(String hrefFragment) {
+	public List<String> buildRelHref(Long subscriptionId, String hrefFragment) {
 		// only MeterReading and UsagePoint have "related" references
 	
 		List<String> result = new ArrayList<String>();
@@ -676,22 +713,22 @@ public class ContentType {
 			
 			String temp = hrefFragment;
 
-			// check for ROOT form
-			if (hrefFragment.contains("/RetailCustomer")) {
-				// XPath form
-				temp = temp.substring(0, temp.indexOf("/RetailCustomer"));
-			} else {
-				// it is a ROOT form 
-				temp = temp.substring(0, temp.indexOf("/MeterReading"));
-			}
+			temp = buildHeader(temp);
 			
 			// build the full path (with consideration that if we have a floating resource, we don't have full XPath information
 			//
-			if (retailCustomer != null) {
-				temp = temp + "/RetailCustomer/" + retailCustomer.getId();
+			if (subscriptionId != 0L) {
+				temp = temp + "/Subscription/" + subscriptionId;
 				if (usagePoint != null) {
 					temp = temp + "/UsagePoint/" + usagePoint.getId();
 				}
+			} else {
+			    if (retailCustomer != null) {
+				    temp = temp + "/RetailCustomer/" + retailCustomer.getId();
+				    if (usagePoint != null) {
+					    temp = temp + "/UsagePoint/" + usagePoint.getId();
+			  	    }
+			    }
 			}
 			temp = temp + "/MeterReading/" + meterReading.getId();
 
@@ -711,19 +748,19 @@ public class ContentType {
 			TimeConfiguration timeConfiguration = this.getUsagePoint().getLocalTimeParameters();
 			String temp = hrefFragment;
 			
-			// check for ROOT form
-			if (hrefFragment.contains("/RetailCustomer")) {
-				// XPath form
-				temp = temp.substring(0, temp.indexOf("/RetailCustomer"));
+			temp = buildHeader(temp);
+
+		    // build the full path (with consideration that if we have a floating resource, we don't have full XPath information
+		    //
+			if (subscriptionId != 0L) {
+				temp = temp + "/Subscription/" + subscriptionId;
 			} else {
-				// ROOT form
-				temp = temp.substring(0, temp.indexOf("/UsagePoint"));
+                if (retailCustomer != null) {
+				    temp = temp + "/RetailCustomer/" + retailCustomer.getId();
+			    }
+                
 			}
-			// build the full path (with consideration that if we have a floating resource, we don't have full XPath information
-			//
-			if (retailCustomer != null) {
-				temp = temp + "/RetailCustomer/" + retailCustomer.getId();
-			}
+			
 			temp = temp + "/UsagePoint/" + usagePoint.getId();
 
 			result.add(temp + "/MeterReading");
@@ -738,5 +775,31 @@ public class ContentType {
 
       return result;
 	}
+	
+	private String buildHeader(String temp) {
+		// check for ROOT form
+		String result = temp;
+		if (temp.contains("resource/Batch/RetailCustomer"))  {
+			// XPath form of upload/download 
+			result = temp.substring(0, temp.indexOf("/Batch"));
+		} else {
+			if (temp.contains("/resource/Batch/Subscription")) {
+				result = temp.substring(0, temp.indexOf("/Batch"));
+			} else {
+				if (temp.contains("/resource/Subscription")) {
+					result = temp.substring(0, temp.indexOf("/Subscription"));
+				} else {
+					if (temp.contains("/resource/Batch/Bulk")) {
+						result = temp.substring(0, temp.indexOf("/Batch"));
+					} else {
+			          // it is a ROOT form 
+						result = temp.substring(0, temp.indexOf("/resource/") + "/resource/".length());	
+					}
+			  	}
+			}
+		}
+		return result;
+	}
+
 
 }
