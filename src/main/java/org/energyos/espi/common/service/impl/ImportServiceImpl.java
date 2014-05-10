@@ -215,12 +215,14 @@ public class ImportServiceImpl implements ImportService {
 					// the Subscription
 
 					for (UsagePoint usagePoint : usagePointList) {
-						
-						if (!(subscription.getUsagePoints().contains(usagePoint))) {
-							
-                            subscriptionService.addUsagePoint(subscription, usagePoint);
-							
+						boolean addNew = false;
+						for (UsagePoint up : subscription.getUsagePoints()) {
+							if (up.equals(usagePoint)) 
+								addNew = true;
 						}
+						
+						if (addNew) subscriptionService.addUsagePoint(subscription, usagePoint);
+
 					}
 				}
 			}

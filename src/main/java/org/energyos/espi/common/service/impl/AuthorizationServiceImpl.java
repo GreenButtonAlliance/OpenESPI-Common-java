@@ -229,4 +229,10 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	public Authorization findById(Long retailCustomerId, long authorizationId) {
 		return this.authorizationRepository.findById(authorizationId);
 	}
+
+	@Override
+	public Authorization findByAccessToken(String accessToken) {
+		return authorizationRepository.findByAccessToken(accessToken);
+
+	}
 }

@@ -34,7 +34,6 @@ import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.service.SubscriptionService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
@@ -154,13 +153,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId) {
+	public EntryTypeIterator findEntryTypeIterator(Long subscriptionId) {
 		EntryTypeIterator result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
-			List<Long> temp = new ArrayList<Long>();
-			temp = resourceService.findAllIds(Subscription.class);
-			result = (new EntryTypeIterator(resourceService, temp, Subscription.class));
+
+			result = (new EntryTypeIterator(resourceService, findUsagePointIds(subscriptionId), Subscription.class));
+			result.setSubscriptionId(subscriptionId);
+			
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -169,6 +168,25 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		return result;	
 	}
 
+	@Override
+	public List<EntryTypeIterator> findEntryTypeIterator(List<Long> subscriptions) {
+		List<EntryTypeIterator> result = new ArrayList<EntryTypeIterator> ();
+		try {
+			for (Long subscriptionId : subscriptions) {
+				
+				EntryTypeIterator eti = new EntryTypeIterator(resourceService, findUsagePointIds(subscriptionId), Subscription.class);
+				eti.setSubscriptionId(subscriptionId);
+			    result.add(eti);
+			}
+			
+		} catch (Exception e) {
+			// TODO need a log file entry as we are going to return a null if
+			// it's not found
+			result = null;
+		}
+		return result;	
+	}
+	
 	@Override
 	public void delete(Subscription subscription) {
 		subscriptionRepository.deleteById(subscription.getId());	
@@ -204,13 +222,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public List<Long> findUsagePointIds(Long subscriptionId) {
 		
-		List<Long> result = new ArrayList<Long>();
-		Subscription subscription = subscriptionRepository.findById(subscriptionId);
-		Iterator<UsagePoint> it = subscription.getUsagePoints().iterator();
-		while (it.hasNext()) {
-			result.add(it.next().getId());
+		List<Long> result = new ArrayList<Long> ();
+		Subscription subscription = findById(subscriptionId);
+		for (UsagePoint up : subscription.getUsagePoints()) {
+			result.add(up.getId());
 		}
-
 		return result;
 	}
 
@@ -228,6 +244,17 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		subscription.getUsagePoints().add(usagePoint);
 		return subscription;
 		
+	}
+
+	@Override
+
+	public List<Long> findByBulkId(Long bulkId) {
+		// TODO :pending implementation of the bulk_id relationship in the domain object
+		List<Long> result = new ArrayList<Long> ();
+		// for now treat this like a subscriptionId and just return it
+		result.add(bulkId);
+		return result;
+
 	}
 
 }

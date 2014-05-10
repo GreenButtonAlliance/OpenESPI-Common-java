@@ -79,6 +79,10 @@ import org.hibernate.annotations.LazyCollectionOption;
  * &lt;/complexType>
  * </pre>
  */
+/**
+ * @author jat1
+ *
+ */
 @XmlRootElement(name="UsagePoint")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UsagePoint", propOrder = {
@@ -387,12 +391,14 @@ public class UsagePoint
         return QUERY_FIND_ALL_RELATED;
     }
 
+
     @Override
     public void merge(IdentifiedObject resource) {
     	super.merge(resource);
         this.setRelatedLinks(resource.getRelatedLinks());
         this.setServiceCategory(((UsagePoint)resource).getServiceCategory());
     }
+
 
 	@Override
 	public void unlink() {
@@ -408,20 +414,45 @@ public class UsagePoint
 
 	}
     
+	/**
+	 * 
+	 * @return
+	 */
     public String getURI() {
         return uri;
     }
 
+    /**
+     * 
+     * @param URI
+     */
     public void setURI(String URI) {
         this.uri = URI;
     }
-
+    
+    /**
+     * 
+     * @return
+     */
     public Subscription getSubscription() {
         return subscription;
     }
 
+    /**
+     * 
+     * @param subscription
+     */
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
+    }
+    
+    /**
+     * 
+     * @param up
+     * @return
+     */
+    public boolean equals (UsagePoint up) {
+    	return (this.getId().equals(up.getId()));
     }
 	
 }

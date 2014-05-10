@@ -50,6 +50,8 @@ public interface SubscriptionService {
 	public EntryType findEntryType(Long retailCustomerId, Long subscriptionId);
 
 	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
+	
+	public List<EntryTypeIterator> findEntryTypeIterator(List<Long> subscriptions);
 
 	public void delete(Subscription subscription);
 	
@@ -59,6 +61,8 @@ public interface SubscriptionService {
 	public Subscription importResource(InputStream stream);
 
 	public Subscription findById(Long subscriptionId);
+	
+	public List<Long> findByBulkId(Long bulkId);
 
 	public Subscription findById(Long retailCustomerId, Long subscriptionId);
 
