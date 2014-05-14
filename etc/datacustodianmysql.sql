@@ -364,9 +364,7 @@ CREATE TABLE `authorizations` (
   KEY `FK_d0761ae9d2dd44c49867ac4ec4b` (`application_information_id`),
   KEY `FK_a4fccef421a14e0ead5c1b9753d` (`retail_customer_id`),
   KEY `FK_subscriptionkey` (`subscription_id`),
-  CONSTRAINT `FK_a4fccef421a14e0ead5c1b9753d` FOREIGN KEY (`retail_customer_id`) REFERENCES `retail_customers` (`id`),
-  CONSTRAINT `FK_d0761ae9d2dd44c49867ac4ec4b` FOREIGN KEY (`application_information_id`) REFERENCES `application_information` (`id`),
-  CONSTRAINT `FK_subscriptionkey` FOREIGN KEY (`subscription_id`) REFERENCES `subscriptions` (`id`)
+  CONSTRAINT `FK_d0761ae9d2dd44c49867ac4ec4b` FOREIGN KEY (`application_information_id`) REFERENCES `application_information` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
