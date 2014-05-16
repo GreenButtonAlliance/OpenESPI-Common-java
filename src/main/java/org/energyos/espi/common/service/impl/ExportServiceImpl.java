@@ -825,13 +825,20 @@ public class ExportServiceImpl implements ExportService {
 			EntryTypeIterator entries, OutputStream stream,
 			ExportFilter exportFilter, String hrefFragment) throws IOException {
 
-		// construct the <feed> header components
-		//
-		buildHeader(stream, hrefFragment);
+		if (entries.hasNext()) {
+			// construct the <feed> header components
+			//
+			buildHeader(stream, hrefFragment);
 
-		exportEntriesInternal(subscriptionId, entries, stream, exportFilter, hrefFragment);
+			exportEntriesInternal(subscriptionId, entries, stream,
+					exportFilter, hrefFragment);
 
-		stream.write("</feed>".getBytes());
+			stream.write("</feed>".getBytes());
+		} else {
+			IOException e = new IOException("Invalid Access");
+			throw (e);
+		}
+
 	}
 
 	// to export a single entry (w/o the <feed>...</feed> wrappers
