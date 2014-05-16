@@ -102,4 +102,11 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 				.setParameter("accessToken", accessToken)
 				.getSingleResult();
 	}
+
+	@Override
+	public Authorization findByRefreshToken(String refreshToken) {
+		return (Authorization) em.createNamedQuery(Authorization.QUERY_FIND_BY_REFRESH_TOKEN)
+				.setParameter("refreshToken", refreshToken)
+				.getSingleResult();
+	}
 }

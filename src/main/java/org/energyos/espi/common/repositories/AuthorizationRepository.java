@@ -46,5 +46,7 @@ public interface AuthorizationRepository {
     void createOrReplaceByUUID(Authorization authorization);
     
     Authorization findByAccessToken(String accessToken);
+
+	Authorization findByRefreshToken(String refreshToken);
     
 }
