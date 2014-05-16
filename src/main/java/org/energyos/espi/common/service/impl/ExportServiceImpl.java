@@ -825,19 +825,12 @@ public class ExportServiceImpl implements ExportService {
 			EntryTypeIterator entries, OutputStream stream,
 			ExportFilter exportFilter, String hrefFragment) throws IOException {
 
-		if (entries.hasNext()) {
-			// construct the <feed> header components
-			//
 			buildHeader(stream, hrefFragment);
 
 			exportEntriesInternal(subscriptionId, entries, stream,
 					exportFilter, hrefFragment);
 
 			stream.write("</feed>".getBytes());
-		} else {
-			IOException e = new IOException("Invalid Access");
-			throw (e);
-		}
 
 	}
 
