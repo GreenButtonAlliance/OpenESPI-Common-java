@@ -235,4 +235,9 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 		return authorizationRepository.findByAccessToken(accessToken);
 
 	}
+
+	@Override
+	public Authorization findByRefreshToken(String refreshToken) {
+		return authorizationRepository.findByRefreshToken(refreshToken);
+	}
 }
