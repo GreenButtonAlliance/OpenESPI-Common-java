@@ -30,6 +30,8 @@ public class EntryTypeIterator {
     @SuppressWarnings("rawtypes")
     // TODO: fix the EntryTypeIterator Typing System
 	private Class rootClass;
+    
+    private Long subscriptionId;
 
     public EntryTypeIterator(ResourceService resourceService, List<Long> ids, EntryBuilder builder) {
         this.resourceService = resourceService;
@@ -106,5 +108,13 @@ public class EntryTypeIterator {
 
     public void setResourceService(ResourceService resourceService) {
         this.resourceService = resourceService;
+    }
+    
+    public void setSubscriptionId (Long subscriptionId) {
+    	this.subscriptionId = subscriptionId; 
+    }
+    
+    public Long getSubscriptionId () {
+    	return this.subscriptionId;
     }
 }

@@ -133,6 +133,8 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 		    	query = "SELECT authorization FROM Authorization authorization WHERE authorization.state = :state"),
 		@NamedQuery(name = Authorization.QUERY_FIND_BY_UUID, 
         		query = "SELECT authorization FROM Authorization authorization WHERE authorization.uuid = :uuid"),
+        @NamedQuery(name = Authorization.QUERY_FIND_BY_ACCESS_TOKEN,
+                query = "SELECT authorization from Authorization authorization WHERE authorization.accessToken = :accessToken"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RESOURCE_URI, 
                 query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI = :uri")
 })
@@ -145,6 +147,7 @@ public class Authorization
 	public static final String QUERY_FIND_BY_SCOPE = "Authorization.findByScope";
     public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";	
 	public final static String QUERY_FIND_BY_UUID = "Authorization.findByUUID";
+	public final static String QUERY_FIND_BY_ACCESS_TOKEN = "Authorization.findByAccessToken";
 	public static final String QUERY_FIND_BY_RESOURCE_URI = "Authorization.findByResourceUri";
 
     @Embedded
