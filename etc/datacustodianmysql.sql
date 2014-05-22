@@ -534,7 +534,7 @@ DROP TABLE IF EXISTS `retail_customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `retail_customers` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,
@@ -550,7 +550,7 @@ CREATE TABLE `retail_customers` (
   `role` varchar(255) NOT NULL,
   `username` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -578,6 +578,7 @@ DROP TABLE IF EXISTS `application_information`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `application_information` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `kind` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,
