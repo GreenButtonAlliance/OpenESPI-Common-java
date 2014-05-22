@@ -88,7 +88,13 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
     	return applicationInformation.getAuthorizationServerTokenEndpoint();
     	// return "http://localhost:8080/DataCustodian/oauth/token";
 	}    
-    
+
+    @Override
+    public List<ApplicationInformation> findByKind(String kind) {
+        return applicationInformationRepository.findByKind(kind);
+    }
+	
+	
     @Override
     public List<ApplicationInformation> findAll() {
         return applicationInformationRepository.findAll();

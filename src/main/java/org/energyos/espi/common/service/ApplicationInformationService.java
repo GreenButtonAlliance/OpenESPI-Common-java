@@ -11,6 +11,8 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 
 public interface ApplicationInformationService {
 
+	public List<ApplicationInformation> findByKind(String kind);
+
 	// TODO: likely deprecated
 	public String feedFor(List<ApplicationInformation> applicationInformations);
 
