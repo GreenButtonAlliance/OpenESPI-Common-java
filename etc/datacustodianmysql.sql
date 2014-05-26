@@ -84,9 +84,8 @@ CREATE TABLE `subscriptions_usage_points` (
   `usagePoints_id` bigint(20) NOT NULL,
   KEY `FK_862cd528c4954f4cb2bcdadaf08` (`usagePoints_id`),
   KEY `FK_c138e968ff2d4cd49398210f48c` (`subscriptions_id`),
-  CONSTRAINT `FK_c138e968ff2d4cd49398210f48c` FOREIGN KEY (`subscriptions_id`) REFERENCES `subscriptions` (`id`),
-  CONSTRAINT `FK_862cd528c4954f4cb2bcdadaf08` FOREIGN KEY (`usagePoints_id`) REFERENCES `usage_points` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK_c138e968ff2d4cd49398210f48c` FOREIGN KEY (`subscriptions_id`) REFERENCES `subscriptions` (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
