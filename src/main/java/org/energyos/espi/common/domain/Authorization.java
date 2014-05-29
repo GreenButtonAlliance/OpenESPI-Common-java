@@ -68,7 +68,6 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
  *       &lt;sequence>
  *         &lt;element name="authorizedPeriod" type="{http://naesb.org/espi}DateTimeInterval" minOccurs="0"/>
  *         &lt;element name="publishedPeriod" type="{http://naesb.org/espi}DateTimeInterval" minOccurs="0"/>
- *         &lt;element name="referenceID" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/>
  *         &lt;element name="access_token" type="{http://naesb.org/espi}String512" minOccurs="0"/>
  *         &lt;element name="status" type="{http://naesb.org/espi}AuthorizationStatus" minOccurs="0"/>
  *         &lt;element name="expires_in" type="{http://naesb.org/espi}TimeType" minOccurs="0"/>
@@ -99,7 +98,7 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 @XmlType(name = "Authorization", propOrder = {
 	    "authorizedPeriod",
 	    "publishedPeriod",
-	    "retailCustomer",
+//	    "retailCustomer",
 	    "accessToken",
 	    "status",
 	    "expiresIn",
@@ -185,7 +184,8 @@ public class Authorization
     protected String thirdParty;
     
     @ManyToOne (cascade = CascadeType.DETACH) @JoinColumn(name = "retail_customer_id")
-    @XmlElement(name = "referenceID")
+//    @XmlElement(name = "referenceID")
+    @XmlTransient
     protected RetailCustomer retailCustomer;
 
     @OneToOne (cascade = CascadeType.DETACH) @JoinColumn(name = "subscription_id")
