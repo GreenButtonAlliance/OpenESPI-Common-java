@@ -72,8 +72,6 @@ public class Routes {
     public static final String ROOT_SERVICE_STATUS = "/espi/1_1/resource/ReadServiceStatus";
     public static final String ROOT_AUTHORIZATION_COLLECTION = "/espi/1_1/resource/Authorization";
     public static final String ROOT_AUTHORIZATION_MEMBER = "/espi/1_1/resource/Authorization/{authorizationId}";
-    public static final String ROOT_SUBSCRIPTION_COLLECTION = "/espi/1_1/resource/Subscription";
-    public static final String ROOT_SUBSCRIPTION_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionHashedId}";
     public static final String ROOT_APPLICATION_INFORMATION_COLLECTION = "/espi/1_1/resource/ApplicationInformation";
     public static final String ROOT_APPLICATION_INFORMATION_MEMBER = "/espi/1_1/resource/ApplicationInformation/{applicationInformationId}";
 

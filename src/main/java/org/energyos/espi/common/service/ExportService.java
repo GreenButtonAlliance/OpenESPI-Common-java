@@ -30,9 +30,9 @@ public interface ExportService {
     // ElectricPowerQualitySummary
     //  - ROOT form
 
-	void exportElectricPowerQualitySummary(Long electricPowerQualitySummaryId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
+	void exportElectricPowerQualitySummary_Root(Long subscriptionId, Long electricPowerQualitySummaryId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
-	void exportElectricPowerQualitySummarys(OutputStream outputStream, ExportFilter exportFilter) throws IOException;
+	void exportElectricPowerQualitySummarys_Root(Long subscriptionId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
     //  - XPath form
 	public void exportElectricPowerQualitySummary(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long electricPowerQualitySummaryId,
@@ -45,10 +45,10 @@ public interface ExportService {
     // ElectricPowerUsageSummary
     //  - ROOT form
 
-	void exportElectricPowerUsageSummarys(ServletOutputStream outputStream,
+	void exportElectricPowerUsageSummarys_Root(Long subscriptionId, ServletOutputStream outputStream,
 			ExportFilter exportFilter) throws IOException;
 
-	void exportElectricPowerUsageSummary(long electricPowerUsageSummaryId,
+	void exportElectricPowerUsageSummary_Root(Long subscriptionId, long electricPowerUsageSummaryId,
 			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
     //  - XPath form
@@ -62,10 +62,10 @@ public interface ExportService {
 
     // IntervalBlock
     //  - ROOT form
-	void exportIntervalBlocks(OutputStream outputStream,
+	void exportIntervalBlocks_Root(Long subscriptionId, OutputStream outputStream,
 			ExportFilter exportFilter) throws IOException;
 
-	void exportIntervalBlock(Long intervalBlockId,
+	void exportIntervalBlock_Root(Long subscriptionId, Long intervalBlockId,
 			OutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
     //  - XPath form
@@ -78,9 +78,9 @@ public interface ExportService {
 
 	// MeterReading
     //  - ROOT form
-	void exportMeterReadings(ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException ;
+	void exportMeterReadings_Root(Long subscriptionId, ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException ;
 
-	void exportMeterReading(long meterReadingId, ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException ;
+	void exportMeterReading_Root(Long subscriptionId, long meterReadingId, ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException ;
 
     //  - XPath form
 	public void exportMeterReading(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long meterReadingId,
@@ -128,9 +128,9 @@ public interface ExportService {
 	
 	// UsagePoints
 	// - ROOT form
-	void exportUsagePoint(Long usagePointId, OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
+	void exportUsagePoint_Root(Long subscriptionId, Long usagePointId, OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
 
-	void exportUsagePoints(OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
+	void exportUsagePoints_Root(Long subscriptionId, OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
         
 	// - XPath form
 	void exportUsagePoint(Long subscriptionId, Long retailCustomerId, Long usagePointId,

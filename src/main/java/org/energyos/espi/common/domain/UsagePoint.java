@@ -152,7 +152,7 @@ public class UsagePoint
 
     @XmlTransient
     @OneToMany(mappedBy = "usagePoint", cascade = {CascadeType.ALL}, orphanRemoval=true)
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<MeterReading> meterReadings = new ArrayList<>();
 
     @XmlTransient
