@@ -98,9 +98,9 @@ public interface ExportService {
     // RetailCustomer
     //  - ROOT form
 
-	public void exportRetailCustomer(Long retailCustomerId, OutputStream stream, ExportFilter exportFilter) throws IOException;
+	public void exportRetailCustomer(Long subscriptionId, Long retailCustomerId, OutputStream stream, ExportFilter exportFilter) throws IOException;
 
-	public void exportRetailCustomers(OutputStream stream, ExportFilter exportFilter) throws IOException;
+	public void exportRetailCustomers(Long subscriptionId, OutputStream stream, ExportFilter exportFilter) throws IOException;
 
 
 	// Subscriptions

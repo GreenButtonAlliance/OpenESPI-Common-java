@@ -19,12 +19,8 @@ package org.energyos.espi.common.service.impl;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
@@ -34,7 +30,6 @@ import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
-import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
@@ -65,7 +60,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ExportServiceImpl implements ExportService {
@@ -384,7 +378,7 @@ public class ExportServiceImpl implements ExportService {
 				+ intervalBlockId;
 		exportEntry(
 				subscriptionId,
-				findEntryTypeXPath(retailCustomerId, usagePointId,
+				findEntryTypeXPath(subscriptionId, retailCustomerId, usagePointId,
 						meterReadingId, intervalBlockId, IntervalBlock.class),
 				stream, exportFilter, hrefFragment);
 	}
@@ -435,7 +429,7 @@ public class ExportServiceImpl implements ExportService {
 				+ meterReadingId;
 		exportEntry(
 				subscriptionId,
-				findEntryTypeXPath(retailCustomerId, usagePointId,
+				findEntryTypeXPath(subscriptionId, retailCustomerId, usagePointId,
 						meterReadingId, 0L, MeterReading.class), stream,
 				exportFilter, hrefFragment);
 	}
@@ -477,17 +471,17 @@ public class ExportServiceImpl implements ExportService {
 
 	// ROOT form
 	@Override
-	public void exportRetailCustomer(Long retailCustomerId,
+	public void exportRetailCustomer(Long subscriptionId, Long retailCustomerId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/RetailCustomer/" + retailCustomerId;
 		exportEntry(
-				findEntryTypeXPath(retailCustomerId, 0L, 0L, 0L,
+				findEntryTypeXPath(subscriptionId, retailCustomerId, 0L, 0L, 0L,
 						RetailCustomer.class), stream, exportFilter,
 				hrefFragment);
 	}
 
 	@Override
-	public void exportRetailCustomers(OutputStream stream,
+	public void exportRetailCustomers(Long subscriptionId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/RetailCustomer";
 		exportEntries(
@@ -585,7 +579,7 @@ public class ExportServiceImpl implements ExportService {
 				+ "/UsagePoint/" + usagePointId;
 		exportEntry(
 				subscriptionId,
-				findEntryTypeXPath(retailCustomerId, usagePointId, 0L, 0L,
+				findEntryTypeXPath(subscriptionId, retailCustomerId, usagePointId, 0L, 0L,
 						UsagePoint.class), stream, exportFilter, hrefFragment);
 	}
 
@@ -984,12 +978,29 @@ public class ExportServiceImpl implements ExportService {
 	@SuppressWarnings("unchecked")
 	// TODO: need to make RetailCustomer inherit from IdentifiedObject to remove
 	// the above
-	private EntryType findEntryTypeXPath(Long id1, Long id2, Long id3,
+	private EntryType findEntryTypeXPath(Long subscriptionId, Long id1, Long id2, Long id3,
 			Long id4, @SuppressWarnings("rawtypes") Class clazz) {
 		EntryType result = null;
 		List<Long> temp = new ArrayList<Long>();
+		Subscription subscription = null;
+		
 		try {
 
+			if (subscriptionId != 0) {
+				subscription = resourceService.findById(subscriptionId, Subscription.class);
+				Authorization authorization = subscription.getAuthorization();
+				if (!(authorization.getThirdParty().contentEquals("third_party"))) {
+					// a special case (client credentials base) access. So the retailCustomerId is not
+					// correct
+				    if (id2 != 0) {
+				    	// we have a request for (at least) a usagePoint
+				    	// so use the relivant retail customer Id to get the ID collection
+				    	UsagePoint usagePoint = resourceService.findById(id2, UsagePoint.class);
+				    	id1 = usagePoint.getRetailCustomer().getId();
+				    }
+				}
+			}
+			
 			if (id4 != 0) {
 				temp.add(resourceService.findIdByXPath(id1, id2, id3, id4,
 						clazz));
@@ -1028,12 +1039,22 @@ public class ExportServiceImpl implements ExportService {
 		boolean valid = false;
 
 		try {
-			// first validate the requested resource is in scope for this
-			// subscription
+
 			if (subscriptionId != 0) {
-				subscription = resourceService.findById(subscriptionId,
-						Subscription.class);
+				subscription = resourceService.findById(subscriptionId, Subscription.class);
+				Authorization authorization = subscription.getAuthorization();
+				if (!(authorization.getThirdParty().contentEquals("third_party"))) {
+					// a special case (client credentials base) access. So the retailCustomerId is not
+					// correct
+				    if (id2 != 0) {
+				    	// we have a request for (at least) a usagePoint
+				    	// so use the relivant retail customer Id to get the ID collection
+				    	UsagePoint usagePoint = resourceService.findById(id2, UsagePoint.class);
+				    	id1 = usagePoint.getRetailCustomer().getId();
+				    }
+				}
 			}
+
 			// do we have a usagepointId?
 			if (id2 != 0) {
 				// is it in the subscription?
