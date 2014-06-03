@@ -31,4 +31,8 @@ public class BatchListServiceImpl implements BatchListService {
     public void setRepository(BatchListRepository repository) {
         this.repository = repository;
     }
+    
+    public BatchListRepository getRepository(BatchListRepository repository) {
+        return repository;
+    }
 }

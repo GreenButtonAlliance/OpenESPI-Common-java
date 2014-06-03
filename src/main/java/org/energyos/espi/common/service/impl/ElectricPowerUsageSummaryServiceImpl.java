@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageSummaryService {
 
     @Autowired
-    protected ElectricPowerUsageSummaryRepository electricPowerUsageSummaryRepository;
+    private ElectricPowerUsageSummaryRepository electricPowerUsageSummaryRepository;
     
     @Autowired
 	private ResourceService resourceService;
@@ -44,18 +44,6 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
     @Autowired
     private ImportService importService;
     
-    public void setImportService(ImportService importService) {
-    	this.importService = importService;
-    }
-    
-    public void setResourceService(ResourceService resourceService) {
-    	this.resourceService = resourceService;
-    }
-
-    public void setRepository(ElectricPowerUsageSummaryRepository electricPowerUsageSummaryRepository) {
-        this.electricPowerUsageSummaryRepository = electricPowerUsageSummaryRepository;
-    }
-
     @Override
     public ElectricPowerUsageSummary findByUUID(UUID uuid) {
         return electricPowerUsageSummaryRepository.findByUUID(uuid);
@@ -151,5 +139,29 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 			return null;
 		}
 	}
+	
+   public void setElectricPowerUsageSummaryRepository(ElectricPowerUsageSummaryRepository electricPowerUsageSummaryRepository) {
+        this.electricPowerUsageSummaryRepository = electricPowerUsageSummaryRepository;
+   }
 
+   public ElectricPowerUsageSummaryRepository getElectricPowerUsageSummaryRepository () {
+        return this.electricPowerUsageSummaryRepository;
+   }
+
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+
+   public void setImportService(ImportService importService) {
+        this.importService = importService;
+   }
+
+   public ImportService getImportService () {
+        return this.importService;
+   }
+   
 }

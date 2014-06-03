@@ -39,12 +39,12 @@ public interface MeterReadingService {
 
 	void associateByUUID(UsagePoint usagePoint, UUID uuid);
 
-	// persistence management services
-	public void setRepository(MeterReadingRepository repository);
-
 	public void persist(MeterReading meterReading);
 
 	// accessor services
+	
+	public void setMeterReadingRepository(MeterReadingRepository meterReadingRepository);
+	
 	public MeterReading findById(Long retailCustomerId, Long usagePointId, Long meterReadingId);
 	
 	public MeterReading findById(long meterReadingId);

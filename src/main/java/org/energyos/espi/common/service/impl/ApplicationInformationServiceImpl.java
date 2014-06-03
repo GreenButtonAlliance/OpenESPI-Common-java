@@ -51,24 +51,6 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
     @Autowired
     private ImportService importService;
     
-    public void setImportService(ImportService importService) {
-    	this.importService = importService;
-    }
-    
-    public void setResourceService(ResourceService resourceService) {
-    	this.resourceService = resourceService;
-    }
-    public void setApplicationInformationRepository(ApplicationInformationRepository applicationInformationRepository) {
-        this.applicationInformationRepository = applicationInformationRepository;
-    }
-
-    // configuration accessors
-    
-    @Override
-    public void setApplicationInformation(ApplicationInformation applicationInformation) {
-    	this.applicationInformation = applicationInformation;
-    }
-    
     @Override
     public String getDataCustodianResourceEndpoint() {
     	if (this.applicationInformation == null) {
@@ -221,5 +203,34 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 		applicationInformation = resourceService.findById(1L, ApplicationInformation.class);
 		return applicationInformation.getThirdPartyNotifyUri();
 	}
+
+    public void setApplicationInformation(ApplicationInformation applicationInformation) {
+        this.applicationInformation = applicationInformation;
+   }
+
+   public ApplicationInformation getApplicationInformation () {
+        return this.applicationInformation;
+   }
+   public void setApplicationInformationRepository(ApplicationInformationRepository applicationInformationRepository) {
+        this.applicationInformationRepository = applicationInformationRepository;
+   }
+
+   public ApplicationInformationRepository getApplicationInformationRepository () {
+        return this.applicationInformationRepository;
+   }
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+   public void setImportService(ImportService importService) {
+        this.importService = importService;
+   }
+
+   public ImportService getImportService () {
+        return this.importService;
+   }
 
 }

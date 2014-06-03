@@ -29,7 +29,6 @@ public interface ElectricPowerQualitySummaryService {
 	public void associateByUUID(UsagePoint usagePoint, UUID uuid);
 
 	// persistence management services
-	public void setRepository(ElectricPowerQualitySummaryRepository repository);
 
 	public void persist(ElectricPowerQualitySummary electricPowerQualitySummary);
 

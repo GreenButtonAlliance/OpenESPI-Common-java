@@ -117,21 +117,6 @@ public class NotificationServiceImpl implements NotificationService {
         }
 		
 	}
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-    
-    public void setResourceService(ResourceService resourceService) {
-    	this.resourceService = resourceService;
-    }
-    
-    public void setAuthorizationService(AuthorizationService authorizationService) {
-    	this.authorizationService = authorizationService;
-    }
-    
-    public void setSubscriptionService(SubscriptionService subscriptionService) {
-    	this.subscriptionService = subscriptionService;
-    }
 
 	@Override
 	public void notifyAllNeed() {
@@ -145,5 +130,33 @@ public class NotificationServiceImpl implements NotificationService {
 		}
 		
 	}
-    
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+   }
+
+   public RestTemplate getRestTemplate () {
+        return this.restTemplate;
+   }
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+   public void setAuthorizationService(AuthorizationService authorizationService) {
+        this.authorizationService = authorizationService;
+   }
+
+   public AuthorizationService getAuthorizationService () {
+        return this.authorizationService;
+   }
+   public void setSubscriptionService(SubscriptionService subscriptionService) {
+        this.subscriptionService = subscriptionService;
+   }
+
+   public SubscriptionService getSubscriptionService () {
+        return this.subscriptionService;
+   }
+   
 }

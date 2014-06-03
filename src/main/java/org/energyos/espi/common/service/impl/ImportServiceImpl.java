@@ -229,28 +229,60 @@ public class ImportServiceImpl implements ImportService {
 		}
     }
         
-    public void setResourceService(ResourceService resourceService) {
-        this.resourceService = resourceService;
-    }
-    
-    public void setAuthorizationService(AuthorizationService authorizationService) {
-        this.authorizationService = authorizationService;
-    }
-    
-    public void setSubscriptionService(SubscriptionService subscriptionService) {
-        this.subscriptionService = subscriptionService;
-    }
-    
-    public void setUsagePointService(UsagePointService usagePointService) {
+    public void setJaxb2Marshaller(Jaxb2Marshaller marshaller) {
+        this.marshaller = marshaller;
+   }
+
+   public Jaxb2Marshaller getJaxb2Marshaller () {
+       return this.marshaller;
+   }
+   public void setAuthorizationService(AuthorizationService authorizationService) {
+        this.authorizationService = authorizationService; 
+   }
+
+   public AuthorizationService getAuthorizationService () {
+       return this.authorizationService;
+   }
+
+   public void setSubscriptionService(SubscriptionService subscriptionService) {
+       this.subscriptionService = subscriptionService;
+   }
+
+   public SubscriptionService getSubscriptionService () {
+       return this.subscriptionService;
+   }
+   
+   public void setUsagePointService(UsagePointService usagePointService) {
         this.usagePointService = usagePointService;
-    }
-    
-    public void setRetailCustomerService(RetailCustomerService retailCustomerService) {
+   }
+
+   public UsagePointService getUsagePointService () {
+        return this.usagePointService;
+   }
+
+   public void setRetailCustomerService(RetailCustomerService retailCustomerService) {
         this.retailCustomerService = retailCustomerService;
-    }  
-    
-    public void setEntryProcessorService (EntryProcessorService entryProcessorService) {
-    	this.entryProcessorService = entryProcessorService;
-    }
+   }
+
+   public RetailCustomerService getRetailCustomerService () {
+        return this.retailCustomerService;
+   }
+   
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+   
+   public void setEntryProcessorService(EntryProcessorService entryProcessorService) {
+        this.entryProcessorService = entryProcessorService;
+   }
+
+   public EntryProcessorService getEntryProcessorService () {
+        return this.entryProcessorService;
+   }
+
 
 }

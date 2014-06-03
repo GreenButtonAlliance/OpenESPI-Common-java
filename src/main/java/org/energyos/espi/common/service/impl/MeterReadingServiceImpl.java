@@ -46,19 +46,6 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 	@Autowired
 	private ResourceService resourceService;
 	
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-	
-	public void setImportService(ImportService importService) {
-		this.importService = importService;
-	}
-	
-    public void setRepository(MeterReadingRepository meterReadingRepository) {
-        this.meterReadingRepository = meterReadingRepository;
-    }
-    
-
     @Override
     public MeterReading findByUUID(UUID uuid) {
         return meterReadingRepository.findByUUID(uuid);
@@ -191,5 +178,29 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		}
 		return result;
 	}
+    
+   public void setImportService(ImportService importService) {
+        this.importService = importService;
+   }
 
+   public ImportService getImportService () {
+        return this.importService;
+   }
+   
+   @Override
+   public void setMeterReadingRepository(MeterReadingRepository meterReadingRepository) {
+        this.meterReadingRepository = meterReadingRepository;
+   }
+
+   public MeterReadingRepository getMeterReadingRepository () {
+        return this.meterReadingRepository;
+   }
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+	   
 }

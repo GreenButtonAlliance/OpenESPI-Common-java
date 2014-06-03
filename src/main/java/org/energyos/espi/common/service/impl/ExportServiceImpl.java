@@ -107,63 +107,106 @@ public class ExportServiceImpl implements ExportService {
 	// setup the services
 	//
 
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
+	public void  setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+     }
 
-	public void setSubscriptionService(SubscriptionService subscriptionService) {
-		this.subscriptionService = subscriptionService;
-	}
+     public ResourceService getResourceService () {
+        return this.resourceService;
+     }
 
-	public void setAuthorization(AuthorizationService authorizationService) {
-		this.authorizationService = authorizationService;
-	}
+	public void setSubscriptionService (SubscriptionService subscriptionService) {
+        this.subscriptionService = subscriptionService;
+     }
 
-	public void setApplicationInformationService(
-			ApplicationInformationService applicationInformationService) {
-		this.applicationInformationService = applicationInformationService;
-	}
+	public SubscriptionService getSubscriptionService () {
+        return this.subscriptionService;
+     }
 
-	public void setRetailCustomerService(
-			RetailCustomerService retailCustomerService) {
-		this.retailCustomerService = retailCustomerService;
-	}
+	public void setRetailCustomerService (RetailCustomerService retailCustomerService) {
+        this.retailCustomerService = retailCustomerService;
+     }
 
-	public void setUsagePointService(UsagePointService usagePointService) {
-		this.usagePointService = usagePointService;
-	}
+	public RetailCustomerService getRetailCustomerService () {
+        return this.retailCustomerService;
+     }
 
-	public void setMeterReadingService(MeterReadingService meterReadingService) {
-		this.meterReadingService = meterReadingService;
-	}
+	public void setUsagePointService (UsagePointService usagePointService) {
+        this.usagePointService = usagePointService;
+     }
 
-	public void setReadingTypeService(ReadingTypeService readingTypeService) {
-		this.readingTypeService = readingTypeService;
-	}
+	public UsagePointService getUsagePointService () {
+        return this.usagePointService;
+     }
 
-	public void setIntervalBlockService(
-			IntervalBlockService intervalBlockService) {
-		this.intervalBlockService = intervalBlockService;
-	}
+	public void setMeterReadingService (MeterReadingService meterReadingService) {
+        this.meterReadingService = meterReadingService;
+     }
 
-	public void setTimeConfigurationService(
-			TimeConfigurationService timeConfigurationService) {
-		this.timeConfigurationService = timeConfigurationService;
-	}
+	public MeterReadingService getMeterReadingService () {
+        return this.meterReadingService;
+     }
 
-	public void setElectricPowerQualitySummaryService(
-			ElectricPowerQualitySummaryService electricPowerQualitySummaryService) {
-		this.electricPowerQualitySummaryService = electricPowerQualitySummaryService;
-	}
+	public void setReadingTypeService (ReadingTypeService readingTypeService) {
+        this.readingTypeService = readingTypeService;
+     }
 
-	public void setElectricPowerUsageSummaryService(
-			ElectricPowerUsageSummaryService electricPowerUsageSummaryService) {
-		this.electricPowerUsageSummaryService = electricPowerUsageSummaryService;
-	}
+	public ReadingTypeService getReadingTypeService () {
+        return this.readingTypeService;
+     }
 
-	public void setMarshaller(Jaxb2Marshaller fragmentMarshaller) {
-		this.fragmentMarshaller = fragmentMarshaller;
-	}
+	public void setIntervalBlockService (IntervalBlockService intervalBlockService) {
+        this.intervalBlockService = intervalBlockService;
+     }
+
+	public IntervalBlockService getIntervalBlockService () {
+        return this.intervalBlockService;
+     }
+
+	public void setElectricPowerQualitySummaryService (ElectricPowerQualitySummaryService electricPowerQualitySummaryService) {
+        this.electricPowerQualitySummaryService = electricPowerQualitySummaryService;
+     }
+
+	public ElectricPowerQualitySummaryService getElectricPowerQualitySummaryService () {
+        return this.electricPowerQualitySummaryService;
+     }
+
+	public void setElectricPowerUsageSummaryService (ElectricPowerUsageSummaryService electricPowerUsageSummaryService) {
+        this.electricPowerUsageSummaryService = electricPowerUsageSummaryService;
+     }
+
+	public ElectricPowerUsageSummaryService getElectricPowerUsageSummaryService () {
+        return this.electricPowerUsageSummaryService;
+     }
+
+	public void setAuthorizationService (AuthorizationService authorizationService) {
+        this.authorizationService = authorizationService;
+     }
+
+	public AuthorizationService getAuthorizationService () {
+        return this.authorizationService;
+     }
+
+	public void setApplicationInformationService (ApplicationInformationService applicationInformationService) {
+        this.applicationInformationService = applicationInformationService;
+     }
+
+	public ApplicationInformationService getApplicationInformationService () {
+        return this.applicationInformationService;
+     }
+
+	public void setTimeConfigurationService (TimeConfigurationService timeConfigurationService) {
+        this.timeConfigurationService = timeConfigurationService;
+     }
+
+	public TimeConfigurationService getTimeConfigurationService () {
+        return this.timeConfigurationService;
+     }
+
+	public void setJaxb2Marshaller (Jaxb2Marshaller fragmentMarshaller) {
+        this.fragmentMarshaller = fragmentMarshaller;
+     }
+
 
 	// TODO Convert this block of functions to a Template system
 	//

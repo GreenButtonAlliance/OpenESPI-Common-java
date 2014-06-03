@@ -53,12 +53,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Autowired
     private ResourceService resourceService;
 
+    @Autowired
 	private ImportService importService;
 	
-	public void setImportService (ImportService importService) {
-		this.importService = importService;
-	}
-
 	@Override
 	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
@@ -115,14 +112,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     public void setRepository(SubscriptionRepository  subscriptionRepository) {
         this.subscriptionRepository = subscriptionRepository;
-    }
-
-    public void setApplicationInformationService(ApplicationInformationService applicationInformationService) {
-    	this.applicationInformationService = applicationInformationService;
-    }
-    
-    public void setSubscriptionRepository(SubscriptionRepository subscriptionRepository) {
-    	this.subscriptionRepository = subscriptionRepository;
     }
     
 	@Override
@@ -256,5 +245,41 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		return result;
 
 	}
+
+    public void setSubscriptionRepository(SubscriptionRepository subscriptionRepository) {
+        this.subscriptionRepository = subscriptionRepository;
+   }
+
+   public SubscriptionRepository getSubscriptionRepository () {
+        return this.subscriptionRepository;
+   }
+   public void setUsagePointRepository(UsagePointRepository usagePointRepository) {
+        this.usagePointRepository = usagePointRepository;
+   }
+
+   public UsagePointRepository getUsagePointRepository () {
+        return this.usagePointRepository;
+   }
+   public void setApplicationInformationService(ApplicationInformationService applicationInformationService) {
+        this.applicationInformationService = applicationInformationService;
+   }
+
+   public ApplicationInformationService getApplicationInformationService () {
+        return this.applicationInformationService;
+   }
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+   public void setImportService(ImportService importService) {
+        this.importService = importService;    
+   }
+
+   public ImportService getImportService () {
+        return this.importService;
+   }
 
 }

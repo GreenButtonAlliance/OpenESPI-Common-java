@@ -303,4 +303,13 @@ public class ResourceServiceImpl implements ResourceService {
 		return repository.merge(resource);
 		
 	}
+	
+    public void setResourceRepository(ResourceRepository repository) {
+        this.repository = repository;     
+   }
+
+   public ResourceRepository getResourceRepository () {
+        return this.repository;
+   }
+
 }
