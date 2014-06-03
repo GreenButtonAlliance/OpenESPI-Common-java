@@ -708,9 +708,9 @@ public class ExportServiceImpl implements ExportService {
 					exportEntry(subscriptionId, entry, stream, exportFilter, hrefFragment + "/"
 							+ entry.getContent().getContentId(resourceClass));
 				} catch (Exception e) {
-					System.out.println("<!-- The requested collection contains no resources -->\n");
+					System.out.printf("exportEntries: The requested collection contains no resources: %s: %s\n", hrefFragment, resourceClass.getSimpleName());
 	
-					stream.write("</feed>".getBytes());
+					// stream.write("</feed>".getBytes());
 				}
 			}
 		}
@@ -807,7 +807,7 @@ public class ExportServiceImpl implements ExportService {
 					exportEntry(subscriptionId, entry, stream, exportFilter, hrefFragment + "/"
 							+ entry.getContent().getContentId(resourceClass));
 				} catch (Exception e) {
-					System.out.println("<!-- The requested collection contains no resources -->\n");
+					System.out.printf("exportEntries_Root: The requested collection contains no resources: %s: %s\n", hrefFragment, resourceClass.getSimpleName());
 						
 					// stream.write("</feed>\n".getBytes());
 				}
@@ -898,7 +898,7 @@ public class ExportServiceImpl implements ExportService {
 				exportEntryFull(subscriptionId, entry, stream,
 						exportFilter, hrefFragment);
 			} catch (Exception e) {
-				System.out.println("<!-- The requested collection contains no resources -->\n");
+				System.out.printf("exportEntriesInternal: The requested collection contains no resources: %s\n", hrefFragment);
 						
 		    }
 		}
