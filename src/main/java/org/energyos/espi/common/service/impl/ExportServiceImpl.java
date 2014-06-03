@@ -708,8 +708,8 @@ public class ExportServiceImpl implements ExportService {
 					exportEntry(subscriptionId, entry, stream, exportFilter, hrefFragment + "/"
 							+ entry.getContent().getContentId(resourceClass));
 				} catch (Exception e) {
-					stream.write("/* The requested collection contains no resources */"
-							.getBytes());
+					System.out.println("<!-- The requested collection contains no resources -->\n");
+	
 					stream.write("</feed>".getBytes());
 				}
 			}
@@ -807,9 +807,9 @@ public class ExportServiceImpl implements ExportService {
 					exportEntry(subscriptionId, entry, stream, exportFilter, hrefFragment + "/"
 							+ entry.getContent().getContentId(resourceClass));
 				} catch (Exception e) {
-					stream.write("/* The requested collection contains no resources */"
-							.getBytes());
-					stream.write("</feed>\n".getBytes());
+					System.out.println("<!-- The requested collection contains no resources -->\n");
+						
+					// stream.write("</feed>\n".getBytes());
 				}
 			}
 		}
@@ -898,8 +898,8 @@ public class ExportServiceImpl implements ExportService {
 				exportEntryFull(subscriptionId, entry, stream,
 						exportFilter, hrefFragment);
 			} catch (Exception e) {
-				stream.write("/* The requested collection contains no resources */\n"
-						.getBytes());
+				System.out.println("<!-- The requested collection contains no resources -->\n");
+						
 		    }
 		}
 	}
