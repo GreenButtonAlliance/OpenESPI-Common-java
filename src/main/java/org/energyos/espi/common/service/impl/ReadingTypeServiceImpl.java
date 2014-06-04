@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 public class ReadingTypeServiceImpl implements ReadingTypeService {
 
     @Autowired
-    protected ReadingTypeRepository repository;
+    private ReadingTypeRepository repository;
     
     @Autowired
 	private ResourceService resourceService;
@@ -47,19 +47,6 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
     @Autowired
 	private ReadingTypeRepository readingTypeRepository;
     
-    public void setImportService(ImportService importService) {
-    	this.importService = importService;
-    }
-    
-	@Override
-	public void setReadingTypeRepository(ReadingTypeRepository readingTypeRepository) {
-		this.readingTypeRepository = readingTypeRepository;
-		
-	}
-    public void setResourceService(ResourceService resourceService) {
-    	this.resourceService = resourceService;
-    }
-
     @Override
     public ReadingType findByUUID(UUID uuid) {
         return repository.findByUUID(uuid);
@@ -151,5 +138,26 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 		}
 	}
 
+   public void setReadingTypeRepository(ReadingTypeRepository repository) {
+        this.repository = repository;
+   }
+
+   public ReadingTypeRepository getReadingTypeRepository () {
+        return this.repository;
+   }
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+   public void setImportService(ImportService importService) {
+        this.importService = importService;
+   }
+
+   public ImportService getImportService () {
+        return this.importService;
+   }
 
 }

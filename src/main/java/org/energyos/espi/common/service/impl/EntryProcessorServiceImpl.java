@@ -245,4 +245,8 @@ public class EntryProcessorServiceImpl implements EntryProcessorService {
     public void setResourceService(ResourceService resourceService) {
     	this.resourceService = resourceService;
     }
+    
+    public ResourceService getResourceService(ResourceService resourceService) {
+    	return resourceService;
+    }
 }

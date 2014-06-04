@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -41,6 +42,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -168,7 +170,8 @@ import org.hibernate.validator.constraints.NotEmpty;
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID, query = "SELECT info FROM ApplicationInformation info WHERE info.dataCustodianId = :dataCustodianId"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL, query = "SELECT info FROM ApplicationInformation info"),
         @NamedQuery(name = ApplicationInformation.QUERY_FIND_ALL_IDS,
-		    query = "SELECT applicationInformation.id FROM ApplicationInformation applicationInformation")
+		    query = "SELECT applicationInformation.id FROM ApplicationInformation applicationInformation"),
+        @NamedQuery(name = ApplicationInformation.QUERY_FIND_BY_KIND, query = "SELECT info FROM ApplicationInformation info WHERE info.kind = :kind")
 
 })
 public class ApplicationInformation
@@ -182,9 +185,13 @@ public class ApplicationInformation
     public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
     public static final String QUERY_FIND_BY_CLIENT_ID = "ApplicationInformation.findByClientId";
     public static final String QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID = "ApplicationInformation.findByDataCustodianClientId";
-	public static final String QUERY_FIND_ALL_IDS = "AppilcationInformation.findAllIds";
+	public static final String QUERY_FIND_ALL_IDS = "ApplicationInformation.findAllIds";
+	public static final String QUERY_FIND_BY_KIND = "ApplicationInformation.findByKind";
 
-    
+    @XmlTransient
+    /*@XmlElement(name = "kind")*/
+    @Column( name = "kind")
+    protected String kind;
     protected String dataCustodianApplicationStatus;
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianDefaultBatchResource;
@@ -301,6 +308,17 @@ public class ApplicationInformation
 	// private Integer accessTokenValiditySeconds;
 	// TODO implement ApplicationInformation.authorities
 	// private Collection<GrantedAuthority> authorities;
+    
+    
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+    	this.kind = kind;
+    }
+        
+    
 
 //    @Override
     public String getClientId() {

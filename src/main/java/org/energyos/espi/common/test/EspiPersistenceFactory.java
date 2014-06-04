@@ -109,4 +109,59 @@ public class EspiPersistenceFactory {
 
         return localTimeParameters;
     }
+    
+    public void setApplicationInformationService(ApplicationInformationService applicationInformationService) { 
+	     this.applicationInformationService = applicationInformationService; 
+   }
+
+   public ApplicationInformationService getApplicationInformationService() {
+	     return this.applicationInformationService; 
+  }
+
+   public void setRetailCustomerService(RetailCustomerService retailCustomerService) {
+       this.retailCustomerService = retailCustomerService;
+   }
+
+   public RetailCustomerService getRetailCustomerService () {
+       return this.retailCustomerService;
+   }
+
+   public void setSubscriptionService(SubscriptionService subscriptionService) {
+       this.subscriptionService = subscriptionService;
+   }
+
+   public SubscriptionService getSubscriptionService () {
+       return this.subscriptionService;
+   }
+   public void setAuthorizationService(AuthorizationService authorizationService) {
+       this.authorizationService = authorizationService;
+   }
+
+   public AuthorizationService getAuthorizationService () {
+       return this.authorizationService;
+   }
+
+   public void setUsagePointService(UsagePointService usagePointService) {
+       this.usagePointService = usagePointService;
+   }
+
+   public UsagePointService getUsagePointService () {
+       return this.usagePointService;
+   } 
+
+   public void setMeterReadingService(MeterReadingService meterReadingService) {
+       this.meterReadingService =  meterReadingService;
+   }
+
+   public MeterReadingService getMeterReadingService () {
+       return this.meterReadingService;
+   }
+
+   public void setResourceService(ResourceService resourceService) {
+       this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+       return this.resourceService;
+   }
 }

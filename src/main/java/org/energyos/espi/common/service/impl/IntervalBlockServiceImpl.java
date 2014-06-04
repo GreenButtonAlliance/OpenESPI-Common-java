@@ -44,14 +44,6 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
     @Autowired
     private ImportService importService;
     
-    public void setImportService(ImportService importService) {
-    	this.importService = importService;
-    }
-    
-    public void setResourceService(ResourceService resourceService) {
-    	this.resourceService = resourceService;
-    }
-
     @Override
     public List<IntervalBlock> findAllByMeterReadingId(Long meterReadingId) {
         return intervalBlockRepository.findAllByMeterReadingId(meterReadingId);
@@ -163,5 +155,27 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 		intervalBlockRepository.findById(intervalBlockId);
 		return null;
 	}
+   
+	public void setIntervalBlockRepository(IntervalBlockRepository intervalBlockRepository) {
+        this.intervalBlockRepository = intervalBlockRepository;
+   }
+
+   public IntervalBlockRepository getIntervalBlockRepository () {
+        return this.intervalBlockRepository;
+   }
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+   public void setImportService(ImportService importService) {
+        this.importService = importService;
+   }
+
+   public ImportService getImportService () {
+        return this.importService;
+   }
 
 }

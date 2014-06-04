@@ -32,9 +32,6 @@ public interface RetailCustomerService extends UserDetailsService {
 
 	RetailCustomer findByHashedId(Long retailCustomerId);
 
-	// persistence management services
-	public void setRepository(RetailCustomerRepository retailCustomerRepository);
-
 	void persist(RetailCustomer customer);
 
 	// accessor services

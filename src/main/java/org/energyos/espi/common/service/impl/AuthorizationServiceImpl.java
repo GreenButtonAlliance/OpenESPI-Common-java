@@ -48,23 +48,6 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	@Autowired
 	private ImportService importService;
 	
-	public void setImportService(ImportService importService){
-		this.importService = importService;
-	}
-	
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-
-    public void setAuthorizationRepository(AuthorizationRepository authorizationRepository) {
-        this.authorizationRepository = authorizationRepository;
-    }
-
-    public void setUsagePointRepository(UsagePointRepository usagePointRepository) {
-        this.usagePointRepository = usagePointRepository;
-    }
-
-	// residue from random stories
     @Override
     public List<Authorization> findAllByRetailCustomerId(Long retailCustomerId) {
         return authorizationRepository.findAllByRetailCustomerId(retailCustomerId);
@@ -229,4 +212,45 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	public Authorization findById(Long retailCustomerId, long authorizationId) {
 		return this.authorizationRepository.findById(authorizationId);
 	}
+
+	@Override
+	public Authorization findByAccessToken(String accessToken) {
+		return authorizationRepository.findByAccessToken(accessToken);
+
+	}
+
+	@Override
+	public Authorization findByRefreshToken(String refreshToken) {
+		return authorizationRepository.findByRefreshToken(refreshToken);
+	}
+	
+    public void setAuthorizationRepository(AuthorizationRepository authorizationRepository) {
+        this.authorizationRepository = authorizationRepository;
+   }
+
+   public AuthorizationRepository getAuthorizationRepository () {
+        return this.authorizationRepository;
+   }
+   public void setUsagePointRepository(UsagePointRepository usagePointRepository) {
+        this.usagePointRepository = usagePointRepository;
+   }
+
+   public UsagePointRepository getUsagePointRepository () {
+        return this.usagePointRepository;
+   }
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+   public void setImportService(ImportService importService) {
+        this.importService = importService;
+   }
+
+   public ImportService getImportService () {
+        return this.importService;
+   }
+
 }

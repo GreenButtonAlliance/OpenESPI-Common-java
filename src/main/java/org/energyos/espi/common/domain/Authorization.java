@@ -68,7 +68,6 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
  *       &lt;sequence>
  *         &lt;element name="authorizedPeriod" type="{http://naesb.org/espi}DateTimeInterval" minOccurs="0"/>
  *         &lt;element name="publishedPeriod" type="{http://naesb.org/espi}DateTimeInterval" minOccurs="0"/>
- *         &lt;element name="referenceID" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/>
  *         &lt;element name="access_token" type="{http://naesb.org/espi}String512" minOccurs="0"/>
  *         &lt;element name="status" type="{http://naesb.org/espi}AuthorizationStatus" minOccurs="0"/>
  *         &lt;element name="expires_in" type="{http://naesb.org/espi}TimeType" minOccurs="0"/>
@@ -99,7 +98,7 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 @XmlType(name = "Authorization", propOrder = {
 	    "authorizedPeriod",
 	    "publishedPeriod",
-	    "retailCustomer",
+//	    "retailCustomer",
 	    "accessToken",
 	    "status",
 	    "expiresIn",
@@ -133,6 +132,10 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 		    	query = "SELECT authorization FROM Authorization authorization WHERE authorization.state = :state"),
 		@NamedQuery(name = Authorization.QUERY_FIND_BY_UUID, 
         		query = "SELECT authorization FROM Authorization authorization WHERE authorization.uuid = :uuid"),
+        @NamedQuery(name = Authorization.QUERY_FIND_BY_ACCESS_TOKEN,
+                query = "SELECT authorization from Authorization authorization WHERE authorization.accessToken = :accessToken"),
+        @NamedQuery(name = Authorization.QUERY_FIND_BY_REFRESH_TOKEN,
+                query = "SELECT authorization from Authorization authorization WHERE authorization.refreshToken = :refreshToken"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RESOURCE_URI, 
                 query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI = :uri")
 })
@@ -145,6 +148,8 @@ public class Authorization
 	public static final String QUERY_FIND_BY_SCOPE = "Authorization.findByScope";
     public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";	
 	public final static String QUERY_FIND_BY_UUID = "Authorization.findByUUID";
+	public final static String QUERY_FIND_BY_ACCESS_TOKEN = "Authorization.findByAccessToken";
+	public final static String QUERY_FIND_BY_REFRESH_TOKEN = "Authorization.findByRefreshToken";
 	public static final String QUERY_FIND_BY_RESOURCE_URI = "Authorization.findByResourceUri";
 
     @Embedded
@@ -179,7 +184,8 @@ public class Authorization
     protected String thirdParty;
     
     @ManyToOne (cascade = CascadeType.DETACH) @JoinColumn(name = "retail_customer_id")
-    @XmlElement(name = "referenceID")
+//    @XmlElement(name = "referenceID")
+    @XmlTransient
     protected RetailCustomer retailCustomer;
 
     @OneToOne (cascade = CascadeType.DETACH) @JoinColumn(name = "subscription_id")

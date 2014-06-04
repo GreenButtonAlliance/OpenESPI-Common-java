@@ -59,15 +59,26 @@ public class UsagePointServiceImpl implements UsagePointService {
 		this.importService = importService;
 	}
 
+	public ImportService getImportService() {
+		return importService;
+	}
+	
 	public void setRepository(UsagePointRepository usagePointRepository) {
 		this.usagePointRepository = usagePointRepository;
 	}
 
-
+	public UsagePointRepository getRepository() {
+		return usagePointRepository;
+	}
+	
 	public void setResourceService(ResourceService resourceService) {
 		this.resourceService = resourceService;
 	}
-
+	
+	public ResourceService getResourceService() {
+		return resourceService;
+	}
+	
 	@Override
 	public List<UsagePoint> findAllByRetailCustomer(RetailCustomer customer) {
 		return usagePointRepository.findAllByRetailCustomerId(customer.getId());

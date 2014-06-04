@@ -35,7 +35,7 @@ import org.springframework.stereotype.Service;
 public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQualitySummaryService {
 
     @Autowired
-    protected ElectricPowerQualitySummaryRepository electricPowerQualitySummaryRepository;
+    private ElectricPowerQualitySummaryRepository electricPowerQualitySummaryRepository;
     
     @Autowired
 	private ResourceService resourceService;
@@ -43,19 +43,6 @@ public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQual
     @Autowired
     private ImportService importService;
     
-    public void setImportService(ImportService importService) {
-    	this.importService = importService;
-    }
-    
-    public void setResourceService(ResourceService resourceService) {
-    	this.resourceService = resourceService;
-    }
-
-    public void setRepository(ElectricPowerQualitySummaryRepository electricPowerQualitySummaryRepository) {
-        this.electricPowerQualitySummaryRepository = electricPowerQualitySummaryRepository;
-    }
-
-
     @Override
     public ElectricPowerQualitySummary findByUUID(UUID uuid) {
         return electricPowerQualitySummaryRepository.findByUUID(uuid);
@@ -152,5 +139,27 @@ public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQual
 			return null;
 		}
 	}
+	
+   public void setElectricPowerQualitySummaryRepository(ElectricPowerQualitySummaryRepository electricPowerQualitySummaryRepository) {
+        this.electricPowerQualitySummaryRepository = electricPowerQualitySummaryRepository;
+   }
 
+   public ElectricPowerQualitySummaryRepository getElectricPowerQualitySummaryRepository () {
+        return this.electricPowerQualitySummaryRepository;
+   }
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+   public void setImportService(ImportService importService) {
+        this.importService = importService;
+   }
+
+   public ImportService getImportService () {
+        return this.importService;
+   }
+ 
 }

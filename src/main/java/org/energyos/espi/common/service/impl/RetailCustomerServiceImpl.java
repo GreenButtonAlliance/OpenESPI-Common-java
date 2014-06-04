@@ -61,26 +61,6 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
     @Autowired
     UsagePointService usagePointService;
     
-    public void setResourceService(ResourceService resourceService){
-    	this.resourceService = resourceService;
-    }
-
-    public void setImportService(ImportService importService){
-    	this.importService = importService;
-    }
-
-    public void setRepository(RetailCustomerRepository retailCustomerRepository) {
-        this.retailCustomerRepository = retailCustomerRepository;
-    }
-    
-    public void setAuthorizationService(AuthorizationService authorizationService) {
-        this.authorizationService = authorizationService;
-    }
-    
-    public void setSubscriptionService(SubscriptionService subscriptionService) {
-        this.subscriptionService = subscriptionService;
-    }
-
     @Override
     public List<RetailCustomer> findAll() {
         return retailCustomerRepository.findAll();
@@ -206,5 +186,48 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
         return subscription;
 	}
 
+    public void setRetailCustomerRepository(RetailCustomerRepository retailCustomerRepository) {
+        this.retailCustomerRepository = retailCustomerRepository;
+   }
+
+   public RetailCustomerRepository getRetailCustomerRepository () {
+        return this.retailCustomerRepository;
+   }
+   public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+   }
+
+   public ResourceService getResourceService () {
+        return this.resourceService;
+   }
+   public void setImportService(ImportService importService) {
+        this.importService = importService;
+   }
+
+   public ImportService getImportService () {
+        return this.importService;
+   }
+   public void setAuthorizationService(AuthorizationService authorizationService) {
+        this.authorizationService = authorizationService;
+   }
+
+   public AuthorizationService getAuthorizationService () {
+        return this.authorizationService;
+   }
+   public void setSubscriptionService(SubscriptionService subscriptionService) {
+        this.subscriptionService = subscriptionService;
+   }
+
+   public SubscriptionService getSubscriptionService () {
+        return this.subscriptionService;
+   }
+   
+   public void setUsagePointService(UsagePointService usagePointService) {
+        this.usagePointService = usagePointService;
+   }
+
+   public UsagePointService getUsagePointService () {
+        return this.usagePointService;
+   }
 
 }

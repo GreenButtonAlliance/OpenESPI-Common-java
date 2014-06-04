@@ -45,6 +45,17 @@ public class ApplicationInformationRepositoryImpl implements ApplicationInformat
 
     @Override
     @SuppressWarnings("unchecked")
+    public List<ApplicationInformation> findByKind(String kind) {
+        return (List<ApplicationInformation>)this.em
+        		.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_KIND)
+                .setParameter("kind", kind)
+                .getResultList();        
+        
+    }
+	   
+    
+    @Override
+    @SuppressWarnings("unchecked")
     public List<ApplicationInformation> findAll() {
         return (List<ApplicationInformation>)this.em
                 .createNamedQuery(ApplicationInformation.QUERY_FIND_ALL).getResultList();

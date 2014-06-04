@@ -84,9 +84,8 @@ CREATE TABLE `subscriptions_usage_points` (
   `usagePoints_id` bigint(20) NOT NULL,
   KEY `FK_862cd528c4954f4cb2bcdadaf08` (`usagePoints_id`),
   KEY `FK_c138e968ff2d4cd49398210f48c` (`subscriptions_id`),
-  CONSTRAINT `FK_c138e968ff2d4cd49398210f48c` FOREIGN KEY (`subscriptions_id`) REFERENCES `subscriptions` (`id`),
-  CONSTRAINT `FK_862cd528c4954f4cb2bcdadaf08` FOREIGN KEY (`usagePoints_id`) REFERENCES `usage_points` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK_c138e968ff2d4cd49398210f48c` FOREIGN KEY (`subscriptions_id`) REFERENCES `subscriptions` (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,9 +330,9 @@ CREATE TABLE `authorizations` (
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,
-  `self_link_rel` varchar(255) DEFAULT NULL,
+  `self_link_rel` varchar(255) DEFAULT 'self',
   `up_link_href` varchar(255) DEFAULT NULL,
-  `up_link_rel` varchar(255) DEFAULT NULL,
+  `up_link_rel` varchar(255) DEFAULT 'up',
   `updated` datetime DEFAULT NULL,
   `uuid` varchar(255) NOT NULL,
   `access_token` varchar(255) DEFAULT NULL,
@@ -364,9 +363,7 @@ CREATE TABLE `authorizations` (
   KEY `FK_d0761ae9d2dd44c49867ac4ec4b` (`application_information_id`),
   KEY `FK_a4fccef421a14e0ead5c1b9753d` (`retail_customer_id`),
   KEY `FK_subscriptionkey` (`subscription_id`),
-  CONSTRAINT `FK_a4fccef421a14e0ead5c1b9753d` FOREIGN KEY (`retail_customer_id`) REFERENCES `retail_customers` (`id`),
-  CONSTRAINT `FK_d0761ae9d2dd44c49867ac4ec4b` FOREIGN KEY (`application_information_id`) REFERENCES `application_information` (`id`),
-  CONSTRAINT `FK_subscriptionkey` FOREIGN KEY (`subscription_id`) REFERENCES `subscriptions` (`id`)
+  CONSTRAINT `FK_d0761ae9d2dd44c49867ac4ec4b` FOREIGN KEY (`application_information_id`) REFERENCES `application_information` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -399,9 +396,9 @@ CREATE TABLE `subscriptions` (
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,
-  `self_link_rel` varchar(255) DEFAULT NULL,
+  `self_link_rel` varchar(255) DEFAULT 'self',
   `up_link_href` varchar(255) DEFAULT NULL,
-  `up_link_rel` varchar(255) DEFAULT NULL,
+  `up_link_rel` varchar(255) DEFAULT 'up',
   `updated` datetime DEFAULT NULL,
   `uuid` varchar(255) NOT NULL,
   `hashedId` varchar(255) DEFAULT NULL,
@@ -536,7 +533,7 @@ DROP TABLE IF EXISTS `retail_customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `retail_customers` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,
@@ -552,7 +549,7 @@ CREATE TABLE `retail_customers` (
   `role` varchar(255) NOT NULL,
   `username` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -580,6 +577,7 @@ DROP TABLE IF EXISTS `application_information`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `application_information` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `kind` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,

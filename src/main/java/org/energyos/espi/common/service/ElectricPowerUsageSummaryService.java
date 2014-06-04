@@ -25,7 +25,6 @@ public interface ElectricPowerUsageSummaryService {
 	public void associateByUUID(UsagePoint usagePoint, UUID uuid);
 
 	// persistence management services
-	public void setRepository(ElectricPowerUsageSummaryRepository repository);
 
 	public void persist(ElectricPowerUsageSummary electricPowerUsageSummary);
 

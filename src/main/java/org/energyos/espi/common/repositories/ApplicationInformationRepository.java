@@ -25,6 +25,8 @@ public interface ApplicationInformationRepository {
 
     public void deleteById(Long id);
 
+    public List<ApplicationInformation> findByKind(String kind);
+
     public List<ApplicationInformation> findAll();
 
     public List<Long> findAllIds();

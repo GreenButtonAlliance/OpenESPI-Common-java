@@ -331,9 +331,9 @@ CREATE TABLE `authorizations` (
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,
-  `self_link_rel` varchar(255) DEFAULT NULL,
+  `self_link_rel` varchar(255) DEFAULT 'self',
   `up_link_href` varchar(255) DEFAULT NULL,
-  `up_link_rel` varchar(255) DEFAULT NULL,
+  `up_link_rel` varchar(255) DEFAULT 'up',
   `updated` datetime DEFAULT NULL,
   `uuid` varchar(255) NOT NULL,
   `access_token` varchar(255) DEFAULT NULL,
@@ -399,9 +399,9 @@ CREATE TABLE `subscriptions` (
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,
-  `self_link_rel` varchar(255) DEFAULT NULL,
+  `self_link_rel` varchar(255) DEFAULT 'self',
   `up_link_href` varchar(255) DEFAULT NULL,
-  `up_link_rel` varchar(255) DEFAULT NULL,
+  `up_link_rel` varchar(255) DEFAULT 'up',
   `updated` datetime DEFAULT NULL,
   `uuid` varchar(255) NOT NULL,
   `hashedId` varchar(255) DEFAULT NULL,
@@ -536,7 +536,7 @@ DROP TABLE IF EXISTS `retail_customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `retail_customers` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,
@@ -580,6 +580,7 @@ DROP TABLE IF EXISTS `application_information`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `application_information` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `kind` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,

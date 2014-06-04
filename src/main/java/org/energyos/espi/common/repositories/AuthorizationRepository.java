@@ -44,4 +44,9 @@ public interface AuthorizationRepository {
     void deleteById(Long id);
 
     void createOrReplaceByUUID(Authorization authorization);
+    
+    Authorization findByAccessToken(String accessToken);
+
+	Authorization findByRefreshToken(String refreshToken);
+    
 }

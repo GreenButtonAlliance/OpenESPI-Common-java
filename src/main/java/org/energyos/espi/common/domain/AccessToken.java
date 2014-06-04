@@ -13,8 +13,6 @@ public class AccessToken {
     private String refreshToken;
     @JsonProperty("scope")
     private String scope;
-    @JsonProperty("client_id")		// Added to resolve issue receiving Access Token response
-    private String clientId;		// using Spring Security OAuth2 2.0.0
     @JsonProperty("resourceURI")
     private String resourceURI;
     @JsonProperty("authorizationURI")

@@ -95,4 +95,18 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public Authorization findByAccessToken(String accessToken) {
+		return (Authorization) em.createNamedQuery(Authorization.QUERY_FIND_BY_ACCESS_TOKEN)
+				.setParameter("accessToken", accessToken)
+				.getSingleResult();
+	}
+
+	@Override
+	public Authorization findByRefreshToken(String refreshToken) {
+		return (Authorization) em.createNamedQuery(Authorization.QUERY_FIND_BY_REFRESH_TOKEN)
+				.setParameter("refreshToken", refreshToken)
+				.getSingleResult();
+	}
 }

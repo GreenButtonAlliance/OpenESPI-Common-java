@@ -19,6 +19,8 @@ public interface AuthorizationService {
 	public Authorization findByState(String state);
 	
 	public Authorization findByScope(String scope, Long retailCustomerId);
+	
+	public Authorization findByAccessToken(String accessToken);
 
 	public List<Authorization> findAll();
 
@@ -55,6 +57,8 @@ public interface AuthorizationService {
 	EntryTypeIterator findEntryTypeIterator();
 
 	Authorization findByUUID(UUID uuid);
+
+	public Authorization findByRefreshToken(String refreshToken);
 
 
 }

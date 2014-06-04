@@ -30,63 +30,63 @@ public interface ExportService {
     // ElectricPowerQualitySummary
     //  - ROOT form
 
-	void exportElectricPowerQualitySummary(Long electricPowerQualitySummaryId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
+	void exportElectricPowerQualitySummary_Root(Long subscriptionId, Long electricPowerQualitySummaryId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
-	void exportElectricPowerQualitySummarys(OutputStream outputStream, ExportFilter exportFilter) throws IOException;
+	void exportElectricPowerQualitySummarys_Root(Long subscriptionId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
     //  - XPath form
-	public void exportElectricPowerQualitySummary(Long retailCustomerId, Long usagePointId, Long electricPowerQualitySummaryId,
+	public void exportElectricPowerQualitySummary(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long electricPowerQualitySummaryId,
 						      OutputStream stream, ExportFilter exportFilter) throws IOException;
 
-	public void exportElectricPowerQualitySummarys(Long retailCustomerId, Long usagePointId,
+	public void exportElectricPowerQualitySummarys(Long subscriptionId, Long retailCustomerId, Long usagePointId,
 						       OutputStream stream, ExportFilter exportFilter) throws IOException;
 
 
     // ElectricPowerUsageSummary
     //  - ROOT form
 
-	void exportElectricPowerUsageSummarys(ServletOutputStream outputStream,
+	void exportElectricPowerUsageSummarys_Root(Long subscriptionId, ServletOutputStream outputStream,
 			ExportFilter exportFilter) throws IOException;
 
-	void exportElectricPowerUsageSummary(long electricPowerUsageSummaryId,
+	void exportElectricPowerUsageSummary_Root(Long subscriptionId, long electricPowerUsageSummaryId,
 			ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
     //  - XPath form
 
-	public void exportElectricPowerUsageSummary(Long retailCustomerId, Long usagePointId, Long electricPowerUsageSummaryId,
+	public void exportElectricPowerUsageSummary(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long electricPowerUsageSummaryId,
 						    OutputStream stream, ExportFilter exportFilter) throws IOException;
 
-	public void exportElectricPowerUsageSummarys(Long retailCustomerId, Long usagePointId,
+	public void exportElectricPowerUsageSummarys(Long subscriptionId, Long retailCustomerId, Long usagePointId,
 						     OutputStream stream, ExportFilter exportFilter) throws IOException;
 
 
     // IntervalBlock
     //  - ROOT form
-	void exportIntervalBlocks(OutputStream outputStream,
+	void exportIntervalBlocks_Root(Long subscriptionId, OutputStream outputStream,
 			ExportFilter exportFilter) throws IOException;
 
-	void exportIntervalBlock(Long intervalBlockId,
+	void exportIntervalBlock_Root(Long subscriptionId, Long intervalBlockId,
 			OutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
     //  - XPath form
 
-	public void exportIntervalBlock(Long retailCustomerId, Long usagePointId, Long meterReadingId, Long intervalBlockId,
+	public void exportIntervalBlock(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long meterReadingId, Long intervalBlockId,
 					OutputStream stream, ExportFilter exportFilter) throws IOException;
 
-	public void exportIntervalBlocks(Long retailCustomerId, Long usagePointId, Long meterReadingId,
+	public void exportIntervalBlocks(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long meterReadingId,
 					 OutputStream stream, ExportFilter exportFilter) throws IOException;
 
 	// MeterReading
     //  - ROOT form
-	void exportMeterReadings(ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException ;
+	void exportMeterReadings_Root(Long subscriptionId, ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException ;
 
-	void exportMeterReading(long meterReadingId, ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException ;
+	void exportMeterReading_Root(Long subscriptionId, long meterReadingId, ServletOutputStream outputStream, ExportFilter exportFilter) throws IOException ;
 
     //  - XPath form
-	public void exportMeterReading(Long retailCustomerId, Long usagePointId, Long meterReadingId,
+	public void exportMeterReading(Long subscriptionId, Long retailCustomerId, Long usagePointId, Long meterReadingId,
 				       OutputStream stream, ExportFilter exportFilter) throws IOException;
 	
-	public void exportMeterReadings(Long retailCustomerId, Long usagePointId,
+	public void exportMeterReadings(Long subscriptionId, Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException;
 
 	// ReadingType
@@ -95,32 +95,25 @@ public interface ExportService {
 
 	void exportReadingType(Long readingTypeId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
-	// - XPath form
-	public void exportReadingType(Long retailCustomerId, Long usagePointId,	Long meterReadingId, Long readingTypeId,
-				      OutputStream stream, ExportFilter exportFilter) throws IOException;
-
-	public void exportReadingTypes(Long retailCustomerId, Long usagePointId,
-				       OutputStream stream, ExportFilter exportFilter) throws IOException;
-
     // RetailCustomer
     //  - ROOT form
 
-	public void exportRetailCustomer(Long retailCustomerId, OutputStream stream, ExportFilter exportFilter) throws IOException;
+	public void exportRetailCustomer(Long subscriptionId, Long retailCustomerId, OutputStream stream, ExportFilter exportFilter) throws IOException;
 
-	public void exportRetailCustomers(OutputStream stream, ExportFilter exportFilter) throws IOException;
+	public void exportRetailCustomers(Long subscriptionId, OutputStream stream, ExportFilter exportFilter) throws IOException;
 
 
 	// Subscriptions
 	//
-       // ROOT forms
-       // -- TODO: original Pivotal version - used for pub/sub activity b/c of the String/Hashed implication 
-       public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
+    // ROOT forms
+    // -- TODO: original Pivotal version - used for pub/sub activity b/c of the String/Hashed implication 
+    public void exportSubscription(String subscriptionHashedId, OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
 	
-       public void exportSubscription(Long subscriptionId, OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
+    public void exportSubscription(Long subscriptionId, OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
 
-       public void exportSubscriptions(OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
+    public void exportSubscriptions(OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
 
-        // XPath forms
+    // XPath forms
 
 	public void exportSubscriptions(Long retailCustomerId, OutputStream stream, ExportFilter exportFilter) throws IOException;
 
@@ -132,33 +125,25 @@ public interface ExportService {
 	public void exportTimeConfiguration(Long timeConfigurationId, OutputStream stream, ExportFilter exportFilter) throws IOException;
 
 	public void exportTimeConfigurations(OutputStream stream, ExportFilter exportFilter) throws IOException;
-
-    //  - XPath form
-
-	public void exportTimeConfiguration(Long retailCustomerId, Long usagePointId, Long timeConfigurationId,
-				     OutputStream stream, ExportFilter exportFilter) throws IOException;
-
-	public void exportTimeConfigurations(Long retailCustomerId, Long usagePointId,
-			OutputStream stream, ExportFilter exportFilter) throws IOException;
 	
 	// UsagePoints
 	// - ROOT form
-	void exportUsagePoint(Long usagePointId, OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
+	void exportUsagePoint_Root(Long subscriptionId, Long usagePointId, OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
 
-	void exportUsagePoints(OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
+	void exportUsagePoints_Root(Long subscriptionId, OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
         
 	// - XPath form
-	void exportUsagePoint(Long retailCustomerId, Long usagePointId,
+	void exportUsagePoint(Long subscriptionId, Long retailCustomerId, Long usagePointId,
 			OutputStream stream, ExportFilter exportResourceFilter) throws IOException;
 
-	void exportUsagePoints(Long retailCustomerId, OutputStream stream,
+	void exportUsagePoints(Long subscriptionId, Long retailCustomerId, OutputStream stream,
 			ExportFilter exportResourceFilter) throws IOException;
 
 	// - Full Export form
-	void exportUsagePointsFull(Long retailCustomerId, ServletOutputStream outputStream,
+	void exportUsagePointsFull(Long subscriptionId, Long retailCustomerId, ServletOutputStream outputStream,
 			ExportFilter exportFilter) throws IOException;
 
-	void exportUsagePointFull(Long usagePointId, Long RetailCustomerId,
+	void exportUsagePointFull(Long subscriptionId, Long usagePointId, Long RetailCustomerId,
 			ServletOutputStream outputStream, ExportFilter exportFilter)  throws IOException;
 
 	public void exportBatchBulk(long bulkId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
