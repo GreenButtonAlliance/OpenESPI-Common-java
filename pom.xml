@@ -52,7 +52,7 @@
         <!-- Spring -->
         <spring.version>4.0.3.RELEASE</spring.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
-        <spring-security-oauth.version>2.0.0.RC2</spring-security-oauth.version>
+        <spring-security-oauth.version>2.0.2.RELEASE</spring-security-oauth.version>
 
         <!-- Hibernate / JPA -->
         <hibernate.version>4.2.1.Final</hibernate.version>
