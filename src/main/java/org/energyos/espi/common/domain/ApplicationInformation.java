@@ -108,6 +108,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  *         &lt;element name="response_types" type="{http://naesb.org/espi}ResponseType" minOccurs="0"/>
  *         &lt;element name="registration_client_uri" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
  *         &lt;element name="registration_access_token" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/>
+ *         &lt;element name="dataCustodianScopeSelectionScreenURI" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -158,7 +159,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 	    "registrationClientUri",
 	    "registrationAccessToken",
 	    "dataCustodianId",
-	    "thirdPartyApplicationName"
+	    "thirdPartyApplicationName",
+	    "dataCustodianScopeSelectionScreenURI"
 	})
 @Entity
 @Table(name = "application_information")
@@ -270,6 +272,10 @@ public class ApplicationInformation
     protected ArrayList<String> contacts;
     @XmlElement(name = "token_endpoint_auth_method")
     protected String tokenEndpointAuthMethod;
+    
+    @XmlElement(name = "dataCustodianScopeSelectionScreenURI")
+    @XmlSchemaType(name = "anyURI")
+    protected String dataCustodianScopeSelectionScreenURI;
     
     // TODO Implement ApplicationInformaion.additionalInformation
     
@@ -1438,6 +1444,33 @@ public class ApplicationInformation
         this.dataCustodianId = value;
     }
 
+    
+    /**
+     * Gets the value of the dataCustodianScopeSelectionScreenURI property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getdataCustodianScopeSelectionScreenURI() {
+        return dataCustodianScopeSelectionScreenURI;
+    }
+
+    /**
+     * Sets the value of the dataCustodianScopeSelectionScreenURI property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setdataCustodianScopeSelectionScreenURI(String value) {
+        this.dataCustodianScopeSelectionScreenURI = value;
+    }
+    
+    
+    
       
 	@Override
     public void merge(IdentifiedObject resource) {

@@ -139,7 +139,7 @@ self link to this resource</xs:documentation>
 					</xs:element>
 					<xs:element name="thirdPartyScopeSelectionScreenURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>URI of the Scope Selection Screen used by the Retail Customer to select the characteristics of the Green Button data to be shared with the ThirdParty.  (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/RetailCustomer/{RetailCustomerID}/ScopeSelection")</xs:documentation>
+							<xs:documentation>URI of the Scope Selection Screen used by the Retail Customer to select the characteristics of the Green Button data to be shared with the ThirdParty.  (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/RetailCustomer/ScopeSelection")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="thirdPartyUserPortalScreenURI" type="xs:anyURI" minOccurs="0">
@@ -243,6 +243,11 @@ self link to this resource</xs:documentation>
 					<xs:element name="registration_access_token" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>A credential obtained during Third Party registration with the Data Custodian to enable access to the ApplicationInformation resource. This is persisted in the ApplicationInformation resource structure. (e.g. "fe82518d-e325-404e-978c-c02f9339bccc")</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dataCustodianScopeSelectionScreenURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The URI used by the Third Party to redirect the Retail Customer to the Data Custodian Scope Selection Screen (note that this will likely involve a dialog with the Retail Customer including a log in authentication process). (e.g. http://localhost:8080/DataCustodian/RetailCustomer/ScopeSelection)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
