@@ -713,7 +713,7 @@ public class ExportServiceImpl implements ExportService {
 		String uuid = UUID.randomUUID().toString();
 
 		stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
-		stream.write("<?xml-stylesheet type=\"text/xsl\" href=\"/GreenButtonDataStyleSheet.xslt\"?>\n"
+		stream.write("<?xml-stylesheet type=\"text/xsl\" href=\"GreenButtonDataStyleSheet.xslt\"?>\n"
 				.getBytes());
 		stream.write("<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n"
 				.getBytes());

@@ -793,7 +793,7 @@ public class ContentType {
 						result = temp.substring(0, temp.indexOf("/Batch"));
 					} else {
 			          // it is a ROOT form 
-						result = temp.substring(0, temp.indexOf("/resource/") + "/resource/".length());	
+						result = temp.substring(0, temp.indexOf("/resource/") + "/resource".length());	
 					}
 			  	}
 			}
