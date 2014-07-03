@@ -22,17 +22,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "ServiceDeliveryPoint")
+@XmlType(name = "ServiceDeliveryPoint", propOrder = {
+//		"id",
+        "name",
+        "tariffProfile",
+        "customerAgreement"
+})
+
 @Entity
 @Table(name = "service_delivery_points")
 public class ServiceDeliveryPoint {
     private String name;
     private String tariffProfile;
     private String customerAgreement;
+
     private long id;
 
     @Id
+    @XmlTransient
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
