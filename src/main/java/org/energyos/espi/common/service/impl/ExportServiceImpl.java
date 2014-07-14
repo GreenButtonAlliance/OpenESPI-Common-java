@@ -651,7 +651,7 @@ public class ExportServiceImpl implements ExportService {
 	}
 
 	@Override
-	public void exportBatchSubscription(long subscriptionId,
+	public void exportBatchSubscription(Long subscriptionId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/Batch/Subscription/" + subscriptionId;
 		// first find all the usagePointIds this subscription is related to
@@ -663,11 +663,15 @@ public class ExportServiceImpl implements ExportService {
 	}
 
 	@Override
-	public void exportBatchBulk(long bulkId, OutputStream outputStream,
+	public void exportBatchBulk(Long bulkId, String thirdParty, OutputStream outputStream,
 			ExportFilter exportFilter) throws IOException {
 		// TODO Work with bulkService rather than subscriptionService
 		String hrefFragment = "/Batch/Bulk/" + bulkId;
-		List<Long> subscriptions = subscriptionService.findByBulkId(bulkId);
+		List<Long> subscriptions = new ArrayList<Long> ();
+		List<Long> authorizations = authorizationService.findAllIdsByBulkId(thirdParty, bulkId);
+		for (Long authorizationId : authorizations) {
+			subscriptions.add((subscriptionService.findByAuthorizationId(authorizationId)).getId());
+		}
 		exportEntriesFull(subscriptionService.findEntryTypeIterator(subscriptions),
 				outputStream, exportFilter, hrefFragment);
 	}
