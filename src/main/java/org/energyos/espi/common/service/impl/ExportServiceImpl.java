@@ -665,14 +665,20 @@ public class ExportServiceImpl implements ExportService {
 	@Override
 	public void exportBatchBulk(Long bulkId, String thirdParty, OutputStream outputStream,
 			ExportFilter exportFilter) throws IOException {
-		// TODO Work with bulkService rather than subscriptionService
+		
 		String hrefFragment = "/Batch/Bulk/" + bulkId;
-		List<Long> subscriptions = new ArrayList<Long> ();
+		List<Long> usagePoints = new ArrayList<Long> ();
 		List<Long> authorizations = authorizationService.findAllIdsByBulkId(thirdParty, bulkId);
+		
 		for (Long authorizationId : authorizations) {
-			subscriptions.add((subscriptionService.findByAuthorizationId(authorizationId)).getId());
+			Subscription subscription = subscriptionService.findByAuthorizationId(authorizationId);
+			for (UsagePoint up : subscription.getUsagePoints()) {
+				usagePoints.add(up.getId());
+			}
+			
 		}
-		exportEntriesFull(subscriptionService.findEntryTypeIterator(subscriptions),
+
+		exportEntriesFull(resourceService.findEntryTypeIterator(usagePoints, UsagePoint.class),
 				outputStream, exportFilter, hrefFragment);
 	}
 
