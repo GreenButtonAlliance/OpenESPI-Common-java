@@ -454,7 +454,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportMeterReading_Root(Long subscriptionId, long meterReadingId,
 			ServletOutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		MeterReading meterReading = meterReadingService.findById(meterReadingId);
+		MeterReading meterReading = resourceService.findById(meterReadingId, MeterReading.class);
 		UsagePoint usagePoint = meterReading.getUsagePoint();
 		
 		String hrefFragment ="/Subscription/" + subscriptionId + "/UsagePoint/" + usagePoint.getId() +   "/MeterReading/" + meterReadingId;

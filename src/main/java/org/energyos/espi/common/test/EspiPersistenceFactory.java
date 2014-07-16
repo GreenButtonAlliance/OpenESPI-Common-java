@@ -91,7 +91,7 @@ public class EspiPersistenceFactory {
 
     public MeterReading createMeterReading() {
         MeterReading meterReading = EspiFactory.newMeterReading();
-        meterReadingService.persist(meterReading);
+        resourceService.persist(meterReading);
 
         return meterReading;
     }
