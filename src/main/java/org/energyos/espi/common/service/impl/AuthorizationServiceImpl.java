@@ -224,6 +224,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 		return authorizationRepository.findByRefreshToken(refreshToken);
 	}
 	
+	@Override
+	public List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId) {
+		return authorizationRepository.findAllIdsByBulkId(thirdParty, bulkId);
+	}
+	
     public void setAuthorizationRepository(AuthorizationRepository authorizationRepository) {
         this.authorizationRepository = authorizationRepository;
    }

@@ -24,6 +24,12 @@ import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 
+/**
+ * Provides a resource type independent access to ESPI Resources
+ * 
+ * @author jat1
+ *
+ */
 public interface ResourceService {
 	void persist(IdentifiedObject resource);
 	
@@ -38,11 +44,33 @@ public interface ResourceService {
 
 	<T extends IdentifiedObject> T testById(Long id, Class<T> clazz);
 	
+	/**
+	 * @param id
+	 * @param clazz
+	 * @return
+	 * 
+	 * Find a Resource based upon it's locally unique id and it's class
+	 */
 	<T extends IdentifiedObject> T findById(Long id, Class<T> clazz);
 
+	/**
+	 * @param clazz
+	 * @return List<Long>
+	 * 
+	 * Returns a list the IDs of all of the locally unique ESPI resources of type clazz
+	 * 
+	 */
 	<T extends IdentifiedObject> List<Long> findAllIds(Class<T> clazz);
 
-	<T extends IdentifiedObject> List<Long> findAllIdsByUsagePointId(Long id, Class<T> clazz);
+	/**
+	 * @param usagePointId
+	 * @param clazz
+	 * @return List<Long>
+	 * 
+	 * Returns a list of IDs for all of the resources of type clazz that are associated with 
+	 * the given usagePointId
+	 */
+	<T extends IdentifiedObject> List<Long> findAllIdsByUsagePointId(Long usagePointId, Class<T> clazz);
 	
 	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Class<T> clazz);
 	

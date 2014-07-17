@@ -30,6 +30,7 @@ import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
@@ -208,8 +209,20 @@ public class ExportServiceImpl implements ExportService {
      }
 
 
-	// TODO Convert this block of functions to a Template system
-	//
+
+	@Override
+	public <T extends IdentifiedObject> void exportResource(Long resourceId,
+			Class<T> clazz, OutputStream stream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <T extends IdentifiedObject> void exportResources(Class<T> clazz,
+			OutputStream stream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	// ApplicationInformation
 
@@ -454,7 +467,7 @@ public class ExportServiceImpl implements ExportService {
 	public void exportMeterReading_Root(Long subscriptionId, long meterReadingId,
 			ServletOutputStream stream, ExportFilter exportFilter)
 			throws IOException {
-		MeterReading meterReading = meterReadingService.findById(meterReadingId);
+		MeterReading meterReading = resourceService.findById(meterReadingId, MeterReading.class);
 		UsagePoint usagePoint = meterReading.getUsagePoint();
 		
 		String hrefFragment ="/Subscription/" + subscriptionId + "/UsagePoint/" + usagePoint.getId() +   "/MeterReading/" + meterReadingId;
@@ -651,7 +664,7 @@ public class ExportServiceImpl implements ExportService {
 	}
 
 	@Override
-	public void exportBatchSubscription(long subscriptionId,
+	public void exportBatchSubscription(Long subscriptionId,
 			OutputStream stream, ExportFilter exportFilter) throws IOException {
 		String hrefFragment = "/Batch/Subscription/" + subscriptionId;
 		// first find all the usagePointIds this subscription is related to
@@ -663,12 +676,22 @@ public class ExportServiceImpl implements ExportService {
 	}
 
 	@Override
-	public void exportBatchBulk(long bulkId, OutputStream outputStream,
+	public void exportBatchBulk(Long bulkId, String thirdParty, OutputStream outputStream,
 			ExportFilter exportFilter) throws IOException {
-		// TODO Work with bulkService rather than subscriptionService
+		
 		String hrefFragment = "/Batch/Bulk/" + bulkId;
-		List<Long> subscriptions = subscriptionService.findByBulkId(bulkId);
-		exportEntriesFull(subscriptionService.findEntryTypeIterator(subscriptions),
+		List<Long> usagePoints = new ArrayList<Long> ();
+		List<Long> authorizations = authorizationService.findAllIdsByBulkId(thirdParty, bulkId);
+		
+		for (Long authorizationId : authorizations) {
+			Subscription subscription = subscriptionService.findByAuthorizationId(authorizationId);
+			for (UsagePoint up : subscription.getUsagePoints()) {
+				usagePoints.add(up.getId());
+			}
+			
+		}
+
+		exportEntriesFull(resourceService.findEntryTypeIterator(usagePoints, UsagePoint.class),
 				outputStream, exportFilter, hrefFragment);
 	}
 
@@ -1145,6 +1168,5 @@ public class ExportServiceImpl implements ExportService {
 		}
 		return result;
 	}
-
 
 }

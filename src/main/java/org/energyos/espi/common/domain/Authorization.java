@@ -137,7 +137,10 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
         @NamedQuery(name = Authorization.QUERY_FIND_BY_REFRESH_TOKEN,
                 query = "SELECT authorization from Authorization authorization WHERE authorization.refreshToken = :refreshToken"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RESOURCE_URI, 
-                query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI = :uri")
+                query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI = :uri"),
+        @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS_BY_BULK_ID, 
+                query = "SELECT authorization.id FROM Authorization authorization WHERE authorization.thirdParty = :thirdParty AND authorization.scope LIKE :bulkId")
+                 
 })
 public class Authorization
         extends IdentifiedObject {
@@ -151,6 +154,7 @@ public class Authorization
 	public final static String QUERY_FIND_BY_ACCESS_TOKEN = "Authorization.findByAccessToken";
 	public final static String QUERY_FIND_BY_REFRESH_TOKEN = "Authorization.findByRefreshToken";
 	public static final String QUERY_FIND_BY_RESOURCE_URI = "Authorization.findByResourceUri";
+	public static final String QUERY_FIND_ALL_IDS_BY_BULK_ID = "Authorization.findAllIdsByBulkId";
 
     @Embedded
     @AttributeOverrides({
