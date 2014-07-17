@@ -30,6 +30,7 @@ import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
@@ -208,8 +209,20 @@ public class ExportServiceImpl implements ExportService {
      }
 
 
-	// TODO Convert this block of functions to a Template system
-	//
+
+	@Override
+	public <T extends IdentifiedObject> void exportResource(Long resourceId,
+			Class<T> clazz, OutputStream stream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <T extends IdentifiedObject> void exportResources(Class<T> clazz,
+			OutputStream stream, ExportFilter exportFilter) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	// ApplicationInformation
 
@@ -1155,6 +1168,5 @@ public class ExportServiceImpl implements ExportService {
 		}
 		return result;
 	}
-
 
 }

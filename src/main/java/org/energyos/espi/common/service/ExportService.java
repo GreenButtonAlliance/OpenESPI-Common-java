@@ -5,6 +5,7 @@ import java.io.OutputStream;
 
 import javax.servlet.ServletOutputStream;
 
+import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.utils.ExportFilter;
 
 
@@ -17,9 +18,9 @@ public interface ExportService {
 	
 	// Generic Forms
     
-    public void exportResource(Long resourceId, Class <T> clazz,  OutputStream stream, ExportFilter exportFilter);
+    public <T extends IdentifiedObject> void exportResource(Long resourceId, Class <T> clazz,  OutputStream stream, ExportFilter exportFilter);
     
-    public void exportResources(Class<T> clazz, OutputStream stream, ExportFilter exportFilter);
+    public <T extends IdentifiedObject> void exportResources(Class<T> clazz, OutputStream stream, ExportFilter exportFilter);
     
     // ApplicationInformation
 
