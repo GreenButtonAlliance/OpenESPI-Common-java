@@ -18,6 +18,7 @@ package org.energyos.espi.common.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.energyos.espi.common.domain.Authorization;
@@ -35,7 +36,6 @@ import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ResourceRepository;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +45,16 @@ public class ResourceServiceImpl implements ResourceService {
 		
     @Autowired
     private ResourceRepository repository;
+    
+    /**
+     * A private Map of Key:Value strings to hold the
+     * dynamic configuration.
+     * 
+     * SFTPCacheRoot: "./pendingdelivery/"
+     * AutomaticNotificationPropogation: [true | false]
+     * 
+     */
+    private Map<String, String> params;
 
     @Override
     public void persist(IdentifiedObject resource) {
@@ -74,7 +84,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     /**
      * Returns an list of the resources contained in the primary children collection
-     * of the a parent resource. The resources are returned within a transactional context
+     * of the a parent resource. The resources are returned lazily within a transactional context
      * allowing for persistent mutation.
      *
      * @param  Long parentResourceID used to retrieve the Resource
@@ -311,5 +321,25 @@ public class ResourceServiceImpl implements ResourceService {
    public ResourceRepository getResourceRepository () {
         return this.repository;
    }
+
+	@Override
+	public void setConfigurations(Map<String, String> params) {
+		this.params = params;
+	}
+
+	@Override
+	public String getConfiguration(String key) {
+		return this.params.get(key);
+	}
+
+	@Override
+	public void setConfiguration(String key, String value) {
+		this.params.put(key, value);
+	}
+
+	@Override
+	public Map<String, String> getConfigurations()  {
+		return this.params;
+	}
 
 }
