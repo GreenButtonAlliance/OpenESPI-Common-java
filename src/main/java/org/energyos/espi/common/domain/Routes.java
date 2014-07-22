@@ -22,8 +22,8 @@ public class Routes {
     public static final String LOGIN = "/login";
     public static final String ROOT = "/";
 
-    public static final String MANAGE = "/manage";
-    public static final String MANAGE_CONFIGURATION = "/manage.config";
+    public static final String DATA_CUSTODIAN_MANAGE = "/management";
+    public static final String THIRD_PARTY_MANAGE = "/management";
     
     public static final String DATA_CUSTODIAN_API_FEED = "/api/feed";
     public static final String DATA_CUSTODIAN_AUTHORIZATION = "/espi/1_1/resource/Authorization/{AuthorizationID}";
