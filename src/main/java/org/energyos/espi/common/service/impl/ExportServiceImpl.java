@@ -674,6 +674,33 @@ public class ExportServiceImpl implements ExportService {
 				usagePointIdList, UsagePoint.class), stream, exportFilter,
 				hrefFragment);
 	}
+	
+	@Override
+	public void exportBatchSubscriptionUsagePoint(Long subscriptionId,
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		String hrefFragment = "/Batch/Subscription/" + subscriptionId + "/UsagePoint";
+		// first find all the usagePointIds this subscription is related to
+		List<Long> usagePointIdList = subscriptionService
+				.findUsagePointIds(subscriptionId);
+		exportEntriesFull(subscriptionId, resourceService.findEntryTypeIterator(
+				usagePointIdList, UsagePoint.class), stream, exportFilter,
+				hrefFragment);
+	}
+
+	@Override
+	public void exportBatchSubscriptionUsagePoint(Long subscriptionId, Long usagePointId,
+			OutputStream stream, ExportFilter exportFilter) throws IOException {
+		String hrefFragment = "/Batch/Subscription/" + subscriptionId + "/UsagePoint/" + usagePointId;
+		List<Long> usagePointIdList = new ArrayList<Long> ();
+		List<Long> temp = subscriptionService
+				.findUsagePointIds(subscriptionId);
+		if (temp.contains(usagePointId)) {
+		     usagePointIdList.add(usagePointId);
+		}
+		exportEntriesFull(subscriptionId, resourceService.findEntryTypeIterator(
+				usagePointIdList, UsagePoint.class), stream, exportFilter,
+				hrefFragment);
+	}
 
 	@Override
 	public void exportBatchBulk(Long bulkId, String thirdParty, OutputStream outputStream,
@@ -757,8 +784,7 @@ public class ExportServiceImpl implements ExportService {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	// TODO: this needs to be templated and RetailCustomer inherited from
-	// IdentifiedObject to remove the above supress warnings
+
 	private void exportEntries(Long subscriptionId, EntryTypeIterator entries, OutputStream stream,
 			ExportFilter exportFilter, Class resourceClass, String hrefFragment)
 			throws IOException {
@@ -884,18 +910,17 @@ public class ExportServiceImpl implements ExportService {
 
 
 	private String adjustFragment(String fragment, EntryType entry) {
-		// TODO there may be other setup things - Likely BatchList
-		// if that still exists.
+
 		String result = fragment;
 		if (fragment.contains("DownloadMyData")) {
 			result.replace("DownloadMyData", "UsagePoint");
 		}
 		if (fragment.contains("Batch")) {
 			if (fragment.contains("Bulk")) {
-				// ToDo need the proper URI fragment for a Bulk
+			
 				UsagePoint up = entry.getContent().getUsagePoint();
 				RetailCustomer rc = up.getRetailCustomer();
-				// TODO here need the proper URI fragment for a subscription
+			
 				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint";
 			}
 			// if (fragment.contains("Subscription")) {
