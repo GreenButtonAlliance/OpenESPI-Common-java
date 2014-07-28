@@ -405,4 +405,21 @@ public interface ExportService {
 	 */
 	public void exportBatchSubscription(Long subscriptionId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
 
+	/**
+	 * @param subscriptionId
+	 * @param outputStream
+	 * @param exportFilter
+	 * @throws IOException
+	 */
+	public void exportBatchSubscriptionUsagePoint(Long subscriptionId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
+	
+	/**
+	 * @param subscriptionId
+	 * @param usagePointId
+	 * @param outputStream
+	 * @param exportFilter
+	 * @throws IOException
+	 */
+	public void exportBatchSubscriptionUsagePoint(Long subscriptionId, Long usagePointId, OutputStream outputStream, ExportFilter exportFilter) throws IOException;
+	
 }
