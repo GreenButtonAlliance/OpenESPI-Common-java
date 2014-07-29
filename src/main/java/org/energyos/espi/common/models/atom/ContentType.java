@@ -471,6 +471,8 @@ public class ContentType {
         	setAuthorization((Authorization) resource);
         } else if (resource instanceof Subscription) {
         	setSubscription((Subscription) resource);
+        } else if (resource instanceof RetailCustomer) {
+        	setRetailCustomer((RetailCustomer) resource);
         }
     }
 
