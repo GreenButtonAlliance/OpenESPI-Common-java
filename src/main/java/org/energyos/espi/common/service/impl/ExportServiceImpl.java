@@ -1085,7 +1085,7 @@ public class ExportServiceImpl implements ExportService {
 					// correct
 				    if (id2 != 0) {
 				    	// we have a request for (at least) a usagePoint
-				    	// so use the relivant retail customer Id to get the ID collection
+				    	// so use the relevant retail customer Id to get the ID collection
 				    	UsagePoint usagePoint = resourceService.findById(id2, UsagePoint.class);
 				    	id1 = usagePoint.getRetailCustomer().getId();
 				    }
