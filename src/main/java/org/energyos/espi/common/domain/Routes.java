@@ -26,7 +26,7 @@ public class Routes {
     public static final String MANAGE_CONFIGURATION = "/manage.config";
     
     public static final String DATA_CUSTODIAN_API_FEED = "/api/feed";
-    public static final String DATA_CUSTODIAN_AUTHORIZATION = "/espi/1_1/resource/Authorization/{AuthorizationID}";
+    public static final String DATA_CUSTODIAN_AUTHORIZATION = "/espi/1_1/resource/Authorization/{authorizationId}";
     public static final String DATA_CUSTODIAN_HOME = "/custodian/home";
     public static final String DATA_CUSTODIAN_NOTIFY_THIRD_PARTYS = "/espi/1_1/NotifyThirdParty";
     public static final String DATA_CUSTODIAN_NOTIFY_THIRD_PARTY = "/espi/1_1/NotifyThirdParty/{applicationInformationId}";
@@ -34,7 +34,7 @@ public class Routes {
     public static final String DATA_CUSTODIAN_REST_SUBSCRIPTION_GET = "/espi/1_1/resource/Subscription/{subscriptionHashedId}";
     public static final String DATA_CUSTODIAN_REST_USAGE_POINT_COLLECTION = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint";
     public static final String DATA_CUSTODIAN_REST_USAGE_POINT_CREATE = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint";
-    public static final String DATA_CUSTODIAN_REST_USAGE_POINT_GET = "/espi/1_1/resource/RetailCustomer/{RetailCustomerID}/UsagePoint/{UsagePointID}";
+    public static final String DATA_CUSTODIAN_REST_USAGE_POINT_GET = "/espi/1_1/resource/RetailCustomer/{retailCustomerId}/UsagePoint/{usagePointId}";
     public static final String DATA_CUSTODIAN_REST_USAGE_POINT_MEMBER = "/espi/1_1/resource/RetailCustomer/{retailCustomerHashedId}/UsagePoint/{usagePointHashedId}";
     public static final String DATA_CUSTODIAN_REST_USAGE_POINT_UPDATE = "/espi/1_1/resource/RetailCustomer/{retailCustomerHashedId}/UsagePoint/{usagePointHashedId}";
     public static final String DATA_CUSTODIAN_RETAIL_CUSTOMER_CREATE = "/custodian/retailcustomers/create";
@@ -48,9 +48,9 @@ public class Routes {
     public static final String DATA_CUSTODIAN_UPLOAD = "/custodian/upload";
     public static final String DATA_CUSTODIAN_RESOURCE_MANAGEMENT = "espi/1_1/resource/**";
 
-    public static final String THIRD_PARTY_AUTHORIZATION = "/RetailCustomer/{retailCustomerID}/AuthorizationList";
+    public static final String THIRD_PARTY_AUTHORIZATION = "/RetailCustomer/{retailCustomerId}/AuthorizationList";
     public static final String THIRD_PARTY_BATCH_LIST = "/batchLists";
-    public static final String THIRD_PARTY_DATA_CUSTODIAN_LIST = "/RetailCustomer/{retailCustomerID}/DataCustodianList";
+    public static final String THIRD_PARTY_DATA_CUSTODIAN_LIST = "/RetailCustomer/{retailCustomerId}/DataCustodianList";
     public static final String THIRD_PARTY_LIST = "/RetailCustomer/{retailCustomerId}/ThirdPartyList";
     public static final String THIRD_PARTY_METER_READINGS_SHOW = "/meterreadings/{meterReadingId}/show";
     public static final String THIRD_PARTY_NOTIFICATION = "/espi/1_1/Notification";
@@ -136,11 +136,11 @@ public class Routes {
     }
 
     public static String buildDataCustodianRESTUsagePointGet(String retailCustomerId, String usagePointId) {
-        return DATA_CUSTODIAN_REST_USAGE_POINT_GET.replace("{RetailCustomerID}", retailCustomerId).replace("{UsagePointID}", usagePointId);
+        return DATA_CUSTODIAN_REST_USAGE_POINT_GET.replace("{retailCustomerId}", retailCustomerId).replace("{usagePointId}", usagePointId);
     }
 
     public static String buildThirdPartyAuthorization(String retailCustomerId) {
-        return THIRD_PARTY_AUTHORIZATION.replace("{retailCustomerID}", retailCustomerId);
+        return THIRD_PARTY_AUTHORIZATION.replace("{retailCustomerId}", retailCustomerId);
     }
 
     public static String getDataCustodianRESTSubscriptionGetURL(String subscriptionHashedId) {
