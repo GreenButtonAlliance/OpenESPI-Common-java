@@ -328,7 +328,7 @@ public class EspiFactory {
 
         authorization.setAccessToken("accessToken" + System.currentTimeMillis());
         authorization.setAuthorizationURI("http://DataCustodian" + System.currentTimeMillis() + ".example.com");
-        authorization.setSubscriptionURI(Routes.getDataCustodianRESTSubscriptionGetURL(newRandomString()));
+        authorization.setResourceURI(Routes.getDataCustodianRESTSubscriptionGetURL(newRandomString()));
         authorization.setThirdParty("thirdParty" + System.currentTimeMillis());
         authorization.setState("state" + UUID.randomUUID());
         authorization.setRetailCustomer(retailCustomer);

@@ -354,7 +354,6 @@ CREATE TABLE `authorizations` (
   `scope` varchar(255) DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `subscriptionURI` varchar(255) DEFAULT NULL,
   `third_party` varchar(255) DEFAULT NULL,
   `tokenType` int(11) DEFAULT NULL,
   `application_information_id` bigint(20) DEFAULT NULL,
