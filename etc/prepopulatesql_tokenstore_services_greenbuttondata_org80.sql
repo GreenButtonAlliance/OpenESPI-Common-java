@@ -53,7 +53,7 @@ INSERT INTO `oauth_client_details` VALUES ('data_custodian_admin', NULL, 'secret
 INSERT INTO `oauth_client_details` VALUES ('third_party', NULL, 'secret', 'FB=4_5_15;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13,FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=13,FB=4_5_12_15_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13', 'authorization_code,refresh_token', 'https://services.greenbuttondata.org/ThirdParty/espi/1_1/OAuthCallBack', 'ROLE_USER', '31536000', '157680000', NULL, 'FALSE');
 INSERT INTO `oauth_client_details` VALUES ('third_party_admin', NULL, 'secret', 'FB=34_35', 'client_credentials', NULL, 'ROLE_TP_ADMIN', '31536000', NULL, NULL, 'FALSE');
 INSERT INTO `oauth_client_details` VALUES ('upload_admin', NULL, 'secret', 'FB=45', 'client_credentials', NULL, 'ROLE_UL_ADMIN', '31536000', NULL, NULL, 'FALSE');
-INSERT INTO `oauth_client_details` VALUES ('REGISTRATION_third_party', NULL, 'secret', 'ThirdParty_Registration_Access', 'client_credentials', NULL, 'ROLE_TP_REGISTRATION', '31536000', NULL, NULL, 'FALSE');
+INSERT INTO `oauth_client_details` VALUES ('REGISTRATION_third_party', NULL, 'secret', 'FB=36_40', 'client_credentials', NULL, 'ROLE_TP_REGISTRATION', '31536000', NULL, NULL, 'FALSE');
 /*!40000 ALTER TABLE `oauth_client_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
