@@ -1133,7 +1133,7 @@ public class ExportServiceImpl implements ExportService {
 
 		try {
 
-			if (subscriptionId != 0) {
+			if (!(subscriptionId.equals(0L))) {
 				subscription = resourceService.findById(subscriptionId, Subscription.class);
 				Authorization authorization = subscription.getAuthorization();
 				if (!(authorization.getThirdParty().contentEquals("third_party"))) {
@@ -1149,10 +1149,10 @@ public class ExportServiceImpl implements ExportService {
 			}
 
 			// do we have a usagepointId?
-			if (id2 != 0) {
+			if (!(id2.equals(0L))) {
 				// is it in the subscription?
 				for (UsagePoint up : subscription.getUsagePoints()) {
-					if (up.getId() == id2) {
+					if (up.getId().equals(id2)) {
 						valid = true;
 					}
 				}
@@ -1163,15 +1163,15 @@ public class ExportServiceImpl implements ExportService {
 			}
 
 			if (valid) {
-				if (id3 != 0) {
+				if (!(id3.equals(0L))) {
 					temp = resourceService.findAllIdsByXPath(id1, id2, id3,
 							clazz);
 				} else {
-					if (id2 != 0) {
+					if (!(id2.equals(0L))) {
 						temp = resourceService.findAllIdsByXPath(id1, id2,
 								clazz);
 					} else {
-						if (id1 != 0) {
+						if (!(id1.equals(0L))) {
 							// temp = resourceService.findAllIdsByXPath(id1,
 							// clazz);
 							// we just want the UsagePoints in the Subscription

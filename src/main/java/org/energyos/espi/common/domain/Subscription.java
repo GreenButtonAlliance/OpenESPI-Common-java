@@ -190,6 +190,6 @@ public class Subscription
     }
 
     public boolean equals (Subscription s) {
-    	return (this.getId() == s.getId());
+    	return (this.getId().equals(s.getId()));
     }
 }
