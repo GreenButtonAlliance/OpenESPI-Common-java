@@ -98,7 +98,6 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 @XmlType(name = "Authorization", propOrder = {
 	    "authorizedPeriod",
 	    "publishedPeriod",
-//	    "retailCustomer",
 	    "accessToken",
 	    "status",
 	    "expiresIn",
@@ -114,7 +113,6 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 	    "errorUri",
 	    "resourceURI",
 	    "authorizationURI",
-	    "subscriptionURI",
 	    "thirdParty"
 	})@Entity
 @Table(name = "authorizations")
@@ -233,8 +231,6 @@ public class Authorization
     @XmlTransient
     private ApplicationInformation applicationInformation;
     
-    private String subscriptionURI;    
-
     public Subscription getSubscription () {
     	return this.subscription;
     }
@@ -710,16 +706,8 @@ public class Authorization
         this.applicationInformation = applicationInformation;
     }
 
-    public void setSubscriptionURI(String subscriptionURI) {
-        this.subscriptionURI = subscriptionURI;
-    }
-
-    public String getSubscriptionURI() {
-        return subscriptionURI;
-    }
-
     public String getSubscriptionId() {
-        String[] pieces = subscriptionURI.split("/");
+        String[] pieces = resourceURI.split("/");
         return pieces[pieces.length-1];
     }
     
@@ -748,7 +736,6 @@ public class Authorization
   	  this.state = ((Authorization)resource).getState();
   	  this.status = ((Authorization)resource).getStatus();
   	  this.subscribable = ((Authorization)resource).subscribable;
-  	  this.subscriptionURI = ((Authorization)resource).getSubscriptionURI();
   	  this.thirdParty = ((Authorization)resource).getThirdParty();
   	  this.tokenType = ((Authorization)resource).getTokenType();
     }
