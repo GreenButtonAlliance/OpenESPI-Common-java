@@ -75,7 +75,7 @@ import org.hibernate.annotations.LazyCollectionOption;
         @NamedQuery(name = Subscription.QUERY_FIND_BY_HASHED_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.hashedId = :hashedId"),
         @NamedQuery(name = Subscription.QUERY_FIND_ALL_IDS, query = "SELECT subscription.id FROM Subscription subscription"),
         @NamedQuery(name = Subscription.QUERY_FIND_BY_AUTHORIZATION_ID, query = "SELECT subscription from Subscription subscription WHERE subscription.authorization.id = :id")
-})
+        })
 
 public class Subscription
         extends IdentifiedObject {
@@ -190,6 +190,6 @@ public class Subscription
     }
 
     public boolean equals (Subscription s) {
-    	return (this.getId() == s.getId());
+    	return (this.getId().equals(s.getId()));
     }
 }

@@ -21,10 +21,12 @@ import java.util.List;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.BatchList;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
+import org.energyos.espi.common.service.ApplicationInformationService;
 import org.energyos.espi.common.service.AuthorizationService;
 import org.energyos.espi.common.service.NotificationService;
 import org.energyos.espi.common.service.ResourceService;
@@ -34,6 +36,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * @author steph
+ *
+ */
 @Service
 public class NotificationServiceImpl implements NotificationService {
     @Autowired
@@ -134,6 +140,18 @@ public class NotificationServiceImpl implements NotificationService {
         this.restTemplate = restTemplate;
    }
 
+
+   @Override
+   public void notify(ApplicationInformation applicationInformation, Long bulkId) {
+	String bulkRequestUri = applicationInformation.getDataCustodianBulkRequestURI() + "/" + bulkId;
+	String thirdPartyNotificationURI = applicationInformation.getThirdPartyNotifyUri();
+    BatchList batchList = new BatchList();
+    batchList.getResources().add(bulkRequestUri);
+    
+    notifyInternal(thirdPartyNotificationURI, batchList);
+	
+   }
+
    public RestTemplate getRestTemplate () {
         return this.restTemplate;
    }
@@ -144,6 +162,7 @@ public class NotificationServiceImpl implements NotificationService {
    public ResourceService getResourceService () {
         return this.resourceService;
    }
+  
    public void setAuthorizationService(AuthorizationService authorizationService) {
         this.authorizationService = authorizationService;
    }

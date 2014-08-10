@@ -108,7 +108,7 @@ public class AuthorizationTests {
     public void subscriptionId() {
         Authorization authorization = new Authorization();
 
-        authorization.setSubscriptionURI("http://localhost:8080/DataCustodian/espi/1_1/resource/Subscription/16228736-8e29-4807-a2a7-283be5cc253e");
+        authorization.setResourceURI("http://localhost:8080/DataCustodian/espi/1_1/resource/Subscription/16228736-8e29-4807-a2a7-283be5cc253e");
 
         assertThat(authorization.getSubscriptionId(), is("16228736-8e29-4807-a2a7-283be5cc253e"));
     }

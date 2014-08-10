@@ -109,4 +109,13 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 				.setParameter("refreshToken", refreshToken)
 				.getSingleResult();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId) {
+		return em.createNamedQuery(Authorization.QUERY_FIND_ALL_IDS_BY_BULK_ID)
+				.setParameter("thirdParty", thirdParty)
+				.setParameter("bulkId", "%BR=" + bulkId + "%")
+				.getResultList();
+	}
 }

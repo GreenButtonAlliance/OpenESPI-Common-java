@@ -48,5 +48,7 @@ public interface AuthorizationRepository {
     Authorization findByAccessToken(String accessToken);
 
 	Authorization findByRefreshToken(String refreshToken);
+	
+	public List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId);
     
 }

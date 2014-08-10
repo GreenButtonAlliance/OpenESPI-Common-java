@@ -12,28 +12,25 @@
     <name>Common</name>
 
     <profiles>
+    
+<!--         <profile> -->
+<!--             <id>dev</id> -->
+<!--             <activation> -->
+<!--                 <activeByDefault>true</activeByDefault> -->
+<!--             </activation> -->
+<!--             <properties> -->
+<!--                 <profile>dev</profile> -->
+<!--                 <database>hsql</database> -->
+<!--             </properties> -->
+<!--         </profile> -->
+        
         <profile>
-            <id>dev</id>
+            <id>devmysql</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <profile>dev</profile>
-                <database>hsql</database>
-            </properties>
-        </profile>
-        <profile>
-            <id>devmysql</id>
-            <properties>
                 <profile>devmysql</profile>
-                <database>mysql</database>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>devmysql-regeneratedatabase</id>
-            <properties>
-                <profile>devmysql-regeneratedatabase</profile>
                 <database>mysql</database>
             </properties>
         </profile>
@@ -50,7 +47,7 @@
 
     <properties>
         <!-- Spring -->
-        <spring.version>4.0.3.RELEASE</spring.version>
+        <spring.version>4.0.6.RELEASE</spring.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <spring-security-oauth.version>2.0.2.RELEASE</spring-security-oauth.version>
 
@@ -65,7 +62,6 @@
         <ehcache.version>2.6.6</ehcache.version>
         <hsqldb.version>2.3.0</hsqldb.version>
         <mysql.version>5.1.18</mysql.version>
-        <postgres.version>9.1-901.jdbc4</postgres.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

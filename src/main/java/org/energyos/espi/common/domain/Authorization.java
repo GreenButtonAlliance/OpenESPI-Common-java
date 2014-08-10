@@ -98,7 +98,6 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 @XmlType(name = "Authorization", propOrder = {
 	    "authorizedPeriod",
 	    "publishedPeriod",
-//	    "retailCustomer",
 	    "accessToken",
 	    "status",
 	    "expiresIn",
@@ -114,7 +113,6 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 	    "errorUri",
 	    "resourceURI",
 	    "authorizationURI",
-	    "subscriptionURI",
 	    "thirdParty"
 	})@Entity
 @Table(name = "authorizations")
@@ -137,7 +135,10 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
         @NamedQuery(name = Authorization.QUERY_FIND_BY_REFRESH_TOKEN,
                 query = "SELECT authorization from Authorization authorization WHERE authorization.refreshToken = :refreshToken"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RESOURCE_URI, 
-                query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI = :uri")
+                query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI = :uri"),
+        @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS_BY_BULK_ID, 
+                query = "SELECT authorization.id FROM Authorization authorization WHERE authorization.thirdParty = :thirdParty AND authorization.scope LIKE :bulkId")
+                 
 })
 public class Authorization
         extends IdentifiedObject {
@@ -151,6 +152,7 @@ public class Authorization
 	public final static String QUERY_FIND_BY_ACCESS_TOKEN = "Authorization.findByAccessToken";
 	public final static String QUERY_FIND_BY_REFRESH_TOKEN = "Authorization.findByRefreshToken";
 	public static final String QUERY_FIND_BY_RESOURCE_URI = "Authorization.findByResourceUri";
+	public static final String QUERY_FIND_ALL_IDS_BY_BULK_ID = "Authorization.findAllIdsByBulkId";
 
     @Embedded
     @AttributeOverrides({
@@ -229,8 +231,6 @@ public class Authorization
     @XmlTransient
     private ApplicationInformation applicationInformation;
     
-    private String subscriptionURI;    
-
     public Subscription getSubscription () {
     	return this.subscription;
     }
@@ -706,16 +706,8 @@ public class Authorization
         this.applicationInformation = applicationInformation;
     }
 
-    public void setSubscriptionURI(String subscriptionURI) {
-        this.subscriptionURI = subscriptionURI;
-    }
-
-    public String getSubscriptionURI() {
-        return subscriptionURI;
-    }
-
     public String getSubscriptionId() {
-        String[] pieces = subscriptionURI.split("/");
+        String[] pieces = resourceURI.split("/");
         return pieces[pieces.length-1];
     }
     
@@ -744,7 +736,6 @@ public class Authorization
   	  this.state = ((Authorization)resource).getState();
   	  this.status = ((Authorization)resource).getStatus();
   	  this.subscribable = ((Authorization)resource).subscribable;
-  	  this.subscriptionURI = ((Authorization)resource).getSubscriptionURI();
   	  this.thirdParty = ((Authorization)resource).getThirdParty();
   	  this.tokenType = ((Authorization)resource).getTokenType();
     }
