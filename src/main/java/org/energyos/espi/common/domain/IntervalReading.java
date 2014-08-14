@@ -41,6 +41,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -69,6 +70,9 @@ import org.hibernate.annotations.LazyCollectionOption;
  *         &lt;element name="ReadingQuality" type="{http://naesb.org/espi}ReadingQuality" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="timePeriod" type="{http://naesb.org/espi}DateTimeInterval" minOccurs="0"/>
  *         &lt;element name="value" type="{http://naesb.org/espi}Int48" minOccurs="0"/>
+ *         &lt;element name="consumptionTier" type="{http://naesb.org/espi}Int16" minOccurs="0"/>
+ *         &lt;element name="tou" type="{http://naesb.org/espi}Int16" minOccurs="0"/>
+ *         &lt;element name="cpp" type="{http://naesb.org/espi}Int16" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -80,7 +84,11 @@ import org.hibernate.annotations.LazyCollectionOption;
         "cost",
         "readingQualities",
         "timePeriod",
-        "value"
+        "value",
+        "consumptionTier",
+        "tou",
+        "cpp"
+       
 })
 @Entity
 @Table(name = "interval_readings")
@@ -108,6 +116,11 @@ public class IntervalReading {
 
     protected Long value;
 
+    protected Long consumptionTier;
+    protected Long tou;
+    protected Long cpp;
+
+    
     @XmlTransient
     @ManyToOne
     @JoinColumn(name = "interval_block_id")
