@@ -119,9 +119,8 @@ public class NotificationServiceImpl implements NotificationService {
         try {
             restTemplate.postForLocation(thirdPartyNotificationURI, batchList);
         } catch (Exception e) {
-        	
-        }
-		
+        	// Do nothing
+        }		
 	}
 
 	@Override
@@ -132,14 +131,14 @@ public class NotificationServiceImpl implements NotificationService {
 		for (Long id : authList) {
 			Authorization authorization = resourceService.findById(id, Authorization.class);
 			
-			notify(authorization.getSubscription(), null, null);
-		}
-		
+			if(authorization.getSubscription() != null) {
+				notify(authorization.getSubscription(), null, null);
+			}
+		}	
 	}
     public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
    }
-
 
    @Override
    public void notify(ApplicationInformation applicationInformation, Long bulkId) {
