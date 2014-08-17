@@ -126,8 +126,13 @@ public class ImportServiceImpl implements ImportService {
 
         // do the parse/import
 
+        try {
         reader.parse(new InputSource(stream));
 
+        } catch (Exception e){
+    		System.out.printf("\nImportServiceImpl -- importData:\n     Cause = %s\n     Description = %s\n\n", e.getClass(), e.getMessage());
+    		e.printStackTrace();
+        }
         // context of the import used for linking things up
         // and establishing notifications
         //
@@ -167,6 +172,8 @@ public class ImportServiceImpl implements ImportService {
 					if (!(tempRc.equals(retailCustomer))) {
 						// we have a conflict in association meaning to Retail Customers
 						// TODO: resolve how to handle the conflict mentioned above.
+						// TODO: Only works for a single customer and not multiple customers
+						retailCustomer = tempRc;	
 					}
 				} else {
 					// associate the usagePoint with the Retail Customer
