@@ -37,10 +37,6 @@ import org.springframework.transaction.annotation.Transactional;
                 noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
 public class ApplicationInformationServiceImpl implements ApplicationInformationService {
-
-    // the cached operational object for this service
-	// 
-	private ApplicationInformation applicationInformation;
 	
     @Autowired
     private ApplicationInformationRepository applicationInformationRepository;
@@ -50,47 +46,10 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
     
     @Autowired
     private ImportService importService;
-    
-    @Override
-    public String getDataCustodianResourceEndpoint() {
-    	if (this.applicationInformation == null) {
-    		// default it to the seed value
-    		this.setApplicationInformation(this.findById(1L));
-    	}
-    	return applicationInformation.getDataCustodianResourceEndpoint();
-    	// return "http://localhost:8080/DataCustodian/espi/1_1/resource";
-    }    
-
-	@Override
-	public String getAuthorizationServerTokenEndpoint() {
-    	if (this.applicationInformation == null) {
-    		// default it to the seed value
-    		this.setApplicationInformation(this.findById(1L));
-    	}
-    	return applicationInformation.getAuthorizationServerTokenEndpoint();
-    	// return "http://localhost:8080/DataCustodian/oauth/token";
-	}    
-
+       
     @Override
     public List<ApplicationInformation> findByKind(String kind) {
         return applicationInformationRepository.findByKind(kind);
-    }
-	
-	
-    @Override
-    public List<ApplicationInformation> findAll() {
-        return applicationInformationRepository.findAll();
-    }
-
-    @Override
-    public ApplicationInformation findById(Long id) {
-        return applicationInformationRepository.findById(id);
-    }
-
-
-    @Override
-    public void persist(ApplicationInformation applicationInformation) {
-    	applicationInformationRepository.persist(applicationInformation);
     }
 
     @Override
@@ -102,86 +61,6 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
     public ApplicationInformation findByDataCustodianClientId(String dataCustodianClientId) {
         return applicationInformationRepository.findByDataCustodianClientId(dataCustodianClientId);
     }
-
-    @Override
-    public ApplicationInformation findByUUID(UUID uuid) {
-        return applicationInformationRepository.findByUUID(uuid);
-    }
-    
-//    @Override
-//    public ClientDetails loadClientByClientId(String clientId) {
-//        return findByClientId(clientId);
-//    }
-
-	@Override
-	public String feedFor(List<ApplicationInformation> applicationInformations) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String entryFor(ApplicationInformation applicationInformation) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void add(ApplicationInformation applicationInformation) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(ApplicationInformation applicationInformation) {
-	       applicationInformationRepository.deleteById(applicationInformation.getId());
-		
-	}
-
-	@Override
-	public void merge(ApplicationInformation applicationInformation) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ApplicationInformation findByURI(String uri) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public EntryType findEntryType(Long applicationInformationId) {
-		EntryType result = null;
-		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
-			List<Long> temp = new ArrayList<Long>();
-			ApplicationInformation applicationInformation = applicationInformationRepository.findById(applicationInformationId);
-			temp.add(applicationInformation.getId());
-			result = (new EntryTypeIterator(resourceService, temp, ApplicationInformation.class)).nextEntry(ApplicationInformation.class);
-		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-			result = null;
-		}
-		return result;		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public EntryTypeIterator findEntryTypeIterator() {
-		EntryTypeIterator result = null;
-		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
-			List<Long> temp = new ArrayList<Long>();
-			temp = applicationInformationRepository.findAllIds();
-			result = (new EntryTypeIterator(resourceService, temp, ApplicationInformation.class));
-		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-			result = null;
-		}
-		return result;
-	}
 
 	@Override
 	public ApplicationInformation importResource(InputStream stream) {
@@ -196,21 +75,6 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 		return applicationInformation;
 	}
 
-	@Override
-	public String getThirdPartyNotifyURI() {
-		ApplicationInformation applicationInformation;
-		// TODO note the assumption on the first (seed) entry
-		applicationInformation = resourceService.findById(1L, ApplicationInformation.class);
-		return applicationInformation.getThirdPartyNotifyUri();
-	}
-
-    public void setApplicationInformation(ApplicationInformation applicationInformation) {
-        this.applicationInformation = applicationInformation;
-   }
-
-   public ApplicationInformation getApplicationInformation () {
-        return this.applicationInformation;
-   }
    public void setApplicationInformationRepository(ApplicationInformationRepository applicationInformationRepository) {
         this.applicationInformationRepository = applicationInformationRepository;
    }
@@ -223,8 +87,9 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
    }
 
    public ResourceService getResourceService () {
-        return this.resourceService;
-   }
+       return this.resourceService;
+  }
+   
    public void setImportService(ImportService importService) {
         this.importService = importService;
    }

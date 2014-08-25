@@ -308,6 +308,7 @@ public class ResourceServiceImpl implements ResourceService {
 		
 	}
 
+	@Transactional
 	@Override
 	public<T extends IdentifiedObject> T merge(IdentifiedObject resource) {
 		return repository.merge(resource);
