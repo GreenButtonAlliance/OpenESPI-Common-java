@@ -66,6 +66,10 @@ CREATE TABLE `interval_readings` (
   `start` bigint(20) DEFAULT NULL,
   `value` bigint(20) DEFAULT NULL,
   `interval_block_id` bigint(20) DEFAULT NULL,
+  `consumptionTier` bigint(20) DEFAULT NULL,
+  `tou` bigint(20) DEFAULT NULL,
+  `cpp` bigint(20) DEFAULT NULL,
+  
   PRIMARY KEY (`id`),
   KEY `FK_982b1bcd359b47fcb5823a43d21` (`interval_block_id`),
   CONSTRAINT `FK_982b1bcd359b47fcb5823a43d21` FOREIGN KEY (`interval_block_id`) REFERENCES `interval_blocks` (`id`)
@@ -353,7 +357,6 @@ CREATE TABLE `authorizations` (
   `scope` varchar(255) DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `subscriptionURI` varchar(255) DEFAULT NULL,
   `third_party` varchar(255) DEFAULT NULL,
   `tokenType` int(11) DEFAULT NULL,
   `application_information_id` bigint(20) DEFAULT NULL,

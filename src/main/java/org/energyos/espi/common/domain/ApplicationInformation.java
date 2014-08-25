@@ -24,9 +24,7 @@
 
 package org.energyos.espi.common.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -50,9 +48,6 @@ import org.energyos.espi.common.models.atom.adapters.ApplicationInformationAdapt
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
-
-
-
 
 /**
  * [extension] Contains information about a Third Party Application requesting access to the DataCustodian services. Information requested may include items such as Organization Name, Website, Contact Info, Application Name, Description, Icon, Type, default Notification and Callback endpoints, and may also include agreement with terms of service.
@@ -181,7 +176,6 @@ public class ApplicationInformation
     /**
 	 * 
 	 */
-	// private static final long serialVersionUID = 1L;
 	public final static String QUERY_FIND_ALL = "ApplicationInformation.findAll";
 	public final static String QUERY_FIND_BY_UUID = "ApplicationInformation.findByUUID";
     public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
@@ -191,107 +185,143 @@ public class ApplicationInformation
 	public static final String QUERY_FIND_BY_KIND = "ApplicationInformation.findByKind";
 
     @XmlTransient
-    /*@XmlElement(name = "kind")*/
     @Column( name = "kind")
     protected String kind;
+    
+    @XmlSchemaType(name = "DataCustodianApplicationStatus")
     protected String dataCustodianApplicationStatus;
+    
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianDefaultBatchResource;
+    
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianDefaultSubscriptionResource;
+    
     protected String thirdPartyApplicationDescription;
+    
+    @XmlSchemaType(name = "ThirdPartyApplicatonStatus")
     protected String thirdPartyApplicationStatus;
+    
+    @XmlSchemaType(name = "ThirdPartyApplicationType")
     protected String thirdPartyApplicationType;
+    
+    @XmlSchemaType(name = "ThirdPartyApplicationUse")
     protected String thirdPartyApplicationUse;
+    
     protected String thirdPartyPhone;
+    
     @XmlSchemaType(name = "anyURI")
     protected String authorizationServerUri;
+    
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyNotifyUri;
+    
     @XmlElement(name = "authorizationServerAuthorizationEndpoint")
     @XmlSchemaType(name = "anyURI")
     protected String authorizationServerAuthorizationEndpoint;
+    
     @XmlElement(name = "authorizationServerRegistrationEndpoint")
     @XmlSchemaType(name = "anyURI")
     protected String authorizationServerRegistrationEndpoint;
+    
     @XmlElement(name = "authorizationServerTokenEndpoint")
     @XmlSchemaType(name = "anyURI")
     protected String authorizationServerTokenEndpoint;
+    
     @XmlElement(name = "dataCustodianBulkRequestURI")
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianBulkRequestURI;
+    
     @XmlElement(name = "dataCustodianThirdPartySelectionScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianThirdPartySelectionScreenURI;
+    
     @XmlElement(name = "dataCustodianResourceEndpoint")
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianResourceEndpoint;
+    
     @XmlElement(name = "thirdPartyDataCustodianSelectionScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyDataCustodianSelectionScreenURI;
+    
     @XmlElement(name = "thirdPartyLoginScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyLoginScreenURI;
+    
     @XmlElement(name = "thirdPartyScopeSelectionScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyScopeSelectionScreenURI;
+    
     @XmlElement(name = "thirdPartyUserPortalScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String thirdPartyUserPortalScreenURI;
+    
     @XmlElement(name = "client_secret")
     protected String clientSecret;
+    
     @XmlElement(name = "logo_uri")
     @XmlSchemaType(name = "anyURI")
     protected String logoUri;
+    
     @XmlElement(name = "client_name")
     protected String clientName;
+    
     @XmlElement(name = "client_uri")
     @XmlSchemaType(name = "anyURI")
     protected String clientUri;
+    
     @XmlElement(name = "redirect_uri")
     @XmlSchemaType(name = "anyURI")
     protected String redirectUri;
+    
     @NotEmpty
     @Size(min = 2, max = 64)
     @XmlElement(name = "client_id")
     protected String clientId;
+    
     @XmlElement(name = "tos_uri")
     @XmlSchemaType(name = "anyURI")
     protected String tosUri;
+    
     @XmlElement(name = "policy_uri")
     @XmlSchemaType(name = "anyURI")
     protected String policyUri;
+    
     @XmlElement(name = "software_id")
     protected String softwareId;
+    
     @XmlElement(name = "software_version")
     protected String softwareVersion;
+    
     @XmlElement(name = "client_id_issued_at")
+    @XmlSchemaType(name = "TimeType")
     protected Long clientIdIssuedAt;
+    
     @XmlElement(name = "client_secret_expires_at")
+    @XmlSchemaType(name = "TimeType")    
     protected Long clientSecretExpiresAt;
-    protected ArrayList<String> contacts;
+    
+    protected String contacts;
+    
     @XmlElement(name = "token_endpoint_auth_method")
+    @XmlSchemaType(name = "TokenEndPointMethod")
     protected String tokenEndpointAuthMethod;
     
     @XmlElement(name = "dataCustodianScopeSelectionScreenURI")
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianScopeSelectionScreenURI;
     
-    // TODO Implement ApplicationInformaion.additionalInformation
-    
-    //@XmlElement(name = "additional_information")
-    //Map<String, java.lang.Object> additionalInformation = null; 
-    
- //   @XmlTransient
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
     @CollectionTable(name="application_information_scopes", joinColumns=@JoinColumn(name="application_information_id"))
     private Set<String> scope = new HashSet<>();   
     
     @XmlElement(name = "grant_types")
-    protected ArrayList<GrantType> grantTypes;
+    @XmlSchemaType(name = "GrantType")
+    protected String grantTypes;
     
     @XmlElement(name = "response_types")
+    @XmlSchemaType(name = "ResponseType")
     protected ResponseType responseTypes;
     
     @XmlElement(name = "registration_client_uri")
@@ -300,8 +330,7 @@ public class ApplicationInformation
     
     @XmlElement(name = "registration_access_token")
     protected String registrationAccessToken;
-
-    
+   
     @Size(min = 2, max = 64)
     @XmlElement(name = "dataCustodianId")
 	protected String dataCustodianId;
@@ -310,12 +339,7 @@ public class ApplicationInformation
     @Size(min = 2, max = 64)
     @XmlElement(name = "thirdPartyApplicationName")
     protected String thirdPartyApplicationName;
-    
-	// private Integer accessTokenValiditySeconds;
-	// TODO implement ApplicationInformation.authorities
-	// private Collection<GrantedAuthority> authorities;
-    
-    
+   
     public String getKind() {
         return kind;
     }
@@ -323,55 +347,15 @@ public class ApplicationInformation
     public void setKind(String kind) {
     	this.kind = kind;
     }
-        
-    
 
-//    @Override
     public String getClientId() {
         return clientId;
     }
 
-//    @Override
-//    public Set<String> getResourceIds() {
-//        return null;
-//    }
-
-//    public void setResourceIds(Set<String> ids) {
-//    	// TODO seems not to be implemented??
-//	    //this.resourceIds = ids;
-//    }
-
-
-//    @Override
-//    public boolean isSecretRequired() {
-//        return true;
-//    }
-
-//        @Override
-//        public Set<String> getAuthorizedGrantTypes() {
-//            Set<String> grantTypes = new HashSet<>();
-//            grantTypes.add("authorization_code");
-//            return grantTypes;
-//        }
-
-//        public void setAuthorizedGrantTypes (Set<String>  authorizedGrantTypes) {
-//            // TODO seems not to be implemented ??                                                                                                                              
-//            // this.grantTypes = authorizedGrantTypes; 
-//        }
-
-
-//    @Override
     public String getClientSecret() {
         return clientSecret;
     }
 
-//    @Override
-//    public boolean isScoped() {
-//        return true;
-//    }
-
-
-//    @Override
     public Set<String> getScope() {
         return scope;
     }
@@ -385,110 +369,6 @@ public class ApplicationInformation
     		return new String[] {};
         return scope.toArray(new String[scope.size()]);
     }
-
-//    @Override
-//    public Set<String> getAuthorizedGrantTypes() {
-//    	Set<String> grantTypes = new HashSet<>();
-//    	grantTypes.add("authorization_code");
-//    	return grantTypes;
-//    }
-
-//    public void setAuthorizedGrantTypes (Set<String> authorizedGrantTypes) {
-//    	// TODO seems not to be implemented ??
-//    	// this.grantTypes = authorizedGrantTypes;
-//    }
-
-//    @Override
-//    public Set<String> getRegisteredRedirectUri() {
-//    	Set<String> uris = new HashSet<>();
-//    	uris.add(getRedirectUri());
-//    	return uris;
-//    }
-
-//    public void setRegisteredRedirectUri(Set<String> registeredRediredUri) {
-//    	this.redirectUri = registeredRediredUri.toString();
-//    }
-
-//    @Override
-//    public Collection<GrantedAuthority> getAuthorities() {
-//    	Collection<GrantedAuthority> authorities = new ArrayList<>();
-//    	authorities.add(new SimpleGrantedAuthority("ROLE_CLIENT"));
-//    	return authorities;
-//    }
-
-//    public void setAuthorities (Collection<GrantedAuthority> authorities) {
-//    	// TODO this seems not to be implemented ??
-//    	// this.authorities = authorities;
-//    }
-        
-//    @Override
-//    public Integer getAccessTokenValiditySeconds() {
-//    	return Integer.valueOf(60*60*24*60);
-//    }
-
-//    public void setAccessTokenValiditySeconds(Integer s) {   	
-//    	// TODO This seems not to be implemented ??
-//    	// this.accessTokenValiditySeconds = s
-//    }
-        
-//    @Override
-//    public Integer getRefreshTokenValiditySeconds() {
-//    	return Integer.valueOf(60*60*24);
-//    }
-
-//    public void setRefreshTokenValiditySeconds(Integer s) {
-//    	// TODO This seems not to be implemented ??
-//    	// this.accessTokenValiditySeconds = s
-//    }
-        
-//    @Override
-//    public Map<String, java.lang.Object> getAdditionalInformation() {
-//    	return null;
-//    }   
-   
-//    public void setAdditionalInformation(Map<String, java.lang.Object> map) {
-//    	// TODO This seems not to be implemented ??
-//    	// this.additionalInformation = additionalInformation;
-//    }
-
-//    public void setAuthorities (Collection<GrantedAuthority> authorities) {
-
-        // TODO this seems not to be implemented ??                                                                                                                                  
-         // this.authorities = authorities; 
-//    } 
-    
-//        @Override
-//        public Integer getAccessTokenValiditySeconds() {
-//            return Integer.valueOf(60*60*24*60);
-//        }
-
-//        public void setAccessTokenValiditySeconds(Integer s) {   	
-//            // TODO This seems not to be implemented ??                                                                                                                                
-//            // this.accessTokenValiditySeconds = s  
-//        }
-        
-
-//       @Override
-//        public Integer getRefreshTokenValiditySeconds() {
-//            return Integer.valueOf(60*60*24);
-//        }
-
-//        public void setRefreshTokenValiditySeconds(Integer s) {
-//            // TODO This seems not to be implemented ??                                                                                                                             
-//            // this.accessTokenValiditySeconds = s    
-//        }
-        
-//        @Override
-//        public Map<String, java.lang.Object> getAdditionalInformation() {
-//           // TODO Implement ApplicationInformaion.additionalInformation
-//           //  return this.additionalInformation;
-//        	return null;
-//        }   
-   
-//	public void setAdditionalInformation(Map<String, java.lang.Object> additionalInformation) {
-//       // TODO This seems not to be implemented ??                                                                                                                                 
-//       // this.additionalInformation = additionalInformation; 
-//	}
 
     /**
      * Gets the value of the dataCustodianApplicationStatus property.
@@ -1256,15 +1136,12 @@ public class ApplicationInformation
      * 
      * 
      */
-    public List<String> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<String>();
-        }
+    public String getContacts() {
         return this.contacts;
     }
 
-    public void setContacts(List<String> contacts) {
-	this.contacts = (ArrayList<String>) contacts;
+    public void setContacts(String contacts) {
+	this.contacts = contacts;
     }
 
     /**
@@ -1314,16 +1191,13 @@ public class ApplicationInformation
      * 
      * 
      */
-    public List<GrantType> getGrantTypes() {
-        if (grantTypes == null) {
-            grantTypes = new ArrayList<GrantType>();
-        }
+    public String getGrantTypes() {
         return this.grantTypes;
     }
 
 
-        private void setGrantTypes(List<GrantType> grantTypes) {
-                this.grantTypes = (ArrayList<GrantType>) grantTypes;
+        private void setGrantTypes(String grantTypes) {
+                this.grantTypes = grantTypes;
 
         }
 	
@@ -1391,7 +1265,6 @@ public class ApplicationInformation
 	    this.registrationAccessToken = registrationAccessToken.toString();
     }
    
-
     /**
      * Sets the value of the registrationAccessToken property.
      * 
@@ -1468,26 +1341,16 @@ public class ApplicationInformation
     public void setdataCustodianScopeSelectionScreenURI(String value) {
         this.dataCustodianScopeSelectionScreenURI = value;
     }
-    
-    
-    
-      
+     
 	@Override
     public void merge(IdentifiedObject resource) {
     	super.merge(resource);
     	this.setDataCustodianId(((ApplicationInformation)resource).getDataCustodianId());
     	this.setClientId(((ApplicationInformation)resource).getClientId());
-//    	this.setResourceIds(((ApplicationInformation)resource).getResourceIds());
     	this.setClientSecret(((ApplicationInformation)resource).getClientSecret());
     	this.setScope(((ApplicationInformation)resource).getScope());
-//    	this.setAuthorizedGrantTypes(((ApplicationInformation)resource).getAuthorizedGrantTypes());
     	this.setGrantTypes(((ApplicationInformation)resource).getGrantTypes());
-//    	this.setRegisteredRedirectUri(((ApplicationInformation)resource).getRegisteredRedirectUri());
     	this.setRedirectUri(((ApplicationInformation)resource).getRedirectUri());
-//    	this.setAuthorities(((ApplicationInformation)resource).getAuthorities());
-//    	this.setAccessTokenValiditySeconds(((ApplicationInformation)resource).getAccessTokenValiditySeconds());
-//    	this.setRefreshTokenValiditySeconds(((ApplicationInformation)resource).getRefreshTokenValiditySeconds());
-//    	this.setAdditionalInformation(((ApplicationInformation)resource).getAdditionalInformation());
     	this.setDataCustodianApplicationStatus(((ApplicationInformation)resource).getDataCustodianApplicationStatus());
     	this.setDataCustodianDefaultBatchResource(((ApplicationInformation)resource).getDataCustodianDefaultBatchResource());
     	this.setDataCustodianDefaultSubscriptionResource(((ApplicationInformation)resource).getDataCustodianDefaultSubscriptionResource());
@@ -1525,6 +1388,5 @@ public class ApplicationInformation
     	this.setRegistrationClientUri(((ApplicationInformation)resource).getRegistrationClientUri());
     	this.setRegistrationAccessToken(((ApplicationInformation)resource).getRegistrationAccessToken());
     	this.setThirdPartyApplicationName(((ApplicationInformation)resource).getThirdPartyApplicationName());
-    }
-   
+    }   
 }

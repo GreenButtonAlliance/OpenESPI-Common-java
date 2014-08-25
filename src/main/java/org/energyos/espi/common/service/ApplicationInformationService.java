@@ -20,7 +20,7 @@ public interface ApplicationInformationService {
 	/**
 	 * Find an ApplicationInformation resource by using it's clientId.
 	 * 
-	 * @param clientId String uniquely identifying a specific ApplicationInformation.clientI
+	 * @param clientId String uniquely identifying a specific ApplicationInformation.clientId
 	 * @return an ApplicationInformation resource
 	 */
 	public ApplicationInformation findByClientId(String clientId);

@@ -46,7 +46,6 @@ public class Routes {
     public static final String DATA_CUSTODIAN_SCOPE_SELECTION_SCREEN = "/RetailCustomer/ScopeSelectionList";
     public static final String DATA_CUSTODIAN_SUBSCRIPTION = "/espi/1_1/resource/Subscription/{subscriptionId}";
     public static final String DATA_CUSTODIAN_UPLOAD = "/custodian/upload";
-    public static final String DATA_CUSTODIAN_RESOURCE_MANAGEMENT = "espi/1_1/resource/**";
 
     public static final String THIRD_PARTY_AUTHORIZATION = "/RetailCustomer/{retailCustomerId}/AuthorizationList";
     public static final String THIRD_PARTY_BATCH_LIST = "/batchLists";

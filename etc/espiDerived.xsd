@@ -3,7 +3,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20140619     
+    Version: 0.7.20140810     
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -747,6 +747,21 @@ Other EUI Types
 					<xs:element name="value" type="Int48" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[correction] Value in units specified by ReadingType</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="consumptionTier" type="Int16" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Code for consumption tier associated with reading.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tou" type="Int16" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Code for the TOU type of reading. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cpp" type="Int16" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Critical peak period (CPP) bucket the reading value is attributed to. Value 0 means not applicable. Even though CPP is usually considered a specialized form of time of use 'tou', this attribute is defined explicitly for flexibility.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
