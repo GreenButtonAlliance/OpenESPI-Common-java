@@ -135,7 +135,7 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
         @NamedQuery(name = Authorization.QUERY_FIND_BY_REFRESH_TOKEN,
                 query = "SELECT authorization from Authorization authorization WHERE authorization.refreshToken = :refreshToken"),
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RESOURCE_URI, 
-                query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI = :uri"),
+                query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI LIKE :uri"),
         @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS_BY_BULK_ID, 
                 query = "SELECT authorization.id FROM Authorization authorization WHERE authorization.thirdParty = :thirdParty AND authorization.scope LIKE :bulkId")
                  
