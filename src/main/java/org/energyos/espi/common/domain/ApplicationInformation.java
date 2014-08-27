@@ -1262,7 +1262,11 @@ public class ApplicationInformation
     }
 
     private void setRegistrationAccessToken(java.lang.Object registrationAccessToken) {
-	    this.registrationAccessToken = registrationAccessToken.toString();
+    	if (registrationAccessToken != null) {
+	       this.registrationAccessToken = registrationAccessToken.toString();
+    	} else {
+    		this.registrationAccessToken = null;
+    	}
     }
    
     /**

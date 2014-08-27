@@ -173,8 +173,10 @@ public class NotificationServiceImpl implements NotificationService {
                           notifyList.get(id).getResources().add(bulkResourceUri);
 			            }
 			    	  } else {
-			    		// just add the resourceUri 
-			    		notifyList.get(id).getResources().add(resourceUri);		
+			    		// just add the resourceUri
+			    		  if (!(notifyList.get(id).getResources().contains(resourceUri))) {
+			    		        notifyList.get(id).getResources().add(resourceUri);	
+			    		  }
 			    	  }
 			    	}
 			    }
