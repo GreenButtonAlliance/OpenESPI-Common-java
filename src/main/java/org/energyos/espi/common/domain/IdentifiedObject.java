@@ -24,6 +24,7 @@
 
 package org.energyos.espi.common.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -82,8 +83,11 @@ import org.energyos.espi.common.models.atom.LinkType;
         ReadingType.class
 })
 @MappedSuperclass
-public class IdentifiedObject extends Resource implements Linkable {
+public class IdentifiedObject extends Resource implements Linkable, Serializable {
 	
+    @XmlTransient
+	private static final long serialVersionUID = -5263186855332223773L;
+
 	public interface ResourceEnumClass {
 		   ResourceEnum getEnumType();
 	}

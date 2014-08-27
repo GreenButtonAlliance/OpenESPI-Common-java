@@ -16,8 +16,11 @@
 
 package org.energyos.espi.common.service.impl;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -26,7 +29,6 @@ import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.BatchList;
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
-import org.energyos.espi.common.service.ApplicationInformationService;
 import org.energyos.espi.common.service.AuthorizationService;
 import org.energyos.espi.common.service.NotificationService;
 import org.energyos.espi.common.service.ResourceService;
@@ -37,7 +39,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * @author steph
+ * @author John Teeter
  *
  */
 @Service
@@ -128,15 +130,71 @@ public class NotificationServiceImpl implements NotificationService {
 	
 		List <Long> authList = resourceService.findAllIds(Authorization.class);
 		
+		Map<Long, BatchList> notifyList = new HashMap<Long, BatchList> ();
+		
 		for (Long id : authList) {
+			
 			Authorization authorization = resourceService.findById(id, Authorization.class);
 			
-			if(authorization.getSubscription() != null) {
-				notify(authorization.getSubscription(), null, null);
+			String tempResourceUri = authorization.getResourceURI();
+			
+			resourceService.findByResourceUri(tempResourceUri, Authorization.class);
+			
+			System.out.println("resourceURI: " + tempResourceUri);
+			
+			String thirdParty = authorization.getThirdParty();
+			
+			// do not do any of the local authorizations
+			//
+			if (!((thirdParty.equals("data_custodian_admin")) || (thirdParty.equals("upload_admin")))) {
+				
+				// if this is the first time we have seen this third party, add it to the notification list.
+			    if (!(notifyList.containsKey(thirdParty))) {
+				    notifyList.put(id, new BatchList ());
+			    }
+			    
+			    // and now add the appropriate resource URIs to the batchList of this third party
+			    //
+			    String resourceUri = authorization.getResourceURI();
+			    
+			    // resouceUri's that are just /Batch/Bulk ==> client-access-token and will be ignored here with the 
+			    // actual Batch/Bulk ids will be picked up by looking at the scope strings of the individual
+			    // authorization/subscription pairs		    
+			    if (!(resourceUri.contains("/Batch/Bulk"))) {
+			    	String scope = authorization.getScope();
+			    	for (String term : scope.split(";")) {
+			    	if (term.contains("BR=")) {
+			    		// we have a bulkId to deal with
+			    		term = term.substring(scope.indexOf("=") + 1);
+			    		// TODO the following getResourceURI() should be changed to getBulkRequestURI when the seed tables 
+			    		// have non-null values for that attribute.
+			    		String bulkResourceUri = authorization.getResourceURI() + "/Batch/Bulk/" + term;
+			            if (!(notifyList.get(id).getResources().contains(bulkResourceUri))) {
+                          notifyList.get(id).getResources().add(bulkResourceUri);
+			            }
+			    	  } else {
+			    		// just add the resourceUri
+			    		  if (!(notifyList.get(id).getResources().contains(resourceUri))) {
+			    		        notifyList.get(id).getResources().add(resourceUri);	
+			    		  }
+			    	  }
+			    	}
+			    }
+			   	
 			}
-		}	
+		}
+		
+		// now notify each ThirdParty
+		for (Entry<Long, BatchList> entry : notifyList.entrySet() ) {
+			String notifyUri = resourceService.findById(entry.getKey(), Authorization.class).getApplicationInformation().getThirdPartyNotifyUri();
+			BatchList batchList = entry.getValue();
+			if (!(batchList.getResources().isEmpty())) {
+			    notifyInternal(notifyUri, batchList);
+			}
+		}
 	}
-    public void setRestTemplate(RestTemplate restTemplate) {
+	
+   public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
    }
 
