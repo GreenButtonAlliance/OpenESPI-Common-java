@@ -19,8 +19,10 @@ package org.energyos.espi.common.service.impl;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
+import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -32,10 +34,22 @@ import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.resource.BaseOAuth2ProtectedResourceDetails;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+import org.springframework.security.oauth2.client.token.ClientTokenServices;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2RefreshToken;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorizationServiceImpl implements AuthorizationService {
+	
     @Autowired
     private AuthorizationRepository authorizationRepository;
 
@@ -192,7 +206,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
 	@Override
 	public void delete(Authorization authorization) {
-	      authorizationRepository.deleteById(authorization.getId());
+	    authorizationRepository.deleteById(authorization.getId());
 	}
 
 	// import-exportResource services
@@ -257,5 +271,5 @@ public class AuthorizationServiceImpl implements AuthorizationService {
    public ImportService getImportService () {
         return this.importService;
    }
-
+   
 }

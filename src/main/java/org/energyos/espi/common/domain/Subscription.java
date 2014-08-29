@@ -96,7 +96,7 @@ public class Subscription
     protected RetailCustomer retailCustomer;
 
     @XmlTransient
-    @OneToOne
+    @OneToOne (cascade = CascadeType.REMOVE)
     private Authorization authorization;
 
     @OneToOne
