@@ -365,8 +365,7 @@ CREATE TABLE `authorizations` (
   PRIMARY KEY (`id`),
   KEY `FK_d0761ae9d2dd44c49867ac4ec4b` (`application_information_id`),
   KEY `FK_a4fccef421a14e0ead5c1b9753d` (`retail_customer_id`),
-  KEY `FK_subscriptionkey` (`subscription_id`),
-  CONSTRAINT `FK_d0761ae9d2dd44c49867ac4ec4b` FOREIGN KEY (`application_information_id`) REFERENCES `application_information` (`id`)
+  KEY `FK_subscriptionkey` (`subscription_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -414,8 +413,7 @@ CREATE TABLE `subscriptions` (
   KEY `FK_a68a2938cbc142c3b82f57cb4b1` (`authorization_id`),
   KEY `FK_e38a940ce8ed4d8983d1d5dac6e` (`retail_customer_id`),
   CONSTRAINT `FK_e38a940ce8ed4d8983d1d5dac6e` FOREIGN KEY (`retail_customer_id`) REFERENCES `retail_customers` (`id`),
-  CONSTRAINT `FK_a027c87418ce4d7abbde7ee5eec` FOREIGN KEY (`applicationInformation_id`) REFERENCES `application_information` (`id`),
-  CONSTRAINT `FK_a68a2938cbc142c3b82f57cb4b1` FOREIGN KEY (`authorization_id`) REFERENCES `authorizations` (`id`)
+  CONSTRAINT `FK_a027c87418ce4d7abbde7ee5eec` FOREIGN KEY (`applicationInformation_id`) REFERENCES `application_information` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

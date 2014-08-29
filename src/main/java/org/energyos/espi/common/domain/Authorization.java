@@ -190,7 +190,7 @@ public class Authorization
     @XmlTransient
     protected RetailCustomer retailCustomer;
 
-    @OneToOne (cascade = CascadeType.DETACH) @JoinColumn(name = "subscription_id")
+    @OneToOne (cascade = CascadeType.REMOVE)  @JoinColumn(name = "subscription_id")
     @XmlTransient
     protected Subscription subscription;
     
