@@ -219,6 +219,10 @@ public class IdentifiedObject extends Resource implements Linkable, Serializable
 
     public void setUUID(UUID uuid) {
         this.uuid = uuid.toString().toUpperCase();
+        // make sure there is a uplink and a selflink
+        // so marshalling works ...
+        getSelfLink();
+        getUpLink();
     }
 
     public UUID getUUID() {
@@ -259,6 +263,10 @@ public class IdentifiedObject extends Resource implements Linkable, Serializable
     }
 
     public LinkType getUpLink() {
+    	if (upLink == null) {
+    		setUpLink(new LinkType());
+    		upLink.setRel("up");
+    	}
         return upLink;
     }
 
@@ -275,6 +283,10 @@ public class IdentifiedObject extends Resource implements Linkable, Serializable
     }
 
     public LinkType getSelfLink() {
+    	if (selfLink == null) {
+    		setSelfLink(new LinkType());
+    		selfLink.setRel("self");
+    	}
         return selfLink;
     }
 

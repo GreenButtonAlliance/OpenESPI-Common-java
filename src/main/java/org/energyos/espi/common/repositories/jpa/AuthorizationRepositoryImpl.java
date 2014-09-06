@@ -30,6 +30,14 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 
     @SuppressWarnings("unchecked")
 	@Override
+    public List<Long> findAllIdsByApplicationInformationId(Long applicationInformationId) {
+      	return em.createNamedQuery(Authorization.QUERY_FIND_ALL_IDS_BY_APPLICATION_INFORMATION_ID)
+      			.setParameter("applicationInformationId", applicationInformationId)
+      			.getResultList();
+    }
+    
+    @SuppressWarnings("unchecked")
+	@Override
     public List<Authorization> findAllByRetailCustomerId(Long retailCustomerId) {
       return em.createNamedQuery(Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID)
               .setParameter("retailCustomerId", retailCustomerId).getResultList();

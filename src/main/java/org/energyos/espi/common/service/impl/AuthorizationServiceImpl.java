@@ -66,6 +66,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     public List<Authorization> findAllByRetailCustomerId(Long retailCustomerId) {
         return authorizationRepository.findAllByRetailCustomerId(retailCustomerId);
     }
+    
+    @Override
+    public List<Long> findAllIdsByApplicationInformationId(Long applicationInformationId) {	
+    	return authorizationRepository.findAllIdsByApplicationInformationId(applicationInformationId);
+    }
 
     @Override
     public Authorization findByUUID(UUID uuid) {

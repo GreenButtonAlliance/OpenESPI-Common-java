@@ -94,6 +94,7 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 
 
 
+@SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Authorization", propOrder = {
 	    "authorizedPeriod",
@@ -137,7 +138,9 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
         @NamedQuery(name = Authorization.QUERY_FIND_BY_RESOURCE_URI, 
                 query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI LIKE :uri"),
         @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS_BY_BULK_ID, 
-                query = "SELECT authorization.id FROM Authorization authorization WHERE authorization.thirdParty = :thirdParty AND authorization.scope LIKE :bulkId")
+                query = "SELECT authorization.id FROM Authorization authorization WHERE authorization.thirdParty = :thirdParty AND authorization.scope LIKE :bulkId"),
+        @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS_BY_APPLICATION_INFORMATION_ID,
+                query = "SELECT authorization.id FROM Authorization authorization where authorization.applicationInformation.id = :applicationInformationId")
                  
 })
 public class Authorization
@@ -153,6 +156,7 @@ public class Authorization
 	public final static String QUERY_FIND_BY_REFRESH_TOKEN = "Authorization.findByRefreshToken";
 	public static final String QUERY_FIND_BY_RESOURCE_URI = "Authorization.findByResourceUri";
 	public static final String QUERY_FIND_ALL_IDS_BY_BULK_ID = "Authorization.findAllIdsByBulkId";
+	public static final String QUERY_FIND_ALL_IDS_BY_APPLICATION_INFORMATION_ID = "Authorization.findAllIdsByApplicationInformationId";
 
     @Embedded
     @AttributeOverrides({

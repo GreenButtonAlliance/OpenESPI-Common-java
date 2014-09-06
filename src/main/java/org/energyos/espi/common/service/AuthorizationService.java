@@ -12,6 +12,12 @@ import org.energyos.espi.common.utils.EntryTypeIterator;
 public interface AuthorizationService {
 	// residue from random stories
 	public List<Authorization> findAllByRetailCustomerId(Long retailCustomerId);
+	
+	/**
+	 * @param authorization
+	 * @return List<Long> a list of all authorizationIds that are visible from the input authorization
+	 */
+	public List<Long> findAllIdsByApplicationInformationId(Long applicationInformationId);
 
 	public Authorization createAuthorization(Subscription subscription,
 			String accessToken);
