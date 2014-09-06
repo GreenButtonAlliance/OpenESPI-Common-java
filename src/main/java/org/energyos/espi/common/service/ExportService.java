@@ -5,6 +5,7 @@ import java.io.OutputStream;
 
 import javax.servlet.ServletOutputStream;
 
+import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.utils.ExportFilter;
 
@@ -49,6 +50,14 @@ public interface ExportService {
 	 * @throws IOException
 	 */
 	public void exportAuthorizations(OutputStream stream, ExportFilter exportFilter) throws IOException;
+
+	/**
+	 * @param authorization
+	 * @param stream
+	 * @param exportFilter
+	 * @throws IOException
+	 */
+	public void exportAuthorizations(Authorization authorization, OutputStream stream, ExportFilter exportFilter) throws IOException;
 
     //  - XPath form
 	/**

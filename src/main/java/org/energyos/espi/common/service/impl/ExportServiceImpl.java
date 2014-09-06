@@ -267,6 +267,17 @@ public class ExportServiceImpl implements ExportService {
 				resourceService.findEntryTypeIterator(Authorization.class),
 				stream, exportFilter, Authorization.class, hrefFragment);
 	}
+	
+	@Override
+	public void exportAuthorizations(Authorization authorization, OutputStream stream,
+			ExportFilter exportFilter) throws IOException {
+		String hrefFragment = "/Authorization";
+		
+		exportEntries(
+				resourceService.findEntryTypeIterator(
+						authorizationService.findAllIdsByApplicationInformationId(authorization.getApplicationInformation().getId()),Authorization.class),
+						stream, exportFilter, Authorization.class, hrefFragment);
+	}
 
 	// - XPath form
 	@Override
