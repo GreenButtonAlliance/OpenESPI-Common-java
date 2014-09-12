@@ -59,47 +59,53 @@ class ResourceRepositoryImpl implements ResourceRepository {
 		List<IdentifiedObject> result = em.createNamedQuery(queryString)
 				.setParameter("href", href).getResultList();
 		if (result.isEmpty()) {
-			// we did not find one, so now try to parse the URL and find the
-			// parent that way
-			// this needed only b/c we are not storing the up and self hrefs in
-			// the underlying db but rather
-			// relying upon a structured URL for resources that we have
-			// exported.
-			//
-			Boolean usagePointFlag = false;
-			Boolean meterReadingFlag = false;
+			try {
+				// we did not find one, so now try to parse the URL and find the
+				// parent that way
+				// this needed only b/c we are not storing the up and self hrefs
+				// in
+				// the underlying db but rather
+				// relying upon a structured URL for resources that we have
+				// exported.
+				//
+				Boolean usagePointFlag = false;
+				Boolean meterReadingFlag = false;
 
-			Long usagePointId = null;
-			Long meterReadingId = null;
+				Long usagePointId = null;
+				Long meterReadingId = null;
 
-			for (String token : href.split("/")) {
-				if (usagePointFlag) {
-					usagePointId = Long.decode(token);
-					usagePointFlag = false;
+				for (String token : href.split("/")) {
+					if (usagePointFlag) {
+						usagePointId = Long.decode(token);
+						usagePointFlag = false;
+					}
+
+					if (meterReadingFlag) {
+						meterReadingId = Long.decode(token);
+						meterReadingFlag = false;
+					}
+
+					if (token.equals("UsagePoint")) {
+						usagePointFlag = true;
+					}
+
+					if (token.equals("MeterReading")) {
+						meterReadingFlag = true;
+					}
+
 				}
 
-				if (meterReadingFlag) {
-					meterReadingId = Long.decode(token);
-					meterReadingFlag = false;
+				if (meterReadingId != null) {
+					result.add(findById(meterReadingId, MeterReading.class));
+				} else {
+					if (usagePointId != null) {
+						result.add(findById(usagePointId, UsagePoint.class));
+					}
+
 				}
-
-				if (token.equals("UsagePoint")) {
-					usagePointFlag = true;
-				}
-
-				if (token.equals("MeterReading")) {
-					meterReadingFlag = true;
-				}
-
-			}
-
-			if (meterReadingId != null) {
-				result.add(findById(meterReadingId, MeterReading.class));
-			} else {
-				if (usagePointId != null) {
-					result.add(findById(usagePointId, UsagePoint.class));
-				}
-
+			} catch (Exception e) {
+				// nothing to do, just retur the empty result and
+				// we'll find it later.
 			}
 
 		}
@@ -120,76 +126,80 @@ class ResourceRepositoryImpl implements ResourceRepository {
 		// in the DB
 		// or imported objects that have the external href's stored
 		if (temp.isEmpty()) {
+			try {
+				Boolean localTimeParameterFlag = false;
+				Boolean readingTypeFlag = false;
+				Boolean electricPowerUsageFlag = false;
+				Boolean electricPowerQualityFlag = false;
 
-			Boolean localTimeParameterFlag = false;
-			Boolean readingTypeFlag = false;
-			Boolean electricPowerUsageFlag = false;
-			Boolean electricPowerQualityFlag = false;
+				Long localTimeParameterId = null;
+				Long readingTypeId = null;
+				Long electricPowerUsageId = null;
+				Long electricPowerQualityId = null;
 
-			Long localTimeParameterId = null;
-			Long readingTypeId = null;
-			Long electricPowerUsageId = null;
-			Long electricPowerQualityId = null;
+				for (String href : linkable.getRelatedLinkHrefs()) {
 
-			for (String href : linkable.getRelatedLinkHrefs()) {
+					for (String token : href.split("/")) {
+						if (localTimeParameterFlag) {
+							localTimeParameterId = Long.decode(token);
+							localTimeParameterFlag = false;
+						}
 
-				for (String token : href.split("/")) {
-					if (localTimeParameterFlag) {
-						localTimeParameterId = Long.decode(token);
-						localTimeParameterFlag = false;
+						if (readingTypeFlag) {
+							readingTypeId = Long.decode(token);
+							readingTypeFlag = false;
+						}
+
+						if (electricPowerUsageFlag) {
+							electricPowerUsageId = Long.decode(token);
+							electricPowerUsageFlag = false;
+						}
+
+						if (electricPowerQualityFlag) {
+							electricPowerQualityId = Long.decode(token);
+							electricPowerQualityFlag = false;
+						}
+
+						if (token.equals("LocalTimeParameters")) {
+							localTimeParameterFlag = true;
+						}
+
+						if (token.equals("ReadingType")) {
+							readingTypeFlag = true;
+						}
+
+						if (token.equals("ElectricPowerUsageSummary")) {
+							electricPowerUsageFlag = true;
+						}
+
+						if (token.equals("ElectricPowerQualitySummary")) {
+							electricPowerQualityFlag = true;
+						}
 					}
 
-					if (readingTypeFlag) {
-						readingTypeId = Long.decode(token);
-						readingTypeFlag = false;
+					if (readingTypeId != null) {
+						temp.add(findById(readingTypeId, ReadingType.class));
+						readingTypeId = null;
 					}
 
-					if (electricPowerUsageFlag) {
-						electricPowerUsageId = Long.decode(token);
-						electricPowerUsageFlag = false;
+					if ((localTimeParameterId != null)) {
+						temp.add(findById(localTimeParameterId,
+								TimeConfiguration.class));
 					}
 
-					if (electricPowerQualityFlag) {
-						electricPowerQualityId = Long.decode(token);
-						electricPowerQualityFlag = false;
+					if ((electricPowerUsageId != null)) {
+						temp.add(findById(electricPowerUsageId,
+								ElectricPowerUsageSummary.class));
 					}
 
-					if (token.equals("LocalTimeParameters")) {
-						localTimeParameterFlag = true;
-					}
-
-					if (token.equals("ReadingType")) {
-						readingTypeFlag = true;
-					}
-
-					if (token.equals("ElectricPowerUsageSummary")) {
-						electricPowerUsageFlag = true;
-					}
-
-					if (token.equals("ElectricPowerQualitySummary")) {
-						electricPowerQualityFlag = true;
+					if ((electricPowerQualityId != null)) {
+						temp.add(findById(electricPowerQualityId,
+								ElectricPowerQualitySummary.class));
 					}
 				}
-
-				if (readingTypeId != null) {
-					temp.add(findById(readingTypeId, ReadingType.class));
-					readingTypeId = null;
-				}
-
-				if ((localTimeParameterId != null)) {
-					temp.add(findById(localTimeParameterId,
-							TimeConfiguration.class));
-				}
-
-				if ((electricPowerUsageId != null)) {
-					temp.add(findById(electricPowerUsageId,
-							ElectricPowerUsageSummary.class));
-				}
-
-				if ((electricPowerQualityId != null)) {
-					temp.add(findById(electricPowerQualityId,
-							ElectricPowerQualitySummary.class));
-				}
+			} catch (Exception e) {
+				// nothing to do -- we'll find it later, just return the
+				// empty temp
 			}
 
 		}
