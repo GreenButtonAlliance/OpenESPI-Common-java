@@ -3,7 +3,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20140810     
+    Version: 0.7.20140924     
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -586,84 +586,84 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 	</xs:complexType>
 	<xs:complexType name="ElectricPowerUsageSummary">
 		<xs:annotation>
-			<xs:documentation>Summary of usage for a billing period</xs:documentation>
+			<xs:documentation>[deprecated] Summary of usage for a billing period</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
 				<xs:sequence>
 					<xs:element name="billingPeriod" type="DateTimeInterval" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The billing period to which the included measurements apply</xs:documentation>
+							<xs:documentation>The billing period to which the included measurements apply. May also be an off-bill arbitrary period.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="billLastPeriod" type="Int48" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The amount of the bill for the previous billing period , in hundred-thousandths of the currency specified in the ReadingType for this reading (e.g., 840 = USD, US dollar).</xs:documentation>
+							<xs:documentation>The amount of the bill for the referenced billingPeriod  in hundred-thousandths of the currency specified in the ReadingType for this reading (e.g., 840 = USD, US dollar).</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="billToDate" type="Int48" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The bill amount related to the billing period as of the date received, in hundred-thousandths of the currency specified in the ReadingType for this reading. (e.g., 840 = USD, US dollar).</xs:documentation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the bill amount as of the date the summary is generated, in hundred-thousandths of the currency specified in the ReadingType for this reading. (e.g., 840 = USD, US dollar).</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="costAdditionalLastPeriod" type="Int48" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Additional charges from the last billing period, in hundred-thousandths of the currency specified in the ReadingType for this reading. (e.g., 840 = USD, US dollar).</xs:documentation>
+							<xs:documentation>Additional charges from the for the referenced billingPeriod, in hundred-thousandths of the currency specified in the ReadingType for this reading. (e.g., 840 = USD, US dollar).</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="costAdditionalDetailLastPeriod" type="LineItem" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>[extension] Additional charges from the last billing period which in total add up to costAdditionalLastPeriod</xs:documentation>
+							<xs:documentation>[extension] Additional charges from the for the referenced billingPeriod which in total add up to costAdditionalLastPeriod.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="currency" type="Currency" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The ISO 4217 code indicating the currency applicable to the bill amounts in the summary. See list at http://tiny.cc/4217</xs:documentation>
+							<xs:documentation>The ISO 4217 code indicating the currency applicable to the bill amounts in the summary. </xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="overallConsumptionLastPeriod" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] The amount of energy consumed in the last billing period.</xs:documentation>
+							<xs:documentation>[extension] The amount of energy consumed in the lfor the referenced billingPeriod.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="currentBillingPeriodOverAllConsumption" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The total consumption for the billing period</xs:documentation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the total consumption for the billing period.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="currentDayLastYearNetConsumption" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The amount of energy consumed one year ago interpreted as same day of week same week of year (see ISO 8601).</xs:documentation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the amount of energy consumed one year ago interpreted as same day of week same week of year (see ISO 8601) based on the day of the statusTimeStamp.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="currentDayNetConsumption" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Net consumption for the current day (delivered - received)</xs:documentation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, net consumption for the current day (delivered - received) based on the day of the statusTimeStamp</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="currentDayOverallConsumption" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Overall energy consumption for the current day</xs:documentation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, overall energy consumption for the current day, based on the day of the statusTimeStamp.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="peakDemand" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Peak demand recorded for the current period</xs:documentation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, peak demand recorded for the current period.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="previousDayLastYearOverallConsumption" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The amount of energy consumed on the previous day one year ago interpreted as same day of week same week of year (see ISO 8601).</xs:documentation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the amount of energy consumed on the previous day one year ago interpreted as same day of week same week of year (see ISO 8601) based on the day of the statusTimestamp.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="previousDayNetConsumption" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Net consumption for the previous day</xs:documentation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, net consumption for the previous day relative to the day of the statusTimestamp.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="previousDayOverallConsumption" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The total consumption for the previous day</xs:documentation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the total consumption for the previous day based on the day of the statusTimestamp.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="qualityOfReading" type="QualityOfReading" minOccurs="0">
@@ -673,7 +673,7 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 					</xs:element>
 					<xs:element name="ratchetDemand" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The current ratchet demand value for the ratchet demand period</xs:documentation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the current ratchet demand value for the ratchet demand over the ratchetDemandPeriod.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="ratchetDemandPeriod" type="DateTimeInterval" minOccurs="0">
@@ -684,6 +684,122 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 					<xs:element name="statusTimeStamp" type="TimeType">
 						<xs:annotation>
 							<xs:documentation>Date/Time status of this UsageSummary</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="commodity" type="CommodityKind" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] The commodity for this summary report</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UsageSummary">
+		<xs:annotation>
+			<xs:documentation>[extension] Summary of usage for a billing period</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="billingPeriod" type="DateTimeInterval" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The billing period to which the included measurements apply. May also be an off-bill arbitrary period.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="billLastPeriod" type="Int48" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The amount of the bill for the referenced billingPeriod  in hundred-thousandths of the currency specified in the ReadingType for this reading (e.g., 840 = USD, US dollar).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="billToDate" type="Int48" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the bill amount as of the date the summary is generated, in hundred-thousandths of the currency specified in the ReadingType for this reading. (e.g., 840 = USD, US dollar).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="costAdditionalLastPeriod" type="Int48" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Additional charges from the for the referenced billingPeriod, in hundred-thousandths of the currency specified in the ReadingType for this reading. (e.g., 840 = USD, US dollar).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="costAdditionalDetailLastPeriod" type="LineItem" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>[extension] Additional charges from the for the referenced billingPeriod which in total add up to costAdditionalLastPeriod.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="currency" type="Currency" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The ISO 4217 code indicating the currency applicable to the bill amounts in the summary. </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="overallConsumptionLastPeriod" type="SummaryMeasurement" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] The amount of energy consumed in the lfor the referenced billingPeriod.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="currentBillingPeriodOverAllConsumption" type="SummaryMeasurement" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the total consumption for the billing period.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="currentDayLastYearNetConsumption" type="SummaryMeasurement" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the amount of energy consumed one year ago interpreted as same day of week same week of year (see ISO 8601) based on the day of the statusTimeStamp.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="currentDayNetConsumption" type="SummaryMeasurement" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, net consumption for the current day (delivered - received) based on the day of the statusTimeStamp</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="currentDayOverallConsumption" type="SummaryMeasurement" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, overall energy consumption for the current day, based on the day of the statusTimeStamp.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="peakDemand" type="SummaryMeasurement" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, peak demand recorded for the current period.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="previousDayLastYearOverallConsumption" type="SummaryMeasurement" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the amount of energy consumed on the previous day one year ago interpreted as same day of week same week of year (see ISO 8601) based on the day of the statusTimestamp.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="previousDayNetConsumption" type="SummaryMeasurement" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, net consumption for the previous day relative to the day of the statusTimestamp.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="previousDayOverallConsumption" type="SummaryMeasurement" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the total consumption for the previous day based on the day of the statusTimestamp.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="qualityOfReading" type="QualityOfReading" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Indication of the quality of the summary readings</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratchetDemand" type="SummaryMeasurement" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If the summary contains data from a current period beyond the end of the referenced billingPeriod, the current ratchet demand value for the ratchet demand over the ratchetDemandPeriod.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratchetDemandPeriod" type="DateTimeInterval" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The period over which the ratchet demand applies</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="statusTimeStamp" type="TimeType">
+						<xs:annotation>
+							<xs:documentation>Date/Time status of this UsageSummary</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="commodity" type="CommodityKind" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] The commodity for this summary report</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -825,6 +941,11 @@ Other EUI Types
 					<xs:element name="value" type="Int48" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>The value of the summary measurement.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="readingTypeRef" type="xs:anyURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Reference to a full ReadingType.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1109,10 +1230,31 @@ Additional Complex Types
 			<xs:documentation>[extension] Line item of detail for additional cost</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="amount" type="Int48"/>
-			<xs:element name="rounding" type="Int48" minOccurs="0"/>
-			<xs:element name="dateTime" type="TimeType"/>
-			<xs:element name="note" type="String256"/>
+			<xs:element name="amount" type="Int48">
+				<xs:annotation>
+					<xs:documentation>Cost of line item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rounding" type="Int48" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Rounded to nearest increment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dateTime" type="TimeType">
+				<xs:annotation>
+					<xs:documentation>Significant date for line item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="note" type="String256">
+				<xs:annotation>
+					<xs:documentation>Comment or description of line item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="measurement" type="SummaryMeasurement" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>[extension] relevant measurment for line item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<!--
@@ -2871,7 +3013,7 @@ Enumerations
 					<xs:enumeration value="19">
 						<xs:annotation>
 							<xs:appinfo>revenue-quality</xs:appinfo>
-							<xs:documentation>data that is valid for billing purposes</xs:documentation>
+							<xs:documentation>data that is valid and acceptable for billing purposes</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -4394,6 +4536,7 @@ Global Elements
 	<xs:element name="UsagePoint" type="UsagePoint"/>
 	<xs:element name="ElectricPowerQualitySummary" type="ElectricPowerQualitySummary"/>
 	<xs:element name="ElectricPowerUsageSummary" type="ElectricPowerUsageSummary"/>
+	<xs:element name="UsageSummary" type="UsageSummary"/>
 	<xs:element name="DateTimeInterval" type="DateTimeInterval"/>
 	<xs:element name="SummaryMeasurement" type="SummaryMeasurement"/>
 	<xs:element name="BatchItemInfo" type="BatchItemInfo"/>
