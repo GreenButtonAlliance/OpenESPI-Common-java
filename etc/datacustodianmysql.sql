@@ -534,7 +534,7 @@ DROP TABLE IF EXISTS `retail_customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `retail_customers` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
   `published` datetime DEFAULT NULL,
   `self_link_href` varchar(255) DEFAULT NULL,
