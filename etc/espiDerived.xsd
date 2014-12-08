@@ -310,7 +310,7 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 					</xs:element>
 					<xs:element name="token_type" type="TokenType" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Type of token used. (e.g. "bearer")</xs:documentation>
+							<xs:documentation>Type of token used. (e.g. "Bearer")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="error" type="OAuthError" minOccurs="0">
@@ -1295,7 +1295,7 @@ Enumerations
 			<xs:documentation>[extension] Type of OAuth 2.0 token.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="bearer"/>
+			<xs:enumeration value="Bearer"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="OAuthError">

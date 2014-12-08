@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;simpleType name="TokenType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="bearer"/>
+ *     &lt;enumeration value="Bearer"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum TokenType {
 
-    @XmlEnumValue("bearer")
-    BEARER("bearer");
+    @XmlEnumValue("Bearer")
+    BEARER("Bearer");
     private final String value;
 
     TokenType(String v) {
