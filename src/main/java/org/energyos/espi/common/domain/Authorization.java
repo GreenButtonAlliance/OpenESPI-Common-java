@@ -318,13 +318,15 @@ public class Authorization extends IdentifiedObject {
 
 	/**
 	 * Sets the value of the expiresIn property.
+	 * Note that the input is duration in seconds
+	 * and the value is biased to currentTime + duration
 	 *
 	 * @param value
 	 *            allowed object is {@link Long }
 	 *
 	 */
 	public void setExpiresIn(Long value) {
-		this.expiresIn = value;
+		this.expiresIn = value + System.currentTimeMillis()/1000;
 	}
 
 	/**
