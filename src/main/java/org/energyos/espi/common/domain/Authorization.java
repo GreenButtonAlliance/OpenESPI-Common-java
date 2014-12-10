@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
-
 
 package org.energyos.espi.common.domain;
 
@@ -46,20 +45,25 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 
-
 /**
- * [extension] Represents a permission granted by an owner for access to a resource.
+ * [extension] Represents a permission granted by an owner for access to a
+ * resource.
  * 
- * Atom Links:
- * self link to this resource
- * rel corresponding ApplicationInformation (if this is the client access containing token instance)
- * rel corresponding to the authorized resource (if this is the access_token containing instance for a customer resource)
+ * Atom Links: self link to this resource rel corresponding
+ * ApplicationInformation (if this is the client access containing token
+ * instance) rel corresponding to the authorized resource (if this is the
+ * access_token containing instance for a customer resource)
  * 
- * Note: for privacy there is no identifier of the RetailCustomer in this structure but an implementation will have consider how to maintain a correspendance between a RetailCustomer and his authorization.
+ * Note: for privacy there is no identifier of the RetailCustomer in this
+ * structure but an implementation will have consider how to maintain a
+ * correspendance between a RetailCustomer and his authorization.
  * 
- * <p>Java class for Authorization complex type.
+ * <p>
+ * Java class for Authorization complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="Authorization">
@@ -92,65 +96,37 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
  * 
  */
 
-
-
 @SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Authorization", propOrder = {
-	    "authorizedPeriod",
-	    "publishedPeriod",
-	    "accessToken",
-	    "status",
-	    "expiresIn",
-	    "grantType",
-	    "refreshToken",
-	    "scope",
-	    "state",
-	    "responseType",
-	    "tokenType",
-	    "code",
-	    "error",
-	    "errorDescription",
-	    "errorUri",
-	    "resourceURI",
-	    "authorizationURI",
-	    "thirdParty"
-	})@Entity
+@XmlType(name = "Authorization", propOrder = { "authorizedPeriod",
+		"publishedPeriod", "accessToken", "status", "expiresIn", "grantType",
+		"refreshToken", "scope", "responseType", "tokenType", "code", "error",
+		"errorDescription", "errorUri", "resourceURI", "authorizationURI",
+		"thirdParty" })
+@Entity
 @Table(name = "authorizations")
 @XmlJavaTypeAdapter(AuthorizationAdapter.class)
 @NamedQueries(value = {
-        @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS,
-                query = "SELECT authorization.id FROM Authorization authorization"),		
-        @NamedQuery(name = Authorization.QUERY_FIND_BY_ID, 
-        		query = "SELECT authorization FROM Authorization authorization WHERE authorization.id = :id"),
-        @NamedQuery(name = Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID,
-                query = "SELECT authorization FROM Authorization authorization WHERE authorization.retailCustomer.id = :retailCustomerId AND authorization.resourceURI IS NOT NULL"),
-        @NamedQuery(name = Authorization.QUERY_FIND_BY_SCOPE,
-        		query = "SELECT authorization FROM Authorization authorization WHERE authorization.scope = :scope AND authorization.retailCustomer.id = :retailCustomerId"),
-        @NamedQuery(name = Authorization.QUERY_FIND_BY_STATE,
-		    	query = "SELECT authorization FROM Authorization authorization WHERE authorization.state = :state"),
-		@NamedQuery(name = Authorization.QUERY_FIND_BY_UUID, 
-        		query = "SELECT authorization FROM Authorization authorization WHERE authorization.uuid = :uuid"),
-        @NamedQuery(name = Authorization.QUERY_FIND_BY_ACCESS_TOKEN,
-                query = "SELECT authorization from Authorization authorization WHERE authorization.accessToken = :accessToken"),
-        @NamedQuery(name = Authorization.QUERY_FIND_BY_REFRESH_TOKEN,
-                query = "SELECT authorization from Authorization authorization WHERE authorization.refreshToken = :refreshToken"),
-        @NamedQuery(name = Authorization.QUERY_FIND_BY_RESOURCE_URI, 
-                query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI LIKE :uri"),
-        @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS_BY_BULK_ID, 
-                query = "SELECT authorization.id FROM Authorization authorization WHERE authorization.thirdParty = :thirdParty AND authorization.scope LIKE :bulkId"),
-        @NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS_BY_APPLICATION_INFORMATION_ID,
-                query = "SELECT authorization.id FROM Authorization authorization where authorization.applicationInformation.id = :applicationInformationId")
-                 
-})
-public class Authorization
-        extends IdentifiedObject {
+		@NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS, query = "SELECT authorization.id FROM Authorization authorization"),
+		@NamedQuery(name = Authorization.QUERY_FIND_BY_ID, query = "SELECT authorization FROM Authorization authorization WHERE authorization.id = :id"),
+		@NamedQuery(name = Authorization.QUERY_FIND_BY_RETAIL_CUSTOMER_ID, query = "SELECT authorization FROM Authorization authorization WHERE authorization.retailCustomer.id = :retailCustomerId AND authorization.resourceURI IS NOT NULL"),
+		@NamedQuery(name = Authorization.QUERY_FIND_BY_SCOPE, query = "SELECT authorization FROM Authorization authorization WHERE authorization.scope = :scope AND authorization.retailCustomer.id = :retailCustomerId"),
+		@NamedQuery(name = Authorization.QUERY_FIND_BY_STATE, query = "SELECT authorization FROM Authorization authorization WHERE authorization.state = :state"),
+		@NamedQuery(name = Authorization.QUERY_FIND_BY_UUID, query = "SELECT authorization FROM Authorization authorization WHERE authorization.uuid = :uuid"),
+		@NamedQuery(name = Authorization.QUERY_FIND_BY_ACCESS_TOKEN, query = "SELECT authorization from Authorization authorization WHERE authorization.accessToken = :accessToken"),
+		@NamedQuery(name = Authorization.QUERY_FIND_BY_REFRESH_TOKEN, query = "SELECT authorization from Authorization authorization WHERE authorization.refreshToken = :refreshToken"),
+		@NamedQuery(name = Authorization.QUERY_FIND_BY_RESOURCE_URI, query = "SELECT authorization FROM Authorization authorization WHERE authorization.resourceURI LIKE :uri"),
+		@NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS_BY_BULK_ID, query = "SELECT authorization.id FROM Authorization authorization WHERE authorization.thirdParty = :thirdParty AND authorization.scope LIKE :bulkId"),
+		@NamedQuery(name = Authorization.QUERY_FIND_ALL_IDS_BY_APPLICATION_INFORMATION_ID, query = "SELECT authorization.id FROM Authorization authorization where authorization.applicationInformation.id = :applicationInformationId")
 
-    public static final String QUERY_FIND_ALL_IDS = "Authorization.findAllIds";
-    public static final String QUERY_FIND_BY_ID = "Authorization.findById";
-    public static final String QUERY_FIND_BY_RETAIL_CUSTOMER_ID = "Authorization.findAllByRetailCustomerId";    
+})
+public class Authorization extends IdentifiedObject {
+
+	public static final String QUERY_FIND_ALL_IDS = "Authorization.findAllIds";
+	public static final String QUERY_FIND_BY_ID = "Authorization.findById";
+	public static final String QUERY_FIND_BY_RETAIL_CUSTOMER_ID = "Authorization.findAllByRetailCustomerId";
 	public static final String QUERY_FIND_BY_SCOPE = "Authorization.findByScope";
-    public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";	
+	public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";
 	public final static String QUERY_FIND_BY_UUID = "Authorization.findByUUID";
 	public final static String QUERY_FIND_BY_ACCESS_TOKEN = "Authorization.findByAccessToken";
 	public final static String QUERY_FIND_BY_REFRESH_TOKEN = "Authorization.findByRefreshToken";
@@ -158,590 +134,545 @@ public class Authorization
 	public static final String QUERY_FIND_ALL_IDS_BY_BULK_ID = "Authorization.findAllIdsByBulkId";
 	public static final String QUERY_FIND_ALL_IDS_BY_APPLICATION_INFORMATION_ID = "Authorization.findAllIdsByApplicationInformationId";
 
-    @Embedded
-    @AttributeOverrides({
-    	@AttributeOverride(name="start", column=@Column(name="ap_start")),
-    	@AttributeOverride(name="duration", column=@Column(name="ap_duration"))
-    })
-    protected DateTimeInterval authorizedPeriod;
+	@Embedded
+	@AttributeOverrides({
+			@AttributeOverride(name = "start", column = @Column(name = "ap_start")),
+			@AttributeOverride(name = "duration", column = @Column(name = "ap_duration")) })
+	@XmlElement(name = "")
+	protected DateTimeInterval authorizedPeriod;
 
-    @Embedded 
-    @AttributeOverrides({
-    	@AttributeOverride(name="start", column=@Column(name="pp_start")),
-    	@AttributeOverride(name="duration", column=@Column(name="pp_duration"))
-    })
+	@Embedded
+	@AttributeOverrides({
+			@AttributeOverride(name = "start", column = @Column(name = "pp_start")),
+			@AttributeOverride(name = "duration", column = @Column(name = "pp_duration")) })
 	protected DateTimeInterval publishedPeriod;
-    
-    @Column(name = "access_token")
-    protected String accessToken;
-    
-    @Column(name = "authorization_uri")
-    @XmlSchemaType(name = "anyURI")
-    
-    protected String authorizationURI;
-    @XmlSchemaType(name = "anyURI")
-    
-    protected String resourceURI;
-    
-    @Column(name = "status")
-    protected String status;
-    
-    @Column(name = "third_party")
-    protected String thirdParty;
-    
-    @ManyToOne (cascade = CascadeType.DETACH) @JoinColumn(name = "retail_customer_id")
-//    @XmlElement(name = "referenceID")
-    @XmlTransient
-    protected RetailCustomer retailCustomer;
 
-    @OneToOne (cascade = CascadeType.REMOVE)  @JoinColumn(name = "subscription_id")
-    @XmlTransient
-    protected Subscription subscription;
-    
-    @XmlElement(name = "expires_in")
-    protected Long expiresIn;
-    
-    @XmlElement(name = "grant_type")
-    protected GrantType grantType;
-    
-    @XmlElement(name = "refresh_token")
-    protected String refreshToken;
-    
-    @Column(name = "scope")
-    private String scope;
-    
-    @Column(name = "state")
-    private String state;
-    
-    @XmlElement(name = "response_type")
-    protected ResponseType responseType;
-    
-    @XmlElement(name = "token_type")
-    protected TokenType tokenType;
-    
-    protected String code;
-    
-    @XmlElement(name = "error")
-    protected OAuthError error;
-    
-    @XmlElement(name = "error_description")
-    protected String errorDescription;
-    
-    @XmlElement(name = "error_uri")
-    @XmlSchemaType(name = "anyURI")
-    protected String errorUri;
-    
-    @ManyToOne (cascade = CascadeType.DETACH) @JoinColumn(name = "application_information_id")
-    @XmlTransient
-    private ApplicationInformation applicationInformation;
-    
-    public Subscription getSubscription () {
-    	return this.subscription;
-    }
-    
-    public void setSubscription (Subscription subscription) {
-    	this.subscription = subscription;
-    }
-    
-    /**
-     * Gets the value of the authorizedPeriod property.
-     *
-     * @return
-     *     possible object is
-     *     {@link DateTimeInterval }
-     *
-     */
-    public DateTimeInterval getAuthorizedPeriod() {
-        return authorizedPeriod;
-    }
+	@Column(name = "access_token")
+	@XmlElement(name = "access_token")
+	protected String accessToken;
 
-    /**
-     * Sets the value of the authorizedPeriod property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link DateTimeInterval }
-     *
-     */
-    public void setAuthorizedPeriod(DateTimeInterval value) {
-        this.authorizedPeriod = value;
-    }
+	@Column(name = "authorization_uri")
+	@XmlSchemaType(name = "anyURI")
+	protected String authorizationURI;
+	@XmlSchemaType(name = "anyURI")
+	protected String resourceURI;
 
-    /**
-     * Gets the value of the publishedPeriod property.
-     *
-     * @return
-     *     possible object is
-     *     {@link DateTimeInterval }
-     *
-     */
-    public DateTimeInterval getPublishedPeriod() {
-        return publishedPeriod;
-    }
+	@Column(name = "status")
+	protected String status;
 
-    /**
-     * Sets the value of the publishedPeriod property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link DateTimeInterval }
-     *
-     */
-    public void setPublishedPeriod(DateTimeInterval value) {
-        this.publishedPeriod = value;
-    }
+	@Column(name = "third_party")
+	@XmlElement(name = "third_party")
+	protected String thirdParty;
 
-    /**
-     * Gets the value of the accessToken property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
-    public String getAccessToken() {
-        return accessToken;
-    }
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "retail_customer_id")
+	// @XmlElement(name = "referenceID")
+	@XmlTransient
+	protected RetailCustomer retailCustomer;
 
-    /**
-     * Sets the value of the accessToken property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
-    public void setAccessToken(String value) {
-        this.accessToken = value;
-    }
+	@OneToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "subscription_id")
+	@XmlTransient
+	protected Subscription subscription;
 
-    /**
-     * Gets the value of the status property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
-    public String getStatus() {
-        return status;
-    }
+	@XmlElement(name = "expires_at")
+	protected Long expiresIn;
 
-    /**
-     * Sets the value of the status property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
-    public void setStatus(String value) {
-        this.status = value;
-    }
+	@XmlElement(name = "grant_type")
+	protected GrantType grantType;
 
-    /**
-     * Gets the value of the expiresIn property.
-     *
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *
-     */
-    public Long getExpiresIn() {
-        return expiresIn;
-    }
+	@XmlElement(name = "refresh_token")
+	protected String refreshToken;
 
-    /**
-     * Sets the value of the expiresIn property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *
-     */
-    public void setExpiresIn(Long value) {
-        this.expiresIn = value;
-    }
+	@Column(name = "scope")
+	private String scope;
 
-    /**
-     * Gets the value of the grantType property.
-     *
-     * @return
-     *     possible object is
-     *     {@link GrantType }
-     *
-     */
-    public GrantType getGrantType() {
-        return grantType;
-    }
+	@Column(name = "state")
+	@XmlTransient
+	private String state;
 
-    /**
-     * Sets the value of the grantType property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link GrantType }
-     *
-     */
-    public void setGrantType(GrantType value) {
-        this.grantType = value;
-    }
+	@XmlElement(name = "response_type")
+	protected ResponseType responseType;
 
-    /**
-     * Sets the value of the grantType property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link GrantType }
-     *
-     */
-    public void setGrantType(String value) {
-        this.grantType = GrantType.fromValue(value);
-    }
-    
-    /**
-     * Gets the value of the resource property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
-    public String getResourceURI() {
-        return resourceURI;
-    }
+	@XmlElement(name = "token_type")
+	protected TokenType tokenType;
 
-    /**
-     * Sets the value of the resource property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
-    public void setResourceURI(String value) {
-        this.resourceURI = value;
-    }
+	protected String code;
 
-    /**
-     * Gets the value of the refreshToken property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
-    public String getRefreshToken() {
-        return refreshToken;
-    }
+	@XmlElement(name = "error")
+	protected OAuthError error;
 
-    /**
-     * Sets the value of the refreshToken property.
-     *
-     * @param oAuth2RefreshToken
-     *     allowed object is
-     *     {@link String }
-     *
-     */
-    public void setRefreshToken(String value) {
-    	if(value != null) {
-    		this.refreshToken = value;
-    	}
-    }
+	@XmlElement(name = "error_description")
+	protected String errorDescription;
 
-    /**
-     * Gets the value of the scope property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
-    public String getScope() {
-        return scope;
-    }
+	@XmlElement(name = "error_uri")
+	@XmlSchemaType(name = "anyURI")
+	protected String errorUri;
 
-    /**
-     * Sets the value of the scope property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
-    public void setScope(String value) {
-        this.scope = value;
-    }
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "application_information_id")
+	@XmlTransient
+	private ApplicationInformation applicationInformation;
 
-    /**
-     * Gets the value of the state property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
-    public String getState() {
-        return state;
-    }
+	public Subscription getSubscription() {
+		return this.subscription;
+	}
 
-    /**
-     * Sets the value of the state property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
-    public void setState(String value) {
-        this.state = value;
-    }
+	public void setSubscription(Subscription subscription) {
+		this.subscription = subscription;
+	}
 
-    /**
-     * Gets the value of the responseType property.
-     *
-     * @return
-     *     possible object is
-     *     {@link ResponseType }
-     *
-     */
-    public ResponseType getResponseType() {
-        return responseType;
-    }
+	/**
+	 * Gets the value of the authorizedPeriod property.
+	 *
+	 * @return possible object is {@link DateTimeInterval }
+	 *
+	 */
+	public DateTimeInterval getAuthorizedPeriod() {
+		return authorizedPeriod;
+	}
 
-    /**
-     * Sets the value of the responseType property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link ResponseType }
-     *
-     */
-    public void setResponseType(ResponseType value) {
-        this.responseType = value;
-    }
+	/**
+	 * Sets the value of the authorizedPeriod property.
+	 *
+	 * @param value
+	 *            allowed object is {@link DateTimeInterval }
+	 *
+	 */
+	public void setAuthorizedPeriod(DateTimeInterval value) {
+		this.authorizedPeriod = value;
+	}
 
-    /**
-     * Sets the value of the responseType property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link ResponseType }
-     *
-     */
-    public void setResponseType(String value) {
-        this.responseType = ResponseType.fromValue(value);
-    }    
-    
-    /**
-     * Gets the value of the tokenType property.
-     *
-     * @return
-     *     possible object is
-     *     {@link TokenType }
-     *
-     */
-    public TokenType getTokenType() {
-        return tokenType;
-    }
+	/**
+	 * Gets the value of the publishedPeriod property.
+	 *
+	 * @return possible object is {@link DateTimeInterval }
+	 *
+	 */
+	public DateTimeInterval getPublishedPeriod() {
+		return publishedPeriod;
+	}
 
-    /**
-     * Sets the value of the tokenType property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link TokenType }
-     *
-     */
-    public void setTokenType(TokenType value) {
-        this.tokenType = value;
-    }
+	/**
+	 * Sets the value of the publishedPeriod property.
+	 *
+	 * @param value
+	 *            allowed object is {@link DateTimeInterval }
+	 *
+	 */
+	public void setPublishedPeriod(DateTimeInterval value) {
+		this.publishedPeriod = value;
+	}
 
-    /**
-     * Sets the value of the tokenType property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link TokenType }
-     *
-     */
-    public void setTokenType(String value) {
-        this.tokenType = TokenType.fromValue(value);
-    }
+	/**
+	 * Gets the value of the accessToken property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getAccessToken() {
+		return accessToken;
+	}
 
-    /**
-     * Gets the value of the code property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
-    public String getCode() {
-        return code;
-    }
+	/**
+	 * Sets the value of the accessToken property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 *
+	 */
+	public void setAccessToken(String value) {
+		this.accessToken = value;
+	}
 
-    /**
-     * Sets the value of the code property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
-    public void setCode(String value) {
-        this.code = value;
-    }
+	/**
+	 * Gets the value of the status property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getStatus() {
+		return status;
+	}
 
-    /**
-     * Gets the value of the error property.
-     *
-     * @return
-     *     possible object is
-     *     {@link OAuthError }
-     *
-     */
-    public OAuthError getError() {
-        return error;
-    }
+	/**
+	 * Sets the value of the status property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 *
+	 */
+	public void setStatus(String value) {
+		this.status = value;
+	}
 
-    /**
-     * Sets the value of the error property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link OAuthError }
-     *
-     */
-    public void setError(OAuthError value) {
-        this.error = value;
-    }
+	/**
+	 * Gets the value of the expiresIn property.
+	 *
+	 * @return possible object is {@link Long }
+	 *
+	 */
+	public Long getExpiresIn() {
+		return expiresIn;
+	}
 
+	/**
+	 * Sets the value of the expiresIn property.
+	 *
+	 * @param value
+	 *            allowed object is {@link Long }
+	 *
+	 */
+	public void setExpiresIn(Long value) {
+		this.expiresIn = value;
+	}
 
-    /**
-     * Sets the value of the error property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link OAuthError }
-     *
-     */
-    public void setError(String value) {
-        this.error = OAuthError.fromValue(value);
-    }    
-    
-    /**
-     * Gets the value of the errorDescription property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
-    public String getErrorDescription() {
-        return errorDescription;
-    }
+	/**
+	 * Gets the value of the grantType property.
+	 *
+	 * @return possible object is {@link GrantType }
+	 *
+	 */
+	public GrantType getGrantType() {
+		return grantType;
+	}
 
-    /**
-     * Sets the value of the errorDescription property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
-    public void setErrorDescription(String value) {
-        this.errorDescription = value;
-    }
+	/**
+	 * Sets the value of the grantType property.
+	 *
+	 * @param value
+	 *            allowed object is {@link GrantType }
+	 *
+	 */
+	public void setGrantType(GrantType value) {
+		this.grantType = value;
+	}
 
-    /**
-     * Gets the value of the errorUri property.
-     *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
-     */
-    public String getErrorUri() {
-        return errorUri;
-    }
+	/**
+	 * Sets the value of the grantType property.
+	 *
+	 * @param value
+	 *            allowed object is {@link GrantType }
+	 *
+	 */
+	public void setGrantType(String value) {
+		this.grantType = GrantType.fromValue(value);
+	}
 
-    /**
-     * Sets the value of the errorUri property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
-     */
-    public void setErrorUri(String value) {
-        this.errorUri = value;
-    }  
-    
-    public String getAuthorizationURI() {
-        return authorizationURI;
-    }
+	/**
+	 * Gets the value of the resource property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getResourceURI() {
+		return resourceURI;
+	}
 
-    public void setAuthorizationURI(String authorizationServerURI) {
-        this.authorizationURI = authorizationServerURI;
-    }
-    
-    public String getThirdParty() {
-        return thirdParty;
-    }
+	/**
+	 * Sets the value of the resource property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 *
+	 */
+	public void setResourceURI(String value) {
+		this.resourceURI = value;
+	}
 
-    public void setThirdParty(String thirdParty) {
-        this.thirdParty = thirdParty;
-    }
+	/**
+	 * Gets the value of the refreshToken property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getRefreshToken() {
+		return refreshToken;
+	}
 
-    public RetailCustomer getRetailCustomer() {
-        return retailCustomer;
-    }
+	/**
+	 * Sets the value of the refreshToken property.
+	 *
+	 * @param oAuth2RefreshToken
+	 *            allowed object is {@link String }
+	 *
+	 */
+	public void setRefreshToken(String value) {
+		if (value != null) {
+			this.refreshToken = value;
+		}
+	}
 
-    public void setRetailCustomer(RetailCustomer retailCustomer) {
-        this.retailCustomer = retailCustomer;
-    }
+	/**
+	 * Gets the value of the scope property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getScope() {
+		return scope;
+	}
 
-    public ApplicationInformation getApplicationInformation() {
-        return applicationInformation;
-    }
+	/**
+	 * Sets the value of the scope property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 *
+	 */
+	public void setScope(String value) {
+		this.scope = value;
+	}
 
-    public void setApplicationInformation(ApplicationInformation applicationInformation) {
-        this.applicationInformation = applicationInformation;
-    }
+	/**
+	 * Gets the value of the state property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getState() {
+		return state;
+	}
 
-    public String getSubscriptionId() {
-        String[] pieces = resourceURI.split("/");
-        return pieces[pieces.length-1];
-    }
-    
-    public void merge(IdentifiedObject resource) {
-    	super.merge(resource);
-  	  this.accessToken = ((Authorization)resource).getAccessToken();
-  	  this.applicationInformation = ((Authorization)resource).getApplicationInformation();
-  	  this.authorizationURI = ((Authorization)resource).authorizationURI;
-  	  this.authorizedPeriod = ((Authorization)resource).getAuthorizedPeriod();
-  	  this.code = ((Authorization)resource).getCode();
-  	  this.description = ((Authorization)resource).getDescription();
-  	  this.error = ((Authorization)resource).getError();
-  	  this.errorDescription = ((Authorization)resource).getErrorDescription();
-  	  this.errorUri = ((Authorization)resource).getErrorUri();
-  	  this.expiresIn = ((Authorization)resource).getExpiresIn();
-  	  this.grantType = ((Authorization)resource).getGrantType();
-  	  this.href = ((Authorization)resource).getHref();
-  	  this.publishedPeriod = ((Authorization)resource).getPublishedPeriod();
-  	  this.refreshToken = ((Authorization)resource).getRefreshToken();
-  	  this.replyTo = ((Authorization)resource).getReplyTo();
-  	  this.resourceURI = ((Authorization)resource).getResourceURI();
-  	  this.responseRequired = ((Authorization)resource).getResponseRequired();
-  	  this.retailCustomer = ((Authorization)resource).getRetailCustomer();
-  	  this.scope = ((Authorization)resource).getScope();
-  	  this.signatureRequired = ((Authorization)resource).signatureRequired;
-  	  this.state = ((Authorization)resource).getState();
-  	  this.status = ((Authorization)resource).getStatus();
-  	  this.subscribable = ((Authorization)resource).subscribable;
-  	  this.thirdParty = ((Authorization)resource).getThirdParty();
-  	  this.tokenType = ((Authorization)resource).getTokenType();
-    }
-    
+	/**
+	 * Sets the value of the state property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 *
+	 */
+	public void setState(String value) {
+		this.state = value;
+	}
+
+	/**
+	 * Gets the value of the responseType property.
+	 *
+	 * @return possible object is {@link ResponseType }
+	 *
+	 */
+	public ResponseType getResponseType() {
+		return responseType;
+	}
+
+	/**
+	 * Sets the value of the responseType property.
+	 *
+	 * @param value
+	 *            allowed object is {@link ResponseType }
+	 *
+	 */
+	public void setResponseType(ResponseType value) {
+		this.responseType = value;
+	}
+
+	/**
+	 * Sets the value of the responseType property.
+	 *
+	 * @param value
+	 *            allowed object is {@link ResponseType }
+	 *
+	 */
+	public void setResponseType(String value) {
+		this.responseType = ResponseType.fromValue(value);
+	}
+
+	/**
+	 * Gets the value of the tokenType property.
+	 *
+	 * @return possible object is {@link TokenType }
+	 *
+	 */
+	public TokenType getTokenType() {
+		return tokenType;
+	}
+
+	/**
+	 * Sets the value of the tokenType property.
+	 *
+	 * @param value
+	 *            allowed object is {@link TokenType }
+	 *
+	 */
+	public void setTokenType(TokenType value) {
+		this.tokenType = value;
+	}
+
+	/**
+	 * Sets the value of the tokenType property.
+	 *
+	 * @param value
+	 *            allowed object is {@link TokenType }
+	 *
+	 */
+	public void setTokenType(String value) {
+		this.tokenType = TokenType.fromValue(value);
+	}
+
+	/**
+	 * Gets the value of the code property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getCode() {
+		return code;
+	}
+
+	/**
+	 * Sets the value of the code property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 *
+	 */
+	public void setCode(String value) {
+		this.code = value;
+	}
+
+	/**
+	 * Gets the value of the error property.
+	 *
+	 * @return possible object is {@link OAuthError }
+	 *
+	 */
+	public OAuthError getError() {
+		return error;
+	}
+
+	/**
+	 * Sets the value of the error property.
+	 *
+	 * @param value
+	 *            allowed object is {@link OAuthError }
+	 *
+	 */
+	public void setError(OAuthError value) {
+		this.error = value;
+	}
+
+	/**
+	 * Sets the value of the error property.
+	 *
+	 * @param value
+	 *            allowed object is {@link OAuthError }
+	 *
+	 */
+	public void setError(String value) {
+		this.error = OAuthError.fromValue(value);
+	}
+
+	/**
+	 * Gets the value of the errorDescription property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getErrorDescription() {
+		return errorDescription;
+	}
+
+	/**
+	 * Sets the value of the errorDescription property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 *
+	 */
+	public void setErrorDescription(String value) {
+		this.errorDescription = value;
+	}
+
+	/**
+	 * Gets the value of the errorUri property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getErrorUri() {
+		return errorUri;
+	}
+
+	/**
+	 * Sets the value of the errorUri property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 *
+	 */
+	public void setErrorUri(String value) {
+		this.errorUri = value;
+	}
+
+	public String getAuthorizationURI() {
+		return authorizationURI;
+	}
+
+	public void setAuthorizationURI(String authorizationServerURI) {
+		this.authorizationURI = authorizationServerURI;
+	}
+
+	public String getThirdParty() {
+		return thirdParty;
+	}
+
+	public void setThirdParty(String thirdParty) {
+		this.thirdParty = thirdParty;
+	}
+
+	public RetailCustomer getRetailCustomer() {
+		return retailCustomer;
+	}
+
+	public void setRetailCustomer(RetailCustomer retailCustomer) {
+		this.retailCustomer = retailCustomer;
+	}
+
+	public ApplicationInformation getApplicationInformation() {
+		return applicationInformation;
+	}
+
+	public void setApplicationInformation(
+			ApplicationInformation applicationInformation) {
+		this.applicationInformation = applicationInformation;
+	}
+
+	public String getSubscriptionId() {
+		String[] pieces = resourceURI.split("/");
+		return pieces[pieces.length - 1];
+	}
+
+	public void merge(IdentifiedObject resource) {
+		super.merge(resource);
+		this.accessToken = ((Authorization) resource).getAccessToken();
+		this.applicationInformation = ((Authorization) resource)
+				.getApplicationInformation();
+		this.authorizationURI = ((Authorization) resource).authorizationURI;
+		this.authorizedPeriod = ((Authorization) resource)
+				.getAuthorizedPeriod();
+		this.code = ((Authorization) resource).getCode();
+		this.description = ((Authorization) resource).getDescription();
+		this.error = ((Authorization) resource).getError();
+		this.errorDescription = ((Authorization) resource)
+				.getErrorDescription();
+		this.errorUri = ((Authorization) resource).getErrorUri();
+		this.expiresIn = ((Authorization) resource).getExpiresIn();
+		this.grantType = ((Authorization) resource).getGrantType();
+		this.href = ((Authorization) resource).getHref();
+		this.publishedPeriod = ((Authorization) resource).getPublishedPeriod();
+		this.refreshToken = ((Authorization) resource).getRefreshToken();
+		this.replyTo = ((Authorization) resource).getReplyTo();
+		this.resourceURI = ((Authorization) resource).getResourceURI();
+		this.responseRequired = ((Authorization) resource)
+				.getResponseRequired();
+		this.retailCustomer = ((Authorization) resource).getRetailCustomer();
+		this.scope = ((Authorization) resource).getScope();
+		this.signatureRequired = ((Authorization) resource).signatureRequired;
+		this.state = ((Authorization) resource).getState();
+		this.status = ((Authorization) resource).getStatus();
+		this.subscribable = ((Authorization) resource).subscribable;
+		this.thirdParty = ((Authorization) resource).getThirdParty();
+		this.tokenType = ((Authorization) resource).getTokenType();
+	}
+
 }
