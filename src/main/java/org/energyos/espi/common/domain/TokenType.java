@@ -44,6 +44,11 @@ public enum TokenType {
     }
 
     public static TokenType fromValue(String v) {
+    	// lower case the value to insure the OAuth2 representation of "bearer" is satisfied
+    	// ref: https://github.com/energyos/OpenESPI-ommon-java/issues/190
+    	
+    	if (v.equals("Bearer")) v = v.toLowerCase();
+    	
         for (TokenType c: TokenType.values()) {
             if (c.value.equals(v)) {
                 return c;
