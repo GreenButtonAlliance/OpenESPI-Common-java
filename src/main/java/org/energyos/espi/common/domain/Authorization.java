@@ -161,7 +161,7 @@ public class Authorization extends IdentifiedObject {
 	protected String status;
 
 	@Column(name = "third_party")
-	@XmlElement(name = "third_party")
+	@XmlTransient
 	protected String thirdParty;
 
 	@ManyToOne(cascade = CascadeType.DETACH)
