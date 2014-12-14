@@ -101,8 +101,8 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 @XmlType(name = "Authorization", propOrder = { "authorizedPeriod",
 		"publishedPeriod", "accessToken", "status", "expiresIn", "grantType",
 		"refreshToken", "scope", "responseType", "tokenType", "code", "error",
-		"errorDescription", "errorUri", "resourceURI", "authorizationURI",
-		"thirdParty" })
+		"errorDescription", "errorUri", "resourceURI", "authorizationURI"
+		})
 @Entity
 @Table(name = "authorizations")
 @XmlJavaTypeAdapter(AuthorizationAdapter.class)
