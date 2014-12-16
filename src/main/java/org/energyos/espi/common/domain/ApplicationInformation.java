@@ -114,6 +114,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ApplicationInformation", propOrder = {
+	    "dataCustodianId",
 	    "dataCustodianApplicationStatus",
 	    "dataCustodianDefaultBatchResource",
 	    "dataCustodianDefaultSubscriptionResource",
@@ -153,7 +154,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 	    "responseTypes",
 	    "registrationClientUri",
 	    "registrationAccessToken",
-	    "dataCustodianId",
 	    "thirdPartyApplicationName",
 	    "dataCustodianScopeSelectionScreenURI"
 	})
