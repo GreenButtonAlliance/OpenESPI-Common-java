@@ -3,7 +3,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20140924     
+    Version: 0.7.20141216     
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -111,7 +111,6 @@ self link to this resource</xs:documentation>
 							<xs:documentation>URI used to notify ThirdParty that subscribed information is available. (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/Notification")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<!--Johns adds-->
 					<xs:element name="authorizationServerAuthorizationEndpoint" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>An OAuth 2.0 URI used by the client to obtain authorization from the resource owner via user-agent redirection - {AuthorizationServer}{AuthorizationPath}. (e.g.  "https://services.greenbuttondata.org/DataCustodian/oauth/authorize" </xs:documentation>
@@ -278,11 +277,13 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 							<xs:documentation>Restricts access to the objects within the associated resource that were published within this date time interval. (e.g. "duration=31536000" for most recent 365 days)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+<!--
 					<xs:element name="access_token" type="String512" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Contains the access token associated with this authorization. (OAuth contains access_token for RetailCustomer resources obtained through authorization code flow, registration_access_token obtained in the registration process, and an access_token obtained through  client credentials flow) (e.g. "AA886A7A-078D-4307-A3D9-AA036796DBC3")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+-->					
 					<xs:element name="status" type="AuthorizationStatus" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>The status of this authorization. (e.g. "1" => active)</xs:documentation>
@@ -298,11 +299,13 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 							<xs:documentation>Type of grant being negotiated for. (e.g. "authorization_code")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+<!--					
 					<xs:element name="refresh_token" type="String512" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Used to obtain a fresh access_token. (e.g. "AA886A7A-078D-4307-A3D9-AA036796DBC4")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+-->					
 					<xs:element name="scope" type="String256" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Negotiated scope of the authorization. (e.g. "FB=1_3_4_5_13_14_15_1937_39;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=94608000"</xs:documentation>
