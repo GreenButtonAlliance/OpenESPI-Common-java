@@ -76,7 +76,6 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
  *         &lt;element name="status" type="{http://naesb.org/espi}AuthorizationStatus" minOccurs="0"/>
  *         &lt;element name="expires_in" type="{http://naesb.org/espi}TimeType" minOccurs="0"/>
  *         &lt;element name="grant_type" type="{http://naesb.org/espi}GrantType" minOccurs="0"/>
- *         &lt;element name="refresh_token" type="{http://naesb.org/espi}String512" minOccurs="0"/>
  *         &lt;element name="scope" type="{http://naesb.org/espi}String256" minOccurs="0"/>
  *         &lt;element name="state" type="{http://naesb.org/espi}String256" minOccurs="0"/>
  *         &lt;element name="response_type" type="{http://naesb.org/espi}ResponseType" minOccurs="0"/>
@@ -99,8 +98,8 @@ import org.energyos.espi.common.models.atom.adapters.AuthorizationAdapter;
 @SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Authorization", propOrder = { "authorizedPeriod",
-		"publishedPeriod", "accessToken", "status", "expiresIn", "grantType",
-		"refreshToken", "scope", "responseType", "tokenType", "code", "error",
+		"publishedPeriod", "status", "expiresIn", "grantType",
+		"scope", "responseType", "tokenType", "code", "error",
 		"errorDescription", "errorUri", "resourceURI", "authorizationURI"
 		})
 @Entity
@@ -148,7 +147,7 @@ public class Authorization extends IdentifiedObject {
 	protected DateTimeInterval publishedPeriod;
 
 	@Column(name = "access_token")
-	@XmlElement(name = "access_token")
+	@XmlTransient
 	protected String accessToken;
 
 	@Column(name = "authorization_uri")
@@ -181,7 +180,7 @@ public class Authorization extends IdentifiedObject {
 	@XmlElement(name = "grant_type")
 	protected GrantType grantType;
 
-	@XmlElement(name = "refresh_token")
+	@XmlTransient
 	protected String refreshToken;
 
 	@Column(name = "scope")
