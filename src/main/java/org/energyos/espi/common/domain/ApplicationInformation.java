@@ -154,7 +154,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 	    "responseTypes",
 	    "registrationClientUri",
 	    "registrationAccessToken",
-	    "thirdPartyApplicationName",
 	    "dataCustodianScopeSelectionScreenURI"
 	})
 @Entity
@@ -337,7 +336,7 @@ public class ApplicationInformation
     
     @NotEmpty
     @Size(min = 2, max = 64)
-    @XmlElement(name = "thirdPartyApplicationName")
+    @XmlTransient
     protected String thirdPartyApplicationName;
    
     public String getKind() {
