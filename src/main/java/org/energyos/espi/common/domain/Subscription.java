@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema. 
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
-
 
 package org.energyos.espi.common.domain;
 
@@ -48,12 +47,17 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 /**
- * Defines the parameters of a subscription between Third Party and Data Custodian.
+ * Defines the parameters of a subscription between Third Party and Data
+ * Custodian.
  * <p/>
- * <p>Java class for Subscription complex type.
+ * <p>
+ * Java class for Subscription complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="Subscription">
  *   &lt;complexContent>
@@ -69,127 +73,126 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "subscriptions")
 @XmlJavaTypeAdapter(SubscriptionAdapter.class)
 @NamedQueries(value = {
-        @NamedQuery(name = Subscription.QUERY_FIND_BY_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.id = :id"),
-        @NamedQuery(name = Subscription.QUERY_FIND_BY_UUID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.uuid = :uuid"),
-        @NamedQuery(name = Subscription.QUERY_FIND_ALL, query = "SELECT subscription FROM Subscription subscription"),
-        @NamedQuery(name = Subscription.QUERY_FIND_BY_HASHED_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.hashedId = :hashedId"),
-        @NamedQuery(name = Subscription.QUERY_FIND_ALL_IDS, query = "SELECT subscription.id FROM Subscription subscription"),
-        @NamedQuery(name = Subscription.QUERY_FIND_BY_AUTHORIZATION_ID, query = "SELECT subscription from Subscription subscription WHERE subscription.authorization.id = :id")
-        })
-
-public class Subscription
-        extends IdentifiedObject {
+		@NamedQuery(name = Subscription.QUERY_FIND_BY_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.id = :id"),
+		@NamedQuery(name = Subscription.QUERY_FIND_BY_UUID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.uuid = :uuid"),
+		@NamedQuery(name = Subscription.QUERY_FIND_ALL, query = "SELECT subscription FROM Subscription subscription"),
+		@NamedQuery(name = Subscription.QUERY_FIND_BY_HASHED_ID, query = "SELECT subscription FROM Subscription subscription WHERE subscription.hashedId = :hashedId"),
+		@NamedQuery(name = Subscription.QUERY_FIND_ALL_IDS, query = "SELECT subscription.id FROM Subscription subscription"),
+		@NamedQuery(name = Subscription.QUERY_FIND_BY_AUTHORIZATION_ID, query = "SELECT subscription from Subscription subscription WHERE subscription.authorization.id = :id") })
+public class Subscription extends IdentifiedObject {
 
 	public final static String QUERY_FIND_BY_UUID = "Subscription.findByUUID";
-    public static final String QUERY_FIND_BY_ID = "Subscription.findById";
+	public static final String QUERY_FIND_BY_ID = "Subscription.findById";
 	public final static String QUERY_FIND_ALL = "Subscription.findAll";
-    public final static String QUERY_FIND_BY_HASHED_ID = "Subscription.findByHashedID";
-    public static final String QUERY_FIND_ALL_IDS = "Subscription.findAllIds";
-    public static final String QUERY_FIND_BY_AUTHORIZATION_ID = "Subscription.findByAuthorizationId";
+	public final static String QUERY_FIND_BY_HASHED_ID = "Subscription.findByHashedID";
+	public static final String QUERY_FIND_ALL_IDS = "Subscription.findAllIds";
+	public static final String QUERY_FIND_BY_AUTHORIZATION_ID = "Subscription.findByAuthorizationId";
 
-    private String hashedId;
+	private String hashedId;
 
-    @ManyToOne
-    @JoinColumn(name = "retail_customer_id")
-    @NotNull
-    @XmlTransient
-    protected RetailCustomer retailCustomer;
+	@ManyToOne
+	@JoinColumn(name = "retail_customer_id")
+	@NotNull
+	@XmlTransient
+	protected RetailCustomer retailCustomer;
 
-    @XmlTransient
-    @OneToOne (cascade = CascadeType.REMOVE)
-    private Authorization authorization;
+	@XmlTransient
+	@OneToOne(cascade = CascadeType.REMOVE)
+	private Authorization authorization;
 
-    @OneToOne
-    @NotNull
-    private ApplicationInformation applicationInformation;
+	@OneToOne
+	@NotNull
+	@XmlTransient
+	private ApplicationInformation applicationInformation;
 
-    @XmlTransient
-    @ManyToMany (cascade = CascadeType.DETACH)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<UsagePoint> usagePoints;
+	@XmlTransient
+	@ManyToMany(cascade = CascadeType.DETACH)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<UsagePoint> usagePoints;
 
-    public Calendar lastUpdate;    
-    
-    public String getHashedId() {
-        return hashedId;
-    }
+	private Calendar lastUpdate;
 
-    public void setHashedId(String hashedId) {
-        this.hashedId = hashedId;
-    }
-    
-    public RetailCustomer getRetailCustomer() {
-        return retailCustomer;
-    }
+	public String getHashedId() {
+		return hashedId;
+	}
 
-    public void setRetailCustomer(RetailCustomer retailCustomer) {
-        this.retailCustomer = retailCustomer;
-    }
+	public void setHashedId(String hashedId) {
+		this.hashedId = hashedId;
+	}
 
-    public ApplicationInformation getApplicationInformation() {
-        return applicationInformation;
-    }
+	public RetailCustomer getRetailCustomer() {
+		return retailCustomer;
+	}
 
-    public void setApplicationInformation(ApplicationInformation applicationInformation) {
-        this.applicationInformation = applicationInformation;
-    }
+	public void setRetailCustomer(RetailCustomer retailCustomer) {
+		this.retailCustomer = retailCustomer;
+	}
 
-    public void setLastUpdate(Calendar lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
+	public ApplicationInformation getApplicationInformation() {
+		return applicationInformation;
+	}
 
-    public Calendar getLastUpdate() {
-        return lastUpdate;
-    }
+	public void setApplicationInformation(
+			ApplicationInformation applicationInformation) {
+		this.applicationInformation = applicationInformation;
+	}
 
-    public List<UsagePoint> getUsagePoints() {
-        return usagePoints;
-    }
-    
-    public void setUsagePoints(List<UsagePoint> usagePoints) {
-        this.usagePoints = usagePoints;
-    }
+	public void setLastUpdate(Calendar lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
 
-    public void removeUsagePoint(UsagePoint up) {
-    	usagePoints.remove(up);
-    }
-    
-    public Authorization getAuthorization() {
-        return authorization;
-    }
+	public Calendar getLastUpdate() {
+		return lastUpdate;
+	}
 
-    public void setAuthorization(Authorization authorization) {
-        this.authorization = authorization;
-    }
-    
-    @Override
-    public void merge(IdentifiedObject resource) {
-    	super.merge(resource);
-    	if (((Subscription)resource).applicationInformation != null) {
-    		this.applicationInformation = ((Subscription)resource).applicationInformation;
-    	}
-    	if (((Subscription)resource).authorization != null){
-    		this.authorization = ((Subscription)resource).authorization;
-    	}
-    	if (((Subscription)resource).lastUpdate != null) {
-    		this.lastUpdate = ((Subscription)resource).lastUpdate;
-    	}
-        if (((Subscription)resource).retailCustomer != null) {
-        	this.retailCustomer = ((Subscription)resource).retailCustomer;
-        }
-        if (((Subscription)resource).usagePoints != null) {
-        	this.usagePoints = ((Subscription)resource).usagePoints;
-        }
-    }
-    
-    @Override
-    public void unlink() {
-    	super.unlink();
-    	this.usagePoints.clear();
-    	this.authorization = null;
-    }
+	public List<UsagePoint> getUsagePoints() {
+		return usagePoints;
+	}
 
-    public boolean equals (Subscription s) {
-    	return (this.getId().equals(s.getId()));
-    }
+	public void setUsagePoints(List<UsagePoint> usagePoints) {
+		this.usagePoints = usagePoints;
+	}
+
+	public void removeUsagePoint(UsagePoint up) {
+		usagePoints.remove(up);
+	}
+
+	public Authorization getAuthorization() {
+		return authorization;
+	}
+
+	public void setAuthorization(Authorization authorization) {
+		this.authorization = authorization;
+	}
+
+	@Override
+	public void merge(IdentifiedObject resource) {
+		super.merge(resource);
+		if (((Subscription) resource).applicationInformation != null) {
+			this.applicationInformation = ((Subscription) resource).applicationInformation;
+		}
+		if (((Subscription) resource).authorization != null) {
+			this.authorization = ((Subscription) resource).authorization;
+		}
+		if (((Subscription) resource).lastUpdate != null) {
+			this.lastUpdate = ((Subscription) resource).lastUpdate;
+		}
+		if (((Subscription) resource).retailCustomer != null) {
+			this.retailCustomer = ((Subscription) resource).retailCustomer;
+		}
+		if (((Subscription) resource).usagePoints != null) {
+			this.usagePoints = ((Subscription) resource).usagePoints;
+		}
+	}
+
+	@Override
+	public void unlink() {
+		super.unlink();
+		this.usagePoints.clear();
+		this.authorization = null;
+	}
+
+	public boolean equals(Subscription s) {
+		return (this.getId().equals(s.getId()));
+	}
 }
