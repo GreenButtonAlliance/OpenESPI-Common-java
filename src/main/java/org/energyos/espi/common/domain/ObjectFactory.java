@@ -66,6 +66,8 @@ public class ObjectFactory {
     public final static QName ElectricPowerUsageSummary_QNAME = new QName("http://naesb.org/espi", "ElectricPowerUsageSummary");
     public final static QName LineItem_QNAME = new QName("http://naesb.org/espi", "LineItem");
     public final static QName RetailCustomer_QNAME = new QName("http://naesb.org/espi", "RetailCustomer");
+    public final static QName GrantType_QNAME = new QName("http://naesb.org/espi", "GrantType");
+    
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.naesb.espi
      */
@@ -329,6 +331,14 @@ public class ObjectFactory {
         return new JAXBElement<ApplicationInformation>(ApplicationInformation_QNAME, ApplicationInformation.class, null, value);
     }
 
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GrantType }{@code >}}
+     */
+    @XmlElementDecl(namespace = "http://naesb.org/espi", name = "GrantType")
+    public JAXBElement<GrantType> createGrantType(GrantType value) {
+        return new JAXBElement<GrantType>(GrantType_QNAME, GrantType.class, null, value);
+    }
+    
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DateTimeInterval }{@code >}}
      */

@@ -8,6 +8,8 @@
 
 package org.energyos.espi.common.domain;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
@@ -29,6 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
+
 @XmlType(name = "GrantType")
 @XmlEnum
 public enum GrantType {

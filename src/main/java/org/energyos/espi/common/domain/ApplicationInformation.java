@@ -25,13 +25,18 @@
 package org.energyos.espi.common.domain;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -39,6 +44,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -315,9 +321,17 @@ public class ApplicationInformation
     @CollectionTable(name="application_information_scopes", joinColumns=@JoinColumn(name="application_information_id"))
     private Set<String> scope = new HashSet<>();   
     
-    @XmlElement(name = "grant_types")
-    @XmlSchemaType(name = "GrantType")
-    protected String grantTypes;
+   
+    @XmlElementWrapper(name="grant_types")
+    @XmlElement(name = "grant_type")
+//    @XmlSchemaType(name = "GrantType")
+    @ElementCollection(targetClass=GrantType.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name="application_information_grant_types", joinColumns=@JoinColumn(name="application_information_id"))
+//    @CollectionTable(name="application_information_grant_types", joinColumns=@JoinColumn(name="application_information_id"))
+    @Enumerated(EnumType.STRING)
+
+    protected Set<GrantType> grantTypes = new HashSet<GrantType>();
     
     @XmlElement(name = "response_types")
     @XmlSchemaType(name = "ResponseType")
@@ -337,7 +351,7 @@ public class ApplicationInformation
     @NotEmpty
     @Size(min = 2, max = 64)
     @XmlTransient
-    protected String thirdPartyApplicationName;
+    protected String thirdPartyApplicationName = "Default Third Party Application Name";
    
     public String getKind() {
         return kind;
@@ -1190,16 +1204,16 @@ public class ApplicationInformation
      * 
      * 
      */
-    public String getGrantTypes() {
+    public Set<GrantType> getGrantTypes() {
         return this.grantTypes;
     }
 
 
-        private void setGrantTypes(String grantTypes) {
-                this.grantTypes = grantTypes;
+	public void setGrantTypes(Set<GrantType> grantTypes) {
+		this.grantTypes = grantTypes;
 
-        }
-	
+	}
+
     /**
      * Gets the value of the responseTypes property.
      * 

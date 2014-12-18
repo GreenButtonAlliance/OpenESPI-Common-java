@@ -53,6 +53,21 @@ CREATE TABLE `application_information_scopes` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `application_information_grant_types`
+--
+
+DROP TABLE IF EXISTS `application_information_grant_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `application_information_grant_types` (
+  `application_information_id` bigint(20) NOT NULL,
+  `grantTypes` varchar(255) DEFAULT NULL,
+  KEY `FK_61a6f8b0091946139543874e559` (`application_information_id`),
+  CONSTRAINT `FK_61a6f8b0091946139543874e559` FOREIGN KEY (`application_information_id`) REFERENCES `application_information` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `interval_readings`
 --
 
@@ -605,7 +620,6 @@ CREATE TABLE `application_information` (
   `dataCustodianId` varchar(64) DEFAULT NULL,
   `dataCustodianResourceEndpoint` varchar(255) DEFAULT NULL,
   `dataCustodianThirdPartySelectionScreenURI` varchar(255) DEFAULT NULL,
-  `grantTypes` tinyblob,
   `logoUri` varchar(255) DEFAULT NULL,
   `policyUri` varchar(255) DEFAULT NULL,
   `redirectUri` varchar(255) DEFAULT NULL,
