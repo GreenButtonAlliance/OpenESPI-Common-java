@@ -120,6 +120,46 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ApplicationInformation", propOrder = {
+		
+		
+		"dataCustodianId",
+		"dataCustodianApplicationStatus",
+		"thirdPartyApplicationDescription",
+		"thirdPartyApplicationStatus",
+		"thirdPartyApplicationType",
+		"thirdPartyApplicationUse",
+		"thirdPartyPhone",
+		"authorizationServerUri",
+		"thirdPartyNotifyUri",
+		"authorizationServerAuthorizationEndpoint",
+		"authorizationServerRegistrationEndpoint",
+		"authorizationServerTokenEndpoint",
+		"dataCustodianBulkRequestURI",
+		"dataCustodianResourceEndpoint",
+		"thirdPartyScopeSelectionScreenURI",
+		"thirdPartyUserPortalScreenURI",
+		"clientSecret",
+		"logoUri",
+		"clientName",
+		"clientUri",
+		"redirectUri",
+		"clientId",
+		"tosUri",
+		"policyUri",
+		"softwareId",
+		"softwareVersion",
+		"clientIdIssuedAt",
+		"clientSecretExpiresAt",
+		"contacts",
+		"tokenEndpointAuthMethod",
+		"scope",
+		"grantTypes",
+		"responseTypes",
+		"registrationClientUri",
+		"registrationAccessToken",
+		"dataCustodianScopeSelectionScreenURI",
+		
+	/* [mjb] 20141219 Old order doesnt match current schema and revisions
 	    "dataCustodianId",
 	    "dataCustodianApplicationStatus",
 	    "dataCustodianDefaultBatchResource",
@@ -161,6 +201,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 	    "registrationClientUri",
 	    "registrationAccessToken",
 	    "dataCustodianScopeSelectionScreenURI"
+	    */
 	})
 @Entity
 @Table(name = "application_information")
@@ -196,10 +237,12 @@ public class ApplicationInformation
     @XmlSchemaType(name = "DataCustodianApplicationStatus")
     protected String dataCustodianApplicationStatus;
     
-    @XmlSchemaType(name = "anyURI")
+    @XmlTransient
+//    @XmlSchemaType(name = "anyURI")
     protected String dataCustodianDefaultBatchResource;
     
-    @XmlSchemaType(name = "anyURI")
+    @XmlTransient
+//    @XmlSchemaType(name = "anyURI")
     protected String dataCustodianDefaultSubscriptionResource;
     
     protected String thirdPartyApplicationDescription;
@@ -236,21 +279,24 @@ public class ApplicationInformation
     @XmlElement(name = "dataCustodianBulkRequestURI")
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianBulkRequestURI;
-    
-    @XmlElement(name = "dataCustodianThirdPartySelectionScreenURI")
-    @XmlSchemaType(name = "anyURI")
+
+    @XmlTransient
+//    @XmlElement(name = "dataCustodianThirdPartySelectionScreenURI")
+//    @XmlSchemaType(name = "anyURI")
     protected String dataCustodianThirdPartySelectionScreenURI;
     
     @XmlElement(name = "dataCustodianResourceEndpoint")
     @XmlSchemaType(name = "anyURI")
     protected String dataCustodianResourceEndpoint;
     
-    @XmlElement(name = "thirdPartyDataCustodianSelectionScreenURI")
-    @XmlSchemaType(name = "anyURI")
+    @XmlTransient
+//    @XmlElement(name = "thirdPartyDataCustodianSelectionScreenURI")
+//    @XmlSchemaType(name = "anyURI")
     protected String thirdPartyDataCustodianSelectionScreenURI;
-    
-    @XmlElement(name = "thirdPartyLoginScreenURI")
-    @XmlSchemaType(name = "anyURI")
+
+    @XmlTransient
+//    @XmlElement(name = "thirdPartyLoginScreenURI")
+//    @XmlSchemaType(name = "anyURI")
     protected String thirdPartyLoginScreenURI;
     
     @XmlElement(name = "thirdPartyScopeSelectionScreenURI")
