@@ -10,8 +10,8 @@ INSERT INTO application_information_scopes (application_information_id, scope) V
 
 /* Add application_information_grant_types */ 
 
-INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (1, 'authorization_code');
-INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (1, 'refresh_token');
+INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (1, 'AUTHORIZATION_CODE');
+INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (1, 'REFRESH_TOKEN');
 
 /* Add authorizations */ 
 INSERT INTO authorizations (id, description, published, self_link_href, self_link_rel, up_link_href, up_link_rel, updated, uuid, access_token, authorization_uri, ap_duration, ap_start, code, error, errorDescription, errorUri, expiresIn, grantType, pp_duration, pp_start, refreshToken, resourceURI, responseType, scope, state, status, third_party, tokenType, application_information_id, retail_customer_id, subscription_id) 
