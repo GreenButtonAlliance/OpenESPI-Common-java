@@ -3,7 +3,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20141216     
+    Version: 0.7.20141220     
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -187,7 +187,7 @@ self link to this resource</xs:documentation>
 							<xs:documentation>A URI that points to a human-readable Policy document for the Third Party Application.  The policy usually describes how a Retail Customer's energy usage information will be used by the Third Party Application. (e.g. "http://services.greenbuttondata.org/ThirdParty/UsagePolicy")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="software_id" type="String32" minOccurs="0">
+					<xs:element name="software_id" type="String256" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>An identifier for the software that comprises the Third Party Application.  The software_id is asserted by the Third Party software and is intended to be shared between all copies of the Third Party software.  The value of this field MAY be a UUID [RFC4122]. (e.g. "MyCoolGreenButtonAnalyzer")</xs:documentation>
 						</xs:annotation>
