@@ -367,14 +367,10 @@ public class ApplicationInformation
     @CollectionTable(name="application_information_scopes", joinColumns=@JoinColumn(name="application_information_id"))
     private Set<String> scope = new HashSet<>();   
     
-   
-    @XmlElementWrapper(name="grant_types")
-    @XmlElement(name = "grant_type")
-//    @XmlSchemaType(name = "GrantType")
+    @XmlElement(name = "grant_types")
     @ElementCollection(targetClass=GrantType.class)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name="application_information_grant_types", joinColumns=@JoinColumn(name="application_information_id"))
-//    @CollectionTable(name="application_information_grant_types", joinColumns=@JoinColumn(name="application_information_id"))
     @Enumerated(EnumType.STRING)
 
     protected Set<GrantType> grantTypes = new HashSet<GrantType>();
