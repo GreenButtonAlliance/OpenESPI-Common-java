@@ -94,7 +94,7 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 		try {
 			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-			temp = resourceService.findAllIds(ElectricPowerUsageSummary.class);
+			temp = resourceService.findAllIdsByXPath(retailCustomerId, usagePointId, ElectricPowerUsageSummary.class);
 			result = (new EntryTypeIterator(resourceService, temp, ElectricPowerUsageSummary.class));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
@@ -111,7 +111,15 @@ public class ElectricPowerUsageSummaryServiceImpl implements ElectricPowerUsageS
 		try {
 			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-			temp.add(electricPowerUsageSummaryId);
+			temp = resourceService.findAllIdsByXPath(retailCustomerId, usagePointId, ElectricPowerUsageSummary.class);
+//			temp.add(electricPowerUsageSummaryId);
+			if (temp.contains(electricPowerUsageSummaryId)) { 
+				temp.clear();
+				temp.add(electricPowerUsageSummaryId);
+			} else {
+				temp.clear();
+			}
+		
 			result = (new EntryTypeIterator(resourceService, temp, ElectricPowerUsageSummary.class)).nextEntry(ElectricPowerUsageSummary.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
