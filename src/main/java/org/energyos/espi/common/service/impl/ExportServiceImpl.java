@@ -747,7 +747,7 @@ public class ExportServiceImpl implements ExportService {
 	}
 
 	@Override
-	public void exportUsagePointFull(Long subscriptionId, Long usagePointId, Long retailCustomerId,
+	public void exportUsagePointFull(Long subscriptionId, Long retailCustomerId, Long usagePointId,
 			ServletOutputStream outputStream, ExportFilter exportFilter)
 			throws IOException {
 		// TODO right now subscriptionId is 1- ... 
