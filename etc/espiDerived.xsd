@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by National Institute of Standards & Technology (NIST) -->
 <xs:schema xmlns="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.7.20131008">
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20141220     
+    Version: 0.7.20150119     
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -66,12 +67,12 @@ self link to this resource</xs:documentation>
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
 				<xs:sequence>
-					<xs:element name="dataCustodianId" type="String64" minOccurs="0">
+					<xs:element name="dataCustodianId" type="String64">
 						<xs:annotation>
 							<xs:documentation>Contains the identifier for the Data Custodian. (e.g. "Sandbox Data Custodian")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="dataCustodianApplicationStatus" type="DataCustodianApplicationStatus" minOccurs="0">
+					<xs:element name="dataCustodianApplicationStatus" type="DataCustodianApplicationStatus">
 						<xs:annotation>
 							<xs:documentation>A code indicating the current status of the application. This value is provided by Data Custodian, cannot be modified by Third Party. (e.g. "2" => production)</xs:documentation>
 						</xs:annotation>
@@ -106,12 +107,12 @@ self link to this resource</xs:documentation>
 							<xs:documentation>Contains the base URI link to the authorization server. (e.g. "https://services.greenbuttondata.org/DataCustodian")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="thirdPartyNotifyUri" type="xs:anyURI" minOccurs="0">
+					<xs:element name="thirdPartyNotifyUri" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>URI used to notify ThirdParty that subscribed information is available. (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/Notification")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="authorizationServerAuthorizationEndpoint" type="xs:anyURI" minOccurs="0">
+					<xs:element name="authorizationServerAuthorizationEndpoint" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>An OAuth 2.0 URI used by the client to obtain authorization from the resource owner via user-agent redirection - {AuthorizationServer}{AuthorizationPath}. (e.g.  "https://services.greenbuttondata.org/DataCustodian/oauth/authorize" </xs:documentation>
 						</xs:annotation>
@@ -121,33 +122,33 @@ self link to this resource</xs:documentation>
 							<xs:documentation>A URI used by the client to register a Third Party with a Data Custodian via its {AuthorizationServer}{AuthorizationServer}{RegistrationPath}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/register")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="authorizationServerTokenEndpoint" type="xs:anyURI" minOccurs="0">
+					<xs:element name="authorizationServerTokenEndpoint" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>An OAuth 2.0 URL used by the client to exchange an authorization grant for an access token, typically with client authentication. (e.g. "https://services.greenbuttondata.org/DataCustodian/oauth/token")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="dataCustodianBulkRequestURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="dataCustodianBulkRequestURI" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>{DataCustodianBulkRequestURI}  URI of DataCustodian’s Bulk Request endpoint.  The value is provided by the Data Custodian and cannot be modified by the ThirdParty. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource/Batch/Bulk/{BulkID}" => bulkID from BR={bulkId} from Scope)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="dataCustodianResourceEndpoint" type="xs:anyURI" minOccurs="0">
+					<xs:element name="dataCustodianResourceEndpoint" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>{ResourceServer}{ResourcePath}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="thirdPartyScopeSelectionScreenURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="thirdPartyScopeSelectionScreenURI" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>URI of the Scope Selection Screen used by the Retail Customer to select the characteristics of the Green Button data to be shared with the ThirdParty.  (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/RetailCustomer/ScopeSelection")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="thirdPartyUserPortalScreenURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="thirdPartyUserPortalScreenURI" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>URI of a Third Party’s web page for use with Green Button Connect My Data (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/home")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!-- OAuth 2.0 fields -->
-					<xs:element name="client_secret" type="String512" minOccurs="0">
+					<xs:element name="client_secret" type="String512">
 						<xs:annotation>
 							<xs:documentation>A secret to be associated with this application, used to sign OAuth requests. This value is provided by Data Custodian (OAuth client_secret). (e.g. "secret")</xs:documentation>
 						</xs:annotation>
@@ -157,22 +158,22 @@ self link to this resource</xs:documentation>
 							<xs:documentation>The link to the logo image for the application. Size greater than 180 x 150 may be cropped or reduced (OAuth logo_uri). (e.g. "http://services.greenbuttondata.org/ThirdParty/favicon.png")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="client_name" type="String256" minOccurs="0">
+					<xs:element name="client_name" type="String256">
 						<xs:annotation>
 							<xs:documentation>The name of the application to which access will be granted (OAuth client_name). (e.g. "Green Button ThirdParty")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="client_uri" type="xs:anyURI" minOccurs="0">
+					<xs:element name="client_uri" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>The link to the main page of the application (OAuth client_uri). (e.g. "https://services.greenbuttondata.org/ThirdParty")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="redirect_uri" type="xs:anyURI" minOccurs="0">
+					<xs:element name="redirect_uri" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>The default redirect back to the application after authorization grant (OAuth redirect uri). (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/OAuthCallBack")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="client_id" type="String64" minOccurs="0">
+					<xs:element name="client_id" type="String64">
 						<xs:annotation>
 							<xs:documentation>Contains the identifier for the Third Party (OAuth client_id). (e.g. "ThirdParty Name")</xs:documentation>
 						</xs:annotation>
@@ -187,22 +188,22 @@ self link to this resource</xs:documentation>
 							<xs:documentation>A URI that points to a human-readable Policy document for the Third Party Application.  The policy usually describes how a Retail Customer's energy usage information will be used by the Third Party Application. (e.g. "http://services.greenbuttondata.org/ThirdParty/UsagePolicy")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="software_id" type="String256" minOccurs="0">
+					<xs:element name="software_id" type="String256">
 						<xs:annotation>
 							<xs:documentation>An identifier for the software that comprises the Third Party Application.  The software_id is asserted by the Third Party software and is intended to be shared between all copies of the Third Party software.  The value of this field MAY be a UUID [RFC4122]. (e.g. "MyCoolGreenButtonAnalyzer")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="software_version" type="String32" minOccurs="0">
+					<xs:element name="software_version" type="String32">
 						<xs:annotation>
 							<xs:documentation>A version identifier for the software that comprises a Third Party Application.  The value of this field is a string that is intended to be compared using string equality matching.  The value of the software_version SHOULD change on any update to the Third Party software. (e.g. "Version 1.00.00")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="client_id_issued_at" type="TimeType" minOccurs="0">
+					<xs:element name="client_id_issued_at" type="TimeType">
 						<xs:annotation>
 							<xs:documentation>Time date stamp at which this client_id was issued. Note the schema data type is TimeType and the presentation in OAuth message flow is xs:dateTime and requires a conversion when accessed. (e.g. "1403190000" => 2014-06-19T15:00:00Z)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="client_secret_expires_at" type="TimeType" minOccurs="0">
+					<xs:element name="client_secret_expires_at" type="TimeType">
 						<xs:annotation>
 							<xs:documentation>Date time at which this client_secret expires -- value of 0 means the client_secret never expires. (e.g. "0" => never expires)</xs:documentation>
 						</xs:annotation>
@@ -213,38 +214,38 @@ self link to this resource</xs:documentation>
 							<xs:documentation>Array of email addresses for people responsible for the Authorized Third Party Application.  These MAY be made available to Retail Customers for support requests for the Authorized Third Party application.  The Data Custodian Authorization Server MAY use the email addresses as identifiers for an Authorized Third Party application administrative page. (e.g. "support@energyos.org")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="token_endpoint_auth_method" type="TokenEndPointMethod" minOccurs="0">
+					<xs:element name="token_endpoint_auth_method" type="TokenEndPointMethod">
 						<xs:annotation>
 							<xs:documentation>The authentication method used by the OAuth 2.0 Token Endpoint to authenticate the Third Party Application. (e.g. "client_secret_basic")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="scope" type="String256" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="scope" type="String256" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation> Space separated list of scope values the Third Party Application may use when requesting access Tokens. (e.g. "FB=1_3_4_5_8_13_18_19_31_34_35_39;IntervalDuration=900_3600;BlockDuration=Daily; HistoryLength= 34128000;SubscriptionFrequency=Daily; AccountCollection=5;BR=1;")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="grant_types" type="GrantType" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="grant_types" type="GrantType" minOccurs="2" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>Grant types this interface supports. (e.g. "client_credentials, authorization_code, refresh_token" in separate tags</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="response_types" type="ResponseType" minOccurs="0">
+					<xs:element name="response_types" type="ResponseType">
 						<xs:annotation>
 							<xs:documentation>Response types supported. (e.g. "code")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="registration_client_uri" type="xs:anyURI" minOccurs="0">
+					<xs:element name="registration_client_uri" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>{ClientConfigurationURI} A URI used by a registered client to manage registration information.  This URI is returned by the AuthorizationServer in the “registration_client_uri” field of the client information response. {AuthorizationServerRegistrationEndpoint}/ApplicationInformation/{ApplicationInformationID}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource/ApplicationInformation/{ApplicationInformationID}/")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!-- OAuth 2.0 fields END -->
-					<xs:element name="registration_access_token" minOccurs="0">
+					<xs:element name="registration_access_token">
 						<xs:annotation>
 							<xs:documentation>A credential obtained during Third Party registration with the Data Custodian to enable access to the ApplicationInformation resource. This is persisted in the ApplicationInformation resource structure. (e.g. "fe82518d-e325-404e-978c-c02f9339bccc")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="dataCustodianScopeSelectionScreenURI" minOccurs="0">
+					<xs:element name="dataCustodianScopeSelectionScreenURI">
 						<xs:annotation>
 							<xs:documentation>The URI used by the Third Party to redirect the Retail Customer to the Data Custodian Scope Selection Screen (note that this will likely involve a dialog with the Retail Customer including a log in authentication process). (e.g. http://localhost:8080/DataCustodian/RetailCustomer/ScopeSelection)</xs:documentation>
 						</xs:annotation>
@@ -267,29 +268,29 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
 				<xs:sequence>
-					<xs:element name="authorizedPeriod" type="DateTimeInterval" minOccurs="0">
+					<xs:element name="authorizedPeriod" type="DateTimeInterval">
 						<xs:annotation>
 							<xs:documentation>Restricts access to requests or subscriptions within this date time interval. (e.g. "duration=31536000,start=1333252800")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="publishedPeriod" type="DateTimeInterval" minOccurs="0">
+					<xs:element name="publishedPeriod" type="DateTimeInterval">
 						<xs:annotation>
 							<xs:documentation>Restricts access to the objects within the associated resource that were published within this date time interval. (e.g. "duration=31536000" for most recent 365 days)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-<!--
+					<!--
 					<xs:element name="access_token" type="String512" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Contains the access token associated with this authorization. (OAuth contains access_token for RetailCustomer resources obtained through authorization code flow, registration_access_token obtained in the registration process, and an access_token obtained through  client credentials flow) (e.g. "AA886A7A-078D-4307-A3D9-AA036796DBC3")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
--->					
-					<xs:element name="status" type="AuthorizationStatus" minOccurs="0">
+-->
+					<xs:element name="status" type="AuthorizationStatus">
 						<xs:annotation>
 							<xs:documentation>The status of this authorization. (e.g. "1" => active)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="expires_at" type="TimeType" minOccurs="0">
+					<xs:element name="expires_at" type="TimeType">
 						<xs:annotation>
 							<xs:documentation>Expiration period for the accessToken. (e.g. "1403190000" for 2014-06-19T15:00:00Z)</xs:documentation>
 						</xs:annotation>
@@ -299,19 +300,19 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 							<xs:documentation>Type of grant being negotiated for. (e.g. "authorization_code")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-<!--					
+					<!--					
 					<xs:element name="refresh_token" type="String512" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Used to obtain a fresh access_token. (e.g. "AA886A7A-078D-4307-A3D9-AA036796DBC4")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
--->					
-					<xs:element name="scope" type="String256" minOccurs="0">
+-->
+					<xs:element name="scope" type="String256">
 						<xs:annotation>
 							<xs:documentation>Negotiated scope of the authorization. (e.g. "FB=1_3_4_5_13_14_15_1937_39;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=94608000"</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="token_type" type="TokenType" minOccurs="0">
+					<xs:element name="token_type" type="TokenType">
 						<xs:annotation>
 							<xs:documentation>Type of token used. (e.g. "Bearer")</xs:documentation>
 						</xs:annotation>
@@ -331,12 +332,12 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 							<xs:documentation>Specific error URI for last returned error. (e.g. "na" if not supported)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="resourceURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="resourceURI" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>resourceURI that represents the data set authorized. Can be used in a GET of the resource subscription. (e.g. "http://localhost:8080/DataCustodian/espi/1_1/resource/Batch/Subscription/1")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="authorizationURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="authorizationURI" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>URI that can be used to update or delete this Authorization. (e.g. "http://localhost:8080/DataCustodian/espi/1_1/resource/Authorization/1")</xs:documentation>
 						</xs:annotation>
@@ -1140,12 +1141,12 @@ Additional Complex Types
 		<xs:complexContent>
 			<xs:extension base="Object">
 				<xs:sequence>
-					<xs:element name="duration" type="UInt32" minOccurs="0">
+					<xs:element name="duration" type="UInt32">
 						<xs:annotation>
 							<xs:documentation>[correction] Duration of the interval, in seconds.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="start" type="TimeType" minOccurs="0">
+					<xs:element name="start" type="TimeType">
 						<xs:annotation>
 							<xs:documentation>[correction] Date and time that this interval started.</xs:documentation>
 						</xs:annotation>
