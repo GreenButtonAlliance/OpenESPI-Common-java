@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import org.energyos.espi.common.repositories.IntervalBlockRepository;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 
 public interface IntervalBlockService {
-	// TODO: likely deprecated
+
 	List<IntervalBlock> findAllByMeterReadingId(Long meterReadingId);
 
 	String feedFor(List<IntervalBlock> intervalBlocks);
@@ -40,12 +40,9 @@ public interface IntervalBlockService {
 
 	List<IntervalBlock> findAllByMeterReading(MeterReading meterReading);
 
-	// persistence management services
 	public void setRepository(IntervalBlockRepository repository);
 
 	public void persist(IntervalBlock intervalBlock);
-
-	// accessor services
 
 	public IntervalBlock findById(long retailCustomerId, long usagePointId,
 			long meterReadingId, long intervalBlockId);
@@ -53,18 +50,15 @@ public interface IntervalBlockService {
 	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
 			Long meterReadingId, Long intervalBlockId);
 
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId,
-			Long meterReadingId);
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
+			Long usagePointId, Long meterReadingId);
 
 	public void delete(IntervalBlock intervalBlock);
 
 	public void add(IntervalBlock intervalBlock);
 
-	// import-exportResource services
 	public IntervalBlock importResource(InputStream stream);
 
 	IntervalBlock findById(long intervalBlockId);
-
-
 
 }

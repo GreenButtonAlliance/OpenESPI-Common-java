@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.energyos.espi.common.utils.ExportFilter;
 
 public interface TimeConfigurationService {
-	// TODO: likely deprecated
+ 
 	TimeConfiguration findByUUID(UUID uuid);
 
 	List<TimeConfiguration> findAllByRetailCustomer(RetailCustomer retailCustomer);
@@ -45,13 +45,11 @@ public interface TimeConfigurationService {
 	void deleteById(long timeConfigurationId);
 
 	UsagePoint getUsagePoint();
-
-	// persistence management services
+ 
 	public void setRepository(TimeConfigurationRepository timeConfigurationRepository);
 
 	public void persist(TimeConfiguration timeConfiguration);
-
-	// accessor services
+ 
 	public TimeConfiguration findById(Long timeConfigurationId);
 
 	public EntryType findEntryType(Long retailCustomerId, Long usagePointId, Long timeConfigurationId, ExportFilter params);
@@ -61,8 +59,7 @@ public interface TimeConfigurationService {
 	public void add(TimeConfiguration timeConfiguration);
 
 	public void delete(TimeConfiguration timeConfiguration);
-
-	// importResource services
+ 
 	public TimeConfiguration importResource(InputStream stream);
 
 }

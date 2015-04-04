@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,14 +17,9 @@
 package org.energyos.espi.common.service;
 
 import java.io.InputStream;
-import java.util.List;
-import java.util.UUID;
 
 import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.UsagePoint;
-import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.MeterReadingRepository;
-import org.energyos.espi.common.utils.EntryTypeIterator;
 
 /**
  * MeterReading Service
@@ -34,9 +29,11 @@ import org.energyos.espi.common.utils.EntryTypeIterator;
  */
 public interface MeterReadingService {
 
-	public void setMeterReadingRepository(MeterReadingRepository meterReadingRepository);
-	
-	public MeterReading findById(Long retailCustomerId, Long usagePointId, Long meterReadingId);
+	public void setMeterReadingRepository(
+			MeterReadingRepository meterReadingRepository);
+
+	public MeterReading findById(Long retailCustomerId, Long usagePointId,
+			Long meterReadingId);
 
 	public MeterReading importResource(InputStream stream);
 

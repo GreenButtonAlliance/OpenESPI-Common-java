@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package org.energyos.espi.common.service;
 import org.energyos.espi.common.models.atom.EntryType;
 
 public interface EntryProcessorService {
-   
-    public EntryType process(EntryType entry);
-    
+
+	public EntryType process(EntryType entry);
+
 }

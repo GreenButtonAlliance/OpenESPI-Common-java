@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013, 2014, 2015 EnergyOS.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package org.energyos.espi.common.service;
 
 import java.io.InputStream;
@@ -12,20 +28,22 @@ import org.energyos.espi.common.utils.EntryTypeIterator;
 public interface AuthorizationService {
 	// residue from random stories
 	public List<Authorization> findAllByRetailCustomerId(Long retailCustomerId);
-	
+
 	/**
 	 * @param authorization
-	 * @return List<Long> a list of all authorizationIds that are visible from the input authorization
+	 * @return List<Long> a list of all authorizationIds that are visible from
+	 *         the input authorization
 	 */
-	public List<Long> findAllIdsByApplicationInformationId(Long applicationInformationId);
+	public List<Long> findAllIdsByApplicationInformationId(
+			Long applicationInformationId);
 
 	public Authorization createAuthorization(Subscription subscription,
 			String accessToken);
 
 	public Authorization findByState(String state);
-	
+
 	public Authorization findByScope(String scope, Long retailCustomerId);
-	
+
 	public Authorization findByAccessToken(String accessToken);
 
 	public List<Authorization> findAll();
@@ -36,14 +54,13 @@ public interface AuthorizationService {
 
 	public Authorization findByURI(String uri);
 
-
 	// persistence management services
 	public void persist(Authorization authorization);
 
 	public void merge(Authorization authorization);
 
 	// accessor services
-    public Authorization findById(Long authorizationId);
+	public Authorization findById(Long authorizationId);
 
 	public EntryType findEntryType(Long retailCustomerId, Long authorizationId);
 
@@ -65,8 +82,7 @@ public interface AuthorizationService {
 	Authorization findByUUID(UUID uuid);
 
 	public Authorization findByRefreshToken(String refreshToken);
-	
-	public List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId);
 
+	public List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId);
 
 }

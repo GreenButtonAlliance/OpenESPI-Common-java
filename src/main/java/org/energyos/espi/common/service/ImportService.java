@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -27,13 +27,13 @@ import org.energyos.espi.common.models.atom.EntryType;
 import org.xml.sax.SAXException;
 
 public interface ImportService {
-	void importData(InputStream stream, Long retailCustomerId) throws IOException, SAXException,
-			ParserConfigurationException;
+	void importData(InputStream stream, Long retailCustomerId)
+			throws IOException, SAXException, ParserConfigurationException;
 
 	List<EntryType> getEntries();
-	
+
 	XMLGregorianCalendar getMinUpdated();
-	
+
 	XMLGregorianCalendar getMaxUpdated();
-	
+
 }

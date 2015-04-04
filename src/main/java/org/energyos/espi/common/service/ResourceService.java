@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -33,17 +33,17 @@ import org.energyos.espi.common.utils.EntryTypeIterator;
  */
 public interface ResourceService {
 	void persist(IdentifiedObject resource);
-	
+
 	void flush();
-    
+
 	public void setConfigurations(Map<String, String> params);
-	
+
 	public void setConfiguration(String key, String value);
-	
+
 	public Map<String, String> getConfigurations();
-	
+
 	public String getConfiguration(String key);
-	
+
 	List<IdentifiedObject> findByAllParentsHref(String relatedHref,
 			Linkable linkable);
 
@@ -52,13 +52,13 @@ public interface ResourceService {
 	<T> T findByUUID(UUID uuid, Class<T> clazz);
 
 	<T extends IdentifiedObject> T testById(Long id, Class<T> clazz);
-	
+
 	/**
 	 * @param id
 	 * @param clazz
 	 * @return
 	 * 
-	 * Find a Resource based upon it's locally unique id and it's class
+	 *         Find a Resource based upon it's locally unique id and it's class
 	 */
 	<T extends IdentifiedObject> T findById(Long id, Class<T> clazz);
 
@@ -66,7 +66,8 @@ public interface ResourceService {
 	 * @param clazz
 	 * @return List<Long>
 	 * 
-	 * Returns a list the IDs of all of the locally unique ESPI resources of type clazz
+	 *         Returns a list the IDs of all of the locally unique ESPI
+	 *         resources of type clazz
 	 * 
 	 */
 	<T extends IdentifiedObject> List<Long> findAllIds(Class<T> clazz);
@@ -76,44 +77,49 @@ public interface ResourceService {
 	 * @param clazz
 	 * @return List<Long>
 	 * 
-	 * Returns a list of IDs for all of the resources of type clazz that are associated with 
-	 * the given usagePointId
+	 *         Returns a list of IDs for all of the resources of type clazz that
+	 *         are associated with the given usagePointId
 	 */
-	<T extends IdentifiedObject> List<Long> findAllIdsByUsagePointId(Long usagePointId, Class<T> clazz);
-	
+	<T extends IdentifiedObject> List<Long> findAllIdsByUsagePointId(
+			Long usagePointId, Class<T> clazz);
+
 	/**
-	 * One of the XPath navigators. Class1/mm/Class2/nn/Class3/pp where the input parameters
-	 * provide the obvious mappings to resources.
+	 * One of the XPath navigators. Class1/mm/Class2/nn/Class3/pp where the
+	 * input parameters provide the obvious mappings to resources.
 	 * 
 	 * @param clazz
 	 * @return
 	 */
 	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Class<T> clazz);
-	
+
 	/**
-	 * One of the XPath navigators. Class1/mm/Class2/nn/Class3/pp where the input parameters
-	 * provide the obvious mappings to resources.
+	 * One of the XPath navigators. Class1/mm/Class2/nn/Class3/pp where the
+	 * input parameters provide the obvious mappings to resources.
 	 * 
-	 * @param id1  (is either a retail customerId or a subscriptionId or ... any resourceId
-	 * @param clazz 
+	 * @param id1
+	 *            (is either a retail customerId or a subscriptionId or ... any
+	 *            resourceId
+	 * @param clazz
 	 * @return
 	 */
-	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1, Class<T> clazz);
-	
+	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1,
+			Class<T> clazz);
+
 	/**
-	 * One of the XPath navigators. Class1/mm/Class2/nn/Class3/pp where the input parameters
-	 * provide the obvious mappings to resources.
+	 * One of the XPath navigators. Class1/mm/Class2/nn/Class3/pp where the
+	 * input parameters provide the obvious mappings to resources.
 	 * 
 	 * @param id1
 	 * @param id2
 	 * @param clazz
 	 * @return a List of Long's == resourceIds of the resultant search
 	 */
-	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1, Long id2, Class<T> clazz);
-	
+	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1,
+			Long id2, Class<T> clazz);
+
 	/**
-	 * One of the XPath navigators. Class1/mm/Class2/nn/Class3/pp where the input parameters
-	 * provide the obvious mappings to resources.
+	 * One of the XPath navigators. Class1/mm/Class2/nn/Class3/pp where the
+	 * input parameters provide the obvious mappings to resources.
 	 * 
 	 * @param id1
 	 * @param id2
@@ -121,7 +127,8 @@ public interface ResourceService {
 	 * @param clazz
 	 * @return a List of Long's == resourceIds of the resultant search
 	 */
-	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1, Long id2, Long id3, Class<T> clazz);
+	<T extends IdentifiedObject> List<Long> findAllIdsByXPath(Long id1,
+			Long id2, Long id3, Class<T> clazz);
 
 	/**
 	 * @param id1
@@ -129,15 +136,16 @@ public interface ResourceService {
 	 * @return a List of Long's == resourceIds of the resultant search
 	 */
 	<T extends IdentifiedObject> Long findIdByXPath(Long id1, Class<T> clazz);
-	
+
 	/**
 	 * @param id1
 	 * @param id2
 	 * @param clazz
 	 * @return a List of Long's == resourceIds of the resultant search
 	 */
-	<T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2, Class<T> clazz);
-	
+	<T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2,
+			Class<T> clazz);
+
 	/**
 	 * @param id1
 	 * @param id2
@@ -145,7 +153,8 @@ public interface ResourceService {
 	 * @param clazz
 	 * @return a List of Long's == resourceIds of the resultant search
 	 */
-	<T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2, Long id3, Class<T> clazz);
+	<T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2,
+			Long id3, Class<T> clazz);
 
 	/**
 	 * @param id1
@@ -155,30 +164,36 @@ public interface ResourceService {
 	 * @param clazz
 	 * @return a List of Long's == resourceIds of the resultant search
 	 */
-	<T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2, Long id3, Long id4, Class<T> clazz);
+	<T extends IdentifiedObject> Long findIdByXPath(Long id1, Long id2,
+			Long id3, Long id4, Class<T> clazz);
 
 	/**
 	 * @param clazz
-	 * @return an {@link EntryTypeIterator} that may be used to export the associated resource tree
+	 * @return an {@link EntryTypeIterator} that may be used to export the
+	 *         associated resource tree
 	 *
 	 */
-	<T extends IdentifiedObject> EntryTypeIterator findEntryTypeIterator(Class<T> clazz);
-	
+	<T extends IdentifiedObject> EntryTypeIterator findEntryTypeIterator(
+			Class<T> clazz);
+
 	/**
 	 * @param ids
 	 * @param clazz
 	 * @return
 	 */
-	<T extends IdentifiedObject> EntryTypeIterator findEntryTypeIterator(List<Long> ids, Class<T> clazz);
+	<T extends IdentifiedObject> EntryTypeIterator findEntryTypeIterator(
+			List<Long> ids, Class<T> clazz);
 
 	/**
 	 * @param id1
 	 * @param clazz
 	 * @return
 	 */
-	<T extends IdentifiedObject> EntryType findEntryType(long id1, Class<T> clazz);
-	
-	// currently used only finding the Authorization associated with a given resource URI
+	<T extends IdentifiedObject> EntryType findEntryType(long id1,
+			Class<T> clazz);
+
+	// currently used only finding the Authorization associated with a given
+	// resource URI
 	/**
 	 * @param uri
 	 * @param clazz
@@ -186,7 +201,8 @@ public interface ResourceService {
 	 */
 	<T extends IdentifiedObject> T findByResourceUri(String uri, Class<T> clazz);
 
-	// a collection of interfaces that delete resources (by both XPATH and ROOT form)
+	// a collection of interfaces that delete resources (by both XPATH and ROOT
+	// form)
 	//
 	/**
 	 * @param id
@@ -204,16 +220,18 @@ public interface ResourceService {
 	 * @param id2
 	 * @param clazz
 	 */
-	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2,Class<T> clazz);
-	
+	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2,
+			Class<T> clazz);
+
 	/**
 	 * @param id1
 	 * @param id2
 	 * @param id3
 	 * @param clazz
 	 */
-	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2, Long id3, Class<T> clazz);
-	
+	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2,
+			Long id3, Class<T> clazz);
+
 	/**
 	 * @param id1
 	 * @param id2
@@ -221,12 +239,13 @@ public interface ResourceService {
 	 * @param id4
 	 * @param clazz
 	 */
-	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2, Long id3, Long id4, Class<T> clazz);
+	<T extends IdentifiedObject> void deleteByXPathId(Long id1, Long id2,
+			Long id3, Long id4, Class<T> clazz);
 
 	/**
 	 * @param existingResource
 	 * @return
 	 */
 	<T extends IdentifiedObject> T merge(IdentifiedObject existingResource);
-	
+
 }

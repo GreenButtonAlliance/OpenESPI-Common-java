@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import org.energyos.espi.common.repositories.ReadingTypeRepository;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 
 public interface ReadingTypeService {
-	// TODO: likely deprecated
 
 	ReadingType findByUUID(UUID uuid);
 
@@ -38,12 +37,10 @@ public interface ReadingTypeService {
 
 	void deleteById(long readingTypeId);
 
-	// persistence management services
 	public void setReadingTypeRepository(ReadingTypeRepository repository);
 
 	public void persist(ReadingType readingType);
 
-	// accessor services
 	public ReadingType findById(Long readingTypeId);
 
 	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,Long meterReadingId,
@@ -55,7 +52,6 @@ public interface ReadingTypeService {
 
 	public void delete(ReadingType readingType);
 
-	// import-exportResource services
 	public ReadingType importResource(InputStream stream);
 
 }

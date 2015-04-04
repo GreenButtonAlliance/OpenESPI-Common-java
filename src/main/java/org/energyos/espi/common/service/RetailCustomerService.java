@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,29 +22,24 @@ import java.util.UUID;
 
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.domain.Subscription;
-import org.energyos.espi.common.repositories.RetailCustomerRepository;
-
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface RetailCustomerService extends UserDetailsService {
-	// TODO: likely deprecated
+
 	List<RetailCustomer> findAll();
 
 	RetailCustomer findByHashedId(Long retailCustomerId);
 
 	void persist(RetailCustomer customer);
 
-	// accessor services
-	//
 	RetailCustomer findById(Long retailCustomerId);
-	
+
 	RetailCustomer findById(String retailCustomerId);
 
 	public void add(RetailCustomer retailCustomer);
 
 	public void delete(RetailCustomer retailCustomer);
 
-	// import-exportResource services
 	public RetailCustomer importResource(InputStream stream);
 
 	Subscription associateByUUID(Long retailCustomerId, UUID uuId);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import org.energyos.espi.common.utils.EntryTypeIterator;
 import com.sun.syndication.io.FeedException;
 
 public interface UsagePointService {
-	// TODO: likely deprecated
+ 
 	List<UsagePoint> findAllByRetailCustomer(RetailCustomer customer);
 
 	void createOrReplaceByUUID(UsagePoint usagePoint);
@@ -53,15 +53,13 @@ public interface UsagePointService {
 	String entryFor(UsagePoint usagePoint);
 
 	List<UsagePoint> findAllByRetailCustomer(Long retailCustomerId);
-
-	// persistence management services
+ 
 	public void setRepository(UsagePointRepository usagePointRepository);
 
 	public void setResourceService(ResourceService resourceService);
 
 	public void persist(UsagePoint usagePoint);
-
-	// accessor services
+ 
 	public UsagePoint findById(Long usagePointId);
 
 	public UsagePoint findById(Long retailCustomerId, Long usagePointId);
@@ -79,8 +77,7 @@ public interface UsagePointService {
 	public void add(UsagePoint usagePoint);
 
 	public void delete(UsagePoint usagePoint);
-
-	// import-exportResource services
+ 
 	public UsagePoint importResource(InputStream stream);
 
 }
