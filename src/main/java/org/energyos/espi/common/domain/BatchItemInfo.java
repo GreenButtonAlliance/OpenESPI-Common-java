@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
 
-
 package org.energyos.espi.common.domain;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -31,14 +30,18 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
 /**
- * Includes elements that make it possible to include multiple transactions in a single (batch) request.
+ * Includes elements that make it possible to include multiple transactions in a
+ * single (batch) request.
  * <p/>
- * <p>Java class for BatchItemInfo complex type.
+ * <p>
+ * Java class for BatchItemInfo complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="BatchItemInfo">
  *   &lt;complexContent>
@@ -55,100 +58,91 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "BatchItemInfo", propOrder = {
-        "name",
-        "operation",
-        "statusCode",
-        "statusReason"
-})
-public class BatchItemInfo
-        extends Object {
+@XmlType(name = "BatchItemInfo", propOrder = { "name", "operation",
+		"statusCode", "statusReason" })
+public class BatchItemInfo extends Object {
 
-    @XmlElement(type = String.class)
-    @XmlJavaTypeAdapter(HexBinaryAdapter.class)
-    protected byte[] name;
-    protected String operation;
-    protected String statusCode;
-    protected String statusReason;
+	@XmlElement(type = String.class)
+	@XmlJavaTypeAdapter(HexBinaryAdapter.class)
+	protected byte[] name;
+	protected String operation;
+	protected String statusCode;
+	protected String statusReason;
 
-    /**
-     * Gets the value of the name property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public byte[] getName() {
-        return name;
-    }
+	/**
+	 * Gets the value of the name property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public byte[] getName() {
+		return name;
+	}
 
-    /**
-     * Sets the value of the name property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setName(byte[] value) {
-        this.name = value;
-    }
+	/**
+	 * Sets the value of the name property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setName(byte[] value) {
+		this.name = value;
+	}
 
-    /**
-     * Gets the value of the operation property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getOperation() {
-        return operation;
-    }
+	/**
+	 * Gets the value of the operation property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getOperation() {
+		return operation;
+	}
 
-    /**
-     * Sets the value of the operation property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setOperation(String value) {
-        this.operation = value;
-    }
+	/**
+	 * Sets the value of the operation property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setOperation(String value) {
+		this.operation = value;
+	}
 
-    /**
-     * Gets the value of the statusCode property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getStatusCode() {
-        return statusCode;
-    }
+	/**
+	 * Gets the value of the statusCode property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getStatusCode() {
+		return statusCode;
+	}
 
-    /**
-     * Sets the value of the statusCode property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setStatusCode(String value) {
-        this.statusCode = value;
-    }
+	/**
+	 * Sets the value of the statusCode property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setStatusCode(String value) {
+		this.statusCode = value;
+	}
 
-    /**
-     * Gets the value of the statusReason property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getStatusReason() {
-        return statusReason;
-    }
+	/**
+	 * Gets the value of the statusReason property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getStatusReason() {
+		return statusReason;
+	}
 
-    /**
-     * Sets the value of the statusReason property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setStatusReason(String value) {
-        this.statusReason = value;
-    }
+	/**
+	 * Sets the value of the statusReason property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setStatusReason(String value) {
+		this.statusReason = value;
+	}
 
 }
