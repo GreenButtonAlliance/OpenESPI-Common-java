@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
 
-
 package org.energyos.espi.common.domain;
 
 import javax.persistence.Embeddable;
@@ -29,14 +28,17 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * An aggregated summary measurement reading.
  * <p/>
- * <p>Java class for SummaryMeasurement complex type.
+ * <p>
+ * Java class for SummaryMeasurement complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="SummaryMeasurement">
  *   &lt;complexContent>
@@ -53,109 +55,101 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SummaryMeasurement", propOrder = {
-        "powerOfTenMultiplier",
-        "timeStamp",
-        "uom",
-        "value"
-})
+@XmlType(name = "SummaryMeasurement", propOrder = { "powerOfTenMultiplier",
+		"timeStamp", "uom", "value" })
 @Embeddable
-public class SummaryMeasurement
-        extends java.lang.Object {
+public class SummaryMeasurement extends java.lang.Object {
 
-    protected String powerOfTenMultiplier;
-    protected Long timeStamp;
-    protected String uom;
-    protected Long value;
+	protected String powerOfTenMultiplier;
+	protected Long timeStamp;
+	protected String uom;
+	protected Long value;
 
-    public SummaryMeasurement() {
-    }
+	public SummaryMeasurement() {
+	}
 
-    public SummaryMeasurement(String powerOfTenMultiplier, Long timeStamp, String uom, Long value) {
-        this.powerOfTenMultiplier = powerOfTenMultiplier;
-        this.timeStamp = timeStamp;
-        this.uom = uom;
-        this.value = value;
-    }
+	public SummaryMeasurement(String powerOfTenMultiplier, Long timeStamp,
+			String uom, Long value) {
+		this.powerOfTenMultiplier = powerOfTenMultiplier;
+		this.timeStamp = timeStamp;
+		this.uom = uom;
+		this.value = value;
+	}
 
-    /**
-     * Gets the value of the powerOfTenMultiplier property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getPowerOfTenMultiplier() {
-        return powerOfTenMultiplier;
-    }
+	/**
+	 * Gets the value of the powerOfTenMultiplier property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getPowerOfTenMultiplier() {
+		return powerOfTenMultiplier;
+	}
 
-    /**
-     * Sets the value of the powerOfTenMultiplier property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setPowerOfTenMultiplier(String value) {
-        this.powerOfTenMultiplier = value;
-    }
+	/**
+	 * Sets the value of the powerOfTenMultiplier property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setPowerOfTenMultiplier(String value) {
+		this.powerOfTenMultiplier = value;
+	}
 
-    /**
-     * Gets the value of the timeStamp property.
-     *
-     * @return possible object is
-     *         {@link Long }
-     */
-    public Long getTimeStamp() {
-        return timeStamp;
-    }
+	/**
+	 * Gets the value of the timeStamp property.
+	 *
+	 * @return possible object is {@link Long }
+	 */
+	public Long getTimeStamp() {
+		return timeStamp;
+	}
 
-    /**
-     * Sets the value of the timeStamp property.
-     *
-     * @param value allowed object is
-     * {@link Long }
-     */
-    public void setTimeStamp(Long value) {
-        this.timeStamp = value;
-    }
+	/**
+	 * Sets the value of the timeStamp property.
+	 *
+	 * @param value
+	 *            allowed object is {@link Long }
+	 */
+	public void setTimeStamp(Long value) {
+		this.timeStamp = value;
+	}
 
-    /**
-     * Gets the value of the uom property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getUom() {
-        return uom;
-    }
+	/**
+	 * Gets the value of the uom property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getUom() {
+		return uom;
+	}
 
-    /**
-     * Sets the value of the uom property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setUom(String value) {
-        this.uom = value;
-    }
+	/**
+	 * Sets the value of the uom property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setUom(String value) {
+		this.uom = value;
+	}
 
-    /**
-     * Gets the value of the value property.
-     *
-     * @return possible object is
-     *         {@link Long }
-     */
-    public Long getValue() {
-        return value;
-    }
+	/**
+	 * Gets the value of the value property.
+	 *
+	 * @return possible object is {@link Long }
+	 */
+	public Long getValue() {
+		return value;
+	}
 
-    /**
-     * Sets the value of the value property.
-     *
-     * @param value allowed object is
-     * {@link Long }
-     */
-    public void setValue(Long value) {
-        this.value = value;
-    }
+	/**
+	 * Sets the value of the value property.
+	 *
+	 * @param value
+	 *            allowed object is {@link Long }
+	 */
+	public void setValue(Long value) {
+		this.value = value;
+	}
 
 }
