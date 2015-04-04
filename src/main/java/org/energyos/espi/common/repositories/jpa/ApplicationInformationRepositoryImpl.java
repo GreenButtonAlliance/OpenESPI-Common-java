@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -28,79 +28,85 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
+public class ApplicationInformationRepositoryImpl implements
+		ApplicationInformationRepository {
 
-public class ApplicationInformationRepositoryImpl implements ApplicationInformationRepository {
+	@PersistenceContext
+	protected EntityManager em;
 
-    @PersistenceContext
-    protected EntityManager em;
+	@Override
+	public ApplicationInformation findById(Long id) {
+		return (ApplicationInformation) em
+				.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_ID)
+				.setParameter("id", id).getSingleResult();
+	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<ApplicationInformation> findByKind(String kind) {
+		return (List<ApplicationInformation>) this.em
+				.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_KIND)
+				.setParameter("kind", kind).getResultList();
 
-    @Override
-    public ApplicationInformation findById(Long id) {
-        return (ApplicationInformation)em.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_ID)
-                .setParameter("id", id).getSingleResult();
-    }
+	}
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<ApplicationInformation> findByKind(String kind) {
-        return (List<ApplicationInformation>)this.em
-        		.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_KIND)
-                .setParameter("kind", kind)
-                .getResultList();        
-        
-    }
-	   
-    
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<ApplicationInformation> findAll() {
-        return (List<ApplicationInformation>)this.em
-                .createNamedQuery(ApplicationInformation.QUERY_FIND_ALL).getResultList();
-    }
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<ApplicationInformation> findAll() {
+		return (List<ApplicationInformation>) this.em.createNamedQuery(
+				ApplicationInformation.QUERY_FIND_ALL).getResultList();
+	}
 
-    @Override
-    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+	@Override
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
+	public void persist(ApplicationInformation applicationInformation) {
+		em.persist(applicationInformation);
+	}
 
-    public void persist(ApplicationInformation applicationInformation) {
-        em.persist(applicationInformation);
-    }
+	@Override
+	public ApplicationInformation findByUUID(UUID uuid) {
+		return (ApplicationInformation) em
+				.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_UUID)
+				.setParameter("uuid", uuid.toString().toUpperCase())
+				.getSingleResult();
+	}
 
-    @Override
-    public ApplicationInformation findByUUID(UUID uuid) {
-        return (ApplicationInformation) em.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_UUID)
-                .setParameter("uuid", uuid.toString().toUpperCase())
-                .getSingleResult();
-    }
+	@Override
+	public ApplicationInformation findByClientId(String clientId) {
+		return (ApplicationInformation) em
+				.createNamedQuery(
+						ApplicationInformation.QUERY_FIND_BY_CLIENT_ID)
+				.setParameter("clientId", clientId).getSingleResult();
+	}
 
-    @Override
-    public ApplicationInformation findByClientId(String clientId) {
-        return (ApplicationInformation)em.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_CLIENT_ID)
-                .setParameter("clientId", clientId).getSingleResult();
-    }
-
-    @Override
-    public ApplicationInformation findByDataCustodianClientId(String dataCustodianId) {
-        return (ApplicationInformation)em.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID)
-                .setParameter("dataCustodianId", dataCustodianId).getSingleResult();
-    }
+	@Override
+	public ApplicationInformation findByDataCustodianClientId(
+			String dataCustodianId) {
+		return (ApplicationInformation) em
+				.createNamedQuery(
+						ApplicationInformation.QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID)
+				.setParameter("dataCustodianId", dataCustodianId)
+				.getSingleResult();
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Long> findAllIds() {
-        return (List<Long>)this.em.createNamedQuery(ApplicationInformation.QUERY_FIND_ALL_IDS)
-                .getResultList();
+		return (List<Long>) this.em.createNamedQuery(
+				ApplicationInformation.QUERY_FIND_ALL_IDS).getResultList();
 	}
 
 	@Override
-	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void deleteById(Long id) {
-	       em.remove(findById(id));
-		
+		em.remove(findById(id));
+
 	}
 }

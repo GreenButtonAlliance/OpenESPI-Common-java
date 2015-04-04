@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,60 +23,59 @@ import javax.persistence.PersistenceContext;
 
 import org.energyos.espi.common.domain.RetailCustomer;
 import org.energyos.espi.common.repositories.RetailCustomerRepository;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
-
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
 public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 
-    @PersistenceContext
-    protected EntityManager em;
+	@PersistenceContext
+	protected EntityManager em;
 
-    public void setEntityManager(EntityManager em)
-      {
-      this.em = em;
-      }
+	public void setEntityManager(EntityManager em) {
+		this.em = em;
+	}
 
-    @SuppressWarnings("unchecked")
-    public List<RetailCustomer> findAll() {
-        return (List<RetailCustomer>)this.em.createNamedQuery(RetailCustomer.QUERY_FIND_ALL).getResultList();
-    }
+	@SuppressWarnings("unchecked")
+	public List<RetailCustomer> findAll() {
+		return (List<RetailCustomer>) this.em.createNamedQuery(
+				RetailCustomer.QUERY_FIND_ALL).getResultList();
+	}
 
-    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
+	public void persist(RetailCustomer customer) {
+		this.em.persist(customer);
+	}
 
-    public void persist(RetailCustomer customer) {
-        this.em.persist(customer);
-    }
+	@Override
+	public RetailCustomer findById(Long id) {
+		return this.em.find(RetailCustomer.class, id);
+	}
 
-    @Override
-    public RetailCustomer findById(Long id) {
-        return this.em.find(RetailCustomer.class, id);
-    }
-
-    @Override
-    public UserDetails findByUsername(String username) {
-        return (UserDetails)this.em.createNamedQuery(RetailCustomer.QUERY_FIND_BY_USERNAME)
-                .setParameter("username", username).getSingleResult();
-    }
+	@Override
+	public UserDetails findByUsername(String username) {
+		return (UserDetails) this.em
+				.createNamedQuery(RetailCustomer.QUERY_FIND_BY_USERNAME)
+				.setParameter("username", username).getSingleResult();
+	}
 
 	@Override
 	public RetailCustomer findById(String id) {
-        return em.find(RetailCustomer.class,id);
+		return em.find(RetailCustomer.class, id);
 	}
 
-        @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
 	@Override
 	public void deleteById(Long id) {
-    		RetailCustomer rc = findById(id);
-    	    em.remove(em.contains(rc) ? rc : em.merge(rc));
+		RetailCustomer rc = findById(id);
+		em.remove(em.contains(rc) ? rc : em.merge(rc));
 	}
 }

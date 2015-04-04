@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -31,47 +31,48 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
 public class MeterReadingRepositoryImpl implements MeterReadingRepository {
 
-    @PersistenceContext
-    protected EntityManager em;
-
-    @Override
-    public MeterReading findById(Long meterReadingId) {
-        return em.find(MeterReading.class, meterReadingId);
-    }
-
-    @Override
-    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
-    public void persist(MeterReading meterReading) {
-        em.persist(meterReading);
-    }
-
-    @Override
-    public MeterReading findByUUID(UUID uuid) {
-        return (MeterReading) em.createNamedQuery(MeterReading.QUERY_FIND_BY_UUID)
-                .setParameter("uuid", uuid.toString().toUpperCase())
-                .getSingleResult();
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Long> findAllIds() {
-    	List<Long> temp;
-    	temp = (List<Long>)this.em.createNamedQuery(MeterReading.QUERY_FIND_ALL_IDS)
-        .getResultList();
-            return temp;
-        }
+	@PersistenceContext
+	protected EntityManager em;
 
 	@Override
-	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+	public MeterReading findById(Long meterReadingId) {
+		return em.find(MeterReading.class, meterReadingId);
+	}
 
+	@Override
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
+	public void persist(MeterReading meterReading) {
+		em.persist(meterReading);
+	}
+
+	@Override
+	public MeterReading findByUUID(UUID uuid) {
+		return (MeterReading) em
+				.createNamedQuery(MeterReading.QUERY_FIND_BY_UUID)
+				.setParameter("uuid", uuid.toString().toUpperCase())
+				.getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Long> findAllIds() {
+		List<Long> temp;
+		temp = (List<Long>) this.em.createNamedQuery(
+				MeterReading.QUERY_FIND_ALL_IDS).getResultList();
+		return temp;
+	}
+
+	@Override
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void deleteById(Long id) {
 		MeterReading mr = findById(id);
 		UsagePoint up = mr.getUsagePoint();
@@ -84,44 +85,49 @@ public class MeterReadingRepositoryImpl implements MeterReadingRepository {
 	}
 
 	@Override
-    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void createOrReplaceByUUID(MeterReading meterReading) {
-	        try {
-	            MeterReading existingMeterReading = findByUUID(meterReading.getUUID());
-	            meterReading.setId(existingMeterReading.getId());
-	            if (meterReading.getUsagePoint() == null) {
-	                meterReading.setUsagePoint(existingMeterReading.getUsagePoint());
-	            }
+		try {
+			MeterReading existingMeterReading = findByUUID(meterReading
+					.getUUID());
+			meterReading.setId(existingMeterReading.getId());
+			if (meterReading.getUsagePoint() == null) {
+				meterReading
+						.setUsagePoint(existingMeterReading.getUsagePoint());
+			}
 
-	            if (existingMeterReading.getIntervalBlocks() != null) {
-	                meterReading.setIntervalBlocks(existingMeterReading.getIntervalBlocks());
-	            }
+			if (existingMeterReading.getIntervalBlocks() != null) {
+				meterReading.setIntervalBlocks(existingMeterReading
+						.getIntervalBlocks());
+			}
 
-	            if (existingMeterReading.getReadingType() != null) {
-	                meterReading.setReadingType(existingMeterReading.getReadingType());
-	            }
+			if (existingMeterReading.getReadingType() != null) {
+				meterReading.setReadingType(existingMeterReading
+						.getReadingType());
+			}
 
-	            if (existingMeterReading.getRelatedLinks() != null) {
-	            	meterReading.setRelatedLinks(existingMeterReading.getRelatedLinks());
-	            }
-	            
-	            if (existingMeterReading.getSelfLink() != null) {
-	                meterReading.setSelfLink(existingMeterReading.getSelfLink());
-	            }
+			if (existingMeterReading.getRelatedLinks() != null) {
+				meterReading.setRelatedLinks(existingMeterReading
+						.getRelatedLinks());
+			}
 
-	            if (existingMeterReading.getUpLink() != null) {
-	                meterReading.setUpLink(existingMeterReading.getUpLink());
-	            }
+			if (existingMeterReading.getSelfLink() != null) {
+				meterReading.setSelfLink(existingMeterReading.getSelfLink());
+			}
 
-	            em.merge(meterReading);
-	        } catch (NoResultException e) {
-	            meterReading.setPublished(new GregorianCalendar());
-	            meterReading.setUpdated(new GregorianCalendar());
-	            persist(meterReading);
-	        }
-	
+			if (existingMeterReading.getUpLink() != null) {
+				meterReading.setUpLink(existingMeterReading.getUpLink());
+			}
+
+			em.merge(meterReading);
+		} catch (NoResultException e) {
+			meterReading.setPublished(new GregorianCalendar());
+			meterReading.setUpdated(new GregorianCalendar());
+			persist(meterReading);
+		}
+
 	}
-	
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,53 +23,50 @@ import javax.persistence.PersistenceContext;
 
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.repositories.TimeConfigurationRepository;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
+public class TimeConfigurationRepositoryImpl implements
+		TimeConfigurationRepository {
 
+	@PersistenceContext
+	protected EntityManager em;
 
-public class TimeConfigurationRepositoryImpl implements TimeConfigurationRepository {
+	public void setEntityManager(EntityManager em) {
+		this.em = em;
+	}
 
-    @PersistenceContext
-    
-    protected EntityManager em;
-
-    public void setEntityManager(EntityManager em)
-      {
-      this.em = em;
-      }
-    
 	@Override
 	public void deleteById(Long id) {
-		
 
 		TimeConfiguration tc = findById(id);
-	    em.remove(em.contains(tc) ? tc : em.merge(tc));
-	   //    em.remove(em.merge(tc));
+		em.remove(em.contains(tc) ? tc : em.merge(tc));
+		// em.remove(em.merge(tc));
 	}
-	
-    @Override
-    public TimeConfiguration findById(Long timeConfigurationId) {
-        return em.find(TimeConfiguration.class, timeConfigurationId);
-    }
-  
-    @Override
-    public TimeConfiguration findByUUID(UUID uuid) {
-        return (TimeConfiguration) em.createNamedQuery(TimeConfiguration.QUERY_FIND_BY_UUID)
-                .setParameter("uuid", uuid.toString().toUpperCase())
-                .getSingleResult();
-    }
-	
-    @Override
-    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
 
-    public void persist(TimeConfiguration timeConfiguration) {
-        em.persist(timeConfiguration);
-    }
+	@Override
+	public TimeConfiguration findById(Long timeConfigurationId) {
+		return em.find(TimeConfiguration.class, timeConfigurationId);
+	}
+
+	@Override
+	public TimeConfiguration findByUUID(UUID uuid) {
+		return (TimeConfiguration) em
+				.createNamedQuery(TimeConfiguration.QUERY_FIND_BY_UUID)
+				.setParameter("uuid", uuid.toString().toUpperCase())
+				.getSingleResult();
+	}
+
+	@Override
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
+	public void persist(TimeConfiguration timeConfiguration) {
+		em.persist(timeConfiguration);
+	}
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -25,60 +25,61 @@ import javax.persistence.PersistenceContext;
 import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.repositories.IntervalBlockRepository;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
 public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 
-    @PersistenceContext
-    protected EntityManager em;
+	@PersistenceContext
+	protected EntityManager em;
 
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	@Override
-    public List<IntervalBlock> findAllByMeterReadingId(Long meterReadingId) {
-        return (List<IntervalBlock>)this.em.createNamedQuery(IntervalBlock.QUERY_ALL_BY_METER_READING_ID)
-                .setParameter("meterReadingId", meterReadingId).getResultList();
-    }
-
-	@Override
-	public IntervalBlock findById(Long intervalBlockId) {
-        return em.find(IntervalBlock.class, intervalBlockId);
+	public List<IntervalBlock> findAllByMeterReadingId(Long meterReadingId) {
+		return (List<IntervalBlock>) this.em
+				.createNamedQuery(IntervalBlock.QUERY_ALL_BY_METER_READING_ID)
+				.setParameter("meterReadingId", meterReadingId).getResultList();
 	}
 
 	@Override
-        @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+	public IntervalBlock findById(Long intervalBlockId) {
+		return em.find(IntervalBlock.class, intervalBlockId);
+	}
 
+	@Override
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void persist(IntervalBlock intervalBlock) {
-        em.persist(intervalBlock);
-		
+		em.persist(intervalBlock);
+
 	}
 
 	@Override
 	public IntervalBlock findByUUID(UUID uuid) {
-        return (IntervalBlock) em.createNamedQuery(IntervalBlock.QUERY_FIND_BY_UUID)
-                .setParameter("uuid", uuid.toString().toUpperCase())
-                .getSingleResult();
+		return (IntervalBlock) em
+				.createNamedQuery(IntervalBlock.QUERY_FIND_BY_UUID)
+				.setParameter("uuid", uuid.toString().toUpperCase())
+				.getSingleResult();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Long> findAllIds() {
-    	List<Long> temp;
-    	temp = (List<Long>)this.em.createNamedQuery(IntervalBlock.QUERY_FIND_ALL_IDS)
-        .getResultList();
-            return temp;
+		List<Long> temp;
+		temp = (List<Long>) this.em.createNamedQuery(
+				IntervalBlock.QUERY_FIND_ALL_IDS).getResultList();
+		return temp;
 	}
 
 	@Override
-	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void deleteById(Long id) {
 		IntervalBlock ib = findById(id);
 		MeterReading mr = ib.getMeterReading();
@@ -92,6 +93,6 @@ public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 	@Override
 	public void createOrReplaceByUUID(IntervalBlock intervalBlock) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

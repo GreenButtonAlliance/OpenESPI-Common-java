@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -31,33 +31,38 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
+public class ElectricPowerQualitySummaryRepositoryImpl implements
+		ElectricPowerQualitySummaryRepository {
 
-public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQualitySummaryRepository {
+	@PersistenceContext
+	protected EntityManager em;
 
-    @PersistenceContext
-    protected EntityManager em;
+	@Override
+	public ElectricPowerQualitySummary findById(
+			Long electricPowerQualitySummaryId) {
+		return em.find(ElectricPowerQualitySummary.class,
+				electricPowerQualitySummaryId);
+	}
 
-    @Override
-    public ElectricPowerQualitySummary findById(Long electricPowerQualitySummaryId) {
-        return em.find(ElectricPowerQualitySummary.class, electricPowerQualitySummaryId);
-    }
+	@Override
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
+	public void persist(ElectricPowerQualitySummary electricPowerQualitySummary) {
+		em.persist(electricPowerQualitySummary);
+	}
 
-    @Override
-    @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
-    public void persist(ElectricPowerQualitySummary electricPowerQualitySummary) {
-        em.persist(electricPowerQualitySummary);
-    }
-
-    @Override
-    public ElectricPowerQualitySummary findByUUID(UUID uuid) {
-        return (ElectricPowerQualitySummary) em.createNamedQuery(ElectricPowerQualitySummary.QUERY_FIND_BY_UUID)
-                .setParameter("uuid", uuid.toString().toUpperCase())
-                .getSingleResult();
-    }
+	@Override
+	public ElectricPowerQualitySummary findByUUID(UUID uuid) {
+		return (ElectricPowerQualitySummary) em
+				.createNamedQuery(
+						ElectricPowerQualitySummary.QUERY_FIND_BY_UUID)
+				.setParameter("uuid", uuid.toString().toUpperCase())
+				.getSingleResult();
+	}
 
 	@Override
 	public List<Long> findAllIds() {
@@ -66,45 +71,52 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements ElectricPowerQ
 	}
 
 	@Override
-	@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void deleteById(Long id) {
 		ElectricPowerQualitySummary qs = findById(id);
 		UsagePoint up = qs.getUsagePoint();
 		up.removeElectricPowerQualitySummary(qs);
 		em.persist(em.contains(up) ? up : em.merge(up));
-	    em.remove(em.contains(qs) ? qs : em.merge(qs));
+		em.remove(em.contains(qs) ? qs : em.merge(qs));
 	}
 
 	@Override
-        @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+			javax.persistence.NoResultException.class,
+			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void createOrReplaceByUUID(
 			ElectricPowerQualitySummary electricPowerQualitySummary) {
-        try {
-        	ElectricPowerQualitySummary existingElectricPowerQualitySummary = findByUUID(electricPowerQualitySummary.getUUID());
-        	electricPowerQualitySummary.setId(existingElectricPowerQualitySummary.getId());
-            if (electricPowerQualitySummary.getUsagePoint() == null) {
-            	electricPowerQualitySummary.setUsagePoint(existingElectricPowerQualitySummary.getUsagePoint());
-            }
-            
-            if (existingElectricPowerQualitySummary.getSelfLink() != null) {
-            	electricPowerQualitySummary.setSelfLink(existingElectricPowerQualitySummary.getSelfLink());
-            }
+		try {
+			ElectricPowerQualitySummary existingElectricPowerQualitySummary = findByUUID(electricPowerQualitySummary
+					.getUUID());
+			electricPowerQualitySummary
+					.setId(existingElectricPowerQualitySummary.getId());
+			if (electricPowerQualitySummary.getUsagePoint() == null) {
+				electricPowerQualitySummary
+						.setUsagePoint(existingElectricPowerQualitySummary
+								.getUsagePoint());
+			}
 
-            if (existingElectricPowerQualitySummary.getUpLink() != null) {
-            	electricPowerQualitySummary.setUpLink(existingElectricPowerQualitySummary.getUpLink());
-            }
+			if (existingElectricPowerQualitySummary.getSelfLink() != null) {
+				electricPowerQualitySummary
+						.setSelfLink(existingElectricPowerQualitySummary
+								.getSelfLink());
+			}
 
-            em.merge(electricPowerQualitySummary);
-        } catch (NoResultException e) {
-        	electricPowerQualitySummary.setPublished(new GregorianCalendar());
-        	electricPowerQualitySummary.setUpdated(new GregorianCalendar());
-            persist(electricPowerQualitySummary);
-        }
+			if (existingElectricPowerQualitySummary.getUpLink() != null) {
+				electricPowerQualitySummary
+						.setUpLink(existingElectricPowerQualitySummary
+								.getUpLink());
+			}
 
-		
+			em.merge(electricPowerQualitySummary);
+		} catch (NoResultException e) {
+			electricPowerQualitySummary.setPublished(new GregorianCalendar());
+			electricPowerQualitySummary.setUpdated(new GregorianCalendar());
+			persist(electricPowerQualitySummary);
+		}
+
 	}
 }
