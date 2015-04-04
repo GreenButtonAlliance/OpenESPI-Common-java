@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
 
-
 package org.energyos.espi.common.models.atom;
 
 import java.util.HashMap;
@@ -37,15 +36,18 @@ import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.namespace.QName;
 
-
 /**
  * The Atom cagegory construct is defined in section 4.2.2 of the format spec.
  * <p/>
  * <p/>
- * <p>Java class for categoryType complex type.
+ * <p>
+ * Java class for categoryType complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="categoryType">
  *   &lt;complexContent>
@@ -64,137 +66,133 @@ import javax.xml.namespace.QName;
 @XmlType(name = "categoryType")
 public class CategoryType {
 
-    @XmlAttribute(name = "term", required = true)
-    protected String term;
-    @XmlAttribute(name = "scheme")
-    @XmlSchemaType(name = "anyURI")
-    protected String scheme;
-    @XmlAttribute(name = "label")
-    protected String label;
-    @XmlAttribute(name = "base", namespace = "http://www.w3.org/XML/1998/namespace")
-    @XmlSchemaType(name = "anyURI")
-    protected String base;
-    @XmlAttribute(name = "lang", namespace = "http://www.w3.org/XML/1998/namespace")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "language")
-    protected String lang;
-    @XmlAnyAttribute
-    private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+	@XmlAttribute(name = "term", required = true)
+	protected String term;
+	@XmlAttribute(name = "scheme")
+	@XmlSchemaType(name = "anyURI")
+	protected String scheme;
+	@XmlAttribute(name = "label")
+	protected String label;
+	@XmlAttribute(name = "base", namespace = "http://www.w3.org/XML/1998/namespace")
+	@XmlSchemaType(name = "anyURI")
+	protected String base;
+	@XmlAttribute(name = "lang", namespace = "http://www.w3.org/XML/1998/namespace")
+	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+	@XmlSchemaType(name = "language")
+	protected String lang;
+	@XmlAnyAttribute
+	private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
-    /**
-     * Gets the value of the term property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getTerm() {
-        return term;
-    }
+	/**
+	 * Gets the value of the term property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getTerm() {
+		return term;
+	}
 
-    /**
-     * Sets the value of the term property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setTerm(String value) {
-        this.term = value;
-    }
+	/**
+	 * Sets the value of the term property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setTerm(String value) {
+		this.term = value;
+	}
 
-    /**
-     * Gets the value of the scheme property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getScheme() {
-        return scheme;
-    }
+	/**
+	 * Gets the value of the scheme property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getScheme() {
+		return scheme;
+	}
 
-    /**
-     * Sets the value of the scheme property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setScheme(String value) {
-        this.scheme = value;
-    }
+	/**
+	 * Sets the value of the scheme property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setScheme(String value) {
+		this.scheme = value;
+	}
 
-    /**
-     * Gets the value of the label property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getLabel() {
-        return label;
-    }
+	/**
+	 * Gets the value of the label property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getLabel() {
+		return label;
+	}
 
-    /**
-     * Sets the value of the label property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setLabel(String value) {
-        this.label = value;
-    }
+	/**
+	 * Sets the value of the label property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setLabel(String value) {
+		this.label = value;
+	}
 
-    /**
-     * Gets the value of the base property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getBase() {
-        return base;
-    }
+	/**
+	 * Gets the value of the base property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getBase() {
+		return base;
+	}
 
-    /**
-     * Sets the value of the base property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setBase(String value) {
-        this.base = value;
-    }
+	/**
+	 * Sets the value of the base property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setBase(String value) {
+		this.base = value;
+	}
 
-    /**
-     * Gets the value of the lang property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getLang() {
-        return lang;
-    }
+	/**
+	 * Gets the value of the lang property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getLang() {
+		return lang;
+	}
 
-    /**
-     * Sets the value of the lang property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setLang(String value) {
-        this.lang = value;
-    }
+	/**
+	 * Sets the value of the lang property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setLang(String value) {
+		this.lang = value;
+	}
 
-    /**
-     * Gets a map that contains attributes that aren't bound to any typed property on this class.
-     * <p/>
-     * <p/>
-     * the map is keyed by the name of the attribute and
-     * the value is the string value of the attribute.
-     * <p/>
-     * the map returned by this method is live, and you can add new attribute
-     * by updating the map directly. Because of this design, there's no setter.
-     *
-     * @return always non-null
-     */
-    public Map<QName, String> getOtherAttributes() {
-        return otherAttributes;
-    }
+	/**
+	 * Gets a map that contains attributes that aren't bound to any typed
+	 * property on this class.
+	 * <p/>
+	 * <p/>
+	 * the map is keyed by the name of the attribute and the value is the string
+	 * value of the attribute.
+	 * <p/>
+	 * the map returned by this method is live, and you can add new attribute by
+	 * updating the map directly. Because of this design, there's no setter.
+	 *
+	 * @return always non-null
+	 */
+	public Map<QName, String> getOtherAttributes() {
+		return otherAttributes;
+	}
 
 }
