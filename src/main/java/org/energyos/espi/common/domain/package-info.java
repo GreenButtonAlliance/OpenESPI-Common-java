@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,13 +21,8 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
 
-@javax.xml.bind.annotation.XmlSchema(
-        namespace = "http://naesb.org/espi",
-        elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
-        xmlns = {
-                @XmlNs(prefix = "espi", namespaceURI = "http://naesb.org/espi")
-        }
-) package org.energyos.espi.common.domain;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://naesb.org/espi", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED, xmlns = { @XmlNs(prefix = "espi", namespaceURI = "http://naesb.org/espi") })
+package org.energyos.espi.common.domain;
 
 import javax.xml.bind.annotation.XmlNs;
 
