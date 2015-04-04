@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema.
 // Generated on: 2013.08.27 at 01:43:57 PM EDT
 //
-
 
 package org.energyos.espi.common.domain;
 
@@ -52,14 +51,17 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.transaction.annotation.Transactional;
 
-
 /**
  * Set of values obtained from the meter.
  * <p/>
- * <p>Java class for MeterReading complex type.
+ * <p>
+ * Java class for MeterReading complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="MeterReading">
  *   &lt;complexContent>
@@ -69,155 +71,149 @@ import org.springframework.transaction.annotation.Transactional;
  * &lt;/complexType>
  * </pre>
  */
-@XmlRootElement(name="MeterReading")
+@SuppressWarnings("serial")
+@XmlRootElement(name = "MeterReading")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MeterReading")
 @Entity
-@Table(name = "meter_readings", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
+@Table(name = "meter_readings", uniqueConstraints = { @UniqueConstraint(columnNames = { "uuid" }) })
 @XmlJavaTypeAdapter(MeterReadingAdapter.class)
 @NamedQueries(value = {
-        @NamedQuery(name = MeterReading.QUERY_FIND_BY_ID,
-                query = "SELECT reading FROM MeterReading reading WHERE reading.id = :id"),
-        @NamedQuery(name = MeterReading.QUERY_FIND_BY_UUID,
-                query = "SELECT meterReading FROM MeterReading meterReading WHERE meterReading.uuid = :uuid"),
-        @NamedQuery(name = MeterReading.QUERY_FIND_BY_RELATED_HREF,
-                query = "SELECT reading FROM MeterReading reading join reading.relatedLinks link WHERE link.href = :href"),
-        @NamedQuery(name = MeterReading.QUERY_FIND_ALL_RELATED,
-                query = "SELECT readingType FROM ReadingType readingType WHERE readingType.selfLink.href in (:relatedLinkHrefs)"),
-        @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
-                query = "SELECT reading.id FROM MeterReading reading WHERE reading.usagePoint.id = :usagePointId"),
-        @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS,
-                query = "SELECT meterReading.id FROM MeterReading meterReading"),
-        @NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT DISTINCT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id"),
-        @NamedQuery(name = MeterReading.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT m.id FROM  UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id AND m.id = :o3Id")
+		@NamedQuery(name = MeterReading.QUERY_FIND_BY_ID, query = "SELECT reading FROM MeterReading reading WHERE reading.id = :id"),
+		@NamedQuery(name = MeterReading.QUERY_FIND_BY_UUID, query = "SELECT meterReading FROM MeterReading meterReading WHERE meterReading.uuid = :uuid"),
+		@NamedQuery(name = MeterReading.QUERY_FIND_BY_RELATED_HREF, query = "SELECT reading FROM MeterReading reading join reading.relatedLinks link WHERE link.href = :href"),
+		@NamedQuery(name = MeterReading.QUERY_FIND_ALL_RELATED, query = "SELECT readingType FROM ReadingType readingType WHERE readingType.selfLink.href in (:relatedLinkHrefs)"),
+		@NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID, query = "SELECT reading.id FROM MeterReading reading WHERE reading.usagePoint.id = :usagePointId"),
+		@NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS, query = "SELECT meterReading.id FROM MeterReading meterReading"),
+		@NamedQuery(name = MeterReading.QUERY_FIND_ALL_IDS_BY_XPATH_2, query = "SELECT DISTINCT m.id FROM UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id"),
+		@NamedQuery(name = MeterReading.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT m.id FROM  UsagePoint u, MeterReading m WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id AND m.id = :o3Id")
 
 })
-public class MeterReading extends IdentifiedObject
-{
-    public static final String QUERY_FIND_BY_UUID = "MeterReading.findByUUID";
-    public static final String QUERY_FIND_BY_ID = "MeterReading.findById";
-    public static final String QUERY_FIND_BY_RELATED_HREF = "MeterReading.findByAllParentsHref";
-    public static final String QUERY_FIND_ALL_RELATED = "MeterReading.findAllRelated";
-    public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "MeterReading.findAllIdsByUsagePointId";
+public class MeterReading extends IdentifiedObject {
+	public static final String QUERY_FIND_BY_UUID = "MeterReading.findByUUID";
+	public static final String QUERY_FIND_BY_ID = "MeterReading.findById";
+	public static final String QUERY_FIND_BY_RELATED_HREF = "MeterReading.findByAllParentsHref";
+	public static final String QUERY_FIND_ALL_RELATED = "MeterReading.findAllRelated";
+	public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "MeterReading.findAllIdsByUsagePointId";
 	public static final String QUERY_FIND_ALL_IDS = "MeterReading.findAllIds";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "MeterReading.findAllIdsByXpath2";
-    public static final String QUERY_FIND_ID_BY_XPATH = "MeterReading.findIdByXpath";
-    
-    @OneToMany(mappedBy = "meterReading", cascade = {CascadeType.ALL}, orphanRemoval=true)
-    @LazyCollection(LazyCollectionOption.TRUE)
-    @XmlTransient
-    private List<IntervalBlock> intervalBlocks = new ArrayList<>();
+	public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "MeterReading.findAllIdsByXpath2";
+	public static final String QUERY_FIND_ID_BY_XPATH = "MeterReading.findIdByXpath";
 
-    @XmlTransient
-    @ElementCollection
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @CollectionTable(name="meter_reading_related_links", joinColumns=@JoinColumn(name="meter_reading_id"))
-    private List<LinkType> relatedLinks = new ArrayList<>();
+	@OneToMany(mappedBy = "meterReading", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.TRUE)
+	@XmlTransient
+	private List<IntervalBlock> intervalBlocks = new ArrayList<>();
 
-    @XmlTransient
-    @ManyToOne
-    @JoinColumn(name = "usage_point_id")
-    private UsagePoint usagePoint;
+	@XmlTransient
+	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@CollectionTable(name = "meter_reading_related_links", joinColumns = @JoinColumn(name = "meter_reading_id"))
+	private List<LinkType> relatedLinks = new ArrayList<>();
 
-    @XmlTransient
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "reading_type_id")
-    private ReadingType readingType;
+	@XmlTransient
+	@ManyToOne
+	@JoinColumn(name = "usage_point_id")
+	private UsagePoint usagePoint;
 
-    public UsagePoint getUsagePoint() {
-        return usagePoint;
-    }
+	@XmlTransient
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "reading_type_id")
+	private ReadingType readingType;
 
-    public void setUsagePoint(UsagePoint usagePoint) {
-        this.usagePoint = usagePoint;
-    }
+	public UsagePoint getUsagePoint() {
+		return usagePoint;
+	}
 
-    public void addIntervalBlock(IntervalBlock intervalBlock) {
-        intervalBlock.setMeterReading(this);
-        intervalBlocks.add(intervalBlock);
-    }
+	public void setUsagePoint(UsagePoint usagePoint) {
+		this.usagePoint = usagePoint;
+	}
 
-    public void removeIntervalBlock(IntervalBlock intervalBlock) {
-    	intervalBlock.setMeterReading(null);
-    	intervalBlocks.remove(intervalBlock);
-    }
-    
-    public ReadingType getReadingType() {
-        return readingType;
-    }
+	public void addIntervalBlock(IntervalBlock intervalBlock) {
+		intervalBlock.setMeterReading(this);
+		intervalBlocks.add(intervalBlock);
+	}
 
-    public void setReadingType(ReadingType readingType) {
-        this.readingType = readingType;
-    }
+	public void removeIntervalBlock(IntervalBlock intervalBlock) {
+		intervalBlock.setMeterReading(null);
+		intervalBlocks.remove(intervalBlock);
+	}
 
-    public void removeReadingType(ReadingType readingType) {
-    	this.readingType = null;
-    }
-    
-    public List<IntervalBlock> getIntervalBlocks() {
-          return intervalBlocks;
-    }
+	public ReadingType getReadingType() {
+		return readingType;
+	}
 
-    public void setIntervalBlocks(List<IntervalBlock> intervalBlocks) {
-        this.intervalBlocks = intervalBlocks;
-    }
+	public void setReadingType(ReadingType readingType) {
+		this.readingType = readingType;
+	}
 
-    @Override
-    public void setUpResource(IdentifiedObject resource) {
-        UsagePoint usagePoint = (UsagePoint)resource;
-        usagePoint.addMeterReading(this);
-    }
+	public void removeReadingType(ReadingType readingType) {
+		this.readingType = null;
+	}
 
-    @Override
-    public String getParentQuery() {
-        return UsagePoint.QUERY_FIND_BY_RELATED_HREF;
-    }
+	public List<IntervalBlock> getIntervalBlocks() {
+		return intervalBlocks;
+	}
 
-    @Override
-    public String getAllRelatedQuery() {
-        return MeterReading.QUERY_FIND_ALL_RELATED;
-    }
+	public void setIntervalBlocks(List<IntervalBlock> intervalBlocks) {
+		this.intervalBlocks = intervalBlocks;
+	}
 
-    public List<LinkType> getRelatedLinks() {
-        return relatedLinks;
-    }
+	@Override
+	public void setUpResource(IdentifiedObject resource) {
+		UsagePoint usagePoint = (UsagePoint) resource;
+		usagePoint.addMeterReading(this);
+	}
 
-    public void setRelatedLinks(List<LinkType> relatedLinks) {
-        this.relatedLinks = relatedLinks;
-    }
-    
-    @Transactional
-    @Override 
-    public void merge(IdentifiedObject resource) {
-    	
-    	super.merge(resource);
-        
-    	for (IntervalBlock bl : ((MeterReading)resource).getIntervalBlocks()) {
-    		
-    		// TODO: Validate that the UUIDs are equal!!
-    		if (this.intervalBlocks.contains(bl)) {
-    			this.intervalBlocks.remove(bl);
-    		}    	
-    		this.intervalBlocks.add(bl);
-    	}
+	@Override
+	public String getParentQuery() {
+		return UsagePoint.QUERY_FIND_BY_RELATED_HREF;
+	}
 
-    	if (((MeterReading)resource).readingType != null) {
-    		this.readingType = ((MeterReading)resource).readingType;
-    	}
-    	if (((MeterReading)resource).usagePoint != null) {
-    		this.usagePoint = ((MeterReading)resource).usagePoint;
-    	}
-    }
-    
+	@Override
+	public String getAllRelatedQuery() {
+		return MeterReading.QUERY_FIND_ALL_RELATED;
+	}
+
+	public List<LinkType> getRelatedLinks() {
+		return relatedLinks;
+	}
+
+	public void setRelatedLinks(List<LinkType> relatedLinks) {
+		this.relatedLinks = relatedLinks;
+	}
+
+	@Transactional
+	@Override
+	public void merge(IdentifiedObject resource) {
+
+		super.merge(resource);
+
+		for (IntervalBlock bl : ((MeterReading) resource).getIntervalBlocks()) {
+
+			// TODO: Validate that the UUIDs are equal!!
+			if (this.intervalBlocks.contains(bl)) {
+				this.intervalBlocks.remove(bl);
+			}
+			this.intervalBlocks.add(bl);
+		}
+
+		if (((MeterReading) resource).readingType != null) {
+			this.readingType = ((MeterReading) resource).readingType;
+		}
+		if (((MeterReading) resource).usagePoint != null) {
+			this.usagePoint = ((MeterReading) resource).usagePoint;
+		}
+	}
+
 	@Override
 	public void unlink() {
-        super.unlink();
-        
+		super.unlink();
+
 		getIntervalBlocks().clear();
 		getRelatedLinks().clear();
 		setReadingType(null);
 		setUsagePoint(null);
 
 	}
-    
+
 }
