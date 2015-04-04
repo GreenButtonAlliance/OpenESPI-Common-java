@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
 
-
 package org.energyos.espi.common.domain;
 
 import java.math.BigInteger;
@@ -32,12 +31,15 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for RationalNumber complex type.
+ * <p>
+ * Java class for RationalNumber complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="RationalNumber">
  *   &lt;complexContent>
@@ -52,56 +54,51 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RationalNumber", propOrder = {
-        "numerator",
-        "denominator"
-})
+@XmlType(name = "RationalNumber", propOrder = { "numerator", "denominator" })
 @Embeddable
 public class RationalNumber {
 
-    @Column(name = "rational_numerator")
-    protected BigInteger numerator;
-    @Column(name = "rational_denominator")
-    protected BigInteger denominator;
+	@Column(name = "rational_numerator")
+	protected BigInteger numerator;
+	@Column(name = "rational_denominator")
+	protected BigInteger denominator;
 
-    /**
-     * Gets the value of the numerator property.
-     *
-     * @return possible object is
-     *         {@link BigInteger }
-     */
-    public BigInteger getNumerator() {
-        return numerator;
-    }
+	/**
+	 * Gets the value of the numerator property.
+	 *
+	 * @return possible object is {@link BigInteger }
+	 */
+	public BigInteger getNumerator() {
+		return numerator;
+	}
 
-    /**
-     * Sets the value of the numerator property.
-     *
-     * @param value allowed object is
-     * {@link BigInteger }
-     */
-    public void setNumerator(BigInteger value) {
-        this.numerator = value;
-    }
+	/**
+	 * Sets the value of the numerator property.
+	 *
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 */
+	public void setNumerator(BigInteger value) {
+		this.numerator = value;
+	}
 
-    /**
-     * Gets the value of the denominator property.
-     *
-     * @return possible object is
-     *         {@link java.lang.Object }
-     */
-    public BigInteger getDenominator() {
-        return denominator;
-    }
+	/**
+	 * Gets the value of the denominator property.
+	 *
+	 * @return possible object is {@link java.lang.Object }
+	 */
+	public BigInteger getDenominator() {
+		return denominator;
+	}
 
-    /**
-     * Sets the value of the denominator property.
-     *
-     * @param value allowed object is
-     * {@link java.lang.Object }
-     */
-    public void setDenominator(BigInteger value) {
-        this.denominator = value;
-    }
+	/**
+	 * Sets the value of the denominator property.
+	 *
+	 * @param value
+	 *            allowed object is {@link java.lang.Object }
+	 */
+	public void setDenominator(BigInteger value) {
+		this.denominator = value;
+	}
 
 }
