@@ -20,24 +20,24 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.energyos.espi.common.domain.GrantType;
-import org.energyos.espi.common.domain.IntervalBlock;
-import org.energyos.espi.common.domain.IntervalReading;
 import org.energyos.espi.common.domain.ObjectFactory;
 
-public class GrantTypeAdapter extends XmlAdapter<JAXBElement<GrantType>, GrantType> {
+public class GrantTypeAdapter extends
+		XmlAdapter<JAXBElement<GrantType>, GrantType> {
 
 	@Override
 	public GrantType unmarshal(JAXBElement<GrantType> v) throws Exception {
-        GrantType grantType = v.getValue();
-        return grantType;
+		GrantType grantType = v.getValue();
+		return grantType;
 	}
 
 	@Override
 	public JAXBElement<GrantType> marshal(GrantType v) throws Exception {
-        if(v == null) {
-            return null;
-        }
-        return new JAXBElement<>(ObjectFactory.GrantType_QNAME, GrantType.class, v);
+		if (v == null) {
+			return null;
+		}
+		return new JAXBElement<>(ObjectFactory.GrantType_QNAME,
+				GrantType.class, v);
 
 	}
 }

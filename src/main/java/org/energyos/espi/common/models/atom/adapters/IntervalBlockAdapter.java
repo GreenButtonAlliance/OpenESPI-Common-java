@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,24 +23,28 @@ import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.IntervalReading;
 import org.energyos.espi.common.domain.ObjectFactory;
 
-public class IntervalBlockAdapter extends XmlAdapter<JAXBElement<IntervalBlock>, IntervalBlock> {
+public class IntervalBlockAdapter extends
+		XmlAdapter<JAXBElement<IntervalBlock>, IntervalBlock> {
 
-    @Override
-    public IntervalBlock unmarshal(JAXBElement<IntervalBlock> v) throws Exception {
-        IntervalBlock intervalBlock = v.getValue();
+	@Override
+	public IntervalBlock unmarshal(JAXBElement<IntervalBlock> v)
+			throws Exception {
+		IntervalBlock intervalBlock = v.getValue();
 
-        for (IntervalReading intervalReading : intervalBlock.getIntervalReadings()) {
-            intervalReading.setIntervalBlock(intervalBlock);
-        }
+		for (IntervalReading intervalReading : intervalBlock
+				.getIntervalReadings()) {
+			intervalReading.setIntervalBlock(intervalBlock);
+		}
 
-        return intervalBlock;
-    }
+		return intervalBlock;
+	}
 
-    @Override
-    public JAXBElement<IntervalBlock> marshal(IntervalBlock v) throws Exception {
-        if(v == null) {
-            return null;
-        }
-        return new JAXBElement<>(ObjectFactory.IntervalBlock_QNAME, IntervalBlock.class, v);
-    }
+	@Override
+	public JAXBElement<IntervalBlock> marshal(IntervalBlock v) throws Exception {
+		if (v == null) {
+			return null;
+		}
+		return new JAXBElement<>(ObjectFactory.IntervalBlock_QNAME,
+				IntervalBlock.class, v);
+	}
 }

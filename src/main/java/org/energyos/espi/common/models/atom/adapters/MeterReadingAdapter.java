@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,17 +22,19 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ObjectFactory;
 
-public class MeterReadingAdapter extends XmlAdapter<JAXBElement<MeterReading>, MeterReading> {
-    @Override
-    public MeterReading unmarshal(JAXBElement<MeterReading> v) throws Exception {
-        return v.getValue();
-    }
+public class MeterReadingAdapter extends
+		XmlAdapter<JAXBElement<MeterReading>, MeterReading> {
+	@Override
+	public MeterReading unmarshal(JAXBElement<MeterReading> v) throws Exception {
+		return v.getValue();
+	}
 
-    @Override
-    public JAXBElement<MeterReading> marshal(MeterReading v) throws Exception {
-        if(v == null) {
-            return null;
-        }
-        return new JAXBElement<>(ObjectFactory.MeterReading_QNAME, MeterReading.class, v);
-    }
+	@Override
+	public JAXBElement<MeterReading> marshal(MeterReading v) throws Exception {
+		if (v == null) {
+			return null;
+		}
+		return new JAXBElement<>(ObjectFactory.MeterReading_QNAME,
+				MeterReading.class, v);
+	}
 }

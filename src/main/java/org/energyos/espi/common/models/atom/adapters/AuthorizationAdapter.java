@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,17 +22,20 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.ObjectFactory;
 
-public class AuthorizationAdapter extends XmlAdapter<JAXBElement<Authorization>, Authorization> {
-    @Override
-    public Authorization unmarshal(JAXBElement<Authorization> v) throws Exception {
-        return (Authorization)v.getValue();
-    }
+public class AuthorizationAdapter extends
+		XmlAdapter<JAXBElement<Authorization>, Authorization> {
+	@Override
+	public Authorization unmarshal(JAXBElement<Authorization> v)
+			throws Exception {
+		return (Authorization) v.getValue();
+	}
 
-    @Override
-    public JAXBElement<Authorization> marshal(Authorization v) throws Exception {
-        if(v == null) {
-            return null;
-        }
-        return new JAXBElement<>(ObjectFactory.Authorization_QNAME, Authorization.class, v);
-    }
+	@Override
+	public JAXBElement<Authorization> marshal(Authorization v) throws Exception {
+		if (v == null) {
+			return null;
+		}
+		return new JAXBElement<>(ObjectFactory.Authorization_QNAME,
+				Authorization.class, v);
+	}
 }

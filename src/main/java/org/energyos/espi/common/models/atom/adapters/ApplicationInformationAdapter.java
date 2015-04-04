@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,17 +22,21 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.ObjectFactory;
 
-public class ApplicationInformationAdapter extends XmlAdapter<JAXBElement<ApplicationInformation>, ApplicationInformation> {
-    @Override
-    public ApplicationInformation unmarshal(JAXBElement<ApplicationInformation> v) throws Exception {
-        return (ApplicationInformation)v.getValue();
-    }
+public class ApplicationInformationAdapter extends
+		XmlAdapter<JAXBElement<ApplicationInformation>, ApplicationInformation> {
+	@Override
+	public ApplicationInformation unmarshal(
+			JAXBElement<ApplicationInformation> v) throws Exception {
+		return (ApplicationInformation) v.getValue();
+	}
 
-    @Override
-    public JAXBElement<ApplicationInformation> marshal(ApplicationInformation v) throws Exception {
-        if(v == null) {
-            return null;
-        }
-        return new JAXBElement<>(ObjectFactory.ApplicationInformation_QNAME, ApplicationInformation.class, v);
-    }
+	@Override
+	public JAXBElement<ApplicationInformation> marshal(ApplicationInformation v)
+			throws Exception {
+		if (v == null) {
+			return null;
+		}
+		return new JAXBElement<>(ObjectFactory.ApplicationInformation_QNAME,
+				ApplicationInformation.class, v);
+	}
 }

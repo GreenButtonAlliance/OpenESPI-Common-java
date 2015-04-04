@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,17 +22,19 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.domain.ObjectFactory;
 import org.energyos.espi.common.domain.UsagePoint;
 
-public class UsagePointAdapter extends XmlAdapter<JAXBElement<UsagePoint>, UsagePoint> {
-    @Override
-    public UsagePoint unmarshal(JAXBElement<UsagePoint> v) throws Exception {
-        return v.getValue();
-    }
+public class UsagePointAdapter extends
+		XmlAdapter<JAXBElement<UsagePoint>, UsagePoint> {
+	@Override
+	public UsagePoint unmarshal(JAXBElement<UsagePoint> v) throws Exception {
+		return v.getValue();
+	}
 
-    @Override
-    public JAXBElement<UsagePoint> marshal(UsagePoint v) throws Exception {
-        if(v == null) {
-            return null;
-        }
-        return new JAXBElement<>(ObjectFactory.UsagePoint_QNAME, UsagePoint.class, v);
-    }
+	@Override
+	public JAXBElement<UsagePoint> marshal(UsagePoint v) throws Exception {
+		if (v == null) {
+			return null;
+		}
+		return new JAXBElement<>(ObjectFactory.UsagePoint_QNAME,
+				UsagePoint.class, v);
+	}
 }

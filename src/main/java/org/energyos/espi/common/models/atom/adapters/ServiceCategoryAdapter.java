@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,14 +21,17 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.energyos.espi.common.domain.ServiceCategory;
 
-public class ServiceCategoryAdapter extends XmlAdapter<JAXBElement<ServiceCategory>, ServiceCategory> {
-    @Override
-    public ServiceCategory unmarshal(JAXBElement<ServiceCategory> v) throws Exception {
-        return (ServiceCategory)v.getValue();
-    }
+public class ServiceCategoryAdapter extends
+		XmlAdapter<JAXBElement<ServiceCategory>, ServiceCategory> {
+	@Override
+	public ServiceCategory unmarshal(JAXBElement<ServiceCategory> v)
+			throws Exception {
+		return (ServiceCategory) v.getValue();
+	}
 
-    @Override
-    public JAXBElement<ServiceCategory> marshal(ServiceCategory v) throws Exception {
-        return null;
-    }
+	@Override
+	public JAXBElement<ServiceCategory> marshal(ServiceCategory v)
+			throws Exception {
+		return null;
+	}
 }

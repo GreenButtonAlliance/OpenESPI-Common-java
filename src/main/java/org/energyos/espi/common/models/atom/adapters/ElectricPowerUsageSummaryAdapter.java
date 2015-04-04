@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,17 +22,22 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 import org.energyos.espi.common.domain.ObjectFactory;
 
-public class ElectricPowerUsageSummaryAdapter extends XmlAdapter<JAXBElement<ElectricPowerUsageSummary>, ElectricPowerUsageSummary> {
-    @Override
-    public ElectricPowerUsageSummary unmarshal(JAXBElement<ElectricPowerUsageSummary> v) throws Exception {
-        return (ElectricPowerUsageSummary)v.getValue();
-    }
+public class ElectricPowerUsageSummaryAdapter
+		extends
+		XmlAdapter<JAXBElement<ElectricPowerUsageSummary>, ElectricPowerUsageSummary> {
+	@Override
+	public ElectricPowerUsageSummary unmarshal(
+			JAXBElement<ElectricPowerUsageSummary> v) throws Exception {
+		return (ElectricPowerUsageSummary) v.getValue();
+	}
 
-    @Override
-    public JAXBElement<ElectricPowerUsageSummary> marshal(ElectricPowerUsageSummary v) throws Exception {
-        if(v == null) {
-            return null;
-        }
-        return new JAXBElement<>(ObjectFactory.ElectricPowerUsageSummary_QNAME, ElectricPowerUsageSummary.class, v);
-    }
+	@Override
+	public JAXBElement<ElectricPowerUsageSummary> marshal(
+			ElectricPowerUsageSummary v) throws Exception {
+		if (v == null) {
+			return null;
+		}
+		return new JAXBElement<>(ObjectFactory.ElectricPowerUsageSummary_QNAME,
+				ElectricPowerUsageSummary.class, v);
+	}
 }

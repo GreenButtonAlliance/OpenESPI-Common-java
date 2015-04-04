@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,14 +22,16 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.models.atom.DateTimeType;
 import org.energyos.espi.common.models.atom.ObjectFactory;
 
-public class UpdatedAdapter extends XmlAdapter<JAXBElement<DateTimeType>, DateTimeType> {
-    @Override
-    public DateTimeType unmarshal(JAXBElement<DateTimeType> v) throws Exception {
-        return v.getValue();
-    }
+public class UpdatedAdapter extends
+		XmlAdapter<JAXBElement<DateTimeType>, DateTimeType> {
+	@Override
+	public DateTimeType unmarshal(JAXBElement<DateTimeType> v) throws Exception {
+		return v.getValue();
+	}
 
-    @Override
-    public JAXBElement<DateTimeType> marshal(DateTimeType v) throws Exception {
-        return new JAXBElement<DateTimeType>(ObjectFactory.SourceTypeUpdated_QNAME, DateTimeType.class, v);
-    }
+	@Override
+	public JAXBElement<DateTimeType> marshal(DateTimeType v) throws Exception {
+		return new JAXBElement<DateTimeType>(
+				ObjectFactory.SourceTypeUpdated_QNAME, DateTimeType.class, v);
+	}
 }

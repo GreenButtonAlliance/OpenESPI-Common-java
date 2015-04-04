@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,21 +23,25 @@ import org.energyos.espi.common.domain.IntervalReading;
 import org.energyos.espi.common.domain.ObjectFactory;
 import org.energyos.espi.common.domain.ReadingQuality;
 
-public class IntervalReadingAdapter extends XmlAdapter<JAXBElement<IntervalReading>, IntervalReading> {
+public class IntervalReadingAdapter extends
+		XmlAdapter<JAXBElement<IntervalReading>, IntervalReading> {
 
-    @Override
-    public IntervalReading unmarshal(JAXBElement<IntervalReading> v) throws Exception {
-        IntervalReading intervalReading = v.getValue();
+	@Override
+	public IntervalReading unmarshal(JAXBElement<IntervalReading> v)
+			throws Exception {
+		IntervalReading intervalReading = v.getValue();
 
-        for (ReadingQuality readingQuality : intervalReading.getReadingQualities()) {
-            readingQuality.setIntervalReading(intervalReading);
-        }
+		for (ReadingQuality readingQuality : intervalReading
+				.getReadingQualities()) {
+			readingQuality.setIntervalReading(intervalReading);
+		}
 
-        return v.getValue();
-    }
+		return v.getValue();
+	}
 
-    @Override
-    public JAXBElement<IntervalReading> marshal(IntervalReading v) throws Exception {
-        return new ObjectFactory().createIntervalReading(v);
-    }
+	@Override
+	public JAXBElement<IntervalReading> marshal(IntervalReading v)
+			throws Exception {
+		return new ObjectFactory().createIntervalReading(v);
+	}
 }

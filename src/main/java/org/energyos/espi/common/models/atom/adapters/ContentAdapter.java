@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,14 +22,16 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.models.atom.ContentType;
 import org.energyos.espi.common.models.atom.ObjectFactory;
 
-public class ContentAdapter extends XmlAdapter<JAXBElement<ContentType>, ContentType> {
-    @Override
-    public ContentType unmarshal(JAXBElement<ContentType> v) throws Exception {
-        return v.getValue();
-    }
+public class ContentAdapter extends
+		XmlAdapter<JAXBElement<ContentType>, ContentType> {
+	@Override
+	public ContentType unmarshal(JAXBElement<ContentType> v) throws Exception {
+		return v.getValue();
+	}
 
-    @Override
-    public JAXBElement<ContentType> marshal(ContentType v) throws Exception {
-        return new JAXBElement<>(ObjectFactory.EntryTypeContent_QNAME, ContentType.class, v);
-    }
+	@Override
+	public JAXBElement<ContentType> marshal(ContentType v) throws Exception {
+		return new JAXBElement<>(ObjectFactory.EntryTypeContent_QNAME,
+				ContentType.class, v);
+	}
 }

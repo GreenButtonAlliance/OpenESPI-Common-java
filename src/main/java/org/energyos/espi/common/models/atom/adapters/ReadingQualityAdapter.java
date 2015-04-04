@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,15 +22,18 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.domain.ObjectFactory;
 import org.energyos.espi.common.domain.ReadingQuality;
 
-public class ReadingQualityAdapter extends XmlAdapter<JAXBElement<ReadingQuality>, ReadingQuality> {
+public class ReadingQualityAdapter extends
+		XmlAdapter<JAXBElement<ReadingQuality>, ReadingQuality> {
 
-    @Override
-    public ReadingQuality unmarshal(JAXBElement<ReadingQuality> v) throws Exception {
-        return v.getValue();
-    }
+	@Override
+	public ReadingQuality unmarshal(JAXBElement<ReadingQuality> v)
+			throws Exception {
+		return v.getValue();
+	}
 
-    @Override
-    public JAXBElement<ReadingQuality> marshal(ReadingQuality v) throws Exception {
-        return new ObjectFactory().createReadingQuality(v);
-    }
+	@Override
+	public JAXBElement<ReadingQuality> marshal(ReadingQuality v)
+			throws Exception {
+		return new ObjectFactory().createReadingQuality(v);
+	}
 }

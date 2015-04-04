@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,19 +21,25 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.energyos.espi.common.domain.ObjectFactory;
 import org.energyos.espi.common.domain.TimeConfiguration;
-public class TimeConfigurationAdapter extends XmlAdapter<JAXBElement<TimeConfiguration>, TimeConfiguration> {
-    
-    @Override
-    public TimeConfiguration unmarshal(JAXBElement<TimeConfiguration> v) throws Exception {
-        return v.getValue();
-    }
 
-    @Override
-    public JAXBElement<TimeConfiguration> marshal(TimeConfiguration v) throws Exception {
-        if(v == null) {
-            return null;
-        }
-        JAXBElement<TimeConfiguration> element = new JAXBElement<>(ObjectFactory.LocalTimeParameters_QNAME, TimeConfiguration.class, v);
-        return element;
-    }
+public class TimeConfigurationAdapter extends
+		XmlAdapter<JAXBElement<TimeConfiguration>, TimeConfiguration> {
+
+	@Override
+	public TimeConfiguration unmarshal(JAXBElement<TimeConfiguration> v)
+			throws Exception {
+		return v.getValue();
+	}
+
+	@Override
+	public JAXBElement<TimeConfiguration> marshal(TimeConfiguration v)
+			throws Exception {
+		if (v == null) {
+			return null;
+		}
+		JAXBElement<TimeConfiguration> element = new JAXBElement<>(
+				ObjectFactory.LocalTimeParameters_QNAME,
+				TimeConfiguration.class, v);
+		return element;
+	}
 }

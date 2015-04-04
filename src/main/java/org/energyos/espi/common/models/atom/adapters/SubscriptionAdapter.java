@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,17 +22,19 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.domain.ObjectFactory;
 import org.energyos.espi.common.domain.Subscription;
 
-public class SubscriptionAdapter extends XmlAdapter<JAXBElement<Subscription>, Subscription> {
-    @Override
-    public Subscription unmarshal(JAXBElement<Subscription> v) throws Exception {
-        return (Subscription)v.getValue();
-    }
+public class SubscriptionAdapter extends
+		XmlAdapter<JAXBElement<Subscription>, Subscription> {
+	@Override
+	public Subscription unmarshal(JAXBElement<Subscription> v) throws Exception {
+		return (Subscription) v.getValue();
+	}
 
-    @Override
-    public JAXBElement<Subscription> marshal(Subscription v) throws Exception {
-        if(v == null) {
-            return null;
-        }
-        return new JAXBElement<>(ObjectFactory.Subscription_QNAME, Subscription.class, v);
-    }
+	@Override
+	public JAXBElement<Subscription> marshal(Subscription v) throws Exception {
+		if (v == null) {
+			return null;
+		}
+		return new JAXBElement<>(ObjectFactory.Subscription_QNAME,
+				Subscription.class, v);
+	}
 }

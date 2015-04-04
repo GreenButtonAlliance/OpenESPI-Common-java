@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,13 +22,13 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.models.atom.TextType;
 
 public class StringAdapter extends XmlAdapter<JAXBElement<TextType>, String> {
-    @Override
-    public String unmarshal(JAXBElement<TextType> v) throws Exception {
-        return ((TextType)v.getValue()).getTitle();
-    }
+	@Override
+	public String unmarshal(JAXBElement<TextType> v) throws Exception {
+		return ((TextType) v.getValue()).getTitle();
+	}
 
-    @Override
-    public JAXBElement<TextType> marshal(String v) throws Exception {
-        return null;
-    }
+	@Override
+	public JAXBElement<TextType> marshal(String v) throws Exception {
+		return null;
+	}
 }

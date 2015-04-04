@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,15 +22,16 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.domain.LineItem;
 import org.energyos.espi.common.domain.ObjectFactory;
 
-public class LineItemAdapter extends XmlAdapter<JAXBElement<LineItem>, LineItem> {
+public class LineItemAdapter extends
+		XmlAdapter<JAXBElement<LineItem>, LineItem> {
 
-    @Override
-    public LineItem unmarshal(JAXBElement<LineItem> v) throws Exception {
-        return (LineItem)v.getValue();
-    }
+	@Override
+	public LineItem unmarshal(JAXBElement<LineItem> v) throws Exception {
+		return (LineItem) v.getValue();
+	}
 
-    @Override
-    public JAXBElement<LineItem> marshal(LineItem v) throws Exception {
-        return new ObjectFactory().createLineItem(v);
-    }
+	@Override
+	public JAXBElement<LineItem> marshal(LineItem v) throws Exception {
+		return new ObjectFactory().createLineItem(v);
+	}
 }

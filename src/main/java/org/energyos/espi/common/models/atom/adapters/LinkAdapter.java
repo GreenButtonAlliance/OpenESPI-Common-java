@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,13 +23,14 @@ import org.energyos.espi.common.models.atom.LinkType;
 import org.energyos.espi.common.models.atom.ObjectFactory;
 
 public class LinkAdapter extends XmlAdapter<JAXBElement<LinkType>, LinkType> {
-    @Override
-    public LinkType unmarshal(JAXBElement<LinkType> v) throws Exception {
-        return (LinkType)v.getValue();
-    }
+	@Override
+	public LinkType unmarshal(JAXBElement<LinkType> v) throws Exception {
+		return (LinkType) v.getValue();
+	}
 
-    @Override
-    public JAXBElement<LinkType> marshal(LinkType v) throws Exception {
-        return new JAXBElement<LinkType>(ObjectFactory.SourceTypeLink_QNAME, LinkType.class, v);
-    }
+	@Override
+	public JAXBElement<LinkType> marshal(LinkType v) throws Exception {
+		return new JAXBElement<LinkType>(ObjectFactory.SourceTypeLink_QNAME,
+				LinkType.class, v);
+	}
 }

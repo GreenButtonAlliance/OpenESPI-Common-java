@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,17 +22,23 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ObjectFactory;
 
-public class ElectricPowerQualitySummaryAdapter extends XmlAdapter<JAXBElement<ElectricPowerQualitySummary>, ElectricPowerQualitySummary> {
-    @Override
-    public ElectricPowerQualitySummary unmarshal(JAXBElement<ElectricPowerQualitySummary> v) throws Exception {
-        return (ElectricPowerQualitySummary)v.getValue();
-    }
+public class ElectricPowerQualitySummaryAdapter
+		extends
+		XmlAdapter<JAXBElement<ElectricPowerQualitySummary>, ElectricPowerQualitySummary> {
+	@Override
+	public ElectricPowerQualitySummary unmarshal(
+			JAXBElement<ElectricPowerQualitySummary> v) throws Exception {
+		return (ElectricPowerQualitySummary) v.getValue();
+	}
 
-    @Override
-    public JAXBElement<ElectricPowerQualitySummary> marshal(ElectricPowerQualitySummary v) throws Exception {
-        if(v == null) {
-            return null;
-        }
-        return new JAXBElement<>(ObjectFactory.ElectricPowerQualitySummary_QNAME, ElectricPowerQualitySummary.class, v);
-    }
+	@Override
+	public JAXBElement<ElectricPowerQualitySummary> marshal(
+			ElectricPowerQualitySummary v) throws Exception {
+		if (v == null) {
+			return null;
+		}
+		return new JAXBElement<>(
+				ObjectFactory.ElectricPowerQualitySummary_QNAME,
+				ElectricPowerQualitySummary.class, v);
+	}
 }
