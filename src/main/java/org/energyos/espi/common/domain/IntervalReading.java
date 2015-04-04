@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
 
-
 package org.energyos.espi.common.domain;
 
 import java.util.ArrayList;
@@ -41,7 +40,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -53,14 +51,18 @@ import org.energyos.espi.common.models.atom.adapters.IntervalReadingAdapter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-
 /**
- * Specific value measured by a meter or other asset. Each Reading is associated with a specific ReadingType.
+ * Specific value measured by a meter or other asset. Each Reading is associated
+ * with a specific ReadingType.
  * <p/>
- * <p>Java class for IntervalReading complex type.
+ * <p>
+ * Java class for IntervalReading complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="IntervalReading">
  *   &lt;complexContent>
@@ -80,15 +82,9 @@ import org.hibernate.annotations.LazyCollectionOption;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "IntervalReading", propOrder = {
-        "cost",
-        "readingQualities",
-        "timePeriod",
-        "value",
-        "consumptionTier",
-        "tou",
-        "cpp"
-       
+@XmlType(name = "IntervalReading", propOrder = { "cost", "readingQualities",
+		"timePeriod", "value", "consumptionTier", "tou", "cpp"
+
 })
 @Entity
 @Table(name = "interval_readings")
@@ -96,130 +92,125 @@ import org.hibernate.annotations.LazyCollectionOption;
 @XmlRootElement(name = "IntervalReading")
 public class IntervalReading {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @XmlTransient
-    protected Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@XmlTransient
+	protected Long id;
 
-    protected Long cost;
+	protected Long cost;
 
-    @OneToMany(mappedBy = "intervalReading", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @XmlElementRefs({
-            @XmlElementRef(name = "ReadingQuality", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
-    })
-    @XmlAnyElement(lax = true)
-    protected List<ReadingQuality> readingQualities = new ArrayList<>();
+	@OneToMany(mappedBy = "intervalReading", cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@XmlElementRefs({ @XmlElementRef(name = "ReadingQuality", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false), })
+	@XmlAnyElement(lax = true)
+	protected List<ReadingQuality> readingQualities = new ArrayList<>();
 
-    @Embedded
-    protected DateTimeInterval timePeriod;
+	@Embedded
+	protected DateTimeInterval timePeriod;
 
-    protected Long value;
+	protected Long value;
 
-    protected Long consumptionTier;
-    protected Long tou;
-    protected Long cpp;
+	protected Long consumptionTier;
+	protected Long tou;
+	protected Long cpp;
 
-    
-    @XmlTransient
-    @ManyToOne
-    @JoinColumn(name = "interval_block_id")
-    protected IntervalBlock intervalBlock;
+	@XmlTransient
+	@ManyToOne
+	@JoinColumn(name = "interval_block_id")
+	protected IntervalBlock intervalBlock;
 
-    /**
-     * Gets the value of the cost property.
-     *
-     * @return possible object is
-     *         {@link Long }
-     */
-    public Long getCost() {
-        return cost;
-    }
+	/**
+	 * Gets the value of the cost property.
+	 *
+	 * @return possible object is {@link Long }
+	 */
+	public Long getCost() {
+		return cost;
+	}
 
-    /**
-     * Sets the value of the cost property.
-     *
-     * @param value allowed object is
-     * {@link Long }
-     */
-    public void setCost(Long value) {
-        this.cost = value;
-    }
+	/**
+	 * Sets the value of the cost property.
+	 *
+	 * @param value
+	 *            allowed object is {@link Long }
+	 */
+	public void setCost(Long value) {
+		this.cost = value;
+	}
 
-    /**
-     * Gets the value of the readingQuality property.
-     * <p/>
-     * <p/>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the readingQuality property.
-     * <p/>
-     * <p/>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getReadingQuality().add(newItem);
-     * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ReadingQuality }
-     */
-    public List<ReadingQuality> getReadingQualities() {
-        return this.readingQualities;
-    }
+	/**
+	 * Gets the value of the readingQuality property.
+	 * <p/>
+	 * <p/>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the readingQuality property.
+	 * <p/>
+	 * <p/>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getReadingQuality().add(newItem);
+	 * </pre>
+	 * <p/>
+	 * <p/>
+	 * <p/>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link ReadingQuality }
+	 */
+	public List<ReadingQuality> getReadingQualities() {
+		return this.readingQualities;
+	}
 
-    /**
-     * Gets the value of the timePeriod property.
-     *
-     * @return possible object is
-     *         {@link DateTimeInterval }
-     */
-    public DateTimeInterval getTimePeriod() {
-        return timePeriod;
-    }
+	/**
+	 * Gets the value of the timePeriod property.
+	 *
+	 * @return possible object is {@link DateTimeInterval }
+	 */
+	public DateTimeInterval getTimePeriod() {
+		return timePeriod;
+	}
 
-    /**
-     * Sets the value of the timePeriod property.
-     *
-     * @param value allowed object is
-     * {@link DateTimeInterval }
-     */
-    public void setTimePeriod(DateTimeInterval value) {
-        this.timePeriod = value;
-    }
+	/**
+	 * Sets the value of the timePeriod property.
+	 *
+	 * @param value
+	 *            allowed object is {@link DateTimeInterval }
+	 */
+	public void setTimePeriod(DateTimeInterval value) {
+		this.timePeriod = value;
+	}
 
-    /**
-     * Gets the value of the value property.
-     *
-     * @return possible object is
-     *         {@link Long }
-     */
-    public Long getValue() {
-        return value;
-    }
+	/**
+	 * Gets the value of the value property.
+	 *
+	 * @return possible object is {@link Long }
+	 */
+	public Long getValue() {
+		return value;
+	}
 
-    /**
-     * Sets the value of the value property.
-     *
-     * @param value allowed object is
-     * {@link Long }
-     */
-    public void setValue(Long value) {
-        this.value = value;
-    }
+	/**
+	 * Sets the value of the value property.
+	 *
+	 * @param value
+	 *            allowed object is {@link Long }
+	 */
+	public void setValue(Long value) {
+		this.value = value;
+	}
 
-    public IntervalBlock getIntervalBlock() {
-        return intervalBlock;
-    }
+	public IntervalBlock getIntervalBlock() {
+		return intervalBlock;
+	}
 
-    public void setIntervalBlock(IntervalBlock intervalBlock) {
-        this.intervalBlock = intervalBlock;
-    }
+	public void setIntervalBlock(IntervalBlock intervalBlock) {
+		this.intervalBlock = intervalBlock;
+	}
 
-    public void addReadingQuality(ReadingQuality readingQuality) {
-        this.readingQualities.add(readingQuality);
-        readingQuality.setIntervalReading(this);
-    }
+	public void addReadingQuality(ReadingQuality readingQuality) {
+		this.readingQualities.add(readingQuality);
+		readingQuality.setIntervalReading(this);
+	}
 }
