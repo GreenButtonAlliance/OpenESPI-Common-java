@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -26,54 +26,49 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "ServiceDeliveryPoint")
-@XmlType(name = "ServiceDeliveryPoint", propOrder = {
-//		"id",
-        "name",
-        "tariffProfile",
-        "customerAgreement"
-})
-
+@XmlType(name = "ServiceDeliveryPoint", propOrder = { "name", "tariffProfile",
+		"customerAgreement" })
 @Entity
 @Table(name = "service_delivery_points")
 public class ServiceDeliveryPoint {
-    private String name;
-    private String tariffProfile;
-    private String customerAgreement;
+	private String name;
+	private String tariffProfile;
+	private String customerAgreement;
 
-    private long id;
+	private long id;
 
-    @Id
-    @XmlTransient
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
-        return id;
-    }
+	@Id
+	@XmlTransient
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public long getId() {
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getTariffProfile() {
-        return tariffProfile;
-    }
+	public String getTariffProfile() {
+		return tariffProfile;
+	}
 
-    public void setTariffProfile(String tariffProfile) {
-        this.tariffProfile = tariffProfile;
-    }
+	public void setTariffProfile(String tariffProfile) {
+		this.tariffProfile = tariffProfile;
+	}
 
-    public String getCustomerAgreement() {
-        return customerAgreement;
-    }
+	public String getCustomerAgreement() {
+		return customerAgreement;
+	}
 
-    public void setCustomerAgreement(String customerAgreement) {
-        this.customerAgreement = customerAgreement;
-    }
+	public void setCustomerAgreement(String customerAgreement) {
+		this.customerAgreement = customerAgreement;
+	}
 }
