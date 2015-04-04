@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -129,29 +129,11 @@ public class Routes {
 	public static final String BATCH_SUBSCRIPTION_USAGEPOINT = "/espi/1_1/resource/Batch/Subscription/{subscriptionId}/UsagePoint";
 	public static final String BATCH_SUBSCRIPTION_USAGEPOINT_MEMBER = "/espi/1_1/resource/Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}";
 
-	public static String buildDataCustodianRESTUsagePointCollection(
-			String retailCustomerHashedId) {
-		return DATA_CUSTODIAN_REST_USAGE_POINT_COLLECTION.replace(
-				"{retailCustomerId}", retailCustomerHashedId);
-	}
-
-	public static String buildDataCustodianRESTUsagePointMember(
-			String retailCustomerHashedId, String usagePointHashedId) {
-		return DATA_CUSTODIAN_REST_USAGE_POINT_MEMBER.replace(
-				"{retailCustomerHashedId}", retailCustomerHashedId).replace(
-				"{usagePointHashedId}", usagePointHashedId);
-	}
-
 	public static String buildDataCustodianRESTUsagePointGet(
 			String retailCustomerId, String usagePointId) {
 		return DATA_CUSTODIAN_REST_USAGE_POINT_GET.replace(
 				"{retailCustomerId}", retailCustomerId).replace(
 				"{usagePointId}", usagePointId);
-	}
-
-	public static String buildThirdPartyAuthorization(String retailCustomerId) {
-		return THIRD_PARTY_AUTHORIZATION.replace("{retailCustomerId}",
-				retailCustomerId);
 	}
 
 	public static String getDataCustodianRESTSubscriptionGetURL(
