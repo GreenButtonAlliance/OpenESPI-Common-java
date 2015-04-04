@@ -67,6 +67,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  * &lt;/complexType>
  * </pre>
  */
+@SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Subscription")
 @Entity
