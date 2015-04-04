@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@
 // Any modifications to this file will be lost upon recompilation of the source schema.
 // Generated on: 2013.08.27 at 01:43:57 PM EDT
 //
-
 
 package org.energyos.espi.common.domain;
 
@@ -53,14 +52,17 @@ import org.energyos.espi.common.models.atom.adapters.IntervalBlockAdapter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-
 /**
  * Time sequence of Readings of the same ReadingType.
  * <p/>
- * <p>Java class for IntervalBlock complex type.
+ * <p>
+ * Java class for IntervalBlock complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="IntervalBlock">
  *   &lt;complexContent>
@@ -74,151 +76,138 @@ import org.hibernate.annotations.LazyCollectionOption;
  * &lt;/complexType>
  * </pre>
  */
+@SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "IntervalBlock", propOrder = {
-        "interval",
-        "intervalReadings"
-})
+@XmlType(name = "IntervalBlock", propOrder = { "interval", "intervalReadings" })
 @Entity
-@Table(name = "interval_blocks", uniqueConstraints = {@UniqueConstraint(columnNames={"uuid"})})
+@Table(name = "interval_blocks", uniqueConstraints = { @UniqueConstraint(columnNames = { "uuid" }) })
 @NamedQueries(value = {
-        @NamedQuery(name = IntervalBlock.QUERY_ALL_BY_METER_READING_ID,
-                query = "SELECT block FROM IntervalBlock block WHERE block.meterReading.id = :meterReadingId"),
-        @NamedQuery(name = IntervalBlock.QUERY_FIND_BY_ID,
-                query = "SELECT block FROM IntervalBlock block WHERE block.id = :id"),
-        @NamedQuery(name = IntervalBlock.QUERY_FIND_BY_UUID,
-                query = "SELECT block FROM IntervalBlock block WHERE block.uuid = :uuid"),
-        @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID,
-                query = "SELECT block.id FROM IntervalBlock block where block.meterReading.usagePoint.id = :usagePointId"),
-        @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS,
-                query = "SELECT intervalBlock.id FROM IntervalBlock intervalBlock"),
-        @NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_XPATH_3, query = "SELECT DISTINCT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id AND i.meterReading.id = :o3Id"),
-        @NamedQuery(name = IntervalBlock.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id AND i.meterReading.id = :o3Id AND i.id = :o4Id")
+		@NamedQuery(name = IntervalBlock.QUERY_ALL_BY_METER_READING_ID, query = "SELECT block FROM IntervalBlock block WHERE block.meterReading.id = :meterReadingId"),
+		@NamedQuery(name = IntervalBlock.QUERY_FIND_BY_ID, query = "SELECT block FROM IntervalBlock block WHERE block.id = :id"),
+		@NamedQuery(name = IntervalBlock.QUERY_FIND_BY_UUID, query = "SELECT block FROM IntervalBlock block WHERE block.uuid = :uuid"),
+		@NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID, query = "SELECT block.id FROM IntervalBlock block where block.meterReading.usagePoint.id = :usagePointId"),
+		@NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS, query = "SELECT intervalBlock.id FROM IntervalBlock intervalBlock"),
+		@NamedQuery(name = IntervalBlock.QUERY_FIND_ALL_IDS_BY_XPATH_3, query = "SELECT DISTINCT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id AND i.meterReading.id = :o3Id"),
+		@NamedQuery(name = IntervalBlock.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT i.id FROM UsagePoint u, MeterReading m, IntervalBlock i WHERE u.retailCustomer.id = :o1Id AND m.usagePoint.id = :o2Id AND i.meterReading.id = :o3Id AND i.id = :o4Id")
 
 })
 @XmlRootElement(name = "IntervalBlock")
 @XmlJavaTypeAdapter(IntervalBlockAdapter.class)
-public class IntervalBlock
-        extends IdentifiedObject
-{
-    public static final String QUERY_ALL_BY_METER_READING_ID = "IntervalBlock.findAllByMeterReadingId";
-    public static final String QUERY_FIND_BY_ID = "IntervalBlock.findById";
-    public static final String QUERY_FIND_BY_UUID = "IntervalBlock.findByUUID";
-    public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "IntervalBlock.findAllIdsByUsagePointId";
+public class IntervalBlock extends IdentifiedObject {
+	public static final String QUERY_ALL_BY_METER_READING_ID = "IntervalBlock.findAllByMeterReadingId";
+	public static final String QUERY_FIND_BY_ID = "IntervalBlock.findById";
+	public static final String QUERY_FIND_BY_UUID = "IntervalBlock.findByUUID";
+	public static final String QUERY_FIND_ALL_IDS_BY_USAGE_POINT_ID = "IntervalBlock.findAllIdsByUsagePointId";
 	public static final String QUERY_FIND_ALL_IDS = "IntervalBlock.findAllIds";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_1 = "IntervalBlock.findAllIdsByXpath1";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "IntervalBlock.findAllIdsByXpath2";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_3 = "IntervalBlock.findAllIdsByXpath3";
-    public static final String QUERY_FIND_ID_BY_XPATH = "IntervalBlock.findIdByXpath";
+	public static final String QUERY_FIND_ALL_IDS_BY_XPATH_1 = "IntervalBlock.findAllIdsByXpath1";
+	public static final String QUERY_FIND_ALL_IDS_BY_XPATH_2 = "IntervalBlock.findAllIdsByXpath2";
+	public static final String QUERY_FIND_ALL_IDS_BY_XPATH_3 = "IntervalBlock.findAllIdsByXpath3";
+	public static final String QUERY_FIND_ID_BY_XPATH = "IntervalBlock.findIdByXpath";
 
-    @Embedded
-    protected DateTimeInterval interval;
+	@Embedded
+	protected DateTimeInterval interval;
 
-    @OneToMany(mappedBy = "intervalBlock", cascade = {CascadeType.ALL})
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @XmlElementRefs({
-            @XmlElementRef(name = "IntervalReading", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false),
-    })
-    @XmlAnyElement(lax = true)
-    protected List<IntervalReading> intervalReadings = new ArrayList<>();
+	@OneToMany(mappedBy = "intervalBlock", cascade = { CascadeType.ALL })
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@XmlElementRefs({ @XmlElementRef(name = "IntervalReading", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false), })
+	@XmlAnyElement(lax = true)
+	protected List<IntervalReading> intervalReadings = new ArrayList<>();
 
-    @XmlTransient
-    @ManyToOne
-    @JoinColumn(name = "meter_reading_id")
-    protected MeterReading meterReading;
+	@XmlTransient
+	@ManyToOne
+	@JoinColumn(name = "meter_reading_id")
+	protected MeterReading meterReading;
 
-    /**
-     * Gets the value of the interval property.
-     *
-     * @return
-     *     possible object is
-     *     {@link DateTimeInterval }
-     *
-     */
-    public DateTimeInterval getInterval() {
-        return interval;
-    }
+	/**
+	 * Gets the value of the interval property.
+	 *
+	 * @return possible object is {@link DateTimeInterval }
+	 *
+	 */
+	public DateTimeInterval getInterval() {
+		return interval;
+	}
 
-    /**
-     * Sets the value of the interval property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link DateTimeInterval }
-     *
-     */
-    public void setInterval(DateTimeInterval value) {
-        this.interval = value;
-    }
+	/**
+	 * Sets the value of the interval property.
+	 *
+	 * @param value
+	 *            allowed object is {@link DateTimeInterval }
+	 *
+	 */
+	public void setInterval(DateTimeInterval value) {
+		this.interval = value;
+	}
 
-    /**
-     * Gets the value of the intervalReading property.
-     *
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the intervalReading property.
-     *
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getIntervalReading().add(newItem);
-     * </pre>
-     *
-     *
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link IntervalReading }
-     *
-     *
-     */
-    public List<IntervalReading> getIntervalReadings() {
-        return this.intervalReadings;
-    }
+	/**
+	 * Gets the value of the intervalReading property.
+	 *
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the intervalReading property.
+	 *
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getIntervalReading().add(newItem);
+	 * </pre>
+	 *
+	 *
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link IntervalReading }
+	 *
+	 *
+	 */
+	public List<IntervalReading> getIntervalReadings() {
+		return this.intervalReadings;
+	}
 
-    public void setIntervalReadings(List<IntervalReading> intervalReadings) {
-        this.intervalReadings = intervalReadings;
-    }
+	public void setIntervalReadings(List<IntervalReading> intervalReadings) {
+		this.intervalReadings = intervalReadings;
+	}
 
-    public MeterReading getMeterReading() {
-        return meterReading;
-    }
+	public MeterReading getMeterReading() {
+		return meterReading;
+	}
 
-    public void setMeterReading(MeterReading meterReading) {
-        this.meterReading = meterReading;
-    }
+	public void setMeterReading(MeterReading meterReading) {
+		this.meterReading = meterReading;
+	}
 
-    public void addIntervalReading(IntervalReading intervalReading) {
-        this.intervalReadings.add(intervalReading);
-        intervalReading.setIntervalBlock(this);
-    }
+	public void addIntervalReading(IntervalReading intervalReading) {
+		this.intervalReadings.add(intervalReading);
+		intervalReading.setIntervalBlock(this);
+	}
 
-    @Override
-    public String getParentQuery() {
-        return MeterReading.QUERY_FIND_BY_RELATED_HREF;
-    }
+	@Override
+	public String getParentQuery() {
+		return MeterReading.QUERY_FIND_BY_RELATED_HREF;
+	}
 
-    @Override
-    public void setUpResource(IdentifiedObject resource) {
-        MeterReading meterReading = (MeterReading) resource;
-        meterReading.addIntervalBlock(this);
-    }
-    
-    @Override 
-    public void merge(IdentifiedObject resource) {
-    	super.merge(resource);
-    	this.interval = ((IntervalBlock)resource).interval;
-    	this.intervalReadings = ((IntervalBlock)resource).intervalReadings;
-    	Iterator<IntervalReading> readings = this.intervalReadings.iterator();
-    	
-    	while (readings.hasNext()) {
-    		IntervalReading reading = readings.next();
-    		reading.setIntervalBlock(this);
-    	}
-    	
-    	if (((IntervalBlock)resource).meterReading != null){
-    		this.meterReading = ((IntervalBlock)resource).meterReading;
-    	}
-    }
+	@Override
+	public void setUpResource(IdentifiedObject resource) {
+		MeterReading meterReading = (MeterReading) resource;
+		meterReading.addIntervalBlock(this);
+	}
+
+	@Override
+	public void merge(IdentifiedObject resource) {
+		super.merge(resource);
+		this.interval = ((IntervalBlock) resource).interval;
+		this.intervalReadings = ((IntervalBlock) resource).intervalReadings;
+		Iterator<IntervalReading> readings = this.intervalReadings.iterator();
+
+		while (readings.hasNext()) {
+			IntervalReading reading = readings.next();
+			reading.setIntervalBlock(this);
+		}
+
+		if (((IntervalBlock) resource).meterReading != null) {
+			this.meterReading = ((IntervalBlock) resource).meterReading;
+		}
+	}
 }
