@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
 
-
 package org.energyos.espi.common.domain;
 
 import javax.persistence.Entity;
@@ -41,14 +40,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.energyos.espi.common.models.atom.adapters.ReadingQualityAdapter;
 
-
 /**
- * Quality of a specific reading value or interval reading value. Note that more than one Quality may be applicable to a given Reading. Typically not used unless problems or unusual conditions occur (i.e., quality for each Reading is assumed to be 'Good' (valid) unless stated otherwise in associated ReadingQuality).
+ * Quality of a specific reading value or interval reading value. Note that more
+ * than one Quality may be applicable to a given Reading. Typically not used
+ * unless problems or unusual conditions occur (i.e., quality for each Reading
+ * is assumed to be 'Good' (valid) unless stated otherwise in associated
+ * ReadingQuality).
  * <p/>
- * <p>Java class for ReadingQuality complex type.
+ * <p>
+ * Java class for ReadingQuality complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="ReadingQuality">
  *   &lt;complexContent>
@@ -62,53 +68,50 @@ import org.energyos.espi.common.models.atom.adapters.ReadingQualityAdapter;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ReadingQuality", propOrder = {
-        "quality"
-})
+@XmlType(name = "ReadingQuality", propOrder = { "quality" })
 @Entity
 @Table(name = "reading_qualities")
 @XmlJavaTypeAdapter(ReadingQualityAdapter.class)
 @XmlRootElement(name = "ReadingQuality")
 public class ReadingQuality {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @XmlTransient
-    protected Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@XmlTransient
+	protected Long id;
 
-    @XmlElement(required = true)
-    protected String quality;
+	@XmlElement(required = true)
+	protected String quality;
 
-    @XmlTransient
-    @ManyToOne
-    @JoinColumn(name = "interval_reading_id")
-    protected IntervalReading intervalReading;
+	@XmlTransient
+	@ManyToOne
+	@JoinColumn(name = "interval_reading_id")
+	protected IntervalReading intervalReading;
 
-    /**
-     * Gets the value of the quality property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getQuality() {
-        return quality;
-    }
+	/**
+	 * Gets the value of the quality property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getQuality() {
+		return quality;
+	}
 
-    /**
-     * Sets the value of the quality property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setQuality(String value) {
-        this.quality = value;
-    }
+	/**
+	 * Sets the value of the quality property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setQuality(String value) {
+		this.quality = value;
+	}
 
-    public IntervalReading getIntervalReading() {
-        return intervalReading;
-    }
+	public IntervalReading getIntervalReading() {
+		return intervalReading;
+	}
 
-    public void setIntervalReading(IntervalReading intervalReading) {
-        this.intervalReading = intervalReading;
-    }
+	public void setIntervalReading(IntervalReading intervalReading) {
+		this.intervalReading = intervalReading;
+	}
 
 }
