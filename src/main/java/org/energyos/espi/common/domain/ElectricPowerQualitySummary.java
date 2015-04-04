@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -74,6 +74,7 @@ import org.energyos.espi.common.models.atom.adapters.ElectricPowerQualitySummary
  * &lt;/complexType>
  * </pre>
  */
+@SuppressWarnings("serial")
 @XmlRootElement(name="ElectricPowerQualitySummary")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ElectricPowerQualitySummary", propOrder = {
