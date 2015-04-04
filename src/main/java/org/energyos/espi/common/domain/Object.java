@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
 
-
 package org.energyos.espi.common.domain;
 
 import java.util.ArrayList;
@@ -32,14 +31,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * Superclass of all object classes to allow extensions.
  * <p/>
- * <p>Java class for Object complex type.
+ * <p>
+ * Java class for Object complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="Object">
  *   &lt;complexContent>
@@ -53,47 +55,40 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Object", propOrder = {
-        "extension"
-})
-@XmlSeeAlso({
-        BatchItemInfo.class,
-        DateTimeInterval.class,
-        ServiceStatus.class,
-        SummaryMeasurement.class,
-        ReadingQuality.class,
-        IntervalReading.class,
-        ServiceCategory.class
-})
+@XmlType(name = "Object", propOrder = { "extension" })
+@XmlSeeAlso({ BatchItemInfo.class, DateTimeInterval.class, ServiceStatus.class,
+		SummaryMeasurement.class, ReadingQuality.class, IntervalReading.class,
+		ServiceCategory.class })
 public class Object {
 
-    protected List<java.lang.Object> extension;
+	protected List<java.lang.Object> extension;
 
-    /**
-     * Gets the value of the extension property.
-     * <p/>
-     * <p/>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
-     * <p/>
-     * <p/>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getExtension().add(newItem);
-     * </pre>
-     * <p/>
-     * <p/>
-     * <p/>
-     * Objects of the following type(s) are allowed in the list
-     * {@link java.lang.Object }
-     */
-    public List<java.lang.Object> getExtension() {
-        if (extension == null) {
-            extension = new ArrayList<java.lang.Object>();
-        }
-        return this.extension;
-    }
+	/**
+	 * Gets the value of the extension property.
+	 * <p/>
+	 * <p/>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the extension property.
+	 * <p/>
+	 * <p/>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getExtension().add(newItem);
+	 * </pre>
+	 * <p/>
+	 * <p/>
+	 * <p/>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link java.lang.Object }
+	 */
+	public List<java.lang.Object> getExtension() {
+		if (extension == null) {
+			extension = new ArrayList<java.lang.Object>();
+		}
+		return this.extension;
+	}
 
 }
