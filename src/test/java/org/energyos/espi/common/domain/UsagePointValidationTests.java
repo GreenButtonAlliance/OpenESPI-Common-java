@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -30,32 +30,38 @@ import javax.validation.constraints.NotNull;
 import org.junit.Test;
 
 public class UsagePointValidationTests {
-    @Test
-    public void isValid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isValid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        UsagePoint usagePoint = new UsagePoint();
-        usagePoint.setMRID("urn:uuid:E8E75691-7F9D-49F3-8BE2-3A74EBF6BFC0");
-        usagePoint.setServiceCategory(new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE));
+		UsagePoint usagePoint = new UsagePoint();
+		usagePoint.setMRID("urn:uuid:E8E75691-7F9D-49F3-8BE2-3A74EBF6BFC0");
+		usagePoint.setServiceCategory(new ServiceCategory(
+				ServiceCategory.ELECTRICITY_SERVICE));
 
-        Set<ConstraintViolation<UsagePoint>> violations = validator.validate(usagePoint);
+		Set<ConstraintViolation<UsagePoint>> violations = validator
+				.validate(usagePoint);
 
-        assertTrue(violations.isEmpty());
-    }
+		assertTrue(violations.isEmpty());
+	}
 
-    @Test
-    public void isInvalid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isInvalid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        UsagePoint usagePoint = new UsagePoint();
+		UsagePoint usagePoint = new UsagePoint();
 
-        Set<ConstraintViolation<UsagePoint>> violations = validator.validate(usagePoint);
+		Set<ConstraintViolation<UsagePoint>> violations = validator
+				.validate(usagePoint);
 
-        assertFalse(violations.isEmpty());
-    }
+		assertFalse(violations.isEmpty());
+	}
 
-    @Test
-    public void validations() {
-        assertAnnotationPresent(UsagePoint.class, "serviceCategory", NotNull.class);
-    }
+	@Test
+	public void validations() {
+		assertAnnotationPresent(UsagePoint.class, "serviceCategory",
+				NotNull.class);
+	}
 }

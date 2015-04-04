@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -27,22 +27,23 @@ import org.junit.Test;
 
 public class StringAdapterTests {
 
-    StringAdapter stringAdapter;
+	StringAdapter stringAdapter;
 
-    @Before
-    public void setup() {
-        stringAdapter = new StringAdapter();
-    }
+	@Before
+	public void setup() {
+		stringAdapter = new StringAdapter();
+	}
 
-    @Test
-    public void givenJAXBElement_returnsContent() throws Exception {
-        TextType textTypeElement = new TextType();
-        textTypeElement.getContent().add("Sample text");
-        JAXBElement<TextType> v = new JAXBElement<TextType>(new QName("xmlNamespace", "localPart"), TextType.class, textTypeElement);
+	@Test
+	public void givenJAXBElement_returnsContent() throws Exception {
+		TextType textTypeElement = new TextType();
+		textTypeElement.getContent().add("Sample text");
+		JAXBElement<TextType> v = new JAXBElement<TextType>(new QName(
+				"xmlNamespace", "localPart"), TextType.class, textTypeElement);
 
-        String value = stringAdapter.unmarshal(v);
+		String value = stringAdapter.unmarshal(v);
 
-        assertTrue(value.equals("Sample text"));
-    }
+		assertTrue(value.equals("Sample text"));
+	}
 
 }

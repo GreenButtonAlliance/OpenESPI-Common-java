@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -28,26 +28,26 @@ import org.junit.Test;
 
 public class ReadingQualityUnmarshallerTests extends XMLTest {
 
-    static final String XML_INPUT =
-            "<ReadingQuality xmlns=\"http://naesb.org/espi\">" +
-                "<quality>quality1</quality>" +
-            "</ReadingQuality>";
-    private ReadingQuality readingQuality;
+	static final String XML_INPUT = "<ReadingQuality xmlns=\"http://naesb.org/espi\">"
+			+ "<quality>quality1</quality>" + "</ReadingQuality>";
+	private ReadingQuality readingQuality;
 
-    @Before
-    public void before() throws Exception {
-        ReadingQualityAdapter intervalBlockAdapter = new ReadingQualityAdapter();
-        JAXBElement<ReadingQuality> readingQualityJAXBElement = EspiMarshaller.unmarshal(XML_INPUT);
-        readingQuality = intervalBlockAdapter.unmarshal(readingQualityJAXBElement);
-    }
+	@Before
+	public void before() throws Exception {
+		ReadingQualityAdapter intervalBlockAdapter = new ReadingQualityAdapter();
+		JAXBElement<ReadingQuality> readingQualityJAXBElement = EspiMarshaller
+				.unmarshal(XML_INPUT);
+		readingQuality = intervalBlockAdapter
+				.unmarshal(readingQualityJAXBElement);
+	}
 
-    @Test
-    public void unmarshalsReadingQuality() {
-        assertEquals(ReadingQuality.class, readingQuality.getClass());
-    }
+	@Test
+	public void unmarshalsReadingQuality() {
+		assertEquals(ReadingQuality.class, readingQuality.getClass());
+	}
 
-    @Test
-    public void unmarshal_setsQuality() {
-        assertEquals("quality1", readingQuality.getQuality());
-    }
+	@Test
+	public void unmarshal_setsQuality() {
+		assertEquals("quality1", readingQuality.getQuality());
+	}
 }

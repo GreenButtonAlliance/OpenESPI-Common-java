@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -41,23 +41,26 @@ import org.xml.sax.SAXException;
 @WebAppConfiguration
 @ContextConfiguration("/spring/test-context.xml")
 public class ServiceCategoryMarshallerTests extends XMLTest {
-    @Autowired
-    @Qualifier("atomMarshaller")
-    private Jaxb2Marshaller atomMarshaller;
+	@Autowired
+	@Qualifier("atomMarshaller")
+	private Jaxb2Marshaller atomMarshaller;
 
-    private String newXML() throws DatatypeConfigurationException {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        atomMarshaller.marshal(EspiFactory.newServiceCategory(), new StreamResult(os));
-        return os.toString();
-    }
+	private String newXML() throws DatatypeConfigurationException {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		atomMarshaller.marshal(EspiFactory.newServiceCategory(),
+				new StreamResult(os));
+		return os.toString();
+	}
 
-    @Test
-    public void serviceCategory() throws SAXException, IOException, XpathException, DatatypeConfigurationException {
-        assertXpathExists("/espi:ServiceCategory", newXML());
-    }
+	@Test
+	public void serviceCategory() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException {
+		assertXpathExists("/espi:ServiceCategory", newXML());
+	}
 
-    @Test
-    public void kind() throws SAXException, IOException, XpathException, DatatypeConfigurationException {
-        assertXpathExists("/espi:ServiceCategory/espi:kind", newXML());
-    }
+	@Test
+	public void kind() throws SAXException, IOException, XpathException,
+			DatatypeConfigurationException {
+		assertXpathExists("/espi:ServiceCategory/espi:kind", newXML());
+	}
 }

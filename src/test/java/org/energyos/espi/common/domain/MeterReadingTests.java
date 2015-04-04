@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -36,30 +36,37 @@ import com.sun.syndication.io.FeedException;
 
 public class MeterReadingTests extends XMLTest {
 
-    @Test
-    public void unmarshalsMeterReading() throws SAXException, IOException, XpathException, FeedException, JAXBException {
-        final String XML_INPUT = "<MeterReading xmlns=\"http://naesb.org/espi\"/>";
+	@Test
+	public void unmarshalsMeterReading() throws SAXException, IOException,
+			XpathException, FeedException, JAXBException {
+		final String XML_INPUT = "<MeterReading xmlns=\"http://naesb.org/espi\"/>";
 
-        assertEquals(MeterReading.class, EspiMarshaller.unmarshal(XML_INPUT).getValue().getClass());
-    }
+		assertEquals(MeterReading.class, EspiMarshaller.unmarshal(XML_INPUT)
+				.getValue().getClass());
+	}
 
-    @Test
-    public void marshalsMeterReading() throws SAXException, IOException, XpathException, FeedException {
-        assertXpathExists("espi:MeterReading", EspiMarshaller.marshal(newMeterReadingWithUsagePoint()));
-    }
+	@Test
+	public void marshalsMeterReading() throws SAXException, IOException,
+			XpathException, FeedException {
+		assertXpathExists("espi:MeterReading",
+				EspiMarshaller.marshal(newMeterReadingWithUsagePoint()));
+	}
 
-    @Test
-    public void usagePoint_hasTransientAnnotation() {
-        TestUtils.assertAnnotationPresent(MeterReading.class, "usagePoint", XmlTransient.class);
-    }
+	@Test
+	public void usagePoint_hasTransientAnnotation() {
+		TestUtils.assertAnnotationPresent(MeterReading.class, "usagePoint",
+				XmlTransient.class);
+	}
 
-    @Test
-    public void intervalBlocks_hasTransientAnnotation() {
-        TestUtils.assertAnnotationPresent(MeterReading.class, "intervalBlocks", XmlTransient.class);
-    }
+	@Test
+	public void intervalBlocks_hasTransientAnnotation() {
+		TestUtils.assertAnnotationPresent(MeterReading.class, "intervalBlocks",
+				XmlTransient.class);
+	}
 
-    @Test
-    public void readingType_hasTransientAnnotation() {
-        TestUtils.assertAnnotationPresent(MeterReading.class, "readingType", XmlTransient.class);
-    }
+	@Test
+	public void readingType_hasTransientAnnotation() {
+		TestUtils.assertAnnotationPresent(MeterReading.class, "readingType",
+				XmlTransient.class);
+	}
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013, 2014, 2015 EnergyOS.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package org.energyos.espi.common.utils;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
@@ -40,102 +56,127 @@ import com.sun.syndication.io.FeedException;
 @ContextConfiguration("/spring/test-context.xml")
 public class FragmentMarshallerTests extends XMLTest {
 
-    @Autowired
-    private Jaxb2Marshaller fragmentMarshaller;
+	@Autowired
+	private Jaxb2Marshaller fragmentMarshaller;
 
-    @Test
-    public void entry() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry", newXML());
-    }
+	@Test
+	public void entry() throws SAXException, IOException, XpathException,
+			DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry", newXML());
+	}
 
-    @Test
-    public void entry_id() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:id", newXML());
-    }
+	@Test
+	public void entry_id() throws SAXException, IOException, XpathException,
+			DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:id", newXML());
+	}
 
-    @Test
-    public void entry_link() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:link", newXML());
-    }
+	@Test
+	public void entry_link() throws SAXException, IOException, XpathException,
+			DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:link", newXML());
+	}
 
-    @Test
-    public void entry_title() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:title", newXML());
-    }
+	@Test
+	public void entry_title() throws SAXException, IOException, XpathException,
+			DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:title", newXML());
+	}
 
-    @Test
-    public void entry_published() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:published", newXML());
-    }
+	@Test
+	public void entry_published() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:published", newXML());
+	}
 
-    @Test
-    public void entry_updated() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:updated", newXML());
-    }
+	@Test
+	public void entry_updated() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:updated", newXML());
+	}
 
-    @Test
-    public void content() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:content", newXML());
-    }
+	@Test
+	public void content() throws SAXException, IOException, XpathException,
+			DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:content", newXML());
+	}
 
-    @Test
-    public void content_empty() throws Exception {
-        assertXpathNotExists("/:entry/:content/*", newXML(null));
-    }
+	@Test
+	public void content_empty() throws Exception {
+		assertXpathNotExists("/:entry/:content/*", newXML(null));
+	}
 
-    @Test
-    public void content_UsagePoint() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:content/espi:UsagePoint", newXML(newUsagePoint()));
-    }
+	@Test
+	public void content_UsagePoint() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:content/espi:UsagePoint",
+				newXML(newUsagePoint()));
+	}
 
-    @Test
-    public void content_MeterReading() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:content/espi:MeterReading", newXML(newMeterReading()));
-    }
+	@Test
+	public void content_MeterReading() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:content/espi:MeterReading",
+				newXML(newMeterReading()));
+	}
 
-    @Test
-    public void content_ReadingType() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:content/espi:ReadingType", newXML(newReadingType()));
-    }
+	@Test
+	public void content_ReadingType() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:content/espi:ReadingType",
+				newXML(newReadingType()));
+	}
 
-    @Test
-    public void content_IntervalBlocks() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:content/espi:IntervalBlock", newXML(newIntervalBlock()));
-    }
+	@Test
+	public void content_IntervalBlocks() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:content/espi:IntervalBlock",
+				newXML(newIntervalBlock()));
+	}
 
-    @Test
-    public void content_ElectricPowerUsageSummary() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:content/espi:ElectricPowerUsageSummary", newXML(newElectricPowerUsageSummary()));
-    }
+	@Test
+	public void content_ElectricPowerUsageSummary() throws SAXException,
+			IOException, XpathException, DatatypeConfigurationException,
+			FeedException {
+		assertXpathExists("/:entry/:content/espi:ElectricPowerUsageSummary",
+				newXML(newElectricPowerUsageSummary()));
+	}
 
-    @Test
-    public void content_ElectricPowerQualitySummary() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:content/espi:ElectricPowerQualitySummary", newXML(newElectricPowerQualitySummary()));
-    }
+	@Test
+	public void content_ElectricPowerQualitySummary() throws SAXException,
+			IOException, XpathException, DatatypeConfigurationException,
+			FeedException {
+		assertXpathExists("/:entry/:content/espi:ElectricPowerQualitySummary",
+				newXML(newElectricPowerQualitySummary()));
+	}
 
-    @Test
-    public void content_LocalTimeParameters() throws SAXException, IOException, XpathException, DatatypeConfigurationException, FeedException {
-        assertXpathExists("/:entry/:content/espi:LocalTimeParameters", newXML(EspiFactory.newLocalTimeParameters()));
-    }
+	@Test
+	public void content_LocalTimeParameters() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException, FeedException {
+		assertXpathExists("/:entry/:content/espi:LocalTimeParameters",
+				newXML(EspiFactory.newLocalTimeParameters()));
+	}
 
-    private String newXML() throws DatatypeConfigurationException, FeedException {
-        return newXML(newUsagePoint());
-    }
+	private String newXML() throws DatatypeConfigurationException,
+			FeedException {
+		return newXML(newUsagePoint());
+	}
 
-    private String newXML(IdentifiedObject resource) throws DatatypeConfigurationException, FeedException {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        EntryType entry = new EntryType();
-        entry.getLinks().add(new LinkType(LinkType.SELF, "self"));
-        entry.setTitle("entry");
-        entry.setId("id");
-        entry.setPublished(new DateTimeType());
-        entry.setUpdated(new DateTimeType());
-        ContentType content = new ContentType();
-        content.setResources(Lists.<IdentifiedObject>newArrayList(resource));
-        entry.setContent(content);
-        
-        fragmentMarshaller.marshal(entry, new StreamResult(os)); 
-        
-        return os.toString();
-    }
+	private String newXML(IdentifiedObject resource)
+			throws DatatypeConfigurationException, FeedException {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		EntryType entry = new EntryType();
+		entry.getLinks().add(new LinkType(LinkType.SELF, "self"));
+		entry.setTitle("entry");
+		entry.setId("id");
+		entry.setPublished(new DateTimeType());
+		entry.setUpdated(new DateTimeType());
+		ContentType content = new ContentType();
+		content.setResources(Lists.<IdentifiedObject> newArrayList(resource));
+		entry.setContent(content);
+
+		fragmentMarshaller.marshal(entry, new StreamResult(os));
+
+		return os.toString();
+	}
 }

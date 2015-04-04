@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -41,63 +41,76 @@ import org.xml.sax.SAXException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
 public class UsagePointMarshallerTests extends XMLTest {
-    @Autowired
-    @Qualifier("atomMarshaller")
-    private Jaxb2Marshaller atomMarshaller;
+	@Autowired
+	@Qualifier("atomMarshaller")
+	private Jaxb2Marshaller atomMarshaller;
 
-    private String newXML() throws DatatypeConfigurationException {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        atomMarshaller.marshal(EspiFactory.newUsagePoint(), new StreamResult(os));
-        return os.toString();
-    }
+	private String newXML() throws DatatypeConfigurationException {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		atomMarshaller.marshal(EspiFactory.newUsagePoint(),
+				new StreamResult(os));
+		return os.toString();
+	}
 
-    @Test
-    public void UsagePoint() throws SAXException, IOException, XpathException, DatatypeConfigurationException {
-        assertXpathExists("/espi:UsagePoint", newXML());
-    }
+	@Test
+	public void UsagePoint() throws SAXException, IOException, XpathException,
+			DatatypeConfigurationException {
+		assertXpathExists("/espi:UsagePoint", newXML());
+	}
 
-    @Test
-    public void roleFlags() throws SAXException, IOException, XpathException, DatatypeConfigurationException {
-        assertXpathValue("726F6C6520666C616773", "/espi:UsagePoint/espi:roleFlags", newXML());
-    }
+	@Test
+	public void roleFlags() throws SAXException, IOException, XpathException,
+			DatatypeConfigurationException {
+		assertXpathValue("726F6C6520666C616773",
+				"/espi:UsagePoint/espi:roleFlags", newXML());
+	}
 
-    @Test
-    public void serviceCategory() throws SAXException, IOException, XpathException, DatatypeConfigurationException {
-        assertXpathExists("/espi:UsagePoint/espi:ServiceCategory", newXML());
-    }
+	@Test
+	public void serviceCategory() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException {
+		assertXpathExists("/espi:UsagePoint/espi:ServiceCategory", newXML());
+	}
 
-    @Test
-    public void status() throws SAXException, IOException, XpathException, DatatypeConfigurationException {
-        assertXpathValue("5", "espi:UsagePoint/espi:status", newXML());
-    }
+	@Test
+	public void status() throws SAXException, IOException, XpathException,
+			DatatypeConfigurationException {
+		assertXpathValue("5", "espi:UsagePoint/espi:status", newXML());
+	}
 
-    @Test
-    public void ServiceDeliveryPoint() throws SAXException, IOException, XpathException, DatatypeConfigurationException {
-        assertXpathExists("/espi:UsagePoint/espi:ServiceDeliveryPoint", newXML());
-    }
+	@Test
+	public void ServiceDeliveryPoint() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException {
+		assertXpathExists("/espi:UsagePoint/espi:ServiceDeliveryPoint",
+				newXML());
+	}
 
-    @Test
-    public void ServiceCategory_kind() throws SAXException, IOException, XpathException, DatatypeConfigurationException {
-        assertXpathValue("0", "espi:UsagePoint/espi:ServiceCategory/espi:kind", newXML());
-    }
+	@Test
+	public void ServiceCategory_kind() throws SAXException, IOException,
+			XpathException, DatatypeConfigurationException {
+		assertXpathValue("0", "espi:UsagePoint/espi:ServiceCategory/espi:kind",
+				newXML());
+	}
 
-    @Test
-    public void meterReadings_shouldNotBeMarshaled() {
-        TestUtils.assertFieldNotMarshallable(UsagePoint.class, "meterReadings");
-    }
+	@Test
+	public void meterReadings_shouldNotBeMarshaled() {
+		TestUtils.assertFieldNotMarshallable(UsagePoint.class, "meterReadings");
+	}
 
-    @Test
-    public void retailCustomer_shouldNotBeMarshaled() {
-        TestUtils.assertFieldNotMarshallable(UsagePoint.class, "retailCustomer");
-    }
+	@Test
+	public void retailCustomer_shouldNotBeMarshaled() {
+		TestUtils
+				.assertFieldNotMarshallable(UsagePoint.class, "retailCustomer");
+	}
 
-    @Test
-    public void electricPowerUsageSummaries_shouldNotBeMarshaled() {
-        TestUtils.assertFieldNotMarshallable(UsagePoint.class, "electricPowerUsageSummaries");
-    }
+	@Test
+	public void electricPowerUsageSummaries_shouldNotBeMarshaled() {
+		TestUtils.assertFieldNotMarshallable(UsagePoint.class,
+				"electricPowerUsageSummaries");
+	}
 
-    @Test
-    public void localTimeParameters_shouldNotBeMarshaled() {
-        TestUtils.assertFieldNotMarshallable(UsagePoint.class, "localTimeParameters");
-    }
+	@Test
+	public void localTimeParameters_shouldNotBeMarshaled() {
+		TestUtils.assertFieldNotMarshallable(UsagePoint.class,
+				"localTimeParameters");
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package org.energyos.espi.common.service.impl;
 
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -26,14 +25,14 @@ import org.junit.Test;
 
 public class IntervalBlockServiceImplTests {
 
-    @Test
-    public void findAllByMeterReading_returnsIntervalBlocks() {
-        IntervalBlockRepository repository = mock(IntervalBlockRepository.class);
-        IntervalBlockService service = new IntervalBlockServiceImpl();
-        service.setRepository(repository);
+	@Test
+	public void findAllByMeterReading_returnsIntervalBlocks() {
+		IntervalBlockRepository repository = mock(IntervalBlockRepository.class);
+		IntervalBlockService service = new IntervalBlockServiceImpl();
+		service.setRepository(repository);
 
-        service.findAllByMeterReadingId(1L);
+		service.findAllByMeterReadingId(1L);
 
-        verify(repository).findAllByMeterReadingId(1L);
-    }
+		verify(repository).findAllByMeterReadingId(1L);
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -33,13 +33,16 @@ import org.xml.sax.SAXException;
 import com.sun.syndication.io.FeedException;
 
 public class ReadingQualityMarshallerTests extends XMLTest {
-    @Test
-    public void marshal_setsQuality() throws FeedException, SAXException, IOException, XpathException {
-        assertXpathValue("100", "espi:IntervalReading/espi:cost", EspiMarshaller.marshal(newIntervalReading()));
-    }
+	@Test
+	public void marshal_setsQuality() throws FeedException, SAXException,
+			IOException, XpathException {
+		assertXpathValue("100", "espi:IntervalReading/espi:cost",
+				EspiMarshaller.marshal(newIntervalReading()));
+	}
 
-    @Test
-    public void intervalReading_hasTransientAnnotation() {
-        TestUtils.assertAnnotationPresent(ReadingQuality.class, "intervalReading", XmlTransient.class);
-    }
+	@Test
+	public void intervalReading_hasTransientAnnotation() {
+		TestUtils.assertAnnotationPresent(ReadingQuality.class,
+				"intervalReading", XmlTransient.class);
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -24,9 +24,10 @@ import org.junit.Test;
 
 public class TimeConfigurationPersistenceTests {
 
-    @Test
-    public void persistence() {
-        TestUtils.assertAnnotationPresent(TimeConfiguration.class, Entity.class);
-        TestUtils.assertAnnotationPresent(TimeConfiguration.class, Table.class);
-    }
+	@Test
+	public void persistence() {
+		TestUtils
+				.assertAnnotationPresent(TimeConfiguration.class, Entity.class);
+		TestUtils.assertAnnotationPresent(TimeConfiguration.class, Table.class);
+	}
 }

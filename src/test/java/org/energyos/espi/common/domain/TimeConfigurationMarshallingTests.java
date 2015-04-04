@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,40 +29,42 @@ import org.junit.Test;
 
 public class TimeConfigurationMarshallingTests {
 
-    static final String XML_INPUT =
-            "<LocalTimeParameters xmlns=\"http://naesb.org/espi\">\n" +
-                    "    <dstEndRule>B40E2000</dstEndRule>\n" +
-                    "    <dstOffset>3600</dstOffset>\n" +
-                    "    <dstStartRule>360E2000</dstStartRule>\n" +
-                    "    <tzOffset>-18000</tzOffset>\n" +
-                    "</LocalTimeParameters>";
+	static final String XML_INPUT = "<LocalTimeParameters xmlns=\"http://naesb.org/espi\">\n"
+			+ "    <dstEndRule>B40E2000</dstEndRule>\n"
+			+ "    <dstOffset>3600</dstOffset>\n"
+			+ "    <dstStartRule>360E2000</dstStartRule>\n"
+			+ "    <tzOffset>-18000</tzOffset>\n" + "</LocalTimeParameters>";
 
-    private TimeConfiguration timeConfiguration() throws JAXBException {
-        return EspiMarshaller.<TimeConfiguration>unmarshal(XML_INPUT).getValue();
-    }
+	private TimeConfiguration timeConfiguration() throws JAXBException {
+		return EspiMarshaller.<TimeConfiguration> unmarshal(XML_INPUT)
+				.getValue();
+	}
 
-    @Test
-    public void unmarshal_timeConfiguration() throws JAXBException {
-        assertEquals(TimeConfiguration.class, timeConfiguration().getClass());
-    }
+	@Test
+	public void unmarshal_timeConfiguration() throws JAXBException {
+		assertEquals(TimeConfiguration.class, timeConfiguration().getClass());
+	}
 
-    @Test
-    public void unmarshal_setsDstEndRule() throws UnsupportedEncodingException, JAXBException {
-        assertTrue(Arrays.equals(timeConfiguration().getDstEndRule(), new byte[]{-76, 14, 32, 0}));
-    }
+	@Test
+	public void unmarshal_setsDstEndRule() throws UnsupportedEncodingException,
+			JAXBException {
+		assertTrue(Arrays.equals(timeConfiguration().getDstEndRule(),
+				new byte[] { -76, 14, 32, 0 }));
+	}
 
-    @Test
-    public void unmarshal_setDstOffset() throws JAXBException {
-        assertEquals(3600L, timeConfiguration().getDstOffset());
-    }
+	@Test
+	public void unmarshal_setDstOffset() throws JAXBException {
+		assertEquals(3600L, timeConfiguration().getDstOffset());
+	}
 
-    @Test
-    public void unmarshal_setDstStartRule() throws JAXBException {
-        assertTrue(Arrays.equals(timeConfiguration().getDstStartRule(), new byte[]{54, 14, 32, 0}));
-    }
+	@Test
+	public void unmarshal_setDstStartRule() throws JAXBException {
+		assertTrue(Arrays.equals(timeConfiguration().getDstStartRule(),
+				new byte[] { 54, 14, 32, 0 }));
+	}
 
-    @Test
-    public void unmarshal_setTzOffset() throws JAXBException {
-        assertEquals(-18000L, timeConfiguration().getTzOffset());
-    }
+	@Test
+	public void unmarshal_setTzOffset() throws JAXBException {
+		assertEquals(-18000L, timeConfiguration().getTzOffset());
+	}
 }

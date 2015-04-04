@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 
 package org.energyos.espi.common.repositories.jpa;
-
 
 import static org.junit.Assert.assertEquals;
 
@@ -34,32 +33,33 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
 public class IntervalBlockRepositoryImplTests {
 
-    @Autowired
-    protected IntervalBlockRepository repository;
-    @Autowired
-    protected MeterReadingRepository meterReadingRepository;
+	@Autowired
+	protected IntervalBlockRepository repository;
+	@Autowired
+	protected MeterReadingRepository meterReadingRepository;
 
-    @Test
-    public void findByMeterReadingId_returnsIntervalBlocks() {
-        MeterReading meterReading = new MeterReading();
-        meterReading.setUUID(UUID.randomUUID());
+	@Test
+	public void findByMeterReadingId_returnsIntervalBlocks() {
+		MeterReading meterReading = new MeterReading();
+		meterReading.setUUID(UUID.randomUUID());
 
-        IntervalBlock intervalBlock = new IntervalBlock();
-        intervalBlock.setUUID(UUID.randomUUID());
+		IntervalBlock intervalBlock = new IntervalBlock();
+		intervalBlock.setUUID(UUID.randomUUID());
 
-        IntervalBlock intervalBlock1 = new IntervalBlock();
-        intervalBlock1.setUUID(UUID.randomUUID());
+		IntervalBlock intervalBlock1 = new IntervalBlock();
+		intervalBlock1.setUUID(UUID.randomUUID());
 
-        meterReading.addIntervalBlock(intervalBlock);
-        meterReading.addIntervalBlock(intervalBlock1);
+		meterReading.addIntervalBlock(intervalBlock);
+		meterReading.addIntervalBlock(intervalBlock1);
 
-        meterReadingRepository.persist(meterReading);
+		meterReadingRepository.persist(meterReading);
 
-        assertEquals(2, repository.findAllByMeterReadingId(meterReading.getId()).size());
-    }
+		assertEquals(2, repository
+				.findAllByMeterReadingId(meterReading.getId()).size());
+	}
 }

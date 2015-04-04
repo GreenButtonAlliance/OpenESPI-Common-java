@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,14 +29,16 @@ import org.junit.Test;
 
 public class IntervalReadingValidationTests extends XMLTest {
 
-    @Test
-    public void isValid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isValid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        IntervalReading intervalReading = new IntervalReading();
+		IntervalReading intervalReading = new IntervalReading();
 
-        Set<ConstraintViolation<IntervalReading>> violations = validator.validate(intervalReading);
+		Set<ConstraintViolation<IntervalReading>> violations = validator
+				.validate(intervalReading);
 
-        assertTrue(violations.isEmpty());
-    }
+		assertTrue(violations.isEmpty());
+	}
 }

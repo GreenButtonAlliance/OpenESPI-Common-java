@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -39,77 +39,89 @@ import org.junit.Test;
 
 public class AuthorizationTests {
 
-    @Test
-    public void isValid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isValid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        Authorization authorization = newAuthorization();
+		Authorization authorization = newAuthorization();
 
-        Set<ConstraintViolation<Authorization>> violations = validator.validate(authorization);
+		Set<ConstraintViolation<Authorization>> violations = validator
+				.validate(authorization);
 
-        assertThat(violations, is(empty()));
-    }
+		assertThat(violations, is(empty()));
+	}
 
-    @Test
-    public void isInvalid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isInvalid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        Authorization authorization = new Authorization();
+		Authorization authorization = new Authorization();
 
-        Set<ConstraintViolation<Authorization>> violations = validator.validate(authorization);
+		Set<ConstraintViolation<Authorization>> violations = validator
+				.validate(authorization);
 
-        assertThat(violations, is(not(empty())));
-    }
+		assertThat(violations, is(not(empty())));
+	}
 
-    @Test
-    public void extendsIdentifiableObject() {
-        assertTrue(Authorization.class.getSuperclass() == IdentifiedObject.class);
-    }
+	@Test
+	public void extendsIdentifiableObject() {
+		assertTrue(Authorization.class.getSuperclass() == IdentifiedObject.class);
+	}
 
-    @Test
-    public void persistence() {
-        assertAnnotationPresent(Authorization.class, Entity.class);
-        assertAnnotationPresent(Authorization.class, Table.class);
-    }
+	@Test
+	public void persistence() {
+		assertAnnotationPresent(Authorization.class, Entity.class);
+		assertAnnotationPresent(Authorization.class, Table.class);
+	}
 
-    @Test
-    public void accessToken() {
-        assertColumnAnnotation(Authorization.class, "accessToken", "access_token");
-    }
+	@Test
+	public void accessToken() {
+		assertColumnAnnotation(Authorization.class, "accessToken",
+				"access_token");
+	}
 
-    @Test
-    public void authorizationServer() {
-        assertColumnAnnotation(Authorization.class, "authorizationURI", "authorization_uri");
-    }
+	@Test
+	public void authorizationServer() {
+		assertColumnAnnotation(Authorization.class, "authorizationURI",
+				"authorization_uri");
+	}
 
-    @Test
-    public void thirdParty() {
-        assertColumnAnnotation(Authorization.class, "thirdParty", "third_party");
-    }
+	@Test
+	public void thirdParty() {
+		assertColumnAnnotation(Authorization.class, "thirdParty", "third_party");
+	}
 
-    @Test
-    public void retailCustomer() {
-        assertAnnotationPresent(Authorization.class, "retailCustomer", ManyToOne.class);
-        assertAnnotationPresent(Authorization.class, "retailCustomer", JoinColumn.class);
-    }
+	@Test
+	public void retailCustomer() {
+		assertAnnotationPresent(Authorization.class, "retailCustomer",
+				ManyToOne.class);
+		assertAnnotationPresent(Authorization.class, "retailCustomer",
+				JoinColumn.class);
+	}
 
-    @Test
-    public void state() {
-        assertColumnAnnotation(Authorization.class, "state", "state");
-    }
+	@Test
+	public void state() {
+		assertColumnAnnotation(Authorization.class, "state", "state");
+	}
 
-    @Test
-    public void applicationInformation() {
-        assertAnnotationPresent(Authorization.class, "applicationInformation", ManyToOne.class);
-        assertAnnotationPresent(Authorization.class, "applicationInformation", JoinColumn.class);
-    }
+	@Test
+	public void applicationInformation() {
+		assertAnnotationPresent(Authorization.class, "applicationInformation",
+				ManyToOne.class);
+		assertAnnotationPresent(Authorization.class, "applicationInformation",
+				JoinColumn.class);
+	}
 
-    @Test
-    public void subscriptionId() {
-        Authorization authorization = new Authorization();
+	@Test
+	public void subscriptionId() {
+		Authorization authorization = new Authorization();
 
-        authorization.setResourceURI("http://localhost:8080/DataCustodian/espi/1_1/resource/Subscription/16228736-8e29-4807-a2a7-283be5cc253e");
+		authorization
+				.setResourceURI("http://localhost:8080/DataCustodian/espi/1_1/resource/Subscription/16228736-8e29-4807-a2a7-283be5cc253e");
 
-        assertThat(authorization.getSubscriptionId(), is("16228736-8e29-4807-a2a7-283be5cc253e"));
-    }
+		assertThat(authorization.getSubscriptionId(),
+				is("16228736-8e29-4807-a2a7-283be5cc253e"));
+	}
 }

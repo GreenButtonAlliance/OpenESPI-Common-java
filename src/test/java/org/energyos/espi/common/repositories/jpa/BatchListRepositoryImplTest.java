@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013, 2014, 2015 EnergyOS.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package org.energyos.espi.common.repositories.jpa;
 
 import static org.energyos.espi.common.test.EspiFactory.newBatchList;
@@ -19,31 +35,31 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
 public class BatchListRepositoryImplTest {
 
-    @Autowired
-    BatchListRepository repository;
+	@Autowired
+	BatchListRepository repository;
 
-    public BatchList batchList;
+	public BatchList batchList;
 
-    @Before
-    public void setup() {
-        batchList = newBatchList();
-        repository.persist(batchList);
-    }
+	@Before
+	public void setup() {
+		batchList = newBatchList();
+		repository.persist(batchList);
+	}
 
-    @Test
-    public void persist() throws Exception {
-        assertNotNull(batchList.getId());
-    }
+	@Test
+	public void persist() throws Exception {
+		assertNotNull(batchList.getId());
+	}
 
-    @Test
-    public void findAll() {
-        List<BatchList> foundList = repository.findAll();
+	@Test
+	public void findAll() {
+		List<BatchList> foundList = repository.findAll();
 
-        assertThat(batchList.getId(), is(foundList.get(0).getId()));
-    }
+		assertThat(batchList.getId(), is(foundList.get(0).getId()));
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -41,17 +41,21 @@ import org.xml.sax.SAXException;
 @WebAppConfiguration
 @ContextConfiguration("/spring/test-context.xml")
 public class ServiceCategoryUnmarshallerTests extends XMLTest {
-    @Autowired
-    @Qualifier("atomMarshaller")
-    private Jaxb2Marshaller atomMarshaller;
+	@Autowired
+	@Qualifier("atomMarshaller")
+	private Jaxb2Marshaller atomMarshaller;
 
-    private ServiceCategory loadServiceCategory() throws DatatypeConfigurationException, IOException {
-        String xml = FixtureFactory.loadFixture("/fixtures/ServiceCategory.xml");
-        return (ServiceCategory)atomMarshaller.unmarshal(new StreamSource(new StringReader(xml)));
-    }
+	private ServiceCategory loadServiceCategory()
+			throws DatatypeConfigurationException, IOException {
+		String xml = FixtureFactory
+				.loadFixture("/fixtures/ServiceCategory.xml");
+		return (ServiceCategory) atomMarshaller.unmarshal(new StreamSource(
+				new StringReader(xml)));
+	}
 
-    @Test
-    public void kind() throws SAXException, IOException, XpathException, DatatypeConfigurationException {
-        assertEquals(Long.valueOf(9L), loadServiceCategory().getKind());
-    }
+	@Test
+	public void kind() throws SAXException, IOException, XpathException,
+			DatatypeConfigurationException {
+		assertEquals(Long.valueOf(9L), loadServiceCategory().getKind());
+	}
 }

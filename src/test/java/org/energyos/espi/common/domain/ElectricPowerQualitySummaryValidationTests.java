@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -30,14 +30,16 @@ import javax.validation.Validator;
 import org.junit.Test;
 
 public class ElectricPowerQualitySummaryValidationTests {
-    @Test
-    public void isValid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isValid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        ElectricPowerQualitySummary electricPowerQualitySummary = newElectricPowerQualitySummary();
+		ElectricPowerQualitySummary electricPowerQualitySummary = newElectricPowerQualitySummary();
 
-        Set<ConstraintViolation<ElectricPowerQualitySummary>> violations = validator.validate(electricPowerQualitySummary);
+		Set<ConstraintViolation<ElectricPowerQualitySummary>> violations = validator
+				.validate(electricPowerQualitySummary);
 
-        assertThat(violations, is(empty()));
-    }
+		assertThat(violations, is(empty()));
+	}
 }

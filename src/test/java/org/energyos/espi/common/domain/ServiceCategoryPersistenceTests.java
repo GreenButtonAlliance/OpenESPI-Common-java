@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,8 +23,9 @@ import org.junit.Test;
 
 public class ServiceCategoryPersistenceTests {
 
-    @Test
-    public void hasId() {
-        TestUtils.assertAnnotationPresent(ServiceCategory.class, "kind", Id.class);
-    }
+	@Test
+	public void hasId() {
+		TestUtils.assertAnnotationPresent(ServiceCategory.class, "kind",
+				Id.class);
+	}
 }

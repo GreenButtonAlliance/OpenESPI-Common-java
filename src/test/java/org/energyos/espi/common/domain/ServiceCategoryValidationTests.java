@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013, 2014, 2015 EnergyOS.org
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package org.energyos.espi.common.domain;
 
 import static org.energyos.espi.common.test.EspiFactory.newServiceCategory;
@@ -16,25 +32,29 @@ import org.energyos.espi.common.atom.XMLTest;
 import org.junit.Test;
 
 public class ServiceCategoryValidationTests extends XMLTest {
-    @Test
-    public void isValid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isValid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        ServiceCategory serviceCategory = newServiceCategory();
+		ServiceCategory serviceCategory = newServiceCategory();
 
-        Set<ConstraintViolation<ServiceCategory>> violations = validator.validate(serviceCategory);
+		Set<ConstraintViolation<ServiceCategory>> violations = validator
+				.validate(serviceCategory);
 
-        assertThat(violations, is(empty()));
-    }
+		assertThat(violations, is(empty()));
+	}
 
-    @Test
-    public void isInvalid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isInvalid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        ServiceCategory serviceCategory = new ServiceCategory();
+		ServiceCategory serviceCategory = new ServiceCategory();
 
-        Set<ConstraintViolation<ServiceCategory>> violations = validator.validate(serviceCategory);
+		Set<ConstraintViolation<ServiceCategory>> violations = validator
+				.validate(serviceCategory);
 
-        assertThat(violations, is(not(empty())));
-    }
+		assertThat(violations, is(not(empty())));
+	}
 }

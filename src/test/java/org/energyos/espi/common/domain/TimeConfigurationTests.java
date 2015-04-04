@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -34,23 +34,23 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration("/spring/test-context.xml")
 public class TimeConfigurationTests extends XMLTest {
 
-    @Autowired
-    ImportService importService;
-    
-    @Autowired
-    ExportService exportService;
-    
-    TimeConfiguration timeConfiguration;
+	@Autowired
+	ImportService importService;
 
-    @Before
-    public void before() {
-    
-        timeConfiguration = new TimeConfiguration();
-    }
+	@Autowired
+	ExportService exportService;
 
-    @Test
-    public void persistable() {
-        assertAnnotationPresent(TimeConfiguration.class, Entity.class);
-    }
+	TimeConfiguration timeConfiguration;
+
+	@Before
+	public void before() {
+
+		timeConfiguration = new TimeConfiguration();
+	}
+
+	@Test
+	public void persistable() {
+		assertAnnotationPresent(TimeConfiguration.class, Entity.class);
+	}
 
 }

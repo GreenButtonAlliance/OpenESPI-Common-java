@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -37,34 +37,35 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
 public class ServiceDeliveryPointUnmarshallerTests {
-    private static String XML_INPUT = "" +
-            "<espi:ServiceDeliveryPoint xmlns:espi=\"http://naesb.org/espi\">" +
-            "   <espi:name>First Last</espi:name>" +
-            "   <espi:tariffProfile>foo</espi:tariffProfile>" +
-            "   <espi:customerAgreement>bar</espi:customerAgreement>" +
-            "</espi:ServiceDeliveryPoint>";
-    @Autowired
-    @Qualifier("domainMarshaller")
-    private Jaxb2Marshaller domainMarshaller;
-    private ServiceDeliveryPoint serviceDeliveryPoint;
+	private static String XML_INPUT = ""
+			+ "<espi:ServiceDeliveryPoint xmlns:espi=\"http://naesb.org/espi\">"
+			+ "   <espi:name>First Last</espi:name>"
+			+ "   <espi:tariffProfile>foo</espi:tariffProfile>"
+			+ "   <espi:customerAgreement>bar</espi:customerAgreement>"
+			+ "</espi:ServiceDeliveryPoint>";
+	@Autowired
+	@Qualifier("domainMarshaller")
+	private Jaxb2Marshaller domainMarshaller;
+	private ServiceDeliveryPoint serviceDeliveryPoint;
 
-    @Before
-    public void setup() {
-        serviceDeliveryPoint = (ServiceDeliveryPoint)domainMarshaller.unmarshal(new StreamSource(new StringReader(XML_INPUT)));
-    }
+	@Before
+	public void setup() {
+		serviceDeliveryPoint = (ServiceDeliveryPoint) domainMarshaller
+				.unmarshal(new StreamSource(new StringReader(XML_INPUT)));
+	}
 
-    @Test
-    public void name() throws JAXBException, IOException {
-        assertThat(serviceDeliveryPoint.getName(), is("First Last"));
-    }
+	@Test
+	public void name() throws JAXBException, IOException {
+		assertThat(serviceDeliveryPoint.getName(), is("First Last"));
+	}
 
-    @Test
-    public void tariffProfile() throws JAXBException, IOException {
-        assertThat(serviceDeliveryPoint.getTariffProfile(), is("foo"));
-    }
+	@Test
+	public void tariffProfile() throws JAXBException, IOException {
+		assertThat(serviceDeliveryPoint.getTariffProfile(), is("foo"));
+	}
 
-    @Test
-    public void customerAgreement() throws JAXBException, IOException {
-        assertThat(serviceDeliveryPoint.getCustomerAgreement(), is("bar"));
-    }
+	@Test
+	public void customerAgreement() throws JAXBException, IOException {
+		assertThat(serviceDeliveryPoint.getCustomerAgreement(), is("bar"));
+	}
 }

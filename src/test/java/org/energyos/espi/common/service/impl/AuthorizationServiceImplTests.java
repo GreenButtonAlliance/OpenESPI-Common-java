@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 
 package org.energyos.espi.common.service.impl;
-
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -35,40 +34,44 @@ import org.mockito.Mock;
 
 public class AuthorizationServiceImplTests extends BaseTest {
 
-    @Mock
-    public AuthorizationRepository repository;
-    public Subscription subscription;
-    public AuthorizationServiceImpl service;
-    public Authorization authorization;
+	@Mock
+	public AuthorizationRepository repository;
+	public Subscription subscription;
+	public AuthorizationServiceImpl service;
+	public Authorization authorization;
 
-    @Before
-    public void before() {
-        subscription = EspiFactory.newSubscription(EspiFactory.newRetailCustomer());
-        service = new AuthorizationServiceImpl();
-        service.setAuthorizationRepository(repository);
+	@Before
+	public void before() {
+		subscription = EspiFactory.newSubscription(EspiFactory
+				.newRetailCustomer());
+		service = new AuthorizationServiceImpl();
+		service.setAuthorizationRepository(repository);
 
-        authorization = service.createAuthorization(subscription, "accessToken");
-    }
+		authorization = service
+				.createAuthorization(subscription, "accessToken");
+	}
 
-    @Test
-    public void createAuthorization_persistsAuthorization() {
-        verify(repository).persist(eq(authorization));
-    }
+	@Test
+	public void createAuthorization_persistsAuthorization() {
+		verify(repository).persist(eq(authorization));
+	}
 
-    @Test
-    @Ignore
-    public void createAuthorization_setsResource() {
-        assertEquals(Routes.DATA_CUSTODIAN_SUBSCRIPTION.replace("{subscriptionId}", subscription.getUUID().toString()), authorization.getResourceURI());
-    }
+	@Test
+	@Ignore
+	public void createAuthorization_setsResource() {
+		assertEquals(Routes.DATA_CUSTODIAN_SUBSCRIPTION.replace(
+				"{subscriptionId}", subscription.getUUID().toString()),
+				authorization.getResourceURI());
+	}
 
-    @Test
-    @Ignore
-    public void createAuthorization_setsAccessToken() {
-        assertEquals("accessToken", authorization.getAccessToken());
-    }
+	@Test
+	@Ignore
+	public void createAuthorization_setsAccessToken() {
+		assertEquals("accessToken", authorization.getAccessToken());
+	}
 
-    @Test
-    public void createAuthorization_setsUUID() {
-        assertNotNull(authorization.getUUID());
-    }
+	@Test
+	public void createAuthorization_setsUUID() {
+		assertNotNull(authorization.getUUID());
+	}
 }

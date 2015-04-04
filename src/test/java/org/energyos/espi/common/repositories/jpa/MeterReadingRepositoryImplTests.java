@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package org.energyos.espi.common.repositories.jpa;
 
-
 import static org.junit.Assert.assertNotNull;
 
 import java.util.UUID;
@@ -32,21 +31,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
 public class MeterReadingRepositoryImplTests {
 
-    @Autowired
-    protected MeterReadingRepository repository;
+	@Autowired
+	protected MeterReadingRepository repository;
 
-    @Test
-    public void findById_returnsMeterReading() {
-        MeterReading meterReading = new MeterReading();
-        meterReading.setUUID(UUID.randomUUID());
+	@Test
+	public void findById_returnsMeterReading() {
+		MeterReading meterReading = new MeterReading();
+		meterReading.setUUID(UUID.randomUUID());
 
-        repository.persist(meterReading);
+		repository.persist(meterReading);
 
-        assertNotNull(repository.findById(meterReading.getId()));
-    }
+		assertNotNull(repository.findById(meterReading.getId()));
+	}
 }

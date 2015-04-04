@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -36,26 +36,26 @@ import com.sun.syndication.io.FeedException;
 @ContextConfiguration("/spring/test-context.xml")
 public class ElectricPowerQualitySummaryTests extends XMLTest {
 
-    private ElectricPowerQualitySummary electricPowerQualitySummary;
-    private String xml;
-    
-    @Autowired
-    private ExportService exportService;
-    
-    @Autowired
-    private ImportService importService;
+	private ElectricPowerQualitySummary electricPowerQualitySummary;
+	private String xml;
 
-    @Before
-    public void before() throws JAXBException, FeedException {
+	@Autowired
+	private ExportService exportService;
 
-        // importService.importData(stream, retailCustomerId);
-    	electricPowerQualitySummary = new ElectricPowerQualitySummary();
-    }
+	@Autowired
+	private ImportService importService;
 
-    @Test
-    public void unmarshalsElectricPowerQualitySummary() {
-        assertEquals(ElectricPowerQualitySummary.class, electricPowerQualitySummary.getClass());
-    }
+	@Before
+	public void before() throws JAXBException, FeedException {
 
- 
+		// importService.importData(stream, retailCustomerId);
+		electricPowerQualitySummary = new ElectricPowerQualitySummary();
+	}
+
+	@Test
+	public void unmarshalsElectricPowerQualitySummary() {
+		assertEquals(ElectricPowerQualitySummary.class,
+				electricPowerQualitySummary.getClass());
+	}
+
 }

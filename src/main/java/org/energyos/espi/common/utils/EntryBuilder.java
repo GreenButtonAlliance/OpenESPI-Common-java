@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,47 +22,47 @@ import org.energyos.espi.common.models.atom.LinkType;
 
 public class EntryBuilder {
 
-    private EntryType entry;
+	private EntryType entry;
 
-    public EntryType build(IdentifiedObject reource) {
-        entry = new EntryType();
+	public EntryType build(IdentifiedObject reource) {
+		entry = new EntryType();
 
-        buildMetadata(reource);
-        buildContent(reource);
+		buildMetadata(reource);
+		buildContent(reource);
 
-        return entry;
-    }
+		return entry;
+	}
 
-    public EntryType buildEntry(IdentifiedObject resource) {
-        entry = new EntryType();
+	public EntryType buildEntry(IdentifiedObject resource) {
+		entry = new EntryType();
 
-        buildMetadata(resource);
-        buildContent(resource);
+		buildMetadata(resource);
+		buildContent(resource);
 
-        return entry;
-    }
+		return entry;
+	}
 
-    private void buildContent(IdentifiedObject resource) {
-        ContentType content = new ContentType();
-        content.setResource(resource);
-        entry.setContent(content);
-    }
+	private void buildContent(IdentifiedObject resource) {
+		ContentType content = new ContentType();
+		content.setResource(resource);
+		entry.setContent(content);
+	}
 
-    private void buildMetadata(IdentifiedObject resource) {
-        entry.setId("urn:uuid:" + resource.getUUID().toString());
-        entry.setTitle(resource.getDescription());
-        entry.setPublished(DateConverter.toDateTimeType(resource.getPublished()));
-        entry.setUpdated(DateConverter.toDateTimeType(resource.getUpdated()));
+	private void buildMetadata(IdentifiedObject resource) {
+		entry.setId("urn:uuid:" + resource.getUUID().toString());
+		entry.setTitle(resource.getDescription());
+		entry.setPublished(DateConverter.toDateTimeType(resource.getPublished()));
+		entry.setUpdated(DateConverter.toDateTimeType(resource.getUpdated()));
 
-        buildLinks(resource);
-    }
+		buildLinks(resource);
+	}
 
-    private void buildLinks(IdentifiedObject resource) {
-        entry.getLinks().add(resource.getUpLink());
-        entry.getLinks().add(resource.getSelfLink());
+	private void buildLinks(IdentifiedObject resource) {
+		entry.getLinks().add(resource.getUpLink());
+		entry.getLinks().add(resource.getSelfLink());
 
-        for (LinkType link : resource.getRelatedLinks()) {
-            entry.getLinks().add(link);
-        }
-    }
+		for (LinkType link : resource.getRelatedLinks()) {
+			entry.getLinks().add(link);
+		}
+	}
 }

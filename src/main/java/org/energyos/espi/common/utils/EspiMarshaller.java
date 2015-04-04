@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,55 +29,60 @@ import com.sun.syndication.io.FeedException;
 
 public class EspiMarshaller {
 
-    private EspiMarshaller() {
-    }
+	private EspiMarshaller() {
+	}
 
-    private static JAXBContext jaxbContext;
-    private static Marshaller marshaller;
-    private static Unmarshaller unmarshaller;
+	private static JAXBContext jaxbContext;
+	private static Marshaller marshaller;
+	private static Unmarshaller unmarshaller;
 
-    @SuppressWarnings("unchecked")
-    // TODO: make RetailCustomer Inherit from Identified Object to fix @Suppress
-	public static <T extends Object> JAXBElement<T> unmarshal(String xml) throws JAXBException {
-        return (JAXBElement<T>)getUnmarshaller().unmarshal(new ByteArrayInputStream(xml.getBytes()));
-    }
+	@SuppressWarnings("unchecked")
+	// TODO: make RetailCustomer Inherit from Identified Object to fix @Suppress
+	public static <T extends Object> JAXBElement<T> unmarshal(String xml)
+			throws JAXBException {
+		return (JAXBElement<T>) getUnmarshaller().unmarshal(
+				new ByteArrayInputStream(xml.getBytes()));
+	}
 
-    public static String marshal(Object entity) throws FeedException {
-        StringWriter sw = new StringWriter();
+	public static String marshal(Object entity) throws FeedException {
+		StringWriter sw = new StringWriter();
 
-        try {
-            getMarshaller().marshal(entity, sw);
-        } catch (JAXBException e) {
-            throw new FeedException("Invalid " + entity.getClass().toString() + ". Could not serialize.");
-        }
-        return sw.toString();
-    }
+		try {
+			getMarshaller().marshal(entity, sw);
+		} catch (JAXBException e) {
+			throw new FeedException("Invalid " + entity.getClass().toString()
+					+ ". Could not serialize.");
+		}
+		return sw.toString();
+	}
 
-    private static Marshaller getMarshaller() throws JAXBException {
-        if (marshaller == null) {
-            JAXBContext jaxbContext = getJaxbContext();
-            marshaller = jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        }
+	private static Marshaller getMarshaller() throws JAXBException {
+		if (marshaller == null) {
+			JAXBContext jaxbContext = getJaxbContext();
+			marshaller = jaxbContext.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
+					Boolean.TRUE);
+		}
 
-        return marshaller;
-    }
+		return marshaller;
+	}
 
-    private static Unmarshaller getUnmarshaller() throws JAXBException {
-        if (unmarshaller == null) {
-            JAXBContext jaxbContext = getJaxbContext();
-            unmarshaller = jaxbContext.createUnmarshaller();
-        }
+	private static Unmarshaller getUnmarshaller() throws JAXBException {
+		if (unmarshaller == null) {
+			JAXBContext jaxbContext = getJaxbContext();
+			unmarshaller = jaxbContext.createUnmarshaller();
+		}
 
-        return unmarshaller;
-    }
+		return unmarshaller;
+	}
 
-    private static JAXBContext getJaxbContext() throws JAXBException {
-        if (jaxbContext == null) {
-            jaxbContext = JAXBContext.newInstance("org.energyos.espi.common.domain");
-        }
+	private static JAXBContext getJaxbContext() throws JAXBException {
+		if (jaxbContext == null) {
+			jaxbContext = JAXBContext
+					.newInstance("org.energyos.espi.common.domain");
+		}
 
-        return jaxbContext;
-    }
+		return jaxbContext;
+	}
 }

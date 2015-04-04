@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,13 +20,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-
 public class FeedTypeTests {
 
-    @Test
-    public void entries_returnsEmptyList() {
-        FeedType feed = new FeedType();
+	@Test
+	public void entries_returnsEmptyList() {
+		FeedType feed = new FeedType();
 
-        assertTrue(feed.getEntries().isEmpty());
-    }
+		assertTrue(feed.getEntries().isEmpty());
+	}
 }

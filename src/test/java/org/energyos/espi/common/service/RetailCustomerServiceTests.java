@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 
 package org.energyos.espi.common.service;
-
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -33,41 +32,41 @@ import org.junit.Test;
 
 public class RetailCustomerServiceTests {
 
-    private RetailCustomerRepository repository;
-    private RetailCustomerServiceImpl service;
+	private RetailCustomerRepository repository;
+	private RetailCustomerServiceImpl service;
 
-    @Before
-    public void setup() {
-        repository = mock(RetailCustomerRepository.class);
-        service = new RetailCustomerServiceImpl();
-        service.setRetailCustomerRepository(repository);
-    }
+	@Before
+	public void setup() {
+		repository = mock(RetailCustomerRepository.class);
+		service = new RetailCustomerServiceImpl();
+		service.setRetailCustomerRepository(repository);
+	}
 
-    @Test
-    public void findAll_returnsAllRetailCustomers() {
-        List<RetailCustomer> allRetailCustomers = new ArrayList<RetailCustomer>();
+	@Test
+	public void findAll_returnsAllRetailCustomers() {
+		List<RetailCustomer> allRetailCustomers = new ArrayList<RetailCustomer>();
 
-        when(repository.findAll()).thenReturn(allRetailCustomers);
+		when(repository.findAll()).thenReturn(allRetailCustomers);
 
-        assertEquals(allRetailCustomers, service.findAll());
-    }
+		assertEquals(allRetailCustomers, service.findAll());
+	}
 
-    @Test
-    public void findById_returnsRetailCustomers() {
-        RetailCustomer customer = new RetailCustomer();
-        customer.setId(13L);
+	@Test
+	public void findById_returnsRetailCustomers() {
+		RetailCustomer customer = new RetailCustomer();
+		customer.setId(13L);
 
-        when(repository.findById(customer.getId())).thenReturn(customer);
+		when(repository.findById(customer.getId())).thenReturn(customer);
 
-        assertEquals(customer, service.findById(customer.getId()));
-    }
+		assertEquals(customer, service.findById(customer.getId()));
+	}
 
-    @Test
-    public void persist_persistsRetailCustomer() {
-        RetailCustomer customer = new RetailCustomer();
+	@Test
+	public void persist_persistsRetailCustomer() {
+		RetailCustomer customer = new RetailCustomer();
 
-        service.persist(customer);
+		service.persist(customer);
 
-        verify(repository).persist(customer);
-    }
+		verify(repository).persist(customer);
+	}
 }

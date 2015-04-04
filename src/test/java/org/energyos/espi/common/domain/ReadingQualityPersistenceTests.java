@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -28,15 +28,17 @@ import org.junit.Test;
 
 public class ReadingQualityPersistenceTests extends XMLTest {
 
-    @Test
-    public void persistence() {
-        assertAnnotationPresent(ReadingQuality.class, Entity.class);
-        assertAnnotationPresent(ReadingQuality.class, Table.class);
-    }
+	@Test
+	public void persistence() {
+		assertAnnotationPresent(ReadingQuality.class, Entity.class);
+		assertAnnotationPresent(ReadingQuality.class, Table.class);
+	}
 
-    @Test
-    public void readingQualities() {
-        assertAnnotationPresent(ReadingQuality.class, "intervalReading", ManyToOne.class);
-        assertAnnotationPresent(ReadingQuality.class, "intervalReading", JoinColumn.class);
-    }
+	@Test
+	public void readingQualities() {
+		assertAnnotationPresent(ReadingQuality.class, "intervalReading",
+				ManyToOne.class);
+		assertAnnotationPresent(ReadingQuality.class, "intervalReading",
+				JoinColumn.class);
+	}
 }

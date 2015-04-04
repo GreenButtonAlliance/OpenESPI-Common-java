@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -39,43 +39,50 @@ import org.junit.Test;
 
 public class SubscriptionTests {
 
-    @Test
-    public void isValid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isValid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        Subscription subscription = EspiFactory.newSubscription();
+		Subscription subscription = EspiFactory.newSubscription();
 
-        Set<ConstraintViolation<Subscription>> violations = validator.validate(subscription);
+		Set<ConstraintViolation<Subscription>> violations = validator
+				.validate(subscription);
 
-        assertThat(violations, is(empty()));
-    }
+		assertThat(violations, is(empty()));
+	}
 
-    @Test
-    public void isInvalid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isInvalid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        Subscription subscription = new Subscription();
+		Subscription subscription = new Subscription();
 
-        Set<ConstraintViolation<Subscription>> violations = validator.validate(subscription);
+		Set<ConstraintViolation<Subscription>> violations = validator
+				.validate(subscription);
 
-        assertFalse(violations.isEmpty());
-    }
+		assertFalse(violations.isEmpty());
+	}
 
-    @Test
-    public void extendsIdentifiableObject() {
-        assertTrue(Subscription.class.getSuperclass() == IdentifiedObject.class);
-    }
+	@Test
+	public void extendsIdentifiableObject() {
+		assertTrue(Subscription.class.getSuperclass() == IdentifiedObject.class);
+	}
 
-    @Test
-    public void persistence() {
-        TestUtils.assertAnnotationPresent(Subscription.class, Entity.class);
-        TestUtils.assertAnnotationPresent(Subscription.class, Table.class);
-    }
+	@Test
+	public void persistence() {
+		TestUtils.assertAnnotationPresent(Subscription.class, Entity.class);
+		TestUtils.assertAnnotationPresent(Subscription.class, Table.class);
+	}
 
-    @Test
-    public void retailCustomer() {
-        TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer", ManyToOne.class);
-        TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer", JoinColumn.class);
-        TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer", NotNull.class);
-    }
+	@Test
+	public void retailCustomer() {
+		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
+				ManyToOne.class);
+		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
+				JoinColumn.class);
+		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
+				NotNull.class);
+	}
 }

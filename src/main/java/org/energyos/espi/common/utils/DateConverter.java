@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,48 +29,52 @@ import org.energyos.espi.common.models.atom.DateTimeType;
 import org.joda.time.DateTime;
 
 public class DateConverter {
-    public static DateTimeType toDateTimeType(Date date) {
-        DateTimeType dateTimeType = new DateTimeType();
-        GregorianCalendar gregorianCalendar = new DateTime(date).toGregorianCalendar();
-        gregorianCalendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-        DatatypeFactory datatypeFactory;
+	public static DateTimeType toDateTimeType(Date date) {
+		DateTimeType dateTimeType = new DateTimeType();
+		GregorianCalendar gregorianCalendar = new DateTime(date)
+				.toGregorianCalendar();
+		gregorianCalendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+		DatatypeFactory datatypeFactory;
 
-        try {
-            datatypeFactory = DatatypeFactory.newInstance();
-        } catch (DatatypeConfigurationException e) {
-            throw new RuntimeException(e);
-        }
+		try {
+			datatypeFactory = DatatypeFactory.newInstance();
+		} catch (DatatypeConfigurationException e) {
+			throw new RuntimeException(e);
+		}
 
-        XMLGregorianCalendar xmlGregorianCalendar = datatypeFactory.newXMLGregorianCalendar(gregorianCalendar);
-        xmlGregorianCalendar.setFractionalSecond(null);
-        dateTimeType.setValue(xmlGregorianCalendar);
+		XMLGregorianCalendar xmlGregorianCalendar = datatypeFactory
+				.newXMLGregorianCalendar(gregorianCalendar);
+		xmlGregorianCalendar.setFractionalSecond(null);
+		dateTimeType.setValue(xmlGregorianCalendar);
 
-        return dateTimeType;
-    }
+		return dateTimeType;
+	}
 
-    public static DateTimeType toDateTimeType(GregorianCalendar gregorianCalendar) {
-        DateTimeType dateTimeType = new DateTimeType();
-        DatatypeFactory datatypeFactory;
-        if (gregorianCalendar == null) {
-        	gregorianCalendar = new GregorianCalendar();
-        }
+	public static DateTimeType toDateTimeType(
+			GregorianCalendar gregorianCalendar) {
+		DateTimeType dateTimeType = new DateTimeType();
+		DatatypeFactory datatypeFactory;
+		if (gregorianCalendar == null) {
+			gregorianCalendar = new GregorianCalendar();
+		}
 
-        try {
-            datatypeFactory = DatatypeFactory.newInstance();
-        } catch (DatatypeConfigurationException e) {
-            throw new RuntimeException(e);
-        }
+		try {
+			datatypeFactory = DatatypeFactory.newInstance();
+		} catch (DatatypeConfigurationException e) {
+			throw new RuntimeException(e);
+		}
 
-        XMLGregorianCalendar xmlGregorianCalendar = datatypeFactory.newXMLGregorianCalendar(gregorianCalendar);
-        xmlGregorianCalendar.setFractionalSecond(null);
-        dateTimeType.setValue(xmlGregorianCalendar);
+		XMLGregorianCalendar xmlGregorianCalendar = datatypeFactory
+				.newXMLGregorianCalendar(gregorianCalendar);
+		xmlGregorianCalendar.setFractionalSecond(null);
+		dateTimeType.setValue(xmlGregorianCalendar);
 
-        return dateTimeType;
-    }
+		return dateTimeType;
+	}
 
-    public static Calendar epoch() {
-        Calendar epoch = Calendar.getInstance();
-        epoch.setTimeInMillis(0L);
-        return epoch;
-    }
+	public static Calendar epoch() {
+		Calendar epoch = Calendar.getInstance();
+		epoch.setTimeInMillis(0L);
+		return epoch;
+	}
 }

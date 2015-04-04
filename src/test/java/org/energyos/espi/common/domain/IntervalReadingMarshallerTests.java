@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -33,37 +33,46 @@ import org.xml.sax.SAXException;
 
 public class IntervalReadingMarshallerTests extends XMLTest {
 
-    private String xml;
+	private String xml;
 
-    @Before
-    public void before() throws Exception {
-        xml = EspiMarshaller.marshal(EspiFactory.newIntervalReading());
-    }
+	@Before
+	public void before() throws Exception {
+		xml = EspiMarshaller.marshal(EspiFactory.newIntervalReading());
+	}
 
-    @Test
-    public void intervalBlock_hasTransientAnnotation() {
-        TestUtils.assertAnnotationPresent(IntervalReading.class, "intervalBlock", XmlTransient.class);
-    }
+	@Test
+	public void intervalBlock_hasTransientAnnotation() {
+		TestUtils.assertAnnotationPresent(IntervalReading.class,
+				"intervalBlock", XmlTransient.class);
+	}
 
-    @Test
-    public void marshal_setsCost() throws SAXException, IOException, XpathException {
-        assertXpathValue("100", "espi:IntervalReading/espi:cost", xml);
-    }
+	@Test
+	public void marshal_setsCost() throws SAXException, IOException,
+			XpathException {
+		assertXpathValue("100", "espi:IntervalReading/espi:cost", xml);
+	}
 
-    @Test
-    public void marshal_setsReadingQualities() throws SAXException, IOException, XpathException {
-        assertXpathValue("quality1", "espi:IntervalReading/espi:ReadingQuality[1]/espi:quality", xml);
-        assertXpathValue("quality2", "espi:IntervalReading/espi:ReadingQuality[2]/espi:quality", xml);
-    }
+	@Test
+	public void marshal_setsReadingQualities() throws SAXException,
+			IOException, XpathException {
+		assertXpathValue("quality1",
+				"espi:IntervalReading/espi:ReadingQuality[1]/espi:quality", xml);
+		assertXpathValue("quality2",
+				"espi:IntervalReading/espi:ReadingQuality[2]/espi:quality", xml);
+	}
 
-    @Test
-    public void marshal_setsTimePeriod() throws SAXException, IOException, XpathException {
-        assertXpathValue("86401", "espi:IntervalReading/espi:timePeriod/espi:duration", xml);
-        assertXpathValue("1330578001", "espi:IntervalReading/espi:timePeriod/espi:start", xml);
-    }
+	@Test
+	public void marshal_setsTimePeriod() throws SAXException, IOException,
+			XpathException {
+		assertXpathValue("86401",
+				"espi:IntervalReading/espi:timePeriod/espi:duration", xml);
+		assertXpathValue("1330578001",
+				"espi:IntervalReading/espi:timePeriod/espi:start", xml);
+	}
 
-    @Test
-    public void marshal_setsValue() throws SAXException, IOException, XpathException {
-        assertXpathValue("6", "espi:IntervalReading/espi:value", xml);
-    }
+	@Test
+	public void marshal_setsValue() throws SAXException, IOException,
+			XpathException {
+		assertXpathValue("6", "espi:IntervalReading/espi:value", xml);
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -31,26 +31,31 @@ import org.junit.Test;
 
 public class IntervalReadingPersistenceTests extends XMLTest {
 
-    @Test
-    public void persistence() {
-        assertAnnotationPresent(IntervalReading.class, Entity.class);
-        assertAnnotationPresent(IntervalReading.class, Table.class);
-    }
+	@Test
+	public void persistence() {
+		assertAnnotationPresent(IntervalReading.class, Entity.class);
+		assertAnnotationPresent(IntervalReading.class, Table.class);
+	}
 
-    @Test
-    public void readingQualities() {
-        assertAnnotationPresent(IntervalReading.class, "readingQualities", OneToMany.class);
-        assertAnnotationPresent(IntervalReading.class, "readingQualities", LazyCollection.class);
-    }
+	@Test
+	public void readingQualities() {
+		assertAnnotationPresent(IntervalReading.class, "readingQualities",
+				OneToMany.class);
+		assertAnnotationPresent(IntervalReading.class, "readingQualities",
+				LazyCollection.class);
+	}
 
-    @Test
-    public void timePeriod() {
-        assertAnnotationPresent(IntervalReading.class, "timePeriod", Embedded.class);
-    }
+	@Test
+	public void timePeriod() {
+		assertAnnotationPresent(IntervalReading.class, "timePeriod",
+				Embedded.class);
+	}
 
-    @Test
-    public void intervalBlock() {
-        assertAnnotationPresent(IntervalReading.class, "intervalBlock", ManyToOne.class);
-        assertAnnotationPresent(IntervalReading.class, "intervalBlock", JoinColumn.class);
-    }
+	@Test
+	public void intervalBlock() {
+		assertAnnotationPresent(IntervalReading.class, "intervalBlock",
+				ManyToOne.class);
+		assertAnnotationPresent(IntervalReading.class, "intervalBlock",
+				JoinColumn.class);
+	}
 }

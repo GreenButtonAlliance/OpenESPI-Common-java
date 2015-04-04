@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,14 +29,16 @@ import org.junit.Test;
 
 public class ReadingQualityValidationTests extends XMLTest {
 
-    @Test
-    public void isValid() throws Exception {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	@Test
+	public void isValid() throws Exception {
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
 
-        ReadingQuality readingQuality = new ReadingQuality();
+		ReadingQuality readingQuality = new ReadingQuality();
 
-        Set<ConstraintViolation<ReadingQuality>> violations = validator.validate(readingQuality);
+		Set<ConstraintViolation<ReadingQuality>> violations = validator
+				.validate(readingQuality);
 
-        assertTrue(violations.isEmpty());
-    }
+		assertTrue(violations.isEmpty());
+	}
 }

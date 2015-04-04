@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -26,24 +26,28 @@ import org.junit.Test;
 
 public class EspiMarshallerTests extends XMLTest {
 
-    @Test
-    public void marshal_with_marshallableObject_returnsValidXml() throws Exception {
-        XMLAssert.assertXpathExists("espi:UsagePoint", EspiMarshaller.marshal(newUsagePoint()));
-    }
+	@Test
+	public void marshal_with_marshallableObject_returnsValidXml()
+			throws Exception {
+		XMLAssert.assertXpathExists("espi:UsagePoint",
+				EspiMarshaller.marshal(newUsagePoint()));
+	}
 
-    @Test
-    public void marshal_with_marshallableObject_returnsXmlWithServiceCategory() throws Exception {
-        assertXpathValue("1", "espi:UsagePoint/espi:ServiceCategory/espi:kind", EspiMarshaller.marshal(newUsagePoint()));
-    }
+	@Test
+	public void marshal_with_marshallableObject_returnsXmlWithServiceCategory()
+			throws Exception {
+		assertXpathValue("1", "espi:UsagePoint/espi:ServiceCategory/espi:kind",
+				EspiMarshaller.marshal(newUsagePoint()));
+	}
 
-    private UsagePoint newUsagePoint() {
-        UsagePoint usagePoint = new UsagePoint();
+	private UsagePoint newUsagePoint() {
+		UsagePoint usagePoint = new UsagePoint();
 
-        ServiceCategory serviceCategory = new ServiceCategory();
-        serviceCategory.setKind(1L);
+		ServiceCategory serviceCategory = new ServiceCategory();
+		serviceCategory.setKind(1L);
 
-        usagePoint.setServiceCategory(serviceCategory);
+		usagePoint.setServiceCategory(serviceCategory);
 
-        return usagePoint;
-    }
+		return usagePoint;
+	}
 }
