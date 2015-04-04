@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -26,27 +26,27 @@ import org.energyos.espi.common.domain.UsagePoint;
 
 public interface UsagePointRepository {
 
-    List<UsagePoint> findAllByRetailCustomerId(Long id);
+	List<UsagePoint> findAllByRetailCustomerId(Long id);
 
-    UsagePoint findById(Long id);
-    
-    void persist(UsagePoint up);
+	UsagePoint findById(Long id);
 
-    UsagePoint findByUUID(UUID uuid);
+	void persist(UsagePoint up);
 
-    void associateByUUID(RetailCustomer retailCustomer, UUID uuid);
+	UsagePoint findByUUID(UUID uuid);
 
-    void createOrReplaceByUUID(UsagePoint usagePoint);
+	void associateByUUID(RetailCustomer retailCustomer, UUID uuid);
 
-    List<UsagePoint> findAllUpdatedFor(Subscription subscription);
+	void createOrReplaceByUUID(UsagePoint usagePoint);
 
-    void deleteById(Long id);
+	List<UsagePoint> findAllUpdatedFor(Subscription subscription);
 
-    UsagePoint findByURI(String uri);
+	void deleteById(Long id);
 
-    IdentifiedObject findByRelatedHref(String href);
+	UsagePoint findByURI(String uri);
 
-    List<Long> findAllIdsForRetailCustomer(Long retailCustomerId);
+	IdentifiedObject findByRelatedHref(String href);
+
+	List<Long> findAllIdsForRetailCustomer(Long retailCustomerId);
 
 	List<Long> findAllIds();
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,17 +23,16 @@ import org.energyos.espi.common.domain.ReadingType;
 
 public interface ReadingTypeRepository {
 
-    public void createOrReplaceByUUID(ReadingType readingType);
+	public void createOrReplaceByUUID(ReadingType readingType);
 
-    public void deleteById(Long id);
+	public void deleteById(Long id);
 
-    public List<Long> findAllIds();
+	public List<Long> findAllIds();
 
-    ReadingType findById(Long readingTypeId);
+	ReadingType findById(Long readingTypeId);
 
-    ReadingType findByUUID(UUID uuid);
+	ReadingType findByUUID(UUID uuid);
 
-    void persist(ReadingType readingType);
-
+	void persist(ReadingType readingType);
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,16 +23,17 @@ import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 
 public interface ElectricPowerQualitySummaryRepository {
 
-    ElectricPowerQualitySummary findById(Long electricPowerQualitySummaryId);
+	ElectricPowerQualitySummary findById(Long electricPowerQualitySummaryId);
 
-    void persist(ElectricPowerQualitySummary electricPowerQualitySummary);
+	void persist(ElectricPowerQualitySummary electricPowerQualitySummary);
 
-    ElectricPowerQualitySummary findByUUID(UUID uuid);
+	ElectricPowerQualitySummary findByUUID(UUID uuid);
 
 	List<Long> findAllIds();
 
 	void deleteById(Long id);
 
-	void createOrReplaceByUUID(ElectricPowerQualitySummary electricPowerQualitySummary);
+	void createOrReplaceByUUID(
+			ElectricPowerQualitySummary electricPowerQualitySummary);
 
 }

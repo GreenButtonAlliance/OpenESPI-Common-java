@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,16 +23,16 @@ import org.energyos.espi.common.domain.MeterReading;
 
 public interface MeterReadingRepository {
 
-    public void createOrReplaceByUUID(MeterReading meterReading);
+	public void createOrReplaceByUUID(MeterReading meterReading);
 
-    public void deleteById(Long id);
+	public void deleteById(Long id);
 
-    public List<Long> findAllIds();
+	public List<Long> findAllIds();
 
-    public MeterReading findById(Long meterReadingId);
+	public MeterReading findById(Long meterReadingId);
 
-    public MeterReading findByUUID(UUID uuid);
+	public MeterReading findByUUID(UUID uuid);
 
-    public void persist(MeterReading meterReading);
+	public void persist(MeterReading meterReading);
 
 }

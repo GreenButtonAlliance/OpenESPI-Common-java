@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,20 +21,13 @@ import java.util.UUID;
 
 import org.energyos.espi.common.domain.IntervalBlock;
 
-/**
- * Created with IntelliJ IDEA.
- * User: pivotal
- * Date: 9/5/13
- * Time: 4:49 PM
- * To change this template use File | Settings | File Templates.
- */
 public interface IntervalBlockRepository {
 
-    IntervalBlock findById(Long intervalBlockId);
+	IntervalBlock findById(Long intervalBlockId);
 
-    void persist(IntervalBlock intervalBlock);
+	void persist(IntervalBlock intervalBlock);
 
-    IntervalBlock findByUUID(UUID uuid);
+	IntervalBlock findByUUID(UUID uuid);
 
 	List<Long> findAllIds();
 
@@ -42,6 +35,5 @@ public interface IntervalBlockRepository {
 
 	void createOrReplaceByUUID(IntervalBlock intervalBlock);
 
-
-    List<IntervalBlock> findAllByMeterReadingId(Long meterReadingId);
+	List<IntervalBlock> findAllByMeterReadingId(Long meterReadingId);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,34 +23,35 @@ import org.energyos.espi.common.domain.Authorization;
 
 public interface AuthorizationRepository {
 
-    void persist(Authorization authorization);
+	void persist(Authorization authorization);
 
-    List<Authorization> findAllByRetailCustomerId(Long retailCustomerId);
-    
-    List<Long> findAllIdsByApplicationInformationId(Long applicationInformationId);
+	List<Authorization> findAllByRetailCustomerId(Long retailCustomerId);
 
-    Authorization findByState(String state);
-    
-    Authorization findByScope(String scope, Long retailCustomerId);
+	List<Long> findAllIdsByApplicationInformationId(
+			Long applicationInformationId);
 
-    void merge(Authorization authorization);
+	Authorization findByState(String state);
 
-    Authorization findById(Long authorizationId);
+	Authorization findByScope(String scope, Long retailCustomerId);
 
-    List<Long> findAllIds(Long retailCustomerId);
+	void merge(Authorization authorization);
 
-    Authorization findByUUID(UUID uuid);
+	Authorization findById(Long authorizationId);
 
-    List<Long> findAllIds();
-    
-    void deleteById(Long id);
+	List<Long> findAllIds(Long retailCustomerId);
 
-    void createOrReplaceByUUID(Authorization authorization);
-    
-    Authorization findByAccessToken(String accessToken);
+	Authorization findByUUID(UUID uuid);
+
+	List<Long> findAllIds();
+
+	void deleteById(Long id);
+
+	void createOrReplaceByUUID(Authorization authorization);
+
+	Authorization findByAccessToken(String accessToken);
 
 	Authorization findByRefreshToken(String refreshToken);
-	
+
 	public List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId);
-    
+
 }

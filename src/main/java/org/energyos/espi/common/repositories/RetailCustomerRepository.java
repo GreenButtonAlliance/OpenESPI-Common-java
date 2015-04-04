@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,16 +23,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public interface RetailCustomerRepository {
 
-    public void deleteById(Long retailCustomerId);
+	public void deleteById(Long retailCustomerId);
 
-    public List<RetailCustomer> findAll();
+	public List<RetailCustomer> findAll();
 
-    public RetailCustomer findById(Long retailCustomerId);
+	public RetailCustomer findById(Long retailCustomerId);
 
-    public RetailCustomer findById(String retailCustomerId);
+	public RetailCustomer findById(String retailCustomerId);
 
-    public UserDetails findByUsername(String userName);
+	public UserDetails findByUsername(String userName);
 
-    public void persist(RetailCustomer retailCustomer);
+	public void persist(RetailCustomer retailCustomer);
 
 }

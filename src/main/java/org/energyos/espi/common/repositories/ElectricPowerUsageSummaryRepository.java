@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,16 +22,17 @@ import java.util.UUID;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
 
 public interface ElectricPowerUsageSummaryRepository {
-    ElectricPowerUsageSummary findById(Long electricPowerUsageSummaryId);
+	ElectricPowerUsageSummary findById(Long electricPowerUsageSummaryId);
 
-    void persist(ElectricPowerUsageSummary electricPowerUsageSummary);
+	void persist(ElectricPowerUsageSummary electricPowerUsageSummary);
 
-    ElectricPowerUsageSummary findByUUID(UUID uuid);
+	ElectricPowerUsageSummary findByUUID(UUID uuid);
 
 	List<Long> findAllIds();
 
 	void deleteById(Long id);
 
-    void createOrReplaceByUUID(ElectricPowerUsageSummary electricPowerUsageSummary);
+	void createOrReplaceByUUID(
+			ElectricPowerUsageSummary electricPowerUsageSummary);
 
 }
