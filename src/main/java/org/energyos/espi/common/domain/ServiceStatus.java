@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
 
-
 package org.energyos.espi.common.domain;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -29,14 +28,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * Contains the current status of the service.
  * <p/>
- * <p>Java class for ServiceStatus complex type.
+ * <p>
+ * Java class for ServiceStatus complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="ServiceStatus">
  *   &lt;complexContent>
@@ -50,33 +52,29 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ServiceStatus", propOrder = {
-        "currentStatus"
-})
-public class ServiceStatus
-        extends java.lang.Object {
+@XmlType(name = "ServiceStatus", propOrder = { "currentStatus" })
+public class ServiceStatus extends java.lang.Object {
 
-    @XmlElement(required = true)
-    protected String currentStatus;
+	@XmlElement(required = true)
+	protected String currentStatus;
 
-    /**
-     * Gets the value of the currentStatus property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
-    public String getCurrentStatus() {
-        return currentStatus;
-    }
+	/**
+	 * Gets the value of the currentStatus property.
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getCurrentStatus() {
+		return currentStatus;
+	}
 
-    /**
-     * Sets the value of the currentStatus property.
-     *
-     * @param value allowed object is
-     * {@link String }
-     */
-    public void setCurrentStatus(String value) {
-        this.currentStatus = value;
-    }
+	/**
+	 * Sets the value of the currentStatus property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setCurrentStatus(String value) {
+		this.currentStatus = value;
+	}
 
 }
