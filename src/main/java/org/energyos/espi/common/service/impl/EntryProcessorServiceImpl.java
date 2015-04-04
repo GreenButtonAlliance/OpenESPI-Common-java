@@ -1,5 +1,5 @@
 /*
-22 * Copyright 2013, 2014 EnergyOS.org
+22 * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -38,128 +38,140 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-@Transactional (rollbackFor = {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
 @Service
-
 public class EntryProcessorServiceImpl implements EntryProcessorService {
-	
-    
-    @Autowired
-    private ResourceService resourceService;
-    
- public EntryType process(EntryType entry) {
-     convert(entry);
-     for(IdentifiedObject resource : entry.getContent().getResources()) {
 
-            try {
+	@Autowired
+	private ResourceService resourceService;
 
-                IdentifiedObject existingResource = resourceService.findByUUID(resource.getUUID(), resource.getClass());
-                existingResource = resourceService.merge(existingResource);
-                
-                // merge the new into the old and throw the new away
-                //	
-          	   existingResource.merge(resource);
+	public EntryType process(EntryType entry) {
+		convert(entry);
+		for (IdentifiedObject resource : entry.getContent().getResources()) {
 
-                // now put the existing resource back into the structure so it will 
-                // be available for later processing
-                
-                if (existingResource instanceof UsagePoint) {
-                    entry.getContent().setUsagePoint((UsagePoint) existingResource);
-                }
+			try {
 
-                if (existingResource instanceof MeterReading) {
-                	entry.getContent().setMeterReading((MeterReading) existingResource);
-                }
- 
-                if (existingResource instanceof IntervalBlock) {
-               	    // System.out.printf("*****We have an existing IntervalBlock??: %s\n", existingResource.toString());
-                    List <IntervalBlock> intervalBlocks = entry.getContent().getIntervalBlocks();
-                    List <IntervalBlock> newList = new ArrayList<IntervalBlock> ();
-                    Iterator<IntervalBlock> blocks = intervalBlocks.iterator();
-                    while (blocks.hasNext()) {
-                       IntervalBlock bl = blocks.next();
-                       if (bl.getUUID().equals(existingResource.getUUID())) {
-                    	   existingResource.merge(bl);
-                    	   newList.add((IntervalBlock) existingResource);                           
-                       } else {
-                    	   newList.add(bl);
-                       }
-                    }
-                }
+				IdentifiedObject existingResource = resourceService.findByUUID(
+						resource.getUUID(), resource.getClass());
+				existingResource = resourceService.merge(existingResource);
 
-                if (existingResource instanceof ReadingType) {              
-                	
-                	entry.getContent().setReadingType((ReadingType) existingResource); 
-                }
+				// merge the new into the old and throw the new away
+				//
+				existingResource.merge(resource);
 
-                if (existingResource instanceof TimeConfiguration) {
-                	
-                    entry.getContent().setLocalTimeParameters((TimeConfiguration) existingResource);
-                }
-                
-                if (existingResource instanceof ElectricPowerUsageSummary) {
-                          	
-                	entry.getContent().setElectricPowerUsageSummary((ElectricPowerUsageSummary) existingResource);               
-                }
-                
-                if (existingResource instanceof ElectricPowerQualitySummary) {
-                       	
-                	entry.getContent().setElectricPowerQualitySummary((ElectricPowerQualitySummary) existingResource);               
-                }
-                
-                if (existingResource instanceof ApplicationInformation) {
-                 	
-                	entry.getContent().setApplicationInformation((ApplicationInformation) existingResource);               
-                }
+				// now put the existing resource back into the structure so it
+				// will
+				// be available for later processing
 
-                link(existingResource);
-                
-            } catch (EmptyResultDataAccessException x) {
-            	resourceService.persist(resource);
-                link(resource);
-            }
+				if (existingResource instanceof UsagePoint) {
+					entry.getContent().setUsagePoint(
+							(UsagePoint) existingResource);
+				}
 
-        }
+				if (existingResource instanceof MeterReading) {
+					entry.getContent().setMeterReading(
+							(MeterReading) existingResource);
+				}
 
-       return entry;
-    }
+				if (existingResource instanceof IntervalBlock) {
+					// System.out.printf("*****We have an existing IntervalBlock??: %s\n",
+					// existingResource.toString());
+					List<IntervalBlock> intervalBlocks = entry.getContent()
+							.getIntervalBlocks();
+					List<IntervalBlock> newList = new ArrayList<IntervalBlock>();
+					Iterator<IntervalBlock> blocks = intervalBlocks.iterator();
+					while (blocks.hasNext()) {
+						IntervalBlock bl = blocks.next();
+						if (bl.getUUID().equals(existingResource.getUUID())) {
+							existingResource.merge(bl);
+							newList.add((IntervalBlock) existingResource);
+						} else {
+							newList.add(bl);
+						}
+					}
+				}
 
-    // the private functions that do the work
-    // 
-    private void link(IdentifiedObject resource) {
-        linkUp(resource);
-        linkUpMember(resource);
-        linkRelatedCollection(resource);
-    }
+				if (existingResource instanceof ReadingType) {
 
-    // Copy the entry attributes into the resource attributes 
-    //
-    public void convert(EntryType entry) {
-        for(IdentifiedObject resource : entry.getContent().getResources()) {
-            resource.setMRID(entry.getId());
-            for(LinkType link : entry.getLinks()) {
-                if (link.getRel().equals(LinkType.SELF))
-                    resource.setSelfLink(link);
-                if (link.getRel().equals(LinkType.UP))
-                    resource.setUpLink(link);
-                if (link.getRel().equals(LinkType.RELATED))
-                    resource.getRelatedLinks().add(link);
-            }
-            resource.setDescription(entry.getTitle());
-            resource.setPublished(entry.getPublished().getValue().toGregorianCalendar());
-            resource.setUpdated(entry.getUpdated().getValue().toGregorianCalendar());
-        }
+					entry.getContent().setReadingType(
+							(ReadingType) existingResource);
+				}
 
-    }
-    
-    // Establish the rel="up" links into the parent collections
-    //
+				if (existingResource instanceof TimeConfiguration) {
+
+					entry.getContent().setLocalTimeParameters(
+							(TimeConfiguration) existingResource);
+				}
+
+				if (existingResource instanceof ElectricPowerUsageSummary) {
+
+					entry.getContent().setElectricPowerUsageSummary(
+							(ElectricPowerUsageSummary) existingResource);
+				}
+
+				if (existingResource instanceof ElectricPowerQualitySummary) {
+
+					entry.getContent().setElectricPowerQualitySummary(
+							(ElectricPowerQualitySummary) existingResource);
+				}
+
+				if (existingResource instanceof ApplicationInformation) {
+
+					entry.getContent().setApplicationInformation(
+							(ApplicationInformation) existingResource);
+				}
+
+				link(existingResource);
+
+			} catch (EmptyResultDataAccessException x) {
+				resourceService.persist(resource);
+				link(resource);
+			}
+
+		}
+
+		return entry;
+	}
+
+	// the private functions that do the work
+	//
+	private void link(IdentifiedObject resource) {
+		linkUp(resource);
+		linkUpMember(resource);
+		linkRelatedCollection(resource);
+	}
+
+	// Copy the entry attributes into the resource attributes
+	//
+	public void convert(EntryType entry) {
+		for (IdentifiedObject resource : entry.getContent().getResources()) {
+			resource.setMRID(entry.getId());
+			for (LinkType link : entry.getLinks()) {
+				if (link.getRel().equals(LinkType.SELF))
+					resource.setSelfLink(link);
+				if (link.getRel().equals(LinkType.UP))
+					resource.setUpLink(link);
+				if (link.getRel().equals(LinkType.RELATED))
+					resource.getRelatedLinks().add(link);
+			}
+			resource.setDescription(entry.getTitle());
+			resource.setPublished(entry.getPublished().getValue()
+					.toGregorianCalendar());
+			resource.setUpdated(entry.getUpdated().getValue()
+					.toGregorianCalendar());
+		}
+
+	}
+
+	// Establish the rel="up" links into the parent collections
+	//
 	private void linkUp(IdentifiedObject resource) {
 		if (resource.getUpLink() != null) {
 			List<IdentifiedObject> parents = resourceService
-					.findByAllParentsHref(resource.getUpLink().getHref(),resource);
+					.findByAllParentsHref(resource.getUpLink().getHref(),
+							resource);
 			for (IdentifiedObject parent : parents) {
 				// add the parent to the transaction
 				resourceService.merge(parent);
@@ -171,82 +183,91 @@ public class EntryProcessorServiceImpl implements EntryProcessorService {
 
 	// Establish the rel="related" links to the associated resources
 	//
-    private void linkUpMember(IdentifiedObject resource) {
-    	
-        if (resource.getSelfLink() != null) {
-            List<IdentifiedObject> parents = resourceService.findByAllParentsHref(resource.getSelfLink().getHref(), resource);
-            for(IdentifiedObject parent : parents) {
-                    // put the existing resource in the transaction
-                    resourceService.merge(parent);
-                    
-                    // Based on the kind of resource, do the appropriate fixup
-                    if (resource instanceof TimeConfiguration) {
-                        UsagePoint usagePoint = (UsagePoint)parent;
-                        
-                        if (usagePoint.getLocalTimeParameters() == null) {
-                        	
-                           usagePoint.setLocalTimeParameters((TimeConfiguration)resource);
+	private void linkUpMember(IdentifiedObject resource) {
 
-                        }
-                    }
+		if (resource.getSelfLink() != null) {
+			List<IdentifiedObject> parents = resourceService
+					.findByAllParentsHref(resource.getSelfLink().getHref(),
+							resource);
+			for (IdentifiedObject parent : parents) {
+				// put the existing resource in the transaction
+				resourceService.merge(parent);
 
-                    if (resource instanceof ReadingType) {
-                    	
-                        MeterReading meterReading = (MeterReading) parent;
-                        if (meterReading.getReadingType() == null) {
-                          meterReading.setReadingType((ReadingType) resource);
-                        }
-                    }
-                }
-            }
-        }
-    
+				// Based on the kind of resource, do the appropriate fixup
+				if (resource instanceof TimeConfiguration) {
+					UsagePoint usagePoint = (UsagePoint) parent;
 
-    private void linkRelatedCollection(IdentifiedObject resource) {
+					if (usagePoint.getLocalTimeParameters() == null) {
 
-        List<IdentifiedObject> relatedResources = resourceService.findAllRelated(resource);
+						usagePoint
+								.setLocalTimeParameters((TimeConfiguration) resource);
 
-            for(IdentifiedObject relatedResource : relatedResources) {
-            	// Put the relatedResource in the Transaction
-            	resourceService.merge(relatedResource);
-            	
-            	if (resource instanceof UsagePoint) {
-            		if (relatedResource instanceof TimeConfiguration ) {
-            			((UsagePoint) resource).setLocalTimeParameters((TimeConfiguration) relatedResource);            			
-            		}
-            		
-            		if (relatedResource instanceof MeterReading) {
-            			((UsagePoint) resource).addMeterReading((MeterReading) relatedResource);
-            		}
-            		
-            		if (relatedResource instanceof ElectricPowerUsageSummary) {
-            			((UsagePoint) resource).addElectricPowerUsageSummary((ElectricPowerUsageSummary) relatedResource);
-            		}
-            		
-            		if (relatedResource instanceof ElectricPowerQualitySummary) {
-            			((UsagePoint) resource).addElectricPowerQualitySummary((ElectricPowerQualitySummary) relatedResource);
-            		}
-            	}
-            	if (resource instanceof MeterReading) {
-            		
-            		if (relatedResource instanceof ReadingType) {           		
-            			((MeterReading) resource).setReadingType((ReadingType) relatedResource);
-            		}
-            		
-            		if (relatedResource instanceof IntervalBlock) {
-            			((MeterReading) resource).addIntervalBlock((IntervalBlock) relatedResource);
-            		}
-            	}
+					}
+				}
 
-            }
-          
-    }
-    
-    public void setResourceService(ResourceService resourceService) {
-    	this.resourceService = resourceService;
-    }
-    
-    public ResourceService getResourceService(ResourceService resourceService) {
-    	return resourceService;
-    }
+				if (resource instanceof ReadingType) {
+
+					MeterReading meterReading = (MeterReading) parent;
+					if (meterReading.getReadingType() == null) {
+						meterReading.setReadingType((ReadingType) resource);
+					}
+				}
+			}
+		}
+	}
+
+	private void linkRelatedCollection(IdentifiedObject resource) {
+
+		List<IdentifiedObject> relatedResources = resourceService
+				.findAllRelated(resource);
+
+		for (IdentifiedObject relatedResource : relatedResources) {
+			// Put the relatedResource in the Transaction
+			resourceService.merge(relatedResource);
+
+			if (resource instanceof UsagePoint) {
+				if (relatedResource instanceof TimeConfiguration) {
+					((UsagePoint) resource)
+							.setLocalTimeParameters((TimeConfiguration) relatedResource);
+				}
+
+				if (relatedResource instanceof MeterReading) {
+					((UsagePoint) resource)
+							.addMeterReading((MeterReading) relatedResource);
+				}
+
+				if (relatedResource instanceof ElectricPowerUsageSummary) {
+					((UsagePoint) resource)
+							.addElectricPowerUsageSummary((ElectricPowerUsageSummary) relatedResource);
+				}
+
+				if (relatedResource instanceof ElectricPowerQualitySummary) {
+					((UsagePoint) resource)
+							.addElectricPowerQualitySummary((ElectricPowerQualitySummary) relatedResource);
+				}
+			}
+			if (resource instanceof MeterReading) {
+
+				if (relatedResource instanceof ReadingType) {
+					((MeterReading) resource)
+							.setReadingType((ReadingType) relatedResource);
+				}
+
+				if (relatedResource instanceof IntervalBlock) {
+					((MeterReading) resource)
+							.addIntervalBlock((IntervalBlock) relatedResource);
+				}
+			}
+
+		}
+
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourceService getResourceService(ResourceService resourceService) {
+		return resourceService;
+	}
 }

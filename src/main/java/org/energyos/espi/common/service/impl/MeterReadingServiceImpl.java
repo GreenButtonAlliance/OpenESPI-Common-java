@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,32 +17,25 @@
 package org.energyos.espi.common.service.impl;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 import org.energyos.espi.common.domain.MeterReading;
-import org.energyos.espi.common.domain.UsagePoint;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.MeterReadingRepository;
 import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.MeterReadingService;
 import org.energyos.espi.common.service.ResourceService;
-import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 
 @Service
 public class MeterReadingServiceImpl implements MeterReadingService {
-	
-	@Autowired 
+
+	@Autowired
 	private ImportService importService;
-	
-    @Autowired
-    protected MeterReadingRepository meterReadingRepository;
-    
+
+	@Autowired
+	protected MeterReadingRepository meterReadingRepository;
+
 	@Autowired
 	private ResourceService resourceService;
 
@@ -67,28 +60,30 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 		}
 	}
 
-   public void setImportService(ImportService importService) {
-        this.importService = importService;
-   }
+	public void setImportService(ImportService importService) {
+		this.importService = importService;
+	}
 
-   public ImportService getImportService () {
-        return this.importService;
-   }
-   
-   @Override
-   public void setMeterReadingRepository(MeterReadingRepository meterReadingRepository) {
-        this.meterReadingRepository = meterReadingRepository;
-   }
+	public ImportService getImportService() {
+		return this.importService;
+	}
 
-   public MeterReadingRepository getMeterReadingRepository () {
-        return this.meterReadingRepository;
-   }
-   public void setResourceService(ResourceService resourceService) {
-        this.resourceService = resourceService;
-   }
+	@Override
+	public void setMeterReadingRepository(
+			MeterReadingRepository meterReadingRepository) {
+		this.meterReadingRepository = meterReadingRepository;
+	}
 
-   public ResourceService getResourceService () {
-        return this.resourceService;
-   }
-	   
+	public MeterReadingRepository getMeterReadingRepository() {
+		return this.meterReadingRepository;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourceService getResourceService() {
+		return this.resourceService;
+	}
+
 }

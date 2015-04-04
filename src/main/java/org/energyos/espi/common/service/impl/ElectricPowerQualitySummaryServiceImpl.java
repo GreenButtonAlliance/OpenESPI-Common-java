@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -33,30 +33,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQualitySummaryService {
+public class ElectricPowerQualitySummaryServiceImpl implements
+		ElectricPowerQualitySummaryService {
 
-    @Autowired
-    private ElectricPowerQualitySummaryRepository electricPowerQualitySummaryRepository;
-    
-    @Autowired
+	@Autowired
+	private ElectricPowerQualitySummaryRepository electricPowerQualitySummaryRepository;
+
+	@Autowired
 	private ResourceService resourceService;
-    
-    @Autowired
-    private ImportService importService;
-    
-    @Override
-    public ElectricPowerQualitySummary findByUUID(UUID uuid) {
-        return electricPowerQualitySummaryRepository.findByUUID(uuid);
-    }
 
-    public ElectricPowerQualitySummary findById(Long electricPowerQualitySummaryId) {
-        return electricPowerQualitySummaryRepository.findById(electricPowerQualitySummaryId);
-    }
+	@Autowired
+	private ImportService importService;
 
-    @Override
-    public void persist(ElectricPowerQualitySummary electricPowerQualitySummary) {
-    	electricPowerQualitySummaryRepository.persist(electricPowerQualitySummary);
-    }
+	@Override
+	public ElectricPowerQualitySummary findByUUID(UUID uuid) {
+		return electricPowerQualitySummaryRepository.findByUUID(uuid);
+	}
+
+	public ElectricPowerQualitySummary findById(
+			Long electricPowerQualitySummaryId) {
+		return electricPowerQualitySummaryRepository
+				.findById(electricPowerQualitySummaryId);
+	}
+
+	@Override
+	public void persist(ElectricPowerQualitySummary electricPowerQualitySummary) {
+		electricPowerQualitySummaryRepository
+				.persist(electricPowerQualitySummary);
+	}
 
 	@Override
 	public List<ElectricPowerQualitySummary> findAllByUsagePoint(
@@ -82,12 +86,13 @@ public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQual
 	@Override
 	public void associateByUUID(UsagePoint usagePoint, UUID uuid) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(ElectricPowerQualitySummary electricPowerQualitySummary) {
-	       electricPowerQualitySummaryRepository.deleteById(electricPowerQualitySummary.getId());
+		electricPowerQualitySummaryRepository
+				.deleteById(electricPowerQualitySummary.getId());
 	}
 
 	@Override
@@ -95,17 +100,21 @@ public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQual
 			Long electricPowerQualitySummaryId) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-			temp = resourceService.findAllIdsByXPath(retailCustomerId, usagePointId, ElectricPowerUsageSummary.class);
-//			temp.add(electricPowerQualitySummaryId);
-			if (temp.contains(electricPowerQualitySummaryId)) { 
+			temp = resourceService.findAllIdsByXPath(retailCustomerId,
+					usagePointId, ElectricPowerUsageSummary.class);
+			// temp.add(electricPowerQualitySummaryId);
+			if (temp.contains(electricPowerQualitySummaryId)) {
 				temp.clear();
 				temp.add(electricPowerQualitySummaryId);
 			} else {
 				temp.clear();
 			}
-			result = (new EntryTypeIterator(resourceService, temp, ElectricPowerQualitySummary.class)).nextEntry(ElectricPowerQualitySummary.class);
+			result = (new EntryTypeIterator(resourceService, temp,
+					ElectricPowerQualitySummary.class))
+					.nextEntry(ElectricPowerQualitySummary.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -115,15 +124,20 @@ public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQual
 	}
 
 	@Override
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId) {
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
+			Long usagePointId) {
 		EntryTypeIterator result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-	//		temp = resourceService.findAllIds(ElectricPowerQualitySummary.class);
-			temp = resourceService.findAllIdsByXPath(retailCustomerId, usagePointId, ElectricPowerQualitySummary.class);
+			// temp =
+			// resourceService.findAllIds(ElectricPowerQualitySummary.class);
+			temp = resourceService.findAllIdsByXPath(retailCustomerId,
+					usagePointId, ElectricPowerQualitySummary.class);
 
-			result = (new EntryTypeIterator(resourceService, temp, ElectricPowerQualitySummary.class));
+			result = (new EntryTypeIterator(resourceService, temp,
+					ElectricPowerQualitySummary.class));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -135,41 +149,45 @@ public class ElectricPowerQualitySummaryServiceImpl implements ElectricPowerQual
 	@Override
 	public void add(ElectricPowerQualitySummary electricPowerQualitySummary) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public ElectricPowerQualitySummary importResource(InputStream stream) {
-		try{
-		importService.importData(stream, null);
-		EntryType entry = importService.getEntries().get(0);
-		ElectricPowerQualitySummary electricPowerQualitySummary = entry.getContent().getElectricPowerQualitySummary();
-		return electricPowerQualitySummary;
+		try {
+			importService.importData(stream, null);
+			EntryType entry = importService.getEntries().get(0);
+			ElectricPowerQualitySummary electricPowerQualitySummary = entry
+					.getContent().getElectricPowerQualitySummary();
+			return electricPowerQualitySummary;
 		} catch (Exception e) {
 			return null;
 		}
 	}
-	
-   public void setElectricPowerQualitySummaryRepository(ElectricPowerQualitySummaryRepository electricPowerQualitySummaryRepository) {
-        this.electricPowerQualitySummaryRepository = electricPowerQualitySummaryRepository;
-   }
 
-   public ElectricPowerQualitySummaryRepository getElectricPowerQualitySummaryRepository () {
-        return this.electricPowerQualitySummaryRepository;
-   }
-   public void setResourceService(ResourceService resourceService) {
-        this.resourceService = resourceService;
-   }
+	public void setElectricPowerQualitySummaryRepository(
+			ElectricPowerQualitySummaryRepository electricPowerQualitySummaryRepository) {
+		this.electricPowerQualitySummaryRepository = electricPowerQualitySummaryRepository;
+	}
 
-   public ResourceService getResourceService () {
-        return this.resourceService;
-   }
-   public void setImportService(ImportService importService) {
-        this.importService = importService;
-   }
+	public ElectricPowerQualitySummaryRepository getElectricPowerQualitySummaryRepository() {
+		return this.electricPowerQualitySummaryRepository;
+	}
 
-   public ImportService getImportService () {
-        return this.importService;
-   }
- 
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourceService getResourceService() {
+		return this.resourceService;
+	}
+
+	public void setImportService(ImportService importService) {
+		this.importService = importService;
+	}
+
+	public ImportService getImportService() {
+		return this.importService;
+	}
+
 }

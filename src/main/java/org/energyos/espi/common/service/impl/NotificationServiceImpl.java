@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -44,47 +44,57 @@ import org.springframework.web.client.RestTemplate;
  */
 @Service
 public class NotificationServiceImpl implements NotificationService {
-    @Autowired
-    private RestTemplate restTemplate;
-    
-    @Autowired
-    private ResourceService resourceService;
-    
-    @Autowired
-    private AuthorizationService authorizationService;
-    
-    @Autowired
-    private SubscriptionService subscriptionService;
-    
-    @Override
-    public void notify(Subscription subscription , XMLGregorianCalendar startDate, XMLGregorianCalendar endDate) {
-        String thirdPartyNotificationURI = subscription.getApplicationInformation().getThirdPartyNotifyUri();
-        String separator = "?";
-        String startDateString = "All";
-        String endDateString = "All";
-        
-        if (startDate != null) startDateString =  startDate.toXMLFormat();
-        if (endDate != null) endDateString = endDate.toXMLFormat();
-        
-        String subscriptionURI = subscription.getApplicationInformation().getDataCustodianResourceEndpoint() + "/Batch/Subscription/" + subscription.getId();
-        if (startDate != null) {
-        	subscriptionURI = subscriptionURI + separator + "published-min=" + startDateString; 
-        	separator = "&";
-        }
-        if (endDate != null) {
-        	subscriptionURI = subscriptionURI + separator + "published-max=" + endDateString; 
-        }
-        
-        BatchList batchList = new BatchList();
-        batchList.getResources().add(subscriptionURI);
-        notifyInternal(thirdPartyNotificationURI, batchList);
-    }
+	@Autowired
+	private RestTemplate restTemplate;
+
+	@Autowired
+	private ResourceService resourceService;
+
+	@Autowired
+	private AuthorizationService authorizationService;
+
+	@Autowired
+	private SubscriptionService subscriptionService;
 
 	@Override
-	public void notify(RetailCustomer retailCustomer,  XMLGregorianCalendar startDate, XMLGregorianCalendar endDate) {
-		
+	public void notify(Subscription subscription,
+			XMLGregorianCalendar startDate, XMLGregorianCalendar endDate) {
+		String thirdPartyNotificationURI = subscription
+				.getApplicationInformation().getThirdPartyNotifyUri();
+		String separator = "?";
+		String startDateString = "All";
+		String endDateString = "All";
+
+		if (startDate != null)
+			startDateString = startDate.toXMLFormat();
+		if (endDate != null)
+			endDateString = endDate.toXMLFormat();
+
+		String subscriptionURI = subscription.getApplicationInformation()
+				.getDataCustodianResourceEndpoint()
+				+ "/Batch/Subscription/"
+				+ subscription.getId();
+		if (startDate != null) {
+			subscriptionURI = subscriptionURI + separator + "published-min="
+					+ startDateString;
+			separator = "&";
+		}
+		if (endDate != null) {
+			subscriptionURI = subscriptionURI + separator + "published-max="
+					+ endDateString;
+		}
+
+		BatchList batchList = new BatchList();
+		batchList.getResources().add(subscriptionURI);
+		notifyInternal(thirdPartyNotificationURI, batchList);
+	}
+
+	@Override
+	public void notify(RetailCustomer retailCustomer,
+			XMLGregorianCalendar startDate, XMLGregorianCalendar endDate) {
+
 		if (retailCustomer != null) {
-			
+
 			Subscription subscription = null;
 
 			// find and iterate across all relevant authorizations
@@ -98,7 +108,8 @@ public class NotificationServiceImpl implements NotificationService {
 				Authorization authorization = authorizationIterator.next();
 
 				try {
-					subscription = subscriptionService.findByAuthorizationId(authorization.getId());
+					subscription = subscriptionService
+							.findByAuthorizationId(authorization.getId());
 				} catch (Exception e) {
 					// an Authorization w/o an associated subscription breaks
 					// the propagation chain
@@ -107,132 +118,154 @@ public class NotificationServiceImpl implements NotificationService {
 
 				}
 				if (subscription != null) {
-					notify (subscription, startDate, endDate);
+					notify(subscription, startDate, endDate);
 				}
 			}
 		}
 	}
-	
+
 	@Async
 	// we want to spawn this to a separate thread so we can get back
 	// and commit the actual data import transaction
-	private void notifyInternal(String thirdPartyNotificationURI, BatchList batchList) {
-		
-        try {
-            restTemplate.postForLocation(thirdPartyNotificationURI, batchList);
-        } catch (Exception e) {
-        	// Do nothing
-        }		
+	private void notifyInternal(String thirdPartyNotificationURI,
+			BatchList batchList) {
+
+		try {
+			restTemplate.postForLocation(thirdPartyNotificationURI, batchList);
+		} catch (Exception e) {
+			// Do nothing
+		}
 	}
 
 	@Override
 	public void notifyAllNeed() {
-	
-		List <Long> authList = resourceService.findAllIds(Authorization.class);
-		
-		Map<Long, BatchList> notifyList = new HashMap<Long, BatchList> ();
-		
+
+		List<Long> authList = resourceService.findAllIds(Authorization.class);
+
+		Map<Long, BatchList> notifyList = new HashMap<Long, BatchList>();
+
 		for (Long id : authList) {
-			
-			Authorization authorization = resourceService.findById(id, Authorization.class);
-			
+
+			Authorization authorization = resourceService.findById(id,
+					Authorization.class);
+
 			String tempResourceUri = authorization.getResourceURI();
-			
-			resourceService.findByResourceUri(tempResourceUri, Authorization.class);
-			
+
+			resourceService.findByResourceUri(tempResourceUri,
+					Authorization.class);
+
 			System.out.println("resourceURI: " + tempResourceUri);
-			
+
 			String thirdParty = authorization.getThirdParty();
-			
+
 			// do not do any of the local authorizations
 			//
-			if (!((thirdParty.equals("data_custodian_admin")) || (thirdParty.equals("upload_admin")))) {
-				
-				// if this is the first time we have seen this third party, add it to the notification list.
-			    if (!(notifyList.containsKey(thirdParty))) {
-				    notifyList.put(id, new BatchList ());
-			    }
-			    
-			    // and now add the appropriate resource URIs to the batchList of this third party
-			    //
-			    String resourceUri = authorization.getResourceURI();
-			    
-			    // resouceUri's that are just /Batch/Bulk ==> client-access-token and will be ignored here with the 
-			    // actual Batch/Bulk ids will be picked up by looking at the scope strings of the individual
-			    // authorization/subscription pairs		    
-			    if (!(resourceUri.contains("/Batch/Bulk"))) {
-			    	String scope = authorization.getScope();
-			    	for (String term : scope.split(";")) {
-			    	if (term.contains("BR=")) {
-			    		// we have a bulkId to deal with
-			    		term = term.substring(scope.indexOf("=") + 1);
-			    		// TODO the following getResourceURI() should be changed to getBulkRequestURI when the seed tables 
-			    		// have non-null values for that attribute.
-			    		String bulkResourceUri = authorization.getResourceURI() + "/Batch/Bulk/" + term;
-			            if (!(notifyList.get(id).getResources().contains(bulkResourceUri))) {
-                          notifyList.get(id).getResources().add(bulkResourceUri);
-			            }
-			    	  } else {
-			    		// just add the resourceUri
-			    		  if (!(notifyList.get(id).getResources().contains(resourceUri))) {
-			    		        notifyList.get(id).getResources().add(resourceUri);	
-			    		  }
-			    	  }
-			    	}
-			    }
-			   	
+			if (!((thirdParty.equals("data_custodian_admin")) || (thirdParty
+					.equals("upload_admin")))) {
+
+				// if this is the first time we have seen this third party, add
+				// it to the notification list.
+				if (!(notifyList.containsKey(thirdParty))) {
+					notifyList.put(id, new BatchList());
+				}
+
+				// and now add the appropriate resource URIs to the batchList of
+				// this third party
+				//
+				String resourceUri = authorization.getResourceURI();
+
+				// resouceUri's that are just /Batch/Bulk ==>
+				// client-access-token and will be ignored here with the
+				// actual Batch/Bulk ids will be picked up by looking at the
+				// scope strings of the individual
+				// authorization/subscription pairs
+				if (!(resourceUri.contains("/Batch/Bulk"))) {
+					String scope = authorization.getScope();
+					for (String term : scope.split(";")) {
+						if (term.contains("BR=")) {
+							// we have a bulkId to deal with
+							term = term.substring(scope.indexOf("=") + 1);
+							// TODO the following getResourceURI() should be
+							// changed to getBulkRequestURI when the seed tables
+							// have non-null values for that attribute.
+							String bulkResourceUri = authorization
+									.getResourceURI() + "/Batch/Bulk/" + term;
+							if (!(notifyList.get(id).getResources()
+									.contains(bulkResourceUri))) {
+								notifyList.get(id).getResources()
+										.add(bulkResourceUri);
+							}
+						} else {
+							// just add the resourceUri
+							if (!(notifyList.get(id).getResources()
+									.contains(resourceUri))) {
+								notifyList.get(id).getResources()
+										.add(resourceUri);
+							}
+						}
+					}
+				}
+
 			}
 		}
-		
+
 		// now notify each ThirdParty
-		for (Entry<Long, BatchList> entry : notifyList.entrySet() ) {
-			String notifyUri = resourceService.findById(entry.getKey(), Authorization.class).getApplicationInformation().getThirdPartyNotifyUri();
+		for (Entry<Long, BatchList> entry : notifyList.entrySet()) {
+			String notifyUri = resourceService
+					.findById(entry.getKey(), Authorization.class)
+					.getApplicationInformation().getThirdPartyNotifyUri();
 			BatchList batchList = entry.getValue();
 			if (!(batchList.getResources().isEmpty())) {
-			    notifyInternal(notifyUri, batchList);
+				notifyInternal(notifyUri, batchList);
 			}
 		}
 	}
-	
-   public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-   }
 
-   @Override
-   public void notify(ApplicationInformation applicationInformation, Long bulkId) {
-	String bulkRequestUri = applicationInformation.getDataCustodianBulkRequestURI() + "/" + bulkId;
-	String thirdPartyNotificationURI = applicationInformation.getThirdPartyNotifyUri();
-    BatchList batchList = new BatchList();
-    batchList.getResources().add(bulkRequestUri);
-    
-    notifyInternal(thirdPartyNotificationURI, batchList);
-	
-   }
+	public void setRestTemplate(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
+	}
 
-   public RestTemplate getRestTemplate () {
-        return this.restTemplate;
-   }
-   public void setResourceService(ResourceService resourceService) {
-        this.resourceService = resourceService;
-   }
+	@Override
+	public void notify(ApplicationInformation applicationInformation,
+			Long bulkId) {
+		String bulkRequestUri = applicationInformation
+				.getDataCustodianBulkRequestURI() + "/" + bulkId;
+		String thirdPartyNotificationURI = applicationInformation
+				.getThirdPartyNotifyUri();
+		BatchList batchList = new BatchList();
+		batchList.getResources().add(bulkRequestUri);
 
-   public ResourceService getResourceService () {
-        return this.resourceService;
-   }
-  
-   public void setAuthorizationService(AuthorizationService authorizationService) {
-        this.authorizationService = authorizationService;
-   }
+		notifyInternal(thirdPartyNotificationURI, batchList);
 
-   public AuthorizationService getAuthorizationService () {
-        return this.authorizationService;
-   }
-   public void setSubscriptionService(SubscriptionService subscriptionService) {
-        this.subscriptionService = subscriptionService;
-   }
+	}
 
-   public SubscriptionService getSubscriptionService () {
-        return this.subscriptionService;
-   }
-   
+	public RestTemplate getRestTemplate() {
+		return this.restTemplate;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourceService getResourceService() {
+		return this.resourceService;
+	}
+
+	public void setAuthorizationService(
+			AuthorizationService authorizationService) {
+		this.authorizationService = authorizationService;
+	}
+
+	public AuthorizationService getAuthorizationService() {
+		return this.authorizationService;
+	}
+
+	public void setSubscriptionService(SubscriptionService subscriptionService) {
+		this.subscriptionService = subscriptionService;
+	}
+
+	public SubscriptionService getSubscriptionService() {
+		return this.subscriptionService;
+	}
+
 }

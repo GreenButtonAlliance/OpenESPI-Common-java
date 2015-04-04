@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -37,52 +37,53 @@ import org.springframework.stereotype.Service;
 @Service
 public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 
-    @Autowired
-    protected TimeConfigurationRepository timeConfigurationRepository;
- 
-    @Autowired
+	@Autowired
+	protected TimeConfigurationRepository timeConfigurationRepository;
+
+	@Autowired
 	private ResourceService resourceService;
-    
-    @Autowired
-    private ImportService importService;
-    
-    public void setImportService(ImportService importService) {
-    	this.importService = importService;
-    }
-    
-    public ImportService getImportService() {
-    	return this.importService;
-    }
-    
-    public void setResourceService(ResourceService resourceService) {
-    	this.resourceService = resourceService;
-    }
 
-    public ResourceService getResourceService() {
-    	return this.resourceService;
-    }
-    
-    public void setRepository(TimeConfigurationRepository timeConfigurationRepository) {
-        this.timeConfigurationRepository = timeConfigurationRepository;
-    }
+	@Autowired
+	private ImportService importService;
 
-    public TimeConfigurationRepository getRepository() {
-        return timeConfigurationRepository;
-    }
-    
-    @Override
-    public TimeConfiguration findByUUID(UUID uuid) {
-        return timeConfigurationRepository.findByUUID(uuid);
-    }
+	public void setImportService(ImportService importService) {
+		this.importService = importService;
+	}
 
-    public TimeConfiguration findById(Long timeConfigurationId) {
-        return timeConfigurationRepository.findById(timeConfigurationId);
-    }
+	public ImportService getImportService() {
+		return this.importService;
+	}
 
-    @Override
-    public void persist(TimeConfiguration timeConfiguration) {
-    	timeConfigurationRepository.persist(timeConfiguration);
-    }
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourceService getResourceService() {
+		return this.resourceService;
+	}
+
+	public void setRepository(
+			TimeConfigurationRepository timeConfigurationRepository) {
+		this.timeConfigurationRepository = timeConfigurationRepository;
+	}
+
+	public TimeConfigurationRepository getRepository() {
+		return timeConfigurationRepository;
+	}
+
+	@Override
+	public TimeConfiguration findByUUID(UUID uuid) {
+		return timeConfigurationRepository.findByUUID(uuid);
+	}
+
+	public TimeConfiguration findById(Long timeConfigurationId) {
+		return timeConfigurationRepository.findById(timeConfigurationId);
+	}
+
+	@Override
+	public void persist(TimeConfiguration timeConfiguration) {
+		timeConfigurationRepository.persist(timeConfiguration);
+	}
 
 	@Override
 	public List<TimeConfiguration> findAllByRetailCustomer(
@@ -106,7 +107,7 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 	@Override
 	public void associateByUUID(UsagePoint usagePoint, UUID uuid) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -114,11 +115,10 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 	@Override
 	public void deleteById(long timeConfigurationId) {
-	       timeConfigurationRepository.deleteById(timeConfigurationId);
+		timeConfigurationRepository.deleteById(timeConfigurationId);
 	}
 
 	@Override
@@ -132,10 +132,13 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 			Long timeConfigurationId, ExportFilter params) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp.add(timeConfigurationId);
-			result = (new EntryTypeIterator(resourceService, temp, TimeConfiguration.class)).nextEntry(TimeConfiguration.class);
+			result = (new EntryTypeIterator(resourceService, temp,
+					TimeConfiguration.class))
+					.nextEntry(TimeConfiguration.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -145,13 +148,16 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 	}
 
 	@Override
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId, ExportFilter params) {
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
+			Long usagePointId, ExportFilter params) {
 		EntryTypeIterator result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understan
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = resourceService.findAllIds(TimeConfiguration.class);
-			result = (new EntryTypeIterator(resourceService, temp, TimeConfiguration.class));
+			result = (new EntryTypeIterator(resourceService, temp,
+					TimeConfiguration.class));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -163,12 +169,12 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 	@Override
 	public void add(TimeConfiguration timeConfiguration) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(TimeConfiguration timeConfiguration) {
-	       timeConfigurationRepository.deleteById(timeConfiguration.getId());
+		timeConfigurationRepository.deleteById(timeConfiguration.getId());
 	}
 
 	@Override
@@ -180,7 +186,7 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 			timeConfiguration = entry.getContent().getLocalTimeParameters();
 
 		} catch (Exception e) {
-           e.printStackTrace();
+			e.printStackTrace();
 		}
 		return timeConfiguration;
 	}

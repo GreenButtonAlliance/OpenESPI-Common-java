@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,50 +17,49 @@
 package org.energyos.espi.common.service.impl;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.energyos.espi.common.domain.ApplicationInformation;
-import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.repositories.ApplicationInformationRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
 import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
-import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
+public class ApplicationInformationServiceImpl implements
+		ApplicationInformationService {
 
-public class ApplicationInformationServiceImpl implements ApplicationInformationService {
-	
-    @Autowired
-    private ApplicationInformationRepository applicationInformationRepository;
+	@Autowired
+	private ApplicationInformationRepository applicationInformationRepository;
 
-    @Autowired
-    private ResourceService resourceService;
-    
-    @Autowired
-    private ImportService importService;
-       
-    @Override
-    public List<ApplicationInformation> findByKind(String kind) {
-        return applicationInformationRepository.findByKind(kind);
-    }
+	@Autowired
+	private ResourceService resourceService;
 
-    @Override
-    public ApplicationInformation findByClientId(String clientId) {
-        return applicationInformationRepository.findByClientId(clientId);
-    }
+	@Autowired
+	private ImportService importService;
 
-    @Override
-    public ApplicationInformation findByDataCustodianClientId(String dataCustodianClientId) {
-        return applicationInformationRepository.findByDataCustodianClientId(dataCustodianClientId);
-    }
+	@Override
+	public List<ApplicationInformation> findByKind(String kind) {
+		return applicationInformationRepository.findByKind(kind);
+	}
+
+	@Override
+	public ApplicationInformation findByClientId(String clientId) {
+		return applicationInformationRepository.findByClientId(clientId);
+	}
+
+	@Override
+	public ApplicationInformation findByDataCustodianClientId(
+			String dataCustodianClientId) {
+		return applicationInformationRepository
+				.findByDataCustodianClientId(dataCustodianClientId);
+	}
 
 	@Override
 	public ApplicationInformation importResource(InputStream stream) {
@@ -68,34 +67,37 @@ public class ApplicationInformationServiceImpl implements ApplicationInformation
 		ApplicationInformation applicationInformation = null;
 		try {
 			importService.importData(stream, null);
-			applicationInformation = importService.getEntries().get(0).getContent().getApplicationInformation();
+			applicationInformation = importService.getEntries().get(0)
+					.getContent().getApplicationInformation();
 		} catch (Exception e) {
 
 		}
 		return applicationInformation;
 	}
 
-   public void setApplicationInformationRepository(ApplicationInformationRepository applicationInformationRepository) {
-        this.applicationInformationRepository = applicationInformationRepository;
-   }
+	public void setApplicationInformationRepository(
+			ApplicationInformationRepository applicationInformationRepository) {
+		this.applicationInformationRepository = applicationInformationRepository;
+	}
 
-   public ApplicationInformationRepository getApplicationInformationRepository () {
-        return this.applicationInformationRepository;
-   }
-   public void setResourceService(ResourceService resourceService) {
-        this.resourceService = resourceService;
-   }
+	public ApplicationInformationRepository getApplicationInformationRepository() {
+		return this.applicationInformationRepository;
+	}
 
-   public ResourceService getResourceService () {
-       return this.resourceService;
-  }
-   
-   public void setImportService(ImportService importService) {
-        this.importService = importService;
-   }
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
 
-   public ImportService getImportService () {
-        return this.importService;
-   }
+	public ResourceService getResourceService() {
+		return this.resourceService;
+	}
+
+	public void setImportService(ImportService importService) {
+		this.importService = importService;
+	}
+
+	public ImportService getImportService() {
+		return this.importService;
+	}
 
 }

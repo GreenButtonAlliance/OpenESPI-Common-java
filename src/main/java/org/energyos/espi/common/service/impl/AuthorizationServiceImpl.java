@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,10 +19,8 @@ package org.energyos.espi.common.service.impl;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
-import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.Authorization;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -34,67 +32,60 @@ import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.client.resource.BaseOAuth2ProtectedResourceDetails;
-import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
-import org.springframework.security.oauth2.client.token.ClientTokenServices;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.common.OAuth2RefreshToken;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorizationServiceImpl implements AuthorizationService {
-	
-    @Autowired
-    private AuthorizationRepository authorizationRepository;
 
-    @Autowired
-    private UsagePointRepository usagePointRepository;
+	@Autowired
+	private AuthorizationRepository authorizationRepository;
+
+	@Autowired
+	private UsagePointRepository usagePointRepository;
 
 	@Autowired
 	private ResourceService resourceService;
-	
+
 	@Autowired
 	private ImportService importService;
-	
-    @Override
-    public List<Authorization> findAllByRetailCustomerId(Long retailCustomerId) {
-        return authorizationRepository.findAllByRetailCustomerId(retailCustomerId);
-    }
-    
-    @Override
-    public List<Long> findAllIdsByApplicationInformationId(Long applicationInformationId) {	
-    	return authorizationRepository.findAllIdsByApplicationInformationId(applicationInformationId);
-    }
 
-    @Override
-    public Authorization findByUUID(UUID uuid) {
-        return authorizationRepository.findByUUID(uuid);
-    }
-    
-    @Override
-    public Authorization createAuthorization(Subscription subscription, String accessToken) {
-        Authorization authorization = new Authorization();
-        authorization.setUUID(UUID.randomUUID());
-        authorizationRepository.persist(authorization);
+	@Override
+	public List<Authorization> findAllByRetailCustomerId(Long retailCustomerId) {
+		return authorizationRepository
+				.findAllByRetailCustomerId(retailCustomerId);
+	}
 
-        return authorization;
-    }
+	@Override
+	public List<Long> findAllIdsByApplicationInformationId(
+			Long applicationInformationId) {
+		return authorizationRepository
+				.findAllIdsByApplicationInformationId(applicationInformationId);
+	}
 
-    @Override
-    public Authorization findByState(String state) {
-        return authorizationRepository.findByState(state);
-    }
-    
-    @Override
-    public Authorization findByScope(String scope, Long retailCustomerId) {
-    	return authorizationRepository.findByScope(scope, retailCustomerId);
-    }
+	@Override
+	public Authorization findByUUID(UUID uuid) {
+		return authorizationRepository.findByUUID(uuid);
+	}
+
+	@Override
+	public Authorization createAuthorization(Subscription subscription,
+			String accessToken) {
+		Authorization authorization = new Authorization();
+		authorization.setUUID(UUID.randomUUID());
+		authorizationRepository.persist(authorization);
+
+		return authorization;
+	}
+
+	@Override
+	public Authorization findByState(String state) {
+		return authorizationRepository.findByState(state);
+	}
+
+	@Override
+	public Authorization findByScope(String scope, Long retailCustomerId) {
+		return authorizationRepository.findByScope(scope, retailCustomerId);
+	}
 
 	@Override
 	public List<Authorization> findAll() {
@@ -107,11 +98,12 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-    @Override
-    public Authorization findByURI(String uri) {
-        UsagePoint usagePoint = usagePointRepository.findByURI(uri);
-        return usagePoint.getSubscription().getAuthorization();
-    }
+
+	@Override
+	public Authorization findByURI(String uri) {
+		UsagePoint usagePoint = usagePointRepository.findByURI(uri);
+		return usagePoint.getSubscription().getAuthorization();
+	}
 
 	@Override
 	public String feedFor(List<Authorization> authorizations) {
@@ -120,15 +112,15 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	}
 
 	// persistence management services
-    @Override
-    public void persist(Authorization authorization) {
-    	authorizationRepository.persist(authorization);
-    }
+	@Override
+	public void persist(Authorization authorization) {
+		authorizationRepository.persist(authorization);
+	}
 
-    @Override
-    public void merge(Authorization authorization) {
-    	authorizationRepository.merge(authorization);
-    }
+	@Override
+	public void merge(Authorization authorization) {
+		authorizationRepository.merge(authorization);
+	}
 
 	// accessor services
 
@@ -141,11 +133,14 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	public EntryType findEntryType(Long retailCustomerId, Long authorizationId) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-			Authorization authorization = authorizationRepository.findById(authorizationId);
+			Authorization authorization = authorizationRepository
+					.findById(authorizationId);
 			temp.add(authorization.getId());
-			result = (new EntryTypeIterator(resourceService, temp, Authorization.class)).nextEntry(Authorization.class);
+			result = (new EntryTypeIterator(resourceService, temp,
+					Authorization.class)).nextEntry(Authorization.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -158,10 +153,12 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId) {
 		EntryTypeIterator result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = authorizationRepository.findAllIds(retailCustomerId);
-			result = (new EntryTypeIterator(resourceService, temp, Authorization.class));
+			result = (new EntryTypeIterator(resourceService, temp,
+					Authorization.class));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -174,11 +171,14 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	public EntryType findRoot(Long authorizationId) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-			Authorization authorization = authorizationRepository.findById(authorizationId);
+			Authorization authorization = authorizationRepository
+					.findById(authorizationId);
 			temp.add(authorization.getId());
-			result = (new EntryTypeIterator(resourceService, temp, Authorization.class)).next();
+			result = (new EntryTypeIterator(resourceService, temp,
+					Authorization.class)).next();
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -191,10 +191,12 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	public EntryTypeIterator findEntryTypeIterator() {
 		EntryTypeIterator result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = authorizationRepository.findAllIds();
-			result = (new EntryTypeIterator(resourceService, temp, Authorization.class));
+			result = (new EntryTypeIterator(resourceService, temp,
+					Authorization.class));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -206,12 +208,12 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	@Override
 	public void add(Authorization authorization) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Authorization authorization) {
-	    authorizationRepository.deleteById(authorization.getId());
+		authorizationRepository.deleteById(authorization.getId());
 	}
 
 	// import-exportResource services
@@ -220,7 +222,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 		Authorization authorization = null;
 		try {
 			importService.importData(stream, null);
-			authorization = importService.getEntries().get(0).getContent().getAuthorization();
+			authorization = importService.getEntries().get(0).getContent()
+					.getAuthorization();
 		} catch (Exception e) {
 
 		}
@@ -242,39 +245,44 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	public Authorization findByRefreshToken(String refreshToken) {
 		return authorizationRepository.findByRefreshToken(refreshToken);
 	}
-	
+
 	@Override
 	public List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId) {
 		return authorizationRepository.findAllIdsByBulkId(thirdParty, bulkId);
 	}
-	
-    public void setAuthorizationRepository(AuthorizationRepository authorizationRepository) {
-        this.authorizationRepository = authorizationRepository;
-   }
 
-   public AuthorizationRepository getAuthorizationRepository () {
-        return this.authorizationRepository;
-   }
-   public void setUsagePointRepository(UsagePointRepository usagePointRepository) {
-        this.usagePointRepository = usagePointRepository;
-   }
+	public void setAuthorizationRepository(
+			AuthorizationRepository authorizationRepository) {
+		this.authorizationRepository = authorizationRepository;
+	}
 
-   public UsagePointRepository getUsagePointRepository () {
-        return this.usagePointRepository;
-   }
-   public void setResourceService(ResourceService resourceService) {
-        this.resourceService = resourceService;
-   }
+	public AuthorizationRepository getAuthorizationRepository() {
+		return this.authorizationRepository;
+	}
 
-   public ResourceService getResourceService () {
-        return this.resourceService;
-   }
-   public void setImportService(ImportService importService) {
-        this.importService = importService;
-   }
+	public void setUsagePointRepository(
+			UsagePointRepository usagePointRepository) {
+		this.usagePointRepository = usagePointRepository;
+	}
 
-   public ImportService getImportService () {
-        return this.importService;
-   }
-   
+	public UsagePointRepository getUsagePointRepository() {
+		return this.usagePointRepository;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourceService getResourceService() {
+		return this.resourceService;
+	}
+
+	public void setImportService(ImportService importService) {
+		this.importService = importService;
+	}
+
+	public ImportService getImportService() {
+		return this.importService;
+	}
+
 }

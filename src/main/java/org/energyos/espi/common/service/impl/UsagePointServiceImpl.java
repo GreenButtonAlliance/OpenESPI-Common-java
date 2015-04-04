@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -38,17 +38,17 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sun.syndication.io.FeedException;
 
 @Service
-@Transactional (rollbackFor= {javax.xml.bind.JAXBException.class}, 
-                noRollbackFor = {javax.persistence.NoResultException.class, org.springframework.dao.EmptyResultDataAccessException.class })
-
+@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+		javax.persistence.NoResultException.class,
+		org.springframework.dao.EmptyResultDataAccessException.class })
 public class UsagePointServiceImpl implements UsagePointService {
-	
+
 	@Autowired
 	private UsagePointRepository usagePointRepository;
 
 	@Autowired
 	private ImportService importService;
-	
+
 	@Autowired
 	private ResourceRepository repository;
 
@@ -62,7 +62,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 	public ImportService getImportService() {
 		return importService;
 	}
-	
+
 	public void setRepository(UsagePointRepository usagePointRepository) {
 		this.usagePointRepository = usagePointRepository;
 	}
@@ -70,15 +70,15 @@ public class UsagePointServiceImpl implements UsagePointService {
 	public UsagePointRepository getRepository() {
 		return usagePointRepository;
 	}
-	
+
 	public void setResourceService(ResourceService resourceService) {
 		this.resourceService = resourceService;
 	}
-	
+
 	public ResourceService getResourceService() {
 		return resourceService;
 	}
-	
+
 	@Override
 	public List<UsagePoint> findAllByRetailCustomer(RetailCustomer customer) {
 		return usagePointRepository.findAllByRetailCustomerId(customer.getId());
@@ -164,8 +164,8 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 	@Override
 	public void delete(UsagePoint usagePoint) {
-	
-       usagePointRepository.deleteById(usagePoint.getId());
+
+		usagePointRepository.deleteById(usagePoint.getId());
 
 	}
 
@@ -175,7 +175,8 @@ public class UsagePointServiceImpl implements UsagePointService {
 		UsagePoint usagePoint = null;
 		try {
 			importService.importData(stream, null);
-			usagePoint = importService.getEntries().get(0).getContent().getUsagePoint();
+			usagePoint = importService.getEntries().get(0).getContent()
+					.getUsagePoint();
 
 		} catch (Exception e) {
 
@@ -187,11 +188,13 @@ public class UsagePointServiceImpl implements UsagePointService {
 	public EntryType findEntryType(Long retailCustomerId, Long usagePointId) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-		    temp.add(usagePointId);
+			temp.add(usagePointId);
 			findAllIdsForRetailCustomer(retailCustomerId);
-			result = (new EntryTypeIterator(resourceService, temp, UsagePoint.class)).next();
+			result = (new EntryTypeIterator(resourceService, temp,
+					UsagePoint.class)).next();
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -204,10 +207,12 @@ public class UsagePointServiceImpl implements UsagePointService {
 	public EntryTypeIterator findEntryTypeIterator() {
 		EntryTypeIterator result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = usagePointRepository.findAllIds();
-			result = new EntryTypeIterator(resourceService, temp, UsagePoint.class);
+			result = new EntryTypeIterator(resourceService, temp,
+					UsagePoint.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -215,15 +220,17 @@ public class UsagePointServiceImpl implements UsagePointService {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public EntryType findEntryType(Long usagePointId) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understan
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = usagePointRepository.findAllIds();
-			result = (new EntryTypeIterator(resourceService, temp, UsagePoint.class)).nextEntry(UsagePoint.class);
+			result = (new EntryTypeIterator(resourceService, temp,
+					UsagePoint.class)).nextEntry(UsagePoint.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -249,16 +256,21 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId) {
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
+			Long usagePointId) {
 		EntryTypeIterator result = null;
 		List<Long> temp = new ArrayList<Long>();
-	    temp.add(usagePointId);
+		temp.add(usagePointId);
 		try {
 			// make the call to insure it is a valid usagePointId
-			resourceService.findIdByXPath(retailCustomerId, usagePointId, UsagePoint.class);
-			result = (new EntryTypeIterator(resourceService, temp, UsagePoint.class));
+			resourceService.findIdByXPath(retailCustomerId, usagePointId,
+					UsagePoint.class);
+			result = (new EntryTypeIterator(resourceService, temp,
+					UsagePoint.class));
 		} catch (Exception e) {
-            System.out.printf("****UsagePointService: Seraching for an invalide UsagePointId - %d: %s\n", usagePointId, e.toString());
+			System.out
+					.printf("****UsagePointService: Seraching for an invalide UsagePointId - %d: %s\n",
+							usagePointId, e.toString());
 			result = null;
 		}
 		return result;

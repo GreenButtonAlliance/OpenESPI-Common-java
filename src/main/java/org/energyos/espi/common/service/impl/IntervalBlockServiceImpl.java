@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -35,23 +35,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class IntervalBlockServiceImpl implements IntervalBlockService {
 
-    @Autowired
-    protected IntervalBlockRepository intervalBlockRepository;
-    
-    @Autowired
-	private ResourceService resourceService;
-    
-    @Autowired
-    private ImportService importService;
-    
-    @Override
-    public List<IntervalBlock> findAllByMeterReadingId(Long meterReadingId) {
-        return intervalBlockRepository.findAllByMeterReadingId(meterReadingId);
-    }
+	@Autowired
+	protected IntervalBlockRepository intervalBlockRepository;
 
-    public void setRepository(IntervalBlockRepository repository) {
-        this.intervalBlockRepository = repository;
-    }
+	@Autowired
+	private ResourceService resourceService;
+
+	@Autowired
+	private ImportService importService;
+
+	@Override
+	public List<IntervalBlock> findAllByMeterReadingId(Long meterReadingId) {
+		return intervalBlockRepository.findAllByMeterReadingId(meterReadingId);
+	}
+
+	public void setRepository(IntervalBlockRepository repository) {
+		this.intervalBlockRepository = repository;
+	}
 
 	@Override
 	public String feedFor(List<IntervalBlock> intervalBlocks) {
@@ -60,8 +60,9 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 	}
 
 	@Override
-	public IntervalBlock findById(long retailCustomerId, long usagePointId, long meterReadingId, long intervalBlockId) {
-        return intervalBlockRepository.findById(intervalBlockId);
+	public IntervalBlock findById(long retailCustomerId, long usagePointId,
+			long meterReadingId, long intervalBlockId) {
+		return intervalBlockRepository.findById(intervalBlockId);
 	}
 
 	@Override
@@ -73,12 +74,12 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 	@Override
 	public void associateByUUID(MeterReading meterReading, UUID uuid) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(IntervalBlock intervalBlock) {
-	       intervalBlockRepository.deleteById(intervalBlock.getId());
+		intervalBlockRepository.deleteById(intervalBlock.getId());
 	}
 
 	@Override
@@ -95,24 +96,26 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 
 	@Override
 	public void persist(IntervalBlock intervalBlock) {
-	    intervalBlockRepository.persist(intervalBlock);
+		intervalBlockRepository.persist(intervalBlock);
 	}
 
 	@Override
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId,
-			Long meterReadingId) {
+	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
+			Long usagePointId, Long meterReadingId) {
 		EntryTypeIterator result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understand
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp = resourceService.findAllIds(IntervalBlock.class);
-			result = (new EntryTypeIterator(resourceService, temp, IntervalBlock.class));
+			result = (new EntryTypeIterator(resourceService, temp,
+					IntervalBlock.class));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
 			result = null;
 		}
-		return result;	
+		return result;
 	}
 
 	@Override
@@ -120,10 +123,12 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 			Long meterReadingId, Long intervalBlockId) {
 		EntryType result = null;
 		try {
-			// TODO - this is sub-optimal (but defers the need to understan creation of an EntryType
+			// TODO - this is sub-optimal (but defers the need to understan
+			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			temp.add(intervalBlockId);
-			result = (new EntryTypeIterator(resourceService, temp, IntervalBlock.class)).nextEntry(IntervalBlock.class);
+			result = (new EntryTypeIterator(resourceService, temp,
+					IntervalBlock.class)).nextEntry(IntervalBlock.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -135,16 +140,17 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 	@Override
 	public void add(IntervalBlock intervalBlock) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public IntervalBlock importResource(InputStream stream) {
-		try{
-		importService.importData(stream, null);
-		EntryType entry = importService.getEntries().get(0);
-		List<IntervalBlock> intervalBlocks = entry.getContent().getIntervalBlocks();
-		return intervalBlocks.get(0);
+		try {
+			importService.importData(stream, null);
+			EntryType entry = importService.getEntries().get(0);
+			List<IntervalBlock> intervalBlocks = entry.getContent()
+					.getIntervalBlocks();
+			return intervalBlocks.get(0);
 		} catch (Exception e) {
 			return null;
 		}
@@ -155,27 +161,30 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 		intervalBlockRepository.findById(intervalBlockId);
 		return null;
 	}
-   
-	public void setIntervalBlockRepository(IntervalBlockRepository intervalBlockRepository) {
-        this.intervalBlockRepository = intervalBlockRepository;
-   }
 
-   public IntervalBlockRepository getIntervalBlockRepository () {
-        return this.intervalBlockRepository;
-   }
-   public void setResourceService(ResourceService resourceService) {
-        this.resourceService = resourceService;
-   }
+	public void setIntervalBlockRepository(
+			IntervalBlockRepository intervalBlockRepository) {
+		this.intervalBlockRepository = intervalBlockRepository;
+	}
 
-   public ResourceService getResourceService () {
-        return this.resourceService;
-   }
-   public void setImportService(ImportService importService) {
-        this.importService = importService;
-   }
+	public IntervalBlockRepository getIntervalBlockRepository() {
+		return this.intervalBlockRepository;
+	}
 
-   public ImportService getImportService () {
-        return this.importService;
-   }
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourceService getResourceService() {
+		return this.resourceService;
+	}
+
+	public void setImportService(ImportService importService) {
+		this.importService = importService;
+	}
+
+	public ImportService getImportService() {
+		return this.importService;
+	}
 
 }

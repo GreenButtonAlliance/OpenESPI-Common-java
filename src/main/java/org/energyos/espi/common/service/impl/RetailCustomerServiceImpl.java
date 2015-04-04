@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -42,72 +42,72 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class RetailCustomerServiceImpl implements RetailCustomerService {
 
-    @Autowired
-    private RetailCustomerRepository retailCustomerRepository;
-    
-    @Autowired
-    private ResourceService resourceService;
-    
-    @Autowired
-    private ImportService importService;
-    
-    
-    @Autowired
-    private AuthorizationService authorizationService;
-    
-    @Autowired
-    private SubscriptionService subscriptionService;
-    
-    @Autowired
-    UsagePointService usagePointService;
-    
-    @Override
-    public List<RetailCustomer> findAll() {
-        return retailCustomerRepository.findAll();
-    }
+	@Autowired
+	private RetailCustomerRepository retailCustomerRepository;
 
-    @Override
-    public void persist(RetailCustomer customer) {
-    	if (customer.getUUID() == null) {
-    		customer.setUUID(UUID.randomUUID());
-    	}
-    	retailCustomerRepository.persist(customer);
-    }
+	@Autowired
+	private ResourceService resourceService;
 
-    @Override
-    public RetailCustomer findById(Long id) {
-        return retailCustomerRepository.findById(id);
-    }
-    
+	@Autowired
+	private ImportService importService;
+
+	@Autowired
+	private AuthorizationService authorizationService;
+
+	@Autowired
+	private SubscriptionService subscriptionService;
+
+	@Autowired
+	UsagePointService usagePointService;
+
+	@Override
+	public List<RetailCustomer> findAll() {
+		return retailCustomerRepository.findAll();
+	}
+
+	@Override
+	public void persist(RetailCustomer customer) {
+		if (customer.getUUID() == null) {
+			customer.setUUID(UUID.randomUUID());
+		}
+		retailCustomerRepository.persist(customer);
+	}
+
+	@Override
+	public RetailCustomer findById(Long id) {
+		return retailCustomerRepository.findById(id);
+	}
+
 	@Override
 	public RetailCustomer findById(String retailCustomerId) {
 		return retailCustomerRepository.findById(retailCustomerId);
 	}
-	
-    @Override
-    public RetailCustomer findByHashedId(Long retailCustomerId) {
-        return findById(retailCustomerId);
-    }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        try {
-            return retailCustomerRepository.findByUsername(username);
-        } catch (EmptyResultDataAccessException x) {
-            throw new UsernameNotFoundException("Unable to find user");
-        }
-    }
-    
+	@Override
+	public RetailCustomer findByHashedId(Long retailCustomerId) {
+		return findById(retailCustomerId);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException {
+		try {
+			return retailCustomerRepository.findByUsername(username);
+		} catch (EmptyResultDataAccessException x) {
+			throw new UsernameNotFoundException("Unable to find user");
+		}
+	}
+
 	@Override
 	public void add(RetailCustomer retailCustomer) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(RetailCustomer retailCustomer) {
 		retailCustomerRepository.deleteById(retailCustomer.getId());
-		
+
 	}
 
 	@Override
@@ -115,13 +115,17 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 		RetailCustomer retailCustomer = null;
 		try {
 			importService.importData(stream, null);
-			// TODO - Make RetailCustomer inherit from IdentifiedObject and add RetailCustomer to the entrytype structure
+			// TODO - Make RetailCustomer inherit from IdentifiedObject and add
+			// RetailCustomer to the entrytype structure
 
 			// EntryType entry = importService.getEntries().get(0);
-            // RetailCustomer retailCustomer = entry.getContent().getRetailCustomer();
-            // persist(retailCustomer);
+			// RetailCustomer retailCustomer =
+			// entry.getContent().getRetailCustomer();
+			// persist(retailCustomer);
 		} catch (Exception e) {
-          System.out.printf("**** RetailCustomerService:importResource Failed %s\n", e.toString());
+			System.out.printf(
+					"**** RetailCustomerService:importResource Failed %s\n",
+					e.toString());
 		}
 		return retailCustomer;
 	}
@@ -129,105 +133,117 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 	@Transactional
 	@Override
 	public Subscription associateByUUID(Long retailCustomerId, UUID uuid) {
-        Subscription subscription = null;
-        RetailCustomer retailCustomer = null;
-        UsagePoint usagePoint = null;
-        
-       try {
-    	   retailCustomer = resourceService.findById(retailCustomerId, RetailCustomer.class);
-           try {
-        	   
-    	       usagePoint = resourceService.findByUUID(uuid, UsagePoint.class);
-    	       
-           } catch (Exception e) {
-        	   
-        	   usagePoint = new UsagePoint();
-        	   usagePoint.setUUID(uuid);
-        	   usagePoint.setDescription("A Temporary UsagePoint Description");
-        	   usagePoint.setServiceCategory(new ServiceCategory(ServiceCategory.ELECTRICITY_SERVICE))	;
-        	   resourceService.persist(usagePoint);
-        	   
-           }
-           usagePoint.setRetailCustomer(retailCustomer);
-           resourceService.merge(usagePoint);
-           
+		Subscription subscription = null;
+		RetailCustomer retailCustomer = null;
+		UsagePoint usagePoint = null;
 
-           // now see if there are any authorizations for this information
-           //
-           try {
-           
-           	for (Authorization authorization : authorizationService.findAllByRetailCustomerId(retailCustomer.getId())) {
- 
- 
-           		String resourceUri = authorization.getResourceURI();
-           		if (resourceUri == null) {
- 
-           			authorization.setResourceURI(authorization.getApplicationInformation().getDataCustodianResourceEndpoint()
-           					+ "/Batch/Subscription/" + subscription.getId());	
-           			resourceService.merge(authorization);
-           			
-           		}
+		try {
+			retailCustomer = resourceService.findById(retailCustomerId,
+					RetailCustomer.class);
+			try {
 
-           		subscription = subscriptionService.findByAuthorizationId(authorization.getId());
+				usagePoint = resourceService.findByUUID(uuid, UsagePoint.class);
 
-           		subscription.getUsagePoints().add(usagePoint);
-           		resourceService.merge(subscription);
-           	}      	
-   	      } catch (Exception e){
-              // we get here if we don't have a subscription
-   	    	  return null;
-   	      }
-           
-      
-        } catch (Exception e) {
-        	System.out.printf("****Error Associating UsagePoint: %s - %s\n", retailCustomer.toString(), usagePoint.toString());
-        }
-     
-        return subscription;
+			} catch (Exception e) {
+
+				usagePoint = new UsagePoint();
+				usagePoint.setUUID(uuid);
+				usagePoint.setDescription("A Temporary UsagePoint Description");
+				usagePoint.setServiceCategory(new ServiceCategory(
+						ServiceCategory.ELECTRICITY_SERVICE));
+				resourceService.persist(usagePoint);
+
+			}
+			usagePoint.setRetailCustomer(retailCustomer);
+			resourceService.merge(usagePoint);
+
+			// now see if there are any authorizations for this information
+			//
+			try {
+
+				for (Authorization authorization : authorizationService
+						.findAllByRetailCustomerId(retailCustomer.getId())) {
+
+					String resourceUri = authorization.getResourceURI();
+					if (resourceUri == null) {
+
+						authorization
+								.setResourceURI(authorization
+										.getApplicationInformation()
+										.getDataCustodianResourceEndpoint()
+										+ "/Batch/Subscription/"
+										+ subscription.getId());
+						resourceService.merge(authorization);
+
+					}
+
+					subscription = subscriptionService
+							.findByAuthorizationId(authorization.getId());
+
+					subscription.getUsagePoints().add(usagePoint);
+					resourceService.merge(subscription);
+				}
+			} catch (Exception e) {
+				// we get here if we don't have a subscription
+				return null;
+			}
+
+		} catch (Exception e) {
+			System.out.printf("****Error Associating UsagePoint: %s - %s\n",
+					retailCustomer.toString(), usagePoint.toString());
+		}
+
+		return subscription;
 	}
 
-    public void setRetailCustomerRepository(RetailCustomerRepository retailCustomerRepository) {
-        this.retailCustomerRepository = retailCustomerRepository;
-   }
+	public void setRetailCustomerRepository(
+			RetailCustomerRepository retailCustomerRepository) {
+		this.retailCustomerRepository = retailCustomerRepository;
+	}
 
-   public RetailCustomerRepository getRetailCustomerRepository () {
-        return this.retailCustomerRepository;
-   }
-   public void setResourceService(ResourceService resourceService) {
-        this.resourceService = resourceService;
-   }
+	public RetailCustomerRepository getRetailCustomerRepository() {
+		return this.retailCustomerRepository;
+	}
 
-   public ResourceService getResourceService () {
-        return this.resourceService;
-   }
-   public void setImportService(ImportService importService) {
-        this.importService = importService;
-   }
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
 
-   public ImportService getImportService () {
-        return this.importService;
-   }
-   public void setAuthorizationService(AuthorizationService authorizationService) {
-        this.authorizationService = authorizationService;
-   }
+	public ResourceService getResourceService() {
+		return this.resourceService;
+	}
 
-   public AuthorizationService getAuthorizationService () {
-        return this.authorizationService;
-   }
-   public void setSubscriptionService(SubscriptionService subscriptionService) {
-        this.subscriptionService = subscriptionService;
-   }
+	public void setImportService(ImportService importService) {
+		this.importService = importService;
+	}
 
-   public SubscriptionService getSubscriptionService () {
-        return this.subscriptionService;
-   }
-   
-   public void setUsagePointService(UsagePointService usagePointService) {
-        this.usagePointService = usagePointService;
-   }
+	public ImportService getImportService() {
+		return this.importService;
+	}
 
-   public UsagePointService getUsagePointService () {
-        return this.usagePointService;
-   }
+	public void setAuthorizationService(
+			AuthorizationService authorizationService) {
+		this.authorizationService = authorizationService;
+	}
+
+	public AuthorizationService getAuthorizationService() {
+		return this.authorizationService;
+	}
+
+	public void setSubscriptionService(SubscriptionService subscriptionService) {
+		this.subscriptionService = subscriptionService;
+	}
+
+	public SubscriptionService getSubscriptionService() {
+		return this.subscriptionService;
+	}
+
+	public void setUsagePointService(UsagePointService usagePointService) {
+		this.usagePointService = usagePointService;
+	}
+
+	public UsagePointService getUsagePointService() {
+		return this.usagePointService;
+	}
 
 }
