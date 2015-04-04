@@ -1,5 +1,5 @@
 /*
- * Copyright 2013, 2014 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -40,8 +40,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @SuppressWarnings("serial")
-// the above surpress warnings is b/c the serial will get pushed on through the the db...
-@XmlRootElement(name="RetailCustomer")
+// the above suppress warnings is b/c the serial will get pushed on through the
+// the database...
+@XmlRootElement(name = "RetailCustomer")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RetailCustomer")
 @Entity
@@ -49,179 +50,185 @@ import org.springframework.security.core.userdetails.UserDetails;
 @XmlJavaTypeAdapter(RetailCustomerAdapter.class)
 @NamedQueries(value = {
 		@NamedQuery(name = RetailCustomer.QUERY_FIND_BY_ID, query = "SELECT customer FROM RetailCustomer customer WHERE customer.id = :id"),
-        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL, query = "SELECT customer FROM RetailCustomer customer"),
-        @NamedQuery(name = RetailCustomer.QUERY_FIND_BY_USERNAME, query = "SELECT customer FROM RetailCustomer customer WHERE customer.username = :username"),
-        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS, query = "SELECT retailCustomer.id FROM RetailCustomer retailCustomer"),
-        @NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS_BY_XPATH_0, query = "SELECT DISTINCT r.id FROM RetailCustomer r"),
-        @NamedQuery(name = RetailCustomer.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT r.id FROM RetailCustomer r WHERE r.id = :o1Id")
-      
+		@NamedQuery(name = RetailCustomer.QUERY_FIND_ALL, query = "SELECT customer FROM RetailCustomer customer"),
+		@NamedQuery(name = RetailCustomer.QUERY_FIND_BY_USERNAME, query = "SELECT customer FROM RetailCustomer customer WHERE customer.username = :username"),
+		@NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS, query = "SELECT retailCustomer.id FROM RetailCustomer retailCustomer"),
+		@NamedQuery(name = RetailCustomer.QUERY_FIND_ALL_IDS_BY_XPATH_0, query = "SELECT DISTINCT r.id FROM RetailCustomer r"),
+		@NamedQuery(name = RetailCustomer.QUERY_FIND_ID_BY_XPATH, query = "SELECT DISTINCT r.id FROM RetailCustomer r WHERE r.id = :o1Id")
+
 })
+public class RetailCustomer extends IdentifiedObject implements UserDetails,
+		Principal {
 
-public class RetailCustomer extends IdentifiedObject implements UserDetails, Principal{
+	public final static String QUERY_FIND_BY_ID = "RetailCustomer.findById";
+	public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
+	public final static String QUERY_FIND_BY_USERNAME = "RetailCustomer.findByUsername";
+	public static final String QUERY_FIND_ALL_IDS = "RetailCustomer.findAllIds";
+	public static final String QUERY_FIND_ALL_IDS_BY_XPATH_0 = "RetailCustomer.findAllIdsByXpath0";
+	public static final String QUERY_FIND_ID_BY_XPATH = "RetailCustomer.findIdsByXpath";
 
-    public final static String QUERY_FIND_BY_ID = "RetailCustomer.findById";
-    public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
-    public final static String QUERY_FIND_BY_USERNAME = "RetailCustomer.findByUsername";
-    public static final String QUERY_FIND_ALL_IDS = "RetailCustomer.findAllIds";
-    public static final String QUERY_FIND_ALL_IDS_BY_XPATH_0 = "RetailCustomer.findAllIdsByXpath0";
-    public static final String QUERY_FIND_ID_BY_XPATH = "RetailCustomer.findIdsByXpath";
-    
-    public final static String ROLE_USER = "ROLE_USER";
-    public final static String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
+	public final static String ROLE_USER = "ROLE_USER";
+	public final static String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
 
-    /*
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @XmlTransient
-    protected Long id;
-    */
-    
-    @Column(name = "username")
-    @Size(min = 4, max = 30)
-    protected String username;
+	/*
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 * 
+	 * @XmlTransient protected Long id;
+	 */
 
-    @Column(name = "first_name")
-    @NotEmpty
-    @Size(max = 30)
-    protected String firstName;
+	@Column(name = "username")
+	@Size(min = 4, max = 30)
+	protected String username;
 
-    @Column(name = "last_name")
-    @NotEmpty
-    @Size(max = 30)
-    protected String lastName;
+	@Column(name = "first_name")
+	@NotEmpty
+	@Size(max = 30)
+	protected String firstName;
 
-    @Column(name = "password")
-    @Size(min = 5, max = 100)
-    protected String password;
-    
-    @Column(name="enabled", columnDefinition = "BIT", length = 1)
-    @NotNull
-    protected Boolean enabled = Boolean.TRUE;
+	@Column(name = "last_name")
+	@NotEmpty
+	@Size(max = 30)
+	protected String lastName;
 
-    @Column(name = "role")
-    @NotEmpty
-    protected String role = ROLE_USER;
+	@Column(name = "password")
+	@Size(min = 5, max = 100)
+	protected String password;
 
-    public Long getId() {
-        return id;
-    }
+	@Column(name = "enabled", columnDefinition = "BIT", length = 1)
+	@NotNull
+	protected Boolean enabled = Boolean.TRUE;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Column(name = "role")
+	@NotEmpty
+	protected String role = ROLE_USER;
 
-    public String getUsername() {
-        return username;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(role));
-        return authorities;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Collection<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(role));
+		return authorities;
+	}
 
-    public Boolean getEnabled() {
-        return enabled;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    @Override
-    public String getName() {
-        return getUsername();
-    }
+	public Boolean getEnabled() {
+		return enabled;
+	}
 
-    public String getHashedId() {
-        return "" + getId();
-    }
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	@Override
+	public String getName() {
+		return getUsername();
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public String getHashedId() {
+		return "" + getId();
+	}
 
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	public String getRole() {
+		return role;
+	}
 
-        RetailCustomer that = (RetailCustomer)o;
+	public void setRole(String role) {
+		this.role = role;
+	}
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
-        return true;
-    }
+		RetailCustomer that = (RetailCustomer) o;
 
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        return result;
-    }
+		if (id != null ? !id.equals(that.id) : that.id != null)
+			return false;
+		if (username != null ? !username.equals(that.username)
+				: that.username != null)
+			return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (username != null ? username.hashCode() : 0);
+		return result;
+	}
 
 	public void merge(RetailCustomer resource) {
 		// TODO needs to inherit from Identified Object
 		// super.merge(resource)
-		this.enabled = ((RetailCustomer)resource).enabled;
-		this.firstName = ((RetailCustomer)resource).firstName;
-		this.lastName = ((RetailCustomer)resource).lastName;
-		this.password = ((RetailCustomer)resource).password;
-		this.role = ((RetailCustomer)resource).role;
-		this.username = ((RetailCustomer)resource).username;
+		this.enabled = ((RetailCustomer) resource).enabled;
+		this.firstName = ((RetailCustomer) resource).firstName;
+		this.lastName = ((RetailCustomer) resource).lastName;
+		this.password = ((RetailCustomer) resource).password;
+		this.role = ((RetailCustomer) resource).role;
+		this.username = ((RetailCustomer) resource).username;
 	}
 }
