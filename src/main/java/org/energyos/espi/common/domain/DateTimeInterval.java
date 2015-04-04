@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 EnergyOS.org
+ * Copyright 2013, 2014, 2015 EnergyOS.org
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT
 //
 
-
 package org.energyos.espi.common.domain;
 
 import javax.persistence.Embeddable;
@@ -29,14 +28,18 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * Interval of date and time. End is not included because it can be derived from the start and the duration.
+ * Interval of date and time. End is not included because it can be derived from
+ * the start and the duration.
  * <p/>
- * <p>Java class for DateTimeInterval complex type.
+ * <p>
+ * Java class for DateTimeInterval complex type.
  * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="DateTimeInterval">
  *   &lt;complexContent>
@@ -51,63 +54,57 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DateTimeInterval", propOrder = {
-        "duration",
-        "start"
-})
+@XmlType(name = "DateTimeInterval", propOrder = { "duration", "start" })
 @Embeddable
-public class DateTimeInterval
-        extends Object {
+public class DateTimeInterval extends Object {
 
-    protected Long duration;
-    protected Long start;
+	protected Long duration;
+	protected Long start;
 
-    public DateTimeInterval() {
-    }
+	public DateTimeInterval() {
+	}
 
-    public DateTimeInterval(Long duration, Long start) {
-        this.duration = duration;
-        this.start = start;
-    }
+	public DateTimeInterval(Long duration, Long start) {
+		this.duration = duration;
+		this.start = start;
+	}
 
-    /**
-     * Gets the value of the duration property.
-     *
-     * @return possible object is
-     *         {@link Long }
-     */
-    public Long getDuration() {
-        return duration;
-    }
+	/**
+	 * Gets the value of the duration property.
+	 *
+	 * @return possible object is {@link Long }
+	 */
+	public Long getDuration() {
+		return duration;
+	}
 
-    /**
-     * Sets the value of the duration property.
-     *
-     * @param value allowed object is
-     * {@link Long }
-     */
-    public void setDuration(Long value) {
-        this.duration = value;
-    }
+	/**
+	 * Sets the value of the duration property.
+	 *
+	 * @param value
+	 *            allowed object is {@link Long }
+	 */
+	public void setDuration(Long value) {
+		this.duration = value;
+	}
 
-    /**
-     * Gets the value of the start property.
-     *
-     * @return possible object is
-     *         {@link Long }
-     */
-    public Long getStart() {
-        return start;
-    }
+	/**
+	 * Gets the value of the start property.
+	 *
+	 * @return possible object is {@link Long }
+	 */
+	public Long getStart() {
+		return start;
+	}
 
-    /**
-     * Sets the value of the start property.
-     *
-     * @param value allowed object is
-     * {@link Long }
-     */
-    public void setStart(Long value) {
-        this.start = value;
-    }
+	/**
+	 * Sets the value of the start property.
+	 *
+	 * @param value
+	 *            allowed object is {@link Long }
+	 */
+	public void setStart(Long value) {
+		this.start = value;
+	}
 
 }
