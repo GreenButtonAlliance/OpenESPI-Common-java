@@ -103,7 +103,9 @@ public class Routes {
 	public static final String ROOT_ELECTRIC_POWER_QUALITY_SUMMARY_MEMBER = "/espi/1_1/resource/ElectricPowerQualitySummary/{electricPowerQualitySummaryId}";
 	public static final String ROOT_ELECTRIC_POWER_USAGE_SUMMARY_COLLECTION = "/espi/1_1/resource/ElectricPowerUsageSummary";
 	public static final String ROOT_ELECTRIC_POWER_USAGE_SUMMARY_MEMBER = "/espi/1_1/resource/ElectricPowerUsageSummary/{electricPowerUsageSummaryId}";
-
+	public static final String ROOT_USAGE_SUMMARY_COLLECTION = "/espi/1_1/resource/UsageSummary";
+	public static final String ROOT_USAGE_SUMMARY_MEMBER = "/espi/1_1/resource/UsageSummary/{usageSummaryId}";
+	
 	// patterns for RESTful xpath based access to Resources
 	public static final String USAGE_POINT_COLLECTION = "/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint";
 	public static final String USAGE_POINT_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}";
@@ -115,6 +117,8 @@ public class Routes {
 	public static final String ELECTRIC_POWER_QUALITY_SUMMARY_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/ElectricPowerQualitySummary/{electricPowerQualitySummaryId}";
 	public static final String ELECTRIC_POWER_USAGE_SUMMARY_COLLECTION = "/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/ElectricPowerUsageSummary";
 	public static final String ELECTRIC_POWER_USAGE_SUMMARY_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/ElectricPowerUsageSummary/{electricPowerUsageSummaryId}";
+	public static final String USAGE_SUMMARY_COLLECTION = "/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary";
+	public static final String USAGE_SUMMARY_MEMBER = "/espi/1_1/resource/Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary/{usageSummaryId}";
 
 	// patterns for RESTful RetailCustomer services
 	public static final String RETAIL_CUSTOMER_COLLECTION = "/espi/1_1/resource/RetailCustomer";

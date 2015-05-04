@@ -26,6 +26,7 @@ import javax.persistence.Query;
 
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
 import org.energyos.espi.common.domain.ElectricPowerUsageSummary;
+import org.energyos.espi.common.domain.UsageSummary;
 import org.energyos.espi.common.domain.IdentifiedObject;
 import org.energyos.espi.common.domain.Linkable;
 import org.energyos.espi.common.domain.MeterReading;
@@ -130,11 +131,13 @@ class ResourceRepositoryImpl implements ResourceRepository {
 				Boolean localTimeParameterFlag = false;
 				Boolean readingTypeFlag = false;
 				Boolean electricPowerUsageFlag = false;
+				Boolean usageFlag = false;
 				Boolean electricPowerQualityFlag = false;
 
 				Long localTimeParameterId = null;
 				Long readingTypeId = null;
 				Long electricPowerUsageId = null;
+				Long usageId = null;
 				Long electricPowerQualityId = null;
 
 				for (String href : linkable.getRelatedLinkHrefs()) {
@@ -151,10 +154,15 @@ class ResourceRepositoryImpl implements ResourceRepository {
 						}
 
 						if (electricPowerUsageFlag) {
+							usageId = Long.decode(token);
+							usageFlag = false;
+						}
+
+						if (usageFlag) {
 							electricPowerUsageId = Long.decode(token);
 							electricPowerUsageFlag = false;
 						}
-
+						
 						if (electricPowerQualityFlag) {
 							electricPowerQualityId = Long.decode(token);
 							electricPowerQualityFlag = false;
@@ -172,6 +180,10 @@ class ResourceRepositoryImpl implements ResourceRepository {
 							electricPowerUsageFlag = true;
 						}
 
+						if (token.equals("UsageSummary")) {
+							usageFlag = true;
+						}
+						
 						if (token.equals("ElectricPowerQualitySummary")) {
 							electricPowerQualityFlag = true;
 						}
@@ -192,6 +204,11 @@ class ResourceRepositoryImpl implements ResourceRepository {
 								ElectricPowerUsageSummary.class));
 					}
 
+					if ((usageId != null)) {
+						temp.add(findById(usageId,
+								UsageSummary.class));
+					}
+					
 					if ((electricPowerQualityId != null)) {
 						temp.add(findById(electricPowerQualityId,
 								ElectricPowerQualitySummary.class));

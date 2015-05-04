@@ -143,6 +143,11 @@ public class UsagePoint extends IdentifiedObject {
 	@XmlTransient
 	@OneToMany(mappedBy = "usagePoint", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<UsageSummary> usageSummaries = new ArrayList<>();
+
+	@XmlTransient
+	@OneToMany(mappedBy = "usagePoint", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ElectricPowerQualitySummary> electricPowerQualitySummaries = new ArrayList<>();
 
 	@XmlTransient
@@ -288,6 +293,22 @@ public class UsagePoint extends IdentifiedObject {
 			ElectricPowerUsageSummary electricPowerUsageSummary) {
 		// electricPowerUsageSummary.setUsagePoint(null);
 		electricPowerUsageSummaries.remove(electricPowerUsageSummary);
+	}
+
+	public List<UsageSummary> getUsageSummaries() {
+		return usageSummaries;
+	}
+
+	public void addUsageSummary(
+			UsageSummary usageSummary) {
+		// electricPowerUsageSummary.setUsagePoint(this);
+		usageSummaries.add(usageSummary);
+	}
+
+	public void removeUsageSummary(
+			UsageSummary usageSummary) {
+		// electricPowerUsageSummary.setUsagePoint(null);
+		usageSummaries.remove(usageSummary);
 	}
 
 	public List<ElectricPowerQualitySummary> getElectricPowerQualitySummaries() {

@@ -204,6 +204,59 @@ public interface ExportService {
 			Long retailCustomerId, Long usagePointId, OutputStream stream,
 			ExportFilter exportFilter) throws IOException;
 
+	// UsageSummary
+	// - ROOT form
+
+	/**
+	 * @param subscriptionId
+	 * @param outputStream
+	 * @param exportFilter
+	 * @throws IOException
+	 */
+	void exportUsageSummarys_Root(Long subscriptionId,
+			ServletOutputStream outputStream, ExportFilter exportFilter)
+			throws IOException;
+
+	/**
+	 * @param subscriptionId
+	 * @param electricPowerUsageSummaryId
+	 * @param outputStream
+	 * @param exportFilter
+	 * @throws IOException
+	 */
+	void exportUsageSummary_Root(Long subscriptionId,
+			long eusageSummaryId, ServletOutputStream outputStream,
+			ExportFilter exportFilter) throws IOException;
+
+	// - XPath form
+
+	/**
+	 * @param subscriptionId
+	 * @param retailCustomerId
+	 * @param usagePointId
+	 * @param electricPowerUsageSummaryId
+	 * @param stream
+	 * @param exportFilter
+	 * @throws IOException
+	 */
+	public void exportUsageSummary(Long subscriptionId,
+			Long retailCustomerId, Long usagePointId,
+			Long usageSummaryId, OutputStream stream,
+			ExportFilter exportFilter) throws IOException;
+
+	/**
+	 * @param subscriptionId
+	 * @param retailCustomerId
+	 * @param usagePointId
+	 * @param stream
+	 * @param exportFilter
+	 * @throws IOException
+	 */
+	public void exportUsageSummarys(Long subscriptionId,
+			Long retailCustomerId, Long usagePointId, OutputStream stream,
+			ExportFilter exportFilter) throws IOException;
+
+	
 	// IntervalBlock
 	// - ROOT form
 	/**

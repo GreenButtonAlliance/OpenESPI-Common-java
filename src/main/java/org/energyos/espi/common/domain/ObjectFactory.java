@@ -77,6 +77,8 @@ public class ObjectFactory {
 			"http://naesb.org/espi", "BatchItemInfo");
 	public final static QName ElectricPowerUsageSummary_QNAME = new QName(
 			"http://naesb.org/espi", "ElectricPowerUsageSummary");
+	public final static QName UsageSummary_QNAME = new QName(
+			"http://naesb.org/espi", "UsageSummary");
 	public final static QName LineItem_QNAME = new QName(
 			"http://naesb.org/espi", "LineItem");
 	public final static QName RetailCustomer_QNAME = new QName(
