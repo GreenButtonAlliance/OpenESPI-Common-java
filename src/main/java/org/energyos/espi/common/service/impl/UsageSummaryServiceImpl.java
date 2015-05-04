@@ -51,13 +51,13 @@ public class UsageSummaryServiceImpl implements
 	}
 
 	public UsageSummary findById(Long usageSummaryId) {
-		return UsageSummaryRepository
+		return usageSummaryRepository
 				.findById(usageSummaryId);
 	}
 
 	@Override
 	public void persist(UsageSummary usageSummary) {
-		usageSummaryRepository.persist(UsageSummary);
+		usageSummaryRepository.persist(usageSummary);
 	}
 
 	@Override
