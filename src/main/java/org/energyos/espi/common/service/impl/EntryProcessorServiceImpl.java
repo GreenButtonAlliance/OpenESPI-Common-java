@@ -19,6 +19,7 @@ package org.energyos.espi.common.service.impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import org.energyos.espi.common.domain.ApplicationInformation;
 import org.energyos.espi.common.domain.ElectricPowerQualitySummary;
@@ -146,11 +147,32 @@ public class EntryProcessorServiceImpl implements EntryProcessorService {
 	// Copy the entry attributes into the resource attributes
 	//
 	public void convert(EntryType entry) {
+		// support for entries that contain multiple resources has been added here
+		// the result of entry.getContent().getResources()) can return a mixed back of resources, only one of which
+		// will have appropriate UUID and self references - the rest will need UUIDs and self references created
+		// NOTE: that this means, in effect, that if the resources types MUST have the same up reference (because there
+		// is only one available in the <entry> structure itself
+		Integer resourceCount = 0;
 		for (IdentifiedObject resource : entry.getContent().getResources()) {
+			resourceCount++;
+			if (resourceCount > 1) {
+				// make a new UUID and stash it in the entry
+				entry.setId(UUID.randomUUID().toString());
+			} 
 			resource.setMRID(entry.getId());
+	
 			for (LinkType link : entry.getLinks()) {
-				if (link.getRel().equals(LinkType.SELF))
-					resource.setSelfLink(link);
+				if (link.getRel().equals(LinkType.SELF)) {
+					LinkType newLink = link;
+					if (resourceCount >1) {
+						// it doesn't mater what this is, except that it must be
+						// unique - the UUID works just fine
+						newLink = new LinkType();
+						newLink.setHref(entry.getId());
+						newLink.setRel(LinkType.SELF);
+					}
+					resource.setSelfLink(newLink);
+				}
 				if (link.getRel().equals(LinkType.UP))
 					resource.setUpLink(link);
 				if (link.getRel().equals(LinkType.RELATED))
