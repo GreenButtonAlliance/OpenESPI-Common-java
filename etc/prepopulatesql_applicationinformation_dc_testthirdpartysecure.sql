@@ -25,6 +25,14 @@ INSERT INTO application_information_grant_types (application_information_id, gra
 INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (3, 'CLIENT_CREDENTIALS');
 
 /* Add predefined authorizations */
+INSERT INTO `authorizations` VALUES (1,NULL,'2015-05-14 19:05:08',NULL,'self',NULL,'up','2015-05-14 19:05:08','4F8582F6-D6CC-4FF9-8AFC-F57FB756DB31','9ae38e20-2b90-4218-b679-769277d022ff','https://localhost:8443/DataCustodian/espi/1_1/resource/Authorization/1',0,0,NULL,NULL,NULL,NULL,1747004707,NULL,0,0,NULL,'https://localhost:8443/DataCustodian/espi/1_1/resource/',NULL,'FB=3_19_32_33_34_35_36_37_38_41_44_45',NULL,'1','data_custodian',0,1,0,1),
+(2,NULL,'2015-05-14 19:08:07',NULL,'self',NULL,'up','2015-05-14 19:08:07','4DF33A1C-FF9E-438C-9CEC-BA66701EF333','b4f05e98-0d4a-4477-be85-c30c1a8e5677','https://localhost:8443/DataCustodian/espi/1_1/resource/Authorization/2',0,0,NULL,NULL,NULL,NULL,1747004886,NULL,0,0,NULL,'https://localhost:8443/DataCustodian/espi/1_1/resource//Batch/RetailCustomer/**/UsagePoint',NULL,'FB=45',NULL,'1','upload',0,3,0,2),
+(3,NULL,'2015-05-14 19:08:43',NULL,'self',NULL,'up','2015-05-14 19:08:43','AE8353C9-4C61-4747-A3B8-1D8C07AEB786','ae3db544-c091-443d-8df1-30558965cb43','https://localhost:8443/DataCustodian/espi/1_1/resource/Authorization/3',0,0,NULL,NULL,NULL,NULL,1747004922,NULL,0,0,NULL,'https://localhost:8443/DataCustodian/espi/1_1/resource//Batch/Bulk/**',NULL,'FB=34_35',NULL,'1','third_party_admin',0,2,0,3),
+(4,NULL,'2015-05-14 19:08:48',NULL,'self',NULL,'up','2015-05-14 19:08:48','FAC2B9C3-E28B-474B-B1A1-7D879C1F971E','5be1358f-2d21-46cb-bc09-8404bbb23fb0','https://localhost:8443/DataCustodian/espi/1_1/resource/Authorization/4',0,0,NULL,NULL,NULL,NULL,1747004927,NULL,0,0,NULL,NULL,NULL,'FB=36_40',NULL,'1','REGISTRATION_third_party',0,2,0,4);
 
 /* Add predefined subscriptions */
+INSERT INTO `subscriptions` VALUES (1,NULL,'2015-05-14 19:05:08',NULL,'self',NULL,'up','2015-05-14 19:05:08','1BC72790-1B51-4D20-B411-765626F246CF','c6a3be79-40ea-4978-b7ac-b7a0746d9b0b','2015-05-14 19:05:08',1,1,0),
+(2,NULL,'2015-05-14 19:08:07',NULL,'self',NULL,'up','2015-05-14 19:08:07','231CA4EC-B6B2-40F0-B77B-A8E9C4088B81','632f74f9-7b2a-4c2c-a252-b692f5d5481f','2015-05-14 19:08:07',3,2,0),
+(3,NULL,'2015-05-14 19:08:43',NULL,'self',NULL,'up','2015-05-14 19:08:43','417D40FA-BE09-4DF4-A5DC-331E2B282F55','d076081f-884b-4a4f-8d7a-5ffe5c4919a6','2015-05-14 19:08:43',2,3,0),
+(4,NULL,'2015-05-14 19:08:48',NULL,'self',NULL,'up','2015-05-14 19:08:48','77D7CCF9-6331-49F4-8D2D-FE2CBBA05707','54a2e420-ccce-425e-9cd0-9cdeaf0d0826','2015-05-14 19:08:48',2,4,0);
 
