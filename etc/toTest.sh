@@ -1,0 +1,3 @@
+cp prepopulatesql_applicationinformation_dc_testthirdparty.sql prepopulatesql_applicationinformation_dc.sql
+cp prepopulatesql_tokenstore_testthirdparty.sql prepopulatesql_tokenstore.sql
+./initializedatabases.sh

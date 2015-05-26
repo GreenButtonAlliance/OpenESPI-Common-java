@@ -1,0 +1,4 @@
+cp prepopulatesql_applicationinformation_dc_localhost8443.sql prepopulatesql_applicationinformation_dc.sql
+cp prepopulatesql_applicationinformation_tp_localhost8443.sql prepopulatesql_applicationinformation_tp.sql
+cp prepopulatesql_tokenstore_localhost8443.sql prepopulatesql_tokenstore.sql
+./initializedatabases.sh
