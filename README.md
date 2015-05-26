@@ -39,24 +39,4 @@ Open IntelliJ and open the project (File > Open...).
 
 ## Testing
 
-### Unit Tests
-
-To run all Unit tests:
-
-```bash
-mvn test
-```
-
-Run a single test class:
-
-```bash
-mvn -Dtest=<TestClassName> test
-mvn -Dtest=HomeControllerTests test
-```
-
-Run a single test in a single class:
-
-```bash
-mvn -Dtest=<TestClassName>#<testMethodName> test
-mvn -Dtest=HomeControllerTests#index_shouldDisplayHomePage test
-```
+All testing of OpenESPI is performed using the [Test Harness](https://github.com/energyos/OpenESPI-GreenButtonCMDTest.git) project. See the [README](https://github.com/energyos/OpenESPI-GreenButtonCMDTest/blob/master/README.md) file for instructions.
