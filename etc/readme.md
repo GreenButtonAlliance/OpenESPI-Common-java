@@ -9,10 +9,10 @@ The XMLSchemas that govern the content of ESPI data are:
 	
 There are bash scripts for manipulating the database if the database is mysql:
 
+	toRegression.sh -- will copy all default configuration files and run the inializedatabase.sh script to prepopulate the database
 	initializedatabases.sh -- will create the tables of a datacustodian and thirdparty (drops tables if they exist)
 	reset.sh -- will clean and repopulate tables. This script will work successfully even while the DataCustodian and/or ThirdParty are running
 	
-	both scripts use a prepopulatesql.sql database script that is not source controlled and allows the databases to be prepopulated with useful initial data
 
 There are sql initialization files used by initializedatabases.sh and reset.sh that populate tables of the DataCustodian and the ThirdParty. The user must copy or create the desired contents and name the files:
 
