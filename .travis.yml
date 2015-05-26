@@ -1,7 +1,5 @@
 language: java
 
-script: ./bin/run_tests.sh
-
 notifications:
   email:
     recipients:
