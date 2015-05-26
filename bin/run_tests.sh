@@ -1,3 +1,3 @@
 #!/bin/sh
 
-mvn clean
+mvn -P devmysql clean install 
