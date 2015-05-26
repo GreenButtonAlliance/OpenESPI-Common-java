@@ -1,3 +1,3 @@
 #!/bin/sh
 
-mvn -P devmysql clean package
+mvn -P devmysql clean -DskipTests=true package
