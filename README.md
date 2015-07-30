@@ -1,7 +1,7 @@
 # OpenESPI-Common
+This is the Common module of the OpenESPI Green Button Data Custodian and Third Party implementation. It is a Spring application written in java and built on top of jpa for database access.
 
-Common run-time and test code shared between [OpenESPI-DataCustodian](https://github.com/energyos/OpenESPI-DataCustodian-java) and [OpenESPI-ThirdParty](https://github.com/energyos/OpenESPI-ThirdParty-java).
-
+This Common run-time and test code is shared between stand-alone Data Custodian and Third Party applications. [OpenESPI-DataCustodian](https://github.com/energyos/OpenESPI-DataCustodian-java) and [OpenESPI-ThirdParty](https://github.com/energyos/OpenESPI-ThirdParty-java).
 
 An operational sandbox with these services operating may be found at:
 <a href="https://services.greenbuttondata.org">services.greenbuttondata.org</a>
