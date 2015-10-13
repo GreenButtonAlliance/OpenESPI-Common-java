@@ -2,7 +2,7 @@
 <!-- 
 ==========================================================================
  Schema: reatilCustomer.xsd
-    Version: 0.1.20141125     
+    Version: 0.1.20150921     
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -46,7 +46,7 @@ ______________________________________________________
 			<xs:documentation>Organisation receiving services from service supplier.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
-			<xs:extension base="OrganisationRole">
+			<xs:extension base="Organisation">
 				<xs:sequence>
 					<xs:element name="kind" type="CustomerKind" minOccurs="0">
 						<xs:annotation>
@@ -175,7 +175,7 @@ ______________________________________________________
 			<xs:documentation>Organisation that provides services to customers.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
-			<xs:extension base="OrganisationRole">
+			<xs:extension base="Organisation">
 				<xs:sequence>
 					<xs:element name="kind" type="SupplierKind" minOccurs="0">
 						<xs:annotation>
@@ -521,14 +521,40 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="OrganisationRole" type="OrganisationRole"/>
-	<xs:complexType name="OrganisationRole">
+	<xs:element name="Organisation" type="Organisation"/>
+	<xs:complexType name="Organisation">
 		<xs:annotation>
-			<xs:documentation>Identifies a way in which an organisation may participate in the utility enterprise (e.g., customer, manufacturer, etc).</xs:documentation>
+			<xs:documentation>Organisation that might have roles as utility, contractor, supplier, manufacturer, customer, etc.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
-				<xs:sequence/>
+				<xs:sequence>
+					<xs:element name="streetAddress" type="StreetAddress" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Street address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="postalAddress" type="StreetAddress" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Postal address, potentially different than 'streetAddress' (e.g., another city).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="phone1" type="TelephoneNumber" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Phone number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="phone2" type="TelephoneNumber" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Additional phone number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="electronicAddress" type="ElectronicAddress" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Electronic address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -581,6 +607,16 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 			<xs:element name="addressGeneral" type="String256" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Additional address information, for example a mailstop.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addressGeneral2" type="String256" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>(if applicable) Second line of a free form address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addressGeneral3" type="String256" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>(if applicable) Third line of a free form address.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="withinTownLimits" type="xs:boolean" minOccurs="0" maxOccurs="1">
@@ -904,6 +940,21 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 			<xs:enumeration value="energyServiceScheduler">
 				<xs:annotation>
 					<xs:documentation>Customer as energy service scheduler.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="enterprise">
+				<xs:annotation>
+					<xs:documentation>Represents the owning enterprise.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="regionalOperator">
+				<xs:annotation>
+					<xs:documentation>Represents a local operator of a larger enterprise.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="subsidiary">
+				<xs:annotation>
+					<xs:documentation>A subsidiary of a larger enterprise.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="internalUse">

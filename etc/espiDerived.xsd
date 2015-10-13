@@ -4,7 +4,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20150225     
+    Version: 0.7.20150921     
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -342,6 +342,11 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 							<xs:documentation>URI that can be used to update or delete this Authorization. (e.g. "http://localhost:8080/DataCustodian/espi/1_1/resource/Authorization/1")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="customerResourceURI" type="xs:anyURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URI that can be used to retrieve customer account information. Note will have differnt namespace than resourceURI</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -501,6 +506,11 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 					<xs:element name="ServiceDeliveryPoint" type="ServiceDeliveryPoint" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Contains service delivery point information about the UsagePoint if it does represent the service delivery point.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="readCycle" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Cycle day on which the meter for this usage point will normally be read.  Usually correlated with the billing cycle.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -806,6 +816,16 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 							<xs:documentation>[extension] The commodity for this summary report</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="tariffProfile" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] A schedule of charges; structure associated with Tariff that allows the definition of complex tariff structures such as step and time of use.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="readCycle" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Cycle day on which the meter for this usage point will normally be read.  Usually correlated with the billing cycle.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -836,6 +856,53 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 						<xs:annotation>
 							<xs:documentation>Local time zone offset from UTCTime. Does not include any daylight savings time offsets.</xs:documentation>
 						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProgramIdMappings">
+		<xs:annotation>
+			<xs:documentation>[extension] list of programIDmappings</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element name="programIdMapping">
+						<xs:annotation>
+							<xs:documentation>single program id mapping</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="tOUorCPPorConsumptionTier">
+									<xs:annotation>
+										<xs:documentation>kind of code</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="tou"/>
+											<xs:enumeration value="cpp"/>
+											<xs:enumeration value="consumptiontier"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="code">
+									<xs:annotation>
+										<xs:documentation>code numeric value</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="name">
+									<xs:annotation>
+										<xs:documentation>name associated with code</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="note" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>optional description of cod</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
 					</xs:element>
 				</xs:sequence>
 			</xs:extension>
@@ -1234,7 +1301,7 @@ Additional Complex Types
 			<xs:documentation>[extension] Line item of detail for additional cost</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="amount" type="Int48">
+			<xs:element name="amount" type="Int48" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Cost of line item.</xs:documentation>
 				</xs:annotation>
@@ -1244,7 +1311,7 @@ Additional Complex Types
 					<xs:documentation>Rounded to nearest increment.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dateTime" type="TimeType">
+			<xs:element name="dateTime" type="TimeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Significant date for line item.</xs:documentation>
 				</xs:annotation>
@@ -1257,6 +1324,11 @@ Additional Complex Types
 			<xs:element name="measurement" type="SummaryMeasurement" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>[extension] relevant measurment for line item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="itemKind" type="ItemKind">
+				<xs:annotation>
+					<xs:documentation>[extension] Classification of a line item -- i.e. usage charge, taxes, etc...</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1323,6 +1395,67 @@ Enumerations
 		</xs:restriction>
 	</xs:simpleType>
 	<!--ESPI Enumerations-->
+	<xs:simpleType name="ItemKind">
+		<xs:annotation>
+			<xs:documentation>Code for classification billing line items.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="UInt16">
+			<xs:simpleType>
+				<xs:restriction base="UInt16">
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:documentation>Energy Generation Fee. A charge for generation of energy.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:documentation>Energy Delivery Fee. A charge for delivery of energy.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:documentation>Energy Usage Fee. A charge for electricity, natural gas, water consumption</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:documentation>Administrative Fee. A fee for administrative services.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="5">
+						<xs:annotation>
+							<xs:documentation>Tax. A local, state, or federal energy tax.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6">
+						<xs:annotation>
+							<xs:documentation>Energy Generation Credit. A credit, discount or rebate for generation of energy.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="7">
+						<xs:annotation>
+							<xs:documentation>Energy Delivery Credit. A credit, discount or rebate for delivery of energy.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="8">
+						<xs:annotation>
+							<xs:documentation>Administrative Credit. A credit, discount or rebate for administrative services.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="9">
+						<xs:annotation>
+							<xs:documentation>Payment. A payment for a previous billing.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="10">
+						<xs:annotation>
+							<xs:documentation>Information. An informational line item.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
 	<xs:simpleType name="AccumulationKind">
 		<xs:annotation>
 			<xs:documentation>Code indicating how value is accumulated over time for Readings of ReadingType. The list of valid values per the standard are defined in AccumulationBehaviorType.</xs:documentation>
@@ -4547,5 +4680,6 @@ Global Elements
 	<xs:element name="Object" type="Object"/>
 	<xs:element name="ServiceStatus" type="ServiceStatus"/>
 	<xs:element name="LocalTimeParameters" type="TimeConfiguration"/>
+	<xs:element name="ProgramIdMappings" type="ProgramIdMappings"/>
 	<xs:element name="BatchList" type="BatchListType"/>
 </xs:schema>
