@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.energyos.espi.common.domain.RetailCustomer;
@@ -31,9 +32,11 @@ import org.energyos.espi.common.repositories.UsagePointRepository;
 import org.energyos.espi.common.service.ApplicationInformationService;
 import org.energyos.espi.common.service.ImportService;
 import org.energyos.espi.common.service.ResourceService;
+import org.energyos.espi.common.service.RetailCustomerService;
 import org.energyos.espi.common.service.SubscriptionService;
 import org.energyos.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +57,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Autowired
 	private ImportService importService;
+	
+	@Autowired
+	private RetailCustomerService retailCustomerService;
 
 	@Override
 	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
@@ -62,25 +68,43 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	public Subscription createSubscription(OAuth2Authentication authentication) {
 		Subscription subscription = new Subscription();
 		subscription.setUUID(UUID.randomUUID());
-		subscription
-				.setApplicationInformation(applicationInformationService
-						.findByClientId(authentication.getOAuth2Request()
-								.getClientId()));
-		subscription.setRetailCustomer((RetailCustomer) authentication
-				.getPrincipal());
-		subscription.setUsagePoints(new ArrayList<UsagePoint>());
-		// set up the subscription's usagePoints list. Keep in mind that right
-		// now this is ALL usage points belonging to the RetailCustomer.
-		// TODO - scope this to only a selected (proper) subset of the
-		// usagePoints as passed
-		// through from the UX or a restful call.
-		List<Long> upIds = resourceService.findAllIdsByXPath(subscription
+
+		// Determine requestor's Role
+		Set<String> role = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+
+		if (role.contains("ROLE_USER")) {
+		
+			subscription.setApplicationInformation(applicationInformationService
+					.findByClientId(authentication.getOAuth2Request().getClientId()));
+			subscription.setRetailCustomer((RetailCustomer) authentication.getPrincipal());
+			subscription.setUsagePoints(new ArrayList<UsagePoint>());
+			// set up the subscription's usagePoints list. Keep in mind that right
+			// now this is ALL usage points belonging to the RetailCustomer.
+			// TODO - scope this to only a selected (proper) subset of the
+			// usagePoints as passed
+			// through from the UX or a restful call.
+			List<Long> upIds = resourceService.findAllIdsByXPath(subscription
 				.getRetailCustomer().getId(), UsagePoint.class);
-		Iterator<Long> it = upIds.iterator();
-		while (it.hasNext()) {
-			UsagePoint usagePoint = resourceService.findById(it.next(),
+			Iterator<Long> it = upIds.iterator();
+			while (it.hasNext()) {
+				UsagePoint usagePoint = resourceService.findById(it.next(),
 					UsagePoint.class);
-			subscription.getUsagePoints().add(usagePoint);
+				subscription.getUsagePoints().add(usagePoint);
+			}
+		} else {
+			String clientId = authentication.getOAuth2Request().getClientId();
+			String ci = clientId;
+			if (ci.indexOf("REGISTRATION_") != -1) {
+				if (ci.substring(0, "REGISTRATION_".length()).equals(
+						"REGISTRATION_")) {
+					ci = ci.substring("REGISTRATION_".length());
+				}
+			}
+			if (ci.indexOf("_admin") != -1) {
+				ci = ci.substring(0, ci.indexOf("_admin"));
+			}
+			subscription.setApplicationInformation(applicationInformationService.findByClientId(ci));
+			subscription.setRetailCustomer(retailCustomerService.findById((long) 0));
 		}
 		subscription.setLastUpdate(new GregorianCalendar());
 		subscriptionRepository.persist(subscription);

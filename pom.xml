@@ -26,6 +26,12 @@
     <packaging>jar</packaging>
 
     <name>Common</name>
+    
+    <scm>
+       <!-- Replace the connection below with your project connection -->
+       <!--  http://mariuszprzydatek.com/2013/09/18/displaying-git-build-number-hash-in-your-rest-api/ -->
+       <connection>scm:git:https://github.com/energyos/OpenESPI-Common-java.git/</connection>
+    </scm>
 
     <profiles>
     
