@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by National Institute of Standards & Technology (NIST) -->
 <xs:schema xmlns="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.7.20131008">
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20150225     
+    Version: 0.7.20151027     
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -342,6 +341,11 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 							<xs:documentation>URI that can be used to update or delete this Authorization. (e.g. "http://localhost:8080/DataCustodian/espi/1_1/resource/Authorization/1")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="customerResourceURI" type="xs:anyURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URI that can be used to retrieve customer account information. Note will have differnt namespace than resourceURI</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -501,6 +505,104 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 					<xs:element name="ServiceDeliveryPoint" type="ServiceDeliveryPoint" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Contains service delivery point information about the UsagePoint if it does represent the service delivery point.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="amiBillingReady" type="AmiBillingReadyKind" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Tracks the lifecycle of the metering installation at a usage point with respect to readiness for billing via advanced metering infrastructure reads.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="checkBilling" type="xs:boolean" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] True if as a result of an inspection or otherwise, there is a reason to suspect that a previous billing may have been performed with erroneous data. Value should be reset once this potential discrepancy has been resolved.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="connectionState" type="UsagePointConnectedKind" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] State of the usage point with respect to connection to the network.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="estimatedLoad" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Estimated load.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="grounded" type="xs:boolean" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] True if grounded.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="isSdp" type="xs:boolean" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] If true, this usage point is a service delivery point, i.e., a usage point where the ownership of the service changes hands.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="isVirtual" type="xs:boolean" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] If true, this usage point is virtual, i.e., no physical location exists in the network where a meter could be located to collect the meter readings. For example, one may define a virtual usage point to serve as an aggregation of usage for all of a company's premises distributed widely across the distribution territory. Otherwise, the usage point is physical, i.e., there is a logical point in the network where a meter could be located to collect meter readings.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="minimalUsageExpected" type="xs:boolean" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] If true, minimal or zero usage is expected at this usage point for situations such as premises vacancy, logical or physical disconnect. It is used for readings validation and estimation.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nominalServiceVoltage" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Nominal service voltage.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="outageRegion" type="String256" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Outage region in which this usage point is located.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="phaseCode" type="PhaseCodeKind" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Phase code. Number of wires and specific nominal phases can be deduced from enumeration literal values. For example, ABCN is three-phase, four-wire, s12n (splitSecondary12N) is single-phase, three-wire, and s1n and s2n are single-phase, two-wire.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratedCurrent" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Current flow that this usage point is configured to deliver.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratedPower" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Active power that this usage point is configured to deliver.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="readCycle" type="String256" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Cycle day on which the meter for this usage point will normally be read.  Usually correlated with the billing cycle.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="readRoute" type="String256" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Identifier of the route to which this usage point is assigned for purposes of meter reading. Typically used to configure hand held meter reading systems prior to collection of reads.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="serviceDeliveryRemark" type="String256" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Remarks about this usage point, for example the reason for it being rated with a non-nominal priority.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="servicePriority" type="String32" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Priority of service for this usage point. Note that usage points at the same service location can have different priorities.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pricingNode" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] A single electrical system Node or subset of Nodes where a
+physical injection or withdrawal of electricity is modeled and for which a Locational
+Marginal Price is calculated by the RTO/ISO and used for financial settlements.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="loadAggregationPoint" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] A RTO/ISO defined subset of PNodes within a Default Load
+Aggregation Point (DLAP).</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -806,6 +908,16 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 							<xs:documentation>[extension] The commodity for this summary report</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="tariffProfile" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] A schedule of charges; structure associated with Tariff that allows the definition of complex tariff structures such as step and time of use.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="readCycle" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Cycle day on which the meter for this usage point will normally be read.  Usually correlated with the billing cycle.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -836,6 +948,53 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 						<xs:annotation>
 							<xs:documentation>Local time zone offset from UTCTime. Does not include any daylight savings time offsets.</xs:documentation>
 						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProgramIdMappings">
+		<xs:annotation>
+			<xs:documentation>[extension] list of programIDmappings</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element name="programIdMapping">
+						<xs:annotation>
+							<xs:documentation>single program id mapping</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="tOUorCPPorConsumptionTier">
+									<xs:annotation>
+										<xs:documentation>kind of code</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="tou"/>
+											<xs:enumeration value="cpp"/>
+											<xs:enumeration value="consumptiontier"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="code">
+									<xs:annotation>
+										<xs:documentation>code numeric value</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="name">
+									<xs:annotation>
+										<xs:documentation>name associated with code</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="note" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>optional description of cod</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
 					</xs:element>
 				</xs:sequence>
 			</xs:extension>
@@ -1234,7 +1393,7 @@ Additional Complex Types
 			<xs:documentation>[extension] Line item of detail for additional cost</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="amount" type="Int48">
+			<xs:element name="amount" type="Int48" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Cost of line item.</xs:documentation>
 				</xs:annotation>
@@ -1244,7 +1403,7 @@ Additional Complex Types
 					<xs:documentation>Rounded to nearest increment.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dateTime" type="TimeType">
+			<xs:element name="dateTime" type="TimeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Significant date for line item.</xs:documentation>
 				</xs:annotation>
@@ -1257,6 +1416,11 @@ Additional Complex Types
 			<xs:element name="measurement" type="SummaryMeasurement" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>[extension] relevant measurment for line item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="itemKind" type="ItemKind">
+				<xs:annotation>
+					<xs:documentation>[extension] Classification of a line item -- i.e. usage charge, taxes, etc...</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1323,6 +1487,67 @@ Enumerations
 		</xs:restriction>
 	</xs:simpleType>
 	<!--ESPI Enumerations-->
+	<xs:simpleType name="ItemKind">
+		<xs:annotation>
+			<xs:documentation>Code for classification billing line items.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="UInt16">
+			<xs:simpleType>
+				<xs:restriction base="UInt16">
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:documentation>Energy Generation Fee. A charge for generation of energy.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:documentation>Energy Delivery Fee. A charge for delivery of energy.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:documentation>Energy Usage Fee. A charge for electricity, natural gas, water consumption</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:documentation>Administrative Fee. A fee for administrative services.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="5">
+						<xs:annotation>
+							<xs:documentation>Tax. A local, state, or federal energy tax.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6">
+						<xs:annotation>
+							<xs:documentation>Energy Generation Credit. A credit, discount or rebate for generation of energy.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="7">
+						<xs:annotation>
+							<xs:documentation>Energy Delivery Credit. A credit, discount or rebate for delivery of energy.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="8">
+						<xs:annotation>
+							<xs:documentation>Administrative Credit. A credit, discount or rebate for administrative services.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="9">
+						<xs:annotation>
+							<xs:documentation>Payment. A payment for a previous billing.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="10">
+						<xs:annotation>
+							<xs:documentation>Information. An informational line item.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
 	<xs:simpleType name="AccumulationKind">
 		<xs:annotation>
 			<xs:documentation>Code indicating how value is accumulated over time for Readings of ReadingType. The list of valid values per the standard are defined in AccumulationBehaviorType.</xs:documentation>
@@ -4489,6 +4714,70 @@ Enumerations
 			</xs:simpleType>
 		</xs:union>
 	</xs:simpleType>
+	<xs:simpleType name="AmiBillingReadyKind">
+		<xs:annotation>
+			<xs:documentation>Lifecycle states of the metering installation at a usage point with respect to readiness for billing via advanced metering infrastructure reads.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="amiCapable">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with an AMI capable meter that is not yet currently equipped with a communications module.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="amiDisabled">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with an AMI capable meter; however, the AMI functionality has been disabled or is not being used.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="billingApproved">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with an operating AMI capable meter and accuracy has been certified for billing purposes.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="enabled">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with an AMI capable meter having communications capability.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="nonAmi">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with a non AMI capable meter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="nonMetered">
+				<xs:annotation>
+					<xs:documentation>Usage point is not currently equipped with a meter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="operable">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with an AMI capable meter that is functioning and communicating with the AMI network.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UsagePointConnectedKind">
+		<xs:annotation>
+			<xs:documentation>State of the usage point with respect to connection to the network.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="connected">
+				<xs:annotation>
+					<xs:documentation>The usage point is connected to the network and able to receive or send the applicable commodity (electricity, gas, water, etc.).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="logicallyDisconnected">
+				<xs:annotation>
+					<xs:documentation>The usage point has been disconnected through operation of a disconnect function within the meter present at the usage point.  The usage point is unable to receive or send the applicable commodity (electricity, gas, water, etc.)  A logical disconnect can often be achieved without utilising a field crew.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="physicallyDisconnected">
+				<xs:annotation>
+					<xs:documentation>The usage point has been disconnected from the network at a point upstream of the meter. The usage point is unable to receive or send the applicable commodity (electricity, gas, water, etc.). A physical disconnect is often achieved by utilising a field crew.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="DstRuleType">
 		<xs:annotation>
 			<xs:documentation>[extension] Bit map encoded rule from which is calculated the start or end time, within the current year, to which daylight savings time offset must be applied. 
@@ -4547,5 +4836,6 @@ Global Elements
 	<xs:element name="Object" type="Object"/>
 	<xs:element name="ServiceStatus" type="ServiceStatus"/>
 	<xs:element name="LocalTimeParameters" type="TimeConfiguration"/>
+	<xs:element name="ProgramIdMappings" type="ProgramIdMappings"/>
 	<xs:element name="BatchList" type="BatchListType"/>
 </xs:schema>
