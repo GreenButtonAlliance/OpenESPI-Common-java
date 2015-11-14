@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by National Institute of Standards & Technology (NIST) -->
 <xs:schema xmlns="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.7.20131008">
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20150921     
+    Version: 0.7.20151027     
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
@@ -508,9 +507,102 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 							<xs:documentation>[extension] Contains service delivery point information about the UsagePoint if it does represent the service delivery point.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="readCycle" type="String256" minOccurs="0">
+					<xs:element name="amiBillingReady" type="AmiBillingReadyKind" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Tracks the lifecycle of the metering installation at a usage point with respect to readiness for billing via advanced metering infrastructure reads.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="checkBilling" type="xs:boolean" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] True if as a result of an inspection or otherwise, there is a reason to suspect that a previous billing may have been performed with erroneous data. Value should be reset once this potential discrepancy has been resolved.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="connectionState" type="UsagePointConnectedKind" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] State of the usage point with respect to connection to the network.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="estimatedLoad" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Estimated load.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="grounded" type="xs:boolean" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] True if grounded.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="isSdp" type="xs:boolean" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] If true, this usage point is a service delivery point, i.e., a usage point where the ownership of the service changes hands.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="isVirtual" type="xs:boolean" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] If true, this usage point is virtual, i.e., no physical location exists in the network where a meter could be located to collect the meter readings. For example, one may define a virtual usage point to serve as an aggregation of usage for all of a company's premises distributed widely across the distribution territory. Otherwise, the usage point is physical, i.e., there is a logical point in the network where a meter could be located to collect meter readings.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="minimalUsageExpected" type="xs:boolean" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] If true, minimal or zero usage is expected at this usage point for situations such as premises vacancy, logical or physical disconnect. It is used for readings validation and estimation.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nominalServiceVoltage" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Nominal service voltage.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="outageRegion" type="String256" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Outage region in which this usage point is located.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="phaseCode" type="PhaseCodeKind" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Phase code. Number of wires and specific nominal phases can be deduced from enumeration literal values. For example, ABCN is three-phase, four-wire, s12n (splitSecondary12N) is single-phase, three-wire, and s1n and s2n are single-phase, two-wire.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratedCurrent" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Current flow that this usage point is configured to deliver.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratedPower" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Active power that this usage point is configured to deliver.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="readCycle" type="String256" minOccurs="0" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>[extension] Cycle day on which the meter for this usage point will normally be read.  Usually correlated with the billing cycle.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="readRoute" type="String256" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Identifier of the route to which this usage point is assigned for purposes of meter reading. Typically used to configure hand held meter reading systems prior to collection of reads.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="serviceDeliveryRemark" type="String256" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Remarks about this usage point, for example the reason for it being rated with a non-nominal priority.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="servicePriority" type="String32" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>[extension] Priority of service for this usage point. Note that usage points at the same service location can have different priorities.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pricingNode" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] A single electrical system Node or subset of Nodes where a
+physical injection or withdrawal of electricity is modeled and for which a Locational
+Marginal Price is calculated by the RTO/ISO and used for financial settlements.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="loadAggregationPoint" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] A RTO/ISO defined subset of PNodes within a Default Load
+Aggregation Point (DLAP).</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -4621,6 +4713,70 @@ Enumerations
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="AmiBillingReadyKind">
+		<xs:annotation>
+			<xs:documentation>Lifecycle states of the metering installation at a usage point with respect to readiness for billing via advanced metering infrastructure reads.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="amiCapable">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with an AMI capable meter that is not yet currently equipped with a communications module.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="amiDisabled">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with an AMI capable meter; however, the AMI functionality has been disabled or is not being used.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="billingApproved">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with an operating AMI capable meter and accuracy has been certified for billing purposes.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="enabled">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with an AMI capable meter having communications capability.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="nonAmi">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with a non AMI capable meter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="nonMetered">
+				<xs:annotation>
+					<xs:documentation>Usage point is not currently equipped with a meter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="operable">
+				<xs:annotation>
+					<xs:documentation>Usage point is equipped with an AMI capable meter that is functioning and communicating with the AMI network.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UsagePointConnectedKind">
+		<xs:annotation>
+			<xs:documentation>State of the usage point with respect to connection to the network.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="connected">
+				<xs:annotation>
+					<xs:documentation>The usage point is connected to the network and able to receive or send the applicable commodity (electricity, gas, water, etc.).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="logicallyDisconnected">
+				<xs:annotation>
+					<xs:documentation>The usage point has been disconnected through operation of a disconnect function within the meter present at the usage point.  The usage point is unable to receive or send the applicable commodity (electricity, gas, water, etc.)  A logical disconnect can often be achieved without utilising a field crew.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="physicallyDisconnected">
+				<xs:annotation>
+					<xs:documentation>The usage point has been disconnected from the network at a point upstream of the meter. The usage point is unable to receive or send the applicable commodity (electricity, gas, water, etc.). A physical disconnect is often achieved by utilising a field crew.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="DstRuleType">
 		<xs:annotation>
