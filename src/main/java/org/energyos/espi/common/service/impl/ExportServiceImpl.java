@@ -35,6 +35,7 @@ import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.Routes;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -808,6 +809,7 @@ public class ExportServiceImpl implements ExportService {
 		DateTimeType updated = DateConverter.toDateTimeType(new Date());
 		String temp = updated.getValue().toXMLFormat();
 		String uuid = UUID.randomUUID().toString();
+		String certLink = "<link href=\"https://cert.greenbuttonalliance.org/certificate/" + Routes.GBA_CERT_ID + "\" rel=\"related\"/>\n";
 
 		stream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
 		stream.write("<?xml-stylesheet type=\"text/xsl\" href=\"GreenButtonDataStyleSheet.xslt\"?>\n"
@@ -818,6 +820,7 @@ public class ExportServiceImpl implements ExportService {
 		stream.write(uuid.getBytes());
 		stream.write("</id>\n".getBytes());
 		stream.write("<title>Green Button Usage Feed</title>\n".getBytes());
+		stream.write(certLink.getBytes());
 		stream.write("<updated>".getBytes());
 		stream.write(temp.getBytes());
 		stream.write("</updated>\n".getBytes());

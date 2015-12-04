@@ -21,6 +21,8 @@ public class Routes {
 	public static final String HOME = "/home";
 	public static final String LOGIN = "/login";
 	public static final String ROOT = "/";
+	
+	public static final String GBA_CERT_ID = "776198e6-59ec-5d25-950a-b34a25b93d67";
 
 	public static final String DATA_CUSTODIAN_MANAGE = "/management";
 	public static final String THIRD_PARTY_MANAGE = "/management";
