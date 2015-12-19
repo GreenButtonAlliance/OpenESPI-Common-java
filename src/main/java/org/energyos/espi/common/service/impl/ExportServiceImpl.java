@@ -819,14 +819,15 @@ public class ExportServiceImpl implements ExportService {
 		stream.write("<id>urn:uuid:".getBytes());
 		stream.write(uuid.getBytes());
 		stream.write("</id>\n".getBytes());
+		stream.write(certLink.getBytes());		
 		stream.write("<title>Green Button Usage Feed</title>\n".getBytes());
-		stream.write(certLink.getBytes());
 		stream.write("<updated>".getBytes());
 		stream.write(temp.getBytes());
 		stream.write("</updated>\n".getBytes());
 		stream.write(selfRef.getBytes());
 	}
 
+	@SuppressWarnings({"rawtypes"})
 	private void exportEntries(EntryTypeIterator entries, OutputStream stream,
 			ExportFilter exportFilter, Class resourceClass, String hrefFragment)
 			throws IOException {
@@ -834,7 +835,7 @@ public class ExportServiceImpl implements ExportService {
 				hrefFragment);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes","unchecked"})
 	private void exportEntries(Long subscriptionId, EntryTypeIterator entries,
 			OutputStream stream, ExportFilter exportFilter,
 			Class resourceClass, String hrefFragment) throws IOException {
@@ -868,6 +869,7 @@ public class ExportServiceImpl implements ExportService {
 		stream.write("</feed>".getBytes());
 	}
 
+	@SuppressWarnings({"rawtypes"})
 	private void exportRootForm(String hrefFragment, Long subscriptionId,
 			OutputStream stream, ExportFilter exportFilter, Class targetClass)
 			throws IOException {
@@ -888,7 +890,7 @@ public class ExportServiceImpl implements ExportService {
 
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void exportRootForm_Internal(String workingFragment,
 			Long subscriptionId, Long retailCustomerId, Long usagePointId,
 			Long meterReadingId, List<Long> resourceList, Class currentClass,
@@ -956,7 +958,7 @@ public class ExportServiceImpl implements ExportService {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	// TODO: this needs to be templated and RetailCustomer inherited from
-	// IdentifiedObject to remove the above supress warnings
+	// IdentifiedObject to remove the above suppress warnings
 	private void exportEntries_Root(Long subscriptionId,
 			EntryTypeIterator entries, OutputStream stream,
 			ExportFilter exportFilter, Class resourceClass, String hrefFragment)

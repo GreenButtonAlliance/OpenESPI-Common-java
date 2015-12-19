@@ -16,6 +16,7 @@
 package org.energyos.espi.common.utils;
 
 import org.energyos.espi.common.domain.IdentifiedObject;
+import org.energyos.espi.common.domain.Routes;
 import org.energyos.espi.common.models.atom.ContentType;
 import org.energyos.espi.common.models.atom.EntryType;
 import org.energyos.espi.common.models.atom.LinkType;
@@ -58,6 +59,9 @@ public class EntryBuilder {
 	}
 
 	private void buildLinks(IdentifiedObject resource) {
+		
+		//TODO: Add Certification relLink
+		entry.getLinks().add(new LinkType(LinkType.RELATED, "https://cert.greenbuttonalliance.org/certificate/" + Routes.GBA_CERT_ID));		
 		entry.getLinks().add(resource.getUpLink());
 		entry.getLinks().add(resource.getSelfLink());
 
