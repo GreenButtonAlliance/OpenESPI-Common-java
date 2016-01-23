@@ -874,9 +874,9 @@ public class ExportServiceImpl implements ExportService {
 			OutputStream stream, ExportFilter exportFilter, Class targetClass)
 			throws IOException {
 
-		Subscription subscription = subscriptionService
-				.findById(subscriptionId);
-		Authorization authorization = subscription.getAuthorization();
+//		Subscription subscription = subscriptionService
+//				.findById(subscriptionId);
+//		Authorization authorization = subscription.getAuthorization();
 
 		buildHeader(stream, hrefFragment);
 
@@ -1082,25 +1082,25 @@ public class ExportServiceImpl implements ExportService {
 		}
 	}
 
-	private void exportEntriesFull(List<EntryTypeIterator> bulkSubscriptions,
-			OutputStream stream, ExportFilter exportFilter, String hrefFragment)
-			throws IOException {
-
-		buildHeader(stream, hrefFragment);
-
-		for (EntryTypeIterator eti : bulkSubscriptions) {
-
-			Long subscriptionId = eti.getSubscriptionId();
-			// first set up the hrefFragment correctly
-			String temp = hrefFragment;
-			temp = temp.substring(temp.indexOf("/Bulk"));
-			temp = temp + "/Subscription/" + subscriptionId;
-			exportEntriesInternal(subscriptionId, eti, stream, exportFilter,
-					temp);
-		}
-
-		stream.write("</feed>\n".getBytes());
-	}
+//	private void exportEntriesFull(List<EntryTypeIterator> bulkSubscriptions,
+//			OutputStream stream, ExportFilter exportFilter, String hrefFragment)
+//			throws IOException {
+//
+//		buildHeader(stream, hrefFragment);
+//
+//		for (EntryTypeIterator eti : bulkSubscriptions) {
+//
+//			Long subscriptionId = eti.getSubscriptionId();
+//			// first set up the hrefFragment correctly
+//			String temp = hrefFragment;
+//			temp = temp.substring(temp.indexOf("/Bulk"));
+//			temp = temp + "/Subscription/" + subscriptionId;
+//			exportEntriesInternal(subscriptionId, eti, stream, exportFilter,
+//					temp);
+//		}
+//
+//		stream.write("</feed>\n".getBytes());
+//	}
 
 	private void exportEntriesFull(EntryTypeIterator entries,
 			OutputStream stream, ExportFilter exportFilter, String hrefFragment)
@@ -1123,10 +1123,10 @@ public class ExportServiceImpl implements ExportService {
 
 	// to export a single entry (w/o the <feed>...</feed> wrappers
 
-	private void exportEntryFull(EntryType entry, OutputStream stream,
-			ExportFilter exportFilter, String hrefFragment) throws IOException {
-		exportEntryFull(0L, entry, stream, exportFilter, hrefFragment);
-	}
+//	private void exportEntryFull(EntryType entry, OutputStream stream,
+//			ExportFilter exportFilter, String hrefFragment) throws IOException {
+//		exportEntryFull(0L, entry, stream, exportFilter, hrefFragment);
+//	}
 
 	private void exportEntryFull(Long subscriptionId, EntryType entry,
 			OutputStream stream, ExportFilter exportFilter, String hrefFragment)
@@ -1240,7 +1240,7 @@ public class ExportServiceImpl implements ExportService {
 					// correct
 					if (id2 != 0) {
 						// we have a request for (at least) a usagePoint
-						// so use the relivant retail customer Id to get the ID
+						// so use the relevant retail customer Id to get the ID
 						// collection
 						UsagePoint usagePoint = resourceService.findById(id2,
 								UsagePoint.class);

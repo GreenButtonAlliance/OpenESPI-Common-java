@@ -35,41 +35,33 @@ public class ExportFilter {
 	public boolean matches(EntryType entry) {
 
 		if (hasParam("max-results")) {
-			if (!(params.get("max-results").equals("All"))) {
-				if (emittedCounter >= Integer
-						.valueOf(params.get("max-results"))) {
-					return false;
-				}
+			if (emittedCounter >= Integer
+					.valueOf(params.get("max-results"))) {
+				return false;
 			}
 		}
+		
 		if (hasParam("published-max")) {
-			if (!(params.get("published-max").equals("All"))) {
-				if (toTime("published-max") < toTime(entry.getPublished())) {
-					return false;
-				}
+			if (toTime("published-max") < toTime(entry.getPublished())) {
+				return false;
 			}
 		}
+		
 		if (hasParam("published-min")) {
-			if (!(params.get("published-min").equals("All"))) {
-				if (toTime("published-min") > toTime(entry.getPublished())) {
-					return false;
-				}
+			if (toTime("published-min") > toTime(entry.getPublished())) {
+				return false;
 			}
 		}
 
 		if (hasParam("updated-max")) {
-			if (!(params.get("updated-max").equals("All"))) {
-				if (toTime("updated-max") < toTime(entry.getUpdated())) {
-					return false;
-				}
+			if (toTime("updated-max") < toTime(entry.getUpdated())) {
+				return false;
 			}
 		}
 
 		if (hasParam("updated-min")) {
-			if (!(params.get("updated-min").equals("All"))) {
-				if (toTime("updated-min") > toTime(entry.getUpdated())) {
-					return false;
-				}
+			if (toTime("updated-min") > toTime(entry.getUpdated())) {
+				return false;
 			}
 		}
 
@@ -81,11 +73,9 @@ public class ExportFilter {
 		}
 
 		if (hasParam("depth")) {
-			if (!(params.get("depth").equals("All"))) {
 				if (emittedCounter > Integer.valueOf(params.get("depth"))) {
 					return false;
 				}
-			}
 		}
 		emittedCounter++;
 		return true;
