@@ -151,19 +151,23 @@ public class NotificationServiceImpl implements NotificationService {
 
 			String tempResourceUri = authorization.getResourceURI();
 
-			try {
-				resourceService.findByResourceUri(tempResourceUri,
-					Authorization.class);
-				
-			} catch (Exception ex) {
-				
-				System.out
-				.printf("NotificationServiceImpl: notifyAllNeed - Processing Authorization: %s, Resource: %s, Exception: %s\n",
-						id, tempResourceUri, ex.getMessage());
-				
-			}
-
 			System.out.println("resourceURI: " + tempResourceUri);
+
+			// Ignore client_access_tokens which contain "/Batch/Bulk/
+			// for their ResourceUri values
+			if(!tempResourceUri.contains("/Batch/Bulk/")) {
+				
+				try {
+					resourceService.findByResourceUri(tempResourceUri,
+							Authorization.class);
+				
+				} catch (Exception ex) {
+				
+					System.out
+					.printf("NotificationServiceImpl: notifyAllNeed - Processing Authorization: %s, Resource: %s, Exception Cause: %s, Exception Message: %s\n",
+							id, tempResourceUri, ex.getCause(), ex.getMessage());
+				}
+			}
 
 			String thirdParty = authorization.getThirdParty();
 
@@ -183,7 +187,7 @@ public class NotificationServiceImpl implements NotificationService {
 				//
 				String resourceUri = authorization.getResourceURI();
 
-				// resouceUri's that are just /Batch/Bulk ==>
+				// resourceUri's that contain /Batch/Bulk are
 				// client-access-token and will be ignored here with the
 				// actual Batch/Bulk ids will be picked up by looking at the
 				// scope strings of the individual
