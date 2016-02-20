@@ -151,8 +151,17 @@ public class NotificationServiceImpl implements NotificationService {
 
 			String tempResourceUri = authorization.getResourceURI();
 
-			resourceService.findByResourceUri(tempResourceUri,
+			try {
+				resourceService.findByResourceUri(tempResourceUri,
 					Authorization.class);
+				
+			} catch (Exception ex) {
+				
+				System.out
+				.printf("NotificationServiceImpl: notifyAllNeed - Processing Authorization: %s, Resource: %s, Exception: %s\n",
+						id, tempResourceUri, ex.getMessage());
+				
+			}
 
 			System.out.println("resourceURI: " + tempResourceUri);
 
