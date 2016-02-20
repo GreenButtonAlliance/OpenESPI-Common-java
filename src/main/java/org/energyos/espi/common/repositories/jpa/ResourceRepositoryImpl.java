@@ -106,6 +106,9 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			} catch (Exception e) {
 				// nothing to do, just retur the empty result and
 				// we'll find it later.
+				System.out.printf("**** findAllParentsByRelatedHref(String href) Exception: %s\n",
+						e.toString());
+
 			}
 
 		}
@@ -200,6 +203,9 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			} catch (Exception e) {
 				// nothing to do -- we'll find it later, just return the
 				// empty temp
+				System.out.printf("**** findAllRelated(Linkable linkable) Exception: %s\n",
+						e.toString());
+
 			}
 
 		}
@@ -217,6 +223,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("uuid", uuid.toString().toUpperCase())
 					.getSingleResult();
 		} catch (IllegalAccessException | NoSuchFieldException e) {
+			System.out.printf("**** findByUUID(UUID uuid) Exception: %s - %s\n",
+					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
 
@@ -232,7 +240,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			return (T) em.createNamedQuery(queryFindById)
 					.setParameter("id", id).getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-			System.out.printf("**** FindbyId Exception: %s - %s\n",
+			System.out.printf("**** FindbyId(Long id) Exception: %s - %s\n",
 					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
@@ -267,7 +275,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("usagePointId", usagePointId).getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
 			System.out.printf(
-					"**** FindAllIdsByUsagePoint Exception: %s - %s\n",
+					"**** FindAllIdsByUsagePointId(Long usagePointId) Exception: %s - %s\n",
 					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
@@ -291,6 +299,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			Query query = em.createNamedQuery(findAllIdsByXPath);
 			return query.getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
+			System.out.printf("**** findAllIdsByXPath Exception: %s - %s\n",
+					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
 
@@ -307,6 +317,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					"o1Id", id1);
 			return query.getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
+			System.out.printf("**** findAllIdsByXPath(Long id1) Exception: %s - %s\n",
+					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
 
@@ -323,6 +335,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("o1Id", id1).setParameter("o2Id", id2);
 			return query.getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
+			System.out.printf("**** findAllIdsByXPath(Long id1, Long id2) Exception: %s - %s\n",
+					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
 	}
@@ -339,6 +353,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("o3Id", id3);
 			return query.getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
+			System.out.printf("**** findAllIdsByXPath(Long id1, Long id2, Long id3) Exception: %s - %s\n",
+					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
 	}
@@ -355,6 +371,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					"o1Id", id1);
 			return (Long) query.getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
+			System.out.printf("**** findIdByXPath(Long id1) Exception: %s - %s\n",
+					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
 	}
@@ -369,6 +387,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("o1Id", id1).setParameter("o2Id", id2);
 			return (Long) query.getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
+			System.out.printf("**** findIdByXPath(Long id1, Long id2) Exception: %s - %s\n",
+					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
 	}
@@ -384,6 +404,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("o3Id", id3);
 			return (Long) query.getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
+			System.out.printf("**** findIdByXPath(Long id1, Long id2, Long id3) Exception: %s - %s\n",
+					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
 	}
@@ -399,6 +421,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("o3Id", id3).setParameter("o4Id", id4);
 			return (Long) query.getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
+			System.out.printf("**** findIdByXPath(Long id1, Long id2, Long id3, Long id4) Exception: %s - %s\n",
+					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
 	}
@@ -417,7 +441,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 		em.merge(originalUsagePoint);
 	}
 
-	@SuppressWarnings("unchecked")
+  	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends IdentifiedObject> T findByResourceUri(String uri,
 			Class<T> clazz) {
@@ -427,7 +451,10 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			Query query = em.createNamedQuery(findByResourceURI).setParameter(
 					"uri", uri);
 			return (T) query.getSingleResult();
+
 		} catch (NoSuchFieldException | IllegalAccessException e) {
+			System.out.printf("**** findByResourceUri(String uri) Exception: %s - %s\n",
+					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
 	}
@@ -443,7 +470,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			em.remove(temp);
 
 		} catch (Exception e) {
-			System.out.printf("**** FindAllIds Exception: %s - %s\n",
+			System.out.printf("**** deleteById(Long id) Exception: %s - %s\n",
 					clazz.toString(), e.toString());
 			throw new RuntimeException(e);
 		}
