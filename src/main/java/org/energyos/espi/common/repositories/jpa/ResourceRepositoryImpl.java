@@ -106,8 +106,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			} catch (Exception e) {
 				// nothing to do, just retur the empty result and
 				// we'll find it later.
-				System.out.printf("**** findAllParentsByRelatedHref(String href) Exception: %s - %s\n",
-						clazz.toString(), e.toString());
+				System.out.printf("**** findAllParentsByRelatedHref(String href) Exception: %s\n",
+						e.toString());
 
 			}
 
@@ -203,8 +203,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			} catch (Exception e) {
 				// nothing to do -- we'll find it later, just return the
 				// empty temp
-				System.out.printf("**** findAllRelated(Linkable linkable) Exception: %s - %s\n",
-						clazz.toString(), e.toString());
+				System.out.printf("**** findAllRelated(Linkable linkable) Exception: %s\n",
+						e.toString());
 
 			}
 
