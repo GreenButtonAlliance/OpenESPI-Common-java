@@ -155,7 +155,7 @@ public class NotificationServiceImpl implements NotificationService {
 
 			String tempResourceUri = authorization.getResourceURI();
 
-			System.out.println("resourceURI: " + tempResourceUri);
+			System.out.println("NotificationServiceImpl: notifyAllNeed - resourceURI: " + tempResourceUri);
 
 			// Ignore client_access_tokens which contain "/Batch/Bulk/
 			// for their ResourceUri values
