@@ -130,10 +130,14 @@ public class NotificationServiceImpl implements NotificationService {
 	private void notifyInternal(String thirdPartyNotificationURI,
 			BatchList batchList) {
 
-		try {
-			restTemplate.postForLocation(thirdPartyNotificationURI, batchList);
-		} catch (Exception e) {
-			// Do nothing
+		if(thirdPartyNotificationURI != null){
+			try {
+				restTemplate.postForLocation(thirdPartyNotificationURI, batchList);
+			} catch (Exception e) {
+				System.out
+				.printf("NotificationServiceImpl: notifyInternal - POST for %s caused an %s Exception\n",
+						thirdPartyNotificationURI, e.getMessage());
+			}
 		}
 	}
 
