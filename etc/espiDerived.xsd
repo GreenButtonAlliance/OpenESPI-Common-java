@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2016 (x64) (http://www.altova.com) by National Institute of Standards & Technology (NIST) -->
 <xs:schema xmlns="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.7.20131008">
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20151027     
+    Version: 0.7.20150225    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
 ========================================================================== 
 
 This product includes software developed within the EnergyOS Initiative
-Copyright (c) 2011, 2012, 2013, 2014 EnergyOS.Org
+Copyright (c) 2011, 2012, 2013, 2014, 2015, 2016 EnergyOS.Org
 
 Licensed by EnergyOS.Org under one or more contributor license agreements.
 See the NOTICE section file below for additional information
@@ -592,17 +593,16 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 							<xs:documentation>[extension] Priority of service for this usage point. Note that usage points at the same service location can have different priorities.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="pricingNode" type="String256" minOccurs="0">
+					<xs:element name="pNode" type="String256" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] A single electrical system Node or subset of Nodes where a
 physical injection or withdrawal of electricity is modeled and for which a Locational
 Marginal Price is calculated by the RTO/ISO and used for financial settlements.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="loadAggregationPoint" type="String256" minOccurs="0">
+					<xs:element name="aggregateNodes" type="AggregateNodes" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] A RTO/ISO defined subset of PNodes within a Default Load
-Aggregation Point (DLAP).</xs:documentation>
+							<xs:documentation>[extension] A sequence of references to AggregateNodes.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1424,6 +1424,108 @@ Additional Complex Types
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AnodeType">
+		<xs:annotation>
+			<xs:documentation>Aggregated Nodes Types for example:
+ - SYS - System Zone/Region; 
+ - RUC - RUC Zone; 
+ - LFZ - Load Forecast Zone; 
+ - REG - Market Energy/Ancillary Service Region; 
+ - AGR - Aggregate Generation Resource; 
+ - POD - Point of Delivery; 
+ - ALR - Aggregate Load Resource; 
+ - LTAC - Load TransmissionAccessCharge (TAC) Group;
+ - ACA - Adjacent Control Area
+ - ASR - Aggregated System Resource
+ - ECA - Embedded Control Area</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SYS">
+				<xs:annotation>
+					<xs:documentation>System Zone/Region; </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUC">
+				<xs:annotation>
+					<xs:documentation>RUC Zone</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LFZ">
+				<xs:annotation>
+					<xs:documentation>Load Forecast Zone</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REG">
+				<xs:annotation>
+					<xs:documentation>Market Energy/Ancillary Service Region; </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AGR">
+				<xs:annotation>
+					<xs:documentation>Aggregate Generation Resource; </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POD">
+				<xs:annotation>
+					<xs:documentation>Point of Delivery; </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALR">
+				<xs:annotation>
+					<xs:documentation>Aggregate Load Resource; </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LTAC">
+				<xs:annotation>
+					<xs:documentation>Load TransmissionAccessCharge (TAC) Group;</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ACA">
+				<xs:annotation>
+					<xs:documentation>Adjacent Control Area</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASR">
+				<xs:annotation>
+					<xs:documentation>Aggregated System Resource</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ECA">
+				<xs:annotation>
+					<xs:documentation>Embedded Control Area</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AggregateNodes">
+		<xs:annotation>
+			<xs:documentation>An aggregated node can define a typed grouping further defined by the AnodeType enumeratuion. Types range from System Zone/Regions to Market Energy Regions to Aggregated Loads and Aggregated Generators.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="AggregateNode" type="AggregateNode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AggregateNode">
+		<xs:annotation>
+			<xs:documentation>An aggregated node can define a typed grouping further defined by the AnodeType enumeratuion. Types range from System Zone/Regions to Market Energy Regions to Aggregated Loads and Aggregated Generators.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="anodeType" type="AnodeType" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Type of aggregated node</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="aggregateNodeRef" type="String256">
+						<xs:annotation>
+							<xs:documentation>reference for this aggregate node</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 	<!--
 =======================================
@@ -2911,7 +3013,7 @@ Enumerations
 							<xs:documentation>AB to Neutral</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
-					<xs:enumeration value="97">
+					<xs:enumeration value="41">
 						<xs:annotation>
 							<xs:appinfo>ACN</xs:appinfo>
 							<xs:documentation>Phases A, C and neutral.</xs:documentation>
@@ -3035,12 +3137,6 @@ Enumerations
 						<xs:annotation>
 							<xs:appinfo>BAv</xs:appinfo>
 							<xs:documentation>Phase B current or voltage relative to Phase A voltage</xs:documentation>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="41">
-						<xs:annotation>
-							<xs:appinfo>CAN</xs:appinfo>
-							<xs:documentation>CA to Neutral</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="40">
