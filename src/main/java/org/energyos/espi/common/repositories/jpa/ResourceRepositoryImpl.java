@@ -76,12 +76,12 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
 				for (String token : href.split("/")) {
 					if (usagePointFlag) {
-						usagePointId = Long.decode(token);
+						usagePointId = Long.parseLong(token);
 						usagePointFlag = false;
 					}
 
 					if (meterReadingFlag) {
-						meterReadingId = Long.decode(token);
+						meterReadingId = Long.parseLong(token);
 						meterReadingFlag = false;
 					}
 
@@ -104,7 +104,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
 				}
 			} catch (Exception e) {
-				// nothing to do, just retur the empty result and
+				// nothing to do, just return the empty result and
 				// we'll find it later.
 				System.out.printf("**** findAllParentsByRelatedHref(String href) Exception: %s\n",
 						e.toString());
