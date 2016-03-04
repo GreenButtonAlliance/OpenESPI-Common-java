@@ -104,7 +104,7 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
 				}
 			} catch (Exception e) {
-				// nothing to do, just retur the empty result and
+				// nothing to do, just return the empty result and
 				// we'll find it later.
 				System.out.printf("**** findAllParentsByRelatedHref(String href) Exception: %s\n",
 						e.toString());
