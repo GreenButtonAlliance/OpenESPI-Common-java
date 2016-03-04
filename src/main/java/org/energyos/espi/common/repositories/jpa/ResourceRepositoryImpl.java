@@ -76,12 +76,12 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
 				for (String token : href.split("/")) {
 					if (usagePointFlag) {
-						usagePointId = Long.parseLong(token);
+						usagePointId = Long.decode(token);
 						usagePointFlag = false;
 					}
 
 					if (meterReadingFlag) {
-						meterReadingId = Long.parseLong(token);
+						meterReadingId = Long.decode(token);
 						meterReadingFlag = false;
 					}
 
