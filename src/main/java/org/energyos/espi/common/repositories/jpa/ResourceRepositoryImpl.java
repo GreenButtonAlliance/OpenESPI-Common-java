@@ -76,12 +76,12 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
 				for (String token : href.split("/")) {
 					if (usagePointFlag) {
-						usagePointId = Long.decode(token);
+						usagePointId = Long.parseLong(token,16);
 						usagePointFlag = false;
 					}
 
 					if (meterReadingFlag) {
-						meterReadingId = Long.decode(token);
+						meterReadingId = Long.parseLong(token,16);
 						meterReadingFlag = false;
 					}
 
@@ -144,22 +144,22 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
 					for (String token : href.split("/")) {
 						if (localTimeParameterFlag) {
-							localTimeParameterId = Long.decode(token);
+							localTimeParameterId = Long.parseLong(token,16);
 							localTimeParameterFlag = false;
 						}
 
 						if (readingTypeFlag) {
-							readingTypeId = Long.decode(token);
+							readingTypeId = Long.parseLong(token,16);
 							readingTypeFlag = false;
 						}
 
 						if (electricPowerUsageFlag) {
-							electricPowerUsageId = Long.decode(token);
+							electricPowerUsageId = Long.parseLong(token,16);
 							electricPowerUsageFlag = false;
 						}
 
 						if (electricPowerQualityFlag) {
-							electricPowerQualityId = Long.decode(token);
+							electricPowerQualityId = Long.parseLong(token,16);
 							electricPowerQualityFlag = false;
 						}
 
