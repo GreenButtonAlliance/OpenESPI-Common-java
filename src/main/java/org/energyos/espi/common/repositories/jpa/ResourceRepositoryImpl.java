@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -59,7 +60,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 		List<IdentifiedObject> result = em.createNamedQuery(queryString)
 				.setParameter("href", href).getResultList();
 		if (result.isEmpty()) {
-			try {
 				// we did not find one, so now try to parse the URL and find the
 				// parent that way
 				// this needed only b/c we are not storing the up and self hrefs
@@ -74,14 +74,19 @@ class ResourceRepositoryImpl implements ResourceRepository {
 				Long usagePointId = null;
 				Long meterReadingId = null;
 
+			try {
 				for (String token : href.split("/")) {
 					if (usagePointFlag) {
-						usagePointId = Long.parseLong(token,16);
+						if (token.length() != 0) {
+							usagePointId = Long.decode(token);
+						}
 						usagePointFlag = false;
 					}
 
 					if (meterReadingFlag) {
-						meterReadingId = Long.parseLong(token,16);
+						if (token.length() != 0) {
+							meterReadingId = Long.decode(token);
+						}
 						meterReadingFlag = false;
 					}
 
@@ -103,12 +108,18 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					}
 
 				}
+
+			} catch (NoResultException e) {
+				// nothing to do, just return the empty result and
+				// we'll find it later.
+				System.out.printf("**** findAllParentsByRelatedHref(String href) NoResultException: %s\n     usagePointId: %s   meterReadingId: %s\n     href: %s\n",
+						e.toString(), usagePointId, meterReadingId, href);
+
 			} catch (Exception e) {
 				// nothing to do, just return the empty result and
 				// we'll find it later.
-				System.out.printf("**** findAllParentsByRelatedHref(String href) Exception: %s\n",
-						e.toString());
-
+				System.out.printf("**** findAllParentsByRelatedHref(String href) Exception: %s\n     href: %s\n",
+						e.toString(), href);
 			}
 
 		}
@@ -125,9 +136,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 				.createNamedQuery(linkable.getAllRelatedQuery())
 				.setParameter("relatedLinkHrefs",
 						linkable.getRelatedLinkHrefs()).getResultList();
-		// now check for specific related that do not have their href's stored
-		// in the DB
-		// or imported objects that have the external href's stored
+		// Check for specific related that do not have their href's stored
+		// in the DB or imported objects that have the external href's stored
 		if (temp.isEmpty()) {
 			try {
 				Boolean localTimeParameterFlag = false;
@@ -141,25 +151,32 @@ class ResourceRepositoryImpl implements ResourceRepository {
 				Long electricPowerQualityId = null;
 
 				for (String href : linkable.getRelatedLinkHrefs()) {
-
 					for (String token : href.split("/")) {
 						if (localTimeParameterFlag) {
-							localTimeParameterId = Long.parseLong(token,16);
+							if (token.length() != 0) {
+								localTimeParameterId = Long.decode(token);
+							}
 							localTimeParameterFlag = false;
 						}
 
 						if (readingTypeFlag) {
-							readingTypeId = Long.parseLong(token,16);
+							if (token.length() != 0) {
+								readingTypeId = Long.decode(token);
+							}
 							readingTypeFlag = false;
 						}
 
 						if (electricPowerUsageFlag) {
-							electricPowerUsageId = Long.parseLong(token,16);
+							if (token.length() != 0) {
+								electricPowerUsageId = Long.decode(token);
+							}
 							electricPowerUsageFlag = false;
 						}
 
 						if (electricPowerQualityFlag) {
-							electricPowerQualityId = Long.parseLong(token,16);
+							if (token.length() != 0) {
+								electricPowerQualityId = Long.decode(token);
+							}
 							electricPowerQualityFlag = false;
 						}
 
@@ -200,8 +217,15 @@ class ResourceRepositoryImpl implements ResourceRepository {
 								ElectricPowerQualitySummary.class));
 					}
 				}
+				
+			} catch (NoResultException e) {
+				// We haven't processed the related record yet, so just return the
+				// empty temp
+				System.out.printf("**** findAllRelated(Linkable linkable) NoResultException: %s\n     Processed 'related' link before processing 'self' link\n",
+						e.toString());
+
 			} catch (Exception e) {
-				// nothing to do -- we'll find it later, just return the
+				// We haven't processed the related record yet, so just return the
 				// empty temp
 				System.out.printf("**** findAllRelated(Linkable linkable) Exception: %s\n",
 						e.toString());
@@ -240,8 +264,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			return (T) em.createNamedQuery(queryFindById)
 					.setParameter("id", id).getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-			System.out.printf("**** FindbyId(Long id) Exception: %s - %s\n",
-					clazz.toString(), e.toString());
+			System.out.printf("**** FindbyId(Long id) Exception: %s - %s id: %s\n",
+					clazz.toString(), e.toString(), id);
 			throw new RuntimeException(e);
 		}
 
