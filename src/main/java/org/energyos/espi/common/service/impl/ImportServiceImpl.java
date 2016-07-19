@@ -131,11 +131,19 @@ public class ImportServiceImpl implements ImportService {
 		try {
 			reader.parse(new InputSource(stream));
 
+		} catch (SAXException e) {
+			System.out
+					.printf("\nImportServiceImpl -- importData: SAXException\n     Cause = %s\n     Description = %s\n\n",
+							e.getClass(), e.getMessage());
+			throw new SAXException(e.getMessage(), e);
+			
 		} catch (Exception e) {
 			System.out
 					.printf("\nImportServiceImpl -- importData:\n     Cause = %s\n     Description = %s\n\n",
 							e.getClass(), e.getMessage());
 			e.printStackTrace();
+			
+			
 		}
 		// context of the import used for linking things up
 		// and establishing notifications
