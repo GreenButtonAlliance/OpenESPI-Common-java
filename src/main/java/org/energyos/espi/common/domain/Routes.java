@@ -27,7 +27,7 @@ public class Routes {
 	public static final String DATA_CUSTODIAN_MANAGE = "/management";
 	public static final String THIRD_PARTY_MANAGE = "/management";
 
-	public static final String DATA_CUSTODIAN_API_FEED = "/api/feed";
+	// public static final String DATA_CUSTODIAN_API_FEED = "/api/feed";
 	public static final String DATA_CUSTODIAN_AUTHORIZATION = "/espi/1_1/resource/Authorization/{authorizationId}";
 	public static final String DATA_CUSTODIAN_HOME = "/custodian/home";
 	public static final String DATA_CUSTODIAN_NOTIFY_THIRD_PARTYS = "/espi/1_1/NotifyThirdParty";
