@@ -140,7 +140,7 @@ LOCK TABLES `oauth_client_details` WRITE;
 /*!40000 ALTER TABLE `oauth_client_details` DISABLE KEYS */;
 SET sql_mode = 'PIPES_AS_CONCAT';
 
-SET @tpbaseurl = 'https://sandbox.greenbuttonalliance.org:8443';
+SET @tpbaseurl = 'http://ec2-52-43-245-161.us-west-2.compute.amazonaws.com:8080';
 
 INSERT INTO `oauth_client_details` VALUES ('data_custodian',NULL,'secret','FB=3_19_32_33_34_35_36_37_38_41_44_45','client_credentials',NULL,'ROLE_DC_ADMIN',315360000,NULL,NULL,'FALSE'),('REGISTRATION_third_party',NULL,'secret','FB=36_40','client_credentials',NULL,'ROLE_TP_REGISTRATION',315360000,NULL,NULL,'FALSE'),('third_party',NULL,'secret','FB=1_3_4_5_13_14_39;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13,FB=1_3_4_5_13_14_15_39;IntervalDuration=900;BlockDuration=monthly;HistoryLength=13,FB=1_3_4_5_13_14_39;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13,FB=1_3_4_5_6_7_8_9_10_11_29_12_13_14_15_16_17_18_19_27_28_32_33_34_35_37_38_39_40_41_44;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13','authorization_code,refresh_token,client_credentials',
 @tpbaseurl || '/ThirdParty/espi/1_1/OAuthCallBack','ROLE_USER',315360000,630720000,NULL,'FALSE'),('third_party_admin',NULL,'secret','FB=34_35','client_credentials',NULL,'ROLE_TP_ADMIN',315360000,NULL,NULL,'FALSE'),('upload',NULL,'secret','FB=45','client_credentials',NULL,'ROLE_UL_ADMIN',315360000,NULL,NULL,'FALSE');
