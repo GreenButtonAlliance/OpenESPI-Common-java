@@ -60,8 +60,7 @@ public class EntryBuilder {
 
 	private void buildLinks(IdentifiedObject resource) {
 		
-		//TODO: Add Certification relLink
-		entry.getLinks().add(new LinkType(LinkType.RELATED, "https://cert.greenbuttonalliance.org/certificate/" + Routes.GBA_CERT_ID));		
+		entry.addRelatedLink("https://cert.greenbuttonalliance.org/certificate/" + Routes.GBA_CERT_ID);		
 		entry.getLinks().add(resource.getUpLink());
 		entry.getLinks().add(resource.getSelfLink());
 

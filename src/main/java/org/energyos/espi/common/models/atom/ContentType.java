@@ -54,6 +54,7 @@ import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.domain.MeterReading;
 import org.energyos.espi.common.domain.ReadingType;
 import org.energyos.espi.common.domain.RetailCustomer;
+import org.energyos.espi.common.domain.Routes;
 import org.energyos.espi.common.domain.Subscription;
 import org.energyos.espi.common.domain.TimeConfiguration;
 import org.energyos.espi.common.domain.UsagePoint;
@@ -683,6 +684,9 @@ public class ContentType {
 		List<String> result = new ArrayList<String>();
 		RetailCustomer retailCustomer = null;
 
+		// Add GBA Certification Link
+		result.add("https://cert.greenbuttonalliance.org/certificate/" + Routes.GBA_CERT_ID);		
+		
 		if (this.getMeterReading() != null) {
 
 			// get the objects
