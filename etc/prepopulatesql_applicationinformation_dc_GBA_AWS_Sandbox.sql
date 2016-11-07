@@ -1,8 +1,8 @@
 /* Add application_information */
 SET sql_mode = 'PIPES_AS_CONCAT';
 
-SET @dcbaseurl = 'http://ec2-52-43-245-161.us-west-2.compute.amazonaws.com:8080';
-SET @tpbaseurl = 'http://ec2-52-43-245-161.us-west-2.compute.amazonaws.com:8080';
+SET @dcbaseurl = 'https://sandbox.greenbuttonalliance.org:8443';
+SET @tpbaseurl = 'https://sandbox.greenbuttonalliance.org:8443';
 
 USE 'datacustodian';
 
