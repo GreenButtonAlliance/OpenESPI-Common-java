@@ -20,6 +20,7 @@ INSERT INTO application_information_scopes (application_information_id, scope) V
 INSERT INTO application_information_scopes (application_information_id, scope) VALUES (2, 'FB=1_3_4_5_13_14_39;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13');
 INSERT INTO application_information_scopes (application_information_id, scope) VALUES (2, 'FB=1_3_4_5_6_7_8_9_10_11_29_12_13_14_15_16_17_18_19_27_28_32_33_34_35_37_38_39_40_41_44;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13');
 INSERT INTO application_information_scopes (application_information_id, scope) VALUES (3, 'FB=45');
+INSERT INTO application_information_scopes (application_information_id, scope) VALUES (4, 'FB=1_3_4_5_13_14_39;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13');
 
 /* Add application_information_grant_types */ 
 INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (1, 'CLIENT_CREDENTIALS');
@@ -27,6 +28,9 @@ INSERT INTO application_information_grant_types (application_information_id, gra
 INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (2, 'REFRESH_TOKEN');
 INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (2, 'CLIENT_CREDENTIALS');
 INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (3, 'CLIENT_CREDENTIALS');
+INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (4, 'CLIENT_CREDENTIALS');
+INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (4, 'AUTHORIZATION_CODE');
+INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (4, 'REFRESH_TOKEN');
 
 /* Add predefined authorizations */
 INSERT INTO `authorizations` VALUES (1,NULL,'2015-05-15 15:02:39',NULL,'self',NULL,'up','2015-05-15 15:02:40','A1635478-76A7-449D-8AE9-EBB191352C25','2a85f4bd-30db-4b7d-8f41-b046b0566cb3', @dcbaseurl || '/DataCustodian/espi/1_1/resource/Authorization/1',0,0,NULL,NULL,NULL,NULL,1747076559,NULL,0,0,NULL,@dcbaseurl || '/DataCustodian/espi/1_1/resource/',NULL,'FB=3_19_32_33_34_35_36_37_38_41_44_45',NULL,'1','data_custodian',0,1,0,1),
