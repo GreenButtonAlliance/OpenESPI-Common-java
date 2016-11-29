@@ -8,13 +8,13 @@
 
 # drop/create databases 
 mysql --user=root --password=password < cleandatabases_dc.sql
-#mysql --user=root --password=password < cleandatabases_tp.sql
+mysql --user=root --password=password < cleandatabases_tp.sql
 
 # create tables 
-#mysql --user=root --password=password < thirdpartymysql.sql
+mysql --user=root --password=password < thirdpartymysql.sql
 mysql --user=root --password=password < datacustodianmysql.sql
 mysql --user=root --password=password < tokenstore.sql
 
 # prepopulate tables 
 mysql --user=root --password=password < prepopulatesql_dc.sql
-#mysql --user=root --password=password < prepopulatesql_tp.sql
+mysql --user=root --password=password < prepopulatesql_tp.sql
