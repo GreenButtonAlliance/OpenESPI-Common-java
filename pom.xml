@@ -24,14 +24,63 @@
     <artifactId>Common</artifactId>
     <version>1.3-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <name>Common</name>
+    <organization>
+    	<name>EnergyOS.org</name>
+    	<url>http://www.energyos.org</url>
+    </organization>
+    
+    <licenses>
+    	<license>
+    		<name>The Apache Software License, Version 2.0</name>
+    		<url>http://www.apache.org/licenses/LICENSE-2.o.txt</url>
+    	</license>
+    </licenses>
     
     <scm>
-       <!-- Replace the connection below with your project connection -->
-       <!--  http://mariuszprzydatek.com/2013/09/18/displaying-git-build-number-hash-in-your-rest-api/ -->
        <connection>scm:git:https://github.com/energyos/OpenESPI-Common-java.git/</connection>
+       <developerConnection>scm:git:git@github.com:energyos/OpenESPI-Common-java.git</developerConnection>
+       <url>https://github.com/energyos/OpenESPI-Common-java.git</url>
+       <tag>HEAD</tag>
     </scm>
+    
+    <developers>
+    	<developer>
+    		<id>jteeter</id>
+    		<name>John Teeter</name>
+    		<email>john.teeter@energyos.org</email>
+    	</developer>
+    	
+    	<developer>
+    		<id>dcoffin</id>
+    		<name>Donald F. Coffin</name>
+    		<email>donald.coffin@reminetworks.com</email>
+    	</developer>
+    	
+    	<developer>
+    		<id>mburns</id>
+    		<name>Dr. Martin J. Burns</name>
+    		<email>marty@hypertek.us</email>
+    	</developer>
+    	
+    	<developer>
+    		<id>apliszka</id>
+    		<name>Andy Pliszka</name>
+    		<email>apliska@pivotal.io</email>
+    	</developer>
+    	
+    	<developer>
+    		<id>rclutton</id>
+    		<name>Robbie Clutton</name>
+    		<email>rclutton@pivotal.io</email>
+    	</developer>
+    	
+    	<developer>
+    		<id>wramsey</id>
+    		<name>William Ramsey</name>
+    		<email>wramsey@pivotal.io</email>
+    	</developer>
+    </developers>
 
     <profiles>
     
