@@ -18,6 +18,7 @@ package org.energyos.espi.common.utils;
 
 import java.util.Map;
 
+import org.energyos.espi.common.domain.IntervalBlock;
 import org.energyos.espi.common.models.atom.DateTimeType;
 import org.energyos.espi.common.models.atom.EntryType;
 
@@ -41,15 +42,61 @@ public class ExportFilter {
 			}
 		}
 		
+		if (hasParam("published-max") && hasParam("published-min")) {
+			// check if this is an IntervalBlock
+			if(entry.getContent().getIntervalBlocks()!=null && !entry.getContent().getIntervalBlocks().isEmpty()){
+				IntervalBlock ib1 = entry.getContent().getIntervalBlocks().get(0);
+				IntervalBlock ibn = entry.getContent().getIntervalBlocks().get(entry.getContent().getIntervalBlocks().size()-1);
+				
+				long lStart = ib1.getInterval().getStart();
+				long lEnd = ibn.getInterval().getStart() + ibn.getInterval().getDuration();
+				
+				long lPubMin = toTime("published-min")/1000;
+				long lPubMax = toTime("published-max")/1000;
+				
+				if((lStart >= lPubMin) && (lEnd <= lPubMax)){
+					emittedCounter++;
+					return true; // cannot fall-through to the final return statement... must return here to bypass additional pub min,max checks
+				} else {
+					return false;
+				}
+			} else {				
+				if ( (toTime("published-max") < toTime(entry.getPublished())) && (toTime("published-min") > toTime(entry.getPublished()))) {
+					return false;
+				}
+			}
+		}
+			
 		if (hasParam("published-max")) {
-			if (toTime("published-max") < toTime(entry.getPublished())) {
-				return false;
+			// check if this is an IntervalBlock
+			if(entry.getContent().getIntervalBlocks()!=null && !entry.getContent().getIntervalBlocks().isEmpty()){
+				IntervalBlock ibn = entry.getContent().getIntervalBlocks().get(entry.getContent().getIntervalBlocks().size()-1);
+				
+				long lEnd = ibn.getInterval().getStart() + ibn.getInterval().getDuration();
+				
+				if(toTime("published-max")/1000 < lEnd){
+					return false;
+				}
+			} else {				
+				if (toTime("published-max") < toTime(entry.getPublished())) {
+					return false;
+				}
 			}
 		}
 		
 		if (hasParam("published-min")) {
-			if (toTime("published-min") > toTime(entry.getPublished())) {
-				return false;
+			// check if this is an IntervalBlock
+			if(entry.getContent().getIntervalBlocks()!=null && !entry.getContent().getIntervalBlocks().isEmpty()){
+				IntervalBlock ib1 = entry.getContent().getIntervalBlocks().get(0);
+				long lStart = ib1.getInterval().getStart();
+				
+				if(toTime("published-min")/1000 > lStart){
+					return false;
+				}
+			} else {				
+				if (toTime("published-min") > toTime(entry.getPublished())) {
+					return false;
+				}
 			}
 		}
 
