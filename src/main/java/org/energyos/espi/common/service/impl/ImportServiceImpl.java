@@ -220,7 +220,7 @@ public class ImportServiceImpl implements ImportService {
 					// an Authorization w/o an associated subscription breaks
 					// the propagation chain
 					System.out
-							.printf("**** End of Notification Propgation Chain\n");
+							.printf("**** End of Notification Propagation Chain\n");
 				}
 				if (subscription != null) {
 					String resourceUri = authorization.getResourceURI();

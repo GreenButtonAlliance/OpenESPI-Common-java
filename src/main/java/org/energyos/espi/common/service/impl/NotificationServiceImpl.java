@@ -59,29 +59,24 @@ public class NotificationServiceImpl implements NotificationService {
 	@Override
 	public void notify(Subscription subscription,
 			XMLGregorianCalendar startDate, XMLGregorianCalendar endDate) {
+		
 		String thirdPartyNotificationURI = subscription
 				.getApplicationInformation().getThirdPartyNotifyUri();
 		String separator = "?";
-		String startDateString = "All";
-		String endDateString = "All";
-
-		if (startDate != null)
-			startDateString = startDate.toXMLFormat();
-		if (endDate != null)
-			endDateString = endDate.toXMLFormat();
-
 		String subscriptionURI = subscription.getApplicationInformation()
 				.getDataCustodianResourceEndpoint()
 				+ "/Batch/Subscription/"
 				+ subscription.getId();
+		
 		if (startDate != null) {
 			subscriptionURI = subscriptionURI + separator + "published-min="
-					+ startDateString;
+					+ startDate.toXMLFormat();
 			separator = "&";
 		}
+		
 		if (endDate != null) {
 			subscriptionURI = subscriptionURI + separator + "published-max="
-					+ endDateString;
+					+ endDate.toXMLFormat();
 		}
 
 		BatchList batchList = new BatchList();
