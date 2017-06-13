@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2016 (x64) (http://www.altova.com) by National Institute of Standards & Technology (NIST) -->
+<!-- edited with XMLSpy v2017 sp2 (x64) (http://www.altova.com) by Donald F Coffin (REMI Networks) -->
 <!-- 
 ==========================================================================
  Schema: reatilCustomer.xsd
@@ -610,6 +610,11 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
 				<xs:sequence>
+					<xs:element ref="name" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name of organisation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="streetAddress" type="StreetAddress" minOccurs="0" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>Street address.</xs:documentation>
@@ -1431,11 +1436,6 @@ ESPI Schema Primitives
 			<xs:extension base="Object">
 				<xs:sequence>
 					<xs:element name="batchItemInfo" type="BatchItemInfo" minOccurs="0"/>
-					<xs:element ref="name" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>identifier of object instance</xs:documentation>
-						</xs:annotation>
-					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
