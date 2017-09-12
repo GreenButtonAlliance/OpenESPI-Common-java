@@ -1380,7 +1380,7 @@ Additional Complex Types
 			<xs:element name="denominator" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="BatchListType">
+	<xs:complexType name="BatchList">
 		<xs:annotation>
 			<xs:documentation>[extension] List of resource URIs that can be used to GET ESPI resources</xs:documentation>
 		</xs:annotation>
@@ -1869,10 +1869,10 @@ Enumerations
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="26">
-					    <xs:annotation>
-					        <xs:appinfo>electricity TransmissionMetered</xs:appinfo>
-					        <xs:documentation>Service taken directly from transmission system without transformation from standard transmission voltages.</xs:documentation>
-					    </xs:annotation>					
+						<xs:annotation>
+							<xs:appinfo>electricity TransmissionMetered</xs:appinfo>
+							<xs:documentation>Service taken directly from transmission system without transformation from standard transmission voltages.</xs:documentation>
+						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
 			</xs:simpleType>
@@ -5081,5 +5081,5 @@ Global Elements
 	<xs:element name="ServiceStatus" type="ServiceStatus"/>
 	<xs:element name="LocalTimeParameters" type="TimeConfiguration"/>
 	<xs:element name="ProgramIdMappings" type="ProgramIdMappings"/>
-	<xs:element name="BatchList" type="BatchListType"/>
+	<xs:element name="BatchList" type="BatchList"/>
 </xs:schema>

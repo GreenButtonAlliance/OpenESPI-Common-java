@@ -557,7 +557,7 @@ Additional Complex Types
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="BatchListType">
+	<xs:complexType name="BatchList">
 		<xs:annotation>
 			<xs:documentation>[extension] List of resource URIs that can be used to GET retail customer resources</xs:documentation>
 		</xs:annotation>
@@ -2496,7 +2496,7 @@ Global Elements
 	<xs:element name="Asset" type="Asset"/>
 	<xs:element name="AssetContainer" type="AssetContainer"/>
 	<xs:element name="BatchItemInfo" type="BatchItemInfo"/>
-	<xs:element name="BatchList" type="BatchListType"/>
+	<xs:element name="BatchList" type="BatchList"/>
 	<xs:element name="Customer" type="Customer"/>
 	<xs:element name="CustomerAccount" type="CustomerAccount"/>
 	<xs:element name="CustomerAgreement" type="CustomerAgreement"/>
