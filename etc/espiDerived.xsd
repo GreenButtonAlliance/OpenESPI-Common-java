@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2017 rel. 3 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
 <xs:schema xmlns="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.7.20131008">
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20160718    
-    Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
+    Version: 0.7.20170908    
+    Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
 This product includes software developed within the EnergyOS Initiative
@@ -387,12 +388,12 @@ Resource Types
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
 				<xs:sequence>
-					<xs:element name="accumulationBehaviour" type="AccumulationKind" minOccurs="0" maxOccurs="1">
+					<xs:element name="accumulationBehaviour" type="AccumulationKind" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Code indicating how value is accumulated over time for Readings of ReadingType. </xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="commodity" type="CommodityKind" minOccurs="0" maxOccurs="1">
+					<xs:element name="commodity" type="CommodityKind" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Code for commodity classification of Readings of ReadingType.</xs:documentation>
 						</xs:annotation>
@@ -458,17 +459,17 @@ Specific format and valid values per the standard are specified in QualityOfRead
 							<xs:documentation>Code for the base unit of measure for Readings of ReadingType.  Used in combination with the powerOfTenMultiplier to specify the actual unit of measure</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="cpp" type="Int16" minOccurs="0" maxOccurs="1">
+					<xs:element name="cpp" type="Int16" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Critical peak period (CPP) bucket the reading value is attributed to. Value 0 means not applicable. Even though CPP is usually considered a specialized form of time of use 'tou', this attribute is defined explicitly for flexibility.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="interharmonic" type="ReadingInterharmonic" minOccurs="0" maxOccurs="1">
+					<xs:element name="interharmonic" type="ReadingInterharmonic" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Indication of a "harmonic" or "interharmonic" basis for the measurement. Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="measuringPeriod" type="TimeAttributeKind" minOccurs="0" maxOccurs="1">
+					<xs:element name="measuringPeriod" type="TimeAttributeKind" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Time attribute inherent or fundamental to the reading value (as opposed to 'macroPeriod' that supplies an "adjective" to describe aspects of a time period with regard to the measurement). It refers to the way the value was originally measured and not to the frequency at which it is reported or presented. For example, an hourly interval of consumption data would have value 'hourly' as an attribute. However in the case of an hourly sampled voltage value, the meterReadings schema would carry the 'hourly' interval size information.
 It is common for meters to report demand in a form that is measured over the course of a portion of an hour, while enterprise applications however commonly assume the demand (in kW or kVAr) normalized to 1 hour. The system that receives readings directly from the meter therefore must perform this transformation before publishing readings for use by the other enterprise systems. The scalar used is chosen based on the block size (not any sub-interval size).</xs:documentation>
@@ -507,87 +508,87 @@ Value 0 in 'numerator' and 'denominator' means not applicable.</xs:documentation
 							<xs:documentation>[extension] Contains service delivery point information about the UsagePoint if it does represent the service delivery point.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="amiBillingReady" type="AmiBillingReadyKind" minOccurs="0" maxOccurs="1">
+					<xs:element name="amiBillingReady" type="AmiBillingReadyKind" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Tracks the lifecycle of the metering installation at a usage point with respect to readiness for billing via advanced metering infrastructure reads.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="checkBilling" type="xs:boolean" minOccurs="0" maxOccurs="1">
+					<xs:element name="checkBilling" type="xs:boolean" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] True if as a result of an inspection or otherwise, there is a reason to suspect that a previous billing may have been performed with erroneous data. Value should be reset once this potential discrepancy has been resolved.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="connectionState" type="UsagePointConnectedKind" minOccurs="0" maxOccurs="1">
+					<xs:element name="connectionState" type="UsagePointConnectedKind" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] State of the usage point with respect to connection to the network.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="estimatedLoad" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+					<xs:element name="estimatedLoad" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Estimated load.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="grounded" type="xs:boolean" minOccurs="0" maxOccurs="1">
+					<xs:element name="grounded" type="xs:boolean" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] True if grounded.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="isSdp" type="xs:boolean" minOccurs="0" maxOccurs="1">
+					<xs:element name="isSdp" type="xs:boolean" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] If true, this usage point is a service delivery point, i.e., a usage point where the ownership of the service changes hands.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="isVirtual" type="xs:boolean" minOccurs="0" maxOccurs="1">
+					<xs:element name="isVirtual" type="xs:boolean" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] If true, this usage point is virtual, i.e., no physical location exists in the network where a meter could be located to collect the meter readings. For example, one may define a virtual usage point to serve as an aggregation of usage for all of a company's premises distributed widely across the distribution territory. Otherwise, the usage point is physical, i.e., there is a logical point in the network where a meter could be located to collect meter readings.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="minimalUsageExpected" type="xs:boolean" minOccurs="0" maxOccurs="1">
+					<xs:element name="minimalUsageExpected" type="xs:boolean" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] If true, minimal or zero usage is expected at this usage point for situations such as premises vacancy, logical or physical disconnect. It is used for readings validation and estimation.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="nominalServiceVoltage" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+					<xs:element name="nominalServiceVoltage" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Nominal service voltage.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="outageRegion" type="String256" minOccurs="0" maxOccurs="1">
+					<xs:element name="outageRegion" type="String256" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Outage region in which this usage point is located.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="phaseCode" type="PhaseCodeKind" minOccurs="0" maxOccurs="1">
+					<xs:element name="phaseCode" type="PhaseCodeKind" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Phase code. Number of wires and specific nominal phases can be deduced from enumeration literal values. For example, ABCN is three-phase, four-wire, s12n (splitSecondary12N) is single-phase, three-wire, and s1n and s2n are single-phase, two-wire.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="ratedCurrent" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+					<xs:element name="ratedCurrent" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Current flow that this usage point is configured to deliver.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="ratedPower" type="SummaryMeasurement" minOccurs="0" maxOccurs="1">
+					<xs:element name="ratedPower" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Active power that this usage point is configured to deliver.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="readCycle" type="String256" minOccurs="0" maxOccurs="1">
+					<xs:element name="readCycle" type="String256" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Cycle day on which the meter for this usage point will normally be read.  Usually correlated with the billing cycle.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="readRoute" type="String256" minOccurs="0" maxOccurs="1">
+					<xs:element name="readRoute" type="String256" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Identifier of the route to which this usage point is assigned for purposes of meter reading. Typically used to configure hand held meter reading systems prior to collection of reads.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="serviceDeliveryRemark" type="String256" minOccurs="0" maxOccurs="1">
+					<xs:element name="serviceDeliveryRemark" type="String256" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Remarks about this usage point, for example the reason for it being rated with a non-nominal priority.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="servicePriority" type="String32" minOccurs="0" maxOccurs="1">
+					<xs:element name="servicePriority" type="String32" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Priority of service for this usage point. Note that usage points at the same service location can have different priorities.</xs:documentation>
 						</xs:annotation>
@@ -989,7 +990,7 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 								</xs:element>
 								<xs:element name="note" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>optional description of cod</xs:documentation>
+										<xs:documentation>optional description of code</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1027,17 +1028,17 @@ Other EUI Types
 							<xs:documentation>[correction] Value in units specified by ReadingType</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="consumptionTier" type="Int16" minOccurs="0" maxOccurs="1">
+					<xs:element name="consumptionTier" type="Int16" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Code for consumption tier associated with reading.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="tou" type="Int16" minOccurs="0" maxOccurs="1">
+					<xs:element name="tou" type="Int16" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Code for the TOU type of reading. </xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="cpp" type="Int16" minOccurs="0" maxOccurs="1">
+					<xs:element name="cpp" type="Int16" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Critical peak period (CPP) bucket the reading value is attributed to. Value 0 means not applicable. Even though CPP is usually considered a specialized form of time of use 'tou', this attribute is defined explicitly for flexibility.</xs:documentation>
 						</xs:annotation>
@@ -1224,14 +1225,6 @@ Basic Types
 			<xs:maxLength value="256"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="String32">
-		<xs:annotation>
-			<xs:documentation>Character string of max length 32</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:maxLength value="32"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="String64">
 		<xs:annotation>
 			<xs:documentation>Character string of max length 64</xs:documentation>
@@ -1240,17 +1233,13 @@ Basic Types
 			<xs:maxLength value="64"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="UInt16">
+	<xs:simpleType name="String32">
 		<xs:annotation>
-			<xs:documentation>Unsigned integer, max inclusive 65535 (2^16-1), same as xs:unsignedShort</xs:documentation>
+			<xs:documentation>Character string of max length 32</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:unsignedShort"/>
-	</xs:simpleType>
-	<xs:simpleType name="UInt32">
-		<xs:annotation>
-			<xs:documentation>Unsigned integer, max inclusive 4294967295 (2^32-1), same as xs:unsignedInt</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:unsignedInt"/>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="UInt48">
 		<xs:annotation>
@@ -1259,6 +1248,18 @@ Basic Types
 		<xs:restriction base="xs:unsignedLong">
 			<xs:maxInclusive value="281474976710655"/>
 		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UInt32">
+		<xs:annotation>
+			<xs:documentation>Unsigned integer, max inclusive 4294967295 (2^32-1), same as xs:unsignedInt</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="UInt16">
+		<xs:annotation>
+			<xs:documentation>Unsigned integer, max inclusive 65535 (2^16-1), same as xs:unsignedShort</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedShort"/>
 	</xs:simpleType>
 	<xs:simpleType name="UInt8">
 		<xs:annotation>
@@ -1422,6 +1423,11 @@ Additional Complex Types
 					<xs:documentation>[extension] Classification of a line item -- i.e. usage charge, taxes, etc...</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="unitCost" type="Int48" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Per Unit cost.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PnodeRefs">
@@ -1456,7 +1462,17 @@ Additional Complex Types
 			</xs:element>
 			<xs:element name="ref" type="String256">
 				<xs:annotation>
-					<xs:documentation>reference to a Pnode.</xs:documentation>
+					<xs:documentation>URI reference to a Pnode.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startEffectiveDate" type="TimeType">
+				<xs:annotation>
+					<xs:documentation>Start Effective Date of Pnode assignment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="endEffectiveDate" type="TimeType">
+				<xs:annotation>
+					<xs:documentation>End Effective Date of Pnode Assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1474,6 +1490,16 @@ Additional Complex Types
 			<xs:element name="ref" type="String256">
 				<xs:annotation>
 					<xs:documentation>reference to an AggregateNode.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startEffectiveDate" type="TimeType">
+				<xs:annotation>
+					<xs:documentation>Start Effective Date of Pnode assignment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="endEffectiveDate" type="TimeType">
+				<xs:annotation>
+					<xs:documentation>End Effective Date of Pnode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="pnodeRef" type="PnodeRef" minOccurs="0" maxOccurs="unbounded"/>
@@ -5023,7 +5049,6 @@ BUS - Bus</xs:documentation>
 					<xs:documentation>Embedded Control Area</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-			
 		</xs:restriction>
 	</xs:simpleType>
 	<!--
