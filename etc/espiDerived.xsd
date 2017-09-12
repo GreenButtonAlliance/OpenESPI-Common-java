@@ -1465,12 +1465,12 @@ Additional Complex Types
 					<xs:documentation>URI reference to a Pnode.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="startEffectiveDate" type="TimeType">
+			<xs:element name="startEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Starting Effective Date of Pnode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="endEffectiveDate" type="TimeType">
+			<xs:element name="endEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Ending Effective Date of Pnode assignment</xs:documentation>
 				</xs:annotation>
@@ -1492,12 +1492,12 @@ Additional Complex Types
 					<xs:documentation>reference to an AggregateNode.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="startEffectiveDate" type="TimeType">
+			<xs:element name="startEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Starting Effective Date of ANode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="endEffectiveDate" type="TimeType">
+			<xs:element name="endEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Ending Effective Date of ANode assignment</xs:documentation>
 				</xs:annotation>
@@ -1867,6 +1867,12 @@ Enumerations
 							<xs:appinfo>refuse</xs:appinfo>
 							<xs:documentation>trash</xs:documentation>
 						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="26">
+					    <xs:annotation>
+					        <xs:appinfo>electricity TransmissionMetered</xs:appinfo>
+					        <xs:documentation>Service taken directly from transmission system without transformation from standard transmission voltages.</xs:documentation>
+					    </xs:annotation>					
 					</xs:enumeration>
 				</xs:restriction>
 			</xs:simpleType>
