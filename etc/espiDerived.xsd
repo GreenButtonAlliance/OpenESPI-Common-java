@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2017 rel. 3 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
 <xs:schema xmlns="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.7.20131008">
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20160718    
-    Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (Remi Networks)
+    Version: 0.7.20170908    
+    Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
 This product includes software developed within the EnergyOS Initiative
@@ -989,7 +990,7 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 								</xs:element>
 								<xs:element name="note" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>optional description of cod</xs:documentation>
+										<xs:documentation>optional description of code</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
@@ -1422,6 +1423,11 @@ Additional Complex Types
 					<xs:documentation>[extension] Classification of a line item -- i.e. usage charge, taxes, etc...</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="unitCost" type="Int48" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>[extension] Per Unit cost.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PnodeRefs">
@@ -1456,7 +1462,17 @@ Additional Complex Types
 			</xs:element>
 			<xs:element name="ref" type="String256">
 				<xs:annotation>
-					<xs:documentation>reference to a Pnode.</xs:documentation>
+					<xs:documentation>URI reference to a Pnode.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startEffectiveDate" type="TimeType">
+				<xs:annotation>
+					<xs:documentation>Starting Effective Date of Pnode assignment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="endEffectiveDate" type="TimeType">
+				<xs:annotation>
+					<xs:documentation>Ending Effective Date of Pnode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1474,6 +1490,16 @@ Additional Complex Types
 			<xs:element name="ref" type="String256">
 				<xs:annotation>
 					<xs:documentation>reference to an AggregateNode.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startEffectiveDate" type="TimeType">
+				<xs:annotation>
+					<xs:documentation>Starting Effective Date of ANode assignment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="endEffectiveDate" type="TimeType">
+				<xs:annotation>
+					<xs:documentation>Ending Effective Date of ANode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="pnodeRef" type="PnodeRef" minOccurs="0" maxOccurs="unbounded"/>
@@ -5023,7 +5049,6 @@ BUS - Bus</xs:documentation>
 					<xs:documentation>Embedded Control Area</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-			
 		</xs:restriction>
 	</xs:simpleType>
 	<!--
