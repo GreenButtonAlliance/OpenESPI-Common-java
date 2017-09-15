@@ -8,6 +8,7 @@
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 -->
+	<xs:import namespace="http://www.w3.org/2005/Atom" schemaLocation="atom.xsd"/>
 	<xs:annotation>
 		<xs:documentation>The retail customer schema provides details about a UsagePoint that are considered Personally identifiable information (PII) and cannot be part of normal ESPI usage information.
 
