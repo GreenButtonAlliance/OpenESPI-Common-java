@@ -4,7 +4,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20170908    
+    Version: 0.7.20170926    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -234,7 +234,7 @@ self link to this resource</xs:documentation>
 							<xs:documentation>Response types supported. (e.g. "code")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="registration_client_uri" type="xs:anyURI">
+					<xs:element name="registration_client_uri">
 						<xs:annotation>
 							<xs:documentation>{ClientConfigurationURI} A URI used by a registered client to manage registration information.  This URI is returned by the AuthorizationServer in the “registration_client_uri” field of the client information response. {AuthorizationServerRegistrationEndpoint}/ApplicationInformation/{ApplicationInformationID}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource/ApplicationInformation/{ApplicationInformationID}/")</xs:documentation>
 						</xs:annotation>
@@ -611,7 +611,7 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 	</xs:complexType>
 	<xs:complexType name="ElectricPowerQualitySummary">
 		<xs:annotation>
-			<xs:documentation>A summary of power quality events. This information represents a summary of power quality information typically required by customer facility energy management systems. It is not intended to satisfy the detailed requirements of power quality monitoring. All values are as defined by measurementProtocol during the period. The standards typically also give ranges of allowed values; the information attributes are the raw measurements, not the “yes/no” determination by the various standards. See referenced standards for definition, measurement protocol and period.</xs:documentation>
+			<xs:documentation>A summary of power quality events. This information represents a summary of power quality information typically required by customer facility energy management systems. It is not intended to satisfy the detailed requirements of power quality monitoring. All values are as defined by measurementProtocol during the period. The standards typically also give ranges of allowed values; the information attributes are the raw measurements, not the "yes/no" determination by the various standards. See referenced standards for definition, measurement protocol and period.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
@@ -1380,7 +1380,7 @@ Additional Complex Types
 			<xs:element name="denominator" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="BatchList">
+	<xs:complexType name="BatchListType">
 		<xs:annotation>
 			<xs:documentation>[extension] List of resource URIs that can be used to GET ESPI resources</xs:documentation>
 		</xs:annotation>
@@ -1462,15 +1462,15 @@ Additional Complex Types
 			</xs:element>
 			<xs:element name="ref" type="String256">
 				<xs:annotation>
-					<xs:documentation>URI reference to a Pnode.</xs:documentation>
+					<xs:documentation>Reference to a Pnode.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="startEffectiveDate" type="TimeType" minOccurs="0">
+			<xs:element name="startEffectiveDate" type="TimeType">
 				<xs:annotation>
 					<xs:documentation>Starting Effective Date of Pnode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="endEffectiveDate" type="TimeType" minOccurs="0">
+			<xs:element name="endEffectiveDate" type="TimeType">
 				<xs:annotation>
 					<xs:documentation>Ending Effective Date of Pnode assignment</xs:documentation>
 				</xs:annotation>
@@ -1489,15 +1489,15 @@ Additional Complex Types
 			</xs:element>
 			<xs:element name="ref" type="String256">
 				<xs:annotation>
-					<xs:documentation>reference to an AggregateNode.</xs:documentation>
+					<xs:documentation>Reference to an AggregateNode.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="startEffectiveDate" type="TimeType" minOccurs="0">
+			<xs:element name="startEffectiveDate" type="TimeType">
 				<xs:annotation>
 					<xs:documentation>Starting Effective Date of ANode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="endEffectiveDate" type="TimeType" minOccurs="0">
+			<xs:element name="endEffectiveDate" type="TimeType">
 				<xs:annotation>
 					<xs:documentation>Ending Effective Date of ANode assignment</xs:documentation>
 				</xs:annotation>
@@ -1866,12 +1866,6 @@ Enumerations
 						<xs:annotation>
 							<xs:appinfo>refuse</xs:appinfo>
 							<xs:documentation>trash</xs:documentation>
-						</xs:annotation>
-					</xs:enumeration>
-					<xs:enumeration value="26">
-						<xs:annotation>
-							<xs:appinfo>electricity TransmissionMetered</xs:appinfo>
-							<xs:documentation>Service taken directly from transmission system without transformation from standard transmission voltages.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -5081,5 +5075,5 @@ Global Elements
 	<xs:element name="ServiceStatus" type="ServiceStatus"/>
 	<xs:element name="LocalTimeParameters" type="TimeConfiguration"/>
 	<xs:element name="ProgramIdMappings" type="ProgramIdMappings"/>
-	<xs:element name="BatchList" type="BatchList"/>
+	<xs:element name="BatchList" type="BatchListType"/>
 </xs:schema>
