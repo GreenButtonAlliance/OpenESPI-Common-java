@@ -1,3 +1,3 @@
 #!/bin/sh
 
-mvn clean -DskipTests=true package
+mvn clean -DskipTests=true package cobertura:cobertura
