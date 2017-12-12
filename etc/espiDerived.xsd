@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2017 rel. 3 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
+<!-- edited with XMLSpy v2018 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
 <xs:schema xmlns="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.7.20131008">
 	<!-- 
 ==========================================================================
@@ -1465,12 +1465,12 @@ Additional Complex Types
 					<xs:documentation>Reference to a Pnode.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="startEffectiveDate" type="TimeType">
+			<xs:element name="startEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Starting Effective Date of Pnode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="endEffectiveDate" type="TimeType">
+			<xs:element name="endEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Ending Effective Date of Pnode assignment</xs:documentation>
 				</xs:annotation>
@@ -1492,12 +1492,12 @@ Additional Complex Types
 					<xs:documentation>Reference to an AggregateNode.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="startEffectiveDate" type="TimeType">
+			<xs:element name="startEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Starting Effective Date of ANode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="endEffectiveDate" type="TimeType">
+			<xs:element name="endEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Ending Effective Date of ANode assignment</xs:documentation>
 				</xs:annotation>
