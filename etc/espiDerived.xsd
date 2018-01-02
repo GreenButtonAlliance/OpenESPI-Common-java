@@ -4485,6 +4485,12 @@ Enumerations
 							<xs:documentation/>
 						</xs:annotation>
 					</xs:enumeration>
+					<xs:enumeration value="202">
+						<xs:annotation>
+							<xs:appinfo>Accepted</xs:appinfo>
+							<xs:documentation></xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
 					<xs:enumeration value="204">
 						<xs:annotation>
 							<xs:appinfo>No Content</xs:appinfo>
