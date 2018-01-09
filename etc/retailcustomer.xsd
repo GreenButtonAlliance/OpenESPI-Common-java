@@ -4,7 +4,7 @@
 	<!-- 
 ==========================================================================
     Schema: retailcustomer.xsd
-    Version: 0.1.20170926    
+    Version: 0.1.20180109    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 -->
@@ -92,7 +92,11 @@ Resource Types
 							<xs:documentation>Set of customer account notifications.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="mainAddress" type="StreetAddress" minOccurs="0"/>
+					<xs:element name="contactInfo" type="Organisation" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Customer contact information used to identify individual responsible for customer billing and payment.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -132,6 +136,11 @@ Resource Types
 					<xs:element name="currency" type="Currency" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Currency for all monetary amounts for this agreement.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="futureStatus" type="Status" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Future status of subject matter (e.g., Agreement, Work) this document represents. For status of the document itself, use 'docStatus' attribute.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
