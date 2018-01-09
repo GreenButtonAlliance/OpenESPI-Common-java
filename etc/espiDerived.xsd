@@ -4,12 +4,12 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20170926    
+    Version: 0.7.20180109    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
 This product includes software developed within the EnergyOS Initiative
-Copyright (c) 2011, 2012, 2013, 2014, 2015, 2016 EnergyOS.Org
+Copyright (c) 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018 EnergyOS.Org
 
 Licensed by EnergyOS.Org under one or more contributor license agreements.
 See the NOTICE section file below for additional information
@@ -270,7 +270,7 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 				<xs:sequence>
 					<xs:element name="authorizedPeriod" type="DateTimeInterval" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Restricts access to requests or subscriptions within this date time interval. (e.g. "duration=31536000,start=1333252800")</xs:documentation>
+							<xs:documentation>Restricts access to requests or subscriptions within this date time interval. (e.g. "duration=31536000,start=1333252800", a duration value of "0" (zero) indicates an infinite duration period)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="publishedPeriod" type="DateTimeInterval" minOccurs="0">
@@ -4488,7 +4488,7 @@ Enumerations
 					<xs:enumeration value="202">
 						<xs:annotation>
 							<xs:appinfo>Accepted</xs:appinfo>
-							<xs:documentation></xs:documentation>
+							<xs:documentation/>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="204">
