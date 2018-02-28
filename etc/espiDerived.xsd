@@ -1467,12 +1467,12 @@ Additional Complex Types
 			</xs:element>
 			<xs:element name="startEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Starting Effective Date of Pnode assignment</xs:documentation>
+					<xs:documentation>[extension] Starting Effective Date of Pnode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="endEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Ending Effective Date of Pnode assignment</xs:documentation>
+					<xs:documentation>[extension] Ending Effective Date of Pnode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1494,12 +1494,12 @@ Additional Complex Types
 			</xs:element>
 			<xs:element name="startEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Starting Effective Date of ANode assignment</xs:documentation>
+					<xs:documentation>[extension] Starting Effective Date of ANode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="endEffectiveDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Ending Effective Date of ANode assignment</xs:documentation>
+					<xs:documentation>[extension] Ending Effective Date of ANode assignment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="pnodeRef" type="PnodeRef" minOccurs="0" maxOccurs="unbounded"/>
