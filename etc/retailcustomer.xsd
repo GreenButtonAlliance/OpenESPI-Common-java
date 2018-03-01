@@ -1,24 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- edited with XMLSpy v2018 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:espi="http://naesb.org/espi" xmlns:cust="http://naesb.org/espi/customer" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified">
-	<!-- 
+<!-- 
 ==========================================================================
     Schema: retailcustomer.xsd
-    Version: 0.1.20180109    
-    Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
+    Version: 0.1.20180228    
+    Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
+
+This product includes software developed within the EnergyOS Initiative
+Copyright (c) 2014 EnergyOS.Org
+
+Licensed by EnergyOS.Org under one or more contributor license agreements.
+See the NOTICE section file below for additional information
+regarding copyright ownership.  The EnergyOS.org licenses this file
+to you under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License.  You may obtain a copy
+of the License at:
+ 
+  http://www.apache.org/licenses/LICENSE-2.0
+ 
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+
+______________________________________________________
+NOTICE
+______________________________________________________
+______________________________________________________
+END NOTICE
+______________________________________________________
 -->
-	<xs:import namespace="http://www.w3.org/2005/Atom" schemaLocation="atom.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:cust="http://naesb.org/espi/customer" xmlns:espi="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified">
 	<xs:annotation>
 		<xs:documentation>The retail customer schema provides details about a UsagePoint that are considered Personally identifiable information (PII) and cannot be part of normal ESPI usage information.
 
 These resources are available via the same messaging patterns as other ESPI data. However, they are defined in a separate namespace and cannot be retrieved in the same message as non-PII containing ESPI data.</xs:documentation>
 	</xs:annotation>
-	<!--
-=======================================
-Resource Types
-=======================================
--->
+	<!--=======================================
+	Imports
+	=======================================-->
+	<xs:import namespace="http://www.w3.org/2005/Atom" schemaLocation="atom.xsd"/>
+	<!--=======================================
+	Resources
+	=======================================-->
 	<xs:complexType name="Customer">
 		<xs:annotation>
 			<xs:documentation>Organisation receiving services from service supplier.</xs:documentation>
@@ -94,7 +121,7 @@ Resource Types
 					</xs:element>
 					<xs:element name="contactInfo" type="Organisation" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Customer contact information used to identify individual responsible for billing and payment of CustomerAccount.</xs:documentation>
+							<xs:documentation>[extension] Customer contact information used to identify individual responsible for billing and payment of CustomerAccount.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -140,7 +167,7 @@ Resource Types
 					</xs:element>
 					<xs:element name="futureStatus" type="Status" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>Known future changes to CustomerAgreement's Status of Service.</xs:documentation>
+							<xs:documentation>[extension] Known future changes to CustomerAgreement's Status of Service.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -199,7 +226,7 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 					</xs:element>
 					<xs:element name="intervalLength" type="UInt32" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Current interval length specified in seconds.</xs:documentation>
+							<xs:documentation>[extension] Current interval length specified in seconds.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -207,6 +234,9 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ProgramDateIdMappings">
+		<xs:annotation>
+			<xs:documentation>[extension] Collection of all customer Energy Efficiency programs</xs:documentation>
+		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
 				<xs:sequence>
@@ -248,7 +278,7 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 					</xs:element>
 					<xs:element name="outageBlock" type="String32" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Outage Block Identifier</xs:documentation>
+							<xs:documentation>[extension] Outage Block Identifier</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -274,7 +304,7 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 					</xs:element>
 					<xs:element name="effectiveDate" type="TimeType" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Effective Date of Service Activation</xs:documentation>
+							<xs:documentation>[extension] Effective Date of Service Activation</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -313,10 +343,9 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 		</xs:complexContent>
 	</xs:complexType>
 	<!--
-=======================================
-Basic Types     
-=======================================
--->
+	=======================================
+	Basic Types     
+	=======================================-->
 	<xs:simpleType name="HexBinary128">
 		<xs:annotation>
 			<xs:documentation>A 128-bit field encoded as a hex string (32 characters / 16 octets)</xs:documentation>
@@ -397,7 +426,7 @@ Basic Types
 	</xs:simpleType>
 	<xs:simpleType name="UInt16">
 		<xs:annotation>
-			<xs:documentation>Unsigned integer, max inclusive 65535 (2^16-1), same as xs:unsignedInteger</xs:documentation>
+			<xs:documentation>Unsigned integer, max inclusive 65535 (2^16-1), same as xs:unsignedShort</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:unsignedShort"/>
 	</xs:simpleType>
@@ -412,8 +441,8 @@ Basic Types
 			<xs:documentation>Signed integer, max inclusive -140737488355327 to +140737488355327 (2^47-1), restriction of xs:long</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:long">
-			<xs:maxInclusive value="140737488355328"/>
 			<xs:minInclusive value="-140737488355328"/>
+			<xs:maxInclusive value="140737488355328"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Int16">
@@ -421,9 +450,6 @@ Basic Types
 			<xs:documentation>Signed integer, max inclusive (2^16-1), restriction of xs:short</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:short"/>
-	</xs:simpleType>
-	<xs:simpleType name="anyURI">
-		<xs:restriction base="xs:anyURI"/>
 	</xs:simpleType>
 	<xs:simpleType name="name">
 		<xs:restriction base="String64"/>
@@ -433,8 +459,8 @@ Basic Types
 			<xs:documentation>Percentage on a defined base.   For example, specify as 100 to indicate at the defined base.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:integer">
-			<xs:maxInclusive value="100"/>
 			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="100"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TimeType">
@@ -452,10 +478,9 @@ Basic Types
 		</xs:restriction>
 	</xs:simpleType>
 	<!--
-=======================================
-Additional Complex Types        
-=======================================
--->
+	=======================================
+	Additional Complex Types        
+	=======================================-->
 	<xs:complexType name="AcceptanceTest">
 		<xs:annotation>
 			<xs:documentation>Acceptance test for assets.</xs:documentation>
@@ -591,9 +616,7 @@ Additional Complex Types
 			<xs:documentation>Asset that is aggregation of other assets such as conductors, transformers, switchgear, land, fences, buildings, equipment, vehicles, etc.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
-			<xs:extension base="Asset">
-				<xs:sequence/>
-			</xs:extension>
+			<xs:extension base="Asset"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="BatchItemInfo">
@@ -627,14 +650,6 @@ Additional Complex Types
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="BatchList">
-		<xs:annotation>
-			<xs:documentation>[extension] List of resource URIs that can be used to GET retail customer resources</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="resources" type="anyURI" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="DateTimeInterval">
 		<xs:annotation>
 			<xs:documentation>Interval of date and time. End is not included because it can be derived from the start and the duration.</xs:documentation>
@@ -663,26 +678,34 @@ Additional Complex Types
 		<xs:sequence>
 			<xs:element name="programName" type="String256" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Name of Demand Response program</xs:documentation>
+					<xs:documentation>[extension] Name of Demand Response program</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="enrollmentStatus" type="EnrollmentStatus" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Retail Customer's current Demand Response program enrollment status</xs:documentation>
+					<xs:documentation>[extension] Retail Customer's current Demand Response program enrollment status</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="programDescription" type="anyURI" minOccurs="0">
+			<xs:element name="programDescription" type="xs:anyURI" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>URI of Demand Response program description</xs:documentation>
+					<xs:documentation>[extension] URI of Demand Response program description</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="programDate" type="ProgramDate" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>All Demand Response program enrollment and termination dates</xs:documentation>
+					<xs:documentation>[extension] All Demand Response program enrollment and termination dates</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="capacityReservationLevel" type="SummaryMeasurement" minOccurs="0"/>
-			<xs:element name="DRProgramNomination" type="SummaryMeasurement" minOccurs="0"/>
+			<xs:element name="capacityReservationLevel" type="SummaryMeasurement" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>[extension] Summary measurement of Capacity Reservation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DRProgramNomination" type="SummaryMeasurement" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>[extension] Summary measurement of Demand Response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Document">
@@ -807,7 +830,11 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 			<xs:extension base="Object">
 				<xs:sequence>
 					<xs:element name="batchItemInfo" type="BatchItemInfo" minOccurs="0"/>
-					<xs:element name="name" type="name" minOccurs="0"/>
+					<xs:element name="name" type="name" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>identifier of object instance</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -1018,7 +1045,7 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 			<xs:documentation>Grouping of pricing components and prices used in the creation of customer charges and the eligibility criteria under which these terms may be offered to a customer. The reasons for grouping include state, customer classification, site characteristics, classification (i.e. fee price structure, deposit price structure, electric service price structure, etc.) and accounting requirements.</xs:documentation>
 		</xs:annotation>
 		<xs:simpleContent>
-			<xs:extension base="anyURI"/>
+			<xs:extension base="xs:anyURI"/>
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="Priority">
@@ -1040,6 +1067,9 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ProgramDate">
+		<xs:annotation>
+			<xs:documentation>[extension] Demand Response Program enrollment or termination date information</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="programDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
@@ -1055,13 +1085,13 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 	</xs:complexType>
 	<xs:complexType name="programDateIdMapping">
 		<xs:annotation>
-			<xs:documentation>Single Demand Response program date mapping</xs:documentation>
+			<xs:documentation>[extension] Single Demand Response program date mapping</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="programDateType" type="ProgramDateKind"/>
 			<xs:element name="code" type="String64">
 				<xs:annotation>
-					<xs:documentation>code numeric value (may be alphanumeric).</xs:documentation>
+					<xs:documentation>Code value (may be alphanumeric).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="name" type="String256">
@@ -1227,9 +1257,9 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 					<xs:documentation>The value of the summary measurement.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="readingTypeRef" type="anyURI" minOccurs="0">
+			<xs:element name="readingTypeRef" type="xs:anyURI" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>[extension] Reference to a full ReadingType.</xs:documentation>
+					<xs:documentation>Reference to a full ReadingType.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1303,7 +1333,7 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 			</xs:element>
 			<xs:element name="county" type="String256" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Name of county.</xs:documentation>
+					<xs:documentation>[extension] Name of county.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="stateOrProvince" type="String256" minOccurs="0">
@@ -1323,7 +1353,7 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 			<xs:documentation>Logical or physical point in the network to which readings or events may be attributed. Used at the place where a physical or virtual meter may be located; however, it is not required that a meter be present.</xs:documentation>
 		</xs:annotation>
 		<xs:simpleContent>
-			<xs:extension base="anyURI"/>
+			<xs:extension base="xs:anyURI"/>
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="UsagePoints">
@@ -1339,27 +1369,142 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 			<xs:documentation>Information about a particular location for various forms of work.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
-			<xs:extension base="Location">
-				<xs:sequence/>
-			</xs:extension>
+			<xs:extension base="Location"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<!--
-=======================================
-Enumerations 
-=======================================
--->
+	=======================================
+	Enumerations 
+	=======================================-->
 	<xs:simpleType name="CRUDOperation">
 		<xs:annotation>
-			<xs:documentation>Specifies the operation requested of this item.</xs:documentation>
+			<xs:documentation>Specifies the operation requested of this item</xs:documentation>
 		</xs:annotation>
-		<xs:union memberTypes="eCRUDOperation UInt16"/>
+		<xs:union memberTypes="UInt16">
+			<xs:simpleType>
+				<xs:restriction base="UInt16">
+					<xs:enumeration value="0">
+						<xs:annotation>
+							<xs:appinfo>Create</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Read</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Update</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>Delete</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
 	</xs:simpleType>
 	<xs:simpleType name="Currency">
 		<xs:annotation>
-			<xs:documentation>Code for the currency for costs. </xs:documentation>
+			<xs:documentation>Code for the currency for costs associated with this ReadingType.  The valid values per the standard are defined in CurrencyCode.</xs:documentation>
 		</xs:annotation>
-		<xs:union memberTypes="eCurrency UInt16"/>
+		<xs:union memberTypes="UInt16">
+			<xs:simpleType>
+				<xs:restriction base="UInt16">
+					<xs:enumeration value="840">
+						<xs:annotation>
+							<xs:appinfo>USD</xs:appinfo>
+							<xs:documentation>US dollar</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="978">
+						<xs:annotation>
+							<xs:appinfo>EUR</xs:appinfo>
+							<xs:documentation>European euro</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="36">
+						<xs:annotation>
+							<xs:appinfo>AUD</xs:appinfo>
+							<xs:documentation>Australian dollar</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="124">
+						<xs:annotation>
+							<xs:appinfo>CAD</xs:appinfo>
+							<xs:documentation>Canadian dollar</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="756">
+						<xs:annotation>
+							<xs:appinfo>CHF</xs:appinfo>
+							<xs:documentation>Swiss francs</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="156">
+						<xs:annotation>
+							<xs:appinfo>CNY</xs:appinfo>
+							<xs:documentation>Chinese yuan renminbi</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="208">
+						<xs:annotation>
+							<xs:appinfo>DKK</xs:appinfo>
+							<xs:documentation>Danish crown</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="826">
+						<xs:annotation>
+							<xs:appinfo>GBP</xs:appinfo>
+							<xs:documentation>British pound</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="392">
+						<xs:annotation>
+							<xs:appinfo>JPY</xs:appinfo>
+							<xs:documentation>Japanese yen</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="578">
+						<xs:annotation>
+							<xs:appinfo>NOK</xs:appinfo>
+							<xs:documentation>Norwegian crown</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="643">
+						<xs:annotation>
+							<xs:appinfo>RUB</xs:appinfo>
+							<xs:documentation>Russian ruble</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="752">
+						<xs:annotation>
+							<xs:appinfo>SEK</xs:appinfo>
+							<xs:documentation>Swedish crown</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="356">
+						<xs:annotation>
+							<xs:appinfo>INR</xs:appinfo>
+							<xs:documentation>India rupees</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="0">
+						<xs:annotation>
+							<xs:appinfo>other</xs:appinfo>
+							<xs:documentation>Another type of currency.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
 	</xs:simpleType>
 	<xs:simpleType name="CustomerKind">
 		<xs:annotation>
@@ -1478,106 +1623,10 @@ Month: 3</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="HexBinary32"/>
 	</xs:simpleType>
-	<xs:simpleType name="eCRUDOperation">
-		<xs:restriction base="UInt16">
-			<xs:enumeration value="0"/>
-			<xs:enumeration value="1"/>
-			<xs:enumeration value="2"/>
-			<xs:enumeration value="3"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="eCurrency">
-		<xs:restriction base="UInt16">
-			<xs:enumeration value="840">
-				<xs:annotation>
-					<xs:documentation>US dollar</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="978">
-				<xs:annotation>
-					<xs:documentation>European euro</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="36">
-				<xs:annotation>
-					<xs:documentation>Australian dollar</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="124">
-				<xs:annotation>
-					<xs:documentation>Canadian dollar</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="756">
-				<xs:annotation>
-					<xs:documentation>Swiss francs</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="156">
-				<xs:annotation>
-					<xs:documentation>Chinese yuan renminbi</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="208">
-				<xs:annotation>
-					<xs:documentation>Danish crown</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="826">
-				<xs:annotation>
-					<xs:documentation>British pound</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="392">
-				<xs:annotation>
-					<xs:documentation>Japanese yen</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="578">
-				<xs:annotation>
-					<xs:documentation>Norwegian crown</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="643">
-				<xs:annotation>
-					<xs:documentation>Russian ruble</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="752">
-				<xs:annotation>
-					<xs:documentation>Swedish crown</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="356">
-				<xs:annotation>
-					<xs:documentation>India rupees</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0">
-				<xs:annotation>
-					<xs:documentation>Another type of currency.</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="eStatusCode">
-		<xs:restriction base="UInt16">
-			<xs:enumeration value="200"/>
-			<xs:enumeration value="201"/>
-			<xs:enumeration value="204"/>
-			<xs:enumeration value="301"/>
-			<xs:enumeration value="302"/>
-			<xs:enumeration value="304"/>
-			<xs:enumeration value="400"/>
-			<xs:enumeration value="401"/>
-			<xs:enumeration value="403"/>
-			<xs:enumeration value="404"/>
-			<xs:enumeration value="405"/>
-			<xs:enumeration value="410"/>
-			<xs:enumeration value="500"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="EnrollmentStatus">
+		<xs:annotation>
+			<xs:documentation>[extension] Current Demand Response program enrollment status</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="unenrolled">
 				<xs:annotation>
@@ -1658,6 +1707,9 @@ Month: 3</xs:documentation>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ProgramDateKind">
+		<xs:annotation>
+			<xs:documentation>[extension] Type of Demand Response program date</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="String64">
 			<xs:enumeration value="CUST_DR_PROGRAM_ENROLLMENT_DATE"/>
 			<xs:enumeration value="CUST_DR_PROGRAM_DE_ENROLLMENT_DATE"/>
@@ -1770,7 +1822,93 @@ Month: 3</xs:documentation>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="StatusCode">
-		<xs:union memberTypes="eStatusCode UInt16"/>
+		<xs:annotation>
+			<xs:documentation>indicates the status code of the associated transaction</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="UInt16">
+			<xs:simpleType>
+				<xs:restriction base="UInt16">
+					<xs:enumeration value="200">
+						<xs:annotation>
+							<xs:appinfo>Ok</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="201">
+						<xs:annotation>
+							<xs:appinfo>Created</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="204">
+						<xs:annotation>
+							<xs:appinfo>No Content</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="301">
+						<xs:annotation>
+							<xs:appinfo>Moved Permanently</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="302">
+						<xs:annotation>
+							<xs:appinfo>Redirect</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="304">
+						<xs:annotation>
+							<xs:appinfo>Not Modified</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="400">
+						<xs:annotation>
+							<xs:appinfo>Bad Request</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="401">
+						<xs:annotation>
+							<xs:appinfo>Unauthorized</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="403">
+						<xs:annotation>
+							<xs:appinfo>Forbidden</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="404">
+						<xs:annotation>
+							<xs:appinfo>Not Found</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="405">
+						<xs:annotation>
+							<xs:appinfo>Method Not Allowed</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="410">
+						<xs:annotation>
+							<xs:appinfo>Gone</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="500">
+						<xs:annotation>
+							<xs:appinfo>Internal Server Error</xs:appinfo>
+							<xs:documentation/>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
 	</xs:simpleType>
 	<xs:simpleType name="SupplierKind">
 		<xs:annotation>
@@ -1798,6 +1936,9 @@ Month: 3</xs:documentation>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="UnitMultiplierKind">
+		<xs:annotation>
+			<xs:documentation>The power of ten unit multipliers</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="Int16">
 			<xs:enumeration value="-12">
 				<xs:annotation>
@@ -1867,6 +2008,9 @@ Month: 3</xs:documentation>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="UnitSymbolKind">
+		<xs:annotation>
+			<xs:documentation>Code for the base unit of measure for Readings of ReadingType.  Used in combination with the powerOfTenMultiplier to specify the actual unit of measure. Valid values per the standard are defined in UomType.</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="UInt16">
 			<xs:enumeration value="0">
 				<xs:annotation>
@@ -2496,17 +2640,15 @@ Month: 3</xs:documentation>
 		</xs:restriction>
 	</xs:simpleType>
 	<!--
-=======================================
-Global Elements
-=======================================
--->
+	=======================================
+	Global Elements
+	=======================================-->
 	<xs:element name="AcceptanceTest" type="AcceptanceTest"/>
 	<xs:element name="AccountNotification" type="AccountNotification"/>
 	<xs:element name="Agreement" type="Agreement"/>
 	<xs:element name="Asset" type="Asset"/>
 	<xs:element name="AssetContainer" type="AssetContainer"/>
 	<xs:element name="BatchItemInfo" type="BatchItemInfo"/>
-	<xs:element name="BatchList" type="BatchList"/>
 	<xs:element name="Customer" type="Customer"/>
 	<xs:element name="CustomerAccount" type="CustomerAccount"/>
 	<xs:element name="CustomerAgreement" type="CustomerAgreement"/>
