@@ -3,7 +3,7 @@
 <!-- 
 ==========================================================================
     Schema: retailcustomer.xsd
-    Version: 0.1.20180228    
+    Version: 0.1.20180307    
     Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -242,7 +242,7 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 				<xs:sequence>
 					<xs:element name="programDateIdMapping" type="programDateIdMapping" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Program date description</xs:documentation>
+							<xs:documentation>[extension] Program date description</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -486,7 +486,7 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 			<xs:documentation>Acceptance test for assets.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="type" type="String256"/>
+			<xs:element name="type" type="String256" minOccurs="0"/>
 			<xs:element name="success" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>True if asset has passed acceptance test and may be placed in or is in service. It is set to false if asset is removed from service and is required to be tested again before being placed back in service, possibly in a new location. Since asset may go through multiple tests during its lifecycle, the date of each acceptance test may be recorded in 'Asset.ActivityRecord.status.dateTime'.</xs:documentation>
@@ -673,7 +673,7 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 	</xs:complexType>
 	<xs:complexType name="DemandResponseProgram">
 		<xs:annotation>
-			<xs:documentation>Demand Response program characteristics covered by Customer Agreement</xs:documentation>
+			<xs:documentation>[extension] Demand Response program characteristics covered by Customer Agreement</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="programName" type="String256" minOccurs="0">
@@ -1091,17 +1091,17 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 			<xs:element name="programDateType" type="ProgramDateKind"/>
 			<xs:element name="code" type="String64">
 				<xs:annotation>
-					<xs:documentation>Code value (may be alphanumeric).</xs:documentation>
+					<xs:documentation>[extension] Code value (may be alphanumeric).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="name" type="String256">
 				<xs:annotation>
-					<xs:documentation>Name associated with code.</xs:documentation>
+					<xs:documentation>[extension] Name associated with code.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="note" type="String256" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Optional description of code</xs:documentation>
+					<xs:documentation>[extension] Optional description of code</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1630,15 +1630,19 @@ Month: 3</xs:documentation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="unenrolled">
 				<xs:annotation>
-					<xs:documentation>Currently NOT enrolled in the Demand Response program</xs:documentation>
+					<xs:documentation>[extension] Currently NOT enrolled in the Demand Response program</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="enrolled">
 				<xs:annotation>
-					<xs:documentation>Currently enrolled in the Demand Response program</xs:documentation>
+					<xs:documentation>[extension] Currently enrolled in the Demand Response program</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-			<xs:enumeration value="enrolledPending"/>
+			<xs:enumeration value="enrolledPending">
+				<xs:annotation>
+					<xs:documentation>[extension] Currently pending enrollment in the Demand Response program</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MeterMultiplierKind">
@@ -1711,10 +1715,26 @@ Month: 3</xs:documentation>
 			<xs:documentation>[extension] Type of Demand Response program date</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="String64">
-			<xs:enumeration value="CUST_DR_PROGRAM_ENROLLMENT_DATE"/>
-			<xs:enumeration value="CUST_DR_PROGRAM_DE_ENROLLMENT_DATE"/>
-			<xs:enumeration value="CUST_DR_PROGRAM_TERM_DATE_REGARDLESS_FINANCIAL"/>
-			<xs:enumeration value="CUST_DR_PROGRAM_TERM_DATE_WITHOUT_FINANCIAL"/>
+			<xs:enumeration value="CUST_DR_PROGRAM_ENROLLMENT_DATE">
+				<xs:annotation>
+					<xs:documentation>[extension] Date customer enrolled in Demand Response program</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUST_DR_PROGRAM_DE_ENROLLMENT_DATE">
+				<xs:annotation>
+					<xs:documentation>[extension] Date customer terminated enrollment in Demand Response program</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUST_DR_PROGRAM_TERM_DATE_REGARDLESS_FINANCIAL">
+				<xs:annotation>
+					<xs:documentation>[extension] Earliest date customer can terminate Demand Response enrollment, regardless of financial impact</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUST_DR_PROGRAM_TERM_DATE_WITHOUT_FINANCIAL">
+				<xs:annotation>
+					<xs:documentation>[extension] Earliest date customer can terminate Demand Response enrollment, without financial impact</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="RevenueKind">

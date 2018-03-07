@@ -4,7 +4,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20180223    
+    Version: 0.7.20180307    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -962,13 +962,13 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 				<xs:sequence maxOccurs="unbounded">
 					<xs:element name="programIdMapping">
 						<xs:annotation>
-							<xs:documentation>single program id mapping</xs:documentation>
+							<xs:documentation>[extension] single program id mapping</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element name="tOUorCPPorConsumptionTier">
 									<xs:annotation>
-										<xs:documentation>kind of code</xs:documentation>
+										<xs:documentation>[extension] kind of code</xs:documentation>
 									</xs:annotation>
 									<xs:simpleType>
 										<xs:restriction base="xs:string">
@@ -980,17 +980,17 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 								</xs:element>
 								<xs:element name="code">
 									<xs:annotation>
-										<xs:documentation>code numeric value</xs:documentation>
+										<xs:documentation>[extension] code numeric value</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="name">
 									<xs:annotation>
-										<xs:documentation>name associated with code</xs:documentation>
+										<xs:documentation>[extension] name associated with code</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="note" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>optional description of code</xs:documentation>
+										<xs:documentation>[extension] optional description of code</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
