@@ -4,7 +4,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20180307    
+    Version: 0.7.20180315    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -808,6 +808,9 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
 				<xs:sequence>
+					<xs:annotation>
+						<xs:documentation>[extension] List of rate options applied to the base tariff profile</xs:documentation>
+					</xs:annotation>
 					<xs:element name="billingPeriod" type="DateTimeInterval" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>The billing period to which the included measurements apply. May also be an off-bill arbitrary period.</xs:documentation>
@@ -918,6 +921,11 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 							<xs:documentation>[extension] Cycle day on which the meter for this usage point will normally be read.  Usually correlated with the billing cycle.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="tariffRiderRefs" type="TariffRiderRef" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>[extension] List of rate options applied to the base tariff profile</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -966,21 +974,14 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="tOUorCPPorConsumptionTier">
+								<xs:element name="tOUorCPPorConsumptionTier" type="tOUorCPPorConsumptionTier">
 									<xs:annotation>
-										<xs:documentation>[extension] kind of code</xs:documentation>
+										<xs:documentation>[extension] Type of billing tariff profile uses</xs:documentation>
 									</xs:annotation>
-									<xs:simpleType>
-										<xs:restriction base="xs:string">
-											<xs:enumeration value="tou"/>
-											<xs:enumeration value="cpp"/>
-											<xs:enumeration value="consumptiontier"/>
-										</xs:restriction>
-									</xs:simpleType>
 								</xs:element>
 								<xs:element name="code">
 									<xs:annotation>
-										<xs:documentation>[extension] code numeric value</xs:documentation>
+										<xs:documentation>[extension] code (numeric value)</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="name">
@@ -1166,6 +1167,11 @@ Other EUI Types
 					<xs:element name="customerAgreement" type="String256" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Agreement between the customer and the ServiceSupplier to pay for service at a specific service location. It provides for the recording of certain billing information about the type of service provided at the service location and is used during charge creation to determine the type of service.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tariffRiderRefs" type="TariffRiderRef" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>[extension] List of rate options applied to the base tariff profile</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1428,6 +1434,11 @@ Additional Complex Types
 					<xs:documentation>[extension] Per Unit cost.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="itemPeriod" type="DateTimeInterval" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>[extension] Time period covered by the LineItem, to support pricing changes in the middle of a billing period</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PnodeRefs">
@@ -1448,6 +1459,18 @@ Additional Complex Types
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="aggregateNodeRef" type="AggregateNodeRef" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TariffRiderRefs">
+		<xs:annotation>
+			<xs:documentation>[extension] References to associated Tariff Riders.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="tariffRiderRef" type="TariffRiderRef" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>[extension] Tariff Rider structure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PnodeRef">
@@ -1479,7 +1502,7 @@ Additional Complex Types
 	</xs:complexType>
 	<xs:complexType name="AggregateNodeRef">
 		<xs:annotation>
-			<xs:documentation>[extension] reference to an AggregateNode (could be a load aggregation point which is a specialization of AggregateNode).</xs:documentation>
+			<xs:documentation>[extension] Reference to an AggregateNode (could be a load aggregation point which is a specialization of AggregateNode).</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="anodeType" type="AnodeType">
@@ -1505,6 +1528,18 @@ Additional Complex Types
 			<xs:element name="pnodeRef" type="PnodeRef" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="TariffRiderRef">
+		<xs:annotation>
+			<xs:documentation>[extension] Reference to a Tariff Rider.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="riderType" type="String256">
+				<xs:annotation>
+					<xs:documentation>[extension] Rate options applied to the base tariff profile</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<!--
 =======================================
 Enumerations 
@@ -1516,112 +1551,196 @@ Enumerations
 			<xs:documentation>[extension]Token endpoint method in OAuth 2.0.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="String64">
-			<xs:enumeration value="client_secret_basic"/>
+			<xs:enumeration value="client_secret_basic">
+				<xs:annotation>
+					<xs:documentation>[extension] Indicates the client uses HTTP Basic authentication (RFC 6749 Section 2.3.1).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="GrantType">
 		<xs:annotation>
-			<xs:documentation>[extension] Grant type in OAuth 2.0.</xs:documentation>
+			<xs:documentation>[extension] OAuth 2.0 ESPI supported grant types.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="authorization_code"/>
-			<xs:enumeration value="client_credentials"/>
-			<xs:enumeration value="refresh_token"/>
+			<xs:enumeration value="authorization_code">
+				<xs:annotation>
+					<xs:documentation>[extension] OAuth 2.0 Authorization Code Grant flow (RFC 6749 Section 4.1).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="client_credentials">
+				<xs:annotation>
+					<xs:documentation>[extension] OAuth 2.0 Client Credentials Grant flow (RFC 6749 Section 4.4).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="refresh_token">
+				<xs:annotation>
+					<xs:documentation>[extension] OAuth 2.0 Refresh Token flow (RFC 6749 Section 6.).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ResponseType">
 		<xs:annotation>
-			<xs:documentation>[extension] OAuth 2.0 response type.</xs:documentation>
+			<xs:documentation>[extension] OAuth 2.0 ESPI supported response types.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="code"/>
-			<xs:enumeration value="token"/>
+			<xs:enumeration value="code">
+				<xs:annotation>
+					<xs:documentation>[extension] indicates a request for an authorization code (RFC 6749 Section 4.1.1)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TokenType">
 		<xs:annotation>
-			<xs:documentation>[extension] Type of OAuth 2.0 token.</xs:documentation>
+			<xs:documentation>[extension] OAuth 2.0 ESPI supported token types.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="Bearer"/>
+			<xs:enumeration value="Bearer">
+				<xs:annotation>
+					<xs:documentation>[extension] A security token with the property that any party in possession of the token (a "bearer") can use the token in any way that any other party in possession of it can.  Using a bearer token does not require a bearer to prove possession of cryptographic key material (proof-of-possession) (RFC6750 Section 1.2).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="OAuthError">
 		<xs:annotation>
-			<xs:documentation>[extension] Error code for OAuth 2.0.</xs:documentation>
+			<xs:documentation>[extension] OAuth 2.0 ESPI supported error codes.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="invalid_request"/>
-			<xs:enumeration value="invalid_client"/>
-			<xs:enumeration value="invalid_grant"/>
-			<xs:enumeration value="unauthorized_client"/>
-			<xs:enumeration value="unsupported_grant_type"/>
-			<xs:enumeration value="invalid_scope"/>
-			<xs:enumeration value="invalid_redirect_uri"/>
-			<xs:enumeration value="invalid_client_metadata"/>
-			<xs:enumeration value="invalid_client_id"/>
-			<xs:enumeration value="access_denied"/>
-			<xs:enumeration value="unsupported_response_type"/>
-			<xs:enumeration value="server_error"/>
-			<xs:enumeration value="temporarily_unavailable"/>
+			<xs:enumeration value="invalid_request">
+				<xs:annotation>
+					<xs:documentation>[extension] The request is missing a required parameter, includes an unsupported parameter value (other than grant type), repeats a parameter, includes multiple credentials, utilizes more than one mechanism for authenticating the client, or is otherwise malformed (RFC 6749 Sections 4.1.2.1 and 5.2).
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="invalid_client">
+				<xs:annotation>
+					<xs:documentation>[extension] Client authentication failed (e.g., unknown client, no client authentication included, or unsupported authentication method).  The authorization server MAY return an HTTP 401 (Unauthorized) status code to indicate which HTTP authentication schemes are supported.  If the client attempted to authenticate via the Authorization request header field, the authorization server MUST respond with an HTTP 401 (Unauthorized) status code and include the WWW-Authenticate response header field matching the authentication scheme used by the client. (RFC 6749 Section 5.2).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="invalid_grant">
+				<xs:annotation>
+					<xs:documentation>[extension] The provided authorization code or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client (RFC 6749 Section 5.2).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="unauthorized_client">
+				<xs:annotation>
+					<xs:documentation>[extension] The authenticated client is not authorized to use this authorization grant type (RFC 6749 Sections 4.1.2.1 and 5.2).
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="unsupported_grant_type">
+				<xs:annotation>
+					<xs:documentation>[extension] The authorization grant type is not supported by the authorization server  (RFC 6749 Section 5.2).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="invalid_scope">
+				<xs:annotation>
+					<xs:documentation>[extension] The requested scope is invalid, unknown, malformed, or exceeds the scope granted by the resource owner (RFC 6749 Sections 4.1.2.1 and 5.2).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="invalid_redirect_uri">
+				<xs:annotation>
+					<xs:documentation>[extension] The value of one or more redirection URIs is invalid (RFC 7591 Section 3.2.2).
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="invalid_client_metadata">
+				<xs:annotation>
+					<xs:documentation>[extension] The value of one of the client metadata fields is invalid and server has rejected the request.  Not that an authorization server MAY choose to substitute a valid value for any requested parameter of a client's metadata (RFC 7591 Section 3.2.2).
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="invalid_client_id">
+				<xs:annotation>
+					<xs:documentation>[extension - deprecated] Client authentication failed (e.g., unknown client, no client authentication included, or unsupported authentication method).  The authorization server MAY return an HTTP 401 (Unauthorized) status code to indicate which HTTP authentication schemes are supported.  If the client attempted to authenticate via the Authorization request header field, the authorization server MUST respond with an HTTP 401 (Unauthorized) status code and include the WWW-Authenticate response header field matching the authentication scheme used by the client.
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="access_denied">
+				<xs:annotation>
+					<xs:documentation>[extension] The resource owner or authorization server denied the request (RFC 6749 Section 4.1.2.1).
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="unsupported_response_type">
+				<xs:annotation>
+					<xs:documentation>[extension] The authorization server does not support obtaining an authorization code using this method (RFC 6749 Section 4.1.2.1).
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="server_error">
+				<xs:annotation>
+					<xs:documentation>[extension] The authorization server encountered an unexpected condition that prevented it from fulfilling the request  (RFC 6749 Section 4.1.2.1).
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="temporarily_unavailable">
+				<xs:annotation>
+					<xs:documentation>[extension] The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server (RFC 6749 Section 4.1.2.1).
+</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<!--ESPI Enumerations-->
 	<xs:simpleType name="ItemKind">
 		<xs:annotation>
-			<xs:documentation>Code for classification billing line items.</xs:documentation>
+			<xs:documentation>[extension]Code for classification billing line items.</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="UInt16">
 			<xs:simpleType>
 				<xs:restriction base="UInt16">
 					<xs:enumeration value="1">
 						<xs:annotation>
-							<xs:documentation>Energy Generation Fee. A charge for generation of energy.</xs:documentation>
+							<xs:documentation>[extension]Energy Generation Fee. A charge for generation of energy.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="2">
 						<xs:annotation>
-							<xs:documentation>Energy Delivery Fee. A charge for delivery of energy.</xs:documentation>
+							<xs:documentation>[extension]Energy Delivery Fee. A charge for delivery of energy.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="3">
 						<xs:annotation>
-							<xs:documentation>Energy Usage Fee. A charge for electricity, natural gas, water consumption</xs:documentation>
+							<xs:documentation>[extension]Energy Usage Fee. A charge for electricity, natural gas, water consumption</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="4">
 						<xs:annotation>
-							<xs:documentation>Administrative Fee. A fee for administrative services.</xs:documentation>
+							<xs:documentation>[extension]Administrative Fee. A fee for administrative services.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="5">
 						<xs:annotation>
-							<xs:documentation>Tax. A local, state, or federal energy tax.</xs:documentation>
+							<xs:documentation>[extension]Tax. A local, state, or federal energy tax.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="6">
 						<xs:annotation>
-							<xs:documentation>Energy Generation Credit. A credit, discount or rebate for generation of energy.</xs:documentation>
+							<xs:documentation>[extension]Energy Generation Credit. A credit, discount or rebate for generation of energy.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="7">
 						<xs:annotation>
-							<xs:documentation>Energy Delivery Credit. A credit, discount or rebate for delivery of energy.</xs:documentation>
+							<xs:documentation>[extension]Energy Delivery Credit. A credit, discount or rebate for delivery of energy.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="8">
 						<xs:annotation>
-							<xs:documentation>Administrative Credit. A credit, discount or rebate for administrative services.</xs:documentation>
+							<xs:documentation>[extension]Administrative Credit. A credit, discount or rebate for administrative services.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="9">
 						<xs:annotation>
-							<xs:documentation>Payment. A payment for a previous billing.</xs:documentation>
+							<xs:documentation>[extension]Payment. A payment for a previous billing.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="10">
 						<xs:annotation>
-							<xs:documentation>Information. An informational line item.</xs:documentation>
+							<xs:documentation>[extension]Information. An informational line item.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -3653,7 +3772,8 @@ Enumerations
 	</xs:simpleType>
 	<xs:simpleType name="TimePeriodOfInterest">
 		<xs:annotation>
-			<xs:documentation>[extension]</xs:documentation>
+			<xs:documentation>[extension] Specific time intervals (e.g., billing period, daily, seasonal, etc) used to identify specific periods of time.
+</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="UInt16">
 			<xs:simpleType>
@@ -3667,37 +3787,37 @@ Enumerations
 					<xs:enumeration value="8">
 						<xs:annotation>
 							<xs:appinfo>billingPeriod</xs:appinfo>
-							<xs:documentation>Captured during the billing period starting at midnight of the first day of the billing period (as defined by the billing cycle day). If during the current billing period, it specifies a period from the start of the current billing period until "now".</xs:documentation>
+							<xs:documentation>[extension] Captured during the billing period starting at midnight of the first day of the billing period (as defined by the billing cycle day). If during the current billing period, it specifies a period from the start of the current billing period until "now".</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="11">
 						<xs:annotation>
 							<xs:appinfo>daily</xs:appinfo>
-							<xs:documentation>Daily Period starting at midnight. If for the current day, this specifies the time from midnight to "now".</xs:documentation>
+							<xs:documentation>[extension] Daily Period starting at midnight. If for the current day, this specifies the time from midnight to "now".</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="13">
 						<xs:annotation>
 							<xs:appinfo>monthly</xs:appinfo>
-							<xs:documentation>Monthly period starting at midnight on the first day of the month. If within the current month, this specifies the period from the start of the month until "now."</xs:documentation>
+							<xs:documentation>[extension] Monthly period starting at midnight on the first day of the month. If within the current month, this specifies the period from the start of the month until "now."</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="22">
 						<xs:annotation>
 							<xs:appinfo>seasonal</xs:appinfo>
-							<xs:documentation>A season of time spanning multiple months. E.g. "Summer," "Spring," "Fall," and "Winter" based cycle. If within the current season, it specifies the period from the start of the current season until "now."</xs:documentation>
+							<xs:documentation>[extension] A season of time spanning multiple months. E.g. "Summer," "Spring," "Fall," and "Winter" based cycle. If within the current season, it specifies the period from the start of the current season until "now."</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="24">
 						<xs:annotation>
 							<xs:appinfo>weekly</xs:appinfo>
-							<xs:documentation>Weekly period starting at midnight on the first day of the week and ending the instant before midnight the last day of the week. If within the current week, it specifies the period from the start of the week until "now."</xs:documentation>
+							<xs:documentation>[extension] Weekly period starting at midnight on the first day of the week and ending the instant before midnight the last day of the week. If within the current week, it specifies the period from the start of the week until "now."</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="32">
 						<xs:annotation>
 							<xs:appinfo>specifiedPeriod</xs:appinfo>
-							<xs:documentation>For the period defined by the start and end of the TimePeriod element in the message.</xs:documentation>
+							<xs:documentation>[extension] For the period defined by the start and end of the TimePeriod element in the message.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -4598,7 +4718,7 @@ Enumerations
 	</xs:simpleType>
 	<xs:simpleType name="DataCustodianApplicationStatus">
 		<xs:annotation>
-			<xs:documentation/>
+			<xs:documentation>A code indicating the current status of the application. This value is provided by Data Custodian, cannot be modified by Third Party.</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="UInt16">
 			<xs:simpleType>
@@ -4606,25 +4726,25 @@ Enumerations
 					<xs:enumeration value="1">
 						<xs:annotation>
 							<xs:appinfo>Review</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Review</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="2">
 						<xs:annotation>
 							<xs:appinfo>Production (Live)</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Production (Live)</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="3">
 						<xs:annotation>
 							<xs:appinfo>On Hold</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>On Hold</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="4">
 						<xs:annotation>
 							<xs:appinfo>Revoked</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Revoked</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -4633,7 +4753,7 @@ Enumerations
 	</xs:simpleType>
 	<xs:simpleType name="ThirdPartyApplicatonStatus">
 		<xs:annotation>
-			<xs:documentation/>
+			<xs:documentation>A code indicating the current status of the application</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="UInt16">
 			<xs:simpleType>
@@ -4641,13 +4761,13 @@ Enumerations
 					<xs:enumeration value="1">
 						<xs:annotation>
 							<xs:appinfo>Development</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Development</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="2">
 						<xs:annotation>
 							<xs:appinfo>ReviewTest</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Review/Test</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="3">
@@ -4668,7 +4788,7 @@ Enumerations
 	</xs:simpleType>
 	<xs:simpleType name="ThirdPartyApplicationType">
 		<xs:annotation>
-			<xs:documentation/>
+			<xs:documentation>A code indicating the type of application</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="UInt16">
 			<xs:simpleType>
@@ -4703,7 +4823,7 @@ Enumerations
 	</xs:simpleType>
 	<xs:simpleType name="ThirdPartyApplicationUse">
 		<xs:annotation>
-			<xs:documentation/>
+			<xs:documentation>A code indicating the expected use of the application.</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="UInt16">
 			<xs:simpleType>
@@ -4711,31 +4831,31 @@ Enumerations
 					<xs:enumeration value="1">
 						<xs:annotation>
 							<xs:appinfo>EnergyManagement</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Energy Management</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="2">
 						<xs:annotation>
 							<xs:appinfo>Comparisons</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Analytical</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="3">
 						<xs:annotation>
 							<xs:appinfo>Government</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Governmental</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="4">
 						<xs:annotation>
 							<xs:appinfo>Academic</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Academic</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="5">
 						<xs:annotation>
 							<xs:appinfo>LawEnforcement</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Law Enforcement</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -4744,7 +4864,7 @@ Enumerations
 	</xs:simpleType>
 	<xs:simpleType name="AuthorizationStatus">
 		<xs:annotation>
-			<xs:documentation/>
+			<xs:documentation>A code indicating the status of an Authorization</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="UInt16">
 			<xs:simpleType>
@@ -4752,19 +4872,19 @@ Enumerations
 					<xs:enumeration value="0">
 						<xs:annotation>
 							<xs:appinfo>Revoked</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Revoked</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="1">
 						<xs:annotation>
 							<xs:appinfo>Active</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Active</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="2">
 						<xs:annotation>
 							<xs:appinfo>Denied</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Denied</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -4773,7 +4893,7 @@ Enumerations
 	</xs:simpleType>
 	<xs:simpleType name="ESPIServiceStatus">
 		<xs:annotation>
-			<xs:documentation/>
+			<xs:documentation>The current status of the service</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="UInt16">
 			<xs:simpleType>
@@ -4781,13 +4901,13 @@ Enumerations
 					<xs:enumeration value="0">
 						<xs:annotation>
 							<xs:appinfo>Unavailable</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Unavailable</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="1">
 						<xs:annotation>
 							<xs:appinfo>Normal</xs:appinfo>
-							<xs:documentation/>
+							<xs:documentation>Normal; operational</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -5053,6 +5173,57 @@ BUS - Bus</xs:documentation>
 			<xs:enumeration value="ECA">
 				<xs:annotation>
 					<xs:documentation>Embedded Control Area</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tOUorCPPorConsumptionTier">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="tou">
+				<xs:annotation>
+					<xs:documentation>[extension] Time of Use</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="cpp">
+				<xs:annotation>
+					<xs:documentation>[extension] Consumption Peak Period</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="consumptiontier">
+				<xs:annotation>
+					<xs:documentation>[extension] Consumption Tier</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ParticipationCategoryMPM">
+		<xs:annotation>
+			<xs:documentation>For example:
+'Y' - Participates in both LMPM and SMPM
+'N' - Not included in LMP price measures
+'S' - Participates in SMPM price measures
+'L' - Participates in LMPM price measures
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Y">
+				<xs:annotation>
+					<xs:documentation>Participates in both LMPM and SMPM</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="N">
+				<xs:annotation>
+					<xs:documentation>Not included in LMP price measures</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="S">
+				<xs:annotation>
+					<xs:documentation>Participates in SMPM price measures</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="L">
+				<xs:annotation>
+					<xs:documentation>Participates in LMPM price measures</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 		</xs:restriction>

@@ -3,7 +3,7 @@
 <!-- 
 ==========================================================================
     Schema: retailcustomer.xsd
-    Version: 0.1.20180307    
+    Version: 0.1.20180315    
     Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -1073,12 +1073,12 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 		<xs:sequence>
 			<xs:element name="programDate" type="TimeType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Demand Response Program enrollment or termination date</xs:documentation>
+					<xs:documentation>[extension] Demand Response Program enrollment or termination date</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="programDateDescription" type="xs:string" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Description of programDate (i.e., Enrollment, Termination, etc.)</xs:documentation>
+					<xs:documentation>[extension] Description of programDate (i.e., Enrollment, Termination, etc.)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
