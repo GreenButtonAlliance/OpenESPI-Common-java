@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2018 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
+<!-- edited with XMLSpy v2018 rel. 2 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
 <xs:schema xmlns="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.7.20131008">
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20180315    
+    Version: 0.7.20180424    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -1536,6 +1536,16 @@ Additional Complex Types
 			<xs:element name="riderType" type="String256">
 				<xs:annotation>
 					<xs:documentation>[extension] Rate options applied to the base tariff profile</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="enrollmentStatus" type="EnrollmentStatus">
+				<xs:annotation>
+					<xs:documentation>[extension] Retail Customer's Tariff Rider enrollment status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="effectiveDate" type="TimeType">
+				<xs:annotation>
+					<xs:documentation>[extension] Effective date of Retail Customer's Tariff Rider enrollment status</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -5224,6 +5234,28 @@ BUS - Bus</xs:documentation>
 			<xs:enumeration value="L">
 				<xs:annotation>
 					<xs:documentation>Participates in LMPM price measures</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EnrollmentStatus">
+		<xs:annotation>
+			<xs:documentation>[extension] Current Tariff Rider enrollment status</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="unenrolled">
+				<xs:annotation>
+					<xs:documentation>[extension] Currently NOT enrolled in Tariff Rider</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="enrolled">
+				<xs:annotation>
+					<xs:documentation>[extension] Currently enrolled in the Tariff Rider</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="enrolledPending">
+				<xs:annotation>
+					<xs:documentation>[extension] Currently pending enrollment in Tariff Rider</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 		</xs:restriction>
