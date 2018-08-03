@@ -4,7 +4,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20180424    
+    Version: 0.7.20180802    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -1342,7 +1342,7 @@ Additional Complex Types
 	</xs:simpleType>
 	<xs:complexType name="Object">
 		<xs:annotation>
-			<xs:documentation>Superclass of all object classes to allow extensions.</xs:documentation>
+			<xs:documentation>Superclass of all object classes to allow extensions. Inheritance from Object provides an inherent extension mechanism permitting custom data to be included in a separate namespace.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="extension" type="xs:anyType" minOccurs="0" maxOccurs="unbounded">

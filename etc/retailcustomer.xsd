@@ -3,7 +3,7 @@
 <!-- 
 ==========================================================================
     Schema: retailcustomer.xsd
-    Version: 0.1.20180315    
+    Version: 0.1.20180802    
     Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -39,13 +39,17 @@ ______________________________________________________
 
 These resources are available via the same messaging patterns as other ESPI data. However, they are defined in a separate namespace and cannot be retrieved in the same message as non-PII containing ESPI data.</xs:documentation>
 	</xs:annotation>
-	<!--=======================================
-	Imports
-	=======================================-->
+	<!--
+=======================================
+Imports
+=======================================
+-->
 	<xs:import namespace="http://www.w3.org/2005/Atom" schemaLocation="atom.xsd"/>
-	<!--=======================================
-	Resources
-	=======================================-->
+	<!--
+=======================================
+Resources
+=======================================
+-->
 	<xs:complexType name="Customer">
 		<xs:annotation>
 			<xs:documentation>Organisation receiving services from service supplier.</xs:documentation>
@@ -343,9 +347,9 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 		</xs:complexContent>
 	</xs:complexType>
 	<!--
-	=======================================
-	Basic Types     
-	=======================================-->
+=======================================
+Basic Types     
+=======================================-->
 	<xs:simpleType name="HexBinary128">
 		<xs:annotation>
 			<xs:documentation>A 128-bit field encoded as a hex string (32 characters / 16 octets)</xs:documentation>
@@ -478,9 +482,10 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 		</xs:restriction>
 	</xs:simpleType>
 	<!--
-	=======================================
-	Additional Complex Types        
-	=======================================-->
+=======================================
+Additional Complex Types        
+=======================================
+-->
 	<xs:complexType name="AcceptanceTest">
 		<xs:annotation>
 			<xs:documentation>Acceptance test for assets.</xs:documentation>
@@ -956,7 +961,7 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 	</xs:complexType>
 	<xs:complexType name="Object">
 		<xs:annotation>
-			<xs:documentation>Superclass of all object classes to allow extensions.</xs:documentation>
+			<xs:documentation>Superclass of all object classes to allow extensions. Inheritance from Object provides an inherent extension mechanism permitting custom data to be included in a separate namespace.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="extension" type="xs:anyType" minOccurs="0" maxOccurs="unbounded">
@@ -1373,9 +1378,10 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 		</xs:complexContent>
 	</xs:complexType>
 	<!--
-	=======================================
-	Enumerations 
-	=======================================-->
+=======================================
+Enumerations 
+=======================================
+-->
 	<xs:simpleType name="CRUDOperation">
 		<xs:annotation>
 			<xs:documentation>Specifies the operation requested of this item</xs:documentation>
@@ -2660,9 +2666,10 @@ Month: 3</xs:documentation>
 		</xs:restriction>
 	</xs:simpleType>
 	<!--
-	=======================================
-	Global Elements
-	=======================================-->
+=======================================
+Global Elements
+=======================================
+-->
 	<xs:element name="AcceptanceTest" type="AcceptanceTest"/>
 	<xs:element name="AccountNotification" type="AccountNotification"/>
 	<xs:element name="Agreement" type="Agreement"/>
