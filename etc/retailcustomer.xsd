@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2018 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
+<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
 <!-- 
 ==========================================================================
     Schema: retailcustomer.xsd
@@ -654,6 +654,14 @@ Additional Complex Types
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BatchListType">
+		<xs:annotation>
+			<xs:documentation>[extension] List of resource URIs that can be used to GET retail customer resources</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="resources" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="DateTimeInterval">
 		<xs:annotation>
@@ -2676,6 +2684,7 @@ Global Elements
 	<xs:element name="Asset" type="Asset"/>
 	<xs:element name="AssetContainer" type="AssetContainer"/>
 	<xs:element name="BatchItemInfo" type="BatchItemInfo"/>
+	<xs:element name="BatchList" type="BatchListType"/>
 	<xs:element name="Customer" type="Customer"/>
 	<xs:element name="CustomerAccount" type="CustomerAccount"/>
 	<xs:element name="CustomerAgreement" type="CustomerAgreement"/>
