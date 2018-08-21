@@ -4,7 +4,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20180803    
+    Version: 0.7.20180821    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -926,6 +926,11 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 							<xs:documentation>[extension] List of rate options applied to the base tariff profile</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="billingChargeSource" type="BillingChargeSource" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Source of Billing Charge</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -1546,6 +1551,18 @@ Additional Complex Types
 			<xs:element name="effectiveDate" type="TimeType">
 				<xs:annotation>
 					<xs:documentation>[extension] Effective date of Retail Customer's Tariff Rider enrollment status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BillingChargeSource">
+		<xs:annotation>
+			<xs:documentation>[extension] Information about source of billing charge</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="agencyName" type="String256" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>[extension] Name of billing source</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
