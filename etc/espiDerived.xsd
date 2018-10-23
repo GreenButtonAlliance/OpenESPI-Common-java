@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
+<!-- edited with XMLSpy v2019 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
 <xs:schema xmlns="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.7.20131008">
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20181009    
+    Version: 0.7.20181023    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -921,7 +921,7 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 							<xs:documentation>[extension] Cycle day on which the meter for this usage point will normally be read.  Usually correlated with the billing cycle.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="tariffRiderRefs" type="TariffRiderRef" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="tariffRiderRefs" type="TariffRiderRefs" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] List of rate options applied to the base tariff profile</xs:documentation>
 						</xs:annotation>
@@ -1471,7 +1471,7 @@ Additional Complex Types
 			<xs:documentation>[extension] References to associated Tariff Riders.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="tariffRiderRef" type="TariffRiderRef" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="tariffRiderRef" type="TariffRiderRef" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>[extension] Tariff Rider structure.</xs:documentation>
 				</xs:annotation>
