@@ -1174,7 +1174,7 @@ Other EUI Types
 							<xs:documentation>Agreement between the customer and the ServiceSupplier to pay for service at a specific service location. It provides for the recording of certain billing information about the type of service provided at the service location and is used during charge creation to determine the type of service.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="tariffRiderRefs" type="TariffRiderRef" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="tariffRiderRefs" type="TariffRiderRefs" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] List of rate options applied to the base tariff profile</xs:documentation>
 						</xs:annotation>
