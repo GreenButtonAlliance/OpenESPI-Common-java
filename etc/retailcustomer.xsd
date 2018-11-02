@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2018 rel. 2 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
+<!-- edited with XMLSpy v2019 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
 <!-- 
 ==========================================================================
     Schema: retailcustomer.xsd
-    Version: 0.1.20180802    
+    Version: 0.1.20181101    
     Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -35,9 +35,13 @@ ______________________________________________________
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:cust="http://naesb.org/espi/customer" xmlns:espi="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified">
 	<xs:annotation>
-		<xs:documentation>The retail customer schema provides details about a UsagePoint that are considered Personally identifiable information (PII) and cannot be part of normal ESPI usage information.
-
-These resources are available via the same messaging patterns as other ESPI data. However, they are defined in a separate namespace and cannot be retrieved in the same message as non-PII containing ESPI data.</xs:documentation>
+		<xs:documentation>
+		    The retail customer schema provides details about a UsagePoint that are considered Personally identifiable information (PII) and
+		    cannot be part of normal ESPI usage information.
+		    
+		    These resources are available via the same messaging patterns as other ESPI data. However, they are defined in a separate namespace 
+		    and cannot be retrieved in the same message as non-PII containing ESPI data.
+		</xs:documentation>
 	</xs:annotation>
 	<!--
 =======================================

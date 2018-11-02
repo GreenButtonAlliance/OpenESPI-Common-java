@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 
+==========================================================================
+    Schema: atom.xsd
+    Version: 0.1.20181101    
+    Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (Green Button Alliance)
+========================================================================== 
+
+Licensed by GreenButtonAlliance.org under one or more contributor license agreements.
+See the NOTICE section file below for additional information
+regarding copyright ownership.  The GreenButtonAlliance.org licenses this file
+to you under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License.  You may obtain a copy
+of the License at:
+ 
+  http://www.apache.org/licenses/LICENSE-2.0
+ 
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+
+______________________________________________________
+NOTICE
+______________________________________________________
+______________________________________________________
+END NOTICE
+______________________________________________________
+-->
 <xs:schema xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.w3.org/2005/Atom" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:annotation>
 		<xs:documentation>
 				This version of the Atom schema is based on version 1.0 of the format specifications,
-				found here http://www.atomenabled.org/developers/syndication/atom-format-spec.php.
+				found here https://tools.ietf.org/pdf/rfc4287.pdf.
 			</xs:documentation>
 	</xs:annotation>
 	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
