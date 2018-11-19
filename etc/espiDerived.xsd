@@ -4,7 +4,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20181023    
+    Version: 0.7.20181119    
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -47,7 +47,32 @@ The NAESB Copyright Policy may be found here http://www.naesb.org/pdf2/copyright
 
 The NAESB Intellectual Property Rights Policy Concerning Contributions and Comments may be found here http://www.naesb.org/pdf4/naesb_ipr_policy.doc. 
 
-______________________________________________________
+	______________________________________________________
+	NOTICE
+	______________________________________________________
+
+	Licensed by Green Button Alliance, Inc. under one or more contributor license agreements.
+	See the NOTICE section file below for additional information
+	regarding copyright ownership.  The GreenButtonAlliance.org licenses this file
+	to you under the Apache License, Version 2.0 (the "License"); you may not
+	use this file except in compliance with the License.  You may obtain a copy
+	of the License at:
+
+	  http://www.apache.org/licenses/LICENSE-2.0
+ 
+	Unless required by applicable law or agreed to in writing,
+	software distributed under the License is distributed on an
+	"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+	KIND, either express or implied.  See the License for the
+	specific language governing permissions and limitations
+	under the License.
+
+	______________________________________________________
+	NOTICE
+	______________________________________________________
+	______________________________________________________
+	END NOTICE
+____________________________________________________________________________________________________________
 END NOTICE
 ______________________________________________________
 -->
@@ -168,7 +193,7 @@ self link to this resource</xs:documentation>
 							<xs:documentation>The link to the main page of the application (OAuth client_uri). (e.g. "https://services.greenbuttondata.org/ThirdParty")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="redirect_uri" type="xs:anyURI">
+					<xs:element name="redirect_uri" type="xs:anyURI" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>The default redirect back to the application after authorization grant (OAuth redirect uri). (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/OAuthCallBack")</xs:documentation>
 						</xs:annotation>
