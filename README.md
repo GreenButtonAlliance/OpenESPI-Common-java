@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/energyos/OpenESPI-Common-java.png)](https://travis-ci.org/energyos/OpenESPI-Common-java)
+[![CircleCI](https://circleci.com/gh/greenbuttonalliance/OpenESPI-Common-java.svg?style=svg)](https://circleci.com/gh/greenbuttonalliance/OpenESPI-Common-java)
 # OpenESPI-Common
 This is the Common module of the OpenESPI Green Button Data Custodian and Third Party implementation. It is a Spring application written in java and built on top of jpa for database access.
 
