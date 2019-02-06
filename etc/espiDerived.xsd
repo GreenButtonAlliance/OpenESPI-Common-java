@@ -4,7 +4,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20181216    
+    Version: 0.7.2090114   
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -54,7 +54,7 @@ ESPI OAuth Exchange Class Resource Types
 -->
 	<xs:complexType name="ApplicationInformation">
 		<xs:annotation>
-			<xs:documentation>[extension] Contains information about a Third Party Application requesting access to the DataCustodian services. Information requested may include items such as Organization Name, Website, Contact Info, Application Name, Description, Icon, Type, default Notification and Callback endpoints, and may also include agreement with terms of service.
+			<xs:documentation>Contains information about a Third Party Application requesting access to the DataCustodian services. Information requested may include items such as Organization Name, Website, Contact Info, Application Name, Description, Icon, Type, default Notification and Callback endpoints, and may also include agreement with terms of service.
 
 Atom Links:
 self link to this resource</xs:documentation>
@@ -64,7 +64,7 @@ self link to this resource</xs:documentation>
 				<xs:sequence>
 					<xs:element name="dataCustodianId" type="String64">
 						<xs:annotation>
-							<xs:documentation>Contains the identifier for the Data Custodian. (e.g. "Sandbox Data Custodian")</xs:documentation>
+							<xs:documentation>[extension] Contains the identifier for the Data Custodian. (e.g. "Sandbox Data Custodian")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="dataCustodianApplicationStatus" type="DataCustodianApplicationStatus">
@@ -99,73 +99,73 @@ self link to this resource</xs:documentation>
 					</xs:element>
 					<xs:element name="authorizationServerUri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Contains the base URI link to the authorization server. (e.g. "https://services.greenbuttondata.org/DataCustodian")</xs:documentation>
+							<xs:documentation>[extension] Contains the base URI link to the authorization server. (e.g. "https://services.greenbuttondata.org/DataCustodian")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="thirdPartyNotifyUri" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>URI used to notify ThirdParty that subscribed information is available. (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/Notification")</xs:documentation>
+							<xs:documentation>[extension] URI used to notify ThirdParty that subscribed information is available. (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/Notification")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="authorizationServerAuthorizationEndpoint" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>An OAuth 2.0 URI used by the client to obtain authorization from the resource owner via user-agent redirection - {AuthorizationServer}{AuthorizationPath}. (e.g.  "https://services.greenbuttondata.org/DataCustodian/oauth/authorize" </xs:documentation>
+							<xs:documentation>[extension] An OAuth 2.0 URI used by the client to obtain authorization from the resource owner via user-agent redirection - {AuthorizationServer}{AuthorizationPath}. (e.g.  "https://services.greenbuttondata.org/DataCustodian/oauth/authorize" </xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="authorizationServerRegistrationEndpoint" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>A URI used by the client to register a Third Party with a Data Custodian via its {AuthorizationServer}{AuthorizationServer}{RegistrationPath}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/register")</xs:documentation>
+							<xs:documentation>[extension] A URI used by the client to register a Third Party with a Data Custodian via its {AuthorizationServer}{AuthorizationServer}{RegistrationPath}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/register")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="authorizationServerTokenEndpoint" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>An OAuth 2.0 URL used by the client to exchange an authorization grant for an access token, typically with client authentication. (e.g. "https://services.greenbuttondata.org/DataCustodian/oauth/token")</xs:documentation>
+							<xs:documentation>[extension] An OAuth 2.0 URL used by the client to exchange an authorization grant for an access token, typically with client authentication. (e.g. "https://services.greenbuttondata.org/DataCustodian/oauth/token")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="dataCustodianBulkRequestURI" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>{DataCustodianBulkRequestURI}  URI of DataCustodian’s Bulk Request endpoint.  The value is provided by the Data Custodian and cannot be modified by the ThirdParty. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource/Batch/Bulk/{BulkID}" => bulkID from BR={bulkId} from Scope)</xs:documentation>
+							<xs:documentation>[extension] {DataCustodianBulkRequestURI}  URI of DataCustodian’s Bulk Request endpoint.  The value is provided by the Data Custodian and cannot be modified by the ThirdParty. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource/Batch/Bulk/{BulkID}" => bulkID from BR={bulkId} from Scope)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="dataCustodianResourceEndpoint" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>{ResourceServer}{ResourcePath}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource")</xs:documentation>
+							<xs:documentation>[extension] {ResourceServer}{ResourcePath}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="thirdPartyScopeSelectionScreenURI" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>URI of the Scope Selection Screen used by the Retail Customer to select the characteristics of the Green Button data to be shared with the ThirdParty.  (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/RetailCustomer/ScopeSelection")</xs:documentation>
+							<xs:documentation>[DEPRECATED][extension] URI of the Scope Selection Screen used by the Retail Customer to select the characteristics of the Green Button data to be shared with the ThirdParty.  (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/RetailCustomer/ScopeSelection")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="thirdPartyUserPortalScreenURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>URI of a Third Party’s web page for use with Green Button Connect My Data (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/home")</xs:documentation>
+							<xs:documentation>[extension] URI of a Third Party’s web page for use with Green Button Connect My Data (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/home")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!-- OAuth 2.0 fields -->
 					<xs:element name="client_secret" type="String512">
 						<xs:annotation>
-							<xs:documentation>A secret to be associated with this application, used to sign OAuth requests. This value is provided by Data Custodian (OAuth client_secret). (e.g. "secret")</xs:documentation>
+							<xs:documentation>[extension] A secret to be associated with this application, used to sign OAuth requests. This value is provided by Data Custodian (OAuth client_secret). (e.g. "secret")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="logo_uri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The link to the logo image for the application. Size greater than 180 x 150 may be cropped or reduced (OAuth logo_uri). (e.g. "http://services.greenbuttondata.org/ThirdParty/favicon.png")</xs:documentation>
+							<xs:documentation>[extension] The link to the logo image for the application. Size greater than 180 x 150 may be cropped or reduced (OAuth logo_uri). (e.g. "http://services.greenbuttondata.org/ThirdParty/favicon.png")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="client_name" type="String256">
 						<xs:annotation>
-							<xs:documentation>The name of the application to which access will be granted (OAuth client_name). (e.g. "Green Button ThirdParty")</xs:documentation>
+							<xs:documentation>[extension] The name of the application to which access will be granted (OAuth client_name). (e.g. "Green Button ThirdParty")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="client_uri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>The link to the main page of the application (OAuth client_uri). (e.g. "https://services.greenbuttondata.org/ThirdParty")</xs:documentation>
+							<xs:documentation>[extension] The link to the main page of the application (OAuth client_uri). (e.g. "https://services.greenbuttondata.org/ThirdParty")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="redirect_uri" type="xs:anyURI" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>The default redirect back to the application after authorization grant (OAuth redirect uri). (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/OAuthCallBack")</xs:documentation>
+							<xs:documentation>[extension] The default redirect back to the application after authorization grant (OAuth redirect uri). (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/OAuthCallBack")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="client_id" type="String64">
@@ -175,74 +175,74 @@ self link to this resource</xs:documentation>
 					</xs:element>
 					<xs:element name="tos_uri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>A URI that points to a human-readable Terms of Service document for the Third Party Application.  The Terms of Service usually describes a contractual relationship between the Retail Customer and the Third Party Application that the Retail Customer accepts when authorizing access to the Third Party Application. (e.g. "http://services.greenbuttondata.org/ThirdParty/TermsOfService")</xs:documentation>
+							<xs:documentation>[extension] A URI that points to a human-readable Terms of Service document for the Third Party Application.  The Terms of Service usually describes a contractual relationship between the Retail Customer and the Third Party Application that the Retail Customer accepts when authorizing access to the Third Party Application. (e.g. "http://services.greenbuttondata.org/ThirdParty/TermsOfService")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="policy_uri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>A URI that points to a human-readable Policy document for the Third Party Application.  The policy usually describes how a Retail Customer's energy usage information will be used by the Third Party Application. (e.g. "http://services.greenbuttondata.org/ThirdParty/UsagePolicy")</xs:documentation>
+							<xs:documentation>[extension] A URI that points to a human-readable Policy document for the Third Party Application.  The policy usually describes how a Retail Customer's energy usage information will be used by the Third Party Application. (e.g. "http://services.greenbuttondata.org/ThirdParty/UsagePolicy")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="software_id" type="String256">
 						<xs:annotation>
-							<xs:documentation>An identifier for the software that comprises the Third Party Application.  The software_id is asserted by the Third Party software and is intended to be shared between all copies of the Third Party software.  The value of this field MAY be a UUID [RFC4122]. (e.g. "MyCoolGreenButtonAnalyzer")</xs:documentation>
+							<xs:documentation>[extension] An identifier for the software that comprises the Third Party Application.  The software_id is asserted by the Third Party software and is intended to be shared between all copies of the Third Party software.  The value of this field MAY be a UUID [RFC4122]. (e.g. "MyCoolGreenButtonAnalyzer")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="software_version" type="String32">
 						<xs:annotation>
-							<xs:documentation>A version identifier for the software that comprises a Third Party Application.  The value of this field is a string that is intended to be compared using string equality matching.  The value of the software_version SHOULD change on any update to the Third Party software. (e.g. "Version 1.00.00")</xs:documentation>
+							<xs:documentation>[extension] A version identifier for the software that comprises a Third Party Application.  The value of this field is a string that is intended to be compared using string equality matching.  The value of the software_version SHOULD change on any update to the Third Party software. (e.g. "Version 1.00.00")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="client_id_issued_at" type="TimeType">
 						<xs:annotation>
-							<xs:documentation>Time date stamp at which this client_id was issued. Note the schema data type is TimeType and the presentation in OAuth message flow is xs:dateTime and requires a conversion when accessed. (e.g. "1403190000" => 2014-06-19T15:00:00Z)</xs:documentation>
+							<xs:documentation>[extension] Time date stamp at which this client_id was issued. Note the schema data type is TimeType and the presentation in OAuth message flow is xs:dateTime and requires a conversion when accessed. (e.g. "1403190000" => 2014-06-19T15:00:00Z)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="client_secret_expires_at" type="TimeType">
 						<xs:annotation>
-							<xs:documentation>Date time at which this client_secret expires -- value of 0 means the client_secret never expires. (e.g. "0" => never expires)</xs:documentation>
+							<xs:documentation>[extension] Date time at which this client_secret expires -- value of 0 means the client_secret never expires. (e.g. "0" => never expires)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!-- Additional OAuth 2.0 fields -->
 					<xs:element name="contacts" type="String256" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>Array of email addresses for people responsible for the Authorized Third Party Application.  These MAY be made available to Retail Customers for support requests for the Authorized Third Party application.  The Data Custodian Authorization Server MAY use the email addresses as identifiers for an Authorized Third Party application administrative page. (e.g. "support@energyos.org")</xs:documentation>
+							<xs:documentation>[extension] Array of email addresses for people responsible for the Authorized Third Party Application.  These MAY be made available to Retail Customers for support requests for the Authorized Third Party application.  The Data Custodian Authorization Server MAY use the email addresses as identifiers for an Authorized Third Party application administrative page. (e.g. "support@energyos.org")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="token_endpoint_auth_method" type="TokenEndPointMethod">
 						<xs:annotation>
-							<xs:documentation>The authentication method used by the OAuth 2.0 Token Endpoint to authenticate the Third Party Application. (e.g. "client_secret_basic")</xs:documentation>
+							<xs:documentation>[extension] The authentication method used by the OAuth 2.0 Token Endpoint to authenticate the Third Party Application. (e.g. "client_secret_basic")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="scope" type="String256" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation> Space separated list of scope values the Third Party Application may use when requesting access Tokens. (e.g. "FB=1_3_4_5_8_13_18_19_31_34_35_39;IntervalDuration=900_3600;BlockDuration=Daily; HistoryLength= 34128000;SubscriptionFrequency=Daily; AccountCollection=5;BR=1;")</xs:documentation>
+							<xs:documentation>[extension] Space separated list of scope values the Third Party Application may use when requesting access Tokens. (e.g. "FB=1_3_4_5_8_13_18_19_31_34_35_39;IntervalDuration=900_3600;BlockDuration=Daily; HistoryLength= 34128000;SubscriptionFrequency=Daily; AccountCollection=5;BR=1;")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="grant_types" type="GrantType" minOccurs="2" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>Grant types this interface supports. (e.g. "client_credentials, authorization_code, refresh_token" in separate tags</xs:documentation>
+							<xs:documentation>[extension] Grant types this interface supports. (e.g. "client_credentials, authorization_code, refresh_token" in separate tags</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="response_types" type="ResponseType">
 						<xs:annotation>
-							<xs:documentation>Response types supported. (e.g. "code")</xs:documentation>
+							<xs:documentation>[extension] Response types supported. (e.g. "code")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="registration_client_uri">
 						<xs:annotation>
-							<xs:documentation>{ClientConfigurationURI} A URI used by a registered client to manage registration information.  This URI is returned by the AuthorizationServer in the “registration_client_uri” field of the client information response. {AuthorizationServerRegistrationEndpoint}/ApplicationInformation/{ApplicationInformationID}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource/ApplicationInformation/{ApplicationInformationID}/")</xs:documentation>
+							<xs:documentation>[extension] {ClientConfigurationURI} A URI used by a registered client to manage registration information.  This URI is returned by the AuthorizationServer in the “registration_client_uri” field of the client information response. {AuthorizationServerRegistrationEndpoint}/ApplicationInformation/{ApplicationInformationID}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource/ApplicationInformation/{ApplicationInformationID}/")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!-- OAuth 2.0 fields END -->
 					<xs:element name="registration_access_token">
 						<xs:annotation>
-							<xs:documentation>A credential obtained during Third Party registration with the Data Custodian to enable access to the ApplicationInformation resource. This is persisted in the ApplicationInformation resource structure. (e.g. "fe82518d-e325-404e-978c-c02f9339bccc")</xs:documentation>
+							<xs:documentation>[extension] A credential obtained during Third Party registration with the Data Custodian to enable access to the ApplicationInformation resource. This is persisted in the ApplicationInformation resource structure. (e.g. "fe82518d-e325-404e-978c-c02f9339bccc")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="dataCustodianScopeSelectionScreenURI">
 						<xs:annotation>
-							<xs:documentation>The URI used by the Third Party to redirect the Retail Customer to the Data Custodian Scope Selection Screen (note that this will likely involve a dialog with the Retail Customer including a log in authentication process). (e.g. http://localhost:8080/DataCustodian/RetailCustomer/ScopeSelection)</xs:documentation>
+							<xs:documentation>[DEPRECATED][extension] The URI used by the Third Party to redirect the Retail Customer to the Data Custodian Scope Selection Screen (note that this will likely involve a dialog with the Retail Customer including a log in authentication process). (e.g. http://localhost:8080/DataCustodian/RetailCustomer/ScopeSelection)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
