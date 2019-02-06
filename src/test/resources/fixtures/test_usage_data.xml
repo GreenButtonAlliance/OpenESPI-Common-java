@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="GreenButtonDataStyleSheet.xslt"?>
 <!--
+  ~     Copyright (c) 2018-2019 Green Button Alliance, Inc.
+  ~
+  ~     Portions copyright (c) 2013-2018 EnergyOS.org
+  ~
+  ~     Licensed under the Apache License, Version 2.0 (the "License");
+  ~     you may not use this file except in compliance with the License.
+  ~     You may obtain a copy of the License at
+  ~
+  ~         http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~     Unless required by applicable law or agreed to in writing, software
+  ~     distributed under the License is distributed on an "AS IS" BASIS,
+  ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~     See the License for the specific language governing permissions and
+  ~     limitations under the License.
+  ~
+  -->
+
+<!--
 =========================================================
 =========================================================
 =========================================================
@@ -25,31 +44,7 @@ Please leave this heading comment section in this file.
 =========================================================
 =========================================================
 -->
-<!--
-==========================================================================
-Sample Green Button Data File:  test_usage_data.xml
-Version: 0.7 20130208
-     Author: Ron Pasquarelli, Marty Burns (Hypertek for EnerNex)
-     Notice: This is draft prototype developed for SGIP by the Administrator Technical Team (EnerNex)
-==========================================================================
-Copyright (c) 2012,2013 EnergyOS.org
-
-Licensed by EnergyOS.org under one or more contributor license agreements.
-
-See the NOTICE file distributed with this work for additional 
-information regarding copyright ownership. The EnergyOS.org licenses this 
-file to you under the Apache License, Version 2.0 (the "; License; "); 
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at:
-http://www.apache.org/licenses/LICENSE-2.0
-  
-Unless required by applicable law or agreed to in writing, software 
-distributed under the License is distributed on an "AS IS" BASIS, 
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
-implied.  See the License for the specific language governing 
-permissions and limitations under the License.
--->
-<feed xmlns="http://www.w3.org/2005/Atom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<feed xmlns="http://www.w3.org/2005/Atom">
 	<id>urn:uuid:15B0A4ED-CCF4-4521-A0A1-9FF650EC8A6B</id>
 	<title>Green Button Subscription Feed</title>
 	<updated>2012-10-24T00:00:00Z</updated>
