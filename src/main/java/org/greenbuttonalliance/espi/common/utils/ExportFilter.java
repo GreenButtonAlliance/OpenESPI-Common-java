@@ -1,5 +1,5 @@
 /*
- *     Copyright (c) 2018 Green Button Alliance, Inc.
+ *     Copyright (c) 2018-2019 Green Button Alliance, Inc.
  *
  *     Portions copyright (c) 2013-2018 EnergyOS.org
  *
@@ -137,7 +137,6 @@ public class ExportFilter {
 	private long toTime(String key) {
 		String param = params.get(key);
 
-		//TODO Issue #305 -- revise use of XMLGregorianCalendarImpl to remove maven build error
 		return XMLGregorianCalendarImpl.parse(param).toGregorianCalendar()
 				.getTimeInMillis();
 	}
