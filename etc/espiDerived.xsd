@@ -4,7 +4,7 @@
 	<!-- 
 ==========================================================================
  Schema: espiDerived.xsd
-    Version: 0.7.20190206   
+    Version: 0.7.20190210   
     Author: Ron Pasquarelli & Marty Burns (Hypertek for NIST), John Teeter (for NIST), Don Coffin (REMI Networks)
 ========================================================================== 
 
@@ -99,47 +99,47 @@ self link to this resource</xs:documentation>
 					</xs:element>
 					<xs:element name="authorizationServerUri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] Contains the base URI link to the authorization server. (e.g. "https://services.greenbuttondata.org/DataCustodian")</xs:documentation>
+							<xs:documentation>[extension] Contains the base URI link to the authorization server. (e.g. "https://server.example.com/DataCustodian")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="thirdPartyNotifyUri" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>[extension] URI used to notify ThirdParty that subscribed information is available. (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/Notification")</xs:documentation>
+							<xs:documentation>[extension] URI used to notify ThirdParty that subscribed information is available. (e.g. "https://server.example.com/ThirdParty/espi/1_1/Notification")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="authorizationServerAuthorizationEndpoint" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>[extension] An OAuth 2.0 URI used by the client to obtain authorization from the resource owner via user-agent redirection - {AuthorizationServer}{AuthorizationPath}. (e.g.  "https://services.greenbuttondata.org/DataCustodian/oauth/authorize" </xs:documentation>
+							<xs:documentation>[extension] An OAuth 2.0 URI used by the client to obtain authorization from the resource owner via user-agent redirection - {AuthorizationServer}{AuthorizationPath}. (e.g.  "https://server.example.com/DataCustodian/oauth/authorize" </xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="authorizationServerRegistrationEndpoint" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] A URI used by the client to register a Third Party with a Data Custodian via its {AuthorizationServer}{AuthorizationServer}{RegistrationPath}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/register")</xs:documentation>
+							<xs:documentation>[extension] A URI used by the client to register a Third Party with a Data Custodian via its {AuthorizationServer}{AuthorizationServer}{RegistrationPath}. (e.g. "https://server.example.com/DataCustodian/espi/1_1/register")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="authorizationServerTokenEndpoint" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>[extension] An OAuth 2.0 URL used by the client to exchange an authorization grant for an access token, typically with client authentication. (e.g. "https://services.greenbuttondata.org/DataCustodian/oauth/token")</xs:documentation>
+							<xs:documentation>[extension] An OAuth 2.0 URL used by the client to exchange an authorization grant for an access token, typically with client authentication. (e.g. "https://server.example.com/DataCustodian/oauth/token")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="dataCustodianBulkRequestURI" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>[extension] {DataCustodianBulkRequestURI}  URI of DataCustodian’s Bulk Request endpoint.  The value is provided by the Data Custodian and cannot be modified by the ThirdParty. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource/Batch/Bulk/{BulkID}" => bulkID from BR={bulkId} from Scope)</xs:documentation>
+							<xs:documentation>[extension] {DataCustodianBulkRequestURI}  URI of DataCustodian’s Bulk Request endpoint.  The value is provided by the Data Custodian and cannot be modified by the ThirdParty. (e.g. "https://server.example.com/DataCustodian/espi/1_1/resource/Batch/Bulk/{BulkID}" => bulkID from BR={bulkId} from Scope)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="dataCustodianResourceEndpoint" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>[extension] {ResourceServer}{ResourcePath}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource")</xs:documentation>
+							<xs:documentation>[extension] {ResourceServer}{ResourcePath}. (e.g. "https://server.example.com/DataCustodian/espi/1_1/resource")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="thirdPartyScopeSelectionScreenURI" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>[DEPRECATED][extension] URI of the Scope Selection Screen used by the Retail Customer to select the characteristics of the Green Button data to be shared with the ThirdParty.  (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/RetailCustomer/ScopeSelection")</xs:documentation>
+							<xs:documentation>[DEPRECATED][extension] URI of the Scope Selection Screen used by the Retail Customer to select the characteristics of the Green Button data to be shared with the ThirdParty.  (e.g. "https://server.example.com/ThirdParty/espi/1_1/RetailCustomer/ScopeSelection")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="thirdPartyUserPortalScreenURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] URI of a Third Party’s web page for use with Green Button Connect My Data (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/home")</xs:documentation>
+							<xs:documentation>[extension] URI of a Third Party’s web page for use with Green Button Connect My Data (e.g. "https://server.example.com/ThirdParty/espi/1_1/home")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!-- OAuth 2.0 fields -->
@@ -150,7 +150,7 @@ self link to this resource</xs:documentation>
 					</xs:element>
 					<xs:element name="logo_uri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] The link to the logo image for the application. Size greater than 180 x 150 may be cropped or reduced (OAuth logo_uri). (e.g. "http://services.greenbuttondata.org/ThirdParty/favicon.png")</xs:documentation>
+							<xs:documentation>[extension] The link to the logo image for the application. Size greater than 180 x 150 may be cropped or reduced (OAuth logo_uri). (e.g. "http://server.example.com/ThirdParty/favicon.png")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="client_name" type="String256">
@@ -160,12 +160,12 @@ self link to this resource</xs:documentation>
 					</xs:element>
 					<xs:element name="client_uri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] The link to the main page of the application (OAuth client_uri). (e.g. "https://services.greenbuttondata.org/ThirdParty")</xs:documentation>
+							<xs:documentation>[extension] The link to the main page of the application (OAuth client_uri). (e.g. "https://server.example.com/ThirdParty")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="redirect_uri" type="xs:anyURI" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>[extension] The default redirect back to the application after authorization grant (OAuth redirect uri). (e.g. "https://services.greenbuttondata.org/ThirdParty/espi/1_1/OAuthCallBack")</xs:documentation>
+							<xs:documentation>[extension] The default redirect back to the application after authorization grant (OAuth redirect uri). (e.g. "https://server.example.com/ThirdParty/espi/1_1/OAuthCallBack")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="client_id" type="String64">
@@ -175,12 +175,12 @@ self link to this resource</xs:documentation>
 					</xs:element>
 					<xs:element name="tos_uri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] A URI that points to a human-readable Terms of Service document for the Third Party Application.  The Terms of Service usually describes a contractual relationship between the Retail Customer and the Third Party Application that the Retail Customer accepts when authorizing access to the Third Party Application. (e.g. "http://services.greenbuttondata.org/ThirdParty/TermsOfService")</xs:documentation>
+							<xs:documentation>[extension] A URI that points to a human-readable Terms of Service document for the Third Party Application.  The Terms of Service usually describes a contractual relationship between the Retail Customer and the Third Party Application that the Retail Customer accepts when authorizing access to the Third Party Application. (e.g. "http://server.example.com/ThirdParty/TermsOfService")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="policy_uri" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] A URI that points to a human-readable Policy document for the Third Party Application.  The policy usually describes how a Retail Customer's energy usage information will be used by the Third Party Application. (e.g. "http://services.greenbuttondata.org/ThirdParty/UsagePolicy")</xs:documentation>
+							<xs:documentation>[extension] A URI that points to a human-readable Policy document for the Third Party Application.  The policy usually describes how a Retail Customer's energy usage information will be used by the Third Party Application. (e.g. "http://server.example.com/ThirdParty/UsagePolicy")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="software_id" type="String256">
@@ -231,7 +231,7 @@ self link to this resource</xs:documentation>
 					</xs:element>
 					<xs:element name="registration_client_uri">
 						<xs:annotation>
-							<xs:documentation>[extension] {ClientConfigurationURI} A URI used by a registered client to manage registration information.  This URI is returned by the AuthorizationServer in the “registration_client_uri” field of the client information response. {AuthorizationServerRegistrationEndpoint}/ApplicationInformation/{ApplicationInformationID}. (e.g. "https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource/ApplicationInformation/{ApplicationInformationID}/")</xs:documentation>
+							<xs:documentation>[extension] {ClientConfigurationURI} A URI used by a registered client to manage registration information.  This URI is returned by the AuthorizationServer in the “registration_client_uri” field of the client information response. {AuthorizationServerRegistrationEndpoint}/ApplicationInformation/{ApplicationInformationID}. (e.g. "https://server.example.com/DataCustodian/espi/1_1/resource/ApplicationInformation/{ApplicationInformationID}/")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<!-- OAuth 2.0 fields END -->
@@ -242,7 +242,7 @@ self link to this resource</xs:documentation>
 					</xs:element>
 					<xs:element name="dataCustodianScopeSelectionScreenURI">
 						<xs:annotation>
-							<xs:documentation>[DEPRECATED][extension] The URI used by the Third Party to redirect the Retail Customer to the Data Custodian Scope Selection Screen (note that this will likely involve a dialog with the Retail Customer including a log in authentication process). (e.g. http://localhost:8080/DataCustodian/RetailCustomer/ScopeSelection)</xs:documentation>
+							<xs:documentation>[DEPRECATED][extension] The URI used by the Third Party to redirect the Retail Customer to the Data Custodian Scope Selection Screen (note that this will likely involve a dialog with the Retail Customer including a log in authentication process). (e.g. http://server.example.com/DataCustodian/RetailCustomer/ScopeSelection)</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -329,17 +329,18 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 					</xs:element>
 					<xs:element name="resourceURI" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>URI that can be used to access the data the Third Party is authorized to access. Can be used in a GET of the resource subscription. (e.g. "http://localhost:8080/DataCustodian/espi/1_1/resource/Batch/Subscription/1")</xs:documentation>
+							<xs:documentation>URI that can be used to access the EUI data the Third Party is authorized to access. Can be used in a GET of the EUI resource subscription (e.g. "http://server.example.com/DataCustodian/espi/1_1/resource/Batch/Subscription/1").</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="authorizationURI" type="xs:anyURI">
 						<xs:annotation>
-							<xs:documentation>URI that can be used to update or delete this Authorization. (e.g. "http://localhost:8080/DataCustodian/espi/1_1/resource/Authorization/1")</xs:documentation>
+							<xs:documentation>URI that can be used to update or delete this Authorization. (e.g. "http://server.example.com/DataCustodian/espi/1_1/resource/Authorization/1")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="customerResourceURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>URI that can be used to retrieve customer account information. Note: This URI will have a differnt namespace than the URI value found in the resourceURI element.</xs:documentation>
+							<xs:documentation>URI that can be used to access PII data the Third Party is authorized to access.  Can be used in a GET of the PII resource subscription (e.g. "http://server.example.com/DataCustodian/espi/1_1/resource/Batch/Subscription/2").
+Note: This URI will have a differnt namespace than the URI value found in the resourceURI element.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -984,22 +985,22 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 							<xs:sequence>
 								<xs:element name="tOUorCPPorConsumptionTier" type="tOUorCPPorConsumptionTier">
 									<xs:annotation>
-										<xs:documentation>[extension] Type of billing tariff profile uses</xs:documentation>
+										<xs:documentation>Type of billing tariff profile uses</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="code">
 									<xs:annotation>
-										<xs:documentation>[extension] code (numeric value)</xs:documentation>
+										<xs:documentation>Code (numeric value)</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="name">
 									<xs:annotation>
-										<xs:documentation>[extension] name associated with code</xs:documentation>
+										<xs:documentation>Name associated with code</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 								<xs:element name="note" minOccurs="0">
 									<xs:annotation>
-										<xs:documentation>[extension] optional description of code</xs:documentation>
+										<xs:documentation>Optional description of code</xs:documentation>
 									</xs:annotation>
 								</xs:element>
 							</xs:sequence>
