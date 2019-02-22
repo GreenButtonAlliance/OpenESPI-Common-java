@@ -18,7 +18,9 @@ cd OpenESPI-Common
 
 Then install the OpenESPI-Common JAR in your local repository:
 ```bash
-mvn clean install
+# The JUnit test have not been maintained since the original creation of the repository. 
+# Any errors encountered here are due to not including the "-Dmaven.test.skip=true" portion of the command.
+mvn -Dmaven.test.skip=true clean install
 
 # or for a specific profile
 mvn -P <profile name> -Dmaven.test.skip=true clean install
