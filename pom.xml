@@ -142,6 +142,7 @@
         <jaxb.version>2.3.0</jaxb.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
     </properties>
 
     <repositories>
@@ -387,6 +388,9 @@
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
+                <excludes>
+                    <exclude>**/10.xml</exclude>
+                </excludes>
             </resource>
         </resources>
 
@@ -405,11 +409,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <!--<configuration>-->
-                    <!--<source>1.7</source>-->
-                    <!--<target>1.7</target>-->
-                <!--</configuration>-->
+                <version>${maven.compiler.plugin.version}</version>
             </plugin>
 
             <plugin>

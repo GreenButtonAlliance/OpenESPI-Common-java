@@ -78,7 +78,7 @@ public class EspiMarshaller {
 	private static JAXBContext getJaxbContext() throws JAXBException {
 		if (jaxbContext == null) {
 			jaxbContext = JAXBContext
-					.newInstance("org.energyos.espi.common.domain");
+					.newInstance("org.greenbuttonalliance.espi.common.domain");
 		}
 
 		return jaxbContext;
