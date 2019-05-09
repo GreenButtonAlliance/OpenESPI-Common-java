@@ -1,4 +1,7 @@
 [![CircleCI](https://circleci.com/gh/GreenButtonAlliance/OpenESPI-Common-java/tree/master.svg?style=svg)](https://circleci.com/gh/GreenButtonAlliance/OpenESPI-Common-java/tree/master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=GreenButtonAlliance_OpenESPI-Common-java&metric=alert_status)](https://sonarcloud.io/dashboard?id=GreenButtonAlliance_OpenESPI-Common-java)
+
+
 # OpenESPI-Common
 This is the Common module of the OpenESPI Green Button Data Custodian and Third Party implementation. It is a Spring application written in java and built on top of jpa for database access.
 
@@ -18,7 +21,9 @@ cd OpenESPI-Common
 
 Then install the OpenESPI-Common JAR in your local repository:
 ```bash
-mvn clean install
+# The JUnit test have not been maintained since the original creation of the repository. 
+# Any errors encountered here are due to not including the "-Dmaven.test.skip=true" portion of the command.
+mvn -Dmaven.test.skip=true clean install
 
 # or for a specific profile
 mvn -P <profile name> -Dmaven.test.skip=true clean install

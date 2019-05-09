@@ -33,6 +33,7 @@ import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
 import static org.greenbuttonalliance.espi.common.test.EspiFactory.newMeterReadingWithUsagePoint;
+import static org.junit.Assert.assertEquals;
 
 public class MeterReadingTests extends XMLTest {
 

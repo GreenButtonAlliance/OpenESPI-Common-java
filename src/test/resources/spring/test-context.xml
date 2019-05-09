@@ -29,9 +29,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <context:component-scan base-package="org.energyos.espi.common.service"/>
-    <context:component-scan base-package="org.energyos.espi.common.utils"/>
-    <context:component-scan base-package="org.energyos.espi.common.test"/>
+    <context:component-scan base-package="org.greenbuttonalliance.espi.common.service"/>
+    <context:component-scan base-package="org.greenbuttonalliance.espi.common.utils"/>
+    <context:component-scan base-package="org.greenbuttonalliance.espi.common.test"/>
 
     <context:property-placeholder location="classpath:spring/${database}-data-access.properties"
                                   system-properties-mode="OVERRIDE"/>
@@ -55,19 +55,19 @@
             </props>
         </property>
         <property name="persistenceUnitName" value="energy"/>
-        <property name="packagesToScan" value="org.energyos.espi.common.domain"/>
+        <property name="packagesToScan" value="org.greenbuttonalliance.espi.common.domain"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" p:entityManagerFactory-ref="entityManagerFactory"/>
 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
-    <context:component-scan base-package="org.energyos.espi.common.repositories.jpa"/>
+    <context:component-scan base-package="org.greenbuttonalliance.espi.common.repositories.jpa"/>
 
     <bean id="domainMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="packagesToScan">
             <list>
-                <value>org.energyos.espi.common.domain</value>
+                <value>org.greenbuttonalliance.espi.common.domain</value>
             </list>
         </property>
         <property name="marshallerProperties">
@@ -85,8 +85,8 @@
     <bean id="atomMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="packagesToScan">
             <list>
-                <value>org.energyos.espi.common.models.atom</value>
-                <value>org.energyos.espi.common.domain</value>
+                <value>org.greenbuttonalliance.espi.common.models.atom</value>
+                <value>org.greenbuttonalliance.espi.common.domain</value>
             </list>
         </property>
         <property name="marshallerProperties">
@@ -104,8 +104,8 @@
     <bean id="fragmentMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="packagesToScan">
             <list>
-                <value>org.energyos.espi.common.models.atom</value>
-                <value>org.energyos.espi.common.domain</value>
+                <value>org.greenbuttonalliance.espi.common.models.atom</value>
+                <value>org.greenbuttonalliance.espi.common.domain</value>
             </list>
         </property>
         <property name="marshallerProperties">

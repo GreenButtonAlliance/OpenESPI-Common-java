@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+==========================================================================	
+    Schema: retailcustomer.xsd	
+    Version: 0.1.20190212    	
+    Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)	
+========================================================================== 	
   ~     Copyright (c) 2018-2019 Green Button Alliance, Inc.
   ~
   ~     Portions copyright (c) 2013-2018 EnergyOS.org
@@ -17,11 +22,8 @@
   ~     limitations under the License.
   ~
   -->
-
 <!-- edited with XMLSpy v2019 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer"
-           targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified">
-	<xs:annotation>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:cust="http://naesb.org/espi/customer" xmlns:espi="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified">	<xs:annotation>
 		<xs:documentation>
 		    The retail customer schema provides details about a UsagePoint that are considered Personally identifiable information (PII) and
 		    cannot be part of normal ESPI usage information.
@@ -2068,7 +2070,7 @@ Month: 3</xs:documentation>
 						<xs:annotation>
 							<xs:documentation>Entity that sells the service, but does not deliver to the customer; applies to the deregulated markets.</xs:documentation>
 						</xs:annotation>
-					</xs:enumeration>		
+					</xs:enumeration>
 					<xs:enumeration value="other">
 						<xs:annotation>
 							<xs:documentation>Other kind of supplier.</xs:documentation>
