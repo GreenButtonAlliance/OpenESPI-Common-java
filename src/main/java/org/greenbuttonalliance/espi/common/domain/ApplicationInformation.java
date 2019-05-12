@@ -165,8 +165,8 @@ public class ApplicationInformation extends IdentifiedObject {
 	/**
 	 * 
 	 */
-	public final static String QUERY_FIND_ALL = "ApplicationInformation.findAll";
-	public final static String QUERY_FIND_BY_UUID = "ApplicationInformation.findByUUID";
+	public static final String QUERY_FIND_ALL = "ApplicationInformation.findAll";
+	public static final String QUERY_FIND_BY_UUID = "ApplicationInformation.findByUUID";
 	public static final String QUERY_FIND_BY_ID = "ApplicationInformation.findById";
 	public static final String QUERY_FIND_BY_CLIENT_ID = "ApplicationInformation.findByClientId";
 	public static final String QUERY_FIND_BY_DATA_CUSTODIAN_CLIENT_ID = "ApplicationInformation.findByDataCustodianClientId";

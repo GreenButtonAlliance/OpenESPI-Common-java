@@ -76,10 +76,10 @@ import java.util.List;
 		@NamedQuery(name = Subscription.QUERY_FIND_BY_AUTHORIZATION_ID, query = "SELECT subscription from Subscription subscription WHERE subscription.authorization.id = :id") })
 public class Subscription extends IdentifiedObject {
 
-	public final static String QUERY_FIND_BY_UUID = "Subscription.findByUUID";
+	public static final String QUERY_FIND_BY_UUID = "Subscription.findByUUID";
 	public static final String QUERY_FIND_BY_ID = "Subscription.findById";
-	public final static String QUERY_FIND_ALL = "Subscription.findAll";
-	public final static String QUERY_FIND_BY_HASHED_ID = "Subscription.findByHashedID";
+	public static final String QUERY_FIND_ALL = "Subscription.findAll";
+	public static final String QUERY_FIND_BY_HASHED_ID = "Subscription.findByHashedID";
 	public static final String QUERY_FIND_ALL_IDS = "Subscription.findAllIds";
 	public static final String QUERY_FIND_BY_AUTHORIZATION_ID = "Subscription.findByAuthorizationId";
 

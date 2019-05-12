@@ -58,15 +58,15 @@ import java.util.Collection;
 public class RetailCustomer extends IdentifiedObject implements UserDetails,
 		Principal {
 
-	public final static String QUERY_FIND_BY_ID = "RetailCustomer.findById";
-	public final static String QUERY_FIND_ALL = "RetailCustomer.findAll";
-	public final static String QUERY_FIND_BY_USERNAME = "RetailCustomer.findByUsername";
+	public static final String QUERY_FIND_BY_ID = "RetailCustomer.findById";
+	public static final String QUERY_FIND_ALL = "RetailCustomer.findAll";
+	public static final String QUERY_FIND_BY_USERNAME = "RetailCustomer.findByUsername";
 	public static final String QUERY_FIND_ALL_IDS = "RetailCustomer.findAllIds";
 	public static final String QUERY_FIND_ALL_IDS_BY_XPATH_0 = "RetailCustomer.findAllIdsByXpath0";
 	public static final String QUERY_FIND_ID_BY_XPATH = "RetailCustomer.findIdsByXpath";
 
-	public final static String ROLE_USER = "ROLE_USER";
-	public final static String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
+	public static final String ROLE_USER = "ROLE_USER";
+	public static final String ROLE_CUSTODIAN = "ROLE_CUSTODIAN";
 
 	/*
 	 * @Id

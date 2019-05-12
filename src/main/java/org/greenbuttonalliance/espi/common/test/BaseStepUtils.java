@@ -34,12 +34,12 @@ import java.net.URISyntaxException;
 import static org.junit.Assert.assertTrue;
 
 public class BaseStepUtils {
-	public final static String BASE_URL = "http://localhost:8080/";
-	public final static String THIRD_PARTY_CONTEXT = "ThirdParty";
-	public final static String DATA_CUSTODIAN_CONTEXT = "DataCustodian";
-	public final static String DATA_CUSTODIAN_BASE_URL = BASE_URL
+	public static final String BASE_URL = "http://localhost:8080/";
+	public static final String THIRD_PARTY_CONTEXT = "ThirdParty";
+	public static final String DATA_CUSTODIAN_CONTEXT = "DataCustodian";
+	public static final String DATA_CUSTODIAN_BASE_URL = BASE_URL
 			+ DATA_CUSTODIAN_CONTEXT;
-	public final static String THIRD_PARTY_BASE_URL = BASE_URL
+	public static final String THIRD_PARTY_BASE_URL = BASE_URL
 			+ THIRD_PARTY_CONTEXT;
 
 	public static final String USERNAME = "alan";

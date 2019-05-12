@@ -113,9 +113,9 @@ public class Authorization extends IdentifiedObject {
 	public static final String QUERY_FIND_BY_RETAIL_CUSTOMER_ID = "Authorization.findAllByRetailCustomerId";
 	public static final String QUERY_FIND_BY_SCOPE = "Authorization.findByScope";
 	public static final String QUERY_FIND_BY_STATE = "Authorization.findByState";
-	public final static String QUERY_FIND_BY_UUID = "Authorization.findByUUID";
-	public final static String QUERY_FIND_BY_ACCESS_TOKEN = "Authorization.findByAccessToken";
-	public final static String QUERY_FIND_BY_REFRESH_TOKEN = "Authorization.findByRefreshToken";
+	public static final String QUERY_FIND_BY_UUID = "Authorization.findByUUID";
+	public static final String QUERY_FIND_BY_ACCESS_TOKEN = "Authorization.findByAccessToken";
+	public static final String QUERY_FIND_BY_REFRESH_TOKEN = "Authorization.findByRefreshToken";
 	public static final String QUERY_FIND_BY_RESOURCE_URI = "Authorization.findByResourceUri";
 	public static final String QUERY_FIND_ALL_IDS_BY_BULK_ID = "Authorization.findAllIdsByBulkId";
 	public static final String QUERY_FIND_ALL_IDS_BY_APPLICATION_INFORMATION_ID = "Authorization.findAllIdsByApplicationInformationId";

@@ -63,16 +63,16 @@ import java.util.Map;
 //@Entity
 //@Table(name = "service_categories")
 public class ServiceCategory {
-    public final static Long ELECTRICITY_SERVICE = 0L;
-    public final static Long GAS_SERVICE = 1L;
-    public final static Long WATER_SERVICE = 2L;
-    public final static Long TIME_SERVICE = 3L;
-    public final static Long HEAT_SERVICE = 4L;
-    public final static Long REFUSE_WASTER_SERVICE = 5L;
-    public final static Long SEWERAGE_SERVICE = 6L;
-    public final static Long RATES_SERVICE = 7L;
-    public final static Long TV_LICENSE_SERVICE = 8L;
-    public final static Long INTERNET_SERVICE = 9L;
+    public static final Long ELECTRICITY_SERVICE = 0L;
+    public static final Long GAS_SERVICE = 1L;
+    public static final Long WATER_SERVICE = 2L;
+    public static final Long TIME_SERVICE = 3L;
+    public static final Long HEAT_SERVICE = 4L;
+    public static final Long REFUSE_WASTER_SERVICE = 5L;
+    public static final Long SEWERAGE_SERVICE = 6L;
+    public static final Long RATES_SERVICE = 7L;
+    public static final Long TV_LICENSE_SERVICE = 8L;
+    public static final Long INTERNET_SERVICE = 9L;
 
     private static final Map<Long, String> labels = new HashMap<Long, String>();
 

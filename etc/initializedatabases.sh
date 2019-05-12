@@ -1,5 +1,5 @@
 # This script will initialize the databases
-# it will first delete datacustodian and third party databases
+# it will first delete datacustodian and thirdparty databases
 # then it creates them
 # then establishes all the tables
 # then populates tables with initial data
@@ -15,6 +15,8 @@ mysql --user=root --password=password < thirdpartymysql.sql
 mysql --user=root --password=password < datacustodianmysql.sql
 mysql --user=root --password=password < tokenstore.sql
 
-# prepopulate tables 
+# prepopulate tables
+mysql --user=root --password=password < prepopulatesql_users_dc.sql
+mysql --user=root --password=password < prepopulatesql_users_tp.sql
 mysql --user=root --password=password < prepopulatesql_dc.sql
 mysql --user=root --password=password < prepopulatesql_tp.sql

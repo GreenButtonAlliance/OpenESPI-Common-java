@@ -46,47 +46,47 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-	public final static QName Entry_QNAME = new QName(
+	public static final QName Entry_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "entry");
-	public final static QName Feed_QNAME = new QName(
+	public static final QName Feed_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "feed");
-	public final static QName SourceTypeTitle_QNAME = new QName(
+	public static final QName SourceTypeTitle_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "title");
-	public final static QName SourceTypeCategory_QNAME = new QName(
+	public static final QName SourceTypeCategory_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "category");
-	public final static QName SourceTypeLogo_QNAME = new QName(
+	public static final QName SourceTypeLogo_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "logo");
-	public final static QName SourceTypeIcon_QNAME = new QName(
+	public static final QName SourceTypeIcon_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "icon");
-	public final static QName SourceTypeAuthor_QNAME = new QName(
+	public static final QName SourceTypeAuthor_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "author");
-	public final static QName SourceTypeId_QNAME = new QName(
+	public static final QName SourceTypeId_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "id");
-	public final static QName SourceTypeLink_QNAME = new QName(
+	public static final QName SourceTypeLink_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "link");
-	public final static QName SourceTypeContributor_QNAME = new QName(
+	public static final QName SourceTypeContributor_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "contributor");
-	public final static QName SourceTypeUpdated_QNAME = new QName(
+	public static final QName SourceTypeUpdated_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "updated");
-	public final static QName SourceTypeGenerator_QNAME = new QName(
+	public static final QName SourceTypeGenerator_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "generator");
-	public final static QName SourceTypeSubtitle_QNAME = new QName(
+	public static final QName SourceTypeSubtitle_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "subtitle");
-	public final static QName SourceTypeRights_QNAME = new QName(
+	public static final QName SourceTypeRights_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "rights");
-	public final static QName EntryTypeSummary_QNAME = new QName(
+	public static final QName EntryTypeSummary_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "summary");
-	public final static QName EntryTypeContent_QNAME = new QName(
+	public static final QName EntryTypeContent_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "content");
-	public final static QName EntryTypeSource_QNAME = new QName(
+	public static final QName EntryTypeSource_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "source");
-	public final static QName EntryTypePublished_QNAME = new QName(
+	public static final QName EntryTypePublished_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "published");
-	public final static QName PersonTypeName_QNAME = new QName(
+	public static final QName PersonTypeName_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "name");
-	public final static QName PersonTypeEmail_QNAME = new QName(
+	public static final QName PersonTypeEmail_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "email");
-	public final static QName PersonTypeUri_QNAME = new QName(
+	public static final QName PersonTypeUri_QNAME = new QName(
 			"http://www.w3.org/2005/Atom", "uri");
 
 	/**

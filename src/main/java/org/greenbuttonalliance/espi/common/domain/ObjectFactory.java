@@ -44,47 +44,47 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-	public final static QName IntervalReading_QNAME = new QName(
+	public static final QName IntervalReading_QNAME = new QName(
 			"http://naesb.org/espi", "IntervalReading");
-	public final static QName IntervalBlock_QNAME = new QName(
+	public static final QName IntervalBlock_QNAME = new QName(
 			"http://naesb.org/espi", "IntervalBlock");
-	public final static QName Object_QNAME = new QName("http://naesb.org/espi",
+	public static final QName Object_QNAME = new QName("http://naesb.org/espi",
 			"Object");
-	public final static QName ReadingType_QNAME = new QName(
+	public static final QName ReadingType_QNAME = new QName(
 			"http://naesb.org/espi", "ReadingType");
-	public final static QName SummaryMeasurement_QNAME = new QName(
+	public static final QName SummaryMeasurement_QNAME = new QName(
 			"http://naesb.org/espi", "SummaryMeasurement");
-	public final static QName Authorization_QNAME = new QName(
+	public static final QName Authorization_QNAME = new QName(
 			"http://naesb.org/espi", "Authorization");
-	public final static QName ElectricPowerQualitySummary_QNAME = new QName(
+	public static final QName ElectricPowerQualitySummary_QNAME = new QName(
 			"http://naesb.org/espi", "ElectricPowerQualitySummary");
-	public final static QName ReadingQuality_QNAME = new QName(
+	public static final QName ReadingQuality_QNAME = new QName(
 			"http://naesb.org/espi", "ReadingQuality");
-	public final static QName Subscription_QNAME = new QName(
+	public static final QName Subscription_QNAME = new QName(
 			"http://naesb.org/espi", "Subscription");
-	public final static QName LocalTimeParameters_QNAME = new QName(
+	public static final QName LocalTimeParameters_QNAME = new QName(
 			"http://naesb.org/espi", "LocalTimeParameters");
-	public final static QName ApplicationInformation_QNAME = new QName(
+	public static final QName ApplicationInformation_QNAME = new QName(
 			"http://naesb.org/espi", "ApplicationInformation");
-	public final static QName DateTimeInterval_QNAME = new QName(
+	public static final QName DateTimeInterval_QNAME = new QName(
 			"http://naesb.org/espi", "DateTimeInterval");
-	public final static QName ServiceStatus_QNAME = new QName(
+	public static final QName ServiceStatus_QNAME = new QName(
 			"http://naesb.org/espi", "ServiceStatus");
-	public final static QName IdentifiedObject_QNAME = new QName(
+	public static final QName IdentifiedObject_QNAME = new QName(
 			"http://naesb.org/espi", "IdentifiedObject");
-	public final static QName MeterReading_QNAME = new QName(
+	public static final QName MeterReading_QNAME = new QName(
 			"http://naesb.org/espi", "MeterReading");
-	public final static QName UsagePoint_QNAME = new QName(
+	public static final QName UsagePoint_QNAME = new QName(
 			"http://naesb.org/espi", "UsagePoint");
-	public final static QName BatchItemInfo_QNAME = new QName(
+	public static final QName BatchItemInfo_QNAME = new QName(
 			"http://naesb.org/espi", "BatchItemInfo");
-	public final static QName ElectricPowerUsageSummary_QNAME = new QName(
+	public static final QName ElectricPowerUsageSummary_QNAME = new QName(
 			"http://naesb.org/espi", "ElectricPowerUsageSummary");
-	public final static QName LineItem_QNAME = new QName(
+	public static final QName LineItem_QNAME = new QName(
 			"http://naesb.org/espi", "LineItem");
-	public final static QName RetailCustomer_QNAME = new QName(
+	public static final QName RetailCustomer_QNAME = new QName(
 			"http://naesb.org/espi", "RetailCustomer");
-	public final static QName GrantType_QNAME = new QName(
+	public static final QName GrantType_QNAME = new QName(
 			"http://naesb.org/espi", "GrantType");
 
 	/**
