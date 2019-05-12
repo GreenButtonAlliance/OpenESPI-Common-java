@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # This script will initialize the databases
 # it will first delete datacustodian and third party databases
 # then it creates them

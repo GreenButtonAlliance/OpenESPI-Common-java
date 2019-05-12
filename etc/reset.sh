@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # This script will repopulate the databases
 # it will first remove all entries in tables for datacustodian and third party databases
 # then populates tables with initial data

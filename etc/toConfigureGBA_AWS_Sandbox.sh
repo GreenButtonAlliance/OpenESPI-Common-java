@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 cp prepopulatesql_applicationinformation_dc_GBA_AWS_Sandbox.sql prepopulatesql_applicationinformation_dc.sql
 cp prepopulatesql_applicationinformation_tp_GBA_AWS_Sandbox.sql prepopulatesql_applicationinformation_tp.sql
 cp prepopulatesql_tokenstore_GBA_AWS_Sandbox.sql prepopulatesql_tokenstore.sql
