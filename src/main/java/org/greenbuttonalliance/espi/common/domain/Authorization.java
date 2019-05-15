@@ -42,8 +42,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * access_token containing instance for a customer resource)
  * 
  * Note: for privacy there is no identifier of the RetailCustomer in this
- * structure but an implementation will have consider how to maintain a
- * correspendance between a RetailCustomer and his authorization.
+ * structure but an implementation will have to consider how to maintain a
+ * correspondence between a RetailCustomer and his authorization.
  * 
  * <p>
  * Java class for Authorization complex type.
