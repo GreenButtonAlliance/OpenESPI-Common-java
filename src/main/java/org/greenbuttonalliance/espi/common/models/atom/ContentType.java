@@ -754,7 +754,7 @@ public class ContentType {
 
 	private String buildHeader(String temp) {
 		// check for ROOT form
-		String result = temp;
+		String result;
 		if (temp.contains("resource/Batch/RetailCustomer")) {
 			// XPath form of upload/download
 			result = temp.substring(0, temp.indexOf("/Batch"));

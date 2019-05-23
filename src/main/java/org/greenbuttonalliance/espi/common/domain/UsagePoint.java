@@ -265,13 +265,11 @@ public class UsagePoint extends IdentifiedObject {
 
 	public void addElectricPowerUsageSummary(
 			ElectricPowerUsageSummary electricPowerUsageSummary) {
-		// electricPowerUsageSummary.setUsagePoint(this);
 		electricPowerUsageSummaries.add(electricPowerUsageSummary);
 	}
 
 	public void removeElectricPowerUsageSummary(
 			ElectricPowerUsageSummary electricPowerUsageSummary) {
-		// electricPowerUsageSummary.setUsagePoint(null);
 		electricPowerUsageSummaries.remove(electricPowerUsageSummary);
 	}
 

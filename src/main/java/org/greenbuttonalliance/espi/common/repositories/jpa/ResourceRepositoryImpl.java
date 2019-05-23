@@ -112,8 +112,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			} catch (NoResultException e) {
 				// nothing to do, just return the empty result and
 				// we'll find it later.
-//				System.out.printf("**** findAllParentsByRelatedHref(String href) NoResultException: %s\n     usagePointId: %s   meterReadingId: %s\n     href: %s\n",
-//						e.toString(), usagePointId, meterReadingId, href);
 				if(logger.isInfoEnabled()) {
 					logger.info("**** findAllParentsByRelatedHref(String href) NoResultException: " + e.toString() + "&n" +
 							"     usagePointId: " + usagePointId + "     meterReadingId: " + meterReadingId + "&n" +
@@ -123,8 +121,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			} catch (Exception e) {
 				// nothing to do, just return the empty result and
 				// we'll find it later.
-//				System.out.printf("**** findAllParentsByRelatedHref(String href) Exception: %s\n     href: %s\n",
-//						e.toString(), href);
 				if(logger.isInfoEnabled()){
 					logger.info("**** findAllParentsByRelatedHref(String href) Exception: " + e.toString() + "&n" +
 							"     href: " + href + "&n");
@@ -230,8 +226,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			} catch (NoResultException e) {
 				// We haven't processed the related record yet, so just return the
 				// empty temp
-//				System.out.printf("**** findAllRelated(Linkable linkable) NoResultException: %s\n     Processed 'related' link before processing 'self' link\n",
-//						e.toString());
 				if(logger.isInfoEnabled()){
 					logger.info("**** findAllRelated(Linkable linkable) NoResultException: " + e.toString() + "&n" +
 							"     Processed 'related' link before processing 'self' link&n");
@@ -240,8 +234,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			} catch (Exception e) {
 				// We haven't processed the related record yet, so just return the
 				// empty temp
-//				System.out.printf("**** findAllRelated(Linkable linkable) Exception: %s\n",
-//						e.toString());
 				if(logger.isInfoEnabled()) {
 					logger.info("**** findAllRelated(Linkable linkable) Exception: " + e.toString() + "&n");
 				}
@@ -263,8 +255,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("uuid", uuid.toString().toUpperCase())
 					.getSingleResult();
 		} catch (IllegalAccessException | NoSuchFieldException e) {
-//			System.out.printf("**** findByUUID(UUID uuid) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()){
 				logger.error("**** findByUUID(UUID uuid) Exception: " + clazz.toString() + " - " + e.toString() + "&n");
 			}
@@ -283,8 +273,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			return (T) em.createNamedQuery(queryFindById)
 					.setParameter("id", id).getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** FindbyId(Long id) Exception: %s - %s id: %s\n",
-//					clazz.toString(), e.toString(), id);
 			if(logger.isErrorEnabled()){
 				logger.error("**** findById(Long id) Exception: " + clazz.toString() + " - " + e.toString() +
 						" id: " + id + "&n");
@@ -303,8 +291,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 
 			return em.createNamedQuery(queryFindById).getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** FindAllIds Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()){
 				logger.error("**** findAllIds Exception: " + clazz.toString() + " - " + e.toString() + "&n");
 			}
@@ -324,9 +310,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			return em.createNamedQuery(queryFindAllIdsByUsagePointId)
 					.setParameter("usagePointId", usagePointId).getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf(
-//					"**** FindAllIdsByUsagePointId(Long usagePointId) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** findAllIdsByUsagePointId(Long usagePointId) Exception: " + clazz.toString() +
 						" - " + e.toString() + "&n");
@@ -353,8 +336,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			Query query = em.createNamedQuery(findAllIdsByXPath);
 			return query.getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** findAllIdsByXPath Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** findAllIdsByXPath Exception: " + clazz.toString() +
 						" - " + e.toString() + "&n");
@@ -375,8 +356,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					"o1Id", id1);
 			return query.getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** findAllIdsByXPath(Long id1) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** findAllIdsByXPath(Long id1) Exception: " + clazz.toString() +
 						" - " + e.toString() + "&n");
@@ -397,8 +376,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("o1Id", id1).setParameter("o2Id", id2);
 			return query.getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** findAllIdsByXPath(Long id1, Long id2) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** findAllIdsByXPath(Long id1, Long id2) Exception: " + clazz.toString() +
 						" - " + e.toString() + "&n");
@@ -419,8 +396,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("o3Id", id3);
 			return query.getResultList();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** findAllIdsByXPath(Long id1, Long id2, Long id3) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** findAllIdsByXPath(Long id1, Long id2, Long id3) Exception: " + clazz.toString() +
 						" - " + e.toString() + "&n");
@@ -441,8 +416,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					"o1Id", id1);
 			return (Long) query.getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** findIdByXPath(Long id1) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** findIdByXPath(Long id1) Exception: " + clazz.toString() +
 						" - " + e.toString() + "&n");
@@ -461,8 +434,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("o1Id", id1).setParameter("o2Id", id2);
 			return (Long) query.getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** findIdByXPath(Long id1, Long id2) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** findIdByXPath(Long id1, Long id2) Exception: " + clazz.toString() +
 						" - " + e.toString() + "&n");
@@ -482,8 +453,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("o3Id", id3);
 			return (Long) query.getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** findIdByXPath(Long id1, Long id2, Long id3) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** findIdByXPath(Long id1, Long id2, Long id3) Exception: " + clazz.toString() +
 						" - " + e.toString() + "&n");
@@ -503,8 +472,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 					.setParameter("o3Id", id3).setParameter("o4Id", id4);
 			return (Long) query.getSingleResult();
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** findIdByXPath(Long id1, Long id2, Long id3, Long id4) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** findIdByXPath(Long id1, Long id2, Long id3, Long id4) Exception: " +
 						clazz.toString() + " - " + e.toString() + "&n");
@@ -539,8 +506,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			return (T) query.getSingleResult();
 
 		} catch (NoSuchFieldException | IllegalAccessException e) {
-//			System.out.printf("**** findByResourceUri(String uri) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** findByResourceUri(String uri) Exception: " +
 						clazz.toString() + " - " + e.toString() + "&n");
@@ -560,8 +525,6 @@ class ResourceRepositoryImpl implements ResourceRepository {
 			em.remove(temp);
 
 		} catch (Exception e) {
-//			System.out.printf("**** deleteById(Long id) Exception: %s - %s\n",
-//					clazz.toString(), e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** deleteById(Long id) Exception: " + clazz.toString() + " - " +
 						e.toString() + "&n");

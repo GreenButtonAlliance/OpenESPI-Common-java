@@ -128,14 +128,6 @@ public class ReadingType extends IdentifiedObject {
 	@Embedded
 	protected ReadingInterharmonic interharmonic;
 
-	// public void setMeterReading(MeterReading meterReading) {
-	// this.meterReading = meterReading;
-	// }
-
-	// public MeterReading getMeterReading() {
-	// return this.meterReading;
-	// }
-
 	/**
 	 * Gets the value of the accumulationBehaviour property.
 	 *
