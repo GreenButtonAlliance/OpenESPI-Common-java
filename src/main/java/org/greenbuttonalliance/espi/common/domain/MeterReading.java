@@ -161,6 +161,7 @@ public class MeterReading extends IdentifiedObject {
 		return MeterReading.QUERY_FIND_ALL_RELATED;
 	}
 
+	@Override
 	public List<LinkType> getRelatedLinks() {
 		return relatedLinks;
 	}

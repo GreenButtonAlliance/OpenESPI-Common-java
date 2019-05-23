@@ -19,6 +19,8 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.greenbuttonalliance.espi.common.domain.*;
 import org.greenbuttonalliance.espi.common.models.atom.DateTimeType;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
@@ -43,6 +45,8 @@ import java.util.UUID;
 
 @Service
 public class ExportServiceImpl implements ExportService {
+
+	private final Log logger = LogFactory.getLog(getClass());
 
 	@Autowired
 	private ResourceService resourceService;
@@ -836,9 +840,13 @@ public class ExportServiceImpl implements ExportService {
 									+ entry.getContent().getContentId(
 											resourceClass));
 				} catch (Exception e) {
-					System.out
-							.printf("exportEntries: The requested collection contains no resources: %s: %s\n",
-									hrefFragment, resourceClass.getSimpleName());
+//					System.out
+//							.printf("exportEntries: The requested collection contains no resources: %s: %s\n",
+//									hrefFragment, resourceClass.getSimpleName());
+					if(logger.isErrorEnabled()) {
+						logger.error("exportEntries: The requested collection contains no resources: " +
+								hrefFragment + ": " + resourceClass.getSimpleName() + "&n");
+					}
 
 					// stream.write("</feed>".getBytes());
 				}
@@ -959,9 +967,13 @@ public class ExportServiceImpl implements ExportService {
 									+ entry.getContent().getContentId(
 											resourceClass));
 				} catch (Exception e) {
-					System.out
-							.printf("exportEntries_Root: The requested collection contains no resources: %s: %s\n",
-									hrefFragment, resourceClass.getSimpleName());
+//					System.out
+//							.printf("exportEntries_Root: The requested collection contains no resources: %s: %s\n",
+//									hrefFragment, resourceClass.getSimpleName());
+					if(logger.isErrorEnabled()) {
+						logger.error("exportEntries_Root: The requested collection contains no resources: " +
+								hrefFragment + ": " + resourceClass.getSimpleName() + "&n");
+					}
 
 					// stream.write("</feed>\n".getBytes());
 				}
@@ -1052,9 +1064,13 @@ public class ExportServiceImpl implements ExportService {
 				exportEntryFull(subscriptionId, entry, stream, exportFilter,
 						hrefFragment);
 			} catch (Exception e) {
-				System.out
-						.printf("exportEntriesInternal: The requested collection contains no resources: %s\n",
-								hrefFragment);
+//				System.out
+//						.printf("exportEntriesInternal: The requested collection contains no resources: %s\n",
+//								hrefFragment);
+				if(logger.isErrorEnabled()) {
+					logger.error("exportEntriesInternal: The requested collection contains no resources: " +
+							hrefFragment + "&n");
+				}
 
 			}
 		}
@@ -1185,7 +1201,10 @@ public class ExportServiceImpl implements ExportService {
 			}
 			result = null;
 		} catch (Exception e) {
-			System.out.printf("**** Error in Query: %s\n", e.toString());
+//			System.out.printf("**** Error in Query: %s\n", e.toString());
+			if(logger.isErrorEnabled()) {
+				logger.error("**** Error in Query: " + e.toString() + "&n");
+			}
 			result = null;
 		}
 		if (temp != null) {
@@ -1269,7 +1288,10 @@ public class ExportServiceImpl implements ExportService {
 			result = (new EntryTypeIterator(resourceService, temp, clazz));
 
 		} catch (Exception e) {
-			System.out.printf("**** Error in Query: %s\n", e.toString());
+//			System.out.printf("**** Error in Query: %s\n", e.toString());
+			if(logger.isErrorEnabled()){
+				logger.error("**** Error in Query: " + e.toString() + "&n");
+			}
 			result = null;
 		}
 		return result;

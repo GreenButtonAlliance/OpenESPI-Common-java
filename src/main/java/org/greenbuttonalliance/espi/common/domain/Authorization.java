@@ -630,6 +630,7 @@ public class Authorization extends IdentifiedObject {
 		return pieces[pieces.length - 1];
 	}
 
+	@Override
 	public void merge(IdentifiedObject resource) {
 		super.merge(resource);
 		this.accessToken = ((Authorization) resource).getAccessToken();

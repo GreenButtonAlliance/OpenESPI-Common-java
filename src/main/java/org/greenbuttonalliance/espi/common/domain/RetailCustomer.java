@@ -102,10 +102,12 @@ public class RetailCustomer extends IdentifiedObject implements UserDetails,
 	@NotEmpty
 	protected String role = ROLE_USER;
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -182,6 +184,7 @@ public class RetailCustomer extends IdentifiedObject implements UserDetails,
 		return getUsername();
 	}
 
+	@Override
 	public String getHashedId() {
 		return "" + getId();
 	}

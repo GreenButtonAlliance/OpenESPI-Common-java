@@ -332,6 +332,7 @@ public class UsagePoint extends IdentifiedObject {
 		this.relatedLinks = relatedLinks;
 	}
 
+	@Override
 	public List<LinkType> getRelatedLinks() {
 		return relatedLinks;
 	}

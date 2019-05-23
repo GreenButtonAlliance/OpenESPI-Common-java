@@ -19,6 +19,8 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.greenbuttonalliance.espi.common.domain.*;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
 import org.greenbuttonalliance.espi.common.service.*;
@@ -48,6 +50,9 @@ import java.util.List;
 
 @Service
 public class ImportServiceImpl implements ImportService {
+
+	private final Log logger = LogFactory.getLog(getClass());
+
 	@Autowired
 	@Qualifier("atomMarshaller")
 	private Jaxb2Marshaller marshaller;
@@ -125,15 +130,23 @@ public class ImportServiceImpl implements ImportService {
 			reader.parse(new InputSource(stream));
 
 		} catch (SAXException e) {
-			System.out
-					.printf("\nImportServiceImpl -- importData: SAXException\n     Cause = %s\n     Description = %s\n\n",
-							e.getClass(), e.getMessage());
+//			System.out
+//					.printf("\nImportServiceImpl -- importData: SAXException\n     Cause = %s\n     Description = %s\n\n",
+//							e.getClass(), e.getMessage());
+			if(logger.isErrorEnabled()) {
+				logger.error("&nImportServiceImpl -- importData: SAXException&n     Cause = " + e.getClass() + "&n" +
+						"     Description = " + e.getMessage() + "&n&n");
+			}
 			throw new SAXException(e.getMessage(), e);
 			
 		} catch (Exception e) {
-			System.out
-					.printf("\nImportServiceImpl -- importData:\n     Cause = %s\n     Description = %s\n\n",
-							e.getClass(), e.getMessage());
+//			System.out
+//					.printf("\nImportServiceImpl -- importData:\n     Cause = %s\n     Description = %s\n\n",
+//							e.getClass(), e.getMessage());
+			if(logger.isErrorEnabled()) {
+				logger.error("&nImportServiceImpl -- importData:&n     Cause = " + e.getClass() + "&n" +
+						"     Description = " + e.getMessage() + "&n&n");
+			}
 			e.printStackTrace();
 			
 			
@@ -212,8 +225,11 @@ public class ImportServiceImpl implements ImportService {
 				} catch (Exception e) {
 					// an Authorization w/o an associated subscription breaks
 					// the propagation chain
-					System.out
-							.printf("**** End of Notification Propagation Chain\n");
+//					System.out
+//							.printf("**** End of Notification Propagation Chain\n");
+					if(logger.isErrorEnabled()) {
+						logger.error("**** End of Notification Propagation Chain&n");
+					}
 				}
 				if (subscription != null) {
 					String resourceUri = authorization.getResourceURI();

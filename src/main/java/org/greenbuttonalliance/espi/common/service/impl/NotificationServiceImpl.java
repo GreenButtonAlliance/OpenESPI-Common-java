@@ -19,6 +19,8 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.greenbuttonalliance.espi.common.domain.*;
 import org.greenbuttonalliance.espi.common.service.AuthorizationService;
 import org.greenbuttonalliance.espi.common.service.NotificationService;
@@ -42,6 +44,8 @@ import java.util.Map.Entry;
  */
 @Service
 public class NotificationServiceImpl implements NotificationService {
+	private final Log logger = LogFactory.getLog(getClass());
+
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -127,9 +131,13 @@ public class NotificationServiceImpl implements NotificationService {
 			try {
 				restTemplate.postForLocation(thirdPartyNotificationURI, batchList);
 			} catch (Exception e) {
-				System.out
-				.printf("NotificationServiceImpl: notifyInternal - POST for %s caused an %s Exception\n",
-						thirdPartyNotificationURI, e.getMessage());
+//				System.out
+//				.printf("NotificationServiceImpl: notifyInternal - POST for %s caused an %s Exception\n",
+//						thirdPartyNotificationURI, e.getMessage());
+				if(logger.isErrorEnabled()) {
+					logger.info("NotificationServiceImpl: notifyInternal - POST for " + thirdPartyNotificationURI +
+							" caused an " + e.getMessage() + " Exception&n");
+				}
 			}
 		}
 	}
@@ -148,7 +156,11 @@ public class NotificationServiceImpl implements NotificationService {
 
 			String tempResourceUri = authorization.getResourceURI();
 
-			System.out.println("NotificationServiceImpl: notifyAllNeed - resourceURI: " + tempResourceUri);
+//			System.out.println("NotificationServiceImpl: notifyAllNeed - resourceURI: " + tempResourceUri);
+
+			if(logger.isInfoEnabled()) {
+				logger.info("NotificationServiceImpl: notifyAllNeed - resourceURI: " + tempResourceUri);
+			}
 
 			// Ignore client_access_tokens which contain "/Batch/Bulk/
 			// for their ResourceUri values
@@ -160,9 +172,14 @@ public class NotificationServiceImpl implements NotificationService {
 				
 				} catch (Exception ex) {
 				
-					System.out
-					.printf("NotificationServiceImpl: notifyAllNeed - Processing Authorization: %s, Resource: %s, Exception Cause: %s, Exception Message: %s\n",
-							id, tempResourceUri, ex.getCause(), ex.getMessage());
+//					System.out
+//					.printf("NotificationServiceImpl: notifyAllNeed - Processing Authorization: %s, Resource: %s, Exception Cause: %s, Exception Message: %s\n",
+//							id, tempResourceUri, ex.getCause(), ex.getMessage());
+					if(logger.isErrorEnabled()) {
+						logger.error("NotificationServiceImpl: notifyAllNeed - Processing Authorization: " + id +
+								", Resource: " + tempResourceUri + ", Exception Cause: " + ex.getCause() +
+								", Exception Message: " + ex.getMessage() + "&n");
+					}
 				}
 			}
 

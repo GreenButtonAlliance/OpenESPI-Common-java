@@ -107,6 +107,7 @@ public class Subscription extends IdentifiedObject {
 
 	private Calendar lastUpdate;
 
+	@Override
 	public String getHashedId() {
 		return hashedId;
 	}
