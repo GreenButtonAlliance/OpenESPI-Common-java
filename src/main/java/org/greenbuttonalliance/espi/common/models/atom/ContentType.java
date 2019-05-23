@@ -660,7 +660,7 @@ public class ContentType {
 	public List<String> buildRelHref(Long subscriptionId, String hrefFragment) {
 		// only MeterReading and UsagePoint have "related" references
 
-		List<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<>();
 		RetailCustomer retailCustomer = null;
 
 		// Add GBA Certification Link

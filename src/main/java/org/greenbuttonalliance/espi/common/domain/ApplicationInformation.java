@@ -315,7 +315,7 @@ public class ApplicationInformation extends IdentifiedObject {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "application_information_grant_types", joinColumns = @JoinColumn(name = "application_information_id"))
 	@Enumerated(EnumType.STRING)
-	protected Set<GrantType> grantTypes = new HashSet<GrantType>();
+	protected Set<GrantType> grantTypes = new HashSet<>();
 
 	@XmlElement(name = "response_types")
 	@XmlSchemaType(name = "ResponseType")

@@ -340,7 +340,7 @@ public class ElectricPowerUsageSummary extends IdentifiedObject {
 	 */
 	public List<LineItem> getCostAdditionalDetailLastPeriod() {
 		if (costAdditionalDetailLastPeriod == null) {
-			costAdditionalDetailLastPeriod = new ArrayList<LineItem>();
+			costAdditionalDetailLastPeriod = new ArrayList<>();
 		}
 		return this.costAdditionalDetailLastPeriod;
 	}

@@ -70,7 +70,7 @@ public class DateTimeType {
 	@XmlSchemaType(name = "language")
 	protected String lang;
 	@XmlAnyAttribute
-	private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+	private Map<QName, String> otherAttributes = new HashMap<>();
 
 	public DateTimeType() {
 	}

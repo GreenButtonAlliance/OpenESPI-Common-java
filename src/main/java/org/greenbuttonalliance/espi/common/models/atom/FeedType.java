@@ -111,7 +111,7 @@ public class FeedType {
 	@XmlElementRefs({ @XmlElementRef(name = "entry", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false) })
 	@XmlAnyElement(lax = true)
 	@XmlJavaTypeAdapter(EntryAdapter.class)
-	protected List<EntryType> entries = new ArrayList<EntryType>();
+	protected List<EntryType> entries = new ArrayList<>();
 
 	@XmlElementRefs({
 			@XmlElementRef(name = "subtitle", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false),
@@ -140,7 +140,7 @@ public class FeedType {
 	protected String lang;
 
 	@XmlAnyAttribute
-	private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+	private Map<QName, String> otherAttributes = new HashMap<>();
 
 	public List<EntryType> getEntries() {
 		return entries;
@@ -184,7 +184,7 @@ public class FeedType {
 	 */
 	public List<Object> getAuthorOrCategoryOrContributor() {
 		if (authorOrCategoryOrContributor == null) {
-			authorOrCategoryOrContributor = new ArrayList<Object>();
+			authorOrCategoryOrContributor = new ArrayList<>();
 		}
 		return this.authorOrCategoryOrContributor;
 	}

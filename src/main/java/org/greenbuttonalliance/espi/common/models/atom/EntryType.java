@@ -91,7 +91,7 @@ public class EntryType {
 	@XmlElementRefs({ @XmlElementRef(name = "link", namespace = "http://www.w3.org/2005/Atom", type = JAXBElement.class, required = false), })
 	@XmlAnyElement(lax = true)
 	@XmlJavaTypeAdapter(LinkAdapter.class)
-	protected List<LinkType> links = new ArrayList<LinkType>();
+	protected List<LinkType> links = new ArrayList<>();
 
 	@XmlElement
 	private String title;
@@ -137,7 +137,7 @@ public class EntryType {
 	protected String lang;
 
 	@XmlAnyAttribute
-	private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+	private Map<QName, String> otherAttributes = new HashMap<>();
 
 	public ContentType getContent() {
 		return content;
@@ -222,7 +222,7 @@ public class EntryType {
 	 */
 	public List<Object> getAuthorOrCategoryOrContent() {
 		if (authorOrCategoryOrContent == null) {
-			authorOrCategoryOrContent = new ArrayList<Object>();
+			authorOrCategoryOrContent = new ArrayList<>();
 		}
 		return this.authorOrCategoryOrContent;
 	}

@@ -74,7 +74,7 @@ public class ServiceCategory {
     public static final Long TV_LICENSE_SERVICE = 8L;
     public static final Long INTERNET_SERVICE = 9L;
 
-    private static final Map<Long, String> labels = new HashMap<Long, String>();
+    private static final Map<Long, String> labels = new HashMap<>();
 
     static {
         labels.put(ELECTRICITY_SERVICE, "ELECTRICITY_SERVICE");

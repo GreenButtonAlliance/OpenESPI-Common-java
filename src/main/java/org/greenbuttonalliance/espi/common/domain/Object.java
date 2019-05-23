@@ -88,7 +88,7 @@ public class Object {
 	 */
 	public List<java.lang.Object> getExtension() {
 		if (extension == null) {
-			extension = new ArrayList<java.lang.Object>();
+			extension = new ArrayList<>();
 		}
 		return this.extension;
 	}

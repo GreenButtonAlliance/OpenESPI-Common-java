@@ -264,7 +264,7 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = NAESB_URI, name = "IntervalReading")
 	public JAXBElement<IntervalReading> createIntervalReading(
 			IntervalReading value) {
-		return new JAXBElement<IntervalReading>(IntervalReading_QNAME,
+		return new JAXBElement<>(IntervalReading_QNAME,
 				IntervalReading.class, null, value);
 	}
 
@@ -274,7 +274,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "IntervalBlock")
 	public JAXBElement<IntervalBlock> createIntervalBlock(IntervalBlock value) {
-		return new JAXBElement<IntervalBlock>(IntervalBlock_QNAME,
+		return new JAXBElement<>(IntervalBlock_QNAME,
 				IntervalBlock.class, null, value);
 	}
 
@@ -284,7 +284,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "Object")
 	public JAXBElement<java.lang.Object> createObject(java.lang.Object value) {
-		return new JAXBElement<java.lang.Object>(Object_QNAME,
+		return new JAXBElement<>(Object_QNAME,
 				java.lang.Object.class, null, value);
 	}
 
@@ -294,7 +294,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "ReadingType")
 	public JAXBElement<ReadingType> createReadingType(ReadingType value) {
-		return new JAXBElement<ReadingType>(ReadingType_QNAME,
+		return new JAXBElement<>(ReadingType_QNAME,
 				ReadingType.class, null, value);
 	}
 
@@ -304,7 +304,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "RetailCustomer")
 	public JAXBElement<RetailCustomer> createRetailCustomer(RetailCustomer value) {
-		return new JAXBElement<RetailCustomer>(RetailCustomer_QNAME,
+		return new JAXBElement<>(RetailCustomer_QNAME,
 				RetailCustomer.class, null, value);
 	}
 
@@ -315,7 +315,7 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = NAESB_URI, name = "SummaryMeasurement")
 	public JAXBElement<SummaryMeasurement> createSummaryMeasurement(
 			SummaryMeasurement value) {
-		return new JAXBElement<SummaryMeasurement>(SummaryMeasurement_QNAME,
+		return new JAXBElement<>(SummaryMeasurement_QNAME,
 				SummaryMeasurement.class, null, value);
 	}
 
@@ -325,7 +325,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "Authorization")
 	public JAXBElement<Authorization> createAuthorization(Authorization value) {
-		return new JAXBElement<Authorization>(Authorization_QNAME,
+		return new JAXBElement<>(Authorization_QNAME,
 				Authorization.class, null, value);
 	}
 
@@ -336,7 +336,7 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = NAESB_URI, name = "ElectricPowerQualitySummary")
 	public JAXBElement<ElectricPowerQualitySummary> createElectricPowerQualitySummary(
 			ElectricPowerQualitySummary value) {
-		return new JAXBElement<ElectricPowerQualitySummary>(
+		return new JAXBElement<>(
 				ElectricPowerQualitySummary_QNAME,
 				ElectricPowerQualitySummary.class, null, value);
 	}
@@ -347,7 +347,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "ReadingQuality")
 	public JAXBElement<ReadingQuality> createReadingQuality(ReadingQuality value) {
-		return new JAXBElement<ReadingQuality>(ReadingQuality_QNAME,
+		return new JAXBElement<>(ReadingQuality_QNAME,
 				ReadingQuality.class, null, value);
 	}
 
@@ -357,7 +357,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "Subscription")
 	public JAXBElement<Subscription> createSubscription(Subscription value) {
-		return new JAXBElement<Subscription>(Subscription_QNAME,
+		return new JAXBElement<>(Subscription_QNAME,
 				Subscription.class, null, value);
 	}
 
@@ -368,7 +368,7 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = NAESB_URI, name = "LocalTimeParameters")
 	public JAXBElement<TimeConfiguration> createLocalTimeParameters(
 			TimeConfiguration value) {
-		return new JAXBElement<TimeConfiguration>(LocalTimeParameters_QNAME,
+		return new JAXBElement<>(LocalTimeParameters_QNAME,
 				TimeConfiguration.class, null, value);
 	}
 
@@ -379,7 +379,7 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = NAESB_URI, name = "ApplicationInformation")
 	public JAXBElement<ApplicationInformation> createApplicationInformation(
 			ApplicationInformation value) {
-		return new JAXBElement<ApplicationInformation>(
+		return new JAXBElement<>(
 				ApplicationInformation_QNAME, ApplicationInformation.class,
 				null, value);
 	}
@@ -390,7 +390,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "GrantType")
 	public JAXBElement<GrantType> createGrantType(GrantType value) {
-		return new JAXBElement<GrantType>(GrantType_QNAME, GrantType.class,
+		return new JAXBElement<>(GrantType_QNAME, GrantType.class,
 				null, value);
 	}
 
@@ -401,7 +401,7 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = NAESB_URI, name = "DateTimeInterval")
 	public JAXBElement<DateTimeInterval> createDateTimeInterval(
 			DateTimeInterval value) {
-		return new JAXBElement<DateTimeInterval>(DateTimeInterval_QNAME,
+		return new JAXBElement<>(DateTimeInterval_QNAME,
 				DateTimeInterval.class, null, value);
 	}
 
@@ -411,7 +411,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "ServiceStatus")
 	public JAXBElement<ServiceStatus> createServiceStatus(ServiceStatus value) {
-		return new JAXBElement<ServiceStatus>(ServiceStatus_QNAME,
+		return new JAXBElement<>(ServiceStatus_QNAME,
 				ServiceStatus.class, null, value);
 	}
 
@@ -422,7 +422,7 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = NAESB_URI, name = "IdentifiedObject")
 	public JAXBElement<IdentifiedObject> createIdentifiedObject(
 			IdentifiedObject value) {
-		return new JAXBElement<IdentifiedObject>(IdentifiedObject_QNAME,
+		return new JAXBElement<>(IdentifiedObject_QNAME,
 				IdentifiedObject.class, null, value);
 	}
 
@@ -432,7 +432,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "MeterReading")
 	public JAXBElement<MeterReading> createMeterReading(MeterReading value) {
-		return new JAXBElement<MeterReading>(MeterReading_QNAME,
+		return new JAXBElement<>(MeterReading_QNAME,
 				MeterReading.class, null, value);
 	}
 
@@ -442,7 +442,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "UsagePoint")
 	public JAXBElement<UsagePoint> createUsagePoint(UsagePoint value) {
-		return new JAXBElement<UsagePoint>(UsagePoint_QNAME, UsagePoint.class,
+		return new JAXBElement<>(UsagePoint_QNAME, UsagePoint.class,
 				null, value);
 	}
 
@@ -452,7 +452,7 @@ public class ObjectFactory {
 	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "BatchItemInfo")
 	public JAXBElement<BatchItemInfo> createBatchItemInfo(BatchItemInfo value) {
-		return new JAXBElement<BatchItemInfo>(BatchItemInfo_QNAME,
+		return new JAXBElement<>(BatchItemInfo_QNAME,
 				BatchItemInfo.class, null, value);
 	}
 
@@ -463,14 +463,14 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = NAESB_URI, name = "ElectricPowerUsageSummary")
 	public JAXBElement<ElectricPowerUsageSummary> createElectricPowerUsageSummary(
 			ElectricPowerUsageSummary value) {
-		return new JAXBElement<ElectricPowerUsageSummary>(
+		return new JAXBElement<>(
 				ElectricPowerUsageSummary_QNAME,
 				ElectricPowerUsageSummary.class, null, value);
 	}
 
 	@XmlElementDecl(namespace = NAESB_URI, name = "costAdditionalDetailLastPeriod")
 	public JAXBElement<LineItem> createLineItem(LineItem v) {
-		return new JAXBElement<LineItem>(LineItem_QNAME, LineItem.class, null,
+		return new JAXBElement<>(LineItem_QNAME, LineItem.class, null,
 				v);
 	}
 

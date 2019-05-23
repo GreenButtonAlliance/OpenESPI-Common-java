@@ -89,7 +89,7 @@ public class TextType {
     @XmlSchemaType(name = "language")
     protected String lang;
     @XmlAnyAttribute
-    private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+    private Map<QName, String> otherAttributes = new HashMap<>();
 
     /**
      * The Atom text construct is defined in section 3.1 of the format spec.
@@ -115,7 +115,7 @@ public class TextType {
      */
     public List<Object> getContent() {
         if (content == null) {
-            content = new ArrayList<Object>();
+            content = new ArrayList<>();
         }
         return this.content;
     }
