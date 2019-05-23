@@ -32,7 +32,7 @@ import java.text.SimpleDateFormat;
 public class DateTimeAdapter extends XmlAdapter<JAXBElement<DateTimeType>, DateTime> {
     @Override
     public DateTime unmarshal(JAXBElement<DateTimeType> v) throws Exception {
-        return new DateTime(((DateTimeType)v.getValue()).getValue().toGregorianCalendar(), ISOChronology.getInstance(DateTimeZone.UTC));
+        return new DateTime((v.getValue()).getValue().toGregorianCalendar(), ISOChronology.getInstance(DateTimeZone.UTC));
     }
 
     @Override

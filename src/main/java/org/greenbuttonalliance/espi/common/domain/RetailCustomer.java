@@ -225,11 +225,11 @@ public class RetailCustomer extends IdentifiedObject implements UserDetails,
 	public void merge(RetailCustomer resource) {
 		// TODO needs to inherit from Identified Object
 		// super.merge(resource)
-		this.enabled = ((RetailCustomer) resource).enabled;
-		this.firstName = ((RetailCustomer) resource).firstName;
-		this.lastName = ((RetailCustomer) resource).lastName;
-		this.password = ((RetailCustomer) resource).password;
-		this.role = ((RetailCustomer) resource).role;
-		this.username = ((RetailCustomer) resource).username;
+		this.enabled = resource.enabled;
+		this.firstName = resource.firstName;
+		this.lastName = resource.lastName;
+		this.password = resource.password;
+		this.role = resource.role;
+		this.username = resource.username;
 	}
 }

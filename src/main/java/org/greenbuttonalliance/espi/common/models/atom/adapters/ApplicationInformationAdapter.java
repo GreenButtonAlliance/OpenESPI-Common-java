@@ -30,7 +30,7 @@ public class ApplicationInformationAdapter extends
 	@Override
 	public ApplicationInformation unmarshal(
 			JAXBElement<ApplicationInformation> v) throws Exception {
-		return (ApplicationInformation) v.getValue();
+		return v.getValue();
 	}
 
 	@Override

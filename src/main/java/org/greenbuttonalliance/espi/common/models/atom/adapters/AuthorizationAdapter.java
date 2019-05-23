@@ -30,7 +30,7 @@ public class AuthorizationAdapter extends
 	@Override
 	public Authorization unmarshal(JAXBElement<Authorization> v)
 			throws Exception {
-		return (Authorization) v.getValue();
+		return v.getValue();
 	}
 
 	@Override
