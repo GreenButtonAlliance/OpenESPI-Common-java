@@ -19,6 +19,8 @@
 
 package org.greenbuttonalliance.espi.common.test;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +36,7 @@ import java.net.URISyntaxException;
 import static org.junit.Assert.assertTrue;
 
 public class BaseStepUtils {
+
 	public static final String BASE_URL = "http://localhost:8080/";
 	public static final String THIRD_PARTY_CONTEXT = "ThirdParty";
 	public static final String DATA_CUSTODIAN_CONTEXT = "DataCustodian";
@@ -186,7 +189,10 @@ public class BaseStepUtils {
 		Desktop.getDesktop().browse(new URI(driver.getCurrentUrl()));
 	}
 
-	static void saveAndOpenPage() throws IOException, URISyntaxException {
+	private void saveAndOpenPage() throws IOException, URISyntaxException {
+
+		Log logger = LogFactory.getLog(getClass());
+
 		File file = new File("/tmp/cucumber.html");
 
 		if (!file.exists()) {
@@ -195,8 +201,18 @@ public class BaseStepUtils {
 
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write(driver.getPageSource());
-		bw.close();
+
+		try {
+			bw.write(driver.getPageSource());
+
+		} catch (Exception e) {
+			if (logger.isErrorEnabled()) {
+				logger.error("**** saveAndOpenPage Exception: " + e.toString() + "&n");
+			}
+
+		} finally {
+			bw.close();
+		}
 
 		Desktop.getDesktop().browse(new URI("file:///tmp/cucumber.html"));
 	}

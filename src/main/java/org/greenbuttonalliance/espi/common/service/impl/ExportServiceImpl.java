@@ -840,9 +840,6 @@ public class ExportServiceImpl implements ExportService {
 									+ entry.getContent().getContentId(
 											resourceClass));
 				} catch (Exception e) {
-//					System.out
-//							.printf("exportEntries: The requested collection contains no resources: %s: %s\n",
-//									hrefFragment, resourceClass.getSimpleName());
 					if(logger.isErrorEnabled()) {
 						logger.error("exportEntries: The requested collection contains no resources: " +
 								hrefFragment + ": " + resourceClass.getSimpleName() + "&n");
@@ -859,10 +856,6 @@ public class ExportServiceImpl implements ExportService {
 	private void exportRootForm(String hrefFragment, Long subscriptionId,
 			OutputStream stream, ExportFilter exportFilter, Class targetClass)
 			throws IOException {
-
-//		Subscription subscription = subscriptionService
-//				.findById(subscriptionId);
-//		Authorization authorization = subscription.getAuthorization();
 
 		buildHeader(stream, hrefFragment);
 
@@ -967,15 +960,10 @@ public class ExportServiceImpl implements ExportService {
 									+ entry.getContent().getContentId(
 											resourceClass));
 				} catch (Exception e) {
-//					System.out
-//							.printf("exportEntries_Root: The requested collection contains no resources: %s: %s\n",
-//									hrefFragment, resourceClass.getSimpleName());
 					if(logger.isErrorEnabled()) {
 						logger.error("exportEntries_Root: The requested collection contains no resources: " +
 								hrefFragment + ": " + resourceClass.getSimpleName() + "&n");
 					}
-
-					// stream.write("</feed>\n".getBytes());
 				}
 			}
 		}
@@ -1064,9 +1052,6 @@ public class ExportServiceImpl implements ExportService {
 				exportEntryFull(subscriptionId, entry, stream, exportFilter,
 						hrefFragment);
 			} catch (Exception e) {
-//				System.out
-//						.printf("exportEntriesInternal: The requested collection contains no resources: %s\n",
-//								hrefFragment);
 				if(logger.isErrorEnabled()) {
 					logger.error("exportEntriesInternal: The requested collection contains no resources: " +
 							hrefFragment + "&n");
@@ -1075,26 +1060,6 @@ public class ExportServiceImpl implements ExportService {
 			}
 		}
 	}
-
-//	private void exportEntriesFull(List<EntryTypeIterator> bulkSubscriptions,
-//			OutputStream stream, ExportFilter exportFilter, String hrefFragment)
-//			throws IOException {
-//
-//		buildHeader(stream, hrefFragment);
-//
-//		for (EntryTypeIterator eti : bulkSubscriptions) {
-//
-//			Long subscriptionId = eti.getSubscriptionId();
-//			// first set up the hrefFragment correctly
-//			String temp = hrefFragment;
-//			temp = temp.substring(temp.indexOf("/Bulk"));
-//			temp = temp + "/Subscription/" + subscriptionId;
-//			exportEntriesInternal(subscriptionId, eti, stream, exportFilter,
-//					temp);
-//		}
-//
-//		stream.write("</feed>\n".getBytes());
-//	}
 
 	private void exportEntriesFull(EntryTypeIterator entries,
 			OutputStream stream, ExportFilter exportFilter, String hrefFragment)
@@ -1114,13 +1079,6 @@ public class ExportServiceImpl implements ExportService {
 		stream.write("</feed>".getBytes());
 
 	}
-
-	// to export a single entry (w/o the <feed>...</feed> wrappers
-
-//	private void exportEntryFull(EntryType entry, OutputStream stream,
-//			ExportFilter exportFilter, String hrefFragment) throws IOException {
-//		exportEntryFull(0L, entry, stream, exportFilter, hrefFragment);
-//	}
 
 	private void exportEntryFull(Long subscriptionId, EntryType entry,
 			OutputStream stream, ExportFilter exportFilter, String hrefFragment)
@@ -1201,7 +1159,6 @@ public class ExportServiceImpl implements ExportService {
 			}
 			result = null;
 		} catch (Exception e) {
-//			System.out.printf("**** Error in Query: %s\n", e.toString());
 			if(logger.isErrorEnabled()) {
 				logger.error("**** Error in Query: " + e.toString() + "&n");
 			}
