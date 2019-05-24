@@ -844,8 +844,6 @@ public class ExportServiceImpl implements ExportService {
 						logger.error("exportEntries: The requested collection contains no resources: " +
 								hrefFragment + ": " + resourceClass.getSimpleName() + "&n");
 					}
-
-					// stream.write("</feed>".getBytes());
 				}
 			}
 		}
@@ -875,7 +873,7 @@ public class ExportServiceImpl implements ExportService {
 			Long meterReadingId, List<Long> resourceList, Class currentClass,
 			Class targetClass, OutputStream stream, ExportFilter exportFilter) {
 
-		List<Long> nextResourceList = new ArrayList<Long>();
+		List<Long> nextResourceList = new ArrayList<>();
 
 		if (targetClass.equals(currentClass)) {
 			// we are at the end; build the final fragment and export this leaf
@@ -943,7 +941,6 @@ public class ExportServiceImpl implements ExportService {
 			ExportFilter exportFilter, Class resourceClass, String hrefFragment)
 			throws IOException {
 
-		// hrefFragment = adjustFragment(hrefFragment);
 		if (entries != null) {
 
 			while (entries.hasNext()) {
@@ -984,16 +981,6 @@ public class ExportServiceImpl implements ExportService {
 
 				result = "/RetailCustomer/" + rc.getId() + "/UsagePoint";
 			}
-			// if (fragment.contains("Subscription")) {
-			// the entry contains a valid usage point at this stage
-			//
-			// with the RetailCustomer -> Subscription change this should go
-			// away
-			// UsagePoint up = entry.getContent().getUsagePoint();
-			// RetailCustomer rc = up.getRetailCustomer();
-			//
-			// result = "/RetailCustomer/" + rc.getId() + "/UsagePoint";
-			// }
 			if (fragment.contains("/Batch/RetailCustomer")) {
 				result = fragment.replace("/Batch", "");
 				if (!(fragment.contains("/UsagePoint"))) {
@@ -1088,8 +1075,8 @@ public class ExportServiceImpl implements ExportService {
 				ApplicationInformation.class)
 				.getDataCustodianResourceEndpoint();
 
-		// setup a listener so that the adapters may later be fed the fragment;
-		//
+		// TODO Setup a listener so that the adapters may later be fed the fragment;
+
 		AtomMarshallerListener uriListener = new AtomMarshallerListener(
 				dataCustodianResourceEndpoint + hrefFragment);
 
@@ -1111,13 +1098,12 @@ public class ExportServiceImpl implements ExportService {
 	}
 
 	@SuppressWarnings("unchecked")
-	// TODO: need to make RetailCustomer inherit from IdentifiedObject to remove
-	// the above
+	// TODO: need to make RetailCustomer inherit from IdentifiedObject to remove the above
 	private EntryType findEntryTypeXPath(Long subscriptionId, Long id1,
 			Long id2, Long id3, Long id4,
 			@SuppressWarnings("rawtypes") Class clazz) {
 		EntryType result = null;
-		List<Long> temp = new ArrayList<Long>();
+		List<Long> temp = new ArrayList<>();
 		Subscription subscription = null;
 
 		try {
@@ -1164,10 +1150,9 @@ public class ExportServiceImpl implements ExportService {
 			}
 			result = null;
 		}
-		if (temp != null) {
-			result = (new EntryTypeIterator(resourceService, temp, clazz))
-					.nextEntry(clazz);
-		}
+
+		result = (new EntryTypeIterator(resourceService, temp, clazz)).nextEntry(clazz);
+
 		return result;
 	}
 
@@ -1184,22 +1169,17 @@ public class ExportServiceImpl implements ExportService {
 		try {
 
 			if (!(subscriptionId.equals(0L))) {
-				subscription = resourceService.findById(subscriptionId,
-						Subscription.class);
+				subscription = resourceService.findById(subscriptionId,Subscription.class);
 				Authorization authorization = subscription.getAuthorization();
-				if (!(authorization.getThirdParty()
-						.contentEquals("third_party"))) {
-					// a special case (client credentials base) access. So the
-					// retailCustomerId is not
-					// correct
-					if (id2 != 0) {
-						// we have a request for (at least) a usagePoint
-						// so use the relevant retail customer Id to get the ID
-						// collection
+
+				if (!(authorization.getThirdParty().contentEquals("third_party")) &&
+                        id2 != 0) {
+					// a special case (client credentials base) access. So the retailCustomerId
+                    // is not correct. We have a request for (at least) a usagePoint so use the
+                    // relevant retail customer Id to get the ID collection
 						UsagePoint usagePoint = resourceService.findById(id2,
 								UsagePoint.class);
 						id1 = usagePoint.getRetailCustomer().getId();
-					}
 				}
 			}
 
@@ -1227,8 +1207,6 @@ public class ExportServiceImpl implements ExportService {
 								clazz);
 					} else {
 						if (!(id1.equals(0L))) {
-							// temp = resourceService.findAllIdsByXPath(id1,
-							// clazz);
 							// we just want the UsagePoints in the Subscription
 							for (UsagePoint up : subscription.getUsagePoints()) {
 								temp.add(up.getId());
