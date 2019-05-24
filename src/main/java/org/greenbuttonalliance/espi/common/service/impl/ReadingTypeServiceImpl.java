@@ -39,7 +39,7 @@ import java.util.UUID;
 public class ReadingTypeServiceImpl implements ReadingTypeService {
 
 	@Autowired
-	private ReadingTypeRepository repository;
+	private ReadingTypeRepository readingTypeRepository;
 
 	@Autowired
 	private ResourceService resourceService;
@@ -47,21 +47,18 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 	@Autowired
 	private ImportService importService;
 
-	@Autowired
-	private ReadingTypeRepository readingTypeRepository;
-
 	@Override
 	public ReadingType findByUUID(UUID uuid) {
-		return repository.findByUUID(uuid);
+		return readingTypeRepository.findByUUID(uuid);
 	}
 
 	public ReadingType findById(Long readingTypeId) {
-		return repository.findById(readingTypeId);
+		return readingTypeRepository.findById(readingTypeId);
 	}
 
 	@Override
 	public void persist(ReadingType readingType) {
-		repository.persist(readingType);
+		readingTypeRepository.persist(readingType);
 	}
 
 	@Override
@@ -147,11 +144,11 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 	}
 
 	public void setReadingTypeRepository(ReadingTypeRepository repository) {
-		this.repository = repository;
+		this.readingTypeRepository = repository;
 	}
 
 	public ReadingTypeRepository getReadingTypeRepository() {
-		return this.repository;
+		return this.readingTypeRepository;
 	}
 
 	public void setResourceService(ResourceService resourceService) {
