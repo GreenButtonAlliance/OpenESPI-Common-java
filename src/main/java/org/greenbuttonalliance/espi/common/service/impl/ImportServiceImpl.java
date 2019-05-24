@@ -43,11 +43,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-//import org.energyos.espi.common.utils.EntryProcessor;
-//import org.energyos.espi.common.utils.ResourceConverter;
-//import org.energyos.espi.common.utils.ResourceLinker;
-//import org.springframework.transaction.annotation.Transactional;
-
 @Service
 public class ImportServiceImpl implements ImportService {
 
@@ -130,9 +125,6 @@ public class ImportServiceImpl implements ImportService {
 			reader.parse(new InputSource(stream));
 
 		} catch (SAXException e) {
-//			System.out
-//					.printf("\nImportServiceImpl -- importData: SAXException\n     Cause = %s\n     Description = %s\n\n",
-//							e.getClass(), e.getMessage());
 			if(logger.isErrorEnabled()) {
 				logger.error("&nImportServiceImpl -- importData: SAXException&n     Cause = " + e.getClass() + "&n" +
 						"     Description = " + e.getMessage() + "&n&n");
@@ -140,9 +132,6 @@ public class ImportServiceImpl implements ImportService {
 			throw new SAXException(e.getMessage(), e);
 			
 		} catch (Exception e) {
-//			System.out
-//					.printf("\nImportServiceImpl -- importData:\n     Cause = %s\n     Description = %s\n\n",
-//							e.getClass(), e.getMessage());
 			if(logger.isErrorEnabled()) {
 				logger.error("&nImportServiceImpl -- importData:&n     Cause = " + e.getClass() + "&n" +
 						"     Description = " + e.getMessage() + "&n&n");
@@ -225,8 +214,6 @@ public class ImportServiceImpl implements ImportService {
 				} catch (Exception e) {
 					// an Authorization w/o an associated subscription breaks
 					// the propagation chain
-//					System.out
-//							.printf("**** End of Notification Propagation Chain\n");
 					if(logger.isErrorEnabled()) {
 						logger.error("**** End of Notification Propagation Chain&n");
 					}

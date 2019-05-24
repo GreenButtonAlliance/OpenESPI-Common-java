@@ -1245,7 +1245,6 @@ public class ExportServiceImpl implements ExportService {
 			result = (new EntryTypeIterator(resourceService, temp, clazz));
 
 		} catch (Exception e) {
-//			System.out.printf("**** Error in Query: %s\n", e.toString());
 			if(logger.isErrorEnabled()){
 				logger.error("**** Error in Query: " + e.toString() + "&n");
 			}

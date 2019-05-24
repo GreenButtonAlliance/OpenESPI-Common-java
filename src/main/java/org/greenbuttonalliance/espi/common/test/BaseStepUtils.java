@@ -185,11 +185,11 @@ public class BaseStepUtils {
 		driver.get(THIRD_PARTY_BASE_URL + "/j_spring_security_logout");
 	}
 
-	static void openPage() throws URISyntaxException, IOException {
+	public static void openPage() throws URISyntaxException, IOException {
 		Desktop.getDesktop().browse(new URI(driver.getCurrentUrl()));
 	}
 
-	private void saveAndOpenPage() throws IOException, URISyntaxException {
+	public void saveAndOpenPage() throws IOException, URISyntaxException {
 
 		Log logger = LogFactory.getLog(getClass());
 

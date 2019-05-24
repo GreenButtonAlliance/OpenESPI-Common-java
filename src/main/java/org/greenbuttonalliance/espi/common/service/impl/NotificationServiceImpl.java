@@ -131,9 +131,6 @@ public class NotificationServiceImpl implements NotificationService {
 			try {
 				restTemplate.postForLocation(thirdPartyNotificationURI, batchList);
 			} catch (Exception e) {
-//				System.out
-//				.printf("NotificationServiceImpl: notifyInternal - POST for %s caused an %s Exception\n",
-//						thirdPartyNotificationURI, e.getMessage());
 				if(logger.isErrorEnabled()) {
 					logger.info("NotificationServiceImpl: notifyInternal - POST for " + thirdPartyNotificationURI +
 							" caused an " + e.getMessage() + " Exception&n");
@@ -156,8 +153,6 @@ public class NotificationServiceImpl implements NotificationService {
 
 			String tempResourceUri = authorization.getResourceURI();
 
-//			System.out.println("NotificationServiceImpl: notifyAllNeed - resourceURI: " + tempResourceUri);
-
 			if(logger.isInfoEnabled()) {
 				logger.info("NotificationServiceImpl: notifyAllNeed - resourceURI: " + tempResourceUri);
 			}
@@ -172,9 +167,6 @@ public class NotificationServiceImpl implements NotificationService {
 				
 				} catch (Exception ex) {
 				
-//					System.out
-//					.printf("NotificationServiceImpl: notifyAllNeed - Processing Authorization: %s, Resource: %s, Exception Cause: %s, Exception Message: %s\n",
-//							id, tempResourceUri, ex.getCause(), ex.getMessage());
 					if(logger.isErrorEnabled()) {
 						logger.error("NotificationServiceImpl: notifyAllNeed - Processing Authorization: " + id +
 								", Resource: " + tempResourceUri + ", Exception Cause: " + ex.getCause() +
