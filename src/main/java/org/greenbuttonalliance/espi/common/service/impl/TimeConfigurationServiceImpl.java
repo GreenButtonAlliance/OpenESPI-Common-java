@@ -19,6 +19,8 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.greenbuttonalliance.espi.common.domain.RetailCustomer;
 import org.greenbuttonalliance.espi.common.domain.TimeConfiguration;
 import org.greenbuttonalliance.espi.common.domain.UsagePoint;
@@ -39,6 +41,8 @@ import java.util.UUID;
 
 @Service
 public class TimeConfigurationServiceImpl implements TimeConfigurationService {
+
+	private final Log logger = LogFactory.getLog(getClass());
 
 	@Autowired
 	protected TimeConfigurationRepository timeConfigurationRepository;
@@ -189,7 +193,10 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 			timeConfiguration = entry.getContent().getLocalTimeParameters();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			if(logger.isErrorEnabled()) {
+				logger.error("**** importResource Exception: " + e.toString() + "&n");
+				e.printStackTrace();
+			}
 		}
 		return timeConfiguration;
 	}

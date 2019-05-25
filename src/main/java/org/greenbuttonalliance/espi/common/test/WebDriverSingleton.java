@@ -30,31 +30,25 @@ public class WebDriverSingleton {
 
 	private static class SingletonHolder {
 
-		public static HtmlUnitDriver HTML_UNIT;
-		public static ChromeDriver CHROME;
+		public static final HtmlUnitDriver HTML_UNIT = new HtmlUnitDriver(BrowserVersion.FIREFOX_17);
+		public static final ChromeDriver CHROME = new ChromeDriver();
 
 		@SuppressWarnings("unused")
-		// TODO: clean the code of needing this as external web testing strategy
-		// is in place
+		// TODO: clean the code of needing this as external web testing strategy is in place
 		public static ChromeDriver chrome() {
-			if (CHROME == null) {
-				CHROME = new ChromeDriver();
-				System.out
-						.println("********************************************************");
-				System.out
-						.println("/!\\    Hey! You're using Chrome from the Googles!    /!\\");
-				System.out
-						.println("********************************************************");
-			}
+			System.out
+					.println("********************************************************");
+			System.out
+					.println("/!\\    Hey! You're using Chrome from the Googles!    /!\\");
+			System.out
+					.println("********************************************************");
 
 			return CHROME;
 		}
 
 		public static HtmlUnitDriver htmlUnit() {
-			if (HTML_UNIT == null) {
-				HTML_UNIT = new HtmlUnitDriver(BrowserVersion.FIREFOX_17);
-				HTML_UNIT.setJavascriptEnabled(true);
-			}
+			HTML_UNIT.setJavascriptEnabled(true);
+
 			return HTML_UNIT;
 		}
 	}

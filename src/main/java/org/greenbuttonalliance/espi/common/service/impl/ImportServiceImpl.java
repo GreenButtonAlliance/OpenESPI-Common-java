@@ -99,9 +99,6 @@ public class ImportServiceImpl implements ImportService {
 		return this.maxUpdated;
 	}
 
-	// @Transactional (rollbackFor= {javax.xml.bind.JAXBException.class},
-	// noRollbackFor = {javax.persistence.NoResultException.class,
-	// org.springframework.dao.EmptyResultDataAccessException.class })
 	@Override
 	public void importData(InputStream stream, Long retailCustomerId)
 			throws IOException, SAXException, ParserConfigurationException {
@@ -135,9 +132,9 @@ public class ImportServiceImpl implements ImportService {
 			if(logger.isErrorEnabled()) {
 				logger.error("&nImportServiceImpl -- importData:&n     Cause = " + e.getClass() + "&n" +
 						"     Description = " + e.getMessage() + "&n&n");
+				e.printStackTrace();
 			}
-			e.printStackTrace();
-			
+
 			
 		}
 		// context of the import used for linking things up

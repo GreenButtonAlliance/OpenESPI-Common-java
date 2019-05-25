@@ -885,8 +885,10 @@ public class ExportServiceImpl implements ExportService {
 								targetClass), stream, exportFilter,
 						targetClass, workingFragment);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+                if(logger.isErrorEnabled()) {
+                    logger.error("**** exportRootForm_Internal Exception: " + e.toString() + "&n");
 				e.printStackTrace();
+                }
 			}
 
 		} else {
@@ -1020,7 +1022,9 @@ public class ExportServiceImpl implements ExportService {
 				fragmentMarshaller.marshal(entry, result);
 			}
 		} catch (Exception e) {
-			throw (e);
+            if(logger.isErrorEnabled()) {
+                logger.error("**** exportEntry Exception: " + e.toString() + "&n", e);
+            }
 		}
 	}
 
@@ -1070,14 +1074,14 @@ public class ExportServiceImpl implements ExportService {
 	private void exportEntryFull(Long subscriptionId, EntryType entry,
 			OutputStream stream, ExportFilter exportFilter, String hrefFragment)
 			throws IOException {
+
 		// TODO Remove the ApplicationInformation(1L) dependency
 		String dataCustodianResourceEndpoint = resourceService.findById(1L,
 				ApplicationInformation.class)
 				.getDataCustodianResourceEndpoint();
 
-		// TODO Setup a listener so that the adapters may later be fed the fragment;
-
-		AtomMarshallerListener uriListener = new AtomMarshallerListener(
+		//TODO Setup a listener so that the adapters may later be fed the fragment;
+        AtomMarshallerListener uriListener = new AtomMarshallerListener(
 				dataCustodianResourceEndpoint + hrefFragment);
 
 		uriListener.setRelList(entry.getContent().buildRelHref(subscriptionId,
@@ -1093,6 +1097,9 @@ public class ExportServiceImpl implements ExportService {
 				fragmentMarshaller.marshal(entry, result);
 			}
 		} catch (Exception e) {
+            if(logger.isErrorEnabled()) {
+                logger.error("**** exportEntryFull Exception: " + e.toString() + "&n");
+            }
 			throw (e);
 		}
 	}
@@ -1143,12 +1150,11 @@ public class ExportServiceImpl implements ExportService {
 					}
 				}
 			}
-			result = null;
+
 		} catch (Exception e) {
 			if(logger.isErrorEnabled()) {
 				logger.error("**** Error in Query: " + e.toString() + "&n");
 			}
-			result = null;
 		}
 
 		result = (new EntryTypeIterator(resourceService, temp, clazz)).nextEntry(clazz);
