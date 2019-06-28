@@ -330,8 +330,7 @@ public class ContentType {
 		return electricPowerUsageSummary;
 	}
 
-	public void setElectricPowerUsageSummary(
-			ElectricPowerUsageSummary electricPowerUsageSummary) {
+	public void setElectricPowerUsageSummary(ElectricPowerUsageSummary electricPowerUsageSummary) {
 		this.electricPowerUsageSummary = electricPowerUsageSummary;
 	}
 
@@ -339,17 +338,15 @@ public class ContentType {
 		return usageSummary;
 	}
 
-	public void setUsageSummary(
-			UsageSummary UsageSummary) {
-		this.usageSummary = UsageSummary;
+	public void setUsageSummary(UsageSummary usageSummary) {
+		this.usageSummary = usageSummary;
 	}
 
 	public ElectricPowerQualitySummary getElectricPowerQualitySummary() {
 		return electricPowerQualitySummary;
 	}
 
-	public void setElectricPowerQualitySummary(
-			ElectricPowerQualitySummary electricPowerQualitySummary) {
+	public void setElectricPowerQualitySummary(ElectricPowerQualitySummary electricPowerQualitySummary) {
 		this.electricPowerQualitySummary = electricPowerQualitySummary;
 	}
 

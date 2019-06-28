@@ -65,7 +65,7 @@ public class ElectricPowerUsageSummaryServiceImpl implements
 
 	@Override
 	public String feedFor(
-			List<ElectricPowerUsageSummary> electricPowerUsageSummarys) {
+			List<ElectricPowerUsageSummary> electricPowerUsageSummaries) {
 		// TODO Auto-generated method stub
 		return null;
 	}

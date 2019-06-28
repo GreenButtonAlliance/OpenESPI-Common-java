@@ -32,11 +32,9 @@ public interface ElectricPowerUsageSummaryService {
 
 	ElectricPowerUsageSummary findByUUID(UUID uuid);
 
-	List<ElectricPowerUsageSummary> findAllByUsagePoint(
-			UsagePoint usagePoint);
+	List<ElectricPowerUsageSummary> findAllByUsagePoint(UsagePoint usagePoint);
 
-	String feedFor(
-			List<ElectricPowerUsageSummary> electricPowerUsageSummarys);
+	String feedFor(List<ElectricPowerUsageSummary> electricPowerUsageSummarys);
 
 	String entryFor(ElectricPowerUsageSummary electricPowerUsageSummary);
 
