@@ -29,7 +29,7 @@ public class SubscriptionAdapter extends
 		XmlAdapter<JAXBElement<Subscription>, Subscription> {
 	@Override
 	public Subscription unmarshal(JAXBElement<Subscription> v) throws Exception {
-		return (Subscription) v.getValue();
+		return v.getValue();
 	}
 
 	@Override

@@ -30,53 +30,53 @@ import java.util.UUID;
 
 public interface AuthorizationService {
 	// residue from random stories
-	public List<Authorization> findAllByRetailCustomerId(Long retailCustomerId);
+	List<Authorization> findAllByRetailCustomerId(Long retailCustomerId);
 
 	/**
 	 * @param authorization
 	 * @return List<Long> a list of all authorizationIds that are visible from
 	 *         the input authorization
 	 */
-	public List<Long> findAllIdsByApplicationInformationId(
+	List<Long> findAllIdsByApplicationInformationId(
 			Long applicationInformationId);
 
-	public Authorization createAuthorization(Subscription subscription,
-			String accessToken);
+	Authorization createAuthorization(Subscription subscription,
+									  String accessToken);
 
-	public Authorization findByState(String state);
+	Authorization findByState(String state);
 
-	public Authorization findByScope(String scope, Long retailCustomerId);
+	Authorization findByScope(String scope, Long retailCustomerId);
 
-	public Authorization findByAccessToken(String accessToken);
+	Authorization findByAccessToken(String accessToken);
 
-	public List<Authorization> findAll();
+	List<Authorization> findAll();
 
-	public String feedFor(List<Authorization> authorizations);
+	String feedFor(List<Authorization> authorizations);
 
-	public String entryFor(Authorization authorization);
+	String entryFor(Authorization authorization);
 
-	public Authorization findByURI(String uri);
+	Authorization findByURI(String uri);
 
 	// persistence management services
-	public void persist(Authorization authorization);
+	void persist(Authorization authorization);
 
-	public void merge(Authorization authorization);
+	void merge(Authorization authorization);
 
 	// accessor services
-	public Authorization findById(Long authorizationId);
+	Authorization findById(Long authorizationId);
 
-	public EntryType findEntryType(Long retailCustomerId, Long authorizationId);
+	EntryType findEntryType(Long retailCustomerId, Long authorizationId);
 
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
+	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
 
-	public void add(Authorization authorization);
+	void add(Authorization authorization);
 
-	public void delete(Authorization authorization);
+	void delete(Authorization authorization);
 
 	// import-exportResource services
-	public Authorization importResource(InputStream stream);
+	Authorization importResource(InputStream stream);
 
-	public Authorization findById(Long retailCustomerId, long authorizationId);
+	Authorization findById(Long retailCustomerId, long authorizationId);
 
 	EntryType findRoot(Long authorizationId);
 
@@ -84,8 +84,8 @@ public interface AuthorizationService {
 
 	Authorization findByUUID(UUID uuid);
 
-	public Authorization findByRefreshToken(String refreshToken);
+	Authorization findByRefreshToken(String refreshToken);
 
-	public List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId);
+	List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId);
 
 }

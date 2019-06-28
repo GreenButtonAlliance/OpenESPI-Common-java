@@ -23,6 +23,6 @@ import org.greenbuttonalliance.espi.common.models.atom.EntryType;
 
 public interface EntryProcessorService {
 
-	public EntryType process(EntryType entry);
+	EntryType process(EntryType entry);
 
 }

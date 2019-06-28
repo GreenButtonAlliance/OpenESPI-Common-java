@@ -30,7 +30,7 @@ import static junit.framework.TestCase.assertTrue;
 
 public class ReadingTypeValidationTests {
 	@Test
-	public void isValid() throws Exception {
+	public void isValid() {
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
 

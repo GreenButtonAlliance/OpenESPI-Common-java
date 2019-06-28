@@ -23,11 +23,9 @@ import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBException;
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class TimeConfigurationMarshallingTests {
 
@@ -48,10 +46,8 @@ public class TimeConfigurationMarshallingTests {
 	}
 
 	@Test
-	public void unmarshal_setsDstEndRule() throws UnsupportedEncodingException,
-			JAXBException {
-		assertTrue(Arrays.equals(timeConfiguration().getDstEndRule(),
-				new byte[] { -76, 14, 32, 0 }));
+	public void unmarshal_setsDstEndRule() throws JAXBException {
+		assertArrayEquals(timeConfiguration().getDstEndRule(), new byte[]{-76, 14, 32, 0});
 	}
 
 	@Test
@@ -61,8 +57,7 @@ public class TimeConfigurationMarshallingTests {
 
 	@Test
 	public void unmarshal_setDstStartRule() throws JAXBException {
-		assertTrue(Arrays.equals(timeConfiguration().getDstStartRule(),
-				new byte[] { 54, 14, 32, 0 }));
+		assertArrayEquals(timeConfiguration().getDstStartRule(), new byte[]{54, 14, 32, 0});
 	}
 
 	@Test

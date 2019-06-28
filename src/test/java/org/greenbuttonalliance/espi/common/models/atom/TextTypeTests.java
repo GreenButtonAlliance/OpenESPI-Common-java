@@ -21,7 +21,7 @@ package org.greenbuttonalliance.espi.common.models.atom;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class TextTypeTests {
 
@@ -30,11 +30,11 @@ public class TextTypeTests {
 		TextType textTypeElement = new TextType();
 		textTypeElement.getContent().add("Sample text");
 
-		assertTrue(textTypeElement.getTitle().equals("Sample text"));
+		assertEquals("Sample text", textTypeElement.getTitle());
 
 		textTypeElement.getContent().clear();
 		textTypeElement.getContent().add("Different text");
 
-		assertTrue(textTypeElement.getTitle().equals("Different text"));
+		assertEquals("Different text", textTypeElement.getTitle());
 	}
 }

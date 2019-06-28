@@ -26,11 +26,11 @@ import org.junit.Test;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class StringAdapterTests {
 
-	StringAdapter stringAdapter;
+	private StringAdapter stringAdapter;
 
 	@Before
 	public void setup() {
@@ -41,12 +41,12 @@ public class StringAdapterTests {
 	public void givenJAXBElement_returnsContent() throws Exception {
 		TextType textTypeElement = new TextType();
 		textTypeElement.getContent().add("Sample text");
-		JAXBElement<TextType> v = new JAXBElement<TextType>(new QName(
+		JAXBElement<TextType> v = new JAXBElement<>(new QName(
 				"xmlNamespace", "localPart"), TextType.class, textTypeElement);
 
 		String value = stringAdapter.unmarshal(v);
 
-		assertTrue(value.equals("Sample text"));
+		assertEquals("Sample text", value);
 	}
 
 }

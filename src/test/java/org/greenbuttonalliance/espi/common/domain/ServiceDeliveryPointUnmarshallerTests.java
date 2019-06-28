@@ -28,9 +28,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
-import java.io.IOException;
 import java.io.StringReader;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -39,12 +37,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
 public class ServiceDeliveryPointUnmarshallerTests {
-	private static String XML_INPUT = ""
-			+ "<espi:ServiceDeliveryPoint xmlns:espi=\"http://naesb.org/espi\">"
-			+ "   <espi:name>First Last</espi:name>"
-			+ "   <espi:tariffProfile>foo</espi:tariffProfile>"
-			+ "   <espi:customerAgreement>bar</espi:customerAgreement>"
-			+ "</espi:ServiceDeliveryPoint>";
 	@Autowired
 	@Qualifier("domainMarshaller")
 	private Jaxb2Marshaller domainMarshaller;
@@ -52,22 +44,28 @@ public class ServiceDeliveryPointUnmarshallerTests {
 
 	@Before
 	public void setup() {
+		String XML_INPUT = ""
+				+ "<espi:ServiceDeliveryPoint xmlns:espi=\"http://naesb.org/espi\">"
+				+ "   <espi:name>First Last</espi:name>"
+				+ "   <espi:tariffProfile>foo</espi:tariffProfile>"
+				+ "   <espi:customerAgreement>bar</espi:customerAgreement>"
+				+ "</espi:ServiceDeliveryPoint>";
 		serviceDeliveryPoint = (ServiceDeliveryPoint) domainMarshaller
 				.unmarshal(new StreamSource(new StringReader(XML_INPUT)));
 	}
 
 	@Test
-	public void name() throws JAXBException, IOException {
+	public void name() {
 		assertThat(serviceDeliveryPoint.getName(), is("First Last"));
 	}
 
 	@Test
-	public void tariffProfile() throws JAXBException, IOException {
+	public void tariffProfile() {
 		assertThat(serviceDeliveryPoint.getTariffProfile(), is("foo"));
 	}
 
 	@Test
-	public void customerAgreement() throws JAXBException, IOException {
+	public void customerAgreement() {
 		assertThat(serviceDeliveryPoint.getCustomerAgreement(), is("bar"));
 	}
 }

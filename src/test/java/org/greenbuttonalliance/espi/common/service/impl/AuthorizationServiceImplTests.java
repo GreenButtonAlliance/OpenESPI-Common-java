@@ -40,14 +40,13 @@ public class AuthorizationServiceImplTests extends BaseTest {
 	@Mock
 	public AuthorizationRepository repository;
 	public Subscription subscription;
-	public AuthorizationServiceImpl service;
-	public Authorization authorization;
+	private Authorization authorization;
 
 	@Before
 	public void before() {
 		subscription = EspiFactory.newSubscription(EspiFactory
 				.newRetailCustomer());
-		service = new AuthorizationServiceImpl();
+		AuthorizationServiceImpl service = new AuthorizationServiceImpl();
 		service.setAuthorizationRepository(repository);
 
 		authorization = service

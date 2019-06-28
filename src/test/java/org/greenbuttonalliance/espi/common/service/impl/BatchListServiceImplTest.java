@@ -34,7 +34,7 @@ public class BatchListServiceImplTest {
 	@Mock
 	public BatchListRepository repository;
 
-	public BatchListServiceImpl batchListService;
+	private BatchListServiceImpl batchListService;
 
 	@Before
 	public void setup() {

@@ -49,20 +49,20 @@ public interface TimeConfigurationService {
 
 	UsagePoint getUsagePoint();
  
-	public void setRepository(TimeConfigurationRepository timeConfigurationRepository);
+	void setRepository(TimeConfigurationRepository timeConfigurationRepository);
 
-	public void persist(TimeConfiguration timeConfiguration);
+	void persist(TimeConfiguration timeConfiguration);
  
-	public TimeConfiguration findById(Long timeConfigurationId);
+	TimeConfiguration findById(Long timeConfigurationId);
 
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId, Long timeConfigurationId, ExportFilter params);
+	EntryType findEntryType(Long retailCustomerId, Long usagePointId, Long timeConfigurationId, ExportFilter params);
 
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId, ExportFilter params);
+	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId, ExportFilter params);
 
-	public void add(TimeConfiguration timeConfiguration);
+	void add(TimeConfiguration timeConfiguration);
 
-	public void delete(TimeConfiguration timeConfiguration);
+	void delete(TimeConfiguration timeConfiguration);
  
-	public TimeConfiguration importResource(InputStream stream);
+	TimeConfiguration importResource(InputStream stream);
 
 }

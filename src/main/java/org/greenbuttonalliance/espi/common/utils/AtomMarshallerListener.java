@@ -61,13 +61,13 @@ public class AtomMarshallerListener extends Marshaller.Listener {
 		}
 		if ((source instanceof LinkType)
 				&& (((LinkType) source).getRel().equals("self"))) {
-			((LinkType) source).setHref(mutateFragment((LinkType) source,
+			((LinkType) source).setHref(mutateFragment(source,
 					this.entryFragment, 0));
 		}
 		if ((source instanceof LinkType)
 				&& (((LinkType) source).getRel().equals("up"))) {
 
-			((LinkType) source).setHref(mutateFragment((LinkType) source,
+			((LinkType) source).setHref(mutateFragment(source,
 					this.entryFragment, 1));
 		}
 		if ((source instanceof LinkType)

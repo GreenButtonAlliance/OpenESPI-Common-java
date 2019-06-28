@@ -43,24 +43,24 @@ public interface IntervalBlockService {
 
 	List<IntervalBlock> findAllByMeterReading(MeterReading meterReading);
 
-	public void setRepository(IntervalBlockRepository repository);
+	void setRepository(IntervalBlockRepository repository);
 
-	public void persist(IntervalBlock intervalBlock);
+	void persist(IntervalBlock intervalBlock);
 
-	public IntervalBlock findById(long retailCustomerId, long usagePointId,
-			long meterReadingId, long intervalBlockId);
+	IntervalBlock findById(long retailCustomerId, long usagePointId,
+						   long meterReadingId, long intervalBlockId);
 
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
-			Long meterReadingId, Long intervalBlockId);
+	EntryType findEntryType(Long retailCustomerId, Long usagePointId,
+							Long meterReadingId, Long intervalBlockId);
 
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
-			Long usagePointId, Long meterReadingId);
+	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
+											Long usagePointId, Long meterReadingId);
 
-	public void delete(IntervalBlock intervalBlock);
+	void delete(IntervalBlock intervalBlock);
 
-	public void add(IntervalBlock intervalBlock);
+	void add(IntervalBlock intervalBlock);
 
-	public IntervalBlock importResource(InputStream stream);
+	IntervalBlock importResource(InputStream stream);
 
 	IntervalBlock findById(long intervalBlockId);
 

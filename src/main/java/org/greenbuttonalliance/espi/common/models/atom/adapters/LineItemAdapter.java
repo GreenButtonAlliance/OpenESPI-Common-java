@@ -30,7 +30,7 @@ public class LineItemAdapter extends
 
 	@Override
 	public LineItem unmarshal(JAXBElement<LineItem> v) throws Exception {
-		return (LineItem) v.getValue();
+		return v.getValue();
 	}
 
 	@Override

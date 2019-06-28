@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class IdentifiedObjectTests {
 	@Test
@@ -44,7 +45,7 @@ public class IdentifiedObjectTests {
 	public void mrid_givenNoUUID() {
 		IdentifiedObject identifiedObject = new IdentifiedObject();
 
-		assertEquals(null, identifiedObject.getMRID());
+		assertNull(identifiedObject.getMRID());
 	}
 
 	@Test

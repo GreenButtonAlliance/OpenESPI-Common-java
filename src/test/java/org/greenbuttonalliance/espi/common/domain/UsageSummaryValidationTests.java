@@ -19,7 +19,6 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
@@ -27,34 +26,23 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Set;
 
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newServiceCategory;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+import static org.greenbuttonalliance.espi.common.test.EspiFactory.newUsageSummary;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 
-public class ServiceCategoryValidationTests extends XMLTest {
+public class UsageSummaryValidationTests {
+
 	@Test
-	public void isValid() {
+	public void isValid() throws Exception {
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
 
-		ServiceCategory serviceCategory = newServiceCategory();
+		UsageSummary usageSummary = newUsageSummary();
 
-		Set<ConstraintViolation<ServiceCategory>> violations = validator
-				.validate(serviceCategory);
+		Set<ConstraintViolation<UsageSummary>> violations = validator
+				.validate(usageSummary);
 
 		assertThat(violations, is(empty()));
-	}
-
-	@Test
-	public void isInvalid() {
-		Validator validator = Validation.buildDefaultValidatorFactory()
-				.getValidator();
-
-		ServiceCategory serviceCategory = new ServiceCategory();
-
-		Set<ConstraintViolation<ServiceCategory>> violations = validator
-				.validate(serviceCategory);
-
-		assertThat(violations, is(not(empty())));
 	}
 }

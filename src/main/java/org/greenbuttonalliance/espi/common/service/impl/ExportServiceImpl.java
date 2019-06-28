@@ -76,6 +76,9 @@ public class ExportServiceImpl implements ExportService {
 	private ElectricPowerUsageSummaryService electricPowerUsageSummaryService;
 
 	@Autowired
+	private UsageSummaryService usageSummaryService;
+
+	@Autowired
 	private AuthorizationService authorizationService;
 
 	@Autowired
@@ -404,6 +407,64 @@ public class ExportServiceImpl implements ExportService {
 				electricPowerUsageSummaryService.findEntryTypeIterator(
 						retailCustomerId, usagePointId), stream, exportFilter,
 				ElectricPowerUsageSummary.class, hrefFragment);
+	}
+
+	// UsageSummary
+
+	// - ROOT form
+	@Override
+	public void exportUsageSummarys_Root(Long subscriptionId,
+										 ServletOutputStream outputStream, ExportFilter exportFilter)
+
+			throws IOException {
+		exportRootForm("/UsageSummary", subscriptionId,
+				outputStream, exportFilter, UsageSummary.class);
+	}
+
+	@Override
+	public void exportUsageSummary_Root(Long subscriptionId,
+										long usageSummaryId, ServletOutputStream stream,
+										ExportFilter exportFilter) throws IOException {
+		UsageSummary usageSummary = resourceService
+				.findById(usageSummaryId,
+						UsageSummary.class);
+		UsagePoint usagePoint = usageSummary.getUsagePoint();
+
+		String hrefFragment = "/Subscription/" + subscriptionId + "/UsagePoint"
+				+ usagePoint.getId() + "/UsageSummary/"
+				+ usageSummaryId;
+
+		exportEntry(subscriptionId, resourceService.findEntryType(
+				usageSummaryId, UsageSummary.class),
+				stream, exportFilter, hrefFragment);
+	}
+
+	// - XPath form
+	@Override
+	public void exportUsageSummary(Long subscriptionId,
+								   Long retailCustomerId, Long usagePointId,
+								   Long usageSummaryId, OutputStream stream,
+								   ExportFilter exportFilter) throws IOException {
+		String hrefFragment = "/Subscription/" + subscriptionId
+				+ "/UsagePoint/" + usagePointId + "/UsageSummary/"
+				+ usageSummaryId;
+		exportEntry(subscriptionId,
+				usageSummaryService.findEntryType(
+						retailCustomerId, usagePointId,
+						usageSummaryId), stream, exportFilter,
+				hrefFragment);
+	}
+
+	@Override
+	public void exportUsageSummarys(Long subscriptionId,
+									Long retailCustomerId, Long usagePointId, OutputStream stream,
+									ExportFilter exportFilter) throws IOException {
+		String hrefFragment = "/Subscription/" + subscriptionId
+				+ "/UsagePoint/" + usagePointId + "/UsageSummary";
+		exportEntries(subscriptionId,
+				usageSummaryService.findEntryTypeIterator(
+						retailCustomerId, usagePointId), stream, exportFilter,
+				UsageSummary.class, hrefFragment);
 	}
 
 	// IntervalBlock

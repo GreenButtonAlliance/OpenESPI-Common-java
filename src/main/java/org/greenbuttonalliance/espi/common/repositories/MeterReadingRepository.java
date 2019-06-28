@@ -26,16 +26,16 @@ import java.util.UUID;
 
 public interface MeterReadingRepository {
 
-	public void createOrReplaceByUUID(MeterReading meterReading);
+	void createOrReplaceByUUID(MeterReading meterReading);
 
-	public void deleteById(Long id);
+	void deleteById(Long id);
 
-	public List<Long> findAllIds();
+	List<Long> findAllIds();
 
-	public MeterReading findById(Long meterReadingId);
+	MeterReading findById(Long meterReadingId);
 
-	public MeterReading findByUUID(UUID uuid);
+	MeterReading findByUUID(UUID uuid);
 
-	public void persist(MeterReading meterReading);
+	void persist(MeterReading meterReading);
 
 }

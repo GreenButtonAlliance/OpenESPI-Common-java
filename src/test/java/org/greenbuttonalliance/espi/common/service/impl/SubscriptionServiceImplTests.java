@@ -49,8 +49,7 @@ public class SubscriptionServiceImplTests extends BaseTest {
 	public Subscription subscription;
 	public OAuth2Request oAuth2Request;
 
-	// TODO - dropped this out as the ApplicationInformation integration is not
-	// complete
+	// TODO - dropped this out as the ApplicationInformation integration is not complete
 	// with "third_party_client" not be related to an existing ApInfo object
 	/*
 	 * start of comment

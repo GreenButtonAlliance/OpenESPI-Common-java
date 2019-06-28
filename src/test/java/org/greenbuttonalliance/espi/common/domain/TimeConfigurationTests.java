@@ -42,12 +42,9 @@ public class TimeConfigurationTests extends XMLTest {
 	@Autowired
 	ExportService exportService;
 
-	TimeConfiguration timeConfiguration;
-
 	@Before
 	public void before() {
 
-		timeConfiguration = new TimeConfiguration();
 	}
 
 	@Test

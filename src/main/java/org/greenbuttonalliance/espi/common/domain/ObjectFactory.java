@@ -82,6 +82,8 @@ public class ObjectFactory {
 			NAESB_URI, "BatchItemInfo");
 	public static final QName ElectricPowerUsageSummary_QNAME = new QName(
 			NAESB_URI, "ElectricPowerUsageSummary");
+	public static final QName UsageSummary_QNAME = new QName(
+			NAESB_URI, "UsageSummary");
 	public static final QName LineItem_QNAME = new QName(
 			NAESB_URI, "LineItem");
 	public static final QName RetailCustomer_QNAME = new QName(
@@ -122,6 +124,13 @@ public class ObjectFactory {
 	 */
 	public ElectricPowerUsageSummary createElectricPowerUsageSummary() {
 		return new ElectricPowerUsageSummary();
+	}
+
+	/**
+	 * Create an instance of {@link UsageSummary }
+	 */
+	public UsageSummary createUsageSummary() {
+		return new UsageSummary();
 	}
 
 	/**
@@ -466,6 +475,18 @@ public class ObjectFactory {
 		return new JAXBElement<>(
 				ElectricPowerUsageSummary_QNAME,
 				ElectricPowerUsageSummary.class, null, value);
+	}
+
+	/**
+	 * Create an instance of {@link JAXBElement }{@code <}
+	 * {@link UsageSummary }{@code >}
+	 */
+	@XmlElementDecl(namespace = NAESB_URI, name = "UsageSummary")
+	public JAXBElement<UsageSummary> createUsageSummary(
+			UsageSummary value) {
+		return new JAXBElement<>(
+				UsageSummary_QNAME,
+				UsageSummary.class, null, value);
 	}
 
 	@XmlElementDecl(namespace = NAESB_URI, name = "costAdditionalDetailLastPeriod")

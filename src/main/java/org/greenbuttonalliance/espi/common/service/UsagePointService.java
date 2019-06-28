@@ -56,30 +56,30 @@ public interface UsagePointService {
 
 	List<UsagePoint> findAllByRetailCustomer(Long retailCustomerId);
  
-	public void setRepository(UsagePointRepository usagePointRepository);
+	void setRepository(UsagePointRepository usagePointRepository);
 
-	public void setResourceService(ResourceService resourceService);
+	void setResourceService(ResourceService resourceService);
 
-	public void persist(UsagePoint usagePoint);
+	void persist(UsagePoint usagePoint);
  
-	public UsagePoint findById(Long usagePointId);
+	UsagePoint findById(Long usagePointId);
 
-	public UsagePoint findById(Long retailCustomerId, Long usagePointId);
+	UsagePoint findById(Long retailCustomerId, Long usagePointId);
 
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId);
+	EntryType findEntryType(Long retailCustomerId, Long usagePointId);
 	
-	public EntryType findEntryType(Long usagePointId);
+	EntryType findEntryType(Long usagePointId);
 	
-	public EntryTypeIterator findEntryTypeIterator();
+	EntryTypeIterator findEntryTypeIterator();
 
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
+	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
 	
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
+	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
 
-	public void add(UsagePoint usagePoint);
+	void add(UsagePoint usagePoint);
 
-	public void delete(UsagePoint usagePoint);
+	void delete(UsagePoint usagePoint);
  
-	public UsagePoint importResource(InputStream stream);
+	UsagePoint importResource(InputStream stream);
 
 }

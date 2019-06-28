@@ -34,7 +34,7 @@ public class DateTimeTypeAdapter extends
 
 	@Override
 	public JAXBElement<DateTimeType> marshal(DateTimeType v) throws Exception {
-		return new JAXBElement<DateTimeType>(
+		return new JAXBElement<>(
 				ObjectFactory.SourceTypeUpdated_QNAME, DateTimeType.class, v);
 	}
 }

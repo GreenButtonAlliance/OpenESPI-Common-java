@@ -37,12 +37,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertSame;
 
 public class SubscriptionTests {
 
 	@Test
-	public void isValid() throws Exception {
+	public void isValid() {
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
 
@@ -55,7 +55,7 @@ public class SubscriptionTests {
 	}
 
 	@Test
-	public void isInvalid() throws Exception {
+	public void isInvalid() {
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
 
@@ -69,7 +69,7 @@ public class SubscriptionTests {
 
 	@Test
 	public void extendsIdentifiableObject() {
-		assertTrue(Subscription.class.getSuperclass() == IdentifiedObject.class);
+		assertSame(Subscription.class.getSuperclass(), IdentifiedObject.class);
 	}
 
 	@Test

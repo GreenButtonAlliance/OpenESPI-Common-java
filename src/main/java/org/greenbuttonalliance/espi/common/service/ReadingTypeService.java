@@ -40,21 +40,21 @@ public interface ReadingTypeService {
 
 	void deleteById(long readingTypeId);
 
-	public void setReadingTypeRepository(ReadingTypeRepository repository);
+	void setReadingTypeRepository(ReadingTypeRepository repository);
 
-	public void persist(ReadingType readingType);
+	void persist(ReadingType readingType);
 
-	public ReadingType findById(Long readingTypeId);
+	ReadingType findById(Long readingTypeId);
 
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,Long meterReadingId,
-			Long readingTypeId);
+	EntryType findEntryType(Long retailCustomerId, Long usagePointId, Long meterReadingId,
+							Long readingTypeId);
 
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
+	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
 
-	public void add(ReadingType readingType);
+	void add(ReadingType readingType);
 
-	public void delete(ReadingType readingType);
+	void delete(ReadingType readingType);
 
-	public ReadingType importResource(InputStream stream);
+	ReadingType importResource(InputStream stream);
 
 }

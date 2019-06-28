@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 public class StringAdapter extends XmlAdapter<JAXBElement<TextType>, String> {
 	@Override
 	public String unmarshal(JAXBElement<TextType> v) throws Exception {
-		return ((TextType) v.getValue()).getTitle();
+		return v.getValue().getTitle();
 	}
 
 	@Override

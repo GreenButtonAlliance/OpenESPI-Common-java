@@ -19,7 +19,6 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.greenbuttonalliance.espi.common.atom.XMLTest;
 import org.greenbuttonalliance.espi.common.test.FixtureFactory;
 import org.junit.Test;
@@ -30,9 +29,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.xml.sax.SAXException;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
 import java.io.StringReader;
@@ -47,8 +44,7 @@ public class ServiceCategoryUnmarshallerTests extends XMLTest {
 	@Qualifier("atomMarshaller")
 	private Jaxb2Marshaller atomMarshaller;
 
-	private ServiceCategory loadServiceCategory()
-			throws DatatypeConfigurationException, IOException {
+	private ServiceCategory loadServiceCategory() throws IOException {
 		String xml = FixtureFactory
 				.loadFixture("/fixtures/ServiceCategory.xml");
 		return (ServiceCategory) atomMarshaller.unmarshal(new StreamSource(
@@ -56,8 +52,7 @@ public class ServiceCategoryUnmarshallerTests extends XMLTest {
 	}
 
 	@Test
-	public void kind() throws SAXException, IOException, XpathException,
-			DatatypeConfigurationException {
+	public void kind() throws IOException {
 		assertEquals(Long.valueOf(9L), loadServiceCategory().getKind());
 	}
 }

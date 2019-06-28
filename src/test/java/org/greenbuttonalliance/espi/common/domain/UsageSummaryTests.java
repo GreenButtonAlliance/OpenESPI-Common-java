@@ -33,13 +33,13 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
 import static org.greenbuttonalliance.espi.common.test.Asserts.assertXpathValue;
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newElectricPowerUsageSummaryWithUsagePoint;
+import static org.greenbuttonalliance.espi.common.test.EspiFactory.newUsageSummaryWithUsagePoint;
 import static org.junit.Assert.assertEquals;
 
-public class ElectricPowerUsageSummaryTests extends XMLTest {
+public class UsageSummaryTests extends XMLTest {
 
 	private String xml;
-	static final String XML_INPUT = "<ElectricPowerUsageSummary xmlns=\"http://naesb.org/espi\">"
+	static final String XML_INPUT = "<UsageSummary xmlns=\"http://naesb.org/espi\">"
 			+ "<billLastPeriod>1</billLastPeriod>"
 			+ "<billToDate>2</billToDate>"
 			+ "<costAdditionalLastPeriod>3</costAdditionalLastPeriod>"
@@ -108,368 +108,383 @@ public class ElectricPowerUsageSummaryTests extends XMLTest {
 			+ "<uom>Uom</uom>"
 			+ "<value>93018</value>"
 			+ "</ratchetDemand>"
-			+ "</ElectricPowerUsageSummary>";
+			+ "</UsageSummary>";
 
-	private ElectricPowerUsageSummary electricPowerUsageSummary;
+	private UsageSummary usageSummary;
 
 	@Before
 	public void before() throws JAXBException, FeedException {
 		xml = EspiMarshaller
-				.marshal(newElectricPowerUsageSummaryWithUsagePoint());
-		electricPowerUsageSummary = EspiMarshaller
-				.<ElectricPowerUsageSummary> unmarshal(XML_INPUT).getValue();
+				.marshal(newUsageSummaryWithUsagePoint());
+		usageSummary = EspiMarshaller
+				.<UsageSummary> unmarshal(XML_INPUT).getValue();
 	}
 
 	@Test
-	public void unmarshalsElectricPowerUsageSummary() {
-		assertEquals(ElectricPowerUsageSummary.class,
-				electricPowerUsageSummary.getClass());
+	public void unmarshalsUsageSummary() {
+		assertEquals(UsageSummary.class,
+				usageSummary.getClass());
 	}
 
 	@Test
 	public void unmarshal_setsBillLastPeriod() {
-		assertEquals(1L, electricPowerUsageSummary.getBillLastPeriod()
+		assertEquals(1L, usageSummary.getBillLastPeriod()
 				.longValue());
 	}
 
 	@Test
 	public void unmarshal_setsBillToDate() {
-		assertEquals(2L, electricPowerUsageSummary.getBillToDate().longValue());
+		assertEquals(2L, usageSummary.getBillToDate().longValue());
 	}
 
 	@Test
 	public void unmarshal_setsCostAdditionalLastPeriod() {
-		assertEquals(3L, electricPowerUsageSummary
+		assertEquals(3L, usageSummary
 				.getCostAdditionalLastPeriod().longValue());
 	}
 
 	@Test
 	public void unmarshal_setsCurrency() {
-		assertEquals("currency", electricPowerUsageSummary.getCurrency());
+		assertEquals("currency", usageSummary.getCurrency());
 	}
 
 	@Test
 	public void unmarshal_setsQualityOfReading() {
 		assertEquals("qualityOfReading",
-				electricPowerUsageSummary.getQualityOfReading());
+				usageSummary.getQualityOfReading());
 	}
 
 	@Test
 	public void unmarshal_setsStatusTimeStamp() {
-		assertEquals(4L, electricPowerUsageSummary.getStatusTimeStamp());
+		assertEquals(4L, usageSummary.getStatusTimeStamp());
 	}
 
 	@Test
 	public void unmarshal_setsRatchetDemandPeriod() {
-		assertEquals(1119600L, electricPowerUsageSummary
+		assertEquals(1119600L, usageSummary
 				.getRatchetDemandPeriod().getDuration().longValue());
-		assertEquals(1119601L, electricPowerUsageSummary
+		assertEquals(1119601L, usageSummary
 				.getRatchetDemandPeriod().getStart().longValue());
 	}
 
 	@Test
 	public void unmarshal_setsBillingPeriod() {
-		assertEquals(1119602L, electricPowerUsageSummary.getBillingPeriod()
+		assertEquals(1119602L, usageSummary.getBillingPeriod()
 				.getDuration().longValue());
-		assertEquals(1119603L, electricPowerUsageSummary.getBillingPeriod()
+		assertEquals(1119603L, usageSummary.getBillingPeriod()
 				.getStart().longValue());
 	}
 
 	@Test
 	public void unmarshal_setsCurrentBillingPeriodOverAllConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getCurrentBillingPeriodOverAllConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsCurrentDayLastYearNetConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getCurrentDayLastYearNetConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsCurrentDayNetConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getCurrentDayNetConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsCurrentDayOverallConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getCurrentDayOverallConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsPeakDemand() {
-		assertSummaryMeasurement(electricPowerUsageSummary.getPeakDemand());
+		assertSummaryMeasurement(usageSummary.getPeakDemand());
 	}
 
 	@Test
 	public void unmarshal_setsPreviousDayLastYearOverallConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getPreviousDayLastYearOverallConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsPreviousDayNetConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getPreviousDayNetConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsPreviousDayOverallConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getPreviousDayOverallConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsRatchetDemand() {
-		assertSummaryMeasurement(electricPowerUsageSummary.getRatchetDemand());
+		assertSummaryMeasurement(usageSummary.getRatchetDemand());
 	}
 
 	@Test
-	public void marshal_setsBillingPeriod() throws SAXException, IOException, XpathException {
+	public void marshal_setsBillingPeriod() throws JAXBException, SAXException,
+			IOException, XpathException {
 		assertXpathValue(
 				"1119600",
-				"/espi:ElectricPowerUsageSummary/espi:billingPeriod/espi:duration",
+				"/espi:UsageSummary/espi:billingPeriod/espi:duration",
 				xml);
 		assertXpathValue(
 				"1119600",
-				"/espi:ElectricPowerUsageSummary/espi:billingPeriod/espi:start",
+				"/espi:UsageSummary/espi:billingPeriod/espi:start",
 				xml);
 	}
 
 	@Test
-	public void marshal_setsBillLastPeriod() throws SAXException, IOException, XpathException {
+	public void marshal_setsBillLastPeriod() throws JAXBException,
+			SAXException, IOException, XpathException {
 		assertXpathValue("15303000",
-				"/espi:ElectricPowerUsageSummary/espi:billLastPeriod", xml);
+				"/espi:UsageSummary/espi:billLastPeriod", xml);
 	}
 
 	@Test
-	public void marshal_setsBillToDate() throws SAXException, IOException, XpathException {
+	public void marshal_setsBillToDate() throws JAXBException, SAXException,
+			IOException, XpathException {
 		assertXpathValue("1135000",
-				"/espi:ElectricPowerUsageSummary/espi:billToDate", xml);
+				"/espi:UsageSummary/espi:billToDate", xml);
 	}
 
 	@Test
-	public void marshal_setsCostAdditionalLastPeriod() throws SAXException, IOException, XpathException {
+	public void marshal_setsCostAdditionalLastPeriod() throws JAXBException,
+			SAXException, IOException, XpathException {
 		assertXpathValue(
 				"1346000",
-				"/espi:ElectricPowerUsageSummary/espi:costAdditionalLastPeriod",
+				"/espi:UsageSummary/espi:costAdditionalLastPeriod",
 				xml);
 	}
 
 	@Test
-	public void marshal_setsCurrency() throws SAXException,	IOException, XpathException {
+	public void marshal_setsCurrency() throws JAXBException, SAXException,
+			IOException, XpathException {
 		assertXpathValue("840",
-				"/espi:ElectricPowerUsageSummary/espi:currency", xml);
+				"/espi:UsageSummary/espi:currency", xml);
 	}
 
 	@Test
 	public void marshal_setsCurrentBillingPeriodOverAllConsumption()
-			throws SAXException, IOException, XpathException {
+			throws JAXBException, SAXException, IOException, XpathException {
 		assertXpathValue(
 				"0",
-				"/espi:ElectricPowerUsageSummary/espi:currentBillingPeriodOverAllConsumption/espi:powerOfTenMultiplier",
+				"/espi:UsageSummary/espi:currentBillingPeriodOverAllConsumption/espi:powerOfTenMultiplier",
 				xml);
 		assertXpathValue(
 				"1331784000",
-				"/espi:ElectricPowerUsageSummary/espi:currentBillingPeriodOverAllConsumption/espi:timeStamp",
+				"/espi:UsageSummary/espi:currentBillingPeriodOverAllConsumption/espi:timeStamp",
 				xml);
 		assertXpathValue(
 				"72",
-				"/espi:ElectricPowerUsageSummary/espi:currentBillingPeriodOverAllConsumption/espi:uom",
+				"/espi:UsageSummary/espi:currentBillingPeriodOverAllConsumption/espi:uom",
 				xml);
 		assertXpathValue(
 				"93018",
-				"/espi:ElectricPowerUsageSummary/espi:currentBillingPeriodOverAllConsumption/espi:value",
+				"/espi:UsageSummary/espi:currentBillingPeriodOverAllConsumption/espi:value",
 				xml);
 	}
 
 	@Test
-	public void marshal_setsQualityOfReading() throws SAXException, IOException, XpathException {
+	public void marshal_setsQualityOfReading() throws JAXBException,
+			SAXException, IOException, XpathException {
 		assertXpathValue("14",
-				"/espi:ElectricPowerUsageSummary/espi:qualityOfReading", xml);
+				"/espi:UsageSummary/espi:qualityOfReading", xml);
 	}
 
 	@Test
-	public void marshal_setsStatusTimeStamp() throws SAXException, IOException, XpathException {
+	public void marshal_setsStatusTimeStamp() throws JAXBException,
+			SAXException, IOException, XpathException {
 		assertXpathValue("1331784000",
-				"/espi:ElectricPowerUsageSummary/espi:statusTimeStamp", xml);
+				"/espi:UsageSummary/espi:statusTimeStamp", xml);
 	}
 
 	@Test
-	public void marshal_setsCurrentDayLastYearNetConsumption() throws SAXException, IOException, XpathException {
+	public void marshal_setsCurrentDayLastYearNetConsumption()
+			throws JAXBException, SAXException, IOException, XpathException {
 		assertXpathValue(
 				"0",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayLastYearNetConsumption/espi:powerOfTenMultiplier",
+				"/espi:UsageSummary/espi:currentDayLastYearNetConsumption/espi:powerOfTenMultiplier",
 				xml);
 		assertXpathValue(
 				"1331784000",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayLastYearNetConsumption/espi:timeStamp",
+				"/espi:UsageSummary/espi:currentDayLastYearNetConsumption/espi:timeStamp",
 				xml);
 		assertXpathValue(
 				"72",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayLastYearNetConsumption/espi:uom",
+				"/espi:UsageSummary/espi:currentDayLastYearNetConsumption/espi:uom",
 				xml);
 		assertXpathValue(
 				"93018",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayLastYearNetConsumption/espi:value",
+				"/espi:UsageSummary/espi:currentDayLastYearNetConsumption/espi:value",
 				xml);
 	}
 
 	@Test
-	public void marshal_setsCurrentDayNetConsumption() throws SAXException, IOException, XpathException {
+	public void marshal_setsCurrentDayNetConsumption() throws JAXBException,
+			SAXException, IOException, XpathException {
 		assertXpathValue(
 				"0",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayNetConsumption/espi:powerOfTenMultiplier",
+				"/espi:UsageSummary/espi:currentDayNetConsumption/espi:powerOfTenMultiplier",
 				xml);
 		assertXpathValue(
 				"1331784000",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayNetConsumption/espi:timeStamp",
+				"/espi:UsageSummary/espi:currentDayNetConsumption/espi:timeStamp",
 				xml);
 		assertXpathValue(
 				"72",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayNetConsumption/espi:uom",
+				"/espi:UsageSummary/espi:currentDayNetConsumption/espi:uom",
 				xml);
 		assertXpathValue(
 				"93018",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayNetConsumption/espi:value",
+				"/espi:UsageSummary/espi:currentDayNetConsumption/espi:value",
 				xml);
 	}
 
 	@Test
-	public void marshal_setsCurrentDayOverallConsumption() throws SAXException, IOException, XpathException {
+	public void marshal_setsCurrentDayOverallConsumption()
+			throws JAXBException, SAXException, IOException, XpathException {
 		assertXpathValue(
 				"0",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayOverallConsumption/espi:powerOfTenMultiplier",
+				"/espi:UsageSummary/espi:currentDayOverallConsumption/espi:powerOfTenMultiplier",
 				xml);
 		assertXpathValue(
 				"1331784000",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayOverallConsumption/espi:timeStamp",
+				"/espi:UsageSummary/espi:currentDayOverallConsumption/espi:timeStamp",
 				xml);
 		assertXpathValue(
 				"72",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayOverallConsumption/espi:uom",
+				"/espi:UsageSummary/espi:currentDayOverallConsumption/espi:uom",
 				xml);
 		assertXpathValue(
 				"93018",
-				"/espi:ElectricPowerUsageSummary/espi:currentDayOverallConsumption/espi:value",
+				"/espi:UsageSummary/espi:currentDayOverallConsumption/espi:value",
 				xml);
 	}
 
 	@Test
-	public void marshal_setsPeakDemand() throws SAXException, IOException, XpathException {
+	public void marshal_setsPeakDemand() throws JAXBException, SAXException,
+			IOException, XpathException {
 		assertXpathValue(
 				"0",
-				"/espi:ElectricPowerUsageSummary/espi:peakDemand/espi:powerOfTenMultiplier",
+				"/espi:UsageSummary/espi:peakDemand/espi:powerOfTenMultiplier",
 				xml);
 		assertXpathValue(
 				"1331784000",
-				"/espi:ElectricPowerUsageSummary/espi:peakDemand/espi:timeStamp",
+				"/espi:UsageSummary/espi:peakDemand/espi:timeStamp",
 				xml);
 		assertXpathValue("72",
-				"/espi:ElectricPowerUsageSummary/espi:peakDemand/espi:uom", xml);
+				"/espi:UsageSummary/espi:peakDemand/espi:uom", xml);
 		assertXpathValue("93018",
-				"/espi:ElectricPowerUsageSummary/espi:peakDemand/espi:value",
+				"/espi:UsageSummary/espi:peakDemand/espi:value",
 				xml);
 	}
 
 	@Test
 	public void marshal_setsPreviousDayLastYearOverallConsumption()
-			throws SAXException, IOException, XpathException {
+			throws JAXBException, SAXException, IOException, XpathException {
 		assertXpathValue(
 				"0",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayLastYearOverallConsumption/espi:powerOfTenMultiplier",
+				"/espi:UsageSummary/espi:previousDayLastYearOverallConsumption/espi:powerOfTenMultiplier",
 				xml);
 		assertXpathValue(
 				"1331784000",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayLastYearOverallConsumption/espi:timeStamp",
+				"/espi:UsageSummary/espi:previousDayLastYearOverallConsumption/espi:timeStamp",
 				xml);
 		assertXpathValue(
 				"72",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayLastYearOverallConsumption/espi:uom",
+				"/espi:UsageSummary/espi:previousDayLastYearOverallConsumption/espi:uom",
 				xml);
 		assertXpathValue(
 				"93018",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayLastYearOverallConsumption/espi:value",
+				"/espi:UsageSummary/espi:previousDayLastYearOverallConsumption/espi:value",
 				xml);
 	}
 
 	@Test
-	public void marshal_setsPreviousDayNetConsumption() throws SAXException, IOException, XpathException {
+	public void marshal_setsPreviousDayNetConsumption() throws JAXBException,
+			SAXException, IOException, XpathException {
 		assertXpathValue(
 				"0",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayNetConsumption/espi:powerOfTenMultiplier",
+				"/espi:UsageSummary/espi:previousDayNetConsumption/espi:powerOfTenMultiplier",
 				xml);
 		assertXpathValue(
 				"1331784000",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayNetConsumption/espi:timeStamp",
+				"/espi:UsageSummary/espi:previousDayNetConsumption/espi:timeStamp",
 				xml);
 		assertXpathValue(
 				"72",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayNetConsumption/espi:uom",
+				"/espi:UsageSummary/espi:previousDayNetConsumption/espi:uom",
 				xml);
 		assertXpathValue(
 				"93018",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayNetConsumption/espi:value",
+				"/espi:UsageSummary/espi:previousDayNetConsumption/espi:value",
 				xml);
 	}
 
 	@Test
-	public void marshal_setsPreviousDayOverallConsumption() throws SAXException, IOException, XpathException {
+	public void marshal_setsPreviousDayOverallConsumption()
+			throws JAXBException, SAXException, IOException, XpathException {
 		assertXpathValue(
 				"0",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayOverallConsumption/espi:powerOfTenMultiplier",
+				"/espi:UsageSummary/espi:previousDayOverallConsumption/espi:powerOfTenMultiplier",
 				xml);
 		assertXpathValue(
 				"1331784000",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayOverallConsumption/espi:timeStamp",
+				"/espi:UsageSummary/espi:previousDayOverallConsumption/espi:timeStamp",
 				xml);
 		assertXpathValue(
 				"72",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayOverallConsumption/espi:uom",
+				"/espi:UsageSummary/espi:previousDayOverallConsumption/espi:uom",
 				xml);
 		assertXpathValue(
 				"93018",
-				"/espi:ElectricPowerUsageSummary/espi:previousDayOverallConsumption/espi:value",
+				"/espi:UsageSummary/espi:previousDayOverallConsumption/espi:value",
 				xml);
 	}
 
 	@Test
-	public void marshal_setsRatchetDemand() throws SAXException, IOException, XpathException {
+	public void marshal_setsRatchetDemand() throws JAXBException, SAXException,
+			IOException, XpathException {
 		assertXpathValue(
 				"0",
-				"/espi:ElectricPowerUsageSummary/espi:ratchetDemand/espi:powerOfTenMultiplier",
+				"/espi:UsageSummary/espi:ratchetDemand/espi:powerOfTenMultiplier",
 				xml);
 		assertXpathValue(
 				"1331784000",
-				"/espi:ElectricPowerUsageSummary/espi:ratchetDemand/espi:timeStamp",
+				"/espi:UsageSummary/espi:ratchetDemand/espi:timeStamp",
 				xml);
 		assertXpathValue("72",
-				"/espi:ElectricPowerUsageSummary/espi:ratchetDemand/espi:uom",
+				"/espi:UsageSummary/espi:ratchetDemand/espi:uom",
 				xml);
 		assertXpathValue(
 				"93018",
-				"/espi:ElectricPowerUsageSummary/espi:ratchetDemand/espi:value",
+				"/espi:UsageSummary/espi:ratchetDemand/espi:value",
 				xml);
 	}
 
 	@Test
-	public void marshal_setsRatchetDemandPeriod() throws SAXException, IOException, XpathException {
+	public void marshal_setsRatchetDemandPeriod() throws JAXBException,
+			SAXException, IOException, XpathException {
 		assertXpathValue(
 				"1119600",
-				"/espi:ElectricPowerUsageSummary/espi:ratchetDemandPeriod/espi:duration",
+				"/espi:UsageSummary/espi:ratchetDemandPeriod/espi:duration",
 				xml);
 		assertXpathValue(
 				"1119600",
-				"/espi:ElectricPowerUsageSummary/espi:ratchetDemandPeriod/espi:start",
+				"/espi:UsageSummary/espi:ratchetDemandPeriod/espi:start",
 				xml);
 	}
 
 	@Test
 	public void usagePoint_hasTransientAnnotation() {
-		TestUtils.assertAnnotationPresent(ElectricPowerUsageSummary.class,
+		TestUtils.assertAnnotationPresent(UsageSummary.class,
 				"usagePoint", XmlTransient.class);
 	}
 

@@ -44,18 +44,18 @@ public class ApplicationInformationRepositoryImplTest {
 	private ApplicationInformation applicationInformation;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		applicationInformation = EspiFactory.newApplicationInformation();
 		repository.persist(applicationInformation);
 	}
 
 	@Test
-	public void persist() throws Exception {
+	public void persist() {
 		assertNotNull(applicationInformation.getId());
 	}
 
 	@Test(expected = org.springframework.dao.DataIntegrityViolationException.class)
-	public void persist_modelEnforcesUniqueClientId() throws Exception {
+	public void persist_modelEnforcesUniqueClientId() {
 		ApplicationInformation duplicateApplicationInformation = EspiFactory
 				.newApplicationInformation();
 		duplicateApplicationInformation
@@ -67,20 +67,20 @@ public class ApplicationInformationRepositoryImplTest {
 	}
 
 	@Test
-	public void findById() throws Exception {
+	public void findById() {
 		assertEquals(applicationInformation.getId(),
 				repository.findById(applicationInformation.getId()).getId());
 	}
 
 	@Test
-	public void findByClientId() throws Exception {
+	public void findByClientId() {
 		assertEquals(applicationInformation.getId(),
 				repository.findByClientId(applicationInformation.getClientId())
 						.getId());
 	}
 
 	@Test
-	public void findByDataCustodianClientId() throws Exception {
+	public void findByDataCustodianClientId() {
 		assertEquals(
 				applicationInformation.getId(),
 				repository.findByDataCustodianClientId(
@@ -88,7 +88,7 @@ public class ApplicationInformationRepositoryImplTest {
 	}
 
 	@Test
-	public void findAll_returnsAllThirdParties() throws Exception {
+	public void findAll_returnsAllThirdParties() {
 		assertTrue("Repository has no data", repository.findAll().size() > 0);
 	}
 }

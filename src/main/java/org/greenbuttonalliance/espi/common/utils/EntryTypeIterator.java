@@ -35,8 +35,7 @@ public class EntryTypeIterator {
 
 	private Iterator<Long> resourceIds;
 	@SuppressWarnings("rawtypes")
-	private Iterator<Pair<Long, Class>> childIds = new ArrayList<Pair<Long, Class>>()
-			.iterator();
+	private Iterator<Pair<Long, Class>> childIds = new ArrayList<Pair<Long, Class>>().iterator();
 	private ResourceService resourceService;
 
 	@SuppressWarnings("rawtypes")
@@ -102,30 +101,30 @@ public class EntryTypeIterator {
 		List<Pair<Long, Class>> pairs = new ArrayList<>();
 		for (Long id : resourceService.findAllIdsByUsagePointId(usagePointId,
 				TimeConfiguration.class)) {
-			pairs.add(new ImmutablePair<Long, Class>(id,
+			pairs.add(new ImmutablePair<>(id,
 					TimeConfiguration.class));
 		}
 		for (Long id : resourceService.findAllIdsByUsagePointId(usagePointId,
 				MeterReading.class)) {
-			pairs.add(new ImmutablePair<Long, Class>(id, MeterReading.class));
+			pairs.add(new ImmutablePair<>(id, MeterReading.class));
 		}
 		for (Long id : resourceService.findAllIdsByUsagePointId(usagePointId,
 				IntervalBlock.class)) {
-			pairs.add(new ImmutablePair<Long, Class>(id, IntervalBlock.class));
+			pairs.add(new ImmutablePair<>(id, IntervalBlock.class));
 		}
 		for (Long id : resourceService.findAllIdsByUsagePointId(usagePointId,
 				ElectricPowerUsageSummary.class)) {
-			pairs.add(new ImmutablePair<Long, Class>(id,
+			pairs.add(new ImmutablePair<>(id,
 					ElectricPowerUsageSummary.class));
 		}
 		for (Long id : resourceService.findAllIdsByUsagePointId(usagePointId,
 				ElectricPowerQualitySummary.class)) {
-			pairs.add(new ImmutablePair<Long, Class>(id,
+			pairs.add(new ImmutablePair<>(id,
 					ElectricPowerQualitySummary.class));
 		}
 		for (Long id : resourceService.findAllIdsByUsagePointId(usagePointId,
 				ReadingType.class)) {
-			pairs.add(new ImmutablePair<Long, Class>(id, ReadingType.class));
+			pairs.add(new ImmutablePair<>(id, ReadingType.class));
 		}
 		childIds = pairs.iterator();
 	}

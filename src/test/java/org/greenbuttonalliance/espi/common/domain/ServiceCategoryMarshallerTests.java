@@ -32,7 +32,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.xml.sax.SAXException;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.transform.stream.StreamResult;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,7 +46,7 @@ public class ServiceCategoryMarshallerTests extends XMLTest {
 	@Qualifier("atomMarshaller")
 	private Jaxb2Marshaller atomMarshaller;
 
-	private String newXML() throws DatatypeConfigurationException {
+	private String newXML() {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		atomMarshaller.marshal(EspiFactory.newServiceCategory(),
 				new StreamResult(os));
@@ -55,14 +54,12 @@ public class ServiceCategoryMarshallerTests extends XMLTest {
 	}
 
 	@Test
-	public void serviceCategory() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException {
+	public void serviceCategory() throws SAXException, IOException, XpathException {
 		assertXpathExists("/espi:ServiceCategory", newXML());
 	}
 
 	@Test
-	public void kind() throws SAXException, IOException, XpathException,
-			DatatypeConfigurationException {
+	public void kind() throws SAXException, IOException, XpathException {
 		assertXpathExists("/espi:ServiceCategory/espi:kind", newXML());
 	}
 }

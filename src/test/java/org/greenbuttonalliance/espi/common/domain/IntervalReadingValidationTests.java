@@ -32,7 +32,7 @@ import static org.junit.Assert.assertTrue;
 public class IntervalReadingValidationTests extends XMLTest {
 
 	@Test
-	public void isValid() throws Exception {
+	public void isValid() {
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
 

@@ -32,7 +32,7 @@ import static org.junit.Assert.assertTrue;
 public class EntryLookupTableTests {
 
 	@Test
-	public void getUpEntry_returnsEntryForUpLink() throws Exception {
+	public void getUpEntry_returnsEntryForUpLink() {
 		EntryType parentEntry = new EntryType();
 		EntryType childEntry = new EntryType();
 
@@ -51,8 +51,7 @@ public class EntryLookupTableTests {
 	}
 
 	@Test
-	public void getRelatedEntries_returnsEntriesForRelatedLinks()
-			throws Exception {
+	public void getRelatedEntries_returnsEntriesForRelatedLinks() {
 		List<EntryType> entries = new ArrayList<>();
 
 		EntryType entry = newEntry("entry");

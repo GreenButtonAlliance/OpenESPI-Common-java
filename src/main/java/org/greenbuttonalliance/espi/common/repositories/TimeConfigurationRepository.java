@@ -25,12 +25,12 @@ import java.util.UUID;
 
 public interface TimeConfigurationRepository {
 
-	public void deleteById(Long id);
+	void deleteById(Long id);
 
-	public TimeConfiguration findById(Long timeConfigurationId);
+	TimeConfiguration findById(Long timeConfigurationId);
 
-	public TimeConfiguration findByUUID(UUID uuid);
+	TimeConfiguration findByUUID(UUID uuid);
 
-	public void persist(TimeConfiguration timeConfiguration);
+	void persist(TimeConfiguration timeConfiguration);
 
 }

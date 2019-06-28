@@ -38,8 +38,7 @@ public interface ApplicationInformationService {
 	 * Find an ApplicationInformation resource by using it's clientId.
 	 * 
 	 * @param clientId
-	 *            String uniquely identifying a specific
-	 *            ApplicationInformation.clientId
+	 *            String uniquely identifying a specific ApplicationInformation.clientId
 	 * @return an ApplicationInformation resource
 	 */
 	public ApplicationInformation findByClientId(String clientId);
@@ -47,8 +46,7 @@ public interface ApplicationInformationService {
 	/**
 	 * Find an Application Information resource by using it's dataCustodianId.
 	 * 
-	 * @param String
-	 *            dataCustodianClientId
+	 * @param dataCustodianClientId
 	 * @return an ApplicationInformation resource
 	 */
 	public ApplicationInformation findByDataCustodianClientId(

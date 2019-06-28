@@ -36,7 +36,7 @@ public class EspiMarshaller {
 
 	@SuppressWarnings("unchecked")
 	// TODO: make RetailCustomer Inherit from Identified Object to fix @Suppress
-	public static <T extends Object> JAXBElement<T> unmarshal(String xml)
+	public static <T> JAXBElement<T> unmarshal(String xml)
 			throws JAXBException {
 		return (JAXBElement<T>) getUnmarshaller().unmarshal(
 				new ByteArrayInputStream(xml.getBytes()));

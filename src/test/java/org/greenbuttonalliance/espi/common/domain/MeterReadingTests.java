@@ -38,8 +38,7 @@ import static org.junit.Assert.assertEquals;
 public class MeterReadingTests extends XMLTest {
 
 	@Test
-	public void unmarshalsMeterReading() throws SAXException, IOException,
-			XpathException, FeedException, JAXBException {
+	public void unmarshalsMeterReading() throws JAXBException {
 		final String XML_INPUT = "<MeterReading xmlns=\"http://naesb.org/espi\"/>";
 
 		assertEquals(MeterReading.class, EspiMarshaller.unmarshal(XML_INPUT)

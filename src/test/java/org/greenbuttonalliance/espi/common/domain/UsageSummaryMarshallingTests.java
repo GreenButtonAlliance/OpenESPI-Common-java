@@ -27,8 +27,8 @@ import javax.xml.bind.JAXBException;
 
 import static org.junit.Assert.assertEquals;
 
-public class ElectricPowerUsageSummaryMarshallingTests {
-	static final String XML_INPUT = "<ElectricPowerUsageSummary xmlns=\"http://naesb.org/espi\">"
+public class UsageSummaryMarshallingTests {
+	static final String XML_INPUT = "<UsageSummary xmlns=\"http://naesb.org/espi\">"
 			+ "<billLastPeriod>1</billLastPeriod>"
 			+ "<billToDate>2</billToDate>"
 			+ "<costAdditionalLastPeriod>3</costAdditionalLastPeriod>"
@@ -97,121 +97,120 @@ public class ElectricPowerUsageSummaryMarshallingTests {
 			+ "<uom>Uom</uom>"
 			+ "<value>93018</value>"
 			+ "</ratchetDemand>"
-			+ "</ElectricPowerUsageSummary>";
+			+ "</UsageSummary>";
 
-	private ElectricPowerUsageSummary electricPowerUsageSummary;
+	private UsageSummary usageSummary;
 
 	@Before
 	public void before() throws JAXBException {
-		electricPowerUsageSummary = EspiMarshaller
-				.<ElectricPowerUsageSummary> unmarshal(XML_INPUT).getValue();
+		usageSummary = EspiMarshaller.<UsageSummary> unmarshal(XML_INPUT).getValue();
 	}
 
 	@Test
-	public void unmarshalsElectricPowerUsageSummary() {
-		assertEquals(ElectricPowerUsageSummary.class,
-				electricPowerUsageSummary.getClass());
+	public void unmarshalsUsageSummary() {
+		assertEquals(UsageSummary.class,
+				usageSummary.getClass());
 	}
 
 	@Test
 	public void unmarshal_setsBillLastPeriod() {
-		assertEquals(1L, electricPowerUsageSummary.getBillLastPeriod()
+		assertEquals(1L, usageSummary.getBillLastPeriod()
 				.longValue());
 	}
 
 	@Test
 	public void unmarshal_setsBillToDate() {
-		assertEquals(2L, electricPowerUsageSummary.getBillToDate().longValue());
+		assertEquals(2L, usageSummary.getBillToDate().longValue());
 	}
 
 	@Test
 	public void unmarshal_setsCostAdditionalLastPeriod() {
-		assertEquals(3L, electricPowerUsageSummary
+		assertEquals(3L, usageSummary
 				.getCostAdditionalLastPeriod().longValue());
 	}
 
 	@Test
 	public void unmarshal_setsCurrency() {
-		assertEquals("currency", electricPowerUsageSummary.getCurrency());
+		assertEquals("currency", usageSummary.getCurrency());
 	}
 
 	@Test
 	public void unmarshal_setsQualityOfReading() {
 		assertEquals("qualityOfReading",
-				electricPowerUsageSummary.getQualityOfReading());
+				usageSummary.getQualityOfReading());
 	}
 
 	@Test
 	public void unmarshal_setsStatusTimeStamp() {
-		assertEquals(4L, electricPowerUsageSummary.getStatusTimeStamp());
+		assertEquals(4L, usageSummary.getStatusTimeStamp());
 	}
 
 	@Test
 	public void unmarshal_setsRatchetDemandPeriod() {
-		assertEquals(1119600L, electricPowerUsageSummary
+		assertEquals(1119600L, usageSummary
 				.getRatchetDemandPeriod().getDuration().longValue());
-		assertEquals(1119601L, electricPowerUsageSummary
+		assertEquals(1119601L, usageSummary
 				.getRatchetDemandPeriod().getStart().longValue());
 	}
 
 	@Test
 	public void unmarshal_setsBillingPeriod() {
-		assertEquals(1119602L, electricPowerUsageSummary.getBillingPeriod()
+		assertEquals(1119602L, usageSummary.getBillingPeriod()
 				.getDuration().longValue());
-		assertEquals(1119603L, electricPowerUsageSummary.getBillingPeriod()
+		assertEquals(1119603L, usageSummary.getBillingPeriod()
 				.getStart().longValue());
 	}
 
 	@Test
 	public void unmarshal_setsCurrentBillingPeriodOverAllConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getCurrentBillingPeriodOverAllConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsCurrentDayLastYearNetConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getCurrentDayLastYearNetConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsCurrentDayNetConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getCurrentDayNetConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsCurrentDayOverallConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getCurrentDayOverallConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsPeakDemand() {
-		assertSummaryMeasurement(electricPowerUsageSummary.getPeakDemand());
+		assertSummaryMeasurement(usageSummary.getPeakDemand());
 	}
 
 	@Test
 	public void unmarshal_setsPreviousDayLastYearOverallConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getPreviousDayLastYearOverallConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsPreviousDayNetConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getPreviousDayNetConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsPreviousDayOverallConsumption() {
-		assertSummaryMeasurement(electricPowerUsageSummary
+		assertSummaryMeasurement(usageSummary
 				.getPreviousDayOverallConsumption());
 	}
 
 	@Test
 	public void unmarshal_setsRatchetDemand() {
-		assertSummaryMeasurement(electricPowerUsageSummary.getRatchetDemand());
+		assertSummaryMeasurement(usageSummary.getRatchetDemand());
 	}
 
 	private void assertSummaryMeasurement(SummaryMeasurement sm) {

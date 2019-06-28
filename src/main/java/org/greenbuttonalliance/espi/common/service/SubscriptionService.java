@@ -36,23 +36,23 @@ public interface SubscriptionService {
 
 	EntryTypeIterator findEntriesByHashedId(String hashedId);
 
-	public void setRepository(SubscriptionRepository subscriptionRepository);
+	void setRepository(SubscriptionRepository subscriptionRepository);
 
-	public EntryType findEntryType(Long retailCustomerId, Long subscriptionId);
+	EntryType findEntryType(Long retailCustomerId, Long subscriptionId);
 
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
+	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
 
-	public void merge(Subscription subscription);
+	void merge(Subscription subscription);
 
-	public Subscription findById(Long subscriptionId);
+	Subscription findById(Long subscriptionId);
 
-	public List<Long> findUsagePointIds(Long subscriptionId);
+	List<Long> findUsagePointIds(Long subscriptionId);
 
-	public Subscription findByAuthorizationId(Long id);
+	Subscription findByAuthorizationId(Long id);
 
-	public Subscription addUsagePoint(Subscription subscription,
-			UsagePoint usagePoint);
+	Subscription addUsagePoint(Subscription subscription,
+							   UsagePoint usagePoint);
 
-	public Long findRetailCustomerId(Long subscriptionId, Long usagePointId);
+	Long findRetailCustomerId(Long subscriptionId, Long usagePointId);
 
 }

@@ -30,6 +30,7 @@ package org.greenbuttonalliance.espi.common.models.atom;
 import javax.persistence.Embeddable;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 
 /**
@@ -118,13 +119,23 @@ public class LinkType implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         LinkType linkType = (LinkType)o;
 
-        if (href != null ? !href.equals(linkType.href) : linkType.href != null) return false;
-        if (rel != null ? !rel.equals(linkType.rel) : linkType.rel != null) return false;
+        if (!Objects.equals(href, linkType.href)) {
+            return false;
+        }
+
+        if (!Objects.equals(rel, linkType.rel)) {
+            return false;
+        }
 
         return true;
     }

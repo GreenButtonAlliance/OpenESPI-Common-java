@@ -76,7 +76,7 @@ import java.util.Map;
 		"applicationInformation", "authorization", "subscription",
 		"retailCustomer", "content" })
 @XmlSeeAlso({ MeterReading.class, UsagePoint.class,
-		ElectricPowerUsageSummary.class, TimeConfiguration.class,
+		ElectricPowerUsageSummary.class, UsageSummary.class, TimeConfiguration.class,
 		ApplicationInformation.class, Authorization.class, Subscription.class,
 		ElectricPowerQualitySummary.class, IntervalBlock.class,
 		ReadingType.class, ApplicationInformation.class, Authorization.class,
@@ -98,6 +98,10 @@ public class ContentType {
 	@XmlElementRefs({ @XmlElementRef(name = "ElectricPowerUsageSummary", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false), })
 	@XmlAnyElement(lax = true)
 	protected ElectricPowerUsageSummary electricPowerUsageSummary;
+
+	@XmlElementRefs({ @XmlElementRef(name = "UsageSummary", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false), })
+	@XmlAnyElement(lax = true)
+	protected UsageSummary usageSummary;
 
 	@XmlElementRefs({ @XmlElementRef(name = "ElectricPowerQualitySummary", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false), })
 	@XmlAnyElement(lax = true)
@@ -331,6 +335,15 @@ public class ContentType {
 		this.electricPowerUsageSummary = electricPowerUsageSummary;
 	}
 
+	public UsageSummary getUsageSummary() {
+		return usageSummary;
+	}
+
+	public void setUsageSummary(
+			UsageSummary UsageSummary) {
+		this.usageSummary = UsageSummary;
+	}
+
 	public ElectricPowerQualitySummary getElectricPowerQualitySummary() {
 		return electricPowerQualitySummary;
 	}
@@ -365,6 +378,8 @@ public class ContentType {
 			return getLocalTimeParameters();
 		} else if (getElectricPowerUsageSummary() != null) {
 			return getElectricPowerUsageSummary();
+		} else if (getUsageSummary() != null) {
+			return getUsageSummary();
 		} else if (getElectricPowerQualitySummary() != null) {
 			return getElectricPowerQualitySummary();
 		} else if (getReadingType() != null) {
@@ -384,8 +399,7 @@ public class ContentType {
 		if (getResource() != null) {
 			resources.add(getResource());
 		} else {
-			for (IntervalBlock intervalBlock : getIntervalBlocks())
-				resources.add(intervalBlock);
+			resources.addAll(getIntervalBlocks());
 		}
 		return resources;
 	}
@@ -401,6 +415,8 @@ public class ContentType {
 			setIntervalBlocks(Lists.newArrayList((IntervalBlock) resource));
 		} else if (resource instanceof ElectricPowerUsageSummary) {
 			setElectricPowerUsageSummary((ElectricPowerUsageSummary) resource);
+		} else if (resource instanceof UsageSummary) {
+			setUsageSummary((UsageSummary) resource);
 		} else if (resource instanceof ElectricPowerQualitySummary) {
 			setElectricPowerQualitySummary((ElectricPowerQualitySummary) resource);
 		} else if (resource instanceof ReadingType) {
@@ -454,6 +470,11 @@ public class ContentType {
 		if (this.getElectricPowerUsageSummary() != null) {
 			if (ElectricPowerUsageSummary.class.equals(resourceClass)) {
 				return this.getElectricPowerUsageSummary().getId();
+			}
+		}
+		if (this.getUsageSummary() != null) {
+			if (UsageSummary.class.equals(resourceClass)) {
+				return this.getUsageSummary().getId();
 			}
 		}
 		if (this.getIntervalBlocks() != null) {
@@ -517,21 +538,16 @@ public class ContentType {
 
 			UsagePoint usagePoint = this.getElectricPowerQualitySummary()
 					.getUsagePoint();
-			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+
+			RetailCustomer retailCustomer = getRetailCustomer(usagePoint);
 
 			if (subscriptionId != 0L) {
-				result = result + "/Subscription/" + subscriptionId;
-				if (usagePoint != null) {
-					result = result + "/UsagePoint/" + usagePoint.getId();
-				}
+
+				result = getSubscriptionUsagePointIds(subscriptionId, result, usagePoint);
+
 			} else {
-				if (retailCustomer != null) {
-					result = result + "/RetailCustomer/"
-							+ retailCustomer.getId();
-					if (usagePoint != null) {
-						result = result + "/UsagePoint/" + usagePoint.getId();
-					}
-				}
+
+				result = getRetailCustomerUsagePointIds(result, usagePoint, retailCustomer);
 			}
 
 			result = result + "/ElectricPowerQualitySummary/"
@@ -541,54 +557,58 @@ public class ContentType {
 		if (this.getElectricPowerUsageSummary() != null) {
 			UsagePoint usagePoint = this.getElectricPowerUsageSummary()
 					.getUsagePoint();
-			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+
+			RetailCustomer retailCustomer = getRetailCustomer(usagePoint);
+
 			if (subscriptionId != 0L) {
-				result = result + "/Subscription/" + subscriptionId;
-				if (usagePoint != null) {
-					result = result + "/UsagePoint/" + usagePoint.getId();
-				}
+
+				result = getSubscriptionUsagePointIds(subscriptionId, result, usagePoint);
+
 			} else {
-				if (retailCustomer != null) {
-					result = result + "/RetailCustomer/"
-							+ retailCustomer.getId();
-					if (usagePoint != null) {
-						result = result + "/UsagePoint/" + usagePoint.getId();
-					}
-				}
+
+				result = getRetailCustomerUsagePointIds(result, usagePoint, retailCustomer);
 			}
 
 			result = result + "/ElectricPowerUsageSummary/"
 					+ this.getElectricPowerUsageSummary().getId();
 		}
 
+		if (this.getUsageSummary() != null) {
+			UsagePoint usagePoint = this.getUsageSummary()
+					.getUsagePoint();
+
+			RetailCustomer retailCustomer = getRetailCustomer(usagePoint);
+
+			if (subscriptionId != 0L) {
+
+				result = getSubscriptionUsagePointIds(subscriptionId, result, usagePoint);
+
+			} else {
+
+				result = getRetailCustomerUsagePointIds(result, usagePoint, retailCustomer);
+			}
+
+			result = result + "/UsageSummary/"
+					+ this.getUsageSummary().getId();
+		}
+
 		if (this.getIntervalBlocks() != null) {
 			MeterReading meterReading = this.getIntervalBlocks().get(0)
 					.getMeterReading();
 			UsagePoint usagePoint = meterReading.getUsagePoint();
-			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+
+			RetailCustomer retailCustomer = getRetailCustomer(usagePoint);
 
 			if (subscriptionId != 0L) {
 				result = result + "/Subscription/" + subscriptionId;
-				if (usagePoint != null) {
-					result = result + "/UsagePoint/" + usagePoint.getId();
+				result = result + "/UsagePoint/" + usagePoint.getId();
+				result = result + "/MeterReading/" + meterReading.getId();
 
-					if (meterReading != null) {
-						result = result + "/MeterReading/"
-								+ meterReading.getId();
-					}
-				}
 			} else {
 				if (retailCustomer != null) {
-					result = result + "/RetailCustomer/"
-							+ retailCustomer.getId();
-					if (usagePoint != null) {
-						result = result + "/UsagePoint/" + usagePoint.getId();
-
-						if (meterReading != null) {
-							result = result + "/MeterReading/"
-									+ meterReading.getId();
-						}
-					}
+					result = result + "/RetailCustomer/" + retailCustomer.getId();
+					result = result + "/UsagePoint/" + usagePoint.getId();
+					result = result + "/MeterReading/" + meterReading.getId();
 				}
 			}
 
@@ -606,22 +626,18 @@ public class ContentType {
 		if (this.getMeterReading() != null) {
 
 			UsagePoint usagePoint = this.getMeterReading().getUsagePoint();
-			RetailCustomer retailCustomer = usagePoint.getRetailCustomer();
+
+			RetailCustomer retailCustomer = getRetailCustomer(usagePoint);
 
 			if (subscriptionId != 0L) {
-				result = result + "/Subscription/" + subscriptionId;
-				if (usagePoint != null) {
-					result = result + "/UsagePoint/" + usagePoint.getId();
-				}
+
+				result = getSubscriptionUsagePointIds(subscriptionId, result, usagePoint);
+
 			} else {
-				if (retailCustomer != null) {
-					result = result + "/RetailCustomer/"
-							+ retailCustomer.getId();
-					if (usagePoint != null) {
-						result = result + "/UsagePoint/" + usagePoint.getId();
-					}
-				}
+
+				result = getRetailCustomerUsagePointIds(result, usagePoint, retailCustomer);
 			}
+
 			result = result + "/MeterReading/" + meterReading.getId();
 		}
 
@@ -639,8 +655,7 @@ public class ContentType {
 		}
 
 		if (this.getUsagePoint() != null) {
-			RetailCustomer retailCustomer = this.getUsagePoint()
-					.getRetailCustomer();
+			RetailCustomer retailCustomer = getRetailCustomer(this.getUsagePoint());
 			if (subscriptionId != 0L) {
 				result = result + "/Subscription/" + subscriptionId;
 
@@ -655,6 +670,29 @@ public class ContentType {
 
 		return result;
 
+	}
+
+	private String getRetailCustomerUsagePointIds(String result, UsagePoint usagePoint, RetailCustomer retailCustomer) {
+		if (retailCustomer != null) {
+			result = result + "/RetailCustomer/"
+					+ retailCustomer.getId();
+			if (usagePoint != null) {
+				result = result + "/UsagePoint/" + usagePoint.getId();
+			}
+		}
+		return result;
+	}
+
+	private String getSubscriptionUsagePointIds(Long subscriptionId, String result, UsagePoint usagePoint) {
+		result = result + "/Subscription/" + subscriptionId;
+		if (usagePoint != null) {
+			result = result + "/UsagePoint/" + usagePoint.getId();
+		}
+		return result;
+	}
+
+	private RetailCustomer getRetailCustomer(UsagePoint usagePoint) {
+		return usagePoint.getRetailCustomer();
 	}
 
 	public List<String> buildRelHref(Long subscriptionId, String hrefFragment) {
@@ -684,18 +722,14 @@ public class ContentType {
 			// floating resource, we don't have full XPath information
 			//
 			if (subscriptionId != 0L) {
-				temp = temp + "/Subscription/" + subscriptionId;
-				if (usagePoint != null) {
-					temp = temp + "/UsagePoint/" + usagePoint.getId();
-				}
+
+				temp = getSubscriptionUsagePointIds(subscriptionId, temp, usagePoint);
+
 			} else {
-				if (retailCustomer != null) {
-					temp = temp + "/RetailCustomer/" + retailCustomer.getId();
-					if (usagePoint != null) {
-						temp = temp + "/UsagePoint/" + usagePoint.getId();
-					}
-				}
+
+				temp = getRetailCustomerUsagePointIds(temp, usagePoint, retailCustomer);
 			}
+
 			temp = temp + "/MeterReading/" + meterReading.getId();
 
 			result.add(temp + "/IntervalBlock");
@@ -713,8 +747,10 @@ public class ContentType {
 			retailCustomer = this.getUsagePoint().getRetailCustomer();
 			List<ElectricPowerQualitySummary> qualityList = this
 					.getUsagePoint().getElectricPowerQualitySummaries();
-			List<ElectricPowerUsageSummary> usageList = this.getUsagePoint()
+			List<ElectricPowerUsageSummary> electricPowerSummaryList = this.getUsagePoint()
 					.getElectricPowerUsageSummaries();
+			List<UsageSummary> usageSummaryList = this.getUsagePoint()
+					.getUsageSummaries();
 			TimeConfiguration timeConfiguration = this.getUsagePoint()
 					.getLocalTimeParameters();
 			String temp = hrefFragment;
@@ -738,8 +774,10 @@ public class ContentType {
 			result.add(temp + "/MeterReading");
 			if (!(qualityList.isEmpty()))
 				result.add(temp + "/ElectricPowerQualitySummary");
-			if (!(usageList.isEmpty()))
+			if (!(electricPowerSummaryList.isEmpty()))
 				result.add(temp + "/ElectricPowerUsageSummary");
+			if (!(usageSummaryList.isEmpty()))
+				result.add(temp + "/UsageSummary");
 			// for LocalTimeParameters - make it a ROOT access
 			//
 			if (timeConfiguration != null) {

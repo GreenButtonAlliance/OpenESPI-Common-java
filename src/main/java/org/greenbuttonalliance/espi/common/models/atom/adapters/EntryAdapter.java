@@ -28,12 +28,12 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 public class EntryAdapter extends XmlAdapter<JAXBElement<EntryType>, EntryType> {
 	@Override
 	public EntryType unmarshal(JAXBElement<EntryType> v) throws Exception {
-		return (EntryType) v.getValue();
+		return v.getValue();
 	}
 
 	@Override
 	public JAXBElement<EntryType> marshal(EntryType v) throws Exception {
-		return new JAXBElement<EntryType>(ObjectFactory.Entry_QNAME,
+		return new JAXBElement<>(ObjectFactory.Entry_QNAME,
 				EntryType.class, v);
 	}
 }

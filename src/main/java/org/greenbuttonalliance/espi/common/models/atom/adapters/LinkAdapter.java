@@ -28,12 +28,12 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 public class LinkAdapter extends XmlAdapter<JAXBElement<LinkType>, LinkType> {
 	@Override
 	public LinkType unmarshal(JAXBElement<LinkType> v) throws Exception {
-		return (LinkType) v.getValue();
+		return v.getValue();
 	}
 
 	@Override
 	public JAXBElement<LinkType> marshal(LinkType v) throws Exception {
-		return new JAXBElement<LinkType>(ObjectFactory.SourceTypeLink_QNAME,
+		return new JAXBElement<>(ObjectFactory.SourceTypeLink_QNAME,
 				LinkType.class, v);
 	}
 }

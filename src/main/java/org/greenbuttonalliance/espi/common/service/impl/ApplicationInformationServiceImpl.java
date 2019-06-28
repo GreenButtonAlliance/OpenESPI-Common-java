@@ -74,7 +74,7 @@ public class ApplicationInformationServiceImpl implements
 					.getContent().getApplicationInformation();
 		} catch (Exception e) {
 
-		}
+ 		}
 		return applicationInformation;
 	}
 

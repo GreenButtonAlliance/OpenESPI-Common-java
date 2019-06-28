@@ -39,11 +39,11 @@ public interface RetailCustomerService extends UserDetailsService {
 
 	RetailCustomer findById(String retailCustomerId);
 
-	public void add(RetailCustomer retailCustomer);
+	void add(RetailCustomer retailCustomer);
 
-	public void delete(RetailCustomer retailCustomer);
+	void delete(RetailCustomer retailCustomer);
 
-	public RetailCustomer importResource(InputStream stream);
+	RetailCustomer importResource(InputStream stream);
 
 	Subscription associateByUUID(Long retailCustomerId, UUID uuId);
 

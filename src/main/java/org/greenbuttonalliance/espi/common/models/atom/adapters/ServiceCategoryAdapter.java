@@ -29,7 +29,7 @@ public class ServiceCategoryAdapter extends
 	@Override
 	public ServiceCategory unmarshal(JAXBElement<ServiceCategory> v)
 			throws Exception {
-		return (ServiceCategory) v.getValue();
+		return v.getValue();
 	}
 
 	@Override

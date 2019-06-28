@@ -32,12 +32,12 @@ import java.io.InputStream;
  */
 public interface MeterReadingService {
 
-	public void setMeterReadingRepository(
+	void setMeterReadingRepository(
 			MeterReadingRepository meterReadingRepository);
 
-	public MeterReading findById(Long retailCustomerId, Long usagePointId,
-			Long meterReadingId);
+	MeterReading findById(Long retailCustomerId, Long usagePointId,
+						  Long meterReadingId);
 
-	public MeterReading importResource(InputStream stream);
+	MeterReading importResource(InputStream stream);
 
 }

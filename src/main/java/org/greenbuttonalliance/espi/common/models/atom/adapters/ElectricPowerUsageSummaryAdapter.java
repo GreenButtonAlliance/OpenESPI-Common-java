@@ -31,7 +31,7 @@ public class ElectricPowerUsageSummaryAdapter
 	@Override
 	public ElectricPowerUsageSummary unmarshal(
 			JAXBElement<ElectricPowerUsageSummary> v) throws Exception {
-		return (ElectricPowerUsageSummary) v.getValue();
+		return v.getValue();
 	}
 
 	@Override

@@ -36,7 +36,7 @@ import static org.junit.Assert.*;
 public class ApplicationInformationTests {
 
 	@Test
-	public void isValid() throws Exception {
+	public void isValid() {
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
 
@@ -50,7 +50,7 @@ public class ApplicationInformationTests {
 	}
 
 	@Test
-	public void isInvalid() throws Exception {
+	public void isInvalid() {
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
 

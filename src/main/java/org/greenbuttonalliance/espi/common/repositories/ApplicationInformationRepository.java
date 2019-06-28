@@ -26,21 +26,21 @@ import java.util.UUID;
 
 public interface ApplicationInformationRepository {
 
-    public void deleteById(Long id);
+    void deleteById(Long id);
 
-    public List<ApplicationInformation> findByKind(String kind);
+    List<ApplicationInformation> findByKind(String kind);
 
-    public List<ApplicationInformation> findAll();
+    List<ApplicationInformation> findAll();
 
-    public List<Long> findAllIds();
+    List<Long> findAllIds();
 
-    public ApplicationInformation findByClientId(String clientId);
+    ApplicationInformation findByClientId(String clientId);
 
     ApplicationInformation findByDataCustodianClientId(String dataCustodianId);
 
-    public ApplicationInformation findById(Long applicationInformationId);
+    ApplicationInformation findById(Long applicationInformationId);
 
-    public void persist(ApplicationInformation applicationInformation);
+    void persist(ApplicationInformation applicationInformation);
 
 	ApplicationInformation findByUUID(UUID uuid);
 }

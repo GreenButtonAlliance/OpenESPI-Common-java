@@ -19,7 +19,6 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import com.sun.syndication.io.FeedException;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +29,6 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStreamReader;
 
@@ -55,7 +53,7 @@ public class BatchListUnmarshallerTest {
 	private BatchList batchList;
 
 	@Before
-	public void before() throws JAXBException, FeedException {
+	public void before() {
 		batchList = (BatchList) marshaller.unmarshal(new StreamSource(
 				new InputStreamReader(IOUtils.toInputStream(XML_INPUT))));
 	}

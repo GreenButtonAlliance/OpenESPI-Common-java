@@ -34,7 +34,7 @@ import static org.hamcrest.Matchers.is;
 public class ElectricPowerUsageSummaryValidationTests {
 
 	@Test
-	public void isValid() throws Exception {
+	public void isValid() {
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
 

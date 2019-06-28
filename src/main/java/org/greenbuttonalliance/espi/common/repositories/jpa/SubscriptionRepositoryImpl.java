@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -95,9 +94,8 @@ public class SubscriptionRepositoryImpl implements SubscriptionRepository {
 	public void deleteById(Long id) {
 		Subscription subscription = findById(id);
 		List<UsagePoint> ups = subscription.getUsagePoints();
-		Iterator<UsagePoint> it = ups.iterator();
-		while (it.hasNext()) {
-			UsagePoint up = it.next();
+
+		for (UsagePoint up : ups) {
 			up.removeSubscription(subscription);
 			em.persist(em.contains(up) ? up : em.merge(up));
 		}

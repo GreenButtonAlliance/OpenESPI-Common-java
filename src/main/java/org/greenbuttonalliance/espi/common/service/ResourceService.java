@@ -39,13 +39,13 @@ public interface ResourceService {
 
 	void flush();
 
-	public void setConfigurations(Map<String, String> params);
+	void setConfigurations(Map<String, String> params);
 
-	public void setConfiguration(String key, String value);
+	void setConfiguration(String key, String value);
 
-	public Map<String, String> getConfigurations();
+	Map<String, String> getConfigurations();
 
-	public String getConfiguration(String key);
+	String getConfiguration(String key);
 
 	List<IdentifiedObject> findByAllParentsHref(String relatedHref,
 			Linkable linkable);

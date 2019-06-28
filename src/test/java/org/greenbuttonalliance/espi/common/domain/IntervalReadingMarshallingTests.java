@@ -65,7 +65,7 @@ public class IntervalReadingMarshallingTests {
 	@Test
 	public void unmarshal_setsCost() {
 		assertEquals(100L, intervalReading.getCost().longValue());
-	};
+	}
 
 	@Test
 	public void unmarshal_setsReadingQualities() {
@@ -77,17 +77,17 @@ public class IntervalReadingMarshallingTests {
 				.getQuality());
 		assertEquals(intervalReading, intervalReading.getReadingQualities()
 				.get(1).getIntervalReading());
-	};
+	}
 
 	@Test
 	public void unmarshal_setsTimePeriod() {
 		assertEquals(3L, intervalReading.getTimePeriod().getDuration()
 				.longValue());
 		assertEquals(4L, intervalReading.getTimePeriod().getStart().longValue());
-	};
+	}
 
 	@Test
 	public void unmarshal_setsValue() {
 		assertEquals(6L, intervalReading.getValue().longValue());
-	};
+	}
 }

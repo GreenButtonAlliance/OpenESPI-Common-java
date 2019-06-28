@@ -32,7 +32,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xml.sax.SAXException;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.transform.stream.StreamResult;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,7 +46,7 @@ public class UsagePointMarshallerTests extends XMLTest {
 	@Qualifier("atomMarshaller")
 	private Jaxb2Marshaller atomMarshaller;
 
-	private String newXML() throws DatatypeConfigurationException {
+	private String newXML() {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		atomMarshaller.marshal(EspiFactory.newUsagePoint(),
 				new StreamResult(os));
@@ -55,40 +54,34 @@ public class UsagePointMarshallerTests extends XMLTest {
 	}
 
 	@Test
-	public void UsagePoint() throws SAXException, IOException, XpathException,
-			DatatypeConfigurationException {
+	public void UsagePoint() throws SAXException, IOException, XpathException {
 		assertXpathExists("/espi:UsagePoint", newXML());
 	}
 
 	@Test
-	public void roleFlags() throws SAXException, IOException, XpathException,
-			DatatypeConfigurationException {
+	public void roleFlags() throws SAXException, IOException, XpathException {
 		assertXpathValue("726F6C6520666C616773",
 				"/espi:UsagePoint/espi:roleFlags", newXML());
 	}
 
 	@Test
-	public void serviceCategory() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException {
+	public void serviceCategory() throws SAXException, IOException, XpathException {
 		assertXpathExists("/espi:UsagePoint/espi:ServiceCategory", newXML());
 	}
 
 	@Test
-	public void status() throws SAXException, IOException, XpathException,
-			DatatypeConfigurationException {
+	public void status() throws SAXException, IOException, XpathException {
 		assertXpathValue("5", "espi:UsagePoint/espi:status", newXML());
 	}
 
 	@Test
-	public void ServiceDeliveryPoint() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException {
+	public void ServiceDeliveryPoint() throws SAXException, IOException, XpathException {
 		assertXpathExists("/espi:UsagePoint/espi:ServiceDeliveryPoint",
 				newXML());
 	}
 
 	@Test
-	public void ServiceCategory_kind() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException {
+	public void ServiceCategory_kind() throws SAXException, IOException, XpathException {
 		assertXpathValue("0", "espi:UsagePoint/espi:ServiceCategory/espi:kind",
 				newXML());
 	}

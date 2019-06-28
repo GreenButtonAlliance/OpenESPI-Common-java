@@ -46,7 +46,7 @@ public class BatchListRepositoryImplTest {
 	@Autowired
 	BatchListRepository repository;
 
-	public BatchList batchList;
+	private BatchList batchList;
 
 	@Before
 	public void setup() {
@@ -55,7 +55,7 @@ public class BatchListRepositoryImplTest {
 	}
 
 	@Test
-	public void persist() throws Exception {
+	public void persist() {
 		assertNotNull(batchList.getId());
 	}
 

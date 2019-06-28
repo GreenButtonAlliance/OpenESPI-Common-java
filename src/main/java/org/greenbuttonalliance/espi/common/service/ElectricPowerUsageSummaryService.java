@@ -30,32 +30,32 @@ import java.util.UUID;
 
 public interface ElectricPowerUsageSummaryService {
 
-	public ElectricPowerUsageSummary findByUUID(UUID uuid);
+	ElectricPowerUsageSummary findByUUID(UUID uuid);
 
-	public List<ElectricPowerUsageSummary> findAllByUsagePoint(
+	List<ElectricPowerUsageSummary> findAllByUsagePoint(
 			UsagePoint usagePoint);
 
-	public String feedFor(
+	String feedFor(
 			List<ElectricPowerUsageSummary> electricPowerUsageSummarys);
 
-	public String entryFor(ElectricPowerUsageSummary electricPowerUsageSummary);
+	String entryFor(ElectricPowerUsageSummary electricPowerUsageSummary);
 
-	public void associateByUUID(UsagePoint usagePoint, UUID uuid);
+	void associateByUUID(UsagePoint usagePoint, UUID uuid);
 
-	public void persist(ElectricPowerUsageSummary electricPowerUsageSummary);
+	void persist(ElectricPowerUsageSummary electricPowerUsageSummary);
 
-	public ElectricPowerUsageSummary findById(Long electricPowerUsageSummaryId);
+	ElectricPowerUsageSummary findById(Long electricPowerUsageSummaryId);
 
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
-			Long electricPowerUsageSummaryId);
+	EntryType findEntryType(Long retailCustomerId, Long usagePointId,
+							Long electricPowerUsageSummaryId);
 
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
-			Long usagePointId);
+	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
+											Long usagePointId);
 
-	public void add(ElectricPowerUsageSummary electricPowerUsageSummary);
+	void add(ElectricPowerUsageSummary electricPowerUsageSummary);
 
-	public void delete(ElectricPowerUsageSummary electricPowerUsageSummary);
+	void delete(ElectricPowerUsageSummary electricPowerUsageSummary);
 
-	public ElectricPowerUsageSummary importResource(InputStream stream);
+	ElectricPowerUsageSummary importResource(InputStream stream);
 
 }

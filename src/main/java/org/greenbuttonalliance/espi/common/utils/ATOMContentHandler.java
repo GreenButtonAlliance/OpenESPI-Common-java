@@ -42,15 +42,15 @@ public class ATOMContentHandler extends XMLFilterImpl {
 	private UnmarshallerHandler unmarshallerHandler;
 	private Locator locator;
 	private NamespaceSupport namespaces = new NamespaceSupport();
-	private EntryProcessorService procssor;
-	private List<EntryType> entries = new ArrayList<EntryType>();
+	private EntryProcessorService entryProcessorService;
+	private List<EntryType> entries = new ArrayList<>();
 	private XMLGregorianCalendar minUpdated = null;
 	private XMLGregorianCalendar maxUpdated = null;
 
 	public ATOMContentHandler(JAXBContext context,
-			EntryProcessorService procssor) {
+			EntryProcessorService entryProcessorService) {
 		this.context = context;
-		this.procssor = procssor;
+		this.entryProcessorService = entryProcessorService;
 	}
 
 	public List<EntryType> getEntries() {
@@ -128,15 +128,14 @@ public class ATOMContentHandler extends XMLFilterImpl {
 				setContentHandler(new DefaultHandler());
 
 				if (localName.equals("entry")) {
-					JAXBElement<EntryType> result = null;
+					JAXBElement<EntryType> result;
 					try {
-						result = (JAXBElement<EntryType>) unmarshallerHandler
-								.getResult();
+						result = (JAXBElement<EntryType>) unmarshallerHandler.getResult();
 					} catch (JAXBException x) {
 						throw new SAXException("Unable to unmarshall <entry>",
 								x);
 					}
-					procssor.process(result.getValue());
+					entryProcessorService.process(result.getValue());
 
 					entries.add(result.getValue());
 
@@ -181,6 +180,6 @@ public class ATOMContentHandler extends XMLFilterImpl {
 
 	public void setEntryProcessorService(
 			EntryProcessorService entryProcessorService) {
-		this.procssor = entryProcessorService;
+		this.entryProcessorService = entryProcessorService;
 	}
 }

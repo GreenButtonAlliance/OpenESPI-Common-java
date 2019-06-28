@@ -31,7 +31,7 @@ public class ElectricPowerQualitySummaryAdapter
 	@Override
 	public ElectricPowerQualitySummary unmarshal(
 			JAXBElement<ElectricPowerQualitySummary> v) throws Exception {
-		return (ElectricPowerQualitySummary) v.getValue();
+		return v.getValue();
 	}
 
 	@Override

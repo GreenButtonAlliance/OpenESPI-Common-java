@@ -40,9 +40,8 @@ public class TimeConfigurationAdapter extends
 		if (v == null) {
 			return null;
 		}
-		JAXBElement<TimeConfiguration> element = new JAXBElement<>(
+		return new JAXBElement<>(
 				ObjectFactory.LocalTimeParameters_QNAME,
 				TimeConfiguration.class, v);
-		return element;
 	}
 }

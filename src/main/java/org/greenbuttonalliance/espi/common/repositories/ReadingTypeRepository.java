@@ -26,11 +26,11 @@ import java.util.UUID;
 
 public interface ReadingTypeRepository {
 
-	public void createOrReplaceByUUID(ReadingType readingType);
+	void createOrReplaceByUUID(ReadingType readingType);
 
-	public void deleteById(Long id);
+	void deleteById(Long id);
 
-	public List<Long> findAllIds();
+	List<Long> findAllIds();
 
 	ReadingType findById(Long readingTypeId);
 

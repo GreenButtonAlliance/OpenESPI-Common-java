@@ -146,7 +146,7 @@ public class ContentTypeTests {
 	public void setResources_givenIntervalBlocks() {
 		IntervalBlock intervalBlock = newIntervalBlock();
 		content.setResources(Lists
-				.<IdentifiedObject> newArrayList(intervalBlock));
+				.newArrayList(intervalBlock));
 
 		assertThat(content.getIntervalBlocks().get(0),
 				is(equalTo(intervalBlock)));
@@ -156,7 +156,7 @@ public class ContentTypeTests {
 	public void setResources_givenASingleResource() {
 		UsagePoint usagePoint = newSimpleUsagePoint();
 		List<IdentifiedObject> resources = Lists
-				.<IdentifiedObject> newArrayList(usagePoint);
+				.newArrayList(usagePoint);
 		content.setResources(resources);
 
 		assertThat(content.getUsagePoint(), is(equalTo(usagePoint)));

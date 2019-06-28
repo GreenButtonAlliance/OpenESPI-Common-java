@@ -30,8 +30,7 @@ public class GrantTypeAdapter extends
 
 	@Override
 	public GrantType unmarshal(JAXBElement<GrantType> v) throws Exception {
-		GrantType grantType = v.getValue();
-		return grantType;
+		return v.getValue();
 	}
 
 	@Override

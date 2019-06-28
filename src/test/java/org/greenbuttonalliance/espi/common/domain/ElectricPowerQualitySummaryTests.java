@@ -19,18 +19,12 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import com.sun.syndication.io.FeedException;
 import org.greenbuttonalliance.espi.common.atom.XMLTest;
-import org.greenbuttonalliance.espi.common.service.ExportService;
-import org.greenbuttonalliance.espi.common.service.ImportService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.xml.bind.JAXBException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -39,18 +33,9 @@ import static org.junit.Assert.assertEquals;
 public class ElectricPowerQualitySummaryTests extends XMLTest {
 
 	private ElectricPowerQualitySummary electricPowerQualitySummary;
-	private String xml;
-
-	@Autowired
-	private ExportService exportService;
-
-	@Autowired
-	private ImportService importService;
 
 	@Before
-	public void before() throws JAXBException, FeedException {
-
-		// importService.importData(stream, retailCustomerId);
+	public void before() {
 		electricPowerQualitySummary = new ElectricPowerQualitySummary();
 	}
 

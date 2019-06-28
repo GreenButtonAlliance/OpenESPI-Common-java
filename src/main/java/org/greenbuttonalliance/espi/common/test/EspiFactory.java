@@ -21,10 +21,8 @@ package org.greenbuttonalliance.espi.common.test;
 
 import org.greenbuttonalliance.espi.common.domain.*;
 import org.greenbuttonalliance.espi.common.models.atom.LinkType;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -70,8 +68,8 @@ public class EspiFactory {
 		usagePoint.setRetailCustomer(retailCustomer);
 		usagePoint.addMeterReading(newMeterReading());
 		usagePoint.addElectricPowerUsageSummary(newElectricPowerUsageSummary());
-		usagePoint
-				.addElectricPowerQualitySummary(newElectricPowerQualitySummary());
+		usagePoint.addUsageSummary(newUsageSummary());
+		usagePoint.addElectricPowerQualitySummary(newElectricPowerQualitySummary());
 		usagePoint.setLocalTimeParameters(newLocalTimeParameters());
 
 		usagePoint.getRelatedLinks().add(
@@ -80,6 +78,9 @@ public class EspiFactory {
 		usagePoint.getRelatedLinks().add(
 				new LinkType("related", usagePoint.getSelfHref()
 						+ "/ElectricPowerUsageSummary"));
+		usagePoint.getRelatedLinks().add(
+				new LinkType("related", usagePoint.getSelfHref()
+						+ "/UsageSummary"));
 		usagePoint.getRelatedLinks().add(
 				new LinkType("related", usagePoint.getSelfHref()
 						+ "/ElectricPowerQualitySummary"));
@@ -121,6 +122,10 @@ public class EspiFactory {
 
 	public static ElectricPowerUsageSummary newElectricPowerUsageSummaryWithUsagePoint() {
 		return newUsagePoint().getElectricPowerUsageSummaries().get(0);
+	}
+
+	public static UsageSummary newUsageSummaryWithUsagePoint() {
+		return newUsagePoint().getUsageSummaries().get(0);
 	}
 
 	public static ElectricPowerQualitySummary newElectricPowerQualitySummaryWithUsagePoint() {
@@ -264,37 +269,70 @@ public class EspiFactory {
 	}
 
 	public static ElectricPowerUsageSummary newElectricPowerUsageSummary() {
-		ElectricPowerUsageSummary summary = new ElectricPowerUsageSummary();
+		ElectricPowerUsageSummary electricPowerUsageSummary = new ElectricPowerUsageSummary();
 
-		summary.setUUID(UUID.randomUUID());
-		summary.setDescription("Usage Summary");
-		summary.setBillingPeriod(new DateTimeInterval(1119600L, 1119600L));
-		summary.setPublished(new GregorianCalendar(2012, 10, 24, 0, 0, 0));
-		summary.setUpdated(new GregorianCalendar(2012, 10, 24, 0, 0, 0));
-		summary.setBillLastPeriod(15303000L);
-		summary.setBillToDate(1135000L);
-		summary.setCostAdditionalLastPeriod(1346000L);
-		summary.setCurrency("840");
+		electricPowerUsageSummary.setUUID(UUID.randomUUID());
+		electricPowerUsageSummary.setDescription("Electric Power Usage Summary");
+		electricPowerUsageSummary.setBillingPeriod(new DateTimeInterval(1119600L, 1119600L));
+		electricPowerUsageSummary.setPublished(new GregorianCalendar(2012, 10, 24, 0, 0, 0));
+		electricPowerUsageSummary.setUpdated(new GregorianCalendar(2012, 10, 24, 0, 0, 0));
+		electricPowerUsageSummary.setBillLastPeriod(15303000L);
+		electricPowerUsageSummary.setBillToDate(1135000L);
+		electricPowerUsageSummary.setCostAdditionalLastPeriod(1346000L);
+		electricPowerUsageSummary.setCurrency("840");
 
 		SummaryMeasurement summaryMeasurement = new SummaryMeasurement("0",
 				1331784000L, "72", 93018L);
 
-		summary.setCurrentBillingPeriodOverAllConsumption(summaryMeasurement);
-		summary.setQualityOfReading("14");
-		summary.setStatusTimeStamp(1331784000L);
-		summary.setCurrentDayLastYearNetConsumption(summaryMeasurement);
-		summary.setCurrentDayNetConsumption(summaryMeasurement);
-		summary.setCurrentDayOverallConsumption(summaryMeasurement);
-		summary.setPeakDemand(summaryMeasurement);
-		summary.setPreviousDayLastYearOverallConsumption(summaryMeasurement);
-		summary.setPreviousDayNetConsumption(summaryMeasurement);
-		summary.setPreviousDayOverallConsumption(summaryMeasurement);
-		summary.setRatchetDemand(summaryMeasurement);
-		summary.setRatchetDemandPeriod(new DateTimeInterval(1119600L, 1119600L));
-		summary.setPublished(newCalendar(2012, 10, 21));
-		summary.setUpdated(newCalendar(2012, 10, 28));
+		electricPowerUsageSummary.setCurrentBillingPeriodOverAllConsumption(summaryMeasurement);
+		electricPowerUsageSummary.setQualityOfReading("14");
+		electricPowerUsageSummary.setStatusTimeStamp(1331784000L);
+		electricPowerUsageSummary.setCurrentDayLastYearNetConsumption(summaryMeasurement);
+		electricPowerUsageSummary.setCurrentDayNetConsumption(summaryMeasurement);
+		electricPowerUsageSummary.setCurrentDayOverallConsumption(summaryMeasurement);
+		electricPowerUsageSummary.setPeakDemand(summaryMeasurement);
+		electricPowerUsageSummary.setPreviousDayLastYearOverallConsumption(summaryMeasurement);
+		electricPowerUsageSummary.setPreviousDayNetConsumption(summaryMeasurement);
+		electricPowerUsageSummary.setPreviousDayOverallConsumption(summaryMeasurement);
+		electricPowerUsageSummary.setRatchetDemand(summaryMeasurement);
+		electricPowerUsageSummary.setRatchetDemandPeriod(new DateTimeInterval(1119600L, 1119600L));
+		electricPowerUsageSummary.setPublished(newCalendar(2012, 10, 21));
+		electricPowerUsageSummary.setUpdated(newCalendar(2012, 10, 28));
 
-		return summary;
+		return electricPowerUsageSummary;
+	}
+	public static UsageSummary newUsageSummary() {
+		UsageSummary usageSummary = new UsageSummary();
+
+		usageSummary.setUUID(UUID.randomUUID());
+		usageSummary.setDescription("Usage Summary");
+		usageSummary.setBillingPeriod(new DateTimeInterval(1119600L, 1119600L));
+		usageSummary.setPublished(new GregorianCalendar(2012, 10, 24, 0, 0, 0));
+		usageSummary.setUpdated(new GregorianCalendar(2012, 10, 24, 0, 0, 0));
+		usageSummary.setBillLastPeriod(15303000L);
+		usageSummary.setBillToDate(1135000L);
+		usageSummary.setCostAdditionalLastPeriod(1346000L);
+		usageSummary.setCurrency("840");
+
+		SummaryMeasurement summaryMeasurement = new SummaryMeasurement("0",
+				1331784000L, "72", 93018L);
+
+		usageSummary.setCurrentBillingPeriodOverAllConsumption(summaryMeasurement);
+		usageSummary.setQualityOfReading("14");
+		usageSummary.setStatusTimeStamp(1331784000L);
+		usageSummary.setCurrentDayLastYearNetConsumption(summaryMeasurement);
+		usageSummary.setCurrentDayNetConsumption(summaryMeasurement);
+		usageSummary.setCurrentDayOverallConsumption(summaryMeasurement);
+		usageSummary.setPeakDemand(summaryMeasurement);
+		usageSummary.setPreviousDayLastYearOverallConsumption(summaryMeasurement);
+		usageSummary.setPreviousDayNetConsumption(summaryMeasurement);
+		usageSummary.setPreviousDayOverallConsumption(summaryMeasurement);
+		usageSummary.setRatchetDemand(summaryMeasurement);
+		usageSummary.setRatchetDemandPeriod(new DateTimeInterval(1119600L, 1119600L));
+		usageSummary.setPublished(newCalendar(2012, 10, 21));
+		usageSummary.setUpdated(newCalendar(2012, 10, 28));
+
+		return usageSummary;
 	}
 
 	public static ElectricPowerQualitySummary newElectricPowerQualitySummary() {
@@ -440,10 +478,10 @@ public class EspiFactory {
 	}
 
 	public static OAuth2Request newOAuth2Request(String clientId) {
-		return new OAuth2Request(new HashMap<String, String>(), clientId,
-				new ArrayList<GrantedAuthority>(), true, new HashSet<String>(),
-				new HashSet<String>(), "redirect", null,
-				new HashMap<String, Serializable>());
+		return new OAuth2Request(new HashMap<>(), clientId,
+				new ArrayList<>(), true, new HashSet<>(),
+				new HashSet<>(), "redirect", null,
+				new HashMap<>());
 	}
 
 	public static OAuth2Request newOAuth2Request() {

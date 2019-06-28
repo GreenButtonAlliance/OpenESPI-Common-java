@@ -20,7 +20,6 @@
 package org.greenbuttonalliance.espi.common.utils;
 
 import com.google.common.collect.Lists;
-import com.sun.syndication.io.FeedException;
 import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.greenbuttonalliance.espi.common.atom.XMLTest;
 import org.greenbuttonalliance.espi.common.domain.IdentifiedObject;
@@ -38,7 +37,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.xml.sax.SAXException;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.transform.stream.StreamResult;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -56,44 +54,37 @@ public class FragmentMarshallerTests extends XMLTest {
 	private Jaxb2Marshaller fragmentMarshaller;
 
 	@Test
-	public void entry() throws SAXException, IOException, XpathException,
-			DatatypeConfigurationException, FeedException {
+	public void entry() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry", newXML());
 	}
 
 	@Test
-	public void entry_id() throws SAXException, IOException, XpathException,
-			DatatypeConfigurationException, FeedException {
+	public void entry_id() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:id", newXML());
 	}
 
 	@Test
-	public void entry_link() throws SAXException, IOException, XpathException,
-			DatatypeConfigurationException, FeedException {
+	public void entry_link() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:link", newXML());
 	}
 
 	@Test
-	public void entry_title() throws SAXException, IOException, XpathException,
-			DatatypeConfigurationException, FeedException {
+	public void entry_title() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:title", newXML());
 	}
 
 	@Test
-	public void entry_published() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException, FeedException {
+	public void entry_published() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:published", newXML());
 	}
 
 	@Test
-	public void entry_updated() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException, FeedException {
+	public void entry_updated() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:updated", newXML());
 	}
 
 	@Test
-	public void content() throws SAXException, IOException, XpathException,
-			DatatypeConfigurationException, FeedException {
+	public void content() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:content", newXML());
 	}
 
@@ -103,63 +94,52 @@ public class FragmentMarshallerTests extends XMLTest {
 	}
 
 	@Test
-	public void content_UsagePoint() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException, FeedException {
+	public void content_UsagePoint() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:content/espi:UsagePoint",
 				newXML(newUsagePoint()));
 	}
 
 	@Test
-	public void content_MeterReading() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException, FeedException {
+	public void content_MeterReading() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:content/espi:MeterReading",
 				newXML(newMeterReading()));
 	}
 
 	@Test
-	public void content_ReadingType() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException, FeedException {
+	public void content_ReadingType() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:content/espi:ReadingType",
 				newXML(newReadingType()));
 	}
 
 	@Test
-	public void content_IntervalBlocks() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException, FeedException {
+	public void content_IntervalBlocks() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:content/espi:IntervalBlock",
 				newXML(newIntervalBlock()));
 	}
 
 	@Test
-	public void content_ElectricPowerUsageSummary() throws SAXException,
-			IOException, XpathException, DatatypeConfigurationException,
-			FeedException {
+	public void content_ElectricPowerUsageSummary() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:content/espi:ElectricPowerUsageSummary",
 				newXML(newElectricPowerUsageSummary()));
 	}
 
 	@Test
-	public void content_ElectricPowerQualitySummary() throws SAXException,
-			IOException, XpathException, DatatypeConfigurationException,
-			FeedException {
+	public void content_ElectricPowerQualitySummary() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:content/espi:ElectricPowerQualitySummary",
 				newXML(newElectricPowerQualitySummary()));
 	}
 
 	@Test
-	public void content_LocalTimeParameters() throws SAXException, IOException,
-			XpathException, DatatypeConfigurationException, FeedException {
+	public void content_LocalTimeParameters() throws SAXException, IOException, XpathException {
 		assertXpathExists("/:entry/:content/espi:LocalTimeParameters",
 				newXML(EspiFactory.newLocalTimeParameters()));
 	}
 
-	private String newXML() throws DatatypeConfigurationException,
-			FeedException {
+	private String newXML() {
 		return newXML(newUsagePoint());
 	}
 
-	private String newXML(IdentifiedObject resource)
-			throws DatatypeConfigurationException, FeedException {
+	private String newXML(IdentifiedObject resource) {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		EntryType entry = new EntryType();
 		entry.getLinks().add(new LinkType(LinkType.SELF, "self"));
@@ -168,7 +148,7 @@ public class FragmentMarshallerTests extends XMLTest {
 		entry.setPublished(new DateTimeType());
 		entry.setUpdated(new DateTimeType());
 		ContentType content = new ContentType();
-		content.setResources(Lists.<IdentifiedObject> newArrayList(resource));
+		content.setResources(Lists.newArrayList(resource));
 		entry.setContent(content);
 
 		fragmentMarshaller.marshal(entry, new StreamResult(os));

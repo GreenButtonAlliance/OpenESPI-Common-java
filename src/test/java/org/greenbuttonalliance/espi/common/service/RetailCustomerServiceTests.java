@@ -45,7 +45,7 @@ public class RetailCustomerServiceTests {
 
 	@Test
 	public void findAll_returnsAllRetailCustomers() {
-		List<RetailCustomer> allRetailCustomers = new ArrayList<RetailCustomer>();
+		List<RetailCustomer> allRetailCustomers = new ArrayList<>();
 
 		when(repository.findAll()).thenReturn(allRetailCustomers);
 

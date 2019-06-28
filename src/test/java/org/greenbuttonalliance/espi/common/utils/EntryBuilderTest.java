@@ -111,7 +111,7 @@ public class EntryBuilderTest {
 	}
 
 	@Test
-	public void build_givenMeterReading() throws Exception {
+	public void build_givenMeterReading() {
 		MeterReading meterReading = newMeterReading();
 		EntryType entry = new EntryBuilder().build(meterReading);
 		assertThat(entry.getContent().getMeterReading(),
@@ -119,7 +119,7 @@ public class EntryBuilderTest {
 	}
 
 	@Test
-	public void build_givenTimeConfiguration() throws Exception {
+	public void build_givenTimeConfiguration() {
 		TimeConfiguration localTimeParameters = newLocalTimeParameters();
 		EntryType entry = new EntryBuilder().build(localTimeParameters);
 		assertThat(entry.getContent().getLocalTimeParameters(),
@@ -127,14 +127,14 @@ public class EntryBuilderTest {
 	}
 
 	@Test
-	public void build_givenUsagePoint() throws Exception {
+	public void build_givenUsagePoint() {
 		UsagePoint usagePoint = newUsagePoint();
 		EntryType entry = new EntryBuilder().build(usagePoint);
 		assertThat(entry.getContent().getUsagePoint(), is(equalTo(usagePoint)));
 	}
 
 	@Test
-	public void build_givenElectricPowerUsageSummary() throws Exception {
+	public void build_givenElectricPowerUsageSummary() {
 		ElectricPowerUsageSummary electricPowerUsageSummary = newElectricPowerUsageSummary();
 		EntryType entry = new EntryBuilder().build(electricPowerUsageSummary);
 		assertThat(entry.getContent().getElectricPowerUsageSummary(),
@@ -142,7 +142,7 @@ public class EntryBuilderTest {
 	}
 
 	@Test
-	public void build_givenElectricPowerQualitySummary() throws Exception {
+	public void build_givenElectricPowerQualitySummary() {
 		ElectricPowerQualitySummary electricPowerQualitySummary = newElectricPowerQualitySummary();
 		EntryType entry = new EntryBuilder().build(electricPowerQualitySummary);
 		assertThat(entry.getContent().getElectricPowerQualitySummary(),
@@ -150,7 +150,7 @@ public class EntryBuilderTest {
 	}
 
 	@Test
-	public void build_givenReadingType() throws Exception {
+	public void build_givenReadingType() {
 		ReadingType readingType = newReadingType();
 		EntryType entry = new EntryBuilder().build(readingType);
 		assertThat(entry.getContent().getReadingType(),

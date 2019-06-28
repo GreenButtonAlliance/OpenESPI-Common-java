@@ -30,34 +30,34 @@ import java.util.UUID;
 
 public interface ElectricPowerQualitySummaryService {
 
-	public ElectricPowerQualitySummary findById(
+	ElectricPowerQualitySummary findById(
 			Long electricPowerQualitySummaryId);
 
-	public ElectricPowerQualitySummary findByUUID(UUID uuid);
+	ElectricPowerQualitySummary findByUUID(UUID uuid);
 
-	public List<ElectricPowerQualitySummary> findAllByUsagePoint(
+	List<ElectricPowerQualitySummary> findAllByUsagePoint(
 			UsagePoint usagePoint);
 
-	public String feedFor(
+	String feedFor(
 			List<ElectricPowerQualitySummary> electricPowerQualitySummarys);
 
-	public String entryFor(
+	String entryFor(
 			ElectricPowerQualitySummary electricPowerQualitySummary);
 
-	public void associateByUUID(UsagePoint usagePoint, UUID uuid);
+	void associateByUUID(UsagePoint usagePoint, UUID uuid);
 
-	public void persist(ElectricPowerQualitySummary electricPowerQualitySummary);
+	void persist(ElectricPowerQualitySummary electricPowerQualitySummary);
 
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
-			Long electricPowerQualitySummaryId);
+	EntryType findEntryType(Long retailCustomerId, Long usagePointId,
+							Long electricPowerQualitySummaryId);
 
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
-			Long usagePointId);
+	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
+											Long usagePointId);
 
-	public void add(ElectricPowerQualitySummary electricPowerQualitySummary);
+	void add(ElectricPowerQualitySummary electricPowerQualitySummary);
 
-	public void delete(ElectricPowerQualitySummary electricPowerQualitySummary);
+	void delete(ElectricPowerQualitySummary electricPowerQualitySummary);
 
-	public ElectricPowerQualitySummary importResource(InputStream stream);
+	ElectricPowerQualitySummary importResource(InputStream stream);
 
 }

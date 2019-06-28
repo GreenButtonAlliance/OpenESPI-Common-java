@@ -19,7 +19,6 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import com.sun.syndication.io.FeedException;
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +52,7 @@ public class ElectricPowerQualitySummaryMarshallingTests {
 	private ElectricPowerQualitySummary electricPowerQualitySummary;
 
 	@Before
-	public void before() throws JAXBException, FeedException {
+	public void before() throws JAXBException {
 		electricPowerQualitySummary = EspiMarshaller
 				.<ElectricPowerQualitySummary> unmarshal(XML_INPUT).getValue();
 	}
