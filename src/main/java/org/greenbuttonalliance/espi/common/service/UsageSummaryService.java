@@ -19,8 +19,8 @@
 
 package org.greenbuttonalliance.espi.common.service;
 
-import org.greenbuttonalliance.espi.common.domain.ElectricPowerUsageSummary;
 import org.greenbuttonalliance.espi.common.domain.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.UsageSummary;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
 import org.greenbuttonalliance.espi.common.utils.EntryTypeIterator;
 
@@ -28,31 +28,34 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
-public interface ElectricPowerUsageSummaryService {
+/**
+ * Created by Donald F. Coffin on 06/28/2019 at 23:01
+ */
+public interface UsageSummaryService {
 
-	ElectricPowerUsageSummary findByUUID(UUID uuid);
+    UsageSummary findByUUID(UUID uuid);
 
-	List<ElectricPowerUsageSummary> findAllByUsagePoint(UsagePoint usagePoint);
+    List<UsageSummary> findAllByUsagePoint(UsagePoint usagePoint);
 
-	String feedFor(List<ElectricPowerUsageSummary> electricPowerUsageSummarys);
+    String feedFor(List<UsageSummary> usageSummaries);
 
-	String entryFor(ElectricPowerUsageSummary electricPowerUsageSummary);
+    String entryFor(UsageSummary usageSummary);
 
-	void associateByUUID(UsagePoint usagePoint, UUID uuid);
+    void associateByUUID(UsagePoint usagePoint, UUID uuid);
 
-	void persist(ElectricPowerUsageSummary electricPowerUsageSummary);
+    void persist(UsageSummary usageSummary);
 
-	ElectricPowerUsageSummary findById(Long electricPowerUsageSummaryId);
+    UsageSummary findById(Long usageSummaryId);
 
-	EntryType findEntryType(Long retailCustomerId, Long usagePointId,
-							Long electricPowerUsageSummaryId);
+    EntryType findEntryType(Long retailCustomerId, Long usagePointId,
+                            Long usageSummaryId);
 
-	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
-											Long usagePointId);
+    EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
+                                            Long usagePointId);
 
-	void add(ElectricPowerUsageSummary electricPowerUsageSummary);
+    void add(UsageSummary usageSummary);
 
-	void delete(ElectricPowerUsageSummary electricPowerUsageSummary);
+    void delete(UsageSummary usageSummary);
 
-	ElectricPowerUsageSummary importResource(InputStream stream);
+    UsageSummary importResource(InputStream stream);
 }

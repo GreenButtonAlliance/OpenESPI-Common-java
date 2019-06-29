@@ -19,13 +19,13 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
-import org.greenbuttonalliance.espi.common.domain.ElectricPowerUsageSummary;
 import org.greenbuttonalliance.espi.common.domain.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.UsageSummary;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
-import org.greenbuttonalliance.espi.common.repositories.ElectricPowerUsageSummaryRepository;
-import org.greenbuttonalliance.espi.common.service.ElectricPowerUsageSummaryService;
+import org.greenbuttonalliance.espi.common.repositories.UsageSummaryRepository;
 import org.greenbuttonalliance.espi.common.service.ImportService;
 import org.greenbuttonalliance.espi.common.service.ResourceService;
+import org.greenbuttonalliance.espi.common.service.UsageSummaryService;
 import org.greenbuttonalliance.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,12 +35,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Created by Donald F. Coffin on 06/28/2019 at 23:04
+ */
+
 @Service
-public class ElectricPowerUsageSummaryServiceImpl implements
-        ElectricPowerUsageSummaryService {
+public class UsageSummaryServiceImpl implements UsageSummaryService {
 
     @Autowired
-    private ElectricPowerUsageSummaryRepository electricPowerUsageSummaryRepository;
+    private UsageSummaryRepository usageSummaryRepository;
 
     @Autowired
     private ResourceService resourceService;
@@ -49,29 +52,29 @@ public class ElectricPowerUsageSummaryServiceImpl implements
     private ImportService importService;
 
     @Override
-    public ElectricPowerUsageSummary findByUUID(UUID uuid) {
-        return electricPowerUsageSummaryRepository.findByUUID(uuid);
+    public UsageSummary findByUUID(UUID uuid) {
+        return usageSummaryRepository.findByUUID(uuid);
     }
 
-    public ElectricPowerUsageSummary findById(Long electricPowerUsageSummaryId) {
-        return electricPowerUsageSummaryRepository
-                .findById(electricPowerUsageSummaryId);
+    public UsageSummary findById(Long usageSummaryId) {
+        return usageSummaryRepository
+                .findById(usageSummaryId);
     }
 
     @Override
-    public void persist(ElectricPowerUsageSummary electricPowerUsageSummary) {
-        electricPowerUsageSummaryRepository.persist(electricPowerUsageSummary);
+    public void persist(UsageSummary usageSummary) {
+        usageSummaryRepository.persist(usageSummary);
     }
 
     @Override
     public String feedFor(
-            List<ElectricPowerUsageSummary> electricPowerUsageSummaries) {
+            List<UsageSummary> electricPowerUsageSummaries) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public String entryFor(ElectricPowerUsageSummary electricPowerUsageSummary) {
+    public String entryFor(UsageSummary usageSummary) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -82,30 +85,29 @@ public class ElectricPowerUsageSummaryServiceImpl implements
     }
 
     @Override
-    public void delete(ElectricPowerUsageSummary electricPowerUsageSummary) {
-        electricPowerUsageSummaryRepository
-                .deleteById(electricPowerUsageSummary.getId());
+    public void delete(UsageSummary usageSummary) {
+        usageSummaryRepository
+                .deleteById(usageSummary.getId());
     }
 
     @Override
-    public List<ElectricPowerUsageSummary> findAllByUsagePoint(
+    public List<UsageSummary> findAllByUsagePoint(
             UsagePoint usagePoint) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
-                                                   Long usagePointId) {
+    public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId) {
         EntryTypeIterator result = null;
         try {
             // TODO - this is sub-optimal (but defers the need to understan
             // creation of an EntryType
             List<Long> temp = new ArrayList<Long>();
             temp = resourceService.findAllIdsByXPath(retailCustomerId,
-                    usagePointId, ElectricPowerUsageSummary.class);
+                    usagePointId, UsageSummary.class);
             result = (new EntryTypeIterator(resourceService, temp,
-                    ElectricPowerUsageSummary.class));
+                    UsageSummary.class));
         } catch (Exception e) {
             // TODO need a log file entry as we are going to return a null if
             // it's not found
@@ -115,60 +117,55 @@ public class ElectricPowerUsageSummaryServiceImpl implements
     }
 
     @Override
-    public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
-                                   Long electricPowerUsageSummaryId) {
+    public EntryType findEntryType(Long retailCustomerId, Long usagePointId, Long usageSummaryId) {
         EntryType result = null;
         try {
-            // TODO - this is sub-optimal (but defers the need to understan
-            // creation of an EntryType
+            // TODO - this is sub-optimal (but defers the need to understand creation of an EntryType
             List<Long> temp = new ArrayList<Long>();
             temp = resourceService.findAllIdsByXPath(retailCustomerId,
-                    usagePointId, ElectricPowerUsageSummary.class);
-            // temp.add(electricPowerUsageSummaryId);
-            if (temp.contains(electricPowerUsageSummaryId)) {
+                    usagePointId, UsageSummary.class);
+            // temp.add(usageSummaryId);
+            if (temp.contains(usageSummaryId)) {
                 temp.clear();
-                temp.add(electricPowerUsageSummaryId);
+                temp.add(usageSummaryId);
             } else {
                 temp.clear();
             }
 
             result = (new EntryTypeIterator(resourceService, temp,
-                    ElectricPowerUsageSummary.class))
-                    .nextEntry(ElectricPowerUsageSummary.class);
+                    UsageSummary.class))
+                    .nextEntry(UsageSummary.class);
         } catch (Exception e) {
-            // TODO need a log file entry as we are going to return a null if
-            // it's not found
+            // TODO need a log file entry as we are going to return a null if it's not found
             result = null;
         }
         return result;
     }
 
     @Override
-    public void add(ElectricPowerUsageSummary electricPowerUsageSummary) {
+    public void add(UsageSummary usageSummary) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public ElectricPowerUsageSummary importResource(InputStream stream) {
+    public UsageSummary importResource(InputStream stream) {
         try {
             importService.importData(stream, null);
             EntryType entry = importService.getEntries().get(0);
-            ElectricPowerUsageSummary electricPowerUsageSummary = entry
-                    .getContent().getElectricPowerUsageSummary();
-            return electricPowerUsageSummary;
+            return entry.getContent().getUsageSummary();
+
         } catch (Exception e) {
             return null;
         }
     }
 
-    public void setElectricPowerUsageSummaryRepository(
-            ElectricPowerUsageSummaryRepository electricPowerUsageSummaryRepository) {
-        this.electricPowerUsageSummaryRepository = electricPowerUsageSummaryRepository;
+    public void setUsageSummaryRepository(UsageSummaryRepository usageSummaryRepository) {
+        this.usageSummaryRepository = usageSummaryRepository;
     }
 
-    public ElectricPowerUsageSummaryRepository getElectricPowerUsageSummaryRepository() {
-        return this.electricPowerUsageSummaryRepository;
+    public UsageSummaryRepository getUsageSummaryRepository() {
+        return this.usageSummaryRepository;
     }
 
     public void setResourceService(ResourceService resourceService) {
