@@ -19,27 +19,30 @@
 
 package org.greenbuttonalliance.espi.common.models.atom.adapters;
 
-import org.greenbuttonalliance.espi.common.domain.ElectricPowerUsageSummary;
 import org.greenbuttonalliance.espi.common.domain.ObjectFactory;
+import org.greenbuttonalliance.espi.common.domain.UsageSummary;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-public class ElectricPowerUsageSummaryAdapter extends
-        XmlAdapter<JAXBElement<ElectricPowerUsageSummary>, ElectricPowerUsageSummary> {
+/**
+ * Created by Donald F. Coffin on 06/28/2019 at 23:19
+ */
+public class UsageSummaryAdapter  extends
+        XmlAdapter<JAXBElement<UsageSummary>, UsageSummary> {
     @Override
-    public ElectricPowerUsageSummary unmarshal(
-            JAXBElement<ElectricPowerUsageSummary> v) throws Exception {
+    public UsageSummary unmarshal(
+            JAXBElement<UsageSummary> v) throws Exception {
         return v.getValue();
     }
 
     @Override
-    public JAXBElement<ElectricPowerUsageSummary> marshal(
-            ElectricPowerUsageSummary v) throws Exception {
+    public JAXBElement<UsageSummary> marshal(
+            UsageSummary v) throws Exception {
         if (v == null) {
             return null;
         }
-        return new JAXBElement<>(ObjectFactory.ElectricPowerUsageSummary_QNAME,
-                ElectricPowerUsageSummary.class, v);
+        return new JAXBElement<>(ObjectFactory.UsageSummary_QNAME,
+                UsageSummary.class, v);
     }
 }
