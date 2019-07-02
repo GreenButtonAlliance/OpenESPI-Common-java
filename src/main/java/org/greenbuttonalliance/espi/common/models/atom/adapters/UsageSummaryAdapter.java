@@ -28,21 +28,18 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 /**
  * Created by Donald F. Coffin on 06/28/2019 at 23:19
  */
-public class UsageSummaryAdapter  extends
-        XmlAdapter<JAXBElement<UsageSummary>, UsageSummary> {
+public class UsageSummaryAdapter  extends XmlAdapter<JAXBElement<UsageSummary>, UsageSummary> {
+
     @Override
-    public UsageSummary unmarshal(
-            JAXBElement<UsageSummary> v) throws Exception {
+    public UsageSummary unmarshal(JAXBElement<UsageSummary> v) throws Exception {
         return v.getValue();
     }
 
     @Override
-    public JAXBElement<UsageSummary> marshal(
-            UsageSummary v) throws Exception {
+    public JAXBElement<UsageSummary> marshal(UsageSummary v) throws Exception {
         if (v == null) {
             return null;
         }
-        return new JAXBElement<>(ObjectFactory.UsageSummary_QNAME,
-                UsageSummary.class, v);
+        return new JAXBElement<>(ObjectFactory.UsageSummary_QNAME, UsageSummary.class, v);
     }
 }
