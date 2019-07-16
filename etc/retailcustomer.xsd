@@ -2,7 +2,7 @@
 <!--
 ==========================================================================	
     Schema: retailcustomer.xsd	
-    Version: 0.1.20190212    	
+    Version: 0.1.20190702    	
     Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)	
 ========================================================================== 	
   ~     Copyright (c) 2018-2019 Green Button Alliance, Inc.
@@ -22,8 +22,9 @@
   ~     limitations under the License.
   ~
   -->
-<!-- edited with XMLSpy v2019 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:cust="http://naesb.org/espi/customer" xmlns:espi="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified">	<xs:annotation>
+<!-- edited with XMLSpy v2019 rel. 3 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:cust="http://naesb.org/espi/customer" xmlns:espi="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.3.20190702">
+	<xs:annotation>
 		<xs:documentation>
 		    The retail customer schema provides details about a UsagePoint that are considered Personally identifiable information (PII) and
 		    cannot be part of normal ESPI usage information.
@@ -85,6 +86,11 @@ Resources
 							<xs:documentation>Locale designating language to use in communications with this customer.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="customerName" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[Extension] Customer name</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -119,6 +125,11 @@ Resources
 					<xs:element name="contactInfo" type="Organisation" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Customer contact information used to identify individual responsible for billing and payment of CustomerAccount.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="accountId" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[Extension] Customer account identifier</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -165,6 +176,11 @@ Resources
 					<xs:element name="futureStatus" type="Status" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>[extension] Known future changes to CustomerAgreement's Status of Service.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="agreementId" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[Extension] Customer agreement identifier</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -861,7 +877,7 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 					<xs:element name="batchItemInfo" type="BatchItemInfo" minOccurs="0"/>
 					<xs:element name="name" type="name" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>identifier of object instance</xs:documentation>
+							<xs:documentation>[Deprecated] identifier of object instance</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1033,6 +1049,11 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 					<xs:element name="electronicAddress" type="ElectronicAddress" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Electronic address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="organisationName" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[Extension] Organisation name</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
