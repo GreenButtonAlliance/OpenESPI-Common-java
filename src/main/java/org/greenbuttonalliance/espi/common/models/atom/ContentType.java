@@ -71,7 +71,7 @@ import java.util.Map;
 @XmlRootElement(name = "content")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "contentType", propOrder = { "usagePoint", "meterReading",
-		"intervalBlocks", "electricPowerUsageSummary",
+		"intervalBlocks", "electricPowerUsageSummary", "usageSummary",
 		"electricPowerQualitySummary", "readingType", "localTimeParameters",
 		"applicationInformation", "authorization", "subscription",
 		"retailCustomer", "content" })

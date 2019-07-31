@@ -83,6 +83,11 @@ public class LineItem {
 	@JoinColumn(name = "electric_power_usage_summary_id")
 	protected ElectricPowerUsageSummary electricPowerUsageSummary;
 
+	@XmlTransient
+	@ManyToOne
+	@JoinColumn(name = "usage_summary_id")
+	protected UsageSummary usageSummary;
+
 	/**
 	 * Gets the value of the amount property.
 	 * 
