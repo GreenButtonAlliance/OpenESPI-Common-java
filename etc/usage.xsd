@@ -1,23 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- edited with XMLSpy v2020 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
-<!--
-  ~     Copyright (c) 2018-2019 Green Button Alliance, Inc.
-  ~
-  ~     Portions copyright (c) 2013-2018 EnergyOS.org
-  ~
-  ~     Licensed under the Apache License, Version 2.0 (the "License");
-  ~     you may not use this file except in compliance with the License.
-  ~     You may obtain a copy of the License at
-  ~
-  ~         http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~     Unless required by applicable law or agreed to in writing, software
-  ~     distributed under the License is distributed on an "AS IS" BASIS,
-  ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~     See the License for the specific language governing permissions and
-  ~     limitations under the License.
-  ~
-  -->
 <xs:schema xmlns="http://naesb.org/espi" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.3.20190408">
 	<!-- 
 ==========================================================================
@@ -56,11 +38,11 @@ NOTICE
 ______________________________________________________
 ==========================================================================
  Schema: usage.xsd
-    Version: 0.7.20190408
+    Version: 3.3.1.20200121
     Author: Donald F. Coffin (Green Button Alliance, Inc.)
 ==========================================================================
 
-    Copyright (c) 2019 Green Button Alliance, Inc.
+    Copyright (c) 2019-2020 Green Button Alliance, Inc.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
