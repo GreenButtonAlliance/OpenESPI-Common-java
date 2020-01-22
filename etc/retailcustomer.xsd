@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+==========================================================================
+ Schema:  retailcustomer.xsd
+ Version: North American Energy Standards Board (NAESB) REQ.21 ESPI Model Business Practices, Retail Markets Quadrant (RMQ). Ratified April 8, 2019.
+ Authors: NAESB
+========================================================================== 
+Copyright 2019 North American Energy Standards Board 
+Licensed by the North American Energy Standards Board (NAESB).  See the NOTICE section file below for additional information
+regarding copyright ownership.  NAESB licenses this file
+to you under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License.  You may obtain a copy
+of the License at:
+ 
+  http://www.apache.org/licenses/LICENSE-2.0
+ 
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+______________________________________________________
+NOTICE
+______________________________________________________
+This NAESB ESPI Retail Customer Schema and the NAESB ESPI Schema are part of the copyrighted NAESB REQ.21 ESPI Model Business Practices.
+The NAESB REQ.21 Model Business Practices may be purchased from NAESB at: http://www.naesb.org/misc/naesb_matl_order_espi_standards.pdf.
+The NAESB Copyright Policy may be found here http://www.naesb.org/pdf2/copyright.pdf.
+The NAESB Intellectual Property Rights Policy Concerning Contributions and Comments may be found here http://www.naesb.org/pdf4/naesb_ipr_policy.doc.
+______________________________________________________
+END NOTICE
+______________________________________________________
+______________________________________________________
+NOTICE
+______________________________________________________
 ==========================================================================	
     Schema: retailcustomer.xsd	
-    Version: 0.1.20190702    	
+    Version: 3.3.20200117    	
     Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)	
 ========================================================================== 	
-  ~     Copyright (c) 2018-2019 Green Button Alliance, Inc.
+  ~     Copyright (c) 2018-2020 Green Button Alliance, Inc.
   ~
   ~     Portions copyright (c) 2013-2018 EnergyOS.org
   ~
