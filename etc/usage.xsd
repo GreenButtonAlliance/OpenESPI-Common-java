@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- edited with XMLSpy v2020 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
-<xs:schema xmlns="http://naesb.org/espi" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.3.20190408">
+<xs:schema xmlns="http://naesb.org/espi" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:atom="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.3.20200320">
 	<!-- 
 ==========================================================================
     Schema:  NAESBespiSchema.xsd
-    Version: North American Energy Standards Board (NAESB)REQ.21 ESPI Model Business Practices, Retail Markets Quadrant (RMQ). Ratified April 8, 2019.
+    Version: North American Energy Standards Board (NAESB)REQ.21 ESPI Model Business Practices, Retail Markets Quadrant (RMQ), Version 3.3 Published January 30, 2020, MC20001 Applied Effective March 20, 2020.
     Authors: NAESB
 ========================================================================== 
-Copyright 2011-2019 North American Energy Standards Board
+Copyright 2011-2020 North American Energy Standards Board
 Licensed by the North American Energy Standards Board (NAESB).  See the NOTICE section file below for additional information
 regarding copyright ownership.  NAESB licenses this file
 to you under the Apache License, Version 2.0 (the "License"); you may not
@@ -38,7 +37,7 @@ NOTICE
 ______________________________________________________
 ==========================================================================
  Schema: usage.xsd
-    Version: 3.3.1.20200121
+    Version: 3.3.1.20200320
     Author: Donald F. Coffin (Green Button Alliance, Inc.)
 ==========================================================================
 
@@ -149,7 +148,7 @@ self link to this resource</xs:documentation>
 							<xs:documentation>[extension] {ResourceServer}{ResourcePath}. (e.g. "https://server.example.com/DataCustodian/espi/1_1/resource")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="thirdPartyScopeSelectionScreenURI" type="xs:anyURI" minOccurs="0">
+					<xs:element name="thirdPartyScopeSelectionScreenURI" type="xs:anyURI" minOccurs="0" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>[DEPRECATED][extension] URI of the Scope Selection Screen used by the Retail Customer to select the characteristics of the Green Button data to be shared with the ThirdParty.  (e.g. "https://server.example.com/ThirdParty/espi/1_1/RetailCustomer/ScopeSelection")</xs:documentation>
 						</xs:annotation>
@@ -257,7 +256,7 @@ self link to this resource</xs:documentation>
 							<xs:documentation>[extension] A credential obtained during Third Party registration with the Data Custodian to enable access to the ApplicationInformation resource. This is persisted in the ApplicationInformation resource structure. (e.g. "fe82518d-e325-404e-978c-c02f9339bccc")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="dataCustodianScopeSelectionScreenURI" minOccurs="0">
+					<xs:element name="dataCustodianScopeSelectionScreenURI" minOccurs="0" maxOccurs="1">
 						<xs:annotation>
 							<xs:documentation>[DEPRECATED][extension] The URI used by the Third Party to redirect the Retail Customer to the Data Custodian Scope Selection Screen (note that this will likely involve a dialog with the Retail Customer including a log in authentication process). (e.g. http://server.example.com/DataCustodian/RetailCustomer/ScopeSelection)</xs:documentation>
 						</xs:annotation>
