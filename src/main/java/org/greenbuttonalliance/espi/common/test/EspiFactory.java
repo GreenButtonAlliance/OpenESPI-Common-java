@@ -107,7 +107,7 @@ public class EspiFactory {
 		usagePoint.setDescription("Electric meter");
 
 		usagePoint.setRoleFlags("role flags".getBytes());
-		usagePoint.setStatus(new Short("5"));
+		usagePoint.setStatus(Short.valueOf("5"));
 
 		usagePoint.setServiceCategory(new ServiceCategory(
 				ServiceCategory.ELECTRICITY_SERVICE));

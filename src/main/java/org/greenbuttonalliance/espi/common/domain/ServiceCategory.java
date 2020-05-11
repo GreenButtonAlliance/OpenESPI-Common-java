@@ -79,7 +79,7 @@ public class ServiceCategory {
     static {
         labels.put(ELECTRICITY_SERVICE, "ELECTRICITY_SERVICE");
         labels.put(GAS_SERVICE, "GAS_SERVICE");
-        labels.put(WATER_SERVICE, "GAS_SERVICE");
+        labels.put(WATER_SERVICE, "WATER_SERVICE");
         labels.put(TIME_SERVICE, "TIME_SERVICE");
         labels.put(HEAT_SERVICE, "HEAT_SERVICE");
         labels.put(REFUSE_WASTER_SERVICE, "REFUSE_WASTER_SERVICE");

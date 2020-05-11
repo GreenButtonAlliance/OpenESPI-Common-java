@@ -19,7 +19,8 @@
 
 package org.greenbuttonalliance.espi.common.utils;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+//import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+
 import org.greenbuttonalliance.espi.common.domain.IntervalBlock;
 import org.greenbuttonalliance.espi.common.models.atom.DateTimeType;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
