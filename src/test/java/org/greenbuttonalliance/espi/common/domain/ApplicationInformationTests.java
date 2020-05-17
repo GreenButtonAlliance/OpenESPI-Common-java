@@ -19,7 +19,6 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.support.TestUtils;
 import org.greenbuttonalliance.espi.common.test.EspiFactory;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.junit.Test;
@@ -29,6 +28,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Set;
 
+import static org.greenbuttonalliance.espi.common.support.TestUtils.assertAnnotationPresent;
+import static org.greenbuttonalliance.espi.common.support.TestUtils.assertSizeValidation;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.*;
@@ -64,16 +65,16 @@ public class ApplicationInformationTests {
 
 	@Test
 	public void clientId() {
-		TestUtils.assertAnnotationPresent(ApplicationInformation.class, "clientId",
+		assertAnnotationPresent(ApplicationInformation.class, "clientId",
 				NotEmpty.class);
-		TestUtils.assertSizeValidation(ApplicationInformation.class, "clientId", 2, 64);
+		assertSizeValidation(ApplicationInformation.class, "clientId", 2, 64);
 	}
 
 	@Test
 	public void thirdPartyApplicationName() {
-		TestUtils.assertAnnotationPresent(ApplicationInformation.class,
+		assertAnnotationPresent(ApplicationInformation.class,
 				"thirdPartyApplicationName", NotEmpty.class);
-		TestUtils.assertSizeValidation(ApplicationInformation.class,
+		assertSizeValidation(ApplicationInformation.class,
 				"thirdPartyApplicationName", 2, 64);
 	}
 
@@ -85,19 +86,21 @@ public class ApplicationInformationTests {
 				containsString("ClientId"));
 	}
 
-	// @Test
-	// public void getResourceIds() {
-	// ApplicationInformation applicationInformation =
-	// EspiFactory.newApplicationInformation();
-	// assertThat(applicationInformation.getResourceIds(), is(nullValue()));
-	// }
+	// TODO: Investigate if getResourceIds() ever existed
+//	 @Test
+//	 public void getResourceIds() {
+//	 ApplicationInformation applicationInformation =
+//	 EspiFactory.newApplicationInformation();
+//	 assertThat(applicationInformation.getResourceIds(), is(nullValue()));
+//	 }
 
-	// @Test
-	// public void isSecretRequired() {
-	// ApplicationInformation applicationInformation =
-	// EspiFactory.newApplicationInformation();
-	// assertThat(applicationInformation.isSecretRequired(), is(true));
-	// }
+	// TODO: Investigate if isSecretRequired() ever existed
+//	 @Test
+//	 public void isSecretRequired() {
+//	 ApplicationInformation applicationInformation =
+//	 EspiFactory.newApplicationInformation();
+//	 assertThat(applicationInformation.isSecretRequired(), is(true));
+//	 }
 
 	@Test
 	public void getClientSecret() {
@@ -107,12 +110,13 @@ public class ApplicationInformationTests {
 				containsString("Secret"));
 	}
 
-	// @Test
-	// public void isScoped() {
-	// ApplicationInformation applicationInformation =
-	// EspiFactory.newApplicationInformation();
-	// assertThat(applicationInformation.isScoped(), is(true));
-	// }
+	// TODO: Investigate if isScoped() ever existed
+//	 @Test
+//	 public void isScoped() {
+//	 ApplicationInformation applicationInformation =
+//	 EspiFactory.newApplicationInformation();
+//	 assertThat(applicationInformation.isScoped(), is(true));
+//	 }
 
 	@Test
 	public void getScope() {
@@ -126,52 +130,55 @@ public class ApplicationInformationTests {
 				hasItem("FB=4_5_16;IntervalDuration=3600;BlockDuration=monthly;HistoryLength=13"));
 	}
 
-	// @Test
-	// public void getAuthorizedGrantTypes() {
-	// ApplicationInformation applicationInformation =
-	// EspiFactory.newApplicationInformation();
-	// assertThat(applicationInformation.getAuthorizedGrantTypes(),
-	// hasItem("authorization_code"));
-	// }
+	// TODO: Investigate if getAuthorizedGrantTypes() ever existed
+//	 @Test
+//	 public void getAuthorizedGrantTypes() {
+//	 ApplicationInformation applicationInformation =
+//	 EspiFactory.newApplicationInformation();
+//	 assertThat(applicationInformation.getAuthorizedGrantTypes(),
+//	 hasItem("authorization_code"));
+//	 }
 
-	// ToDo: Verify this test
-	// @Test
-	// public void getRegisteredRedirectUri() {
-	// ApplicationInformation applicationInformation =
-	// EspiFactory.newApplicationInformation();
-	// assertThat(applicationInformation.getRegisteredRedirectUri(),
-	// hasItem(applicationInformation.getRedirectUri()));
-	// }
+	// TODO: Investigate if getRegisteredRedirectUri() ever existed
+//	 @Test
+//	 public void getRegisteredRedirectUri() {
+//	 ApplicationInformation applicationInformation =
+//	 EspiFactory.newApplicationInformation();
+//	 assertThat(applicationInformation.getRegisteredRedirectUri(),
+//	 hasItem(applicationInformation.getRedirectUri()));
+//	 }
 
-	// @Test
-	// public void getAuthorities() {
-	// ApplicationInformation applicationInformation =
-	// EspiFactory.newApplicationInformation();
-	// assertThat(applicationInformation.getAuthorities(), hasItem(new
-	// SimpleGrantedAuthority("ROLE_CLIENT")));
-	// }
+	// TODO: Investigate if getAuthorities() ever existed
+//	 @Test
+//	 public void getAuthorities() {
+//	 ApplicationInformation applicationInformation =
+//	 EspiFactory.newApplicationInformation();
+//	 assertThat(applicationInformation.getAuthorities(), hasItem(new
+//			 SimpleGrantedAuthority("ROLE_CLIENT")));
+//	 }
 
-	// @Test
-	// public void getAccessTokenValiditySeconds() {
-	// ApplicationInformation applicationInformation =
-	// EspiFactory.newApplicationInformation();
-	// assertThat(applicationInformation.getAccessTokenValiditySeconds(),
-	// equalTo(Integer.valueOf(60*60*24*60)));
-	// }
+	// TODO: Investigate if getAccessTokenValiditySeconds() ever existed
+//	 @Test
+//	 public void getAccessTokenValiditySeconds() {
+//	 ApplicationInformation applicationInformation =
+//	 EspiFactory.newApplicationInformation();
+//	 assertThat(applicationInformation.getAccessTokenValiditySeconds(),
+//	 equalTo(Integer.valueOf(60*60*24*60)));
+//	 }
 
-	// @Test
-	// public void getRefreshTokenValiditySeconds() {
-	// ApplicationInformation applicationInformation =
-	// EspiFactory.newApplicationInformation();
-	// assertThat(applicationInformation.getRefreshTokenValiditySeconds(),
-	// equalTo(Integer.valueOf(60*60*24)));
-	// }
+	// TODO: Investigate if getRefreshTokenValiditySeconds() ever existed//	 @Test
+//	 public void getRefreshTokenValiditySeconds() {
+//	 ApplicationInformation applicationInformation =
+//	 EspiFactory.newApplicationInformation();
+//	 assertThat(applicationInformation.getRefreshTokenValiditySeconds(),
+//	 equalTo(Integer.valueOf(60*60*24)));
+//	 }
 
-	// @Test
-	// public void getAdditionalInformation() {
-	// ApplicationInformation applicationInformation =
-	// EspiFactory.newApplicationInformation();
-	// assertThat(applicationInformation.getAdditionalInformation(),
-	// is(nullValue()));
-	// }
+	// TODO: Investigate if getAdditionalInformation() ever existed//	 @Test
+//	 public void getAdditionalInformation() {
+//	 ApplicationInformation applicationInformation =
+//	 EspiFactory.newApplicationInformation();
+//	 assertThat(applicationInformation.getAdditionalInformation(),
+//	 is(nullValue()));
+//	 }
 }

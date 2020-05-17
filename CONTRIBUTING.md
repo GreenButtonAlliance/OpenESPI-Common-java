@@ -81,4 +81,3 @@ That's it! Thank you for your contribution!
 [groups]: https://groups.google.com/forum/?fromgroups#!forum/angular
 [greenbutton-dev]: mailto:greenbutton-dev@googlegroups.com
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
-<!--[pivotal-tracker]: https://www.pivotaltracker.com/projects/884994-->
