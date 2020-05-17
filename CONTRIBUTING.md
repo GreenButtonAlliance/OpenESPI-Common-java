@@ -1,4 +1,4 @@
-#Contributing to OpenESPI-Greenbutton-java
+#Contributing to OpenESPI-Common-java
 
 
 ## Have a Question or Problem?
@@ -16,21 +16,21 @@ The project uses a mixture of Cucumber and JUnit tests. When implementing a new 
 When implementing a new feature or bugfix, you want to ensure the you have appropriate test coverage. Here is an example of the code structure for a single feature (UsagePoint REST API).
 
 * **Write a Cucumber feature test**
-    * [Feature](https://github.com/energyos/OpenESPI-DataCustodian-java/blob/master/src/test/resources/features/API.feature)
+    * [Feature](https://github.com/greenbuttonalliance/OpenESPI-DataCustodian-java/blob/master/src/test/resources/features/API.feature)
 * **Implement the Controller**
-    * [Implementation](https://github.com/energyos/OpenESPI-DataCustodian-java/blob/master/src/main/java/org/energyos/espi/datacustodian/web/api/UsagePointRESTController.java)
-    * [Integration Test](https://github.com/energyos/OpenESPI-DataCustodian-java/blob/master/src/test/java/org/energyos/espi/datacustodian/integration/api/UsagePointRESTTests.java)
-	* [Unit Test](https://github.com/energyos/OpenESPI-DataCustodian-java/blob/master/src/test/java/org/energyos/espi/datacustodian/web/api/UsagePointRESTControllerTests.java)
+    * [Implementation](https://github.com/greenbuttonalliance/OpenESPI-DataCustodian-java/blob/master/src/main/java/org/greenbuttonalliance/espi/datacustodian/web/api/UsagePointRESTController.java)
+    * [Integration Test](https://github.com/greenbuttonalliance/OpenESPI-DataCustodian-java/blob/master/src/test/java/org/greenbuttonalliance/espi/datacustodian/integration/api/UsagePointRESTTests.java)
+	* [Unit Test](https://github.com/greenbuttonalliance/OpenESPI-DataCustodian-java/blob/master/src/test/java/org/greenbuttonalliance/espi/datacustodian/web/api/UsagePointRESTControllerTests.java)
 * **Implement the Service Layer**
-	* [Implementation](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/main/java/org/energyos/espi/common/service/impl/UsagePointServiceImpl.java)
-	* [Integration Test](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/test/java/org/energyos/espi/common/integration/service/UsagePointServiceTests.java)
-	* [Unit Test](https://github.com/energyos/OpenESPI-DataCustodian-java/blob/master/src/test/java/org/energyos/espi/datacustodian/service/impl/UsagePointServiceImplTests.java)
+	* [Implementation](https://github.com/greenbuttonalliance/OpenESPI-Common-java/blob/master/src/main/java/org/greenbuttonalliance/espi/common/service/impl/UsagePointServiceImpl.java)
+	* [Integration Test](https://github.com/greenbuttonalliance/OpenESPI-Common-java/blob/master/src/test/java/org/greenbuttonalliance/espi/common/integration/service/UsagePointServiceTests.java)
+	* [Unit Test](https://github.com/greenbuttonalliance/OpenESPI-DataCustodian-java/blob/master/src/test/java/org/greenbuttonalliance/espi/datacustodian/service/impl/UsagePointServiceImplTests.java)
 * **Implement the Repository Layer**
-	* [Implementation](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/main/java/org/energyos/espi/common/repositories/jpa/UsagePointRepositoryImpl.java)	 
-	* [Integration Test](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/test/java/org/energyos/espi/common/repositories/jpa/UsagePointRepositoryImplTests.java)
+	* [Implementation](https://github.com/greenbuttonalliance/OpenESPI-Common-java/blob/master/src/main/java/org/greenbuttonalliance/espi/common/repositories/jpa/UsagePointRepositoryImpl.java)
+	* [Integration Test](https://github.com/greenbuttonalliance/OpenESPI-Common-java/blob/master/src/test/java/org/greenbuttonalliance/espi/common/repositories/jpa/UsagePointRepositoryImplTests.java)
 * **Implement the Domain Object**
-	* [Implementation](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/main/java/org/energyos/espi/common/domain/UsagePoint.java)
-	* [Unit Test](https://github.com/energyos/OpenESPI-Common-java/blob/master/src/test/java/org/energyos/espi/common/domain/UsagePointTests.java)
+	* [Implementation](https://github.com/greenbuttonalliance/OpenESPI-Common-java/blob/master/src/main/java/org/greenbuttonalliance/espi/common/domain/UsagePoint.java)
+	* [Unit Test](https://github.com/greenbuttonalliance/OpenESPI-Common-java/blob/master/src/test/java/org/greenbuttonalliance/espi/common/domain/UsagePointTests.java)
 	
 *Note that each of the classes linked above reference many other classes that are individually unit and integration tested.*
 
@@ -38,7 +38,7 @@ When implementing a new feature or bugfix, you want to ensure the you have appro
 ### Submitting a Pull Request
 Before you submit your pull request consider the following guidelines:
 
-* Search [the master module](https://github.com/energyos/OpenESPI-Greenbutton-java/pulls), the [Common module](https://github.com/energyos/OpenESPI-Common-java/pulls), the [DataCustodian module](https://github.com/energyos/OpenESPI-DataCustodian-java/pulls) and the [ThirdParty module](https://github.com/energyos/OpenESPI-ThirdParty-java/pulls) for an open or closed Pull Request
+* Search the [Common module](https://github.com/greenbuttonalliance/OpenESPI-Common-java/pulls), the [DataCustodian module](https://github.com/greenbuttonalliance/OpenESPI-DataCustodian-java/pulls) and the [ThirdParty module](https://github.com/greenbuttonalliance/OpenESPI-ThirdParty-java/pulls) for an open or closed Pull Request
   that relates to your submission. You don't want to duplicate effort.
 * Create a fork of the project you'd like to contribute to.
 * Make your changes in a new git branch
@@ -76,9 +76,9 @@ Before you submit your pull request consider the following guidelines:
 
 That's it! Thank you for your contribution!
 
-[github]: https://github.com/energyos/OpenESPI-Greenbutton-java
+[github]: https://github.com/greenbuttonalliance/OpenESPI-Common-java
 [list]: https://groups.google.com/forum/?fromgroups#!forum/angular
 [groups]: https://groups.google.com/forum/?fromgroups#!forum/angular
 [greenbutton-dev]: mailto:greenbutton-dev@googlegroups.com
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
-[pivotal-tracker]: https://www.pivotaltracker.com/projects/884994
+<!--[pivotal-tracker]: https://www.pivotaltracker.com/projects/884994-->

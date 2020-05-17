@@ -103,6 +103,14 @@ public class EntryBuilderTest {
 	}
 
 	@Test
+	public void usageSummaryLinks() {
+		List<LinkType> relatedLinks = usagePoint.getRelatedLinks();
+		LinkType link = new LinkType("related", usagePoint.getSelfHref()
+				+ "/UsageSummary");
+		assertThat(relatedLinks, hasItem(link));
+	}
+
+	@Test
 	public void electricPowerQualitySummaryLinks() {
 		List<LinkType> relatedLinks = usagePoint.getRelatedLinks();
 		LinkType link = new LinkType("related", usagePoint.getSelfHref()

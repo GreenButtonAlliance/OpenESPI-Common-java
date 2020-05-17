@@ -70,6 +70,14 @@ public class ContentTypeTests {
 	}
 
 	@Test
+	public void getResource_returnsUsageSummary() {
+		content.setUsageSummary(new UsageSummary());
+
+		assertThat(content.getResource(),
+				instanceOf((UsageSummary.class)));
+	}
+
+	@Test
 	public void getResource_returnsElectricPowerQualitySummary() {
 		content.setElectricPowerQualitySummary(new ElectricPowerQualitySummary());
 
@@ -122,6 +130,15 @@ public class ContentTypeTests {
 		content.setResource(resource);
 
 		assertThat(content.getElectricPowerUsageSummary(),
+				is(equalTo(resource)));
+	}
+
+	@Test
+	public void setResource_setUsageSummary() throws Exception {
+		UsageSummary resource = newUsageSummary();
+		content.setResource(resource);
+
+		assertThat(content.getUsageSummary(),
 				is(equalTo(resource)));
 	}
 
