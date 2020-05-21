@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -40,7 +41,8 @@ import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration("/spring/test-context.xml")
+@ContextConfiguration(value = "/spring/test-context.xml")
+@ActiveProfiles("devmysql")
 public class BatchListMarshallerTest extends XMLTest {
 	@Autowired
 	@Qualifier(value = "domainMarshaller")

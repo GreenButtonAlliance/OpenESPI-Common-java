@@ -43,7 +43,7 @@ import static org.greenbuttonalliance.espi.common.test.Asserts.assertXpathValue;
 @ContextConfiguration("/spring/test-context.xml")
 public class UsagePointMarshallerTests extends XMLTest {
 	@Autowired
-	@Qualifier("atomMarshaller")
+	@Qualifier(value = "atomMarshaller")
 	private Jaxb2Marshaller atomMarshaller;
 
 	private String newXML() {

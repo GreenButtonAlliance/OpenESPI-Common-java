@@ -37,7 +37,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/spring/test-context.xml")
+@ContextConfiguration(value = "/spring/test-context.xml")
 public class BatchListUnmarshallerTest {
 
 	static final String XML_INPUT = ""
@@ -47,7 +47,7 @@ public class BatchListUnmarshallerTest {
 			+ "</espi:BatchList>";
 
 	@Autowired
-	@Qualifier("atomMarshaller")
+	@Qualifier(value = "atomMarshaller")
 	private Jaxb2Marshaller marshaller;
 
 	private BatchList batchList;

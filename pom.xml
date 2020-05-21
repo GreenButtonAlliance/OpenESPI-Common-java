@@ -22,7 +22,7 @@
 
     <groupId>org.greenbuttonalliance</groupId>
     <artifactId>OpenESPI-Common</artifactId>
-    <version>1.3</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>OpenESPI-Common</name>
@@ -93,6 +93,17 @@
 
     <profiles>
         <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile>dev</profile>
+                <database>hsql</database>
+            </properties>
+        </profile>
+
+        <profile>
             <id>devmysql</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -102,6 +113,7 @@
                 <database>mysql</database>
             </properties>
         </profile>
+
         <profile>
 			<!-- Green Button Alliance AWS Green Button Sandbox -->
         	<id>awsgbasandbox</id>
@@ -132,7 +144,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <jaxb.version>2.3.0</jaxb.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -246,6 +258,12 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.h2database</groupId>-->
+<!--            <artifactId>h2</artifactId>-->
+<!--            <version>1.4.200</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.apache.tomcat</groupId>
