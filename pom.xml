@@ -22,7 +22,7 @@
 
     <groupId>org.greenbuttonalliance</groupId>
     <artifactId>OpenESPI-Common</artifactId>
-    <version>1.4</version>
+    <version>1.4-BUILD-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>OpenESPI-Common</name>
@@ -59,31 +59,26 @@
     		<name>John Teeter</name>
     		<email>john.teeter@energyos.org</email>
     	</developer>
-    	
     	<developer>
     		<id>dcoffin</id>
     		<name>Donald F. Coffin</name>
     		<email>donald.coffin@reminetworks.com</email>
     	</developer>
-    	
     	<developer>
     		<id>mburns</id>
     		<name>Dr. Martin J. Burns</name>
     		<email>marty@hypertek.us</email>
     	</developer>
-    	
     	<developer>
     		<id>apliszka</id>
     		<name>Andy Pliszka</name>
     		<email>apliska@pivotal.io</email>
     	</developer>
-    	
     	<developer>
     		<id>rclutton</id>
     		<name>Robbie Clutton</name>
     		<email>rclutton@pivotal.io</email>
     	</developer>
-    	
     	<developer>
     		<id>wramsey</id>
     		<name>William Ramsey</name>
@@ -91,40 +86,17 @@
     	</developer>
     </developers>
 
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <profile>dev</profile>
-                <database>hsql</database>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>devmysql</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <profile>devmysql</profile>
-                <database>mysql</database>
-            </properties>
-        </profile>
-
-        <profile>
-			<!-- Green Button Alliance AWS Green Button Sandbox -->
-        	<id>awsgbasandbox</id>
-        	<properties>
-        		<profile>awsgbasandbox</profile>
-        		<database>mysql</database>
-        	</properties>
-        </profile>
-    </profiles>
-
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <jaxb.version>2.3.0</jaxb.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <junit.version>4.11</junit.version>
+        <project.scm.id>github</project.scm.id>
+
         <!-- Spring -->
         <spring.version>4.0.6.RELEASE</spring.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
@@ -141,15 +113,39 @@
         <ehcache.version>2.6.6</ehcache.version>
         <hsqldb.version>2.3.0</hsqldb.version>
         <mysql.version>5.1.18</mysql.version>
-
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <jaxb.version>2.3.0</jaxb.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <h2.version>1.3.173</h2.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <profile>dev</profile>
+                <database>hsql</database>
+            </properties>
+        </profile>
+        <profile>
+            <id>devmysql</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile>devmysql</profile>
+                <database>mysql</database>
+            </properties>
+        </profile>
+        <profile>
+			<!-- Green Button Alliance AWS Green Button Sandbox -->
+        	<id>awsgbasandbox</id>
+        	<properties>
+        		<profile>awsgbasandbox</profile>
+        		<database>mysql</database>
+        	</properties>
+        </profile>
+    </profiles>
 
     <repositories>
         <repository>
@@ -157,13 +153,11 @@
             <name>Spring Maven Release Repository</name>
             <url>http://maven.springframework.org/release</url>
         </repository>
-
         <repository>
             <id>spring-maven-milestone</id>
             <name>Spring Maven Milestone Repository</name>
             <url>http://maven.springframework.org/milestone</url>
         </repository>
-
         <repository>
             <id>spring-maven-snapshot</id>
             <url>http://maven.springframework.org/snapshot</url>
@@ -171,6 +165,36 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+        </repository>
+        <!-- Packagecloud Repository configuration -->
+        <repository>
+            <id>packagecloud.release</id>
+            <url>packagecloud+https://packagecloud.io/greenbuttonalliance/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>packagecloud.snapshot</id>
+            <url>packagecloud+https://greenbuttonalliance/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <!-- Nexus Maven repositories -->
+        <repository>
+            <id>nexus-snapshot</id>
+            <url>http://localhost:8081/repository/greenbuttonalliance-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>nexus-release</id>
+            <url>http://localhost:8081/repository/greenbuttonalliance-release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
         </repository>
     </repositories>
 
@@ -180,183 +204,147 @@
             <artifactId>spring-oxm</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
             <version>${spring-security-oauth.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.h2database</groupId>-->
-<!--            <artifactId>h2</artifactId>-->
-<!--            <version>1.4.200</version>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jdbc</artifactId>
             <version>${tomcat-jdbc.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>${junit.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>1.9.5</version>
         </dependency>
-
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
             <version>1.3</version>
         </dependency>
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>2.34.0</version>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>xmlunit</groupId>
             <artifactId>xmlunit</artifactId>
             <version>1.4</version>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-ehcache</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
-
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
         </dependency>
-
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
         </dependency>
-        
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>2.3</version>
         </dependency>
-
         <dependency>
             <groupId>rome</groupId>
             <artifactId>rome</artifactId>
             <version>1.0</version>
         </dependency>
-
         <!-- Databases - Uses HSQL by default -->
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -364,36 +352,38 @@
             <version>${hsqldb.version}</version>
             <scope>runtime</scope>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.5</version>
         </dependency>
-
         <!-- Jaxb Dependencies -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <version>${jaxb.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-core</artifactId>
             <version>${jaxb.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
             <version>${jaxb.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
-
+        <!-- Packagecloud repository configuration -->
+<!--        <extensions>-->
+<!--            <extension>-->
+<!--                <groupId>io.packagecloud.maven.wagon</groupId>-->
+<!--                <artifactId>maven-packagecloud-wagon</artifactId>-->
+<!--                <version>0.0.6</version>-->
+<!--            </extension>-->
+<!--        </extensions>-->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -424,7 +414,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
             </plugin>
-
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12.4</version>
@@ -435,7 +424,49 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.wagon</groupId>
+                        <artifactId>wagon-webdav-jackrabbit</artifactId>
+                        <version>2.9</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <locales>en</locales>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+            </plugin>
         </plugins>
     </build>
 
+    <distributionManagement>
+        <!-- Packagecloud Repository configuration -->
+<!--        <repository>-->
+<!--            <id>packagecloud.release</id>-->
+<!--            <url>packagecloud+https://packagcloud.io/greenbuttonalliance/release</url>-->
+<!--        </repository>-->
+<!--        <snapshotRepository>-->
+<!--            <id>packagecloud.snapshot</id>-->
+<!--            <url>packagecloud+https://packagecloud.io/greenbuttonalliance/snapshot</url>-->
+<!--        </snapshotRepository>-->
+        <!-- Nexus Repository configuration -->
+        <repository>
+            <id>nexus-release</id>
+            <name>Nexus Releases</name>
+            <url>http://localhost:8081/repository/greenbuttonalliance-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshot</id>
+            <name>Nexus Snapshots</name>
+            <url>http://localhost:8081/repository/greenbuttonalliance-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
