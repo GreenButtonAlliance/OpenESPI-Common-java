@@ -169,14 +169,14 @@
         <!-- Packagecloud Repository configuration -->
         <repository>
             <id>packagecloud.release</id>
-            <url>packagecloud+https://packagecloud.io/greenbuttonalliance/release</url>
+            <url>https://packagecloud.io/greenbuttonalliance/release</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
         </repository>
         <repository>
             <id>packagecloud.snapshot</id>
-            <url>packagecloud+https://greenbuttonalliance/snapshot</url>
+            <url>https://greenbuttonalliance/snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -377,13 +377,13 @@
 
     <build>
         <!-- Packagecloud repository configuration -->
-<!--        <extensions>-->
-<!--            <extension>-->
-<!--                <groupId>io.packagecloud.maven.wagon</groupId>-->
-<!--                <artifactId>maven-packagecloud-wagon</artifactId>-->
-<!--                <version>0.0.6</version>-->
-<!--            </extension>-->
-<!--        </extensions>-->
+        <extensions>
+            <extension>
+                <groupId>io.packagecloud.maven.wagon</groupId>
+                <artifactId>maven-packagecloud-wagon</artifactId>
+                <version>0.0.6</version>
+            </extension>
+        </extensions>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -458,15 +458,26 @@
 <!--            <url>packagecloud+https://packagecloud.io/greenbuttonalliance/snapshot</url>-->
 <!--        </snapshotRepository>-->
         <!-- Nexus Repository configuration -->
-        <repository>
-            <id>nexus-release</id>
-            <name>Nexus Releases</name>
-            <url>http://localhost:8081/repository/greenbuttonalliance-release/</url>
-        </repository>
+<!--        <repository>-->
+<!--            <id>nexus-release</id>-->
+<!--            <name>Nexus Releases</name>-->
+<!--            <url>http://localhost:8081/repository/greenbuttonalliance-release/</url>-->
+<!--        </repository>-->
+<!--        <snapshotRepository>-->
+<!--            <id>nexus-snapshot</id>-->
+<!--            <name>Nexus Snapshots</name>-->
+<!--            <url>http://localhost:8081/repository/greenbuttonalliance-snapshot/</url>-->
+<!--        </snapshotRepository>-->
+        <!-- Sonatype Maven Repository configuration -->
         <snapshotRepository>
-            <id>nexus-snapshot</id>
-            <name>Nexus Snapshots</name>
-            <url>http://localhost:8081/repository/greenbuttonalliance-snapshot/</url>
+            <id>sonatype-snapshot</id>
+            <name>Sonatype Maven Snapshot Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>sonatype-release</id>
+            <name>Sonatype Maven Snapshot Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/releases</url>
+        </repository>
     </distributionManagement>
 </project>

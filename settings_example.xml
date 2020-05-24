@@ -46,6 +46,16 @@
             <password>{Nexus Password}</password>
         </server>
         <server>
+            <id>sonatype-snapshot</id>
+            <username>{Sonatype UserID</username>
+            <password>{Sonatype Password</password>
+        </server>
+        <server>
+            <id>sonatype-release</id>
+            <username>{Sonatype UserID</username>
+            <password>{Sonatype Password</password>
+        </server>
+        <server>
             <id>TomcatServerDeployment</id>
             <username>(Tomcat UserID)</username>
             <password>{Tomcat Password}</password>
