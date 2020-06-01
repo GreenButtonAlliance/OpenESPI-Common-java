@@ -1,33 +1,32 @@
 /*
- *     Copyright (c) 2018-2019 Green Button Alliance, Inc.
+ *    Copyright (c) 2018-2020 Green Button Alliance, Inc.
  *
- *     Portions copyright (c) 2013-2018 EnergyOS.org
+ *    Portions copyright (c) 2013-2018 EnergyOS.org
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
  *         http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
- *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package org.greenbuttonalliance.espi.common.domain;
 
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
+import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBException;
 
-import static org.junit.Assert.assertEquals;
-
-public class ElectricPowerQualitySummaryMarshallingTests {
+public class ElectricPowerQualitySummaryUnmarshallerTests {
 
 	static final String XML_INPUT = "<ElectricPowerQualitySummary xmlns=\"http://naesb.org/espi\">"
 			+ "<flickerPlt>1</flickerPlt>"
@@ -59,93 +58,94 @@ public class ElectricPowerQualitySummaryMarshallingTests {
 
 	@Test
 	public void unmarshalsElectricPowerQualitySummary() {
-		assertEquals(ElectricPowerQualitySummary.class,
+		Assert.assertEquals(ElectricPowerQualitySummary.class,
 				electricPowerQualitySummary.getClass());
 	}
 
 	@Test
 	public void unmarshal_setsFlickerPlt() {
-		assertEquals(1L, electricPowerQualitySummary.getFlickerPlt()
-				.longValue());
+		Assert.assertThat(electricPowerQualitySummary.getFlickerPlt(),
+				Matchers.is(1L));
 	}
 
 	@Test
 	public void unmarshal_setsFlickerPst() {
-		assertEquals(2L, electricPowerQualitySummary.getFlickerPst()
-				.longValue());
+		Assert.assertThat(electricPowerQualitySummary.getFlickerPst(),
+				Matchers.is(2L));
 	}
 
 	@Test
 	public void unmarshal_setsHarmonicVoltage() {
-		assertEquals(3L, electricPowerQualitySummary.getHarmonicVoltage()
-				.longValue());
+		Assert.assertThat(electricPowerQualitySummary.getHarmonicVoltage(),
+				Matchers.is(3L));
 	}
 
 	@Test
 	public void unmarshal_setsLongInterruptions() {
-		assertEquals(4L, electricPowerQualitySummary.getLongInterruptions()
-				.longValue());
+		Assert.assertThat(electricPowerQualitySummary.getLongInterruptions(),
+				Matchers.is(4L));
 	}
 
 	@Test
 	public void unmarshal_setsMainsVoltage() {
-		assertEquals(5L, electricPowerQualitySummary.getMainsVoltage()
-				.longValue());
+		Assert.assertThat(electricPowerQualitySummary.getMainsVoltage(),
+				Matchers.is(5L));
 	}
 
 	@Test
 	public void unmarshal_setsMeasurementProtocol() {
-		assertEquals(6, electricPowerQualitySummary.getMeasurementProtocol()
-				.shortValue());
+
+		Assert.assertThat(electricPowerQualitySummary.getMeasurementProtocol().toString(),
+				Matchers.is("6"));
 	}
 
 	@Test
 	public void unmarshal_setsPowerFrequency() {
-		assertEquals(7L, electricPowerQualitySummary.getPowerFrequency()
-				.longValue());
+		Assert.assertThat(electricPowerQualitySummary.getPowerFrequency(),
+				Matchers.is(7L));
 	}
 
 	@Test
 	public void unmarshal_setsRapidVoltageChanges() {
-		assertEquals(8L, electricPowerQualitySummary.getRapidVoltageChanges()
-				.longValue());
+		Assert.assertThat(electricPowerQualitySummary.getRapidVoltageChanges(),
+				Matchers.is(8L));
 	}
 
 	@Test
 	public void unmarshal_setsShortInterruptions() {
-		assertEquals(9L, electricPowerQualitySummary.getShortInterruptions()
-				.longValue());
+		Assert.assertThat(electricPowerQualitySummary.getShortInterruptions(),
+				Matchers.is(9L));
 	}
 
 	@Test
 	public void unmarshal_setsSupplyVoltageDips() {
-		assertEquals(10L, electricPowerQualitySummary.getSupplyVoltageDips()
-				.longValue());
+		Assert.assertThat(electricPowerQualitySummary.getSupplyVoltageDips(),
+				Matchers.is(10L));
 	}
 
 	@Test
 	public void unmarshal_setsSupplyVoltageImbalance() {
-		assertEquals(11L, electricPowerQualitySummary
-				.getSupplyVoltageImbalance().longValue());
+		Assert.assertThat(electricPowerQualitySummary.getSupplyVoltageImbalance(),
+				Matchers.is(11L));
 	}
 
 	@Test
 	public void unmarshal_setsSupplyVoltageVariations() {
-		assertEquals(12L, electricPowerQualitySummary
-				.getSupplyVoltageVariations().longValue());
+		Assert.assertThat(electricPowerQualitySummary.getSupplyVoltageVariations(),
+				Matchers.is(12L));
 	}
 
 	@Test
 	public void unmarshal_setsTempOvervoltage() {
-		assertEquals(13L, electricPowerQualitySummary.getTempOvervoltage()
-				.longValue());
+		Assert.assertThat(electricPowerQualitySummary.getTempOvervoltage(),
+				Matchers.is(13L));
 	}
 
 	@Test
 	public void unmarshal_setsSummaryInterval() {
-		assertEquals(2119600L, electricPowerQualitySummary.getSummaryInterval()
-				.getDuration().longValue());
-		assertEquals(2330578000L, electricPowerQualitySummary
-				.getSummaryInterval().getStart().longValue());
+		Assert.assertThat(electricPowerQualitySummary.getSummaryInterval().getDuration(),
+				Matchers.is(2119600L));
+		Assert.assertThat(electricPowerQualitySummary.getSummaryInterval().getStart(),
+				Matchers.is(2330578000L));
 	}
 }

@@ -1,20 +1,19 @@
 /*
- *     Copyright (c) 2018-2019 Green Button Alliance, Inc.
+ *    Copyright (c) 2018-2020 Green Button Alliance, Inc.
  *
- *     Portions copyright (c) 2013-2018 EnergyOS.org
+ *    Portions copyright (c) 2013-2018 EnergyOS.org
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
  *         http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
- *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package org.greenbuttonalliance.espi.common.domain;
@@ -222,14 +221,15 @@ public class RetailCustomer extends IdentifiedObject implements UserDetails,
 		return result;
 	}
 
-	public void merge(RetailCustomer resource) {
+//	public void merge(RetailCustomer resource) {
+	public void merge(IdentifiedObject resource) {
 		// TODO needs to inherit from Identified Object
-		// super.merge(resource)
-		this.enabled = resource.enabled;
-		this.firstName = resource.firstName;
-		this.lastName = resource.lastName;
-		this.password = resource.password;
-		this.role = resource.role;
-		this.username = resource.username;
+		super.merge(resource);
+		this.enabled = ((RetailCustomer)resource).getEnabled();
+		this.firstName = ((RetailCustomer)resource).getFirstName();
+		this.lastName = ((RetailCustomer)resource).getLastName();
+		this.password = ((RetailCustomer)resource).getPassword();
+		this.role = ((RetailCustomer)resource).getRole();
+		this.username = ((RetailCustomer)resource).getUsername();
 	}
 }

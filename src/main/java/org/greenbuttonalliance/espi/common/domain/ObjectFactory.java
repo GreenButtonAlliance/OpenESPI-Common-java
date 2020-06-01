@@ -1,20 +1,19 @@
 /*
- *     Copyright (c) 2018-2019 Green Button Alliance, Inc.
+ *    Copyright (c) 2018-2020 Green Button Alliance, Inc.
  *
- *     Portions copyright (c) 2013-2018 EnergyOS.org
+ *    Portions copyright (c) 2013-2018 EnergyOS.org
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
  *         http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
- *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 //
@@ -50,8 +49,8 @@ public class ObjectFactory {
 			NAESB_URI, "IntervalReading");
 	public static final QName IntervalBlock_QNAME = new QName(
 			NAESB_URI, "IntervalBlock");
-	public static final QName Object_QNAME = new QName(NAESB_URI,
-			"Object");
+	public static final QName Object_QNAME = new QName(
+			NAESB_URI, "Object");
 	public static final QName ReadingType_QNAME = new QName(
 			NAESB_URI, "ReadingType");
 	public static final QName SummaryMeasurement_QNAME = new QName(
@@ -86,6 +85,8 @@ public class ObjectFactory {
 			NAESB_URI, "UsageSummary");
 	public static final QName LineItem_QNAME = new QName(
 			NAESB_URI, "LineItem");
+	public static final QName BatchList_QNAME = new QName(
+			NAESB_URI, "BatchList");
 	public static final QName RetailCustomer_QNAME = new QName(
 			NAESB_URI, "RetailCustomer");
 	public static final QName GrantType_QNAME = new QName(
@@ -489,10 +490,27 @@ public class ObjectFactory {
 				UsageSummary.class, null, value);
 	}
 
+	/**
+	 * Create an instance of {@link JAXBElement }{@code <}
+	 * {@link LineItem }{@code >}
+	 */
 	@XmlElementDecl(namespace = NAESB_URI, name = "costAdditionalDetailLastPeriod")
 	public JAXBElement<LineItem> createLineItem(LineItem v) {
-		return new JAXBElement<>(LineItem_QNAME, LineItem.class, null,
-				v);
+		return new JAXBElement<>(
+				LineItem_QNAME,
+				LineItem.class, null, v);
+	}
+
+
+	/**
+	 * Create an instance of {@link JAXBElement }{@code <}
+	 * {@link BatchList }{@code >}
+	 */
+	@XmlElementDecl(namespace = NAESB_URI, name = "BatchList")
+	public JAXBElement<BatchList> createBatchList(BatchList v) {
+		return new JAXBElement<>(
+				BatchList_QNAME,
+				BatchList.class, null, v);
 	}
 
 }

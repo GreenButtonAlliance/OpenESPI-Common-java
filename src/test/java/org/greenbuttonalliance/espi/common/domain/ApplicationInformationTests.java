@@ -1,20 +1,19 @@
 /*
- *     Copyright (c) 2018-2019 Green Button Alliance, Inc.
+ *    Copyright (c) 2018-2020 Green Button Alliance, Inc.
  *
- *     Portions copyright (c) 2013-2018 EnergyOS.org
+ *    Portions copyright (c) 2013-2018 EnergyOS.org
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
  *         http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
- *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package org.greenbuttonalliance.espi.common.domain;
@@ -30,9 +29,8 @@ import java.util.Set;
 
 import static org.greenbuttonalliance.espi.common.support.TestUtils.assertAnnotationPresent;
 import static org.greenbuttonalliance.espi.common.support.TestUtils.assertSizeValidation;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 
 public class ApplicationInformationTests {
 
@@ -47,7 +45,7 @@ public class ApplicationInformationTests {
 		Set<ConstraintViolation<ApplicationInformation>> violations = validator
 				.validate(applicationInformation);
 
-		assertTrue(violations.isEmpty());
+		assertThat(violations.isEmpty(), is(true));
 	}
 
 	@Test
@@ -60,7 +58,7 @@ public class ApplicationInformationTests {
 		Set<ConstraintViolation<ApplicationInformation>> violations = validator
 				.validate(applicationInformation);
 
-		assertFalse(violations.isEmpty());
+		assertThat(violations.isEmpty(), is(false));
 	}
 
 	@Test
@@ -87,20 +85,20 @@ public class ApplicationInformationTests {
 	}
 
 	// TODO: Investigate if getResourceIds() ever existed
-//	 @Test
-//	 public void getResourceIds() {
-//	 ApplicationInformation applicationInformation =
-//	 EspiFactory.newApplicationInformation();
-//	 assertThat(applicationInformation.getResourceIds(), is(nullValue()));
-//	 }
+//	@Test
+//	public void getResourceIds() {
+//		ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+//		assertThat(applicationInformation.getResourceIds(),
+//				is(nullValue()));
+//	}
 
 	// TODO: Investigate if isSecretRequired() ever existed
-//	 @Test
-//	 public void isSecretRequired() {
-//	 ApplicationInformation applicationInformation =
-//	 EspiFactory.newApplicationInformation();
-//	 assertThat(applicationInformation.isSecretRequired(), is(true));
-//	 }
+//	@Test
+//	public void isSecretRequired() {
+//		ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+//		assertThat(applicationInformation.isSecretRequired(),
+//				is(true));
+//	}
 
 	@Test
 	public void getClientSecret() {
@@ -111,12 +109,12 @@ public class ApplicationInformationTests {
 	}
 
 	// TODO: Investigate if isScoped() ever existed
-//	 @Test
-//	 public void isScoped() {
-//	 ApplicationInformation applicationInformation =
-//	 EspiFactory.newApplicationInformation();
-//	 assertThat(applicationInformation.isScoped(), is(true));
-//	 }
+//	@Test
+//	public void isScoped() {
+//		ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+//		assertThat(applicationInformation.isScoped(),
+//				is(true));
+//	}
 
 	@Test
 	public void getScope() {
@@ -131,54 +129,50 @@ public class ApplicationInformationTests {
 	}
 
 	// TODO: Investigate if getAuthorizedGrantTypes() ever existed
-//	 @Test
-//	 public void getAuthorizedGrantTypes() {
-//	 ApplicationInformation applicationInformation =
-//	 EspiFactory.newApplicationInformation();
-//	 assertThat(applicationInformation.getAuthorizedGrantTypes(),
-//	 hasItem("authorization_code"));
-//	 }
+//	@Test
+//	public void getAuthorizedGrantTypes() {
+//		ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+//		assertThat(applicationInformation.getAuthorizedGrantTypes(),
+//				hasItem("authorization_code"));
+//	}
 
 	// TODO: Investigate if getRegisteredRedirectUri() ever existed
-//	 @Test
-//	 public void getRegisteredRedirectUri() {
-//	 ApplicationInformation applicationInformation =
-//	 EspiFactory.newApplicationInformation();
-//	 assertThat(applicationInformation.getRegisteredRedirectUri(),
-//	 hasItem(applicationInformation.getRedirectUri()));
-//	 }
+//	@Test
+//	public void getRegisteredRedirectUri() {
+//		ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+//		assertThat(applicationInformation.getRegisteredRedirectUri(),
+//				hasItem(applicationInformation.getRedirectUri()));
+//	}
 
 	// TODO: Investigate if getAuthorities() ever existed
-//	 @Test
-//	 public void getAuthorities() {
-//	 ApplicationInformation applicationInformation =
-//	 EspiFactory.newApplicationInformation();
-//	 assertThat(applicationInformation.getAuthorities(), hasItem(new
-//			 SimpleGrantedAuthority("ROLE_CLIENT")));
-//	 }
+//	@Test
+//	public void getAuthorities() {
+//		ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+//		assertThat(applicationInformation.getAuthorities(),
+//				hasItem(new SimpleGrantedAuthority("ROLE_CLIENT")));
+//	}
 
 	// TODO: Investigate if getAccessTokenValiditySeconds() ever existed
-//	 @Test
-//	 public void getAccessTokenValiditySeconds() {
-//	 ApplicationInformation applicationInformation =
-//	 EspiFactory.newApplicationInformation();
-//	 assertThat(applicationInformation.getAccessTokenValiditySeconds(),
-//	 equalTo(Integer.valueOf(60*60*24*60)));
-//	 }
+//	@Test
+//	public void getAccessTokenValiditySeconds() {
+//		ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+//		assertThat(applicationInformation.getAccessTokenValiditySeconds(),
+//				equalTo(60 * 60 * 24 * 60));
+//	}
 
-	// TODO: Investigate if getRefreshTokenValiditySeconds() ever existed//	 @Test
-//	 public void getRefreshTokenValiditySeconds() {
-//	 ApplicationInformation applicationInformation =
-//	 EspiFactory.newApplicationInformation();
-//	 assertThat(applicationInformation.getRefreshTokenValiditySeconds(),
-//	 equalTo(Integer.valueOf(60*60*24)));
-//	 }
+	// TODO: Investigate if getRefreshTokenValiditySeconds() ever existed
+//	@Test
+//	public void getRefreshTokenValiditySeconds() {
+//		ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+//		assertThat(applicationInformation.getRefreshTokenValiditySeconds(),
+//				equalTo(60 * 60 * 24));
+//	}
 
-	// TODO: Investigate if getAdditionalInformation() ever existed//	 @Test
-//	 public void getAdditionalInformation() {
-//	 ApplicationInformation applicationInformation =
-//	 EspiFactory.newApplicationInformation();
-//	 assertThat(applicationInformation.getAdditionalInformation(),
-//	 is(nullValue()));
-//	 }
+	// TODO: Investigate if getAdditionalInformation() ever existed
+//	@Test
+//	public void getAdditionalInformation() {
+//		ApplicationInformation applicationInformation = EspiFactory.newApplicationInformation();
+//		assertThat(applicationInformation.getAdditionalInformation(),
+//				is(nullValue()));
+//	}
 }

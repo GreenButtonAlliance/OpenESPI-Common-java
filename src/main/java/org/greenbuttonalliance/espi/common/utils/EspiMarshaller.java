@@ -1,25 +1,25 @@
 /*
- *     Copyright (c) 2018-2019 Green Button Alliance, Inc.
+ *    Copyright (c) 2018-2020 Green Button Alliance, Inc.
  *
- *     Portions copyright (c) 2013-2018 EnergyOS.org
+ *    Portions copyright (c) 2013-2018 EnergyOS.org
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
  *         http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
- *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package org.greenbuttonalliance.espi.common.utils;
 
 import com.sun.syndication.io.FeedException;
+import org.springframework.util.Assert;
 
 import javax.xml.bind.*;
 import java.io.ByteArrayInputStream;
@@ -36,13 +36,13 @@ public class EspiMarshaller {
 
 	@SuppressWarnings("unchecked")
 	// TODO: make RetailCustomer Inherit from Identified Object to fix @Suppress
-	public static <T> JAXBElement<T> unmarshal(String xml)
-			throws JAXBException {
-		return (JAXBElement<T>) getUnmarshaller().unmarshal(
-				new ByteArrayInputStream(xml.getBytes()));
+	public static <T> JAXBElement<T> unmarshal(String xml) throws JAXBException {
+		Assert.notNull(xml, "XML string must not be null!");
+		return (JAXBElement<T>) getUnmarshaller().unmarshal(new ByteArrayInputStream(xml.getBytes()));
 	}
 
 	public static String marshal(Object entity) throws FeedException {
+		Assert.notNull(entity, "Entity must not be null");
 		StringWriter sw = new StringWriter();
 
 		try {

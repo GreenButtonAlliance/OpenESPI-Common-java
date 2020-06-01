@@ -1,20 +1,19 @@
 /*
- *     Copyright (c) 2018-2019 Green Button Alliance, Inc.
+ *    Copyright (c) 2018-2020 Green Button Alliance, Inc.
  *
- *     Portions copyright (c) 2013-2018 EnergyOS.org
+ *    Portions copyright (c) 2013-2018 EnergyOS.org
  *
- *     Licensed under the Apache License, Version 2.0 (the "License");
- *     you may not use this file except in compliance with the License.
- *     You may obtain a copy of the License at
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
  *         http://www.apache.org/licenses/LICENSE-2.0
  *
- *     Unless required by applicable law or agreed to in writing, software
- *     distributed under the License is distributed on an "AS IS" BASIS,
- *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *     See the License for the specific language governing permissions and
- *     limitations under the License.
- *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 package org.greenbuttonalliance.espi.common.repositories.jpa;
@@ -23,6 +22,7 @@ import org.greenbuttonalliance.espi.common.domain.ApplicationInformation;
 import org.greenbuttonalliance.espi.common.repositories.ApplicationInformationRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,6 +41,7 @@ public class ApplicationInformationRepositoryImpl implements
 
 	@Override
 	public ApplicationInformation findById(Long id) {
+		Assert.notNull(id, "id is required");
 		return (ApplicationInformation) em
 				.createNamedQuery(ApplicationInformation.QUERY_FIND_BY_ID)
 				.setParameter("id", id).getSingleResult();
@@ -80,6 +81,7 @@ public class ApplicationInformationRepositoryImpl implements
 
 	@Override
 	public ApplicationInformation findByClientId(String clientId) {
+		Assert.notNull(clientId, "clientId is required");
 		return (ApplicationInformation) em
 				.createNamedQuery(
 						ApplicationInformation.QUERY_FIND_BY_CLIENT_ID)
