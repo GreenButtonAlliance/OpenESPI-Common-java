@@ -18,52 +18,37 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
+import com.sun.syndication.io.FeedException;
 import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.greenbuttonalliance.espi.common.atom.XMLTest;
+import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.xml.sax.SAXException;
 
-import javax.xml.transform.stream.StreamResult;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathEvaluatesTo;
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
+import static org.greenbuttonalliance.espi.common.test.EspiFactory.newBatchList;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration("/spring/test-context.xml")
-@ActiveProfiles("devmysql")
 public class BatchListMarshallerTests extends XMLTest {
-    @Autowired
-    @Qualifier(value = "domainMarshaller")
-    Jaxb2Marshaller jaxb2Marshaller;
 
-    public String newXML() {
+    public String newXML() throws FeedException {
         BatchList batchList = new BatchList();
         batchList.getResources().add("foo");
         batchList.getResources().add("bar");
 
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        jaxb2Marshaller.marshal(batchList, new StreamResult(os));
-        return os.toString();
+        return EspiMarshaller.marshal(batchList);
     }
 
     @Test
-    public void batchList() throws SAXException, IOException, XpathException {
-        assertXpathExists("/espi:BatchList", newXML());
+    public void batchList() throws SAXException, IOException, XpathException, FeedException {
+        assertXpathExists("/espi:BatchList",
+                EspiMarshaller.marshal(newBatchList()));
     }
 
     @Test
-    public void resources() throws SAXException, IOException, XpathException {
+    public void resources() throws SAXException, IOException, XpathException, FeedException {
         assertXpathEvaluatesTo("foo", "/espi:BatchList/espi:resources[1]",
                 newXML());
         assertXpathEvaluatesTo("bar", "/espi:BatchList/espi:resources[2]",
