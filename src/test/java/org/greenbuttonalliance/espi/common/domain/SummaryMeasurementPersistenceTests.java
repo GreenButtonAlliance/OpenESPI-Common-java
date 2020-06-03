@@ -18,7 +18,7 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.support.TestUtils;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Test;
 
 import javax.persistence.Embeddable;

@@ -19,11 +19,12 @@
 package org.greenbuttonalliance.espi.common.domain;
 
 import org.custommonkey.xmlunit.exceptions.XpathException;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
-import org.greenbuttonalliance.espi.common.support.TestUtils;
-import org.greenbuttonalliance.espi.common.test.EspiFactory;
+import org.greenbuttonalliance.espi.common.support.EspiFactory;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -37,12 +38,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
-import static org.greenbuttonalliance.espi.common.test.Asserts.assertXpathValue;
+import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathValue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
 @ActiveProfiles("devmysql")
-public class UsagePointMarshallerTests extends XMLTest {
+public class UsagePointMarshallerTests {
 	@Autowired
 	@Qualifier("domainMarshaller")
 	private Jaxb2Marshaller marshaller;
@@ -52,6 +53,12 @@ public class UsagePointMarshallerTests extends XMLTest {
 		marshaller.marshal(EspiFactory.newUsagePoint(),
 				new StreamResult(os));
 		return os.toString();
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
 	}
 
 	@Test

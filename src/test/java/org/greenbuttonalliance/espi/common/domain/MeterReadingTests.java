@@ -20,10 +20,11 @@ package org.greenbuttonalliance.espi.common.domain;
 
 import com.sun.syndication.io.FeedException;
 import org.custommonkey.xmlunit.exceptions.XpathException;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
-import org.greenbuttonalliance.espi.common.support.TestUtils;
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -31,10 +32,18 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newMeterReadingWithUsagePoint;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newMeterReadingWithUsagePoint;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
-public class MeterReadingTests extends XMLTest {
+public class MeterReadingTests {
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+	}
 
 	@Test
 	public void unmarshalsMeterReading() throws JAXBException {
@@ -67,5 +76,14 @@ public class MeterReadingTests extends XMLTest {
 	public void readingType_hasTransientAnnotation() {
 		TestUtils.assertAnnotationPresent(MeterReading.class, "readingType",
 				XmlTransient.class);
+	}
+
+	@Test
+	public void setUpResource() {
+		MeterReading meterReading = new MeterReading();
+		UsagePoint usagePoint = new UsagePoint();
+		meterReading.setUpResource(usagePoint);
+
+		assertThat(meterReading.getUsagePoint(), equalTo(usagePoint));
 	}
 }

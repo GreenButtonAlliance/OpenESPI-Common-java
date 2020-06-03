@@ -19,12 +19,12 @@
 package org.greenbuttonalliance.espi.common.domain;
 
 import org.custommonkey.xmlunit.exceptions.XpathException;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
 import org.greenbuttonalliance.espi.common.models.atom.adapters.IntervalBlockAdapter;
-import org.greenbuttonalliance.espi.common.support.TestUtils;
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBElement;
@@ -32,11 +32,11 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
-import static org.greenbuttonalliance.espi.common.test.Asserts.assertXpathValue;
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newIntervalBlockWithUsagePoint;
+import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathValue;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newIntervalBlockWithUsagePoint;
 import static org.junit.Assert.assertEquals;
 
-public class IntervalBlockTests extends XMLTest {
+public class IntervalBlockTests {
 	static final String XML_INPUT = "<IntervalBlock xmlns=\"http://naesb.org/espi\">"
 			+ "<interval>"
 			+ "<duration>3</duration>"
@@ -50,6 +50,9 @@ public class IntervalBlockTests extends XMLTest {
 
 	@Before
 	public void before() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+
 		xml = EspiMarshaller.marshal(newIntervalBlockWithUsagePoint());
 
 		IntervalBlockAdapter intervalBlockAdapter = new IntervalBlockAdapter();

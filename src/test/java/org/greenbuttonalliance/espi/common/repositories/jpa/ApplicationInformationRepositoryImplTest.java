@@ -20,7 +20,7 @@ package org.greenbuttonalliance.espi.common.repositories.jpa;
 
 import org.greenbuttonalliance.espi.common.domain.ApplicationInformation;
 import org.greenbuttonalliance.espi.common.repositories.ApplicationInformationRepository;
-import org.greenbuttonalliance.espi.common.test.EspiFactory;
+import org.greenbuttonalliance.espi.common.support.EspiFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -19,7 +19,6 @@
 package org.greenbuttonalliance.espi.common.service.impl;
 
 import com.google.common.collect.Lists;
-import org.greenbuttonalliance.espi.common.BaseTest;
 import org.greenbuttonalliance.espi.common.domain.RetailCustomer;
 import org.greenbuttonalliance.espi.common.domain.Subscription;
 import org.greenbuttonalliance.espi.common.repositories.jpa.SubscriptionRepositoryImpl;
@@ -32,6 +31,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 
@@ -40,13 +40,13 @@ import java.util.UUID;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.*;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.*;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
-public class SubscriptionServiceImplTests extends BaseTest {
+public class SubscriptionServiceImplTests {
 
 	@Mock
 	private SubscriptionRepositoryImpl repository;
@@ -68,6 +68,8 @@ public class SubscriptionServiceImplTests extends BaseTest {
 
     @Before
 	public void before() {
+    	MockitoAnnotations.initMocks(this);
+
     	service = new SubscriptionServiceImpl();
     	applicationInformationService = new ApplicationInformationServiceImpl();
     	repository = mock(SubscriptionRepositoryImpl.class);

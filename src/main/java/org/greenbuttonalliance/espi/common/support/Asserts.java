@@ -16,7 +16,7 @@
  *    limitations under the License.
  */
 
-package org.greenbuttonalliance.espi.common.test;
+package org.greenbuttonalliance.espi.common.support;
 
 import org.custommonkey.xmlunit.XMLUnit;
 import org.custommonkey.xmlunit.XpathEngine;

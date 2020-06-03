@@ -18,7 +18,7 @@ INSERT INTO application_information_scopes (application_information_id, scope) V
 INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (1, 'AUTHORIZATION_CODE');
 INSERT INTO application_information_grant_types (application_information_id, grantTypes) VALUES (1, 'REFRESH_TOKEN');
 
-/* Add authorizations */ 
+/* Add authorizations */
 INSERT INTO authorizations (id, description, published, self_link_href, self_link_rel, up_link_href, up_link_rel, updated, uuid, access_token, authorization_uri, ap_duration, ap_start, code, error, errorDescription, errorUri, expiresIn, grantType, pp_duration, pp_start, refreshToken, resourceURI, responseType, scope, state, status, third_party, tokenType, application_information_id, retail_customer_id, subscription_id) 
 VALUES (1,NULL,'2014-05-12 09:02:03',NULL,'self',NULL,'up','2014-05-12 09:02:03','0BA247E0-87F0-41E1-BB50-271468B00DC0','75dd9c46-becf-48b5-9cb5-9c3233d718d0',@dcbaseurl || '/DataCustodian/espi/1_1/resource/Authorization/2',0,0,NULL,NULL,NULL,NULL,31536000,NULL,0,0,NULL,@dcbaseurl || '/DataCustodian/espi/1_1/resource/Batch/Bulk',NULL,'FB=34_35',NULL,'1','third_party_admin',0,1,0,NULL);
 INSERT INTO authorizations (id, description, published, self_link_href, self_link_rel, up_link_href, up_link_rel, updated, uuid, access_token, authorization_uri, ap_duration, ap_start, code, error, errorDescription, errorUri, expiresIn, grantType, pp_duration, pp_start, refreshToken, resourceURI, responseType, scope, state, status, third_party, tokenType, application_information_id, retail_customer_id, subscription_id) 

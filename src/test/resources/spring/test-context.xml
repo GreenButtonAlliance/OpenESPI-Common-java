@@ -30,7 +30,7 @@
 
     <context:component-scan base-package="org.greenbuttonalliance.espi.common.service"/>
     <context:component-scan base-package="org.greenbuttonalliance.espi.common.utils"/>
-    <context:component-scan base-package="org.greenbuttonalliance.espi.common.test"/>
+    <context:component-scan base-package="org.greenbuttonalliance.espi.common.support"/>
 
 <!--    <context:property-placeholder location="classpath:spring/${database}-data-access.properties"-->
 <!--                                  system-properties-mode="OVERRIDE"/>-->

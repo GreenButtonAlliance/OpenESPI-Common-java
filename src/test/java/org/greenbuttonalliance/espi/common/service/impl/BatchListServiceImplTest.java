@@ -25,7 +25,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newBatchList;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newBatchList;
 import static org.mockito.Mockito.verify;
 
 public class BatchListServiceImplTest {

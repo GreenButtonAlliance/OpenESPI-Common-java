@@ -16,7 +16,7 @@
  *    limitations under the License.
  */
 
-package org.greenbuttonalliance.espi.common.test;
+package org.greenbuttonalliance.espi.common.support;
 
 import org.custommonkey.xmlunit.SimpleNamespaceContext;
 import org.custommonkey.xmlunit.XMLUnit;
@@ -33,7 +33,7 @@ import java.util.Map;
 
 import static org.greenbuttonalliance.espi.common.domain.Configuration.*;
 
-public class TestUtils {
+public class TestUtils2 {
 	public static void setupXMLUnit() {
 		XMLUnit.setXpathNamespaceContext(new SimpleNamespaceContext(namespaces()));
 	}

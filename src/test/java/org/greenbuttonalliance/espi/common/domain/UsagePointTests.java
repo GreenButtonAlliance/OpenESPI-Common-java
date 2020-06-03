@@ -18,15 +18,27 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
 import org.greenbuttonalliance.espi.common.models.atom.LinkType;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
+import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newUsagePoint;
+import java.util.List;
+
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newUsagePoint;
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class UsagePointTests extends XMLTest {
+public class UsagePointTests {
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+	}
 
 	@Test
 	public void getRelatedLinks() {
@@ -35,21 +47,49 @@ public class UsagePointTests extends XMLTest {
 		electricPowerQualitySummaryLink.setHref(usagePoint.getSelfHref()
 				+ "/ElectricPowerQualitySummary");
 		electricPowerQualitySummaryLink.setRel("related");
+		usagePoint.getRelatedLinks().add(electricPowerQualitySummaryLink);
 
 		LinkType electricPowerUsageSummaryLink = new LinkType();
 		electricPowerUsageSummaryLink.setHref(usagePoint.getSelfHref()
 				+ "/ElectricPowerUsageSummary");
 		electricPowerUsageSummaryLink.setRel("related");
+		usagePoint.getRelatedLinks().add(electricPowerUsageSummaryLink);
+
+		LinkType usageSummaryLink = new LinkType();
+		usageSummaryLink.setHref(usagePoint.getSelfHref()
+				+ "/UsageSummary");
+		usageSummaryLink.setRel("related");
+		usagePoint.getRelatedLinks().add(usageSummaryLink);
 
 		LinkType meterReadingLink = new LinkType();
 		meterReadingLink.setHref(usagePoint.getSelfHref()
 				+ "/ElectricPowerUsageSummary");
 		meterReadingLink.setRel("related");
+		usagePoint.getRelatedLinks().add(meterReadingLink);
 
 		assertThat(usagePoint.getRelatedLinks(),
 				hasItem(electricPowerQualitySummaryLink));
 		assertThat(usagePoint.getRelatedLinks(),
 				hasItem(electricPowerUsageSummaryLink));
-		assertThat(usagePoint.getRelatedLinks(), hasItem(meterReadingLink));
+		assertThat(usagePoint.getRelatedLinks(),
+				hasItem(meterReadingLink));
+		assertThat(usagePoint.getRelatedLinks(),
+				hasItem(usageSummaryLink));
+	}
+
+	@Test
+	public void getRelatedLinkHrefs() throws Exception {
+		UsagePoint usagePoint = new UsagePoint();
+		LinkType link1 = new LinkType();
+		link1.setHref("href1");
+		usagePoint.getRelatedLinks().add(link1);
+		LinkType link2 = new LinkType();
+		link2.setHref("href2");
+		usagePoint.getRelatedLinks().add(link2);
+
+		List<String> relatedLinkHrefs = usagePoint.getRelatedLinkHrefs();
+
+		assertThat(relatedLinkHrefs,
+				allOf(Matchers.hasItem("href1"), Matchers.hasItem("href2")));
 	}
 }

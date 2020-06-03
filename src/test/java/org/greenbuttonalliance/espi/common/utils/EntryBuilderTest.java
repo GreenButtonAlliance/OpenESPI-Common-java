@@ -27,7 +27,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.*;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 

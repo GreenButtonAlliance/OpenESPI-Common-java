@@ -16,7 +16,7 @@
  *    limitations under the License.
  */
 
-package org.greenbuttonalliance.espi.common.test;
+package org.greenbuttonalliance.espi.common.support;
 
 import org.greenbuttonalliance.espi.common.domain.*;
 import org.greenbuttonalliance.espi.common.models.atom.LinkType;

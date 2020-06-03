@@ -18,22 +18,22 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
-import org.greenbuttonalliance.espi.common.BaseTest;
 import org.greenbuttonalliance.espi.common.domain.Authorization;
 import org.greenbuttonalliance.espi.common.domain.Routes;
 import org.greenbuttonalliance.espi.common.domain.Subscription;
 import org.greenbuttonalliance.espi.common.repositories.AuthorizationRepository;
-import org.greenbuttonalliance.espi.common.test.EspiFactory;
+import org.greenbuttonalliance.espi.common.support.EspiFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
-public class AuthorizationServiceImplTests extends BaseTest {
+public class AuthorizationServiceImplTests {
 
 	static final String ACCESS_TOKEN = "accessToken";
 
@@ -44,6 +44,8 @@ public class AuthorizationServiceImplTests extends BaseTest {
 
 	@Before
 	public void before() {
+		MockitoAnnotations.initMocks(this);
+
 		subscription = EspiFactory.newSubscription(EspiFactory
 				.newRetailCustomer());
 		AuthorizationServiceImpl service = new AuthorizationServiceImpl();

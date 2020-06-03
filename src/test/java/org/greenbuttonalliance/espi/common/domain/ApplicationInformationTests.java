@@ -18,7 +18,7 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.test.EspiFactory;
+import org.greenbuttonalliance.espi.common.support.EspiFactory;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.junit.Test;
 
@@ -27,8 +27,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Set;
 
-import static org.greenbuttonalliance.espi.common.support.TestUtils.assertAnnotationPresent;
-import static org.greenbuttonalliance.espi.common.support.TestUtils.assertSizeValidation;
+import static org.greenbuttonalliance.espi.common.utils.TestUtils.assertAnnotationPresent;
+import static org.greenbuttonalliance.espi.common.utils.TestUtils.assertSizeValidation;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 

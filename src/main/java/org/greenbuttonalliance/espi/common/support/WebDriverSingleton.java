@@ -16,7 +16,7 @@
  *    limitations under the License.
  */
 
-package org.greenbuttonalliance.espi.common.test;
+package org.greenbuttonalliance.espi.common.support;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.WebDriver;

@@ -16,16 +16,30 @@
  *    limitations under the License.
  */
 
-package org.greenbuttonalliance.espi.common.atom;
+package org.greenbuttonalliance.espi.common.support;
 
-import org.greenbuttonalliance.espi.common.BaseTest;
-import org.greenbuttonalliance.espi.common.test.TestUtils;
-import org.junit.BeforeClass;
+import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
-public class XMLTest extends BaseTest {
+import java.util.List;
+@SuppressWarnings("rawtypes")
+// TODO: figure out how to best remove the above @Suppress
+public class IsEmpty extends TypeSafeMatcher<List> {
 
-	@BeforeClass
-	public static void beforeClass() {
-		TestUtils.setupXMLUnit();
+	@Override
+	public boolean matchesSafely(List list) {
+		return list.isEmpty();
 	}
+
+	public void describeTo(Description description) {
+		description.appendText("empty list");
+	}
+
+	@Factory
+	public static <T> Matcher<List> isEmpty() {
+		return new IsEmpty();
+	}
+
 }

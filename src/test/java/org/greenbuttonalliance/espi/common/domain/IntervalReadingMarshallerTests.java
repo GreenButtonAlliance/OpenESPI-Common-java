@@ -19,25 +19,28 @@
 package org.greenbuttonalliance.espi.common.domain;
 
 import org.custommonkey.xmlunit.exceptions.XpathException;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
-import org.greenbuttonalliance.espi.common.support.TestUtils;
-import org.greenbuttonalliance.espi.common.test.EspiFactory;
+import org.greenbuttonalliance.espi.common.support.EspiFactory;
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
-import static org.greenbuttonalliance.espi.common.test.Asserts.assertXpathValue;
+import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathValue;
 
-public class IntervalReadingMarshallerTests extends XMLTest {
+public class IntervalReadingMarshallerTests {
 
 	private String xml;
 
 	@Before
 	public void before() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+
 		xml = EspiMarshaller.marshal(EspiFactory.newIntervalReading());
 	}
 

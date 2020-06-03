@@ -18,7 +18,7 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.support.TestUtils;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
@@ -27,7 +27,7 @@ import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newSubscription;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newSubscription;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;

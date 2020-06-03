@@ -18,10 +18,12 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
-import org.greenbuttonalliance.espi.common.test.FixtureFactory;
+import org.greenbuttonalliance.espi.common.support.FixtureFactory;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -40,7 +42,7 @@ import static org.junit.Assert.assertEquals;
 @WebAppConfiguration
 @ContextConfiguration("/spring/test-context.xml")
 @ActiveProfiles("devmysql")
-public class ServiceCategoryUnmarshallerTests extends XMLTest {
+public class ServiceCategoryUnmarshallerTests {
 	@Autowired
 	@Qualifier(value = "domainMarshaller")
 	private Jaxb2Marshaller jaxb2Marshaller;
@@ -50,6 +52,12 @@ public class ServiceCategoryUnmarshallerTests extends XMLTest {
 				.loadFixture("/fixtures/ServiceCategory.xml");
 		return (ServiceCategory) jaxb2Marshaller.unmarshal(new StreamSource(
 				new StringReader(xml)));
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
 	}
 
 	@Test

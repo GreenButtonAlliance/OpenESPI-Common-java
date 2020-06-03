@@ -19,10 +19,12 @@
 package org.greenbuttonalliance.espi.common.domain;
 
 import org.custommonkey.xmlunit.exceptions.XpathException;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
-import org.greenbuttonalliance.espi.common.test.EspiFactory;
+import org.greenbuttonalliance.espi.common.support.EspiFactory;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -42,7 +44,7 @@ import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
 @WebAppConfiguration
 @ContextConfiguration(value = "/spring/test-context.xml")
 @ActiveProfiles("devmysql")
-public class ServiceCategoryMarshallerTests extends XMLTest {
+public class ServiceCategoryMarshallerTests {
 	@Autowired
 	@Qualifier("domainMarshaller")
 	private Jaxb2Marshaller jaxb2Marshaller;
@@ -52,6 +54,12 @@ public class ServiceCategoryMarshallerTests extends XMLTest {
 		jaxb2Marshaller.marshal(EspiFactory.newServiceCategory(),
 				new StreamResult(os));
 		return os.toString();
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
 	}
 
 	@Test

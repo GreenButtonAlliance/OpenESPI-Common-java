@@ -18,16 +18,23 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
-import org.greenbuttonalliance.espi.common.support.TestUtils;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-public class ReadingQualityPersistenceTests extends XMLTest {
+public class ReadingQualityPersistenceTests {
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+	}
 
 	@Test
 	public void persistence() {

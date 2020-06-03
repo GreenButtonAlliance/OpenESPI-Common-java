@@ -16,16 +16,30 @@
  *    limitations under the License.
  */
 
-package org.greenbuttonalliance.espi.common.support;
+package org.greenbuttonalliance.espi.common.utils;
+
+import org.custommonkey.xmlunit.SimpleNamespaceContext;
+import org.custommonkey.xmlunit.XMLUnit;
+import org.xml.sax.InputSource;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.io.StringReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-@SuppressWarnings("rawtypes")
+import static org.greenbuttonalliance.espi.common.domain.Configuration.*;
+
+//@SuppressWarnings("rawtypes")
 public class TestUtils {
 
 	public static void assertAnnotationPresent(Class clazz,
@@ -134,5 +148,52 @@ public class TestUtils {
 
 	public static void assertFieldNotMarshallable(Class clazz, String field) {
 		assertAnnotationPresent(clazz, field, XmlTransient.class);
+	}
+
+	public static void setupXMLUnit() {
+
+		XMLUnit.setXpathNamespaceContext(new SimpleNamespaceContext(
+				namespaces()));
+	}
+
+	public static Map<String, String> namespaces() {
+		Map<String, String> m = new HashMap<>();
+		m.put(ATOM_PREFIX, HTTP_WWW_W3_ORG_2005_ATOM);
+		m.put(ESPI_PREFIX, HTTP_NAESB_ORG_ESPI);
+		return m;
+	}
+
+	public static NamespaceContext getNamespaceContext() {
+		return new NamespaceContext() {
+			@Override
+			public String getNamespaceURI(String prefix) {
+				return namespaces().get(prefix);
+			}
+
+			@Override
+			public String getPrefix(String namespaceURI) {
+				return null;
+			}
+
+			@SuppressWarnings("rawtypes")
+			// TODO: Type this class strongly and hook back into the xml name
+			// world
+			@Override
+			public Iterator getPrefixes(String namespaceURI) {
+				return null;
+			}
+		};
+	}
+
+	public static String getXPathValue(String expression, String xml)
+			throws XPathExpressionException {
+		String value;
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+		XPath xpath = xpathFactory.newXPath();
+		xpath.setNamespaceContext(getNamespaceContext());
+
+		value = xpath.evaluate(expression,
+				new InputSource(new StringReader(xml))).trim();
+		return value;
 	}
 }

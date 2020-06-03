@@ -19,14 +19,21 @@
 package org.greenbuttonalliance.espi.common.utils;
 
 import org.custommonkey.xmlunit.XMLAssert;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
 import org.greenbuttonalliance.espi.common.domain.ServiceCategory;
 import org.greenbuttonalliance.espi.common.domain.UsagePoint;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 
-import static org.greenbuttonalliance.espi.common.test.Asserts.assertXpathValue;
+import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathValue;
 
-public class EspiMarshallerTests extends XMLTest {
+public class EspiMarshallerTests {
+
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+	}
 
 	@Test
 	public void marshal_with_marshallableObject_returnsValidXml()

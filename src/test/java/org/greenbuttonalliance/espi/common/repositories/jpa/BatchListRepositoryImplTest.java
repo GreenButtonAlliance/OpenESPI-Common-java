@@ -31,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newBatchList;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newBatchList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;

@@ -18,19 +18,20 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
 import org.greenbuttonalliance.espi.common.models.atom.adapters.ReadingQualityAdapter;
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 
 import javax.xml.bind.JAXBElement;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 
-public class ReadingQualityUnmarshallerTests extends XMLTest {
+public class ReadingQualityUnmarshallerTests {
 
 	static final String XML_INPUT =
 			"<ReadingQuality xmlns=\"http://naesb.org/espi\">"
@@ -41,6 +42,9 @@ public class ReadingQualityUnmarshallerTests extends XMLTest {
 
 	@Before
 	public void before() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+
 		ReadingQualityAdapter intervalBlockAdapter = new ReadingQualityAdapter();
 		JAXBElement<ReadingQuality> readingQualityJAXBElement = EspiMarshaller.unmarshal(XML_INPUT);
 		readingQuality = intervalBlockAdapter.unmarshal(readingQualityJAXBElement);

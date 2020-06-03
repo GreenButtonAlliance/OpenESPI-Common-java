@@ -16,17 +16,16 @@
  *    limitations under the License.
  */
 
-package org.greenbuttonalliance.espi.common.atom;
+package org.greenbuttonalliance.espi.common.models.atom;
 
 import com.google.common.collect.Lists;
 import org.greenbuttonalliance.espi.common.domain.*;
-import org.greenbuttonalliance.espi.common.models.atom.ContentType;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.*;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 

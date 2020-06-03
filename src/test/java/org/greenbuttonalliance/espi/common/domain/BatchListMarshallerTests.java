@@ -20,18 +20,20 @@ package org.greenbuttonalliance.espi.common.domain;
 
 import com.sun.syndication.io.FeedException;
 import org.custommonkey.xmlunit.exceptions.XpathException;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
+import org.greenbuttonalliance.espi.common.support.TestUtils2;
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathEvaluatesTo;
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newBatchList;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newBatchList;
 
-public class BatchListMarshallerTests extends XMLTest {
+public class BatchListMarshallerTests{
 
     public String newXML() throws FeedException {
         BatchList batchList = new BatchList();
@@ -39,6 +41,12 @@ public class BatchListMarshallerTests extends XMLTest {
         batchList.getResources().add("bar");
 
         return EspiMarshaller.marshal(batchList);
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        TestUtils2.setupXMLUnit();
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test

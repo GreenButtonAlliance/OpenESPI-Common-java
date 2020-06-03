@@ -20,19 +20,27 @@ package org.greenbuttonalliance.espi.common.domain;
 
 import com.sun.syndication.io.FeedException;
 import org.custommonkey.xmlunit.exceptions.XpathException;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
-import org.greenbuttonalliance.espi.common.support.TestUtils;
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
-import static org.greenbuttonalliance.espi.common.test.Asserts.assertXpathValue;
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newIntervalReading;
+import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathValue;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newIntervalReading;
 
-public class ReadingQualityMarshallerTests extends XMLTest {
+public class ReadingQualityMarshallerTests {
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+	}
+
 	@Test
 	public void marshal_setsQuality() throws FeedException, SAXException,
 			IOException, XpathException {

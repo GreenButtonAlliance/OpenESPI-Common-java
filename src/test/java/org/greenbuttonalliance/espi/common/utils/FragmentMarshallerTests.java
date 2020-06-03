@@ -20,15 +20,16 @@ package org.greenbuttonalliance.espi.common.utils;
 
 import com.google.common.collect.Lists;
 import org.custommonkey.xmlunit.exceptions.XpathException;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
 import org.greenbuttonalliance.espi.common.domain.IdentifiedObject;
 import org.greenbuttonalliance.espi.common.models.atom.ContentType;
 import org.greenbuttonalliance.espi.common.models.atom.DateTimeType;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
 import org.greenbuttonalliance.espi.common.models.atom.LinkType;
-import org.greenbuttonalliance.espi.common.test.EspiFactory;
+import org.greenbuttonalliance.espi.common.support.EspiFactory;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.test.context.ActiveProfiles;
@@ -43,16 +44,22 @@ import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathNotExists;
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.*;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration("/spring/test-context.xml")
 @ActiveProfiles("devmysql")
-public class FragmentMarshallerTests extends XMLTest {
+public class FragmentMarshallerTests {
 
 	@Autowired
 	private Jaxb2Marshaller fragmentMarshaller;
+
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+	}
 
 	@Test
 	public void entry() throws SAXException, IOException, XpathException {

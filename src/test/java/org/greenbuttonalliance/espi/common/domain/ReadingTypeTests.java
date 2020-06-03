@@ -20,10 +20,11 @@ package org.greenbuttonalliance.espi.common.domain;
 
 import com.sun.syndication.io.FeedException;
 import org.custommonkey.xmlunit.exceptions.XpathException;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -31,11 +32,11 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
-import static org.greenbuttonalliance.espi.common.test.Asserts.assertXpathValue;
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newReadingType;
+import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathValue;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newReadingType;
 import static org.junit.Assert.assertEquals;
 
-public class ReadingTypeTests extends XMLTest {
+public class ReadingTypeTests {
 
 	static final String XML_INPUT = "<ReadingType xmlns=\"http://naesb.org/espi\">"
 			+ "<accumulationBehaviour>Behaviour</accumulationBehaviour>"
@@ -68,6 +69,9 @@ public class ReadingTypeTests extends XMLTest {
 
 	@Before
 	public void before() throws JAXBException, FeedException {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+
 		xml = EspiMarshaller.marshal(newReadingType());
 		readingType = EspiMarshaller.<ReadingType> unmarshal(XML_INPUT)
 				.getValue();

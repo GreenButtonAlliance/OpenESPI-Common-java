@@ -20,22 +20,23 @@ package org.greenbuttonalliance.espi.common.domain;
 
 import com.sun.syndication.io.FeedException;
 import org.custommonkey.xmlunit.exceptions.XpathException;
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
-import org.greenbuttonalliance.espi.common.support.TestUtils;
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
-import static org.greenbuttonalliance.espi.common.test.Asserts.assertXpathValue;
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newElectricPowerUsageSummaryWithUsagePoint;
+import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathValue;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newElectricPowerUsageSummaryWithUsagePoint;
+import static org.greenbuttonalliance.espi.common.utils.TestUtils.assertAnnotationPresent;
 import static org.junit.Assert.assertEquals;
 
-public class ElectricPowerUsageSummaryTests extends XMLTest {
+public class ElectricPowerUsageSummaryTests {
 
 	private String xml;
 	static final String XML_INPUT = "<ElectricPowerUsageSummary xmlns=\"http://naesb.org/espi\">"
@@ -113,6 +114,9 @@ public class ElectricPowerUsageSummaryTests extends XMLTest {
 
 	@Before
 	public void before() throws JAXBException, FeedException {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+
 		xml = EspiMarshaller
 				.marshal(newElectricPowerUsageSummaryWithUsagePoint());
 		electricPowerUsageSummary = EspiMarshaller
@@ -468,7 +472,7 @@ public class ElectricPowerUsageSummaryTests extends XMLTest {
 
 	@Test
 	public void usagePoint_hasTransientAnnotation() {
-		TestUtils.assertAnnotationPresent(ElectricPowerUsageSummary.class,
+		assertAnnotationPresent(ElectricPowerUsageSummary.class,
 				"usagePoint", XmlTransient.class);
 	}
 

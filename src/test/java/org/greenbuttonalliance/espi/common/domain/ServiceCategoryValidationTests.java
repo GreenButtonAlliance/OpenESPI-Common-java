@@ -18,19 +18,28 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.atom.XMLTest;
+import org.greenbuttonalliance.espi.common.utils.TestUtils;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Set;
 
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newServiceCategory;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newServiceCategory;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
-public class ServiceCategoryValidationTests extends XMLTest {
+public class ServiceCategoryValidationTests {
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		TestUtils.setupXMLUnit();
+	}
+
 	@Test
 	public void isValid() {
 		Validator validator = Validation.buildDefaultValidatorFactory()

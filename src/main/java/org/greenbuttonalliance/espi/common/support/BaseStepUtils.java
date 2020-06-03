@@ -16,7 +16,7 @@
  *    limitations under the License.
  */
 
-package org.greenbuttonalliance.espi.common.test;
+package org.greenbuttonalliance.espi.common.support;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

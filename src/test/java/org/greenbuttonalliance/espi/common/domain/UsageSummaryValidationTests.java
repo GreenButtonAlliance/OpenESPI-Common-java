@@ -25,7 +25,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Set;
 
-import static org.greenbuttonalliance.espi.common.test.EspiFactory.newUsageSummary;
+import static org.greenbuttonalliance.espi.common.support.EspiFactory.newUsageSummary;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
