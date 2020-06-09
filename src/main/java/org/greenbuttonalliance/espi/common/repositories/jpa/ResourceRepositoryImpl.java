@@ -67,8 +67,8 @@ class ResourceRepositoryImpl implements ResourceRepository {
 				// relying upon a structured URL for resources that we have
 				// exported.
 				//
-				Boolean usagePointFlag = false;
-				Boolean meterReadingFlag = false;
+				boolean usagePointFlag = false;
+				boolean meterReadingFlag = false;
 
 				Long usagePointId = null;
 				Long meterReadingId = null;
@@ -144,10 +144,10 @@ class ResourceRepositoryImpl implements ResourceRepository {
 		// in the DB or imported objects that have the external href's stored
 		if (temp.isEmpty()) {
 			try {
-				Boolean localTimeParameterFlag = false;
-				Boolean readingTypeFlag = false;
-				Boolean electricPowerUsageFlag = false;
-				Boolean electricPowerQualityFlag = false;
+				boolean localTimeParameterFlag = false;
+				boolean readingTypeFlag = false;
+				boolean electricPowerUsageFlag = false;
+				boolean electricPowerQualityFlag = false;
 
 				Long localTimeParameterId = null;
 				Long readingTypeId = null;

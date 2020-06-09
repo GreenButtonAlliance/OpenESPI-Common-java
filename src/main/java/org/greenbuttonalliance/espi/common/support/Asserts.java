@@ -22,7 +22,7 @@ import org.custommonkey.xmlunit.XMLUnit;
 import org.custommonkey.xmlunit.XpathEngine;
 import org.custommonkey.xmlunit.exceptions.XpathException;
 import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
+import org.springframework.util.Assert;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -39,7 +39,7 @@ public class Asserts {
 	public static void assertXpathValue(String expectedValue,
 			String xpathExpression, Document inDocument) throws XpathException {
 		XpathEngine simpleXpathEngine = XMLUnit.newXpathEngine();
-		Assert.assertEquals(expectedValue,
+		Assert.hasText(expectedValue,
 				simpleXpathEngine.evaluate(xpathExpression, inDocument).trim());
 
 	}
@@ -51,6 +51,6 @@ public class Asserts {
 		XpathEngine simpleXpathEngine = XMLUnit.newXpathEngine();
 		String updated = simpleXpathEngine.evaluate(xpathExpression,
 				xmlDocument).trim();
-		Assert.assertThat(updated, CoreMatchers.startsWith(expectedPrefix));
+		Assert.hasText(updated, String.valueOf(CoreMatchers.startsWith(expectedPrefix)));
 	}
 }

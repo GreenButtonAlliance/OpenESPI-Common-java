@@ -41,7 +41,7 @@ public class ResourceServiceImpl implements ResourceService {
 	/**
 	 * A private Map of Key:Value strings to hold the dynamic configuration.
 	 * 
-	 * SFTPCacheRoot: "./pendingdelivery/" AutomaticNotificationPropogation:
+	 * SFTPCacheRoot: "./pendingdelivery/" AutomaticNotificationPropagation:
 	 * [true | false]
 	 * 
 	 */
@@ -113,7 +113,7 @@ public class ResourceServiceImpl implements ResourceService {
 		}
 
 		if (IntervalBlock.class.equals(parentClass)) {
-			// IntervalBlock doesn't have any IdentfiedObject children
+			// IntervalBlock doesn't have any IdentifiedObject children
 			// but we may want to return the IntervalReadings
 		}
 
@@ -147,7 +147,6 @@ public class ResourceServiceImpl implements ResourceService {
 		}
 
 		return result;
-
 	}
 
 	@Override

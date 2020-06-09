@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static org.junit.Assert.assertTrue;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 public class BaseStepUtils {
 
@@ -142,7 +142,7 @@ public class BaseStepUtils {
 		clickLinkByText("Customer List");
 		clickLinkByPartialText("Add new customer");
 
-		assertTrue(driver.getPageSource().contains("New Retail Customer"));
+		assert (driver.getPageSource().contains("New Retail Customer"));
 
 		WebElement form = driver.findElement(By.name("new_customer"));
 
@@ -161,7 +161,7 @@ public class BaseStepUtils {
 		WebElement create = form.findElement(By.name("create"));
 		create.click();
 
-		assertTrue(driver.getPageSource().contains("Retail Customers"));
+		assert (driver.getPageSource().contains("Retail Customers"));
 	}
 
 	public static void registerDataCustodianUser(String username,

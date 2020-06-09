@@ -169,6 +169,15 @@ public class ExportServiceImpl implements ExportService {
 		return this.electricPowerUsageSummaryService;
 	}
 
+	public void setUsageSummaryService(
+			UsageSummaryService usageSummaryService) {
+		this.usageSummaryService = usageSummaryService;
+	}
+
+	public UsageSummaryService getUsageSummaryService() {
+		return this.usageSummaryService;
+	}
+
 	public void setAuthorizationService(
 			AuthorizationService authorizationService) {
 		this.authorizationService = authorizationService;

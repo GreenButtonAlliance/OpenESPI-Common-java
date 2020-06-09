@@ -16,7 +16,9 @@
   ~    limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.greenbuttonalliance</groupId>
@@ -92,9 +94,13 @@
         <jaxb.version>2.3.0</jaxb.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
-        <junit.version>4.11</junit.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.surefire.plugin.version>2.22.0</maven.surefire.plugin.version>
+        <maven.failsafe.plugin.version>2.22.0</maven.failsafe.plugin.version>
+        <junit.version>4.12</junit.version>
+        <junit-platform.version>5.6.2</junit-platform.version>
         <mockito.version>1.9.5</mockito.version>
+        <hamcrest.version>1.3</hamcrest.version>
         <project.scm.id>github</project.scm.id>
 
         <!-- Spring -->
@@ -112,7 +118,6 @@
         <tomcat-jdbc.version>7.0.42</tomcat-jdbc.version>
         <ehcache.version>2.6.6</ehcache.version>
         <hsqldb.version>2.3.0</hsqldb.version>
-<!--        <mysql.version>5.1.18</mysql.version>-->
         <mysql.version>5.1.49</mysql.version>
         <h2.version>1.3.173</h2.version>
     </properties>
@@ -149,39 +154,24 @@
     </profiles>
 
     <repositories>
-        <repository>
-            <id>spring-maven-release</id>
-            <name>Spring Maven Release Repository</name>
-            <url>http://maven.springframework.org/release</url>
-        </repository>
-        <repository>
-            <id>spring-maven-milestone</id>
-            <name>Spring Maven Milestone Repository</name>
-            <url>http://maven.springframework.org/milestone</url>
-        </repository>
-        <repository>
-            <id>spring-maven-snapshot</id>
-            <url>http://maven.springframework.org/snapshot</url>
-            <name>Spring Maven Snapshot Repository</name>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <!-- Packagecloud Repository configuration -->
-        <repository>
-            <id>packagecloud.release</id>
-            <url>https://packagecloud.io/greenbuttonalliance/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>packagecloud.snapshot</id>
-            <url>https://greenbuttonalliance/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
+<!--        <repository>-->
+<!--            <id>spring-maven-release</id>-->
+<!--            <name>Spring Maven Release Repository</name>-->
+<!--            <url>http://maven.springframework.org/release</url>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>spring-maven-milestone</id>-->
+<!--            <name>Spring Maven Milestone Repository</name>-->
+<!--            <url>http://maven.springframework.org/milestone</url>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>spring-maven-snapshot</id>-->
+<!--            <url>http://maven.springframework.org/snapshot</url>-->
+<!--            <name>Spring Maven Snapshot Repository</name>-->
+<!--            <snapshots>-->
+<!--                <enabled>true</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
         <!-- Nexus Maven repositories -->
         <repository>
             <id>nexus-snapshot</id>
@@ -282,6 +272,18 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>${mockito.version}</version>
@@ -290,9 +292,22 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
-            <version>1.3</version>
+            <version>${hamcrest.version}</version>
             <scope>test</scope>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.hamcrest</groupId>-->
+<!--            <artifactId>hamcrest-core</artifactId>-->
+<!--            <version>${hamcrest.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.hamcrest</groupId>-->
+<!--            <artifactId>hamcrest-library</artifactId>-->
+<!--            <version>${hamcrest.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -362,13 +377,6 @@
             <artifactId>rome</artifactId>
             <version>1.0</version>
         </dependency>
-        <!-- Databases - Uses HSQL by default -->
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>${hsqldb.version}</version>
-            <scope>runtime</scope>
-        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -391,12 +399,6 @@
             <version>${jaxb.version}</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>18.0.0</version>
@@ -405,23 +407,33 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven.failsafe.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <!-- Packagecloud repository configuration -->
-        <extensions>
-            <extension>
-                <groupId>io.packagecloud.maven.wagon</groupId>
-                <artifactId>maven-packagecloud-wagon</artifactId>
-                <version>0.0.6</version>
-            </extension>
-        </extensions>
+<!--        <extensions>-->
+<!--            <extension>-->
+<!--                <groupId>io.packagecloud.maven.wagon</groupId>-->
+<!--                <artifactId>maven-packagecloud-wagon</artifactId>-->
+<!--                <version>0.0.6</version>-->
+<!--            </extension>-->
+<!--        </extensions>-->
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+<!--                <directory>src/main/resources</directory>-->
+                <directory>src/test/resources/fixtures</directory>
                 <filtering>true</filtering>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
+<!--                <includes>-->
+<!--                    <include>/*.xml</include>-->
+<!--                </includes>-->
                 <excludes>
-                    <exclude>**/10.xml</exclude>
+                    <exclude>/10.xml</exclude>
                 </excludes>
             </resource>
         </resources>
@@ -440,18 +452,41 @@
 
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12.4</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Tests.java</include>
-                    </includes>
-                    <skipTests>true</skipTests>
-                </configuration>
+                <version>${maven.surefire.plugin.version}</version>
+<!--                <configuration>-->
+<!--                    <argline>-->
+<!--                        &#45;&#45;illegal-access=permit-->
+<!--                    </argline>-->
+<!--                    <includes>-->
+<!--                        <include>**/*Tests.java</include>-->
+<!--                    </includes>-->
+<!--                </configuration>-->
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven.failsafe.plugin.version}</version>
+<!--                <scope>test</scope>-->
+<!--                <configuration>-->
+<!--                    <argline>-->
+<!--                        &#45;&#45;illegal-access=permit-->
+<!--                    </argline>-->
+<!--                </configuration>-->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -477,26 +512,6 @@
     </build>
 
     <distributionManagement>
-        <!-- Packagecloud Repository configuration -->
-<!--        <repository>-->
-<!--            <id>packagecloud.release</id>-->
-<!--            <url>packagecloud+https://packagcloud.io/greenbuttonalliance/release</url>-->
-<!--        </repository>-->
-<!--        <snapshotRepository>-->
-<!--            <id>packagecloud.snapshot</id>-->
-<!--            <url>packagecloud+https://packagecloud.io/greenbuttonalliance/snapshot</url>-->
-<!--        </snapshotRepository>-->
-        <!-- Nexus Repository configuration -->
-<!--        <repository>-->
-<!--            <id>nexus-release</id>-->
-<!--            <name>Nexus Releases</name>-->
-<!--            <url>http://localhost:8081/repository/greenbuttonalliance-release/</url>-->
-<!--        </repository>-->
-<!--        <snapshotRepository>-->
-<!--            <id>nexus-snapshot</id>-->
-<!--            <name>Nexus Snapshots</name>-->
-<!--            <url>http://localhost:8081/repository/greenbuttonalliance-snapshot/</url>-->
-<!--        </snapshotRepository>-->
         <!-- Sonatype Maven Repository configuration -->
         <snapshotRepository>
             <id>sonatype-snapshot</id>

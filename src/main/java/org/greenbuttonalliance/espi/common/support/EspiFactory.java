@@ -40,6 +40,8 @@ public class EspiFactory {
 		applicationInformation
 				.setAuthorizationServerTokenEndpoint("http://example.com:8080/DataCustodian/oauth/token");
 		applicationInformation
+				.setDataCustodianResourceEndpoint("http://example.com:8080/DataCustodian/espi/1_1/resource");
+		applicationInformation
 				.setRedirectUri("http://example.com:8080/ThirdParty/espi/1_1/OAuthCallBack");
 		applicationInformation.setClientSecret("Secret" + newRandomString());
 		applicationInformation

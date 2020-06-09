@@ -24,6 +24,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 import java.util.List;
+
 @SuppressWarnings("rawtypes")
 // TODO: figure out how to best remove the above @Suppress
 public class IsEmpty extends TypeSafeMatcher<List> {
