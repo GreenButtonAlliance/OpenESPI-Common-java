@@ -41,15 +41,15 @@ import static org.junit.Assert.assertNotNull;
 public class MeterReadingRepositoryImplTests {
 
 	@Autowired
-	protected MeterReadingRepository repository;
+	protected MeterReadingRepository meterReadingRepository;
 
 	@Test
 	public void findById_returnsMeterReading() {
 		MeterReading meterReading = new MeterReading();
 		meterReading.setUUID(UUID.randomUUID());
 
-		repository.persist(meterReading);
+		meterReadingRepository.persist(meterReading);
 
-		assertNotNull(repository.findById(meterReading.getId()));
+		assertNotNull(meterReadingRepository.findById(meterReading.getId()));
 	}
 }
