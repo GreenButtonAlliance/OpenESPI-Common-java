@@ -457,17 +457,20 @@
                 <version>${maven.compiler.plugin.version}</version>
             </plugin>
             <plugin>
+                <!--fix for issue with JDK 1.8 181 see: -->
+                <!-- https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
-<!--                <configuration>-->
+                <configuration>
 <!--                    <argline>-->
 <!--                        &#45;&#45;illegal-access=permit-->
 <!--                    </argline>-->
-<!--                    <includes>-->
-<!--                        <include>**/*Tests.java</include>-->
-<!--                    </includes>-->
-<!--                </configuration>-->
+                    <includes>
+                        <include>**/*Tests.java</include>
+                    </includes>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

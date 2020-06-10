@@ -8,12 +8,12 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-      - image: circleci/mysql:5.7
-        environment:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: thirdparty
-          MYSQL_USER: root
-          MYSQL_PASSWORD: password
+#      - image: circleci/mysql:5.7
+#        environment:
+#          MYSQL_ROOT_PASSWORD: password
+#          MYSQL_DATABASE: thirdparty
+#          MYSQL_USER: root
+#          MYSQL_PASSWORD: password
 
     # Specify service dependencies here if necessary
     # CircleCI maintains a library of pre-built images
@@ -27,25 +27,25 @@ jobs:
 
     steps:
       - checkout
-      - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
-          name: Waiting for MySQL to be ready
-          command: |
-            - for i in 'seq 1 10';
-              do
-                nc -z 127.0.0.1 3306 & echo Success && exit 0
-                echo -n .
-                sleep 1
-              done
-              echo Failed waiting for MySQL && exit 1
-      - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
-          command: |
-            sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u root -ppassword thirdparty < etc/cleandatabases_tp.sql
-            mysql -h 127.0.0.1 -u root -ppassword thirdparty < etc/prepopulatesql_tp.sql
-            mysql -h 127.0.0.1 -u root -ppassword thirdparty < etc/prepopulatesql_users_tp.sql
-            mysql -h 127.0.0.1 -u root -ppassword --execute="SELECT * FROM thirdparty.retail_customers"
+#      - run:
+#      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+#          name: Waiting for MySQL to be ready
+#          command: |
+#            - for i in 'seq 1 10';
+#              do
+#                nc -z 127.0.0.1 3306 & echo Success && exit 0
+#                echo -n .
+#                sleep 1
+#              done
+#              echo Failed waiting for MySQL && exit 1
+#      - run:
+#          name: Install MySQL CLI; Import dummy data; run an example query
+#          command: |
+#            sudo apt-get install default-mysql-client
+#            mysql -h 127.0.0.1 -u root -ppassword thirdparty < etc/cleandatabases_tp.sql
+#            mysql -h 127.0.0.1 -u root -ppassword thirdparty < etc/prepopulatesql_tp.sql
+#            mysql -h 127.0.0.1 -u root -ppassword thirdparty < etc/prepopulatesql_users_tp.sql
+#            mysql -h 127.0.0.1 -u root -ppassword --execute="SELECT * FROM thirdparty.retail_customers"
 
       # Download and cache dependencies
       - restore_cache:
