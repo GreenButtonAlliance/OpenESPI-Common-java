@@ -698,7 +698,7 @@ CREATE TABLE `application_information` (
   `dataCustodianBulkRequestURI` varchar(255) DEFAULT NULL,
   `dataCustodianDefaultBatchResource` varchar(255) DEFAULT NULL,
   `dataCustodianDefaultSubscriptionResource` varchar(255) DEFAULT NULL,
-  `dataCustodianId` varchar(64) DEFAULT NULL,
+  `dataCustodianId` varchar(64) NOT NULL,
   `dataCustodianResourceEndpoint` varchar(255) DEFAULT NULL,
   `dataCustodianThirdPartySelectionScreenURI` varchar(255) DEFAULT NULL,
   `logoUri` varchar(255) DEFAULT NULL,
@@ -723,7 +723,8 @@ CREATE TABLE `application_information` (
   `tokenEndpointAuthMethod` varchar(255) DEFAULT NULL,
   `tosUri` varchar(255) DEFAULT NULL,
   `dataCustodianScopeSelectionScreenURI` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dataCustodianId_UNIQUE` (`dataCustodianId`),
   UNIQUE KEY `clientId_UNIQUE` (`clientId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
