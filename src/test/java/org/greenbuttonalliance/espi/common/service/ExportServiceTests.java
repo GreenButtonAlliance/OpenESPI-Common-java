@@ -51,7 +51,7 @@ import static org.greenbuttonalliance.espi.common.support.EspiFactory.newRetailC
 import static org.greenbuttonalliance.espi.common.support.EspiFactory.newSubscription;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.*;
+//import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 public class ExportServiceTests {
@@ -77,7 +77,7 @@ public class ExportServiceTests {
 	private ByteArrayOutputStream stream;
 
 	private ExportFilter exportFilter = new ExportFilter(
-			new HashMap<String, String>());
+			new HashMap<>());
 
 	// TODO - Refactor SetUp to resolve null repository value in ResourceServiceImpl class
 	@Before
@@ -111,7 +111,8 @@ public class ExportServiceTests {
 						.getHashedId())).thenReturn(entries);
 	}
 
-	@Ignore("TODO - Resolve issue with null repository value in ResourceServiceImpl findById method for repository.")
+	//TODO - Resolve issue with null repository value in ResourceServiceImpl findById method for repository
+	@Ignore
 	@Test
 	public void exportSubscription_addsTheXMLProlog() throws Exception {
 		exportService.exportSubscription(subscription.getHashedId(), stream,
@@ -121,7 +122,8 @@ public class ExportServiceTests {
 				containsString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"));
 	}
 
-	@Ignore("TODO - Resolve issue with null repository value in ResourceServiceImpl findById method for repository.")
+	//TODO - Resolve issue with null repository value in ResourceServiceImpl findById method for repository
+	@Ignore
 	@Test
 	public void exportSubscription_addsTheFeed() throws Exception {
 		exportService.exportSubscription(subscription.getHashedId(), stream,
@@ -130,8 +132,9 @@ public class ExportServiceTests {
 		assertXpathExists("/:feed", stream.toString());
 	}
 
+	//TODO - Resolve issue with null repository value in ResourceServiceImpl findById method for repository
+	@Ignore
 	@Test
-	@Ignore("TODO - Resolve issue with null repository value in ResourceServiceImpl findById method for repository.")
 	public void exportSubscription_addsEntries() throws Exception {
 		when(entries.hasNext()).thenReturn(true).thenReturn(true)
 				.thenReturn(false);
@@ -142,10 +145,10 @@ public class ExportServiceTests {
 		verify(entries, times(2)).next();
 	}
 
-	// TODO - need a way to cleanly initialize the more complex services (in the
-	// absence of @Autowired)
+	// TODO - need a way to cleanly initialize the more complex services (in the absence of @Autowired)
 
-	@Ignore("TODO - Resolve issue with null repository value in ResourceServiceImpl findById method for repository.")
+	//TODO - Resolve issue with null repository value in ResourceServiceImpl findById method for repository
+	@Ignore
 	@Test
 	public void exportUsagePoints() throws Exception {
 		Long retailCustomerId = 1L;
@@ -155,13 +158,14 @@ public class ExportServiceTests {
 
 		exportService.exportUsagePoints(anyLong(), retailCustomerId,
 				new ByteArrayOutputStream(), new ExportFilter(
-						new HashMap<String, String>()));
+						new HashMap<>()));
 
 		verify(subscriptionService).findEntryTypeIterator(retailCustomerId);
 
 	}
 
-	@Ignore("TODO - Resolve issue with null repository value in ResourceServiceImpl findById method for repository.")
+	//TODO - Resolve issue with null repository value in ResourceServiceImpl findById method for repository
+	@Ignore
 	@Test
 	public void exportSubscription_filtersEntries() throws Exception {
 		EntryType goodEntry = getEntry(50);
