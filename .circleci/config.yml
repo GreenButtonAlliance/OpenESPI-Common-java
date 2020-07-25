@@ -17,7 +17,7 @@ jobs:
           DB_PASSORD: "password"
 
     # Service container image
-      - image: circleci/mysql:8.0.20
+      - image: circleci/mysql:8.0.21-ram
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: no
           MYSQL_PASSWORD: 'password'
