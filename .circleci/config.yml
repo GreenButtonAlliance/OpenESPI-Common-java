@@ -14,18 +14,11 @@ jobs:
           TOKENSTORE_DB_URL: jdbc:mysql://localhost:3306/tokenstore
           DB_DRIVER: com.mysql.cj.jdbc.Driver
           DB_ROOT_USER: root
-          DB_PASSORD: "password"
+          DB_PASSORD: ''
 
     # Service container image
       - image: circleci/mysql:8.0.21-ram
-#        environment:
-#          MYSQL_ALLOW_EMPTY_PASSWORD: no
-#          MYSQL_PASSWORD: 'password'
 
-    # Specify service dependencies here if necessary
-    # CircleCI maintains a library of pre-built images
-    # documented at https://circleci.com/docs/2.0/circleci-images/
-    # - image: circleci/postgres:9.4
     working_directory: ~/repo
 
     environment:
@@ -43,11 +36,12 @@ jobs:
       - run:
           name: Install MySQL CLI; Import dummy data; run an example query
           command: |
+            sudo apt update
             sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u root -ppassword thirdparty < etc/cleandatabases_tp.sql
-            mysql -h 127.0.0.1 -u root -ppassword thirdparty < etc/prepopulatesql_tp.sql
-            mysql -h 127.0.0.1 -u root -ppassword thirdparty < etc/prepopulatesql_users_tp.sql
-            mysql -h 127.0.0.1 -u root -ppassword --execute="SELECT * FROM thirdparty.retail_customers"
+            mysql -h 127.0.0.1 -u root  thirdparty < etc/cleandatabases_tp.sql
+            mysql -h 127.0.0.1 -u root  thirdparty < etc/prepopulatesql_tp.sql
+            mysql -h 127.0.0.1 -u root  thirdparty < etc/prepopulatesql_users_tp.sql
+            mysql -h 127.0.0.1 -u root  --execute="SELECT * FROM thirdparty.retail_customers"
 
       # Download and cache dependencies
       - restore_cache:
