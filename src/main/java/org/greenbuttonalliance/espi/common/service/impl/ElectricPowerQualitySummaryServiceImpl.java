@@ -30,7 +30,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -73,7 +72,7 @@ public class ElectricPowerQualitySummaryServiceImpl implements
 
 	@Override
 	public String feedFor(
-			List<ElectricPowerQualitySummary> electricPowerQualitySummarys) {
+			List<ElectricPowerQualitySummary> electricPowerQualitySummaries) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -104,7 +103,7 @@ public class ElectricPowerQualitySummaryServiceImpl implements
 		try {
 			// TODO - this is sub-optimal (but defers the need to understand
 			// creation of an EntryType
-			List<Long> temp = new ArrayList<Long>();
+			List<Long> temp;
 			temp = resourceService.findAllIdsByXPath(retailCustomerId,
 					usagePointId, ElectricPowerUsageSummary.class);
 			// temp.add(electricPowerQualitySummaryId);
@@ -118,9 +117,7 @@ public class ElectricPowerQualitySummaryServiceImpl implements
 					ElectricPowerQualitySummary.class))
 					.nextEntry(ElectricPowerQualitySummary.class);
 		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-			result = null;
+			// TODO need a log file entry as we are going to return a null if not found
 		}
 		return result;
 	}
@@ -132,7 +129,7 @@ public class ElectricPowerQualitySummaryServiceImpl implements
 		try {
 			// TODO - this is sub-optimal (but defers the need to understand
 			// creation of an EntryType
-			List<Long> temp = new ArrayList<Long>();
+			List<Long> temp;
 			// temp =
 			// resourceService.findAllIds(ElectricPowerQualitySummary.class);
 			temp = resourceService.findAllIdsByXPath(retailCustomerId,
@@ -141,9 +138,7 @@ public class ElectricPowerQualitySummaryServiceImpl implements
 			result = (new EntryTypeIterator(resourceService, temp,
 					ElectricPowerQualitySummary.class));
 		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-			result = null;
+			// TODO need a log file entry as we are going to return a null if not found
 		}
 		return result;
 	}
@@ -159,18 +154,17 @@ public class ElectricPowerQualitySummaryServiceImpl implements
 		try {
 			importService.importData(stream, null);
 			EntryType entry = importService.getEntries().get(0);
-			ElectricPowerQualitySummary electricPowerQualitySummary = entry
+			return entry
 					.getContent().getElectricPowerQualitySummary();
-			return electricPowerQualitySummary;
 		} catch (Exception e) {
 			return null;
 		}
 	}
 
-	public void setElectricPowerQualitySummaryRepository(
-			ElectricPowerQualitySummaryRepository electricPowerQualitySummaryRepository) {
-		this.electricPowerQualitySummaryRepository = electricPowerQualitySummaryRepository;
-	}
+//	public void setElectricPowerQualitySummaryRepository(
+//			ElectricPowerQualitySummaryRepository electricPowerQualitySummaryRepository) {
+//		this.electricPowerQualitySummaryRepository = electricPowerQualitySummaryRepository;
+//	}
 
 	public ElectricPowerQualitySummaryRepository getElectricPowerQualitySummaryRepository() {
 		return this.electricPowerQualitySummaryRepository;

@@ -30,7 +30,7 @@
 
     <context:component-scan base-package="org.greenbuttonalliance.espi.common.service"/>
     <context:component-scan base-package="org.greenbuttonalliance.espi.common.utils"/>
-    <context:component-scan base-package="org.greenbuttonalliance.espi.common.support"/>
+<!--    <context:component-scan base-package="org.greenbuttonalliance.espi.common.support"/>    -->
 
 <!--    <context:property-placeholder location="classpath:spring/${database}-data-access.properties"-->
 <!--                                  system-properties-mode="OVERRIDE"/>-->
@@ -40,7 +40,7 @@
     </beans>
 
     <beans profile="devmysql">
-        <context:property-placeholder location="classpath:spring/mysql-data-access.properties" />
+        <context:property-placeholder location="classpath:src/test/resources/spring/mysql-data-access.properties" />
     </beans>
 
     <beans>
