@@ -6,14 +6,21 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
+      # Primary container image where all commands run
       - image: circleci/openjdk:8-jdk
+        environment:
+          DATACUSTODIAN_DB_URL: jdbc:mysql://localhost:3306/datacustodian
+          THIRDPARTY_DB_URL: jdbc:mysql://localhost:3306/thirdparty
+          TOKENSTORE_DB_URL: jdbc:mysql://localhost:3306/tokenstore
+          DB_DRIVER: com.mysql.cj.jdbc.Driver
+          DB_ROOT_USER: root
+          DB_PASSORD: "password"
+
+    # Service container image
       - image: circleci/mysql:8.0.20
         environment:
-#          MYSQL_ROOT_PASSWORD: password
-#          MYSQL_DATABASE: thirdparty
-          MYSQL_USER: root
-          MYSQL_PASSWORD: password
+          MYSQL_ALLOW_EMPTY_PASSWORD: no
+          MYSQL_PASSWORD: 'password'
 
     # Specify service dependencies here if necessary
     # CircleCI maintains a library of pre-built images
