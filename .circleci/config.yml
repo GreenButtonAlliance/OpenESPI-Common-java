@@ -37,10 +37,17 @@ jobs:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
 
       - run:
-          name: Import and test thirdparty database
+          name: Update CircleCI image
+          command: sudo apt-get update
+
+      - run:
+          name: Install default-mysql-client
+          command: sudo apt-get install default-mysql-client
+
+
+      - run:
+          name: Create thirdparty database
           command: |
-            sudo apt-get update
-            echo "password" | sudo -S apt-get install default-mysql-client
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/cleandatabases_tp.sql
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/prepopulatesql_tp.sql
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/prepopulatesql_users_tp.sql
