@@ -14,13 +14,12 @@ jobs:
           TOKENSTORE_DB_URL: jdbc:mysql://localhost:3306/tokenstore
           DB_DRIVER: com.mysql.cj.jdbc.Driver
           DB_ROOT_USER: root
-          DB_PASSORD: ''
+          DB_PASSORD: 'password'
 
     # Service container image
       - image: circleci/mysql:8.0.20
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_ROOT_PASSWORD: 'password'
 
     working_directory: ~/repo
 
@@ -48,10 +47,10 @@ jobs:
       - run:
           name: Create thirdparty database
           command: |
-            mysql -h 127.0.0.1 -u root -p thirdparty < etc/cleandatabases_tp.sql
-            mysql -h 127.0.0.1 -u root -p thirdparty < etc/prepopulatesql_tp.sql
-            mysql -h 127.0.0.1 -u root -p thirdparty < etc/prepopulatesql_users_tp.sql
-            mysql -h 127.0.0.1 -u root -p --execute="SELECT * FROM thirdparty.retail_customers"
+            mysql -h 127.0.0.1 -u root -p'password' thirdparty < etc/cleandatabases_tp.sql
+            mysql -h 127.0.0.1 -u root -p'password' thirdparty < etc/prepopulatesql_tp.sql
+            mysql -h 127.0.0.1 -u root -p'password' thirdparty < etc/prepopulatesql_users_tp.sql
+            mysql -h 127.0.0.1 -u root -p'password' --execute="SELECT * FROM thirdparty.retail_customers"
 
       # Download and cache dependencies
       - restore_cache:
