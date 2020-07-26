@@ -18,6 +18,9 @@ jobs:
 
     # Service container image
       - image: circleci/mysql:8.0.20
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: ''
 
     working_directory: ~/repo
 
@@ -37,7 +40,7 @@ jobs:
           name: Import and test thirdparty database
           command: |
             sudo apt-get update
-            sudo apt-get install default-mysql-client
+            sudo apt-get install mysql-client
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/cleandatabases_tp.sql
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/prepopulatesql_tp.sql
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/prepopulatesql_users_tp.sql
