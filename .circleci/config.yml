@@ -39,7 +39,7 @@ jobs:
 
       - run:
           name: Check status of MySQL
-            command: sudo systemctl status mysql
+          command: sudo systemctl status mysql
 
       - run:
           name: Update CircleCI image
