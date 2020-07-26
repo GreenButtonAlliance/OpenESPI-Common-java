@@ -40,7 +40,7 @@ jobs:
           name: Import and test thirdparty database
           command: |
             sudo apt-get update
-            sudo apt-get install default-mysql-client
+            echo "password" | sudo -S apt-get install default-mysql-client
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/cleandatabases_tp.sql
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/prepopulatesql_tp.sql
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/prepopulatesql_users_tp.sql
