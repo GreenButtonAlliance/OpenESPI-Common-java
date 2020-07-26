@@ -37,7 +37,7 @@ jobs:
           name: Import and test thirdparty database
           command: |
             sudo apt update
-            sudo apt list mysql*
+            sudo apt install mysql-client-8.0
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/cleandatabases_tp.sql
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/prepopulatesql_tp.sql
             mysql -h 127.0.0.1 -u root -p thirdparty < etc/prepopulatesql_users_tp.sql
