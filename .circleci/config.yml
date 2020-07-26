@@ -45,13 +45,13 @@ jobs:
           name: Install default-mysql-client
           command: sudo apt-get install default-mysql-client
 
-      - run:
-          name: Create thirdparty database
-          command: |
-            mysql -h 127.0.0.1 -u user -ppassw0rd thirdparty < etc/cleandatabases_tp.sql
-            mysql -h 127.0.0.1 -u user -ppassw0rd thirdparty < etc/prepopulatesql_tp.sql
-            mysql -h 127.0.0.1 -u user -ppassw0rd thirdparty < etc/prepopulatesql_users_tp.sql
-            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM thirdparty.retail_customers"
+#     - run:
+#         name: Create thirdparty database
+#         command: |
+#           mysql -h 127.0.0.1 -u user -ppassw0rd thirdparty < etc/cleandatabases_tp.sql
+#           mysql -h 127.0.0.1 -u user -ppassw0rd thirdparty < etc/prepopulatesql_tp.sql
+#           mysql -h 127.0.0.1 -u user -ppassw0rd thirdparty < etc/prepopulatesql_users_tp.sql
+#           mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM thirdparty.retail_customers"
 
       # Download and cache dependencies
       - restore_cache:
