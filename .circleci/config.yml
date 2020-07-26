@@ -19,7 +19,9 @@ jobs:
     # Service container image
       - image: circleci/mysql:8.0.20
         environment:
-          MYSQL_ROOT_PASSWORD: 'password'
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
 
     working_directory: ~/repo
 
@@ -36,6 +38,10 @@ jobs:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
 
       - run:
+          name: Check status of MySQL
+            command: sudo systemctl status mysql
+
+      - run:
           name: Update CircleCI image
           command: sudo apt-get update
 
@@ -43,14 +49,13 @@ jobs:
           name: Install default-mysql-client
           command: sudo apt-get install default-mysql-client
 
-
       - run:
           name: Create thirdparty database
           command: |
-            mysql -h 127.0.0.1 -u root -p'password' thirdparty < etc/cleandatabases_tp.sql
-            mysql -h 127.0.0.1 -u root -p'password' thirdparty < etc/prepopulatesql_tp.sql
-            mysql -h 127.0.0.1 -u root -p'password' thirdparty < etc/prepopulatesql_users_tp.sql
-            mysql -h 127.0.0.1 -u root -p'password' --execute="SELECT * FROM thirdparty.retail_customers"
+            mysql -h 127.0.0.1 -u user -ppassw0rd thirdparty < etc/cleandatabases_tp.sql
+            mysql -h 127.0.0.1 -u user -ppassw0rd thirdparty < etc/prepopulatesql_tp.sql
+            mysql -h 127.0.0.1 -u user -ppassw0rd thirdparty < etc/prepopulatesql_users_tp.sql
+            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM thirdparty.retail_customers"
 
       # Download and cache dependencies
       - restore_cache:
