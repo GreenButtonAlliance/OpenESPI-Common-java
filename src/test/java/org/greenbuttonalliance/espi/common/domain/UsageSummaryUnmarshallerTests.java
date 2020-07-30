@@ -106,7 +106,7 @@ public class UsageSummaryUnmarshallerTests {
 	}
 
 	@Test
-	public void unmarshalsUsageSummary() {
+	public void unmarshal_UsageSummary() {
 		assertEquals(UsageSummary.class,
 				usageSummary.getClass());
 	}

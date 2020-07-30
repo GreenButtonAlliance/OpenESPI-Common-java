@@ -7,21 +7,21 @@ jobs:
   build:
     docker:
       # Primary container image where all commands run
-      - image: circleci/openjdk:8-jdk
-        environment:
-          DATACUSTODIAN_DB_URL: jdbc:mysql://localhost:3306/datacustodian
-          THIRDPARTY_DB_URL: jdbc:mysql://localhost:3306/thirdparty
-          TOKENSTORE_DB_URL: jdbc:mysql://localhost:3306/tokenstore
-          DB_DRIVER: com.mysql.cj.jdbc.Driver
-          DB_ROOT_USER: root
-          DB_PASSORD: 'password'
+      - image: circleci/openjdk:11.0.8-jdk-buster
+#        environment:
+#          DATACUSTODIAN_DB_URL: jdbc:mysql://localhost:3306/datacustodian
+#          THIRDPARTY_DB_URL: jdbc:mysql://localhost:3306/thirdparty
+#          TOKENSTORE_DB_URL: jdbc:mysql://localhost:3306/tokenstore
+#          DB_DRIVER: com.mysql.cj.jdbc.Driver
+#          DB_ROOT_USER: root
+#          DB_PASSORD: 'password'
 
-    # Service container image
-      - image: circleci/mysql:8.0.20
-        environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_USER: user
-          MYSQL_PASSWORD: passw0rd
+#    # Service container image
+#      - image: circleci/mysql:8.0.20
+#        environment:
+#          MYSQL_ROOT_PASSWORD: rootpw
+#          MYSQL_USER: user
+#          MYSQL_PASSWORD: passw0rd
 
     working_directory: ~/repo
 
@@ -31,19 +31,19 @@ jobs:
 
     steps:
       - checkout
-      - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
-          name: Wait for MySQL Database Connection
-          # Preinstalled in circleci/* docker image
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+#      - run:
+#      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+#          name: Wait for MySQL Database Connection
+#          # Preinstalled in circleci/* docker image
+#          command: dockerize -wait tcp://localhost:3306 -timeout 1m
 
-      - run:
-          name: Update CircleCI image
-          command: sudo apt-get update
+#      - run:
+#          name: Update CircleCI image
+#          command: sudo apt-get update
 
-      - run:
-          name: Install default-mysql-client
-          command: sudo apt-get install default-mysql-client
+#      - run:
+#          name: Install default-mysql-client
+#          command: sudo apt-get install default-mysql-client
 
 #     - run:
 #         name: Create thirdparty database
