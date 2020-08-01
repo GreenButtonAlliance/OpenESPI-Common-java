@@ -20,11 +20,8 @@ package org.greenbuttonalliance.espi.common.domain;
 
 import org.junit.Test;
 
-import javax.persistence.Embedded;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.UUID;
 
-import static org.greenbuttonalliance.espi.common.utils.TestUtils.assertAnnotationPresent;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -69,35 +66,35 @@ public class IdentifiedObjectTests {
 				identifiedObject.getMRID());
 	}
 
-	@Test
-	public void description_hasTransientAnnotation() {
-		assertAnnotationPresent(IdentifiedObject.class, "description",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void description_hasTransientAnnotation() {
+//		assertAnnotationPresent(IdentifiedObject.class, "description",
+//				XmlTransient.class);
+//	}
 
-	@Test
-	public void id_hasTransientAnnotation() {
-		assertAnnotationPresent(IdentifiedObject.class, "id",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void id_hasTransientAnnotation() {
+//		assertAnnotationPresent(IdentifiedObject.class, "id",
+//				XmlTransient.class);
+//	}
 
-	@Test
-	public void created_hasTransientAnnotation() {
-		assertAnnotationPresent(IdentifiedObject.class, "published",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void created_hasTransientAnnotation() {
+//		assertAnnotationPresent(IdentifiedObject.class, "published",
+//				XmlTransient.class);
+//	}
 
-	@Test
-	public void updated_hasTransientAnnotation() {
-		assertAnnotationPresent(IdentifiedObject.class, "updated",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void updated_hasTransientAnnotation() {
+//		assertAnnotationPresent(IdentifiedObject.class, "updated",
+//				XmlTransient.class);
+//	}
 
-	@Test
-	public void upLink() {
-		assertAnnotationPresent(IdentifiedObject.class, "upLink",
-				XmlTransient.class);
-		assertAnnotationPresent(IdentifiedObject.class, "upLink",
-				Embedded.class);
-	}
+//	@Test
+//	public void upLink() {
+//		assertAnnotationPresent(IdentifiedObject.class, "upLink",
+//				XmlTransient.class);
+//		assertAnnotationPresent(IdentifiedObject.class, "upLink",
+//				Embedded.class);
+//	}
 }

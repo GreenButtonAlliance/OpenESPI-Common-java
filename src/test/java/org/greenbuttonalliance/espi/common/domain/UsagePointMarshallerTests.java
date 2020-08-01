@@ -94,26 +94,26 @@ public class UsagePointMarshallerTests {
 				newXML());
 	}
 
-	@Test
-	public void meterReadings_shouldNotBeMarshaled() {
-		TestUtils.assertFieldNotMarshallable(UsagePoint.class, "meterReadings");
-	}
+//	@Test
+//	public void meterReadings_shouldNotBeMarshaled() {
+//		TestUtils.assertFieldNotMarshallable(UsagePoint.class, "meterReadings");
+//	}
 
-	@Test
-	public void retailCustomer_shouldNotBeMarshaled() {
-		TestUtils
-				.assertFieldNotMarshallable(UsagePoint.class, "retailCustomer");
-	}
+//	@Test
+//	public void retailCustomer_shouldNotBeMarshaled() {
+//		TestUtils
+//				.assertFieldNotMarshallable(UsagePoint.class, "retailCustomer");
+//	}
 
-	@Test
-	public void electricPowerUsageSummaries_shouldNotBeMarshaled() {
-		TestUtils.assertFieldNotMarshallable(UsagePoint.class,
-				"electricPowerUsageSummaries");
-	}
+//	@Test
+//	public void electricPowerUsageSummaries_shouldNotBeMarshaled() {
+//		TestUtils.assertFieldNotMarshallable(UsagePoint.class,
+//				"electricPowerUsageSummaries");
+//	}
 
-	@Test
-	public void localTimeParameters_shouldNotBeMarshaled() {
-		TestUtils.assertFieldNotMarshallable(UsagePoint.class,
-				"localTimeParameters");
-	}
+//	@Test
+//	public void localTimeParameters_shouldNotBeMarshaled() {
+//		TestUtils.assertFieldNotMarshallable(UsagePoint.class,
+//				"localTimeParameters");
+//	}
 }

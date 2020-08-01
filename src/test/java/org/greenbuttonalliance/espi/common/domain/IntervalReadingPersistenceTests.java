@@ -18,47 +18,39 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
-import org.hibernate.annotations.LazyCollection;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.MockitoAnnotations;
-
-import javax.persistence.*;
-
 public class IntervalReadingPersistenceTests {
 
-	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
-		TestUtils.setupXMLUnit();
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		MockitoAnnotations.initMocks(this);
+//		TestUtils.setupXMLUnit();
+//	}
 
-	@Test
-	public void persistence() {
-		TestUtils.assertAnnotationPresent(IntervalReading.class, Entity.class);
-		TestUtils.assertAnnotationPresent(IntervalReading.class, Table.class);
-	}
+//	@Test
+//	public void persistence() {
+//		TestUtils.assertAnnotationPresent(IntervalReading.class, Entity.class);
+//		TestUtils.assertAnnotationPresent(IntervalReading.class, Table.class);
+//	}
 
-	@Test
-	public void readingQualities() {
-		TestUtils.assertAnnotationPresent(IntervalReading.class, "readingQualities",
-				OneToMany.class);
-		TestUtils.assertAnnotationPresent(IntervalReading.class, "readingQualities",
-				LazyCollection.class);
-	}
+//	@Test
+//	public void readingQualities() {
+//		TestUtils.assertAnnotationPresent(IntervalReading.class, "readingQualities",
+//				OneToMany.class);
+//		TestUtils.assertAnnotationPresent(IntervalReading.class, "readingQualities",
+//				LazyCollection.class);
+//	}
 
-	@Test
-	public void timePeriod() {
-		TestUtils.assertAnnotationPresent(IntervalReading.class, "timePeriod",
-				Embedded.class);
-	}
+//	@Test
+//	public void timePeriod() {
+//		TestUtils.assertAnnotationPresent(IntervalReading.class, "timePeriod",
+//				Embedded.class);
+//	}
 
-	@Test
-	public void intervalBlock() {
-		TestUtils.assertAnnotationPresent(IntervalReading.class, "intervalBlock",
-				ManyToOne.class);
-		TestUtils.assertAnnotationPresent(IntervalReading.class, "intervalBlock",
-				JoinColumn.class);
-	}
+//	@Test
+//	public void intervalBlock() {
+//		TestUtils.assertAnnotationPresent(IntervalReading.class, "intervalBlock",
+//				ManyToOne.class);
+//		TestUtils.assertAnnotationPresent(IntervalReading.class, "intervalBlock",
+//				JoinColumn.class);
+//	}
 }

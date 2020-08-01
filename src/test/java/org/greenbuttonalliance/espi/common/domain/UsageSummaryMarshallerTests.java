@@ -28,7 +28,6 @@ import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
 import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathValue;
@@ -485,10 +484,10 @@ public class UsageSummaryMarshallerTests {
 	}
 
 	@Test
-	public void usagePoint_hasTransientAnnotation() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"usagePoint", XmlTransient.class);
-	}
+//	public void usagePoint_hasTransientAnnotation() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"usagePoint", XmlTransient.class);
+//	}
 
 	private void assertSummaryMeasurement(SummaryMeasurement sm) {
 		assertEquals("PowerOfTenMultiplier", sm.getPowerOfTenMultiplier());

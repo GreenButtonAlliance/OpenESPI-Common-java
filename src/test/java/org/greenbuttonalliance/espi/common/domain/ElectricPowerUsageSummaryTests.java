@@ -28,14 +28,17 @@ import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
 import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathValue;
 import static org.greenbuttonalliance.espi.common.support.EspiFactory.newElectricPowerUsageSummaryWithUsagePoint;
-import static org.greenbuttonalliance.espi.common.utils.TestUtils.assertAnnotationPresent;
 import static org.junit.Assert.assertEquals;
 
+/**
+ *
+ *  ElectricPowerUsageSummaryTests duplicates ElectricPowerUsageSummaryUnmarshallerTests
+ *
+ */
 public class ElectricPowerUsageSummaryTests {
 
 	private String xml;
@@ -470,11 +473,11 @@ public class ElectricPowerUsageSummaryTests {
 				xml);
 	}
 
-	@Test
-	public void usagePoint_hasTransientAnnotation() {
-		assertAnnotationPresent(ElectricPowerUsageSummary.class,
-				"usagePoint", XmlTransient.class);
-	}
+//	@Test
+//	public void usagePoint_hasTransientAnnotation() {
+//		assertAnnotationPresent(ElectricPowerUsageSummary.class,
+//				"usagePoint", XmlTransient.class);
+//	}
 
 	private void assertSummaryMeasurement(SummaryMeasurement sm) {
 		assertEquals("PowerOfTenMultiplier", sm.getPowerOfTenMultiplier());

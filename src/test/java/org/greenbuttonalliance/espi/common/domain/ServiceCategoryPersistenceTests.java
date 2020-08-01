@@ -18,16 +18,11 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
-import org.junit.Test;
-
-import javax.persistence.Column;
-
 public class ServiceCategoryPersistenceTests {
 
-	@Test
-	public void hasId() {
-		TestUtils.assertAnnotationPresent(ServiceCategory.class, "kind",
-				Column.class);
-	}
+//	@Test
+//	public void hasId() {
+//		TestUtils.assertAnnotationPresent(ServiceCategory.class, "kind",
+//				Column.class);
+//	}
 }

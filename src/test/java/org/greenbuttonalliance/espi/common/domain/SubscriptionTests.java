@@ -19,17 +19,11 @@
 package org.greenbuttonalliance.espi.common.domain;
 
 import org.greenbuttonalliance.espi.common.support.EspiFactory;
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Test;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -68,22 +62,23 @@ public class SubscriptionTests {
 
 	@Test
 	public void extendsIdentifiableObject() {
-		assertSame(Subscription.class.getSuperclass(), IdentifiedObject.class);
+		assertSame(Subscription.class.getSuperclass(),
+				IdentifiedObject.class);
 	}
 
-	@Test
-	public void persistence() {
-		TestUtils.assertAnnotationPresent(Subscription.class, Entity.class);
-		TestUtils.assertAnnotationPresent(Subscription.class, Table.class);
-	}
+//	@Test
+//	public void persistence() {
+//		TestUtils.assertAnnotationPresent(Subscription.class, Entity.class);
+//		TestUtils.assertAnnotationPresent(Subscription.class, Table.class);
+//	}
 
-	@Test
-	public void retailCustomer() {
-		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
-				ManyToOne.class);
-		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
-				JoinColumn.class);
-		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
-				NotNull.class);
-	}
+//	@Test
+//	public void retailCustomer() {
+//		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
+//				ManyToOne.class);
+//		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
+//				JoinColumn.class);
+//		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
+//				NotNull.class);
+//	}
 }

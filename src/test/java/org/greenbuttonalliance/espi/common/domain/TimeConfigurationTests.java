@@ -18,40 +18,31 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.service.ExportService;
-import org.greenbuttonalliance.espi.common.service.ImportService;
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.persistence.Entity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
 @ActiveProfiles("devmysql")
 public class TimeConfigurationTests {
 
-	@Autowired
-	ImportService importService;
+//	@Autowired
+//	ImportService importService;
 
-	@Autowired
-	ExportService exportService;
+//	@Autowired
+//	ExportService exportService;
 
-	@Before
-	public void before() {
-		MockitoAnnotations.initMocks(this);
-		TestUtils.setupXMLUnit();
-	}
+//	@Before
+//	public void before() {
+//		MockitoAnnotations.initMocks(this);
+//		TestUtils.setupXMLUnit();
+//	}
 
-	@Test
-	public void persistable() {
-		TestUtils.assertAnnotationPresent(TimeConfiguration.class, Entity.class);
-	}
+//	@Test
+//	public void persistable() {
+//		TestUtils.assertAnnotationPresent(TimeConfiguration.class, Entity.class);
+//	}
 
 }

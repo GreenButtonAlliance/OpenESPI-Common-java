@@ -14,7 +14,7 @@ jobs:
 #          TOKENSTORE_DB_URL: jdbc:mysql://localhost:3306/tokenstore
 #          DB_DRIVER: com.mysql.cj.jdbc.Driver
 #          DB_ROOT_USER: root
-#          DB_PASSORD: 'password'
+#          DB_PASSWORD: 'password'
 
 #    # Service container image
 #      - image: circleci/mysql:8.0.20

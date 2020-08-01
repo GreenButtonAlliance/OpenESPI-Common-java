@@ -18,91 +18,86 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
-import org.junit.Test;
-
-import javax.persistence.*;
-
 public class UsageSummaryPersistenceTests {
-	@Test
-	public void persistence() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				Entity.class);
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				Table.class);
-	}
+//	@Test
+//	public void persistence() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				Entity.class);
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				Table.class);
+//	}
 
-	@Test
-	public void ratchetDemandPeriod() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"ratchetDemandPeriod", Embedded.class);
-	}
+//	@Test
+//	public void ratchetDemandPeriod() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"ratchetDemandPeriod", Embedded.class);
+//	}
 
-	@Test
-	public void billingPeriod() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"billingPeriod", Embedded.class);
-	}
+//	@Test
+//	public void billingPeriod() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"billingPeriod", Embedded.class);
+//	}
 
-	@Test
-	public void currentBillingPeriodOverAllConsumption() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"currentBillingPeriodOverAllConsumption", Embedded.class);
-	}
+//	@Test
+//	public void currentBillingPeriodOverAllConsumption() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"currentBillingPeriodOverAllConsumption", Embedded.class);
+//	}
 
-	@Test
-	public void currentDayLastYearNetConsumption() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"currentDayLastYearNetConsumption", Embedded.class);
-	}
+//	@Test
+//	public void currentDayLastYearNetConsumption() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"currentDayLastYearNetConsumption", Embedded.class);
+//	}
 
-	@Test
-	public void currentDayNetConsumption() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"currentDayNetConsumption", Embedded.class);
-	}
+//	@Test
+//	public void currentDayNetConsumption() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"currentDayNetConsumption", Embedded.class);
+//	}
 
-	@Test
-	public void currentDayOverallConsumption() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"currentDayOverallConsumption", Embedded.class);
-	}
+//	@Test
+//	public void currentDayOverallConsumption() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"currentDayOverallConsumption", Embedded.class);
+//	}
 
-	@Test
-	public void peakDemand() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"peakDemand", Embedded.class);
-	}
+//	@Test
+//	public void peakDemand() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"peakDemand", Embedded.class);
+//	}
 
-	@Test
-	public void previousDayLastYearOverallConsumption() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"previousDayLastYearOverallConsumption", Embedded.class);
-	}
+//	@Test
+//	public void previousDayLastYearOverallConsumption() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"previousDayLastYearOverallConsumption", Embedded.class);
+//	}
 
-	@Test
-	public void previousDayNetConsumption() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"previousDayNetConsumption", Embedded.class);
-	}
+//	@Test
+//	public void previousDayNetConsumption() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"previousDayNetConsumption", Embedded.class);
+//	}
 
-	@Test
-	public void previousDayOverallConsumption() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"previousDayOverallConsumption", Embedded.class);
-	}
+//	@Test
+//	public void previousDayOverallConsumption() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"previousDayOverallConsumption", Embedded.class);
+//	}
 
-	@Test
-	public void ratchetDemand() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"ratchetDemand", Embedded.class);
-	}
+//	@Test
+//	public void ratchetDemand() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"ratchetDemand", Embedded.class);
+//	}
 
-	@Test
-	public void usagePoint() {
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"usagePoint", ManyToOne.class);
-		TestUtils.assertAnnotationPresent(UsageSummary.class,
-				"usagePoint", JoinColumn.class);
-	}
+//	@Test
+//	public void usagePoint() {
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"usagePoint", ManyToOne.class);
+//		TestUtils.assertAnnotationPresent(UsageSummary.class,
+//				"usagePoint", JoinColumn.class);
+//	}
 }

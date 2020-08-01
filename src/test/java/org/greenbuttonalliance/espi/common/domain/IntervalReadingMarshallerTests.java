@@ -27,7 +27,6 @@ import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
 import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathValue;
@@ -44,11 +43,11 @@ public class IntervalReadingMarshallerTests {
 		xml = EspiMarshaller.marshal(EspiFactory.newIntervalReading());
 	}
 
-	@Test
-	public void intervalBlock_hasTransientAnnotation() {
-		TestUtils.assertAnnotationPresent(IntervalReading.class,
-				"intervalBlock", XmlTransient.class);
-	}
+//	@Test
+//	public void intervalBlock_hasTransientAnnotation() {
+//		TestUtils.assertAnnotationPresent(IntervalReading.class,
+//				"intervalBlock", XmlTransient.class);
+//	}
 
 	@Test
 	public void marshal_setsCost() throws SAXException, IOException,

@@ -18,13 +18,11 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 import static org.greenbuttonalliance.espi.common.support.EspiFactory.newSubscription;
@@ -60,9 +58,9 @@ public class SubscriptionValidationTests {
 		assertFalse(violations.isEmpty());
 	}
 
-	@Test
-	public void retailCustomer() {
-		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
-				NotNull.class);
-	}
+//	@Test
+//	public void retailCustomer() {
+//		TestUtils.assertAnnotationPresent(Subscription.class, "retailCustomer",
+//				NotNull.class);
+//	}
 }

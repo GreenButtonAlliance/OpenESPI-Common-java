@@ -18,35 +18,25 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.MockitoAnnotations;
-
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 public class ReadingQualityPersistenceTests {
 
-	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
-		TestUtils.setupXMLUnit();
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		MockitoAnnotations.initMocks(this);
+//		TestUtils.setupXMLUnit();
+//	}
 
-	@Test
-	public void persistence() {
-		TestUtils.assertAnnotationPresent(ReadingQuality.class, Entity.class);
-		TestUtils.assertAnnotationPresent(ReadingQuality.class, Table.class);
-	}
+//	@Test
+//	public void persistence() {
+//		TestUtils.assertAnnotationPresent(ReadingQuality.class, Entity.class);
+//		TestUtils.assertAnnotationPresent(ReadingQuality.class, Table.class);
+//	}
 
-	@Test
-	public void readingQualities() {
-		TestUtils.assertAnnotationPresent(ReadingQuality.class, "intervalReading",
-				ManyToOne.class);
-		TestUtils.assertAnnotationPresent(ReadingQuality.class, "intervalReading",
-				JoinColumn.class);
-	}
+//	@Test
+//	public void readingQualities() {
+//		TestUtils.assertAnnotationPresent(ReadingQuality.class, "intervalReading",
+//				ManyToOne.class);
+//		TestUtils.assertAnnotationPresent(ReadingQuality.class, "intervalReading",
+//				JoinColumn.class);
+//	}
 }

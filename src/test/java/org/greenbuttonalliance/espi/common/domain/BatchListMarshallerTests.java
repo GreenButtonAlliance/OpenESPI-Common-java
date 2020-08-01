@@ -44,7 +44,7 @@ public class BatchListMarshallerTests{
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         TestUtils2.setupXMLUnit();
         MockitoAnnotations.initMocks(this);
     }

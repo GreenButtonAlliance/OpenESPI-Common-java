@@ -18,13 +18,8 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Test;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -67,52 +62,55 @@ public class AuthorizationTests {
 
 	@Test
 	public void extendsIdentifiableObject() {
-		assertSame(Authorization.class.getSuperclass(), IdentifiedObject.class);
+		assertSame(Authorization.class.getSuperclass(),
+				IdentifiedObject.class);
 	}
 
-	@Test
-	public void persistence() {
-		TestUtils.assertAnnotationPresent(Authorization.class, Entity.class);
-		TestUtils.assertAnnotationPresent(Authorization.class, Table.class);
-	}
+//	@Test
+//	public void persistence() {
+//		TestUtils.assertAnnotationPresent(Authorization.class, Entity.class);
+//		TestUtils.assertAnnotationPresent(Authorization.class, Table.class);
+//	}
 
-	@Test
-	public void accessToken() {
-		TestUtils.assertColumnAnnotation(Authorization.class, "accessToken",
-				"access_token");
-	}
+//	@Test
+//	public void accessToken() {
+//		TestUtils.assertColumnAnnotation(Authorization.class,
+//				"accessToken","access_token");
+//	}
 
-	@Test
-	public void authorizationServer() {
-		TestUtils.assertColumnAnnotation(Authorization.class, "authorizationURI",
-				"authorization_uri");
-	}
+//	@Test
+//	public void authorizationServer() {
+//		TestUtils.assertColumnAnnotation(Authorization.class,
+//				"authorizationURI","authorization_uri");
+//	}
 
-	@Test
-	public void thirdParty() {
-		TestUtils.assertColumnAnnotation(Authorization.class, "thirdParty", "third_party");
-	}
+//	@Test
+//	public void thirdParty() {
+//		TestUtils.assertColumnAnnotation(Authorization.class,
+//				"thirdParty", "third_party");
+//	}
 
-	@Test
-	public void retailCustomer() {
-		TestUtils.assertAnnotationPresent(Authorization.class, "retailCustomer",
-				ManyToOne.class);
-		TestUtils.assertAnnotationPresent(Authorization.class, "retailCustomer",
-				JoinColumn.class);
-	}
+//	@Test
+//	public void retailCustomer() {
+//		TestUtils.assertAnnotationPresent(Authorization.class, "retailCustomer",
+//				ManyToOne.class);
+//		TestUtils.assertAnnotationPresent(Authorization.class, "retailCustomer",
+//				JoinColumn.class);
+//	}
 
-	@Test
-	public void state() {
-		TestUtils.assertColumnAnnotation(Authorization.class, "state", "state");
-	}
+//	@Test
+//	public void state() {
+//		TestUtils.assertColumnAnnotation(Authorization.class,
+//				"state","state");
+//	}
 
-	@Test
-	public void applicationInformation() {
-		TestUtils.assertAnnotationPresent(Authorization.class, "applicationInformation",
-				ManyToOne.class);
-		TestUtils.assertAnnotationPresent(Authorization.class, "applicationInformation",
-				JoinColumn.class);
-	}
+//	@Test
+//	public void applicationInformation() {
+//		TestUtils.assertAnnotationPresent(Authorization.class,
+//				"applicationInformation", ManyToOne.class);
+//		TestUtils.assertAnnotationPresent(Authorization.class,
+//				"applicationInformation", JoinColumn.class);
+//	}
 
 	@Test
 	public void subscriptionId() {

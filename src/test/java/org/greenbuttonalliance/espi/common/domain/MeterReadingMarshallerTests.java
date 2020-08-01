@@ -18,27 +18,22 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
-import org.junit.Test;
-
-import javax.xml.bind.annotation.XmlTransient;
-
 public class MeterReadingMarshallerTests {
-	@Test
-	public void intervalBlocks() {
-		TestUtils.assertAnnotationPresent(MeterReading.class, "intervalBlocks",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void intervalBlocks() {
+//		TestUtils.assertAnnotationPresent(MeterReading.class, "intervalBlocks",
+//				XmlTransient.class);
+//	}
 
-	@Test
-	public void usagePoint() {
-		TestUtils.assertAnnotationPresent(MeterReading.class, "usagePoint",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void usagePoint() {
+//		TestUtils.assertAnnotationPresent(MeterReading.class, "usagePoint",
+//				XmlTransient.class);
+//	}
 
-	@Test
-	public void readingType() {
-		TestUtils.assertAnnotationPresent(MeterReading.class, "readingType",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void readingType() {
+//		TestUtils.assertAnnotationPresent(MeterReading.class, "readingType",
+//				XmlTransient.class);
+//	}
 }

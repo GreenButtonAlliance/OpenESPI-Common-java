@@ -28,7 +28,6 @@ import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
@@ -60,23 +59,23 @@ public class MeterReadingTests {
 				EspiMarshaller.marshal(newMeterReadingWithUsagePoint()));
 	}
 
-	@Test
-	public void usagePoint_hasTransientAnnotation() {
-		TestUtils.assertAnnotationPresent(MeterReading.class, "usagePoint",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void usagePoint_hasTransientAnnotation() {
+//		TestUtils.assertAnnotationPresent(MeterReading.class, "usagePoint",
+//				XmlTransient.class);
+//	}
 
-	@Test
-	public void intervalBlocks_hasTransientAnnotation() {
-		TestUtils.assertAnnotationPresent(MeterReading.class, "intervalBlocks",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void intervalBlocks_hasTransientAnnotation() {
+//		TestUtils.assertAnnotationPresent(MeterReading.class, "intervalBlocks",
+//				XmlTransient.class);
+//	}
 
-	@Test
-	public void readingType_hasTransientAnnotation() {
-		TestUtils.assertAnnotationPresent(MeterReading.class, "readingType",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void readingType_hasTransientAnnotation() {
+//		TestUtils.assertAnnotationPresent(MeterReading.class, "readingType",
+//				XmlTransient.class);
+//	}
 
 	@Test
 	public void setUpResource() {

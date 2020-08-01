@@ -18,15 +18,10 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
-import org.junit.Test;
-
-import javax.persistence.Embeddable;
-
 public class SummaryMeasurementPersistenceTests {
-	@Test
-	public void persistence() {
-		TestUtils.assertAnnotationPresent(SummaryMeasurement.class,
-				Embeddable.class);
-	}
+//	@Test
+//	public void persistence() {
+//		TestUtils.assertAnnotationPresent(SummaryMeasurement.class,
+//				Embeddable.class);
+//	}
 }

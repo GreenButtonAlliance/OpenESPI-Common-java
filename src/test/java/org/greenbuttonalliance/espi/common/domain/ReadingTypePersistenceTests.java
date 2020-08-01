@@ -18,28 +18,21 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
-import org.junit.Test;
-
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 public class ReadingTypePersistenceTests {
-    @Test
-    public void persistence() {
-        TestUtils.assertAnnotationPresent(ReadingType.class, Entity.class);
-        TestUtils.assertAnnotationPresent(ReadingType.class, Table.class);
-    }
+//    @Test
+//    public void persistence() {
+//        TestUtils.assertAnnotationPresent(ReadingType.class, Entity.class);
+//        TestUtils.assertAnnotationPresent(ReadingType.class, Table.class);
+//    }
 
-    @Test
-    public void interhamonic() {
-        TestUtils.assertAnnotationPresent(ReadingType.class, "interharmonic", Embedded.class);
-    }
+//    @Test
+//    public void interhamonic() {
+//        TestUtils.assertAnnotationPresent(ReadingType.class, "interharmonic", Embedded.class);
+//    }
 
-    @Test
-    public void argument() {
-		TestUtils.assertAnnotationPresent(ReadingType.class, "argument",
-				Embedded.class);
-	}
+//    @Test
+//    public void argument() {
+//		TestUtils.assertAnnotationPresent(ReadingType.class, "argument",
+//				Embedded.class);
+//	}
 }

@@ -18,7 +18,6 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import com.sun.syndication.io.FeedException;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -31,7 +30,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStreamReader;
 
@@ -41,7 +39,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("devmysql")
-@ContextConfiguration("/spring/test-context.xml")
+@ContextConfiguration("classpath:spring/test-context.xml")
 public class BatchListUnmarsallerTests {
 
     static final String XML_INPUT = ""
@@ -51,13 +49,13 @@ public class BatchListUnmarsallerTests {
             + "</espi:BatchList>";
 
     @Autowired
-    @Qualifier("domainMarshaller")
+    @Qualifier(value = "domainMarshaller")
     private Jaxb2Marshaller marshaller;
 
     private BatchList batchList;
 
     @Before
-    public void before() throws JAXBException, FeedException {
+    public void before() {
         batchList = (BatchList) marshaller.unmarshal(new StreamSource(
                 new InputStreamReader(IOUtils.toInputStream(XML_INPUT))));
     }

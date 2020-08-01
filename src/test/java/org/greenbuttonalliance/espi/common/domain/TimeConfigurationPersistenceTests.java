@@ -18,18 +18,12 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
-import org.junit.Test;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 public class TimeConfigurationPersistenceTests {
 
-	@Test
-	public void persistence() {
-		TestUtils
-				.assertAnnotationPresent(TimeConfiguration.class, Entity.class);
-		TestUtils.assertAnnotationPresent(TimeConfiguration.class, Table.class);
-	}
+//	@Test
+//	public void persistence() {
+//		TestUtils
+//				.assertAnnotationPresent(TimeConfiguration.class, Entity.class);
+//		TestUtils.assertAnnotationPresent(TimeConfiguration.class, Table.class);
+//	}
 }

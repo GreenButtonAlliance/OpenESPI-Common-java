@@ -18,13 +18,11 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.greenbuttonalliance.espi.common.utils.TestUtils;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 import java.util.UUID;
 
@@ -59,9 +57,9 @@ public class IdentifiedObjectValidationTests {
 		assertFalse(violations.isEmpty());
 	}
 
-	@Test
-	public void uuid() {
-		TestUtils.assertAnnotationPresent(IdentifiedObject.class, "uuid",
-				NotNull.class);
-	}
+//	@Test
+//	public void uuid() {
+//		TestUtils.assertAnnotationPresent(IdentifiedObject.class, "uuid",
+//				NotNull.class);
+//	}
 }

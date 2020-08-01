@@ -28,7 +28,6 @@ import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
@@ -36,6 +35,12 @@ import static org.greenbuttonalliance.espi.common.support.Asserts.assertXpathVal
 import static org.greenbuttonalliance.espi.common.support.EspiFactory.newIntervalBlockWithUsagePoint;
 import static org.junit.Assert.assertEquals;
 
+/**
+ *
+ *  IntervalBlockTests and IntervalBlockUnmarshallerTests contain duplicate
+ *  functional Unmarshalling tests
+ *
+ */
 public class IntervalBlockTests {
 	static final String XML_INPUT = "<IntervalBlock xmlns=\"http://naesb.org/espi\">"
 			+ "<interval>"
@@ -64,13 +69,16 @@ public class IntervalBlockTests {
 
 	@Test
 	public void unmarshallsIntervalBlock() {
-		assertEquals(IntervalBlock.class, intervalBlock.getClass());
+		assertEquals(IntervalBlock.class,
+				intervalBlock.getClass());
 	}
 
 	@Test
 	public void unmarshal_setsInterval() {
-		assertEquals(3L, intervalBlock.getInterval().getDuration().longValue());
-		assertEquals(4L, intervalBlock.getInterval().getStart().longValue());
+		assertEquals(3L, intervalBlock.getInterval()
+				.getDuration().longValue());
+		assertEquals(4L, intervalBlock.getInterval()
+				.getStart().longValue());
 	}
 
 	@Test
@@ -102,9 +110,9 @@ public class IntervalBlockTests {
 		assertXpathExists("espi:IntervalBlock/espi:IntervalReading[2]", xml);
 	}
 
-	@Test
-	public void meterReading_hasTransientAnnotation() {
-		TestUtils.assertAnnotationPresent(IntervalBlock.class, "meterReading",
-				XmlTransient.class);
-	}
+//	@Test
+//	public void meterReading_hasTransientAnnotation() {
+//		TestUtils.assertAnnotationPresent(IntervalBlock.class, "meterReading",
+//				XmlTransient.class);
+//	}
 }

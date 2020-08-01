@@ -44,18 +44,22 @@ public class IntervalBlockUnmarshallerTests {
 	@Before
 	public void before() throws Exception {
 		IntervalBlockAdapter intervalBlockAdapter = new IntervalBlockAdapter();
-		JAXBElement<IntervalBlock> intervalBlockJAXBElement = EspiMarshaller.unmarshal(XML_INPUT);
-		intervalBlock = intervalBlockAdapter.unmarshal(intervalBlockJAXBElement);
+		JAXBElement<IntervalBlock> intervalBlockJAXBElement = EspiMarshaller
+				.unmarshal(XML_INPUT);
+		intervalBlock = intervalBlockAdapter
+				.unmarshal(intervalBlockJAXBElement);
 	}
 
 	@Test
 	public void unmarshallsIntervalBlock() {
-		assertEquals(IntervalBlock.class, intervalBlock.getClass());
+		assertEquals(IntervalBlock.class,
+				intervalBlock.getClass());
 	}
 
 	@Test
 	public void unmarshal_setsIntervalDuration() {
-		Assert.assertThat(intervalBlock.getInterval().getDuration(),
+		Assert.assertThat(intervalBlock.getInterval()
+						.getDuration(),
 				is(86400L));
 	}
 
