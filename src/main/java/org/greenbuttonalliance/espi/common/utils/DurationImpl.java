@@ -697,7 +697,7 @@ class DurationImpl
         BigInteger maxintAsBigInteger = BigInteger.valueOf(Integer.MAX_VALUE);
 
         // check for fields that are too large in this Duration
-        if (years != null && years.compareTo(maxintAsBigInteger) == 1) {
+        if (years != null && years.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.YEARS.toString(), years.toString()})
@@ -706,7 +706,7 @@ class DurationImpl
                     //+ years.toString()
             );
         }
-        if (months != null && months.compareTo(maxintAsBigInteger) == 1) {
+        if (months != null && months.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.MONTHS.toString(), months.toString()})
@@ -716,7 +716,7 @@ class DurationImpl
                     //+ months.toString()
             );
         }
-        if (days != null && days.compareTo(maxintAsBigInteger) == 1) {
+        if (days != null && days.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.DAYS.toString(), days.toString()})
@@ -726,7 +726,7 @@ class DurationImpl
                     //+ days.toString()
             );
         }
-        if (hours != null && hours.compareTo(maxintAsBigInteger) == 1) {
+        if (hours != null && hours.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.HOURS.toString(), hours.toString()})
@@ -736,7 +736,7 @@ class DurationImpl
                     //+ hours.toString()
             );
         }
-        if (minutes != null && minutes.compareTo(maxintAsBigInteger) == 1) {
+        if (minutes != null && minutes.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.MINUTES.toString(), minutes.toString()})
@@ -746,7 +746,7 @@ class DurationImpl
                     //+ minutes.toString()
             );
         }
-        if (seconds != null && seconds.toBigInteger().compareTo(maxintAsBigInteger) == 1) {
+        if (seconds != null && seconds.toBigInteger().compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.SECONDS.toString(), toString(seconds)})
@@ -759,7 +759,7 @@ class DurationImpl
 
         // check for fields that are too large in rhs Duration
         BigInteger rhsYears = (BigInteger) rhs.getField(DatatypeConstants.YEARS);
-        if (rhsYears != null && rhsYears.compareTo(maxintAsBigInteger) == 1) {
+        if (rhsYears != null && rhsYears.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.YEARS.toString(), rhsYears.toString()})
@@ -770,7 +770,7 @@ class DurationImpl
             );
         }
         BigInteger rhsMonths = (BigInteger) rhs.getField(DatatypeConstants.MONTHS);
-        if (rhsMonths != null && rhsMonths.compareTo(maxintAsBigInteger) == 1) {
+        if (rhsMonths != null && rhsMonths.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.MONTHS.toString(), rhsMonths.toString()})
@@ -781,7 +781,7 @@ class DurationImpl
             );
         }
         BigInteger rhsDays = (BigInteger) rhs.getField(DatatypeConstants.DAYS);
-        if (rhsDays != null && rhsDays.compareTo(maxintAsBigInteger) == 1) {
+        if (rhsDays != null && rhsDays.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.DAYS.toString(), rhsDays.toString()})
@@ -792,7 +792,7 @@ class DurationImpl
             );
         }
         BigInteger rhsHours = (BigInteger) rhs.getField(DatatypeConstants.HOURS);
-        if (rhsHours != null && rhsHours.compareTo(maxintAsBigInteger) == 1) {
+        if (rhsHours != null && rhsHours.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.HOURS.toString(), rhsHours.toString()})
@@ -803,7 +803,7 @@ class DurationImpl
             );
         }
         BigInteger rhsMinutes = (BigInteger) rhs.getField(DatatypeConstants.MINUTES);
-        if (rhsMinutes != null && rhsMinutes.compareTo(maxintAsBigInteger) == 1) {
+        if (rhsMinutes != null && rhsMinutes.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.MINUTES.toString(), rhsMinutes.toString()})
@@ -818,7 +818,7 @@ class DurationImpl
         if ( rhsSecondsAsBigDecimal != null ) {
             rhsSeconds =  rhsSecondsAsBigDecimal.toBigInteger();
         }
-        if (rhsSeconds != null && rhsSeconds.compareTo(maxintAsBigInteger) == 1) {
+        if (rhsSeconds != null && rhsSeconds.compareTo(maxintAsBigInteger) > 0) {
             throw new UnsupportedOperationException(
                     DatatypeMessageFormatter.formatMessage(null, "TooLarge",
                             new Object[]{this.getClass().getName() + "#compare(Duration duration)" + DatatypeConstants.SECONDS.toString(), rhsSeconds.toString()})
