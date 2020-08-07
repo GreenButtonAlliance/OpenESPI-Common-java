@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer"
+		   targetNamespace="http://naesb.org/espi/customer"
+		   elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.3.20200130">
 <!--
 ==========================================================================
  Schema:  retailcustomer.xsd
  Version: North American Energy Standards Board (NAESB) REQ.21 ESPI Model Business Practices, Retail Markets Quadrant (RMQ). Ratified April 8, 2019.
  Authors: NAESB
 ========================================================================== 
-Copyright 2019 North American Energy Standards Board 
+Copyright 2019-2020 North American Energy Standards Board
 Licensed by the North American Energy Standards Board (NAESB).  See the NOTICE section file below for additional information
 regarding copyright ownership.  NAESB licenses this file
 to you under the Apache License, Version 2.0 (the "License"); you may not
@@ -35,7 +38,7 @@ NOTICE
 ______________________________________________________
 ==========================================================================	
     Schema: retailcustomer.xsd	
-    Version: 3.3.20200117    	
+    Version: 3.3.20200130
     Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)	
 ========================================================================== 	
   ~     Copyright (c) 2018-2020 Green Button Alliance, Inc.
@@ -53,10 +56,15 @@ ______________________________________________________
   ~     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~     See the License for the specific language governing permissions and
   ~     limitations under the License.
-  ~
+______________________________________________________
+
+All entries marked [GBA-Extension] are Copyright property of the Green Button Alliance, Inc.
+as required by the Apache 2.0 License.
+______________________________________________________
+END NOTICE
+______________________________________________________
   -->
 <!-- edited with XMLSpy v2019 rel. 3 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:cust="http://naesb.org/espi/customer" xmlns:espi="http://naesb.org/espi" xmlns:atom="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.3.20190702">
 	<xs:annotation>
 		<xs:documentation>
 		    The retail customer schema provides details about a UsagePoint that are considered Personally identifiable information (PII) and
@@ -919,7 +927,7 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 	</xs:complexType>
 	<xs:complexType name="Location">
 		<xs:annotation>
-			<xs:documentation>The place, scene, or point of something where someone or something has been, is, and/or will be at a given moment in time. It can be defined with one or more postition points (coordinates) in a given coordinate system.</xs:documentation>
+			<xs:documentation>The place, scene, or point of something where someone or something has been, is, and/or will be at a given moment in time. It can be defined with one or more position points (coordinates) in a given coordinate system.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
@@ -1111,7 +1119,7 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 	</xs:complexType>
 	<xs:complexType name="PositionPoint">
 		<xs:annotation>
-			<xs:documentation>Set of spatial coordinates that determine a point, defined in the coordinate system specified in 'Location.CoordinateSystem'. Use a single position point instance to desribe a point-oriented location. Use a sequence of position points to describe a line-oriented object (physical location of non-point oriented objects like cables or lines), or area of an object (like a substation or a geographical zone - in this case, have first and last position point with the same values).</xs:documentation>
+			<xs:documentation>Set of spatial coordinates that determine a point, defined in the coordinate system specified in 'Location.CoordinateSystem'. Use a single position point instance to describe a point-oriented location. Use a sequence of position points to describe a line-oriented object (physical location of non-point oriented objects like cables or lines), or area of an object (like a substation or a geographical zone - in this case, have first and last position point with the same values).</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="Object">
@@ -2422,7 +2430,7 @@ Month: 3</xs:documentation>
 					<xs:enumeration value="152">
 						<xs:annotation>
 							<xs:appinfo>APerA</xs:appinfo>
-							<xs:documentation>Current, Ratio of Amperages, A/A</xs:documentation>
+							<xs:documentation>Current, Ratio of Amperage, A/A</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="103">
