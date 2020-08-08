@@ -5,7 +5,9 @@
 	<!--
 ==========================================================================
     Schema:  NAESBespiSchema.xsd
-    Version: North American Energy Standards Board (NAESB)REQ.21 ESPI Model Business Practices, Retail Markets Quadrant (RMQ), Version 3.3 Published January 30, 2020, MC20001 Applied Effective March 20, 2020.
+    Version: North American Energy Standards Board (NAESB)REQ.21 ESPI Model Business Practices,
+             Retail Markets Quadrant (RMQ), Version 3.3 Published January 30, 2020,
+             MC20001 Applied Effective March 20, 2020.
     Authors: NAESB
 ==========================================================================
 Copyright 2011-2020 North American Energy Standards Board
@@ -39,7 +41,7 @@ NOTICE
 ______________________________________________________
 ==========================================================================
     Schema: usage.xsd
-    Version: 3.3.1.20200320
+    Version: 3.3.2.20200807
     Author: Donald F. Coffin (Green Button Alliance, Inc.)
 ==========================================================================
 
@@ -95,6 +97,7 @@ self link to this resource</xs:documentation>
 							<xs:documentation>A description of the application. (e.g. "Third Party Application Description is added as provided by each TP")</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<!-- TODO: Correct Typo type=ThirdPartyApplicatonStatus s/b type=ThirdPartyApplicationStatus -->
 					<xs:element name="thirdPartyApplicationStatus" type="ThirdPartyApplicatonStatus" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>A code indicating the current status of the application. (e.g. "1" => Development</xs:documentation>
@@ -358,7 +361,7 @@ Note: for privacy there is no identifier of the RetailCustomer in this structure
 					<xs:element name="customerResourceURI" type="xs:anyURI" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>URI that can be used to access PII data the Third Party is authorized to access.  Can be used in a GET of the PII resource subscription (e.g. "http://server.example.com/DataCustodian/espi/1_1/resource/Batch/Subscription/2").
-Note: This URI will have a differnt namespace than the URI value found in the resourceURI element.</xs:documentation>
+Note: This URI will have a different namespace than the URI value found in the resourceURI element.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -751,7 +754,7 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 					</xs:element>
 					<xs:element name="overallConsumptionLastPeriod" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] The amount of energy consumed in the lfor the referenced billingPeriod.</xs:documentation>
+							<xs:documentation>[extension] The amount of energy consumed in the last period for the referenced billingPeriod.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="currentBillingPeriodOverAllConsumption" type="SummaryMeasurement" minOccurs="0">
@@ -865,7 +868,7 @@ Marginal Price is calculated by the RTO/ISO and used for financial settlements.<
 					</xs:element>
 					<xs:element name="overallConsumptionLastPeriod" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] The amount of energy consumed in the lfor the referenced billingPeriod.</xs:documentation>
+							<xs:documentation>[extension] The amount of energy consumed in the last period for the referenced billingPeriod.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="currentBillingPeriodOverAllConsumption" type="SummaryMeasurement" minOccurs="0">
@@ -1490,7 +1493,7 @@ Additional Complex Types
 					</xs:element>
 					<xs:element name="measurement" type="SummaryMeasurement" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>[extension] relevant measurment for line item.</xs:documentation>
+							<xs:documentation>[extension] relevant measurement for line item.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="itemKind" type="ItemKind">
@@ -1514,7 +1517,7 @@ Additional Complex Types
 	</xs:complexType>
 	<xs:complexType name="PnodeRefs">
 		<xs:annotation>
-			<xs:documentation>[extension] Sequence of references to Pnodes assoicated with a UsagePoint.</xs:documentation>
+			<xs:documentation>[extension] Sequence of references to Pnodes associated with a UsagePoint.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="Object">
@@ -4148,7 +4151,7 @@ Enumerations
 					<xs:enumeration value="152">
 						<xs:annotation>
 							<xs:appinfo>APerA</xs:appinfo>
-							<xs:documentation>Current, Ratio of Amperages, A/A</xs:documentation>
+							<xs:documentation>Current, Ratio of Amperes, A/A</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="103">
