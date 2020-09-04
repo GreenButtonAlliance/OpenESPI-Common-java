@@ -16,8 +16,7 @@
   ~    See the License for the specific language governing permissions and
   ~    limitations under the License.
   -->
-<xs:schema xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-		   targetNamespace="http://www.w3.org/2005/Atom" elementFormDefault="qualified">
+<xs:schema xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.w3.org/2005/Atom" elementFormDefault="qualified">
 	<xs:annotation>
 		<xs:documentation>
 				This version of the Atom schema is based on version 1.0 of the format specifications,
@@ -89,13 +88,13 @@
 			<xs:element name="generator" type="atom:generatorType" minOccurs="0"/>
 			<xs:element name="icon" type="atom:iconType" minOccurs="0"/>
 			<xs:element name="id" type="atom:idType"/>
-			<xs:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="link" type="atom:linkType"/>
 			<xs:element name="logo" type="atom:logoType" minOccurs="0"/>
 			<xs:element name="rights" type="atom:textType" minOccurs="0"/>
 			<xs:element name="subtitle" type="atom:textType" minOccurs="0"/>
 			<xs:element name="title" type="atom:textType"/>
 			<xs:element name="updated" type="atom:dateTimeType"/>
-			<xs:element name="entry" type="atom:entryType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="entry" type="atom:entryType" maxOccurs="unbounded"/>
 			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:choice>
 		<xs:attributeGroup ref="atom:commonAttributes"/>
@@ -112,8 +111,8 @@
 			<xs:element name="content" type="atom:contentType" minOccurs="0"/>
 			<xs:element name="contributor" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="id" type="atom:idType"/>
-			<xs:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="published" type="atom:dateTimeType" minOccurs="0"/>
+			<xs:element name="link" type="atom:linkType" minOccurs="2" maxOccurs="unbounded"/>
+			<xs:element name="published" type="atom:dateTimeType"/>
 			<xs:element name="rights" type="atom:textType" minOccurs="0"/>
 			<xs:element name="source" type="atom:textType" minOccurs="0"/>
 			<xs:element name="summary" type="atom:textType" minOccurs="0"/>
