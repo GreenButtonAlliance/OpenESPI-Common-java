@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns="http://naesb.org/espi"
-		   xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://naesb.org/espi"
-		   elementFormDefault="qualified" version="3.3.20200320">
+<xs:schema xmlns="http://naesb.org/espi" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" version="3.3.20200320">
 	<!--
 ==========================================================================
     Schema:  NAESBespiSchema.xsd
@@ -41,7 +39,7 @@ NOTICE
 ______________________________________________________
 ==========================================================================
     Schema: usage.xsd
-    Version: 3.3.2.20200807
+    Version: 3.3.2.20201019
     Author: Donald F. Coffin (Green Button Alliance, Inc.)
 ==========================================================================
 
@@ -3637,6 +3635,12 @@ Enumerations
 						<xs:annotation>
 							<xs:appinfo>internet</xs:appinfo>
 							<xs:documentation>Internet service.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="10">
+						<xs:annotation>
+							<xs:appinfo>weather</xs:appinfo>
+							<xs:documentation>[GBA Extension]Weather service.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
