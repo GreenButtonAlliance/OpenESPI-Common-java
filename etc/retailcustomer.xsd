@@ -705,11 +705,6 @@ Additional Complex Types
 						<xs:annotation>
 							<xs:documentation>Name of attachment document or file including filename extension if present.</xs:documentation>
 						</xs:annotation>
-						<xs:simpleType>
-							<xs:restriction base="String256">
-								<xs:pattern value="\S*"/>
-							</xs:restriction>
-						</xs:simpleType>
 					</xs:element>
 					<xs:element name="attachmentMediaType" type="String256" minOccurs="0">
 						<xs:annotation>
