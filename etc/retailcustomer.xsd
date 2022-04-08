@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer"
-	targetNamespace="http://naesb.org/espi/customer"
-	elementFormDefault="qualified" version="3.3.20200130">
+	targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified"
+	version="3.3.20200130">
 	<!--
 ==========================================================================
  Schema:  retailcustomer.xsd
@@ -40,7 +40,7 @@ ______________________________________________________
 ==========================================================================
     Schema: retailcustomer.xsd	
     Version: 3.3.20200130
-    Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)	
+    Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks), Klaar De Schepper (Flux Tailor)	
 ========================================================================== 	
     Copyright (c) 2018-2020 Green Button Alliance, Inc.
 
@@ -65,7 +65,7 @@ ______________________________________________________
 END NOTICE
 ______________________________________________________
   -->
-<!-- edited with XMLSpy v2019 rel. 3 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
+	<!-- edited with XMLSpy v2019 rel. 3 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
 	<xs:annotation>
 		<xs:documentation>
 		    The retail customer schema provides details about a UsagePoint that are considered Personally identifiable information (PII) and
@@ -159,7 +159,8 @@ Resources
 							<xs:documentation>The last amount that will be billed to the customer prior to shut off of the account.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="notifications" type="AccountNotification" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="notifications" type="AccountNotification" minOccurs="0"
+						maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>Set of customer account notifications.</xs:documentation>
 						</xs:annotation>
@@ -200,12 +201,14 @@ Resources
 							<xs:documentation>Final date and time the service will be billed to the previous customer.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="DemandResponseProgram" type="DemandResponseProgram" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="DemandResponseProgram" type="DemandResponseProgram"
+						minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>Demand Response program characteristics covered by Customer Agreement</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="PricingStructures" type="PricingStructure" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="PricingStructures" type="PricingStructure" minOccurs="0"
+						maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>All pricing structures applicable to this customer agreement.</xs:documentation>
 						</xs:annotation>
@@ -215,7 +218,8 @@ Resources
 							<xs:documentation>Currency for all monetary amounts for this agreement.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="futureStatus" type="Status" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="futureStatus" type="Status" minOccurs="0"
+						maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>[extension] Known future changes to CustomerAgreement's Status of Service.</xs:documentation>
 						</xs:annotation>
@@ -274,7 +278,8 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 							<xs:documentation>Meter form designation per ANSI C12.10 or other applicable standard. An alphanumeric designation denoting the circuit arrangement for which the meter is applicable and its specific terminal arrangement.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="MeterMultipliers" type="MeterMultiplier" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="MeterMultipliers" type="MeterMultiplier" minOccurs="0"
+						maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>All multipliers applied at this meter.</xs:documentation>
 						</xs:annotation>
@@ -295,7 +300,8 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 		<xs:complexContent>
 			<xs:extension base="IdentifiedObject">
 				<xs:sequence>
-					<xs:element name="programDateIdMapping" type="ProgramDateIdMapping" minOccurs="0">
+					<xs:element name="programDateIdMapping" type="ProgramDateIdMapping"
+						minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Program date description</xs:documentation>
 						</xs:annotation>
@@ -326,7 +332,8 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 							<xs:documentation>True if inspection is needed of facilities at this service location. This could be requested by a customer, due to suspected tampering, environmental concerns (e.g., a fire in the vicinity), or to correct incompatible data.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="UsagePoints" type="UsagePoints" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="UsagePoints" type="UsagePoints" minOccurs="0"
+						maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>All usage points delivering service (of the same type) to this service location.</xs:documentation>
 						</xs:annotation>
@@ -360,6 +367,28 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 					<xs:element name="effectiveDate" type="TimeType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>[extension] Effective Date of Service Activation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Statement">
+		<xs:annotation>
+			<xs:documentation>[extension Copyright GBA] Billing statement for provided services.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="IssueDateTime" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension Copyright GBA] Date and time at which a billing statement was issued.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="statementRef" type="StatementRef" minOccurs="0"
+						maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>[extension Copyright GBA] Contains document reference metadata needed to access a document representation of a billing statement.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -692,37 +721,6 @@ Additional Complex Types
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="Asset"/>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="AttachmentReference">
-		<xs:annotation>
-			<xs:documentation>Object attachment reference information</xs:documentation>
-		</xs:annotation>
-		<xs:complexContent>
-			<xs:extension base="Object">
-				<xs:sequence>
-					<xs:element name="attachmentFileName" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>Name of attachment document or file including filename extension if present.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="attachmentMediaType" type="String256" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>attachment media type as published by IANA (see https://www.iana.org/assignments/media-types/media-types.xhtml) e.g PDF, excel</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="attachmentURL">
-						<xs:annotation>
-							<xs:documentation>URL used to access attachment. Use CDATA or URL encoding to escape characters not allowed in XML.</xs:documentation>
-						</xs:annotation>
-						<xs:simpleType>
-							<xs:restriction base="xs:anyURI">
-								<xs:pattern value="\S*"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:element>
-				</xs:sequence>
-			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="BatchItemInfo">
@@ -1258,19 +1256,26 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="Statement">
+	<xs:complexType name="StatementRef">
+		<xs:annotation>
+			<xs:documentation>[extension Copyright GBA] A sequence of references to a document associated with a Statement.</xs:documentation>
+		</xs:annotation>
 		<xs:complexContent>
-			<xs:extension base="IdentifiedObject">
+			<xs:extension base="Object">
 				<xs:sequence>
-					<xs:element name="statementIssueDateTime" type="TimeType" minOccurs="0">
+					<xs:element name="fileName" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Date and time at which a billing statement was issued</xs:documentation>
+							<xs:documentation>[extension Copyright GBA] Name of document or file including filename extension if present.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="statementAttachmentRefs" type="AttachmentReference"
-						minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="mediaType" minOccurs="0" type="MediaType">
 						<xs:annotation>
-							<xs:documentation>One or more attachments related to a statement</xs:documentation>
+							<xs:documentation>[extension Copyright GBA] Document media type as published by IANA, see https://www.iana.org/assignments/media-types for more information.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="statementURL">
+						<xs:annotation>
+							<xs:documentation>[extension Copyright GBA] URL used to access a representation of a statement, for example a bill image. Use CDATA or URL encoding to escape characters not allowed in XML.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1851,6 +1856,88 @@ Month: 3</xs:documentation>
 					<xs:enumeration value="enrolledPending">
 						<xs:annotation>
 							<xs:documentation>Currently pending enrollment in the Demand Response program</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="MediaType">
+		<xs:annotation>
+			<xs:documentation>[extension Copright GBA] Media type for document as registered by IANA.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:string">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="application/json">
+						<xs:annotation>
+							<xs:documentation>json</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="application/pdf">
+						<xs:annotation>
+							<xs:documentation>pdf</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="application/vnd.ms-excel">
+						<xs:annotation>
+							<xs:documentation>vnd.ms-excel</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="application/vnd.oasis.opendocument.spreadsheet">
+						<xs:annotation>
+							<xs:documentation>vnd.oasis.opendocument.spreadsheet</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="application/vnd.oasis.opendocument.text">
+						<xs:annotation>
+							<xs:documentation>vnd.oasis.opendocument.text</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration
+						value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+						<xs:annotation>
+							<xs:documentation>vnd.openxmlformats-officedocument.spreadsheetml.sheet</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="image/gif">
+						<xs:annotation>
+							<xs:documentation>gif</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="image/jpeg">
+						<xs:annotation>
+							<xs:documentation>jpeg</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="image/png">
+						<xs:annotation>
+							<xs:documentation>png</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="text/csv">
+						<xs:annotation>
+							<xs:documentation>csv</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="text/html">
+						<xs:annotation>
+							<xs:documentation>html</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="text/plain">
+						<xs:annotation>
+							<xs:documentation>plain</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="text/rtf">
+						<xs:annotation>
+							<xs:documentation>rtf</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="text/xml">
+						<xs:annotation>
+							<xs:documentation>XML</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 				</xs:restriction>
@@ -3057,7 +3144,6 @@ Global Elements
 	<xs:element name="Agreement" type="Agreement"/>
 	<xs:element name="Asset" type="Asset"/>
 	<xs:element name="AssetContainer" type="AssetContainer"/>
-	<xs:element name="AttachmentReference" type="AttachmentReference"/>
 	<xs:element name="BatchItemInfo" type="BatchItemInfo"/>
 	<xs:element name="BatchList" type="BatchListType"/>
 	<xs:element name="Customer" type="Customer"/>
@@ -3086,6 +3172,7 @@ Global Elements
 	<xs:element name="ServiceLocation" type="ServiceLocation"/>
 	<xs:element name="ServiceSupplier" type="ServiceSupplier"/>
 	<xs:element name="Statement" type="Statement"/>
+	<xs:element name="StatementRef" type="StatementRef"/>
 	<xs:element name="Status" type="Status"/>
 	<xs:element name="StreetAddress" type="StreetAddress"/>
 	<xs:element name="StreetDetail" type="StreetDetail"/>
