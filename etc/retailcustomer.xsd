@@ -1263,7 +1263,7 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 		<xs:complexContent>
 			<xs:extension base="Object">
 				<xs:sequence>
-					<xs:element name="fileName" minOccurs="0">
+					<xs:element name="fileName" minOccurs="0" type="String512">
 						<xs:annotation>
 							<xs:documentation>[extension Copyright GBA] Name of document or file including filename extension if present.</xs:documentation>
 						</xs:annotation>
@@ -1273,7 +1273,7 @@ Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:d
 							<xs:documentation>[extension Copyright GBA] Document media type as published by IANA, see https://www.iana.org/assignments/media-types for more information.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="statementURL">
+					<xs:element name="statementURL" type="xs:anyURI">
 						<xs:annotation>
 							<xs:documentation>[extension Copyright GBA] URL used to access a representation of a statement, for example a bill image. Use CDATA or URL encoding to escape characters not allowed in XML.</xs:documentation>
 						</xs:annotation>
@@ -1864,7 +1864,7 @@ Month: 3</xs:documentation>
 	</xs:simpleType>
 	<xs:simpleType name="MediaType">
 		<xs:annotation>
-			<xs:documentation>[extension Copright GBA] Media type for document as registered by IANA.</xs:documentation>
+			<xs:documentation>[extension Copright GBA] Media type for document as registered by IANA, allowed subset in enumeration.</xs:documentation>
 		</xs:annotation>
 		<xs:union memberTypes="xs:string">
 			<xs:simpleType>
@@ -1898,6 +1898,11 @@ Month: 3</xs:documentation>
 						value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
 						<xs:annotation>
 							<xs:documentation>vnd.openxmlformats-officedocument.spreadsheetml.sheet</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="application/zip">
+						<xs:annotation>
+							<xs:documentation>zip</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
 					<xs:enumeration value="image/gif">
