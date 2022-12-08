@@ -194,7 +194,7 @@
 		</xs:annotation>
 		<xs:attribute name="href" type="xs:anyURI" use="required"/>
 		<xs:attribute name="rel" type="xs:string" use="required"/>
-		<xs:attribute name="type" type="xs:string" use="required"/>
+		<xs:attribute name="type" type="xs:string"/>
 		<xs:attribute name="hreflang" type="xs:NMTOKEN"/>
 		<xs:attribute name="title" type="xs:string"/>
 		<xs:attribute name="length" type="xs:positiveInteger"/>
