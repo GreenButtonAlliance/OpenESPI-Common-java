@@ -2,7 +2,7 @@
  *
  *    Copyright (c) 2018-2021 Green Button Alliance, Inc.
  *
- *    Portions (c) 2013-2018 EnergyOS.org
+g *    Portions (c) 2013-2018 EnergyOS.org
  *
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.

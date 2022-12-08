@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer"
-		   targetNamespace="http://naesb.org/espi/customer"
-		   elementFormDefault="qualified" version="3.3.20200130">
-<!--
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:ns1="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified" version="3.3.20200130">
+	<!--
 ==========================================================================
  Schema:  retailcustomer.xsd
  Version: North American Energy Standards Board (NAESB) REQ.21 ESPI Model Business Practices,
@@ -65,7 +63,7 @@ ______________________________________________________
 END NOTICE
 ______________________________________________________
   -->
-<!-- edited with XMLSpy v2019 rel. 3 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
+	<!-- edited with XMLSpy v2019 rel. 3 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
 	<xs:annotation>
 		<xs:documentation>
 		    The retail customer schema provides details about a UsagePoint that are considered Personally identifiable information (PII) and
