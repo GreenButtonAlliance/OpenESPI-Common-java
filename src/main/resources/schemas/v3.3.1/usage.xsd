@@ -3637,12 +3637,6 @@ Enumerations
 							<xs:documentation>Internet service.</xs:documentation>
 						</xs:annotation>
 					</xs:enumeration>
-					<xs:enumeration value="10">
-						<xs:annotation>
-							<xs:appinfo>weather</xs:appinfo>
-							<xs:documentation>[GBA Extension]Weather service.</xs:documentation>
-						</xs:annotation>
-					</xs:enumeration>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:union>
