@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns="http://naesb.org/espi" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" version="3.3.20200320">
+<xs:schema xmlns="http://naesb.org/espi" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://naesb.org/espi" elementFormDefault="qualified" version="3.3.20200320">
 	<!--
 ==========================================================================
     Schema:  NAESBespiSchema.xsd
@@ -64,7 +65,7 @@ ______________________________________________________
 END NOTICE
 ______________________________________________________
 -->
-	<xs:import namespace="http://www.w3.org/2005/Atom" schemaLocation="atom.xsd"/>
+	<xs:import namespace="atom_4.0.xsd" schemaLocation="atom_4.0.xsd"/>
 	<!--
 =======================================
 ESPI OAuth Exchange Class Resource Types       

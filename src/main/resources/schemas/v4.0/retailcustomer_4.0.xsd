@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:ns1="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified" version="3.3.20200130">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer"
+           targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified"
+           version="3.3.20200130">
 	<!--
 ==========================================================================
- Schema:  retailcustomer.xsd
+ Schema:  retailcustomer_4.0.xsd
  Version: North American Energy Standards Board (NAESB) REQ.21 ESPI Model Business Practices,
           Retail Markets Quadrant (RMQ). Ratified April 8, 2019.
  Authors: NAESB
@@ -36,11 +38,11 @@ ______________________________________________________
 NOTICE
 ______________________________________________________
 ==========================================================================
-    Schema: retailcustomer.xsd	
+    Schema: retailcustomer_4.0.xsd
     Version: 3.3.20200130
-    Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)	
+    Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks), Klaar Dde Schepper (Flux Tailor)	
 ========================================================================== 	
-    Copyright (c) 2018-2021 Green Button Alliance, Inc.
+    Copyright (c) 2018-2023 Green Button Alliance, Inc.
 
     Portions copyright (c) 2013-2018 EnergyOS.org
 
@@ -78,7 +80,7 @@ ______________________________________________________
 Imports
 =======================================
 -->
-	<xs:import namespace="http://www.w3.org/2005/Atom" schemaLocation="atom.xsd"/>
+	<xs:import namespace="atom_4.0.xsd" schemaLocation="atom_4.0.xsd"/>
 	<!--
 =======================================
 Resources
@@ -301,6 +303,32 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
+	</xs:complexType>	
+	<xs:complexType name="StatementRef">
+		<xs:annotation>
+			<xs:documentation>[extension Copyright GBA] A sequence of references to a document associated with a Statement.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="fileName" minOccurs="0" type="String512">
+						<xs:annotation>
+							<xs:documentation>[extension Copyright GBA] Name of document or file including filename extension if present.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="mediaType" minOccurs="0" type="MediaType">
+						<xs:annotation>
+							<xs:documentation>[extension Copyright GBA] Document media type as published by IANA, see https://www.iana.org/assignments/media-types for more information.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="statementURL" type="xs:anyURI">
+						<xs:annotation>
+							<xs:documentation>[extension Copyright GBA] URL used to access a representation of a statement, for example a bill image. Use CDATA or URL encoding to escape characters not allowed in XML.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ServiceLocation">
 		<xs:annotation>
@@ -364,6 +392,28 @@ Some devices may use an optical port that conforms to the ANSI C12.18 standard f
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="Statement">
+		<xs:annotation>
+			<xs:documentation>[extension Copyright GBA] Billing statement for provided services.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="issueDateTime" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension Copyright GBA] Date and time at which a billing statement was issued.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="statementRef" type="StatementRef" minOccurs="0"
+						maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>[extension Copyright GBA] Contains document reference metadata needed to access a document representation of a billing statement.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>	
 	<xs:complexType name="TimeConfiguration">
 		<xs:annotation>
 			<xs:documentation>[extension] Contains attributes related to the configuration of the time service.</xs:documentation>
@@ -1804,6 +1854,93 @@ Month: 3</xs:documentation>
 			</xs:simpleType>
 		</xs:union>
 	</xs:simpleType>
+	<xs:simpleType name="MediaType">
+		<xs:annotation>
+			<xs:documentation>[extension Copright GBA] Media type for document as registered by IANA, allowed subset in enumeration.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:string">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="application/json">
+						<xs:annotation>
+							<xs:documentation>json</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="application/pdf">
+						<xs:annotation>
+							<xs:documentation>pdf</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="application/vnd.ms-excel">
+						<xs:annotation>
+							<xs:documentation>vnd.ms-excel</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="application/vnd.oasis.opendocument.spreadsheet">
+						<xs:annotation>
+							<xs:documentation>vnd.oasis.opendocument.spreadsheet</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="application/vnd.oasis.opendocument.text">
+						<xs:annotation>
+							<xs:documentation>vnd.oasis.opendocument.text</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration
+						value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+						<xs:annotation>
+							<xs:documentation>vnd.openxmlformats-officedocument.spreadsheetml.sheet</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="application/zip">
+						<xs:annotation>
+							<xs:documentation>zip</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="image/gif">
+						<xs:annotation>
+							<xs:documentation>gif</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="image/jpeg">
+						<xs:annotation>
+							<xs:documentation>jpeg</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="image/png">
+						<xs:annotation>
+							<xs:documentation>png</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="text/csv">
+						<xs:annotation>
+							<xs:documentation>csv</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="text/html">
+						<xs:annotation>
+							<xs:documentation>html</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="text/plain">
+						<xs:annotation>
+							<xs:documentation>plain</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="text/rtf">
+						<xs:annotation>
+							<xs:documentation>rtf</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="text/xml">
+						<xs:annotation>
+							<xs:documentation>XML</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>	
 	<xs:simpleType name="MeterMultiplierKind">
 		<xs:annotation>
 			<xs:documentation>Kind of meter multiplier.</xs:documentation>
@@ -3031,6 +3168,8 @@ Global Elements
 	<xs:element name="ProgramDateIdMappings" type="ProgramDateIdMappings"/>
 	<xs:element name="ServiceLocation" type="ServiceLocation"/>
 	<xs:element name="ServiceSupplier" type="ServiceSupplier"/>
+	<xs:element name="Statement" type="Statement"/>
+	<xs:element name="StatementRef" type="StatementRef"/>
 	<xs:element name="Status" type="Status"/>
 	<xs:element name="StreetAddress" type="StreetAddress"/>
 	<xs:element name="StreetDetail" type="StreetDetail"/>
