@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:ns1="atom.xsd" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified" version="3.3.20200130">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer"
+           targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified" version="3.3.20200130">
 	<!--
 ==========================================================================
  Schema:  retailcustomer_4.0.xsd
@@ -36,9 +37,9 @@ ______________________________________________________
 NOTICE
 ______________________________________________________
 ==========================================================================
-    Schema: retailcustomer_4.0.xsd
+    Schema: retailcustomer.xsd
     Version: 3.3.20200130
-    Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks), Klaar Dde Schepper (Flux Tailor)	
+    Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks), Klaar De Schepper (Flux Tailor)
 ========================================================================== 	
     Copyright (c) 2018-2023 Green Button Alliance, Inc.
 

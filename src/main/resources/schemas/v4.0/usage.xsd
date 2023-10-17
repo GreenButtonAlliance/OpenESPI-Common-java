@@ -65,7 +65,7 @@ ______________________________________________________
 END NOTICE
 ______________________________________________________
 -->
-	<xs:import namespace="atom_4.0.xsd" schemaLocation="atom_4.0.xsd"/>
+	<xs:import namespace="atom.xsd" schemaLocation="atom.xsd"/>
 	<!--
 =======================================
 ESPI OAuth Exchange Class Resource Types       

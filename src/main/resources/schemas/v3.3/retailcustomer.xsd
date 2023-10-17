@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:ns1="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified" version="3.3.20200130">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer"
+           targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified" version="3.3.20200130">
 	<!--
 ==========================================================================
- Schema:  retailcustomer.xsd
+ Schema:  retailcustomer_4.0.xsd
  Version: North American Energy Standards Board (NAESB) REQ.21 ESPI Model Business Practices,
           Retail Markets Quadrant (RMQ). Ratified April 8, 2019.
  Authors: NAESB
@@ -36,7 +37,7 @@ ______________________________________________________
 NOTICE
 ______________________________________________________
 ==========================================================================
-    Schema: retailcustomer.xsd	
+    Schema: retailcustomer_4.0.xsd
     Version: 3.3.20200130
     Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)	
 ========================================================================== 	
