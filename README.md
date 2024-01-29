@@ -2,7 +2,10 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=GreenButtonAlliance_OpenESPI-Common-java&metric=alert_status)](https://sonarcloud.io/dashboard?id=GreenButtonAlliance_OpenESPI-Common-java)
 
 
-# OpenESPI-Common
+# OpenESPI-Common -- Archived January 29, 2024
+
+NOTE: This repository is no longer maintained. The OpenESPI project has been archived and is no longer being maintained.
+
 This is the Common module of the OpenESPI Green Button Data Custodian and Third Party implementation. It is a Spring application written in java and built on top of jpa for database access.
 
 This Common run-time and test code is shared between stand-alone Data Custodian and Third Party applications. [OpenESPI-DataCustodian](https://github.com/greenbuttonalliance/OpenESPI-DataCustodian-java) and [OpenESPI-ThirdParty](https://github.com/greenbuttonalliance/OpenESPI-ThirdParty-java).
