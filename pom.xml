@@ -110,13 +110,13 @@
         <!-- Spring -->
         <spring.version>4.0.6.RELEASE</spring.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
-        <spring-security-oauth.version>2.0.2.RELEASE</spring-security-oauth.version>
+        <spring-security-oauth.version>2.4.1.RELEASE</spring-security-oauth.version>
 
         <!-- Hibernate / JPA -->
         <hibernate.version>4.2.1.Final</hibernate.version>
 
         <!-- Bean validation -->
-        <hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.0.19.Final</hibernate-validator.version>
 
         <!-- Database access -->
         <tomcat-jdbc.version>7.0.42</tomcat-jdbc.version>
@@ -308,7 +308,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.34.0</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -362,7 +362,7 @@
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.9</version>
+            <version>1.13</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
