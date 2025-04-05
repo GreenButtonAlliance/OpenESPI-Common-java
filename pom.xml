@@ -108,8 +108,8 @@
         <project.scm.id>github</project.scm.id>
 
         <!-- Spring -->
-        <spring.version>4.0.6.RELEASE</spring.version>
-        <spring.security.version>3.2.3.RELEASE</spring.security.version>
+        <spring.version>5.2.19.RELEASE</spring.version>
+        <spring.security.version>4.0.1.RELEASE</spring.security.version>
         <spring-security-oauth.version>2.0.2.RELEASE</spring-security-oauth.version>
 
         <!-- Hibernate / JPA -->
