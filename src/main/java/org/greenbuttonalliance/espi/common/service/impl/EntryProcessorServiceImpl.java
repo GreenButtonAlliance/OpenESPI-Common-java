@@ -35,7 +35,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 		javax.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 @Service

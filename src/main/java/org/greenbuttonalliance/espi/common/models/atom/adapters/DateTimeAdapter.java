@@ -26,8 +26,8 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.chrono.ISOChronology;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import java.text.SimpleDateFormat;
 
 public class DateTimeAdapter extends XmlAdapter<JAXBElement<DateTimeType>, DateTime> {

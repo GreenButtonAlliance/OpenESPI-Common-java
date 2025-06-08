@@ -23,8 +23,8 @@ package org.greenbuttonalliance.espi.common.models.atom.adapters;
 import org.greenbuttonalliance.espi.common.models.atom.DateTimeType;
 import org.greenbuttonalliance.espi.common.models.atom.ObjectFactory;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 public class PublishedAdapter extends
 		XmlAdapter<JAXBElement<DateTimeType>, DateTimeType> {

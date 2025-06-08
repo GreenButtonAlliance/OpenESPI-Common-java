@@ -25,13 +25,13 @@
 // Generated on: 2013.08.27 at 01:43:57 PM EDT 
 //
 
-@javax.xml.bind.annotation.XmlSchema(
+@jakarta.xml.bind.annotation.XmlSchema(
         namespace = "http://www.w3.org/2005/Atom",
-        elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
+        elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED,
         xmlns = {
                 @XmlNs(prefix = "", namespaceURI = "http://www.w3.org/2005/Atom"),
                 @XmlNs(prefix = "espi", namespaceURI = "http://naesb.org/espi"),
         }
 ) package org.greenbuttonalliance.espi.common.models.atom;
 
-import javax.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNs;

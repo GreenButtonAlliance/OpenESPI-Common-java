@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 		javax.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
@@ -54,7 +54,7 @@ public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 	}
 
 	@Override
-	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 			javax.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void persist(IntervalBlock intervalBlock) {
@@ -80,7 +80,7 @@ public class IntervalBlockRepositoryImpl implements IntervalBlockRepository {
 	}
 
 	@Override
-	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 			javax.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void deleteById(Long id) {

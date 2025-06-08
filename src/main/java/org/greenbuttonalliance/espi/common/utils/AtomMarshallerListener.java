@@ -25,7 +25,7 @@ import org.greenbuttonalliance.espi.common.models.atom.DateTimeType;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
 import org.greenbuttonalliance.espi.common.models.atom.LinkType;
 
-import javax.xml.bind.Marshaller;
+import jakarta.xml.bind.Marshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.List;
 

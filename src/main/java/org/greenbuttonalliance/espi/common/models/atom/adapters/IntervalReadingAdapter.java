@@ -24,8 +24,8 @@ import org.greenbuttonalliance.espi.common.domain.IntervalReading;
 import org.greenbuttonalliance.espi.common.domain.ObjectFactory;
 import org.greenbuttonalliance.espi.common.domain.ReadingQuality;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 public class IntervalReadingAdapter extends
 		XmlAdapter<JAXBElement<IntervalReading>, IntervalReading> {

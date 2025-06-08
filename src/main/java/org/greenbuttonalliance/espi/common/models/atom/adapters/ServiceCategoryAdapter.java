@@ -22,8 +22,8 @@ package org.greenbuttonalliance.espi.common.models.atom.adapters;
 
 import org.greenbuttonalliance.espi.common.domain.ServiceCategory;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 public class ServiceCategoryAdapter extends
 		XmlAdapter<JAXBElement<ServiceCategory>, ServiceCategory> {

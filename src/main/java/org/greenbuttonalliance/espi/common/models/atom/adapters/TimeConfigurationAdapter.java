@@ -23,8 +23,8 @@ package org.greenbuttonalliance.espi.common.models.atom.adapters;
 import org.greenbuttonalliance.espi.common.domain.ObjectFactory;
 import org.greenbuttonalliance.espi.common.domain.TimeConfiguration;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 public class TimeConfigurationAdapter extends
 		XmlAdapter<JAXBElement<TimeConfiguration>, TimeConfiguration> {

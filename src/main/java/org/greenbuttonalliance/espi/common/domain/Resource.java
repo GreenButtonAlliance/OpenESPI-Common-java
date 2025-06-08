@@ -27,9 +27,9 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.HexBinaryAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * A resource is an addressable unit of information, either a collection (List)

@@ -23,7 +23,7 @@ package org.greenbuttonalliance.espi.common.utils;
 import com.sun.syndication.io.FeedException;
 import org.springframework.util.Assert;
 
-import javax.xml.bind.*;
+import jakarta.xml.bind.*;
 import java.io.ByteArrayInputStream;
 import java.io.StringWriter;
 

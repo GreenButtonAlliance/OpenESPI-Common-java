@@ -29,7 +29,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.NamespaceSupport;
 import org.xml.sax.helpers.XMLFilterImpl;
 
-import javax.xml.bind.*;
+import jakarta.xml.bind.*;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.ArrayList;

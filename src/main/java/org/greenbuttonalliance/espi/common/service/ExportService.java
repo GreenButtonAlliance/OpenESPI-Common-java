@@ -24,7 +24,7 @@ import org.greenbuttonalliance.espi.common.domain.Authorization;
 import org.greenbuttonalliance.espi.common.domain.IdentifiedObject;
 import org.greenbuttonalliance.espi.common.utils.ExportFilter;
 
-import javax.servlet.ServletOutputStream;
+import jakarta.servlet.ServletOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 

@@ -28,7 +28,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;

@@ -35,7 +35,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.ServletOutputStream;
+import jakarta.servlet.ServletOutputStream;
 import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
 import java.io.OutputStream;

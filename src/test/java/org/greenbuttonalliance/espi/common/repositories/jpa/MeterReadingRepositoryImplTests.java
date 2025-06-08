@@ -38,7 +38,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring/test-context.xml")
 @ActiveProfiles("devmysql")
-@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 		javax.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class MeterReadingRepositoryImplTests {

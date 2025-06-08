@@ -23,7 +23,7 @@ package org.greenbuttonalliance.espi.common.domain;
 import org.greenbuttonalliance.espi.common.utils.EspiMarshaller;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;

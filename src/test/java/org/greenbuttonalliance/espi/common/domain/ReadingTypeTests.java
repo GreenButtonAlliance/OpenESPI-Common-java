@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import java.io.IOException;
 import java.math.BigInteger;
 

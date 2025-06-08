@@ -23,8 +23,8 @@ package org.greenbuttonalliance.espi.common.models.atom.adapters;
 import org.greenbuttonalliance.espi.common.domain.ObjectFactory;
 import org.greenbuttonalliance.espi.common.domain.UsageSummary;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * Created by Donald F. Coffin on 06/28/2019 at 23:19

@@ -38,7 +38,7 @@ import java.util.UUID;
  */
 
 @Repository
-@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
         javax.persistence.NoResultException.class,
         org.springframework.dao.EmptyResultDataAccessException.class })
 public class UsageSummaryRepositoryImpl implements UsageSummaryRepository {
@@ -52,7 +52,7 @@ public class UsageSummaryRepositoryImpl implements UsageSummaryRepository {
     }
 
     @Override
-    @Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+    @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
             javax.persistence.NoResultException.class,
             org.springframework.dao.EmptyResultDataAccessException.class })
     public void persist(UsageSummary usageSummary) {
@@ -77,7 +77,7 @@ public class UsageSummaryRepositoryImpl implements UsageSummaryRepository {
     }
 
     @Override
-    @Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+    @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
             javax.persistence.NoResultException.class,
             org.springframework.dao.EmptyResultDataAccessException.class })
     public void deleteById(Long id) {

@@ -32,10 +32,10 @@ import org.greenbuttonalliance.espi.common.models.atom.adapters.LinkAdapter;
 import org.greenbuttonalliance.espi.common.models.atom.adapters.PublishedAdapter;
 import org.greenbuttonalliance.espi.common.models.atom.adapters.UpdatedAdapter;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 		javax.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class UsagePointServiceImpl implements UsagePointService {

@@ -57,7 +57,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	private RetailCustomerService retailCustomerService;
 
 	@Override
-	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 			javax.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public Subscription createSubscription(OAuth2Authentication authentication) {
@@ -186,7 +186,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 			javax.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public Subscription addUsagePoint(Subscription subscription,

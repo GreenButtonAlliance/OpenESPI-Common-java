@@ -25,7 +25,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;

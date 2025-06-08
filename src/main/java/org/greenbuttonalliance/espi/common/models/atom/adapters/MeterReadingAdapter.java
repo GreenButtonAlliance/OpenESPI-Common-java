@@ -23,8 +23,8 @@ package org.greenbuttonalliance.espi.common.models.atom.adapters;
 import org.greenbuttonalliance.espi.common.domain.MeterReading;
 import org.greenbuttonalliance.espi.common.domain.ObjectFactory;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 public class MeterReadingAdapter extends
 		XmlAdapter<JAXBElement<MeterReading>, MeterReading> {

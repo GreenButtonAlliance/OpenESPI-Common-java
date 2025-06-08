@@ -30,8 +30,8 @@ package org.greenbuttonalliance.espi.common.domain;
 import org.greenbuttonalliance.espi.common.models.atom.adapters.ReadingQualityAdapter;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Quality of a specific reading value or interval reading value. Note that more

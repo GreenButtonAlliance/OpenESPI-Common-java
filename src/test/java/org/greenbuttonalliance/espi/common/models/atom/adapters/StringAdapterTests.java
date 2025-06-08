@@ -24,7 +24,7 @@ import org.greenbuttonalliance.espi.common.models.atom.TextType;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import static org.junit.Assert.assertEquals;

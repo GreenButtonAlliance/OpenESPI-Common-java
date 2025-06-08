@@ -31,7 +31,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 		javax.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
@@ -49,7 +49,7 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 				RetailCustomer.QUERY_FIND_ALL).getResultList();
 	}
 
-	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 			javax.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void persist(RetailCustomer customer) {
@@ -73,7 +73,7 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 		return em.find(RetailCustomer.class, id);
 	}
 
-	@Transactional(rollbackFor = { javax.xml.bind.JAXBException.class }, noRollbackFor = {
+	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
 			javax.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	@Override

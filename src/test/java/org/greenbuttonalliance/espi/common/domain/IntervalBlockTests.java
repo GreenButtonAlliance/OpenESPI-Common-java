@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXpathExists;
