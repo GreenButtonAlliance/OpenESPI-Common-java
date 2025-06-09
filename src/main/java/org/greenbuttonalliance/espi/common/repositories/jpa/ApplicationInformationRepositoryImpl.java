@@ -26,14 +26,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.List;
 import java.util.UUID;
 
 @Repository
 @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-		javax.persistence.NoResultException.class,
+		jakarta.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class ApplicationInformationRepositoryImpl implements
 		ApplicationInformationRepository {
@@ -67,7 +67,7 @@ public class ApplicationInformationRepositoryImpl implements
 
 	@Override
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void persist(ApplicationInformation applicationInformation) {
 		em.persist(applicationInformation);
@@ -109,7 +109,7 @@ public class ApplicationInformationRepositoryImpl implements
 
 	@Override
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void deleteById(Long id) {
 		em.remove(findById(id));

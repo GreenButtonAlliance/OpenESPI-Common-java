@@ -25,16 +25,16 @@ import org.greenbuttonalliance.espi.common.repositories.UsagePointRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceContext;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
 @Repository
 @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-		javax.persistence.NoResultException.class,
+		jakarta.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class UsagePointRepositoryImpl implements UsagePointRepository {
 
@@ -61,7 +61,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
 	}
 
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	@Override
 	public void persist(UsagePoint up) {
@@ -70,7 +70,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
 
 	@Override
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void associateByUUID(RetailCustomer retailCustomer, UUID uuid) {
 		try {
@@ -88,7 +88,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
 	}
 
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	@Override
 	public void createOrReplaceByUUID(UsagePoint usagePoint) {
@@ -143,7 +143,7 @@ public class UsagePointRepositoryImpl implements UsagePointRepository {
 	}
 
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	@Override
 	public void deleteById(Long id) {

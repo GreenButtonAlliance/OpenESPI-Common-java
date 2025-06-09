@@ -26,13 +26,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-		javax.persistence.NoResultException.class,
+		jakarta.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 
@@ -50,7 +50,7 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 	}
 
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void persist(RetailCustomer customer) {
 		this.em.persist(customer);
@@ -74,7 +74,7 @@ public class RetailCustomerRepositoryImpl implements RetailCustomerRepository {
 	}
 
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	@Override
 	public void deleteById(Long id) {

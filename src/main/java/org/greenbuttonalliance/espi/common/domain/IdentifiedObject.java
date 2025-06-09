@@ -29,8 +29,8 @@ package org.greenbuttonalliance.espi.common.domain;
 
 import org.greenbuttonalliance.espi.common.models.atom.LinkType;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;

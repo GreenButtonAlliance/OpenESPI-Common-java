@@ -26,16 +26,16 @@ import org.greenbuttonalliance.espi.common.repositories.ElectricPowerQualitySumm
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceContext;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
 @Repository
 @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-		javax.persistence.NoResultException.class,
+		jakarta.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class ElectricPowerQualitySummaryRepositoryImpl implements
 		ElectricPowerQualitySummaryRepository {
@@ -52,7 +52,7 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements
 
 	@Override
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void persist(ElectricPowerQualitySummary electricPowerQualitySummary) {
 		em.persist(electricPowerQualitySummary);
@@ -75,7 +75,7 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements
 
 	@Override
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void deleteById(Long id) {
 		ElectricPowerQualitySummary qs = findById(id);
@@ -87,7 +87,7 @@ public class ElectricPowerQualitySummaryRepositoryImpl implements
 
 	@Override
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void createOrReplaceByUUID(
 			ElectricPowerQualitySummary electricPowerQualitySummary) {

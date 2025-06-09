@@ -1,0 +1,3100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://naesb.org/espi/customer" xmlns:ns1="http://www.w3.org/2005/Atom" targetNamespace="http://naesb.org/espi/customer" elementFormDefault="qualified" version="3.3.20200130">
+	<!--
+==========================================================================
+ Schema:  retailcustomer_4.0.xsd
+ Version: North American Energy Standards Board (NAESB) REQ.21 ESPI Model Business Practices,
+          Retail Markets Quadrant (RMQ). Ratified April 8, 2019.
+ Authors: NAESB
+==========================================================================
+Copyright 2019-2021 North American Energy Standards Board
+Licensed by the North American Energy Standards Board (NAESB).  See the NOTICE section file below for additional information
+regarding copyright ownership.  NAESB licenses this file
+to you under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License.  You may obtain a copy
+of the License at:
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+______________________________________________________
+NOTICE
+______________________________________________________
+This NAESB ESPI Retail Customer Schema and the NAESB ESPI Schema are part of the copyrighted NAESB REQ.21 ESPI Model Business Practices.
+The NAESB REQ.21 Model Business Practices may be purchased from NAESB at: http://www.naesb.org/misc/naesb_matl_order_espi_standards.pdf.
+The NAESB Copyright Policy may be found here http://www.naesb.org/pdf2/copyright.pdf.
+The NAESB Intellectual Property Rights Policy Concerning Contributions and Comments may be found here http://www.naesb.org/pdf4/naesb_ipr_policy.doc.
+______________________________________________________
+END NOTICE
+______________________________________________________
+______________________________________________________
+NOTICE
+______________________________________________________
+==========================================================================
+    Schema: retailcustomer_4.0.xsd
+    Version: 3.3.20200130
+    Author: Ron Pasquarelli & Marty Burns (NIST), John Teeter (for NIST), Don Coffin (REMI Networks)	
+========================================================================== 	
+    Copyright (c) 2018-2020 Green Button Alliance, Inc.
+
+    Portions copyright (c) 2013-2018 EnergyOS.org
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+______________________________________________________
+
+All entries marked [GBA-Extension] are Copyright property of the Green Button Alliance, Inc.
+as required by the Apache 2.0 License.
+______________________________________________________
+END NOTICE
+______________________________________________________
+  -->
+	<!-- edited with XMLSpy v2019 rel. 3 sp1 (x64) (http://www.altova.com) by Donald Coffin (REMI Networks) -->
+	<xs:annotation>
+		<xs:documentation>
+		    The retail customer schema provides details about a UsagePoint that are considered Personally identifiable information (PII) and
+		    cannot be part of normal ESPI usage information.
+		    
+		    These resources are available via the same messaging patterns as other ESPI data. However, they are defined in a separate namespace 
+		    and cannot be retrieved in the same message as non-PII containing ESPI data.
+		</xs:documentation>
+	</xs:annotation>
+	<!--
+=======================================
+Imports
+=======================================
+-->
+	<xs:import namespace="http://www.w3.org/2005/Atom" schemaLocation="../src/main/resources/schemas/v3.3/atom.xsd"/>
+	<!--
+=======================================
+Resources
+=======================================
+-->
+	<xs:complexType name="Customer">
+		<xs:annotation>
+			<xs:documentation>Organisation receiving services from service supplier.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="OrganisationRole">
+				<xs:sequence>
+					<xs:element name="kind" type="CustomerKind" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Kind of customer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="specialNeed" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>True if customer organisation has special service needs such as life support, hospitals, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="vip" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(use 'priority' instead) True if this is an important customer. Importance is for matters different than those in 'specialNeed' attribute.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pucNumber" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Public utilities commission (PUC) identification number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="status" type="Status" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Status of this customer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="priority" type="Priority" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Priority of the customer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="locale" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Locale designating language to use in communications with this customer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="customerName" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[Extension] Customer name</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CustomerAccount">
+		<xs:annotation>
+			<xs:documentation>Assignment of a group of products and services purchased by the customer through a customer agreement, used as a mechanism for customer billing and payment. It contains common information from the various types of customer agreements to create billings (invoices) for a customer and receive payment.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Document">
+				<xs:sequence>
+					<xs:element name="billingCycle" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Cycle day on which the associated customer account will normally be billed, used to determine when to produce the billing.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="budgetBill" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Budget bill code.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lastBillAmount" type="Int48" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The last amount that will be billed to the customer prior to shut off of the account.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="notifications" type="AccountNotification" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Set of customer account notifications.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="contactInfo" type="Organisation" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Customer contact information used to identify individual responsible for billing and payment of CustomerAccount.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="accountId" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[Extension] Customer account identifier</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CustomerAgreement">
+		<xs:annotation>
+			<xs:documentation>Agreement between the customer and the service supplier to pay for service at a specific service location. It records certain billing information about the type of service provided at the service location and is used during charge creation to determine the type of service.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Agreement">
+				<xs:sequence>
+					<xs:element name="loadMgmt" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Load management code.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="isPrePay" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation> If true, the customer is a pre-pay customer for the specified service.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="shutOffDateTime" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Final date and time the service will be billed to the previous customer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DemandResponseProgram" type="DemandResponseProgram" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Demand Response program characteristics covered by Customer Agreement</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PricingStructures" type="PricingStructure" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>All pricing structures applicable to this customer agreement.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="currency" type="Currency" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Currency for all monetary amounts for this agreement.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="futureStatus" type="Status" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>[extension] Known future changes to CustomerAgreement's Status of Service.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="agreementId" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[Extension] Customer agreement identifier</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EndDevice">
+		<xs:annotation>
+			<xs:documentation>Asset container that performs one or more end device functions. One type of end device is a meter which can perform metering, load management, connect/disconnect, accounting functions, etc. Some end devices, such as ones monitoring and controlling air conditioners, refrigerators, pool pumps may be connected to a meter. All end devices may have communication capability defined by the associated communication function(s). An end device may be owned by a consumer, a service provider, utility or otherwise.
+There may be a related end device function that identifies a sensor or control point within a metering application or communications systems (e.g., water, gas, electricity).
+Some devices may use an optical port that conforms to the ANSI C12.18 standard for communications.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AssetContainer">
+				<xs:sequence>
+					<xs:element name="isVirtual" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If true, there is no physical device. As an example, a virtual meter can be defined to aggregate the consumption for two or more physical meters. Otherwise, this is a physical hardware device.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="isPan" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If true, this is a premises area network (PAN) device.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="installCode" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Installation code.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="amrSystem" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Automated meter reading (AMR) or other communication system responsible for communications to this end device.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Meter">
+		<xs:annotation>
+			<xs:documentation>Physical asset that performs the metering role of the usage point. Used for measuring consumption and detection of events.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="EndDevice">
+				<xs:sequence>
+					<xs:element name="formNumber" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Meter form designation per ANSI C12.10 or other applicable standard. An alphanumeric designation denoting the circuit arrangement for which the meter is applicable and its specific terminal arrangement.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MeterMultipliers" type="MeterMultiplier" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>All multipliers applied at this meter.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="intervalLength" type="UInt32" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Current interval length specified in seconds.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProgramDateIdMappings">
+		<xs:annotation>
+			<xs:documentation>[extension] Collection of all customer Energy Efficiency programs</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="programDateIdMapping" type="ProgramDateIdMapping" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Program date description</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ServiceLocation">
+		<xs:annotation>
+			<xs:documentation>A real estate location, commonly referred to as premises.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="WorkLocation">
+				<xs:sequence>
+					<xs:element name="accessMethod" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Method for the service person to access this service location. For example, a description of where to obtain a key if the facility is unmanned and secured.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="siteAccessProblem" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Problems previously encountered when visiting or performing work on this location. Examples include: bad dog, violent customer, verbally abusive occupant, obstructions, safety hazards, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="needsInspection" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>True if inspection is needed of facilities at this service location. This could be requested by a customer, due to suspected tampering, environmental concerns (e.g., a fire in the vicinity), or to correct incompatible data.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UsagePoints" type="UsagePoints" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>All usage points delivering service (of the same type) to this service location.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="outageBlock" type="String32" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Outage Block Identifier</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ServiceSupplier">
+		<xs:annotation>
+			<xs:documentation>Organisation that provides services to customers.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="OrganisationRole">
+				<xs:sequence>
+					<xs:element name="kind" type="SupplierKind" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Kind of supplier.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="issuerIdentificationNumber" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Unique transaction reference prefix number issued to an entity by the International Organization for Standardization for the purpose of tagging onto electronic financial transactions, as defined in ISO/IEC 7812-1 and ISO/IEC 7812-2.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="effectiveDate" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Effective Date of Service Activation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TimeConfiguration">
+		<xs:annotation>
+			<xs:documentation>[extension] Contains attributes related to the configuration of the time service.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="dstEndRule" type="DstRuleType">
+						<xs:annotation>
+							<xs:documentation>Rule to calculate end of daylight savings time in the current year.  Result of dstEndRule must be greater than result of dstStartRule.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dstOffset" type="TimeType">
+						<xs:annotation>
+							<xs:documentation>Daylight savings time offset from local standard time.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dstStartRule" type="DstRuleType">
+						<xs:annotation>
+							<xs:documentation>Rule to calculate start of daylight savings time in the current year. Result of dstEndRule must be greater than result of dstStartRule.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tzOffset" type="TimeType">
+						<xs:annotation>
+							<xs:documentation>Local time zone offset from UTCTime. Does not include any daylight savings time offsets.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--
+=======================================
+Basic Types     
+=======================================-->
+	<xs:simpleType name="HexBinary128">
+		<xs:annotation>
+			<xs:documentation>A 128-bit field encoded as a hex string (32 characters / 16 octets)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:hexBinary">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HexBinary32">
+		<xs:annotation>
+			<xs:documentation>A 32-bit field encoded as a hex string (8 characters / 4 octets)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:hexBinary">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HexBinary16">
+		<xs:annotation>
+			<xs:documentation>A 16-bit field encoded as a hex string (4 characters / 2 octets)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:hexBinary">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HexBinary8">
+		<xs:annotation>
+			<xs:documentation>An 8-bit field encoded as a hex string (2 characters / 1 octets)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:hexBinary">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String512">
+		<xs:annotation>
+			<xs:documentation>[extension] Character string of max length 512</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="512"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String256">
+		<xs:annotation>
+			<xs:documentation>Character string of max length 256</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String64">
+		<xs:annotation>
+			<xs:documentation>Character string of max length 64</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String32">
+		<xs:annotation>
+			<xs:documentation>Character string of max length 32</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UInt48">
+		<xs:annotation>
+			<xs:documentation>Unsigned integer, max inclusive 281474976710655 (2^48-1), restriction of xs:unsignedLong</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedLong">
+			<xs:maxInclusive value="281474976710655"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UInt32">
+		<xs:annotation>
+			<xs:documentation>Unsigned integer, max inclusive 4294967295 (2^32-1), same as xs:unsignedInt</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="UInt16">
+		<xs:annotation>
+			<xs:documentation>Unsigned integer, max inclusive 65535 (2^16-1), same as xs:unsignedShort</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedShort"/>
+	</xs:simpleType>
+	<xs:simpleType name="UInt8">
+		<xs:annotation>
+			<xs:documentation>Unsigned integer, max inclusive 255 (2^8-1), same as xs:unsignedByte</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedByte"/>
+	</xs:simpleType>
+	<xs:simpleType name="Int48">
+		<xs:annotation>
+			<xs:documentation>Signed integer, max inclusive -140737488355327 to +140737488355327 (2^47-1), restriction of xs:long</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="-140737488355328"/>
+			<xs:maxInclusive value="140737488355328"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Int16">
+		<xs:annotation>
+			<xs:documentation>Signed integer, max inclusive (2^16-1), restriction of xs:short</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:short"/>
+	</xs:simpleType>
+	<xs:simpleType name="name">
+		<xs:restriction base="String64"/>
+	</xs:simpleType>
+	<xs:simpleType name="PerCent">
+		<xs:annotation>
+			<xs:documentation>Percentage on a defined base.   For example, specify as 100 to indicate at the defined base.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TimeType">
+		<xs:annotation>
+			<xs:documentation>Time is a signed 64-bit value representing the number of seconds since 0 hours, 0 minutes, 0 seconds, on the 1st of January, 1970.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="UUIDType">
+		<xs:annotation>
+			<xs:documentation>This pattern defines a UUID </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--
+=======================================
+Additional Complex Types        
+=======================================
+-->
+	<xs:complexType name="AcceptanceTest">
+		<xs:annotation>
+			<xs:documentation>Acceptance test for assets.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="type" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Describes the type of test performed on the asset.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="success" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>True if asset has passed acceptance test and may be placed in or is in service. It is set to false if asset is removed from service and is required to be tested again before being placed back in service, possibly in a new location. Since asset may go through multiple tests during its lifecycle, the date of each acceptance test may be recorded in 'Asset.ActivityRecord.status.dateTime'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dateTime" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date and time the asset was last tested using the 'type' of test and yielding the current status in 'success' attribute.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AccountNotification">
+		<xs:annotation>
+			<xs:documentation>[extension] Customer action notification (e.g., delinquency, move in, move out)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="methodKind" type="NotificationMethodKind">
+						<xs:annotation>
+							<xs:documentation>Method by which the customer was notified.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="time" type="TimeType">
+						<xs:annotation>
+							<xs:documentation>timedate of notification</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="note" type="String256">
+						<xs:annotation>
+							<xs:documentation>annotation of the reason for the notification</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="customerNotificationKind" type="String256">
+						<xs:annotation>
+							<xs:documentation>delinquency,move in, move out ...</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Agreement">
+		<xs:annotation>
+			<xs:documentation>Formal agreement between two parties defining the terms and conditions for a set of services. The specifics of the services are, in turn, defined via one or more service agreements.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Document">
+				<xs:sequence>
+					<xs:element name="signDate" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date this agreement was consummated among associated persons and/or organisations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="validityInterval" type="DateTimeInterval" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date and time interval this agreement is valid (from going into effect to termination).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Asset">
+		<xs:annotation>
+			<xs:documentation>Tangible resource of the utility, including power system equipment, various end devices, cabinets, buildings, etc. For electrical network equipment, the role of the asset is defined through PowerSystemResource and its subclasses, defined mainly in the Wires model (refer to IEC61970-301 and model package IEC61970::Wires). Asset description places emphasis on the physical characteristics of the equipment fulfilling that role.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="type" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Utility-specific classification of Asset and its subtypes, according to their corporate standards, practices, and existing IT systems (e.g., for management of assets, maintenance, work, outage, customers, etc.).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="utcNumber" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Uniquely tracked commodity (UTC) number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="serialNumber" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Serial number of this asset.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lotNumber" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Lot number for this asset. Even for the same model and version number, many assets are manufactured in lots.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="purchasePrice" type="Int48" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Purchase price of asset.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="critical" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>True if asset is considered critical for some reason (for example, a pole with critical attachments).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="electronicAddress" type="ElectronicAddress" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Electronic address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lifecycle" type="LifecycleDate" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Lifecycle dates for this asset.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="acceptanceTest" type="AcceptanceTest" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Information on acceptance test.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="initialCondition" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Condition of asset in inventory or at time of installation. Examples include new, rebuilt, overhaul required, other. Refer to inspection data for information on the most current condition of the asset.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="initialLossOfLife" type="PerCent" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Whenever an asset is reconditioned, percentage of expected life for the asset when it was new; zero for new devices.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="status" type="Status" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Status of this asset.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AssetContainer">
+		<xs:annotation>
+			<xs:documentation>Asset that is aggregation of other assets such as conductors, transformers, switchgear, land, fences, buildings, equipment, vehicles, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Asset"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AttachmentReference">
+		<xs:annotation>
+			<xs:documentation>Object attachment reference information</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="attachmentFileName" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name of attachment document or file including filename extension if present.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="String256">
+								<xs:pattern value="\S*"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="attachmentMediaType" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>attachment media type as published by IANA (see https://www.iana.org/assignments/media-types/media-types.xhtml) e.g PDF, excel</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="attachmentURL">
+						<xs:annotation>
+							<xs:documentation>URL used to access attachment. Use CDATA or URL encoding to escape characters not allowed in XML.</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:anyURI">
+								<xs:pattern value="\S*"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BatchItemInfo">
+		<xs:annotation>
+			<xs:documentation>Includes elements that make it possible to include multiple transactions in a single (batch) request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="name" type="HexBinary16" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>An identifier for this object that is only unique within the containing collection.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="operation" type="CRUDOperation" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Specifies the operation requested of this item.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="statusCode" type="StatusCode" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Indicates the status code of the associated transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="statusReason" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Indicates the reason for the indicated status code.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BatchListType">
+		<xs:annotation>
+			<xs:documentation>[extension] List of resource URIs that can be used to GET retail customer resources</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="resources" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DateTimeInterval">
+		<xs:annotation>
+			<xs:documentation>Interval of date and time. End is not included because it can be derived from the start and the duration.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="duration" type="UInt32" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[correction] Duration of the interval, in seconds.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="start" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[correction] Date and time that this interval started.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DemandResponseProgram">
+		<xs:annotation>
+			<xs:documentation>[extension] Demand Response program characteristics covered by Customer Agreement</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="programName" type="String256" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name of Demand Response program</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="enrollmentStatus" type="EnrollmentStatus" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Retail Customer's current Demand Response program enrollment status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="programDescription" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>URI of Demand Response program description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="programDate" type="ProgramDate" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>All Demand Response program enrollment and termination dates</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="capacityReservationLevel" type="SummaryMeasurement" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Summary measurement of Capacity Reservation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DRProgramNomination" type="SummaryMeasurement" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Summary measurement of Demand Response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Document">
+		<xs:annotation>
+			<xs:documentation>Parent class for different groupings of information collected and managed as a part of a business process. It will frequently contain references to other objects, such as assets, people and power system resources.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="type" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Utility-specific classification of this document, according to its corporate standards, practices, and existing IT systems (e.g., for management of assets, maintenance, work, outage, customers, etc.).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="authorName" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name of the author of this document.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="createdDateTime" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date and time that this document was created.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lastModifiedDateTime" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date and time this document was last modified. Documents may potentially be modified many times during their lifetime.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="revisionNumber" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Revision number for this document.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="electronicAddress" type="ElectronicAddress" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Electronic address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="subject" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Document subject.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="title" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Document title.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="docStatus" type="Status" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Status of this document. For status of subject matter this document represents (e.g., Agreement, Work), use 'status' attribute.
+Example values for 'docStatus.status' are draft, approved, cancelled, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="status" type="Status" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Status of subject matter (e.g., Agreement, Work) this document represents. For status of the document itself, use 'docStatus' attribute.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="comment" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Free text comment.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ElectronicAddress">
+		<xs:annotation>
+			<xs:documentation>Electronic address information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="lan" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Address on local area network.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="mac" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>MAC (Media Access Control) address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="email1" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Primary email address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="email2" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Alternate email address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="web" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>World wide web address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="radio" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Radio address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="userID" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>User ID needed to log in, which can be for an individual person, an organisation, a location, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="password" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Password needed to log in.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IdentifiedObject">
+		<xs:annotation>
+			<xs:documentation>This is a root class to provide common naming attributes for all classes needing naming attributes</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="batchItemInfo" type="BatchItemInfo" minOccurs="0"/>
+					<xs:element name="name" type="name" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[Deprecated] identifier of object instance</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Location">
+		<xs:annotation>
+			<xs:documentation>The place, scene, or point of something where someone or something has been, is, and/or will be at a given moment in time. It can be defined with one or more position points (coordinates) in a given coordinate system.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="type" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Classification by utility's corporate standards and practices, relative to the location itself (e.g., geographical, functional accounting, etc., not a given property that happens to exist at that location).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="mainAddress" type="StreetAddress" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Main address of the location.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="secondaryAddress" type="StreetAddress" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Secondary address of the location. For example, PO Box address may have different ZIP code than that in the 'mainAddress'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="phone1" type="TelephoneNumber" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Phone number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="phone2" type="TelephoneNumber" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Additional phone number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="electronicAddress" type="ElectronicAddress" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Electronic address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="geoInfoReference" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Reference to geographical information source, often external to the utility.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="direction" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Direction that allows field crews to quickly find a given asset. For a given location, such as a street address, this is the relative direction in which to find the asset. For example, a streetlight may be located at the 'NW' (northwest) corner of the customer's site, or a usage point may be located on the second floor of an apartment building.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="status" type="Status" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Status of this location.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="positionPoints" type="PositionPoint" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Sequence of position points describing this location, expressed in coordinate system 'Location.CoordinateSystem'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LifecycleDate">
+		<xs:annotation>
+			<xs:documentation>Dates for lifecycle events of an asset.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="manufacturedDate" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date the asset was manufactured.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="purchaseDate" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date the asset was purchased. Note that even though an asset may have been purchased, it may not have been received into inventory at the time of purchase.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="receivedDate" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date the asset was received and first placed into inventory.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="installationDate" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Date current installation was completed, which may not be the same as the in-service date. Asset may have been installed at other locations previously. Ignored if asset is (1) not currently installed (e.g., stored in a depot) or (2) not intended to be installed (e.g., vehicle, tool).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="removalDate" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Date when the asset was last removed from service. Ignored if (1) not intended to be in service, or (2) currently in service.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="retiredDate" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Date the asset is permanently retired from service and may be scheduled for disposal. Ignored if asset is (1) currently in service, or (2) permanently removed from service.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MeterMultiplier">
+		<xs:annotation>
+			<xs:documentation>Multiplier applied at the meter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="kind" type="MeterMultiplierKind" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Kind of multiplier.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="value" type="xs:float" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Multiplier value.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Object">
+		<xs:annotation>
+			<xs:documentation>Superclass of all object classes to allow extensions. Inheritance from Object provides an inherent extension mechanism permitting custom data to be included in a separate namespace.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="extension" type="xs:anyType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Contains an extension.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Organisation">
+		<xs:annotation>
+			<xs:documentation>Organisation that might have roles as utility, contractor, supplier, manufacturer, customer, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="streetAddress" type="StreetAddress" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Street address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="postalAddress" type="StreetAddress" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Postal address, potentially different than 'streetAddress' (e.g., another city).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="phone1" type="TelephoneNumber" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Phone number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="phone2" type="TelephoneNumber" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Additional phone number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="electronicAddress" type="ElectronicAddress" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Electronic address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="organisationName" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[Extension] Organisation name</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrganisationRole">
+		<xs:annotation>
+			<xs:documentation>Identifies a way in which an organisation may participate in the utility enterprise (e.g., customer, manufacturer, etc).</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="Organisation" type="Organisation" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Organisation having this role.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PositionPoint">
+		<xs:annotation>
+			<xs:documentation>Set of spatial coordinates that determine a point, defined in the coordinate system specified in 'Location.CoordinateSystem'. Use a single position point instance to describe a point-oriented location. Use a sequence of position points to describe a line-oriented object (physical location of non-point oriented objects like cables or lines), or area of an object (like a substation or a geographical zone - in this case, have first and last position point with the same values).</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="xPosition" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>X axis position.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="yPosition" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Y axis position.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="zPosition" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Z axis position.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PricingStructure">
+		<xs:annotation>
+			<xs:documentation>Grouping of pricing components and prices used in the creation of customer charges and the eligibility criteria under which these terms may be offered to a customer. The reasons for grouping include state, customer classification, site characteristics, classification (i.e. fee price structure, deposit price structure, electric service price structure, etc.) and accounting requirements.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:anyURI"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Priority">
+		<xs:annotation>
+			<xs:documentation>Priority definition.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="rank" type="xs:integer">
+						<xs:annotation>
+							<xs:documentation>This is the priority of this event relative to other events. The lower the number higher the priority. A value of zero (0) indicates NO priority and in essence is the lowest priority by default.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="type" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Type describing 'rank'; e.g., high, emergency, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="justification" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Justification for 'rank'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProgramDate">
+		<xs:annotation>
+			<xs:documentation>[extension] Demand Response Program enrollment or termination date information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="programDate" type="TimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Demand Response Program enrollment or termination date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="programDateDescription" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of programDate (i.e., Enrollment, Termination, etc.)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProgramDateIdMapping">
+		<xs:annotation>
+			<xs:documentation>[extension] Single customer energy efficiency program date mapping</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="programDateType" type="ProgramDateKind">
+						<xs:annotation>
+							<xs:documentation>Type of customer energy efficiency program date</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="code" type="String64">
+						<xs:annotation>
+							<xs:documentation>Code value (may be alphanumeric).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="name" type="String256">
+						<xs:annotation>
+							<xs:documentation>Name associated with code.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="note" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Optional description of code</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Statement">
+		<xs:complexContent>
+			<xs:extension base="IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="statementIssueDateTime" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date and time at which a billing statement was issued</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="statementAttachmentRefs" type="AttachmentReference" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>One or more attachments related to a statement</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Status">
+		<xs:annotation>
+			<xs:documentation>Current status information relevant to an entity.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="value" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Status value at 'dateTime'; prior status changes may have been kept in instances of activity records associated with the object to which this status applies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dateTime" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date and time for which status 'value' applies.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="remark" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Pertinent information regarding the current 'value', as free form text.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="reason" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reason code or explanation for why an object went to the current status 'value'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StreetAddress">
+		<xs:annotation>
+			<xs:documentation>General purpose street and postal address information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="streetDetail" type="StreetDetail" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Street detail.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="townDetail" type="TownDetail" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Town detail.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="status" type="Status" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Status of this address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="postalCode" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Postal code for the address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="poBox" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Post office box.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StreetDetail">
+		<xs:annotation>
+			<xs:documentation>Street details, in the context of address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="number" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Designator of the specific location on the street.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="name" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name of the street.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="suffix" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Suffix to the street name. For example: North, South, East, West.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="prefix" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Prefix to the street name. For example: North, South, East, West.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="type" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Type of street. Examples include: street, circle, boulevard, avenue, road, drive, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="code" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Utilities often make use of external reference systems, such as those of the town-planner's department or surveyor general's mapping system, that allocate global reference codes to streets.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="buildingName" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) In certain cases the physical location of the place of interest does not have a direct point of entry from the street, but may be located inside a larger structure such as a building, complex, office block, apartment, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="suiteNumber" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Number of the apartment or suite.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="addressGeneral" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>First line of a free form address or some additional address information (for example a mail stop).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="addressGeneral2" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Second line of a free form address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="addressGeneral3" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Third line of a free form address.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="withinTownLimits" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>True if this street is within the legal geographical boundaries of the specified town (default).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SummaryMeasurement">
+		<xs:annotation>
+			<xs:documentation>An aggregated summary measurement reading</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="powerOfTenMultiplier" type="UnitMultiplierKind" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The multiplier part of the unit of measure, e.g. "kilo" (k)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="timeStamp" type="TimeType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The date and time (if needed) of the summary measurement.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="uom" type="UnitSymbolKind" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The units of the reading, e.g. “Wh”</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="value" type="Int48" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The value of the summary measurement.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="readingTypeRef" type="xs:anyURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to a full ReadingType.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TelephoneNumber">
+		<xs:annotation>
+			<xs:documentation>Telephone number.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="countryCode" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Country code.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="areaCode" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Area or region code.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cityCode" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>City code.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="localNumber" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Main (local) part of this telephone number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ext" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Extension for this telephone number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="dialOut" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Dial out code, for instance to call outside an enterprise.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="internationalPrefix" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>(if applicable) Prefix used when calling an international number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ituPhone" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Phone number according to ITU E.164.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TownDetail">
+		<xs:annotation>
+			<xs:documentation>Town details, in the context of address.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence>
+					<xs:element name="code" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Town code.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="section" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Town section. For example, it is common for there to be 36 sections per township.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="name" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Town name.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="county" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>[extension] Name of county.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="stateOrProvince" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name of the state or province.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="country" type="String256" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name of the country.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UsagePoint">
+		<xs:annotation>
+			<xs:documentation>Logical or physical point in the network to which readings or events may be attributed. Used at the place where a physical or virtual meter may be located; however, it is not required that a meter be present.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:anyURI"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="UsagePoints">
+		<xs:annotation>
+			<xs:documentation>Sequence of UsagePoint URIS</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Object">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="UsagePoint">
+						<xs:annotation>
+							<xs:documentation>Logical or physical point in the network to which readings or events may be attributed. Used at the place where a physical or virtual meter may be located; however, it is not required that a meter be present.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WorkLocation">
+		<xs:annotation>
+			<xs:documentation>Information about a particular location for various forms of work.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Location"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--
+=======================================
+Enumerations 
+=======================================
+-->
+	<xs:simpleType name="CRUDOperation">
+		<xs:annotation>
+			<xs:documentation>Specifies the operation requested of this item</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="UInt16">
+			<xs:simpleType>
+				<xs:restriction base="UInt16">
+					<xs:enumeration value="0">
+						<xs:annotation>
+							<xs:appinfo>Create</xs:appinfo>
+							<xs:documentation>Create</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Read</xs:appinfo>
+							<xs:documentation>Read</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Update</xs:appinfo>
+							<xs:documentation>Update</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>Delete</xs:appinfo>
+							<xs:documentation>Delete</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="Currency">
+		<xs:annotation>
+			<xs:documentation>Code for the currency for costs associated with this ReadingType.  The valid values per the standard are defined in CurrencyCode.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="UInt16">
+			<xs:simpleType>
+				<xs:restriction base="UInt16">
+					<xs:enumeration value="840">
+						<xs:annotation>
+							<xs:appinfo>USD</xs:appinfo>
+							<xs:documentation>US dollar</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="978">
+						<xs:annotation>
+							<xs:appinfo>EUR</xs:appinfo>
+							<xs:documentation>European euro</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="36">
+						<xs:annotation>
+							<xs:appinfo>AUD</xs:appinfo>
+							<xs:documentation>Australian dollar</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="124">
+						<xs:annotation>
+							<xs:appinfo>CAD</xs:appinfo>
+							<xs:documentation>Canadian dollar</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="756">
+						<xs:annotation>
+							<xs:appinfo>CHF</xs:appinfo>
+							<xs:documentation>Swiss francs</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="156">
+						<xs:annotation>
+							<xs:appinfo>CNY</xs:appinfo>
+							<xs:documentation>Chinese yuan renminbi</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="208">
+						<xs:annotation>
+							<xs:appinfo>DKK</xs:appinfo>
+							<xs:documentation>Danish crown</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="826">
+						<xs:annotation>
+							<xs:appinfo>GBP</xs:appinfo>
+							<xs:documentation>British pound</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="392">
+						<xs:annotation>
+							<xs:appinfo>JPY</xs:appinfo>
+							<xs:documentation>Japanese yen</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="578">
+						<xs:annotation>
+							<xs:appinfo>NOK</xs:appinfo>
+							<xs:documentation>Norwegian crown</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="643">
+						<xs:annotation>
+							<xs:appinfo>RUB</xs:appinfo>
+							<xs:documentation>Russian ruble</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="752">
+						<xs:annotation>
+							<xs:appinfo>SEK</xs:appinfo>
+							<xs:documentation>Swedish crown</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="356">
+						<xs:annotation>
+							<xs:appinfo>INR</xs:appinfo>
+							<xs:documentation>India rupees</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="0">
+						<xs:annotation>
+							<xs:appinfo>other</xs:appinfo>
+							<xs:documentation>Another type of currency.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="CustomerKind">
+		<xs:annotation>
+			<xs:documentation>Kind of customer.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:string">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="residential">
+						<xs:annotation>
+							<xs:documentation>Residential customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="residentialAndCommercial">
+						<xs:annotation>
+							<xs:documentation>Residential and commercial customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="residentialAndStreetlight">
+						<xs:annotation>
+							<xs:documentation>Residential and streetlight customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="residentialStreetlightOthers">
+						<xs:annotation>
+							<xs:documentation>Residential streetlight or other related customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="residentialFarmService">
+						<xs:annotation>
+							<xs:documentation>Residential farm service customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="commercialIndustrial">
+						<xs:annotation>
+							<xs:documentation>Commercial industrial customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="pumpingLoad">
+						<xs:annotation>
+							<xs:documentation>Pumping load customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="windMachine">
+						<xs:annotation>
+							<xs:documentation>Wind machine customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="energyServiceSupplier">
+						<xs:annotation>
+							<xs:documentation>Customer as energy service supplier.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="energyServiceScheduler">
+						<xs:annotation>
+							<xs:documentation>Customer as energy service scheduler.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="enterprise">
+						<xs:annotation>
+							<xs:documentation>Represents the owning enterprise.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="regionalOperator">
+						<xs:annotation>
+							<xs:documentation>Represents a local operator of a larger enterprise.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="subsidiary">
+						<xs:annotation>
+							<xs:documentation>A subsidiary of a larger enterprise.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="internalUse">
+						<xs:annotation>
+							<xs:documentation>Internal use customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="other">
+						<xs:annotation>
+							<xs:documentation>Other kind of customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="DstRuleType">
+		<xs:annotation>
+			<xs:documentation>[extension] Bit map encoded rule from which is calculated the start or end time, within the current year, to which daylight savings time offset must be applied. 
+
+The rule encoding:
+Bits  0 - 11: seconds 0 - 3599
+Bits 12 - 16: hours 0 - 23
+Bits 17 - 19: day of the week 0 = not applicable, 1 - 7 (Monday = 1)
+Bits:20 - 24: day of the month 0 = not applicable, 1 - 31
+Bits: 25 - 27: operator  (detailed below)
+Bits: 28 - 31: month 1 - 12
+
+Rule value of 0xFFFFFFFF means rule processing/DST correction is disabled.
+
+The operators:
+
+0: DST starts/ends on the Day of the Month
+1: DST starts/ends on the Day of the Week that is on or after the Day of the Month
+2: DST starts/ends on the first occurrence of the Day of the Week in a month
+3: DST starts/ends on the second occurrence of the Day of the Week in a month
+4: DST starts/ends on the third occurrence of the Day of the Week in a month
+5: DST starts/ends on the forth occurrence of the Day of the Week in a month
+6: DST starts/ends on the fifth occurrence of the Day of the Week in a month
+7: DST starts/ends on the last occurrence of the Day of the Week in a month
+
+An example: DST starts on third Friday in March at 1:45 AM.  The rule...
+Seconds: 2700
+Hours: 1
+Day of Week: 5
+Day of Month: 0
+Operator: 4
+Month: 3</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="HexBinary32"/>
+	</xs:simpleType>
+	<xs:simpleType name="EnrollmentStatus">
+		<xs:annotation>
+			<xs:documentation>[extension] Current Demand Response program enrollment status</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:string">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="unenrolled">
+						<xs:annotation>
+							<xs:documentation>Currently NOT enrolled in the Demand Response program</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="enrolled">
+						<xs:annotation>
+							<xs:documentation>Currently enrolled in the Demand Response program</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="enrolledPending">
+						<xs:annotation>
+							<xs:documentation>Currently pending enrollment in the Demand Response program</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="MeterMultiplierKind">
+		<xs:annotation>
+			<xs:documentation>Kind of meter multiplier.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:string">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="kH">
+						<xs:annotation>
+							<xs:documentation>Meter kh (watthour) constant. The number of watthours that must be applied to the meter to cause one disk revolution for an electromechanical meter or the number of watthours represented by one increment pulse for an electronic meter.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="transformerRatio">
+						<xs:annotation>
+							<xs:documentation>The ratio of the transformer's primary and secondary windings (turns) with respect to each other.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="kR">
+						<xs:annotation>
+							<xs:documentation>Register multiplier. The number to multiply the register reading by in order to get kWh.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="kE">
+						<xs:annotation>
+							<xs:documentation>Test constant.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ctRatio">
+						<xs:annotation>
+							<xs:documentation>Current transformer ratio used to convert associated quantities to real measurements.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ptRatio">
+						<xs:annotation>
+							<xs:documentation>Potential transformer ratio used to convert associated quantities to real measurements.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="NotificationMethodKind">
+		<xs:annotation>
+			<xs:documentation>Method by which the customer was notified</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:string">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="call">
+						<xs:annotation>
+							<xs:documentation>Contacted by phone by customer service representative.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="email">
+						<xs:annotation>
+							<xs:documentation>Trouble reported by email.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="letter">
+						<xs:annotation>
+							<xs:documentation>Trouble reported by letter.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="other">
+						<xs:annotation>
+							<xs:documentation>Trouble reported by other means.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ivr">
+						<xs:annotation>
+							<xs:documentation>Trouble reported through interactive voice response system.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="ProgramDateKind">
+		<xs:annotation>
+			<xs:documentation>[extension] Type of Demand Response program date</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="String64">
+			<xs:simpleType>
+				<xs:restriction base="String64">
+					<xs:enumeration value="CUST_DR_PROGRAM_ENROLLMENT_DATE">
+						<xs:annotation>
+							<xs:documentation>Date customer enrolled in Demand Response program</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CUST_DR_PROGRAM_DE_ENROLLMENT_DATE">
+						<xs:annotation>
+							<xs:documentation>Date customer terminated enrollment in Demand Response program</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CUST_DR_PROGRAM_TERM_DATE_REGARDLESS_FINANCIAL">
+						<xs:annotation>
+							<xs:documentation>Earliest date customer can terminate Demand Response enrollment, regardless of financial impact</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CUST_DR_PROGRAM_TERM_DATE_WITHOUT_FINANCIAL">
+						<xs:annotation>
+							<xs:documentation>Earliest date customer can terminate Demand Response enrollment, without financial impact</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="RevenueKind">
+		<xs:annotation>
+			<xs:documentation>Accounting classification of the type of revenue collected for the customer agreement, typically used to break down accounts for revenue accounting.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:string">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="residential">
+						<xs:annotation>
+							<xs:documentation>Residential revenue.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="nonResidential">
+						<xs:annotation>
+							<xs:documentation>Non-residential revenue.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="commercial">
+						<xs:annotation>
+							<xs:documentation>Commercial revenue.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="industrial">
+						<xs:annotation>
+							<xs:documentation>Industrial revenue.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="irrigation">
+						<xs:annotation>
+							<xs:documentation>Irrigation revenue.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="streetLight">
+						<xs:annotation>
+							<xs:documentation>Streetlight revenue.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="other">
+						<xs:annotation>
+							<xs:documentation>Other revenue kind.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceKind">
+		<xs:annotation>
+			<xs:documentation>Kind of service.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="electricity">
+				<xs:annotation>
+					<xs:documentation>Electricity service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="gas">
+				<xs:annotation>
+					<xs:documentation>Gas service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="water">
+				<xs:annotation>
+					<xs:documentation>Water service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="time">
+				<xs:annotation>
+					<xs:documentation>Time service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="heat">
+				<xs:annotation>
+					<xs:documentation>Heat service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="refuse">
+				<xs:annotation>
+					<xs:documentation>Refuse (waster) service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sewerage">
+				<xs:annotation>
+					<xs:documentation>Sewerage service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="rates">
+				<xs:annotation>
+					<xs:documentation>Rates (e.g. tax, charge, toll, duty, tariff, etc.) service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="tvLicence">
+				<xs:annotation>
+					<xs:documentation>TV license service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="internet">
+				<xs:annotation>
+					<xs:documentation>Internet service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="other">
+				<xs:annotation>
+					<xs:documentation>Other kind of service.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StatusCode">
+		<xs:annotation>
+			<xs:documentation>indicates the status code of the associated transaction</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="UInt16">
+			<xs:simpleType>
+				<xs:restriction base="UInt16">
+					<xs:enumeration value="200">
+						<xs:annotation>
+							<xs:appinfo>Ok</xs:appinfo>
+							<xs:documentation>OK</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="201">
+						<xs:annotation>
+							<xs:appinfo>Created</xs:appinfo>
+							<xs:documentation>Created</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="202">
+						<xs:annotation>
+							<xs:appinfo>Accepted</xs:appinfo>
+							<xs:documentation>Accepted</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="204">
+						<xs:annotation>
+							<xs:appinfo>No Content</xs:appinfo>
+							<xs:documentation>No Content</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="301">
+						<xs:annotation>
+							<xs:appinfo>Moved Permanently</xs:appinfo>
+							<xs:documentation>Moved Permanently</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="302">
+						<xs:annotation>
+							<xs:appinfo>Redirect</xs:appinfo>
+							<xs:documentation>Redirect</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="304">
+						<xs:annotation>
+							<xs:appinfo>Not Modified</xs:appinfo>
+							<xs:documentation>Not Modified</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="400">
+						<xs:annotation>
+							<xs:appinfo>Bad Request</xs:appinfo>
+							<xs:documentation>Bad Request</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="401">
+						<xs:annotation>
+							<xs:appinfo>Unauthorized</xs:appinfo>
+							<xs:documentation>Unauthorized</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="403">
+						<xs:annotation>
+							<xs:appinfo>Forbidden</xs:appinfo>
+							<xs:documentation>Forbidden</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="404">
+						<xs:annotation>
+							<xs:appinfo>Not Found</xs:appinfo>
+							<xs:documentation>Not Found</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="405">
+						<xs:annotation>
+							<xs:appinfo>Method Not Allowed</xs:appinfo>
+							<xs:documentation>Method Not Allowed</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="410">
+						<xs:annotation>
+							<xs:appinfo>Gone</xs:appinfo>
+							<xs:documentation>Gone</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="500">
+						<xs:annotation>
+							<xs:appinfo>Internal Server Error</xs:appinfo>
+							<xs:documentation>Internal Server Error</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="SupplierKind">
+		<xs:annotation>
+			<xs:documentation>Kind of supplier.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:string">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="utility">
+						<xs:annotation>
+							<xs:documentation>Entity that delivers the service to the customer.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="retailer">
+						<xs:annotation>
+							<xs:documentation>Entity that sells the service, but does not deliver to the customer; applies to the deregulated markets.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="other">
+						<xs:annotation>
+							<xs:documentation>Other kind of supplier.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="lse">
+						<xs:annotation>
+							<xs:documentation>[Extension] Load Serving Entity</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="mdma">
+						<xs:annotation>
+							<xs:documentation>[Extension] Meter Data Management Agent</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="msp">
+						<xs:annotation>
+							<xs:documentation>[Extension] Meter Service Provider</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="UnitMultiplierKind">
+		<xs:annotation>
+			<xs:documentation>The power of ten unit multipliers</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="Int16">
+			<xs:simpleType>
+				<xs:restriction base="Int16">
+					<xs:enumeration value="-12">
+						<xs:annotation>
+							<xs:documentation>Pico 10**-12</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="-9">
+						<xs:annotation>
+							<xs:documentation>Nano 10**-9</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="-6">
+						<xs:annotation>
+							<xs:documentation>Micro 10**-6</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="-3">
+						<xs:annotation>
+							<xs:documentation>Milli 10**-3</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="-2">
+						<xs:annotation>
+							<xs:documentation>Centi 10**-2</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="-1">
+						<xs:annotation>
+							<xs:documentation>Deci 10**-1</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:documentation>Kilo 10**3</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6">
+						<xs:annotation>
+							<xs:documentation>Mega 10**6</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="9">
+						<xs:annotation>
+							<xs:documentation>Giga 10**9</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="12">
+						<xs:annotation>
+							<xs:documentation>Tera 10**12</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="0">
+						<xs:annotation>
+							<xs:documentation>Not Applicable or "x1"</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:documentation>deca 10**1</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:documentation>hecto 10**2</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="UnitSymbolKind">
+		<xs:annotation>
+			<xs:documentation>Code for the base unit of measure for Readings of ReadingType.  Used in combination with the powerOfTenMultiplier to specify the actual unit of measure. Valid values per the standard are defined in UomType.
+</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="UInt16">
+			<xs:simpleType>
+				<xs:restriction base="UInt16">
+					<xs:enumeration value="61">
+						<xs:annotation>
+							<xs:appinfo>VA</xs:appinfo>
+							<xs:documentation>Apparent power, Volt Ampere (See also real power and reactive power.), VA</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="38">
+						<xs:annotation>
+							<xs:appinfo>W</xs:appinfo>
+							<xs:documentation>Real power, Watt. By definition, one Watt equals one Joule per second. Electrical power may have real and reactive components. The real portion of electrical power (I²R) or VIcos?, is expressed in Watts. (See also apparent power and reactive power.), W</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="63">
+						<xs:annotation>
+							<xs:appinfo>VAr</xs:appinfo>
+							<xs:documentation>Reactive power, Volt Ampere reactive. The “reactive” or “imaginary” component of electrical power (VISin?). (See also real power and apparent power)., VAr</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="71">
+						<xs:annotation>
+							<xs:appinfo>VAh</xs:appinfo>
+							<xs:documentation>Apparent energy, Volt Ampere hours, VAh</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="72">
+						<xs:annotation>
+							<xs:appinfo>Wh</xs:appinfo>
+							<xs:documentation>Real energy, Watt hours, Wh</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="73">
+						<xs:annotation>
+							<xs:appinfo>VArh</xs:appinfo>
+							<xs:documentation>Reactive energy, Volt Ampere reactive hours, VArh</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="29">
+						<xs:annotation>
+							<xs:appinfo>V</xs:appinfo>
+							<xs:documentation>Electric potential, Volt (W/A), V</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="30">
+						<xs:annotation>
+							<xs:appinfo>ohm</xs:appinfo>
+							<xs:documentation>Electric resistance, Ohm (V/A), O</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="5">
+						<xs:annotation>
+							<xs:appinfo>A</xs:appinfo>
+							<xs:documentation>Current, ampere, A</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="25">
+						<xs:annotation>
+							<xs:appinfo>F</xs:appinfo>
+							<xs:documentation>Electric capacitance, Farad (C/V), °C</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="28">
+						<xs:annotation>
+							<xs:appinfo>H</xs:appinfo>
+							<xs:documentation>Electric inductance, Henry (Wb/A), H</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="23">
+						<xs:annotation>
+							<xs:appinfo>degC</xs:appinfo>
+							<xs:documentation>Relative temperature in degrees Celsius. In the SI unit system the symbol is ºC. Electric charge is measured in coulomb that has the unit symbol C. To distinguish degree Celsius from coulomb the symbol used in the UML is degC. Reason for not using ºC is the special character º is difficult to manage in software.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="27">
+						<xs:annotation>
+							<xs:appinfo>sec</xs:appinfo>
+							<xs:documentation>Time, seconds, s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="159">
+						<xs:annotation>
+							<xs:appinfo>min</xs:appinfo>
+							<xs:documentation>Time, minute = s * 60, min</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="160">
+						<xs:annotation>
+							<xs:appinfo>h</xs:appinfo>
+							<xs:documentation>Time, hour = minute * 60, h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="9">
+						<xs:annotation>
+							<xs:appinfo>deg</xs:appinfo>
+							<xs:documentation>Plane angle, degrees, deg</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="10">
+						<xs:annotation>
+							<xs:appinfo>rad</xs:appinfo>
+							<xs:documentation>Plane angle, Radian (m/m), rad</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="31">
+						<xs:annotation>
+							<xs:appinfo>J</xs:appinfo>
+							<xs:documentation>Energy joule, (N·m = C·V = W·s), J</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="32">
+						<xs:annotation>
+							<xs:appinfo>n</xs:appinfo>
+							<xs:documentation>Force newton, (kg m/s²), N</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="53">
+						<xs:annotation>
+							<xs:appinfo>siemens</xs:appinfo>
+							<xs:documentation>Electric conductance, Siemens (A / V = 1 / O), S</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="0">
+						<xs:annotation>
+							<xs:appinfo>none</xs:appinfo>
+							<xs:documentation>N/A, None</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="33">
+						<xs:annotation>
+							<xs:appinfo>Hz</xs:appinfo>
+							<xs:documentation>Frequency hertz, (1/s), Hz</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>g</xs:appinfo>
+							<xs:documentation>Mass in gram, g</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="39">
+						<xs:annotation>
+							<xs:appinfo>pa</xs:appinfo>
+							<xs:documentation>Pressure, Pascal (N/m²)(Note: the absolute or relative measurement of pressure is implied with this entry. See below for more explicit forms.), Pa</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>m</xs:appinfo>
+							<xs:documentation>Length, meter, m</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="41">
+						<xs:annotation>
+							<xs:appinfo>m2</xs:appinfo>
+							<xs:documentation>Area, square meter, m²</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="42">
+						<xs:annotation>
+							<xs:appinfo>m3</xs:appinfo>
+							<xs:documentation>Volume, cubic meter, m³</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="69">
+						<xs:annotation>
+							<xs:appinfo>A2</xs:appinfo>
+							<xs:documentation>Amps squared, amp squared, A2</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="105">
+						<xs:annotation>
+							<xs:appinfo>A2h</xs:appinfo>
+							<xs:documentation>ampere-squared, Ampere-squared hour, A²h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="70">
+						<xs:annotation>
+							<xs:appinfo>A2s</xs:appinfo>
+							<xs:documentation>Amps squared time, square amp second, A²s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="106">
+						<xs:annotation>
+							<xs:appinfo>Ah</xs:appinfo>
+							<xs:documentation>Ampere-hours, Ampere-hours, Ah</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="152">
+						<xs:annotation>
+							<xs:appinfo>APerA</xs:appinfo>
+							<xs:documentation>Current, Ratio of Amperage, A/A</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="103">
+						<xs:annotation>
+							<xs:appinfo>APerM</xs:appinfo>
+							<xs:documentation>A/m, magnetic field strength, Ampere per metre, A/m</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="68">
+						<xs:annotation>
+							<xs:appinfo>As</xs:appinfo>
+							<xs:documentation>Amp seconds, amp seconds, As</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="79">
+						<xs:annotation>
+							<xs:appinfo>b</xs:appinfo>
+							<xs:documentation>Sound pressure level, Bel, acoustic, Combine with multiplier prefix “d” to form decibels of Sound Pressure Level“dB (SPL).”, B (SPL)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="113">
+						<xs:annotation>
+							<xs:appinfo>bm</xs:appinfo>
+							<xs:documentation>Signal Strength, Bel-mW, normalized to 1mW. Note: to form “dBm” combine “Bm” with multiplier “d”. Bm</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="22">
+						<xs:annotation>
+							<xs:appinfo>bq</xs:appinfo>
+							<xs:documentation>Radioactivity, Becquerel (1/s), Bq</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="132">
+						<xs:annotation>
+							<xs:appinfo>btu</xs:appinfo>
+							<xs:documentation>Energy, British Thermal Units, BTU</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="133">
+						<xs:annotation>
+							<xs:appinfo>btuPerH</xs:appinfo>
+							<xs:documentation>Power, BTU per hour, BTU/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="8">
+						<xs:annotation>
+							<xs:appinfo>cd</xs:appinfo>
+							<xs:documentation>Luminous intensity, candela, cd</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="76">
+						<xs:annotation>
+							<xs:appinfo>char</xs:appinfo>
+							<xs:documentation>Number of characters, characters, char</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="75">
+						<xs:annotation>
+							<xs:appinfo>HzPerSec</xs:appinfo>
+							<xs:documentation>Rate of change of frequency, hertz per second, Hz/s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="114">
+						<xs:annotation>
+							<xs:appinfo>code</xs:appinfo>
+							<xs:documentation>Application Value, encoded value, code</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="65">
+						<xs:annotation>
+							<xs:appinfo>cosTheta</xs:appinfo>
+							<xs:documentation>Power factor, Dimensionless, cos?</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="111">
+						<xs:annotation>
+							<xs:appinfo>count</xs:appinfo>
+							<xs:documentation>Amount of substance, counter value, count</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="119">
+						<xs:annotation>
+							<xs:appinfo>ft3</xs:appinfo>
+							<xs:documentation>Volume, cubic feet, ft³</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="120">
+						<xs:annotation>
+							<xs:appinfo>ft3compensated</xs:appinfo>
+							<xs:documentation>Volume, cubic feet, ft³(compensated)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="123">
+						<xs:annotation>
+							<xs:appinfo>ft3compensatedPerH</xs:appinfo>
+							<xs:documentation>Volumetric flow rate, compensated cubic feet per hour, ft³(compensated)/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="78">
+						<xs:annotation>
+							<xs:appinfo>gM2</xs:appinfo>
+							<xs:documentation>Turbine inertia, gram·meter2 (Combine with multiplier prefix “k” to form kg·m2.), gm²</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="144">
+						<xs:annotation>
+							<xs:appinfo>gPerG</xs:appinfo>
+							<xs:documentation>Concentration, The ratio of the mass of a solute divided by the mass of the solution., g/g</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="21">
+						<xs:annotation>
+							<xs:appinfo>gy</xs:appinfo>
+							<xs:documentation>Absorbed dose, Gray (J/kg), GY</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="150">
+						<xs:annotation>
+							<xs:appinfo>HzPerHz</xs:appinfo>
+							<xs:documentation>Frequency, Rate of frequency change, Hz/Hz</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="77">
+						<xs:annotation>
+							<xs:appinfo>charPerSec</xs:appinfo>
+							<xs:documentation>Data rate, characters per second, char/s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="130">
+						<xs:annotation>
+							<xs:appinfo>imperialGal</xs:appinfo>
+							<xs:documentation>Volume, imperial gallons, ImperialGal</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="131">
+						<xs:annotation>
+							<xs:appinfo>imperialGalPerH</xs:appinfo>
+							<xs:documentation>Volumetric flow rate, Imperial gallons per hour, ImperialGal/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="51">
+						<xs:annotation>
+							<xs:appinfo>jPerK</xs:appinfo>
+							<xs:documentation>Heat capacity, Joule/Kelvin, J/K</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="165">
+						<xs:annotation>
+							<xs:appinfo>jPerKg</xs:appinfo>
+							<xs:documentation>Specific energy, Joules / kg, J/kg</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="6">
+						<xs:annotation>
+							<xs:appinfo>K</xs:appinfo>
+							<xs:documentation>Temperature, Kelvin, K</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="158">
+						<xs:annotation>
+							<xs:appinfo>kat</xs:appinfo>
+							<xs:documentation>Catalytic activity, katal = mol / s, kat</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="47">
+						<xs:annotation>
+							<xs:appinfo>kgM</xs:appinfo>
+							<xs:documentation>Moment of mass ,kilogram meter (kg·m), M</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="48">
+						<xs:annotation>
+							<xs:appinfo>kgPerM3</xs:appinfo>
+							<xs:documentation>Density, gram/cubic meter (combine with prefix multiplier “k” to form kg/ m³), g/m³</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="134">
+						<xs:annotation>
+							<xs:appinfo>litre</xs:appinfo>
+							<xs:documentation>Volume, litre = dm3 = m3/1000., L</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="157">
+						<xs:annotation>
+							<xs:appinfo>litreCompensated</xs:appinfo>
+							<xs:documentation>Volume, litre, with the value compensated for weather effects, L(compensated)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="138">
+						<xs:annotation>
+							<xs:appinfo>litreCompensatedPerH</xs:appinfo>
+							<xs:documentation>Volumetric flow rate, litres (compensated) per hour, L(compensated)/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="137">
+						<xs:annotation>
+							<xs:appinfo>litrePerH</xs:appinfo>
+							<xs:documentation>Volumetric flow rate, litres per hour, L/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="143">
+						<xs:annotation>
+							<xs:appinfo>litrePerLitre</xs:appinfo>
+							<xs:documentation>Concentration, The ratio of the volume of a solute divided by the volume of the solution., L/L</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="82">
+						<xs:annotation>
+							<xs:appinfo>litrePerSec</xs:appinfo>
+							<xs:documentation>Volumetric flow rate, Volumetric flow rate, L/s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="156">
+						<xs:annotation>
+							<xs:appinfo>litreUncompensated</xs:appinfo>
+							<xs:documentation>Volume, litre, with the value uncompensated for weather effects., L(uncompensated)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="139">
+						<xs:annotation>
+							<xs:appinfo>litreUncompensatedPerH</xs:appinfo>
+							<xs:documentation>Volumetric flow rate, litres (uncompensated) per hour, L(uncompensated)/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="35">
+						<xs:annotation>
+							<xs:appinfo>lm</xs:appinfo>
+							<xs:documentation>Luminous flux, lumen (cd sr), Lm</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="34">
+						<xs:annotation>
+							<xs:appinfo>lx</xs:appinfo>
+							<xs:documentation>Illuminance lux, (lm/m²), L(uncompensated)/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="49">
+						<xs:annotation>
+							<xs:appinfo>m2PerSec</xs:appinfo>
+							<xs:documentation>Viscosity, meter squared / second, m²/s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="167">
+						<xs:annotation>
+							<xs:appinfo>m3compensated</xs:appinfo>
+							<xs:documentation>Volume, cubic meter, with the value compensated for weather effects., m3(compensated)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="126">
+						<xs:annotation>
+							<xs:appinfo>m3compensatedPerH</xs:appinfo>
+							<xs:documentation>Volumetric flow rate, compensated cubic meters per hour, ³(compensated)/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="125">
+						<xs:annotation>
+							<xs:appinfo>m3PerH</xs:appinfo>
+							<xs:documentation>Volumetric flow rate, cubic meters per hour, m³/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="45">
+						<xs:annotation>
+							<xs:appinfo>m3PerSec</xs:appinfo>
+							<xs:documentation>m3PerSec, cubic meters per second, m³/s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="166">
+						<xs:annotation>
+							<xs:appinfo>m3uncompensated</xs:appinfo>
+							<xs:documentation>m3uncompensated, cubic meter, with the value uncompensated for weather effects., m3(uncompensated)</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="127">
+						<xs:annotation>
+							<xs:appinfo>m3uncompensatedPerH</xs:appinfo>
+							<xs:documentation>Volumetric flow rate, uncompensated cubic meters per hour, m³(uncompensated)/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="118">
+						<xs:annotation>
+							<xs:appinfo>meCode</xs:appinfo>
+							<xs:documentation>EndDeviceEvent, value to be interpreted as a EndDeviceEventCode, meCode</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="7">
+						<xs:annotation>
+							<xs:appinfo>mol</xs:appinfo>
+							<xs:documentation>Amount of substance, mole, mol</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="147">
+						<xs:annotation>
+							<xs:appinfo>molPerKg</xs:appinfo>
+							<xs:documentation>Concentration, Molality, the amount of solute in moles and the amount of solvent in kilograms., mol/kg</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="145">
+						<xs:annotation>
+							<xs:appinfo>molPerM3</xs:appinfo>
+							<xs:documentation>Concentration, The amount of substance concentration, (c), the amount of solvent in moles divided by the volume of solution in m³., mol/ m³</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="146">
+						<xs:annotation>
+							<xs:appinfo>molPerMol</xs:appinfo>
+							<xs:documentation>Concentration, Molar fraction (?), the ratio of the molar amount of a solute divided by the molar amount of the solution.,mol/mol</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="80">
+						<xs:annotation>
+							<xs:appinfo>money</xs:appinfo>
+							<xs:documentation>Monetary unit, Generic money (Note: Specific monetary units are identified the currency class)., ¤</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="148">
+						<xs:annotation>
+							<xs:appinfo>mPerM</xs:appinfo>
+							<xs:documentation>Length, Ratio of length, m/m</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="46">
+						<xs:annotation>
+							<xs:appinfo>mPerM3</xs:appinfo>
+							<xs:documentation>Fuel efficiency, meters / cubic meter, m/m³</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="43">
+						<xs:annotation>
+							<xs:appinfo>mPerSec</xs:appinfo>
+							<xs:documentation>Velocity, meters per second (m/s), m/s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="44">
+						<xs:annotation>
+							<xs:appinfo>mPerSec2</xs:appinfo>
+							<xs:documentation>Acceleration, meters per second squared, m/s²</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="102">
+						<xs:annotation>
+							<xs:appinfo>ohmM</xs:appinfo>
+							<xs:documentation>resistivity, ? (rho), ?m</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="155">
+						<xs:annotation>
+							<xs:appinfo>paA</xs:appinfo>
+							<xs:documentation>Pressure, Pascal, absolute pressure, PaA</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="140">
+						<xs:annotation>
+							<xs:appinfo>paG</xs:appinfo>
+							<xs:documentation>Pressure, Pascal, gauge pressure, PaG</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="141">
+						<xs:annotation>
+							<xs:appinfo>psiA</xs:appinfo>
+							<xs:documentation>Pressure, Pounds per square inch, absolute, psiA</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="142">
+						<xs:annotation>
+							<xs:appinfo>psiG</xs:appinfo>
+							<xs:documentation>Pressure, Pounds per square inch, gauge, psiG</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="100">
+						<xs:annotation>
+							<xs:appinfo>q</xs:appinfo>
+							<xs:documentation>Quantity power, Q, Q</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="161">
+						<xs:annotation>
+							<xs:appinfo>q45</xs:appinfo>
+							<xs:documentation>Quantity power, Q measured at 45º, Q45</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="163">
+						<xs:annotation>
+							<xs:appinfo>q45h</xs:appinfo>
+							<xs:documentation>Quantity energy, Q measured at 45º, Q45h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="162">
+						<xs:annotation>
+							<xs:appinfo>q60</xs:appinfo>
+							<xs:documentation>Quantity power, Q measured at 60º, Q60</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="164">
+						<xs:annotation>
+							<xs:appinfo>q60h</xs:appinfo>
+							<xs:documentation>Quantity energy, Qh measured at 60º, Q60h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="101">
+						<xs:annotation>
+							<xs:appinfo>qh</xs:appinfo>
+							<xs:documentation>Quantity energy, Qh, Qh</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="54">
+						<xs:annotation>
+							<xs:appinfo>radPerSec</xs:appinfo>
+							<xs:documentation>Angular velocity, radians per second, rad/s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="154">
+						<xs:annotation>
+							<xs:appinfo>rev</xs:appinfo>
+							<xs:documentation>Amount of rotation, Revolutions, rev</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:appinfo>revPerSec</xs:appinfo>
+							<xs:documentation>Rotational speed, Rotations per second, rev/s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="149">
+						<xs:annotation>
+							<xs:appinfo>secPerSec</xs:appinfo>
+							<xs:documentation>Time, Ratio of time (can be combined with an multiplier prefix to show rates such as a clock drift rate, e.g. “µs/s”), s/s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="11">
+						<xs:annotation>
+							<xs:appinfo>sr</xs:appinfo>
+							<xs:documentation>Solid angle, Steradian (m2/m2), sr</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="109">
+						<xs:annotation>
+							<xs:appinfo>status</xs:appinfo>
+							<xs:documentation>State, "1" = "true", "live", "on", "high", "set"; "0" = "false", "dead", "off", "low", "cleared". Note: A Boolean value is preferred but other values may be supported, status</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="24">
+						<xs:annotation>
+							<xs:appinfo>sv</xs:appinfo>
+							<xs:documentation>Doe equivalent, Sievert (J/kg), Sv</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="37">
+						<xs:annotation>
+							<xs:appinfo>t</xs:appinfo>
+							<xs:documentation>Magnetic flux density, Tesla (Wb/m2), T</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="169">
+						<xs:annotation>
+							<xs:appinfo>therm</xs:appinfo>
+							<xs:documentation>Energy, Therm, therm</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="108">
+						<xs:annotation>
+							<xs:appinfo>timeStamp</xs:appinfo>
+							<xs:documentation>Timestamp, time and date per ISO 8601 format, timeStamp</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="128">
+						<xs:annotation>
+							<xs:appinfo>usGal</xs:appinfo>
+							<xs:documentation>Volume, US gallons, Gal</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="129">
+						<xs:annotation>
+							<xs:appinfo>usGalPerH</xs:appinfo>
+							<xs:documentation>Volumetric flow rate, US gallons per hour, USGal/h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="67">
+						<xs:annotation>
+							<xs:appinfo>V2</xs:appinfo>
+							<xs:documentation>Volts squared, Volt squared (W2/A2), V²</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="104">
+						<xs:annotation>
+							<xs:appinfo>V2h</xs:appinfo>
+							<xs:documentation>volt-squared hour, Volt-squared-hours, V²h</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="117">
+						<xs:annotation>
+							<xs:appinfo>VAhPerRev</xs:appinfo>
+							<xs:documentation>Kh-Vah, apparent energy metering constant, VAh/rev</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="116">
+						<xs:annotation>
+							<xs:appinfo>VArhPerRev</xs:appinfo>
+							<xs:documentation>Kh-VArh, reactive energy metering constant, VArh/rev</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="74">
+						<xs:annotation>
+							<xs:appinfo>VPerHz</xs:appinfo>
+							<xs:documentation>Magnetic flux, Volts per Hertz, V/Hz</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="151">
+						<xs:annotation>
+							<xs:appinfo>VPerV</xs:appinfo>
+							<xs:documentation>Voltage, Ratio of voltages (e.g. mV/V), V/V</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="66">
+						<xs:annotation>
+							<xs:appinfo>Vs</xs:appinfo>
+							<xs:documentation>Volt seconds, Volt seconds (Ws/A), Vs</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="36">
+						<xs:annotation>
+							<xs:appinfo>wb</xs:appinfo>
+							<xs:documentation>Magnetic flux, Weber (V s), Wb</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="107">
+						<xs:annotation>
+							<xs:appinfo>WhPerM3</xs:appinfo>
+							<xs:documentation>Wh/m3, energy per volume, Wh/m³</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="115">
+						<xs:annotation>
+							<xs:appinfo>WhPerRev</xs:appinfo>
+							<xs:documentation>Kh-Wh, active energy metering constant, Wh/rev</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="50">
+						<xs:annotation>
+							<xs:appinfo>wPerMK</xs:appinfo>
+							<xs:documentation>Thermal conductivity, Watt/meter Kelvin, W/m K</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="81">
+						<xs:annotation>
+							<xs:appinfo>WPerSec</xs:appinfo>
+							<xs:documentation>Ramp rate, Watts per second, W/s</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="153">
+						<xs:annotation>
+							<xs:appinfo>WPerVA</xs:appinfo>
+							<xs:documentation>Power Factor, PF, W/VA</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="168">
+						<xs:annotation>
+							<xs:appinfo>WPerW</xs:appinfo>
+							<xs:documentation>Signal Strength, Ratio of power, W/W</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<!--
+=======================================
+Global Elements
+=======================================
+-->
+	<xs:element name="AcceptanceTest" type="AcceptanceTest"/>
+	<xs:element name="AccountNotification" type="AccountNotification"/>
+	<xs:element name="Agreement" type="Agreement"/>
+	<xs:element name="Asset" type="Asset"/>
+	<xs:element name="AssetContainer" type="AssetContainer"/>
+	<xs:element name="AttachmentReference" type="AttachmentReference"/>
+	<xs:element name="BatchItemInfo" type="BatchItemInfo"/>
+	<xs:element name="BatchList" type="BatchListType"/>
+	<xs:element name="Customer" type="Customer"/>
+	<xs:element name="CustomerAccount" type="CustomerAccount"/>
+	<xs:element name="CustomerAgreement" type="CustomerAgreement"/>
+	<xs:element name="DateTimeInterval" type="DateTimeInterval"/>
+	<xs:element name="DemandResponseProgram" type="DemandResponseProgram"/>
+	<xs:element name="Document" type="Document"/>
+	<xs:element name="ElectronicAddress" type="ElectronicAddress"/>
+	<xs:element name="EndDevice" type="EndDevice"/>
+	<xs:element name="IdentifiedObject" type="IdentifiedObject"/>
+	<xs:element name="LifecycleDate" type="LifecycleDate"/>
+	<xs:element name="LocalTimeParameters" type="TimeConfiguration"/>
+	<xs:element name="Location" type="Location"/>
+	<xs:element name="Meter" type="Meter"/>
+	<xs:element name="MeterMultiplier" type="MeterMultiplier"/>
+	<xs:element name="Object" type="Object"/>
+	<xs:element name="Organisation" type="Organisation"/>
+	<xs:element name="OrganisationRole" type="OrganisationRole"/>
+	<xs:element name="PositionPoint" type="PositionPoint"/>
+	<xs:element name="PricingStructure" type="PricingStructure"/>
+	<xs:element name="Priority" type="Priority"/>
+	<xs:element name="ProgramDate" type="ProgramDate"/>
+	<xs:element name="ProgramDateIdMapping" type="ProgramDateIdMapping"/>
+	<xs:element name="ProgramDateIdMappings" type="ProgramDateIdMappings"/>
+	<xs:element name="ServiceLocation" type="ServiceLocation"/>
+	<xs:element name="ServiceSupplier" type="ServiceSupplier"/>
+	<xs:element name="Statement" type="Statement"/>
+	<xs:element name="Status" type="Status"/>
+	<xs:element name="StreetAddress" type="StreetAddress"/>
+	<xs:element name="StreetDetail" type="StreetDetail"/>
+	<xs:element name="SummaryMeasurement" type="SummaryMeasurement"/>
+	<xs:element name="TelephoneNumber" type="TelephoneNumber"/>
+	<xs:element name="TimeConfiguration" type="TimeConfiguration"/>
+	<xs:element name="TownDetail" type="TownDetail"/>
+	<xs:element name="UsagePoint" type="UsagePoint"/>
+	<xs:element name="UsagePoints" type="UsagePoints"/>
+	<xs:element name="WorkLocation" type="WorkLocation"/>
+</xs:schema>

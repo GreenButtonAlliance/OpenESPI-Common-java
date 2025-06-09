@@ -29,7 +29,7 @@ package org.greenbuttonalliance.espi.common.domain;
 
 import org.greenbuttonalliance.espi.common.models.atom.adapters.ReadingQualityAdapter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 

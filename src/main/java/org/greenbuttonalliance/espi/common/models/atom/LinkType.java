@@ -28,7 +28,7 @@
 
 package org.greenbuttonalliance.espi.common.models.atom;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 import jakarta.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.Objects;

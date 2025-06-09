@@ -43,7 +43,7 @@ public interface ResourceRepository {
 	UsagePoint findByUUID(UUID uuid);
 
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	void update(UsagePoint resource);
 

@@ -25,14 +25,14 @@ import org.greenbuttonalliance.espi.common.repositories.AuthorizationRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.List;
 import java.util.UUID;
 
 @Repository
 @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-		javax.persistence.NoResultException.class,
+		jakarta.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 
@@ -41,7 +41,7 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 
 	@Override
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void persist(Authorization authorization) {
 		em.persist(authorization);
@@ -86,7 +86,7 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 
 	@Override
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void merge(Authorization authorization) {
 		em.merge(authorization);
@@ -121,7 +121,7 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
 
 	@Override
 	@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-			javax.persistence.NoResultException.class,
+			jakarta.persistence.NoResultException.class,
 			org.springframework.dao.EmptyResultDataAccessException.class })
 	public void deleteById(Long id) {
 		em.remove(findById(id));

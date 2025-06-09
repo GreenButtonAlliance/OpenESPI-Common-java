@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.XmlType;

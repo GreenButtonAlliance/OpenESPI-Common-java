@@ -1,6 +1,6 @@
 <!--
   ~
-  ~    Copyright (c) 2018-2021 Green Button Alliance, Inc.
+  ~    Copyright (c) 2018-2025 Green Button Alliance, Inc.
   ~
   ~    Portions (c) 2013-2018 EnergyOS.org
   ~
@@ -22,6 +22,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- Spring Boot Parent POM for dependency management -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.2</version>
+        <relativePath/>
+    </parent>
 
     <groupId>org.greenbuttonalliance</groupId>
     <artifactId>OpenESPI-Common</artifactId>
@@ -48,14 +56,14 @@
     		<url>http://www.apache.org/licenses/LICENSE-2.o.txt</url>
     	</license>
     </licenses>
-    
+
     <scm>
        <connection>scm:git:https://github.com/greenbuttonalliance/OpenESPI-Common-java.git/</connection>
        <developerConnection>scm:git:git@github.com:greenbuttonalliance/OpenESPI-Common-java.git</developerConnection>
        <url>https://github.com/greenbuttonalliance/OpenESPI-Common-java.git</url>
        <tag>v1.4-SNAPSHOT</tag>
     </scm>
-    
+
     <developers>
     	<developer>
     		<id>jteeter</id>
@@ -89,46 +97,22 @@
     	</developer>
     </developers>
 
-    <!-- Dependencies closes to Spring Boot v1.1.5.RELEASE   -->
-
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- Spring Boot parent manages version compatibility -->
         <java.version>21</java.version>
-        <jaxb.version>2.3.0</jaxb.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
-        <maven.surefire.plugin.version>3.0.0</maven.surefire.plugin.version>
-        <maven.failsafe.plugin.version>3.0.0</maven.failsafe.plugin.version>
-        <junit.version>4.12</junit.version>
-        <junit-platform.version>5.6.2</junit-platform.version>
-        <mockito.version>2.23.0</mockito.version>
-        <hamcrest.version>1.3</hamcrest.version>
-        
-        <!-- Modern Dependencies for Spring Boot Migration -->
+        <project.scm.id>github</project.scm.id>
+
+        <!-- Modern Dependencies for Spring Boot 3.3.2 -->
         <lombok.version>1.18.30</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <testcontainers.version>1.19.3</testcontainers.version>
-        <project.scm.id>github</project.scm.id>
 
-        <!-- Spring -->
-        <spring.version>4.0.6.RELEASE</spring.version>
-        <spring.security.version>3.2.3.RELEASE</spring.security.version>
-        <spring-security-oauth.version>2.0.2.RELEASE</spring-security-oauth.version>
-
-        <!-- Hibernate / JPA -->
-        <hibernate.version>4.2.1.Final</hibernate.version>
-
-        <!-- Bean validation -->
-        <hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
-
-        <!-- Database access -->
-        <tomcat-jdbc.version>7.0.42</tomcat-jdbc.version>
-        <ehcache.version>2.6.6</ehcache.version>
-        <hsqldb.version>2.3.0</hsqldb.version>
-        <mysql.version>8.0.16</mysql.version>
-        <h2.version>1.3.173</h2.version>
+        <!-- Legacy support for compatibility -->
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-codec.version>1.9</commons-codec.version>
+        <joda-time.version>2.3</joda-time.version>
+        <rome.version>1.0</rome.version>
+        <xmlunit.version>1.4</xmlunit.version>
     </properties>
 
     <profiles>
@@ -199,121 +183,67 @@
     </repositories>
 
     <dependencies>
+        <!-- Spring Boot Starters for Common Library -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
-            <version>${spring.version}</version>
         </dependency>
+        <!-- Jackson for OAuth2 JSON handling -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
         </dependency>
+        
+        <!-- Jakarta Validation API -->
         <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>${spring-security-oauth.version}</version>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
         </dependency>
+        
+        <!-- Spring Security Core (RetailCustomer implements UserDetails) -->
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-            <version>${spring.security.version}</version>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+        
+        <!-- Core utilities needed for domain logic -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>32.1.3-jre</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+        
+        <!-- Spring Web for RestTemplate and web components -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
         </dependency>
+        
+        <!-- Legacy OAuth2 support (will be modernized to Spring Security 6.x later) -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.5.2.RELEASE</version>
         </dependency>
+        
+        <!-- Xerces for XML utility classes (temporary - should be refactored) -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jdbc</artifactId>
-            <version>${tomcat-jdbc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <version>${hamcrest.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-platform.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>${junit-platform.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>2.34.0</version>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.12.2</version>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet</groupId>
@@ -330,29 +260,13 @@
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>${hsqldb.version}</version>
             <scope>runtime</scope>
         </dependency>
         <!--Databases - MySQL default database -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
-            <version>${hibernate.version}</version>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -401,7 +315,7 @@
             <version>18.0.0</version>
             <scope>compile</scope>
         </dependency>
-        
+
         <!-- Lombok for boilerplate reduction -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -409,7 +323,7 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- MapStruct for DTO-Entity mapping -->
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -422,7 +336,7 @@
             <version>${mapstruct.version}</version>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- TestContainers for integration testing -->
         <dependency>
             <groupId>org.testcontainers</groupId>
@@ -445,15 +359,6 @@
     </dependencies>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>${maven.failsafe.plugin.version}</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <!-- Packagecloud repository configuration -->
 <!--        <extensions>-->
 <!--            <extension>-->
@@ -492,8 +397,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
+                    <excludes>
+                        <!-- Exclude testing support classes (should be in src/test) -->
+                        <exclude>**/support/**</exclude>
+                        <!-- Exclude classes with missing Xerces dependencies -->
+                        <exclude>**/utils/DurationImpl.java</exclude>
+                        <exclude>**/utils/XMLGregorianCalendarImpl.java</exclude>
+                    </excludes>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
@@ -514,15 +425,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <!--fix for issue with JDK 1.8 181 see: -->
-                <!-- https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.plugin.version}</version>
                 <configuration>
-<!--                    <argline>-->
-<!--                        &#45;&#45;illegal-access=permit-->
-<!--                    </argline>-->
                     <includes>
                         <include>**/*Tests.java</include>
                     </includes>
@@ -532,7 +437,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven.failsafe.plugin.version}</version>
 <!--                <scope>test</scope>-->
 <!--                <configuration>-->
 <!--                    <argline>-->

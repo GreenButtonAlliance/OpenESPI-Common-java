@@ -559,4 +559,34 @@ public class UsageSummaryEntity extends IdentifiedObjectEntity {
         }
         return "Unknown";
     }
+
+    /**
+     * Alias method for addCostAdditionalDetailLastPeriod.
+     * Provides a more generic name for line item management.
+     * 
+     * @param lineItem the line item to add
+     */
+    public void addLineItem(LineItemEntity lineItem) {
+        addCostAdditionalDetailLastPeriod(lineItem);
+    }
+
+    /**
+     * Alias method for removeCostAdditionalDetailLastPeriod.
+     * Provides a more generic name for line item management.
+     * 
+     * @param lineItem the line item to remove
+     */
+    public void removeLineItem(LineItemEntity lineItem) {
+        removeCostAdditionalDetailLastPeriod(lineItem);
+    }
+
+    /**
+     * Alias getter for costAdditionalDetailLastPeriod.
+     * Provides a more generic name for line item access.
+     * 
+     * @return the list of line items
+     */
+    public List<LineItemEntity> getLineItems() {
+        return costAdditionalDetailLastPeriod;
+    }
 }

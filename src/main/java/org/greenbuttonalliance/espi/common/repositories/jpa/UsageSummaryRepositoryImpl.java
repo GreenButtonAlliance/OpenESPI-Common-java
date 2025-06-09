@@ -26,9 +26,9 @@ import org.greenbuttonalliance.espi.common.repositories.UsageSummaryRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceContext;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
@@ -39,7 +39,7 @@ import java.util.UUID;
 
 @Repository
 @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-        javax.persistence.NoResultException.class,
+        jakarta.persistence.NoResultException.class,
         org.springframework.dao.EmptyResultDataAccessException.class })
 public class UsageSummaryRepositoryImpl implements UsageSummaryRepository {
 
@@ -53,7 +53,7 @@ public class UsageSummaryRepositoryImpl implements UsageSummaryRepository {
 
     @Override
     @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-            javax.persistence.NoResultException.class,
+            jakarta.persistence.NoResultException.class,
             org.springframework.dao.EmptyResultDataAccessException.class })
     public void persist(UsageSummary usageSummary) {
         em.persist(usageSummary);
@@ -78,7 +78,7 @@ public class UsageSummaryRepositoryImpl implements UsageSummaryRepository {
 
     @Override
     @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-            javax.persistence.NoResultException.class,
+            jakarta.persistence.NoResultException.class,
             org.springframework.dao.EmptyResultDataAccessException.class })
     public void deleteById(Long id) {
         UsageSummary us = findById(id);

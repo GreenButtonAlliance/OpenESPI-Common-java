@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AccessToken {
     @JsonProperty("access_token")

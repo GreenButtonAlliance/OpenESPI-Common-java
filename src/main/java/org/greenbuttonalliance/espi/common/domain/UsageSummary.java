@@ -28,7 +28,7 @@ import org.greenbuttonalliance.espi.common.models.atom.adapters.UsageSummaryAdap
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;

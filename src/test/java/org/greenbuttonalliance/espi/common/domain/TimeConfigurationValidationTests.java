@@ -22,9 +22,9 @@ package org.greenbuttonalliance.espi.common.domain;
 
 import org.junit.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import java.util.Set;
 
 import static org.greenbuttonalliance.espi.common.support.EspiFactory.newLocalTimeParameters;

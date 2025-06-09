@@ -27,7 +27,7 @@
 
 package org.greenbuttonalliance.espi.common.domain;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlType;

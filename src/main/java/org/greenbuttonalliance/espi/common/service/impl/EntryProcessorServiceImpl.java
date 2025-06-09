@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-		javax.persistence.NoResultException.class,
+		jakarta.persistence.NoResultException.class,
 		org.springframework.dao.EmptyResultDataAccessException.class })
 @Service
 public class EntryProcessorServiceImpl implements EntryProcessorService {

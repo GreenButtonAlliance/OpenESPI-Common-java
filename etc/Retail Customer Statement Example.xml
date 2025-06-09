@@ -1,0 +1,16 @@
+
+<feed  xmlns="http://www.w3.org/2005/Atom" xmlns:cust="http://naesb.org/espi/customer"  xsi:schemaLocation="http://naesb.org/espi/customer retailcustomer.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<entry>
+		<id>urn:uuid:2c690b38-d5f4-5913-b4bd-53133e0f2a8d</id>
+		<link rel="self" href="https://sandbox.greenbuttonalliance.org:8443/DataCustodian/espi/1_1/resource/RetailCustomer/ad68ce2/Customer/b0f3e742/Statement/d3efe668"/>
+		<link rel="up" href="https://sandbox.greenbuttonalliance.org:8443/DataCustodian/espi/1_1/resource/RetailCustomer/ad68ce2/Customer/b0f3e742/Statement"/>
+		<link rel="related" href="https://sandbox.greenbuttonalliance.org:8443/DataCustodian/espi/1_1/resource/RetailCustomer/ad68ce2/Customer/b0f3e742/CustomerAccount/bb6a0c74"/>
+		<link rel="related" href="https://sandbox.greenbuttonalliance.org:8443/DataCustodian/espi/1_1/resource/RetailCustomer/ad68ce2/Customer/b0f3e742/CustomerAccount/bb6a0c74/CustomerAgreement/c6384b84"/>
+		<title>November Billing Statement</title>
+		<content>
+			<statement>https://sandbox.greenbuttonalliance.org:8443/DataCustodian/espi/1_1/resource/RetailCustomer/ad68ce2/Customer/b0f3e742/Statement/d3efe668</statement>
+		</content>
+		<published>2021-11-23T04:00:00Z</published>
+		<updated>2021-11-23T04:00:00Z</updated>    
+	</entry>
+</feed>
