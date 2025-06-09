@@ -21,41 +21,69 @@
 package org.greenbuttonalliance.espi.common.repositories;
 
 import org.greenbuttonalliance.espi.common.domain.Authorization;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-public interface AuthorizationRepository {
+@Repository
+public interface AuthorizationRepository extends JpaRepository<Authorization, Long> {
 
-	void persist(Authorization authorization);
+	// JpaRepository provides: save(), findById(), findAll(), deleteById(), etc.
 
 	List<Authorization> findAllByRetailCustomerId(Long retailCustomerId);
 
-	List<Long> findAllIdsByApplicationInformationId(
-			Long applicationInformationId);
+	@Query("SELECT a.id FROM Authorization a WHERE a.applicationInformation.id = :applicationInformationId")
+	List<Long> findAllIdsByApplicationInformationId(@Param("applicationInformationId") Long applicationInformationId);
 
-	Authorization findByState(String state);
+	Optional<Authorization> findByState(String state);
 
-	Authorization findByScope(String scope, Long retailCustomerId);
+	@Query("SELECT a FROM Authorization a WHERE a.scope = :scope AND a.retailCustomer.id = :retailCustomerId")
+	Optional<Authorization> findByScope(@Param("scope") String scope, @Param("retailCustomerId") Long retailCustomerId);
 
-	void merge(Authorization authorization);
+	@Query("SELECT a.id FROM Authorization a WHERE a.retailCustomer.id = :retailCustomerId")
+	List<Long> findAllIds(@Param("retailCustomerId") Long retailCustomerId);
 
-	Authorization findById(Long authorizationId);
+	Optional<Authorization> findByUuid(UUID uuid);
 
-	List<Long> findAllIds(Long retailCustomerId);
-
-	Authorization findByUUID(UUID uuid);
-
+	@Query("SELECT a.id FROM Authorization a")
 	List<Long> findAllIds();
 
-	void deleteById(Long id);
+	@Modifying
+	@Transactional
+	@Query("DELETE FROM Authorization a WHERE a.id = :id")
+	void deleteById(@Param("id") Long id);
 
-	void createOrReplaceByUUID(Authorization authorization);
+	@Modifying
+	@Transactional
+	@Query("DELETE FROM Authorization a WHERE a.uuid = :uuid")
+	void deleteByUuid(@Param("uuid") UUID uuid);
 
-	Authorization findByAccessToken(String accessToken);
+	// Custom method for createOrReplaceByUUID - will need service layer implementation
+	// Note: This should be implemented in a service class to avoid transactional issues
 
-	Authorization findByRefreshToken(String refreshToken);
+	Optional<Authorization> findByAccessToken(String accessToken);
 
-	List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId);
+	Optional<Authorization> findByRefreshToken(String refreshToken);
+
+	@Query("SELECT a.id FROM Authorization a WHERE a.thirdParty = :thirdParty AND a.scope LIKE :bulkId")
+	List<Long> findAllIdsByBulkId(@Param("thirdParty") String thirdParty, @Param("bulkId") String bulkId);
+
+	// Missing NamedQueries that need to be added:
+	
+	@Query("SELECT a FROM Authorization a WHERE a.resourceURI LIKE :uri")
+	List<Authorization> findByResourceUri(@Param("uri") String uri);
+
+	@Query("SELECT a FROM Authorization a WHERE a.expiresIn IS NOT NULL AND a.expiresIn < :currentTime")
+	List<Authorization> findExpiredAuthorizations(@Param("currentTime") Long currentTime);
+
+	@Query("SELECT a FROM Authorization a WHERE a.retailCustomer.id = :customerId AND a.applicationInformation.id = :applicationId AND (a.expiresIn IS NULL OR a.expiresIn > :currentTime)")
+	List<Authorization> findActiveByCustomerAndApplication(@Param("customerId") Long customerId, @Param("applicationId") Long applicationId, @Param("currentTime") Long currentTime);
 
 }

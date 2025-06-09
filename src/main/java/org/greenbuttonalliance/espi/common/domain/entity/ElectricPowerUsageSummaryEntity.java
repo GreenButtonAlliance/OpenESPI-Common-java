@@ -44,32 +44,6 @@ import java.util.List;
 @Table(name = "electric_power_usage_summaries", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"uuid"})
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "ElectricPowerUsageSummaryEntity.findById",
-        query = "SELECT epus FROM ElectricPowerUsageSummaryEntity epus WHERE epus.id = :id"
-    ),
-    @NamedQuery(
-        name = "ElectricPowerUsageSummaryEntity.findByUuid",
-        query = "SELECT epus FROM ElectricPowerUsageSummaryEntity epus WHERE epus.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "ElectricPowerUsageSummaryEntity.findAllIdsByUsagePointId",
-        query = "SELECT epus.id FROM ElectricPowerUsageSummaryEntity epus WHERE epus.usagePoint.id = :usagePointId"
-    ),
-    @NamedQuery(
-        name = "ElectricPowerUsageSummaryEntity.findAllIds",
-        query = "SELECT epus.id FROM ElectricPowerUsageSummaryEntity epus"
-    ),
-    @NamedQuery(
-        name = "ElectricPowerUsageSummaryEntity.findAllIdsByXpath",
-        query = "SELECT epus.id FROM UsagePointEntity up, ElectricPowerUsageSummaryEntity epus WHERE up.retailCustomer.id = :o1Id AND epus.usagePoint.id = :o2Id"
-    ),
-    @NamedQuery(
-        name = "ElectricPowerUsageSummaryEntity.findIdByXpath",
-        query = "SELECT epus.id FROM UsagePointEntity up, ElectricPowerUsageSummaryEntity epus WHERE up.retailCustomer.id = :o1Id AND epus.usagePoint.id = :o2Id AND epus.id = :o3Id"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

@@ -20,28 +20,67 @@
 
 package org.greenbuttonalliance.espi.common.repositories;
 
-import org.greenbuttonalliance.espi.common.domain.ApplicationInformation;
+import org.greenbuttonalliance.espi.common.domain.entity.ApplicationInformationEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
-public interface ApplicationInformationRepository {
+/**
+ * Modern Spring Data JPA repository for ApplicationInformation entities.
+ * Replaces the legacy ApplicationInformationRepositoryImpl with modern Spring Data patterns.
+ */
+@Repository
+public interface ApplicationInformationRepository extends JpaRepository<ApplicationInformationEntity, Long> {
 
-    void deleteById(Long id);
+    /**
+     * Find application information by UUID.
+     */
+    @Query("SELECT ai FROM ApplicationInformationEntity ai WHERE UPPER(ai.uuid) = UPPER(:uuid)")
+    Optional<ApplicationInformationEntity> findByUuid(@Param("uuid") String uuid);
 
-    List<ApplicationInformation> findByKind(String kind);
+    /**
+     * Find application information by client ID.
+     */
+    @Query("SELECT ai FROM ApplicationInformationEntity ai WHERE ai.clientId = :clientId")
+    Optional<ApplicationInformationEntity> findByClientId(@Param("clientId") String clientId);
 
-    List<ApplicationInformation> findAll();
+    /**
+     * Find application information by data custodian ID.
+     */
+    @Query("SELECT ai FROM ApplicationInformationEntity ai WHERE ai.dataCustodianId = :dataCustodianId")
+    Optional<ApplicationInformationEntity> findByDataCustodianId(@Param("dataCustodianId") String dataCustodianId);
 
+    /**
+     * Find all application information by kind.
+     */
+    @Query("SELECT ai FROM ApplicationInformationEntity ai WHERE ai.kind = :kind")
+    List<ApplicationInformationEntity> findByKind(@Param("kind") String kind);
+
+    /**
+     * Find all application information IDs.
+     */
+    @Query("SELECT ai.id FROM ApplicationInformationEntity ai")
     List<Long> findAllIds();
 
-    ApplicationInformation findByClientId(String clientId);
+    /**
+     * Check if application exists by client ID.
+     */
+    @Query("SELECT COUNT(ai) > 0 FROM ApplicationInformationEntity ai WHERE ai.clientId = :clientId")
+    boolean existsByClientId(@Param("clientId") String clientId);
 
-    ApplicationInformation findByDataCustodianClientId(String dataCustodianId);
+    /**
+     * Find applications by third party application status.
+     */
+    @Query("SELECT ai FROM ApplicationInformationEntity ai WHERE ai.thirdPartyApplicationStatus = :status")
+    List<ApplicationInformationEntity> findByThirdPartyApplicationStatus(@Param("status") String status);
 
-    ApplicationInformation findById(Long applicationInformationId);
-
-    void persist(ApplicationInformation applicationInformation);
-
-	ApplicationInformation findByUUID(UUID uuid);
+    /**
+     * Find applications by data custodian application status.
+     */
+    @Query("SELECT ai FROM ApplicationInformationEntity ai WHERE ai.dataCustodianApplicationStatus = :status")
+    List<ApplicationInformationEntity> findByDataCustodianApplicationStatus(@Param("status") String status);
 }

@@ -21,17 +21,39 @@
 package org.greenbuttonalliance.espi.common.repositories;
 
 import org.greenbuttonalliance.espi.common.domain.TimeConfiguration;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-public interface TimeConfigurationRepository {
+@Repository
+public interface TimeConfigurationRepository extends JpaRepository<TimeConfiguration, Long> {
 
-	void deleteById(Long id);
+	// JpaRepository provides: save(), findById(), findAll(), deleteById(), etc.
 
-	TimeConfiguration findById(Long timeConfigurationId);
+	@Modifying
+	@Transactional
+	@Query("DELETE FROM TimeConfiguration t WHERE t.id = :id")
+	void deleteById(@Param("id") Long id);
 
-	TimeConfiguration findByUUID(UUID uuid);
+	Optional<TimeConfiguration> findByUuid(UUID uuid);
 
-	void persist(TimeConfiguration timeConfiguration);
+	@Query("SELECT t.id FROM TimeConfiguration t")
+	List<Long> findAllIds();
+
+	@Query("SELECT usagePoint.localTimeParameters.id FROM UsagePoint usagePoint WHERE usagePoint.id = :usagePointId")
+	List<Long> findAllIdsByUsagePointId(@Param("usagePointId") Long usagePointId);
+
+	@Query("SELECT DISTINCT t.id FROM TimeConfiguration t")
+	List<Long> findAllIdsByXpath0();
+
+	@Query("SELECT DISTINCT t.id FROM TimeConfiguration t WHERE t.id = :o1Id")
+	Optional<Long> findIdsByXpath(@Param("o1Id") Long o1Id);
 
 }

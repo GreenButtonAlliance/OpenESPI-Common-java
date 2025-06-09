@@ -202,19 +202,19 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
         </dependency>
-        
+
         <!-- Jakarta Validation API -->
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
         </dependency>
-        
+
         <!-- Spring Security Core (RetailCustomer implements UserDetails) -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
-        
+
         <!-- Core utilities needed for domain logic -->
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -225,20 +225,20 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        
+
         <!-- Spring Web for RestTemplate and web components -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
         </dependency>
-        
+
         <!-- Legacy OAuth2 support (will be modernized to Spring Security 6.x later) -->
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
             <version>2.5.2.RELEASE</version>
         </dependency>
-        
+
         <!-- Xerces for XML utility classes (temporary - should be refactored) -->
         <dependency>
             <groupId>xerces</groupId>
@@ -337,6 +337,24 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Flyway for database migrations -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- PostgreSQL driver for multi-database support -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- TestContainers for integration testing -->
         <dependency>
             <groupId>org.testcontainers</groupId>
@@ -347,6 +365,12 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>mysql</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
             <version>${testcontainers.version}</version>
             <scope>test</scope>
         </dependency>

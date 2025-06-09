@@ -44,36 +44,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "application_information")
-@NamedQueries({
-    @NamedQuery(
-        name = "ApplicationInformationEntity.findById",
-        query = "SELECT ai FROM ApplicationInformationEntity ai WHERE ai.id = :id"
-    ),
-    @NamedQuery(
-        name = "ApplicationInformationEntity.findByUuid",
-        query = "SELECT ai FROM ApplicationInformationEntity ai WHERE ai.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "ApplicationInformationEntity.findByClientId",
-        query = "SELECT ai FROM ApplicationInformationEntity ai WHERE ai.clientId = :clientId"
-    ),
-    @NamedQuery(
-        name = "ApplicationInformationEntity.findByDataCustodianClientId",
-        query = "SELECT ai FROM ApplicationInformationEntity ai WHERE ai.dataCustodianId = :dataCustodianId"
-    ),
-    @NamedQuery(
-        name = "ApplicationInformationEntity.findAll",
-        query = "SELECT ai FROM ApplicationInformationEntity ai"
-    ),
-    @NamedQuery(
-        name = "ApplicationInformationEntity.findAllIds",
-        query = "SELECT ai.id FROM ApplicationInformationEntity ai"
-    ),
-    @NamedQuery(
-        name = "ApplicationInformationEntity.findByKind",
-        query = "SELECT ai FROM ApplicationInformationEntity ai WHERE ai.kind = :kind"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

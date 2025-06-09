@@ -40,32 +40,6 @@ import jakarta.persistence.*;
 @Table(name = "electric_power_quality_summaries", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"uuid"})
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "ElectricPowerQualitySummaryEntity.findById",
-        query = "SELECT epqs FROM ElectricPowerQualitySummaryEntity epqs WHERE epqs.id = :id"
-    ),
-    @NamedQuery(
-        name = "ElectricPowerQualitySummaryEntity.findByUuid",
-        query = "SELECT epqs FROM ElectricPowerQualitySummaryEntity epqs WHERE epqs.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "ElectricPowerQualitySummaryEntity.findAllIdsByUsagePointId",
-        query = "SELECT epqs.id FROM ElectricPowerQualitySummaryEntity epqs WHERE epqs.usagePoint.id = :usagePointId"
-    ),
-    @NamedQuery(
-        name = "ElectricPowerQualitySummaryEntity.findAllIds",
-        query = "SELECT epqs.id FROM ElectricPowerQualitySummaryEntity epqs"
-    ),
-    @NamedQuery(
-        name = "ElectricPowerQualitySummaryEntity.findAllIdsByXpath",
-        query = "SELECT epqs.id FROM UsagePointEntity up, ElectricPowerQualitySummaryEntity epqs WHERE up.retailCustomer.id = :o1Id AND epqs.usagePoint.id = :o2Id"
-    ),
-    @NamedQuery(
-        name = "ElectricPowerQualitySummaryEntity.findIdByXpath",
-        query = "SELECT epqs.id FROM UsagePointEntity up, ElectricPowerQualitySummaryEntity epqs WHERE up.retailCustomer.id = :o1Id AND epqs.usagePoint.id = :o2Id AND epqs.id = :o3Id"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

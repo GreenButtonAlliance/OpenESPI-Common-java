@@ -42,32 +42,6 @@ import java.util.List;
 @Table(name = "time_configurations", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"uuid"})
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "TimeConfigurationEntity.findById",
-        query = "SELECT tc FROM TimeConfigurationEntity tc WHERE tc.id = :id"
-    ),
-    @NamedQuery(
-        name = "TimeConfigurationEntity.findByUuid",
-        query = "SELECT tc FROM TimeConfigurationEntity tc WHERE tc.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "TimeConfigurationEntity.findAllIdsByUsagePointId",
-        query = "SELECT up.localTimeParameters.id FROM UsagePointEntity up WHERE up.id = :usagePointId"
-    ),
-    @NamedQuery(
-        name = "TimeConfigurationEntity.findAllIds",
-        query = "SELECT tc.id FROM TimeConfigurationEntity tc"
-    ),
-    @NamedQuery(
-        name = "TimeConfigurationEntity.findAllIdsByXpath",
-        query = "SELECT DISTINCT tc.id FROM TimeConfigurationEntity tc"
-    ),
-    @NamedQuery(
-        name = "TimeConfigurationEntity.findIdByXpath",
-        query = "SELECT DISTINCT tc.id FROM TimeConfigurationEntity tc WHERE tc.id = :o1Id"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

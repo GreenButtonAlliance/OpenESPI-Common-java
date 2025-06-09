@@ -41,32 +41,6 @@ import java.util.List;
 @Table(name = "meter_readings", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"uuid"})
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "MeterReadingEntity.findById",
-        query = "SELECT mr FROM MeterReadingEntity mr WHERE mr.id = :id"
-    ),
-    @NamedQuery(
-        name = "MeterReadingEntity.findByUuid",
-        query = "SELECT mr FROM MeterReadingEntity mr WHERE mr.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "MeterReadingEntity.findAllIdsByUsagePointId",
-        query = "SELECT mr.id FROM MeterReadingEntity mr WHERE mr.usagePoint.id = :usagePointId"
-    ),
-    @NamedQuery(
-        name = "MeterReadingEntity.findAllIds",
-        query = "SELECT mr.id FROM MeterReadingEntity mr"
-    ),
-    @NamedQuery(
-        name = "MeterReadingEntity.findAllIdsByXpath",
-        query = "SELECT DISTINCT mr.id FROM UsagePointEntity up, MeterReadingEntity mr WHERE up.retailCustomer.id = :o1Id AND mr.usagePoint.id = :o2Id"
-    ),
-    @NamedQuery(
-        name = "MeterReadingEntity.findIdByXpath",
-        query = "SELECT DISTINCT mr.id FROM UsagePointEntity up, MeterReadingEntity mr WHERE up.retailCustomer.id = :o1Id AND mr.usagePoint.id = :o2Id AND mr.id = :o3Id"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

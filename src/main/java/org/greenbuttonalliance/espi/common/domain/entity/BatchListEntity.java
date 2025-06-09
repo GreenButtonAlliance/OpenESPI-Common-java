@@ -46,48 +46,6 @@ import java.util.stream.Collectors;
     @Index(name = "idx_batch_list_created_at", columnList = "created_at"),
     @Index(name = "idx_batch_list_resource_count", columnList = "resource_count")
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "BatchListEntity.findById",
-        query = "SELECT bl FROM BatchListEntity bl WHERE bl.id = :id"
-    ),
-    @NamedQuery(
-        name = "BatchListEntity.findAll",
-        query = "SELECT bl FROM BatchListEntity bl ORDER BY bl.createdAt DESC"
-    ),
-    @NamedQuery(
-        name = "BatchListEntity.findAllIds",
-        query = "SELECT bl.id FROM BatchListEntity bl"
-    ),
-    @NamedQuery(
-        name = "BatchListEntity.findByResourceCount",
-        query = "SELECT bl FROM BatchListEntity bl WHERE bl.resourceCount = :resourceCount ORDER BY bl.createdAt DESC"
-    ),
-    @NamedQuery(
-        name = "BatchListEntity.findByResourceCountRange",
-        query = "SELECT bl FROM BatchListEntity bl WHERE bl.resourceCount >= :minCount AND bl.resourceCount <= :maxCount ORDER BY bl.createdAt DESC"
-    ),
-    @NamedQuery(
-        name = "BatchListEntity.findByCreatedAtRange",
-        query = "SELECT bl FROM BatchListEntity bl WHERE bl.createdAt >= :startTime AND bl.createdAt <= :endTime ORDER BY bl.createdAt DESC"
-    ),
-    @NamedQuery(
-        name = "BatchListEntity.findEmpty",
-        query = "SELECT bl FROM BatchListEntity bl WHERE bl.resourceCount = 0 ORDER BY bl.createdAt DESC"
-    ),
-    @NamedQuery(
-        name = "BatchListEntity.findNonEmpty",
-        query = "SELECT bl FROM BatchListEntity bl WHERE bl.resourceCount > 0 ORDER BY bl.createdAt DESC"
-    ),
-    @NamedQuery(
-        name = "BatchListEntity.countAll",
-        query = "SELECT COUNT(bl) FROM BatchListEntity bl"
-    ),
-    @NamedQuery(
-        name = "BatchListEntity.countByResourceCountRange",
-        query = "SELECT COUNT(bl) FROM BatchListEntity bl WHERE bl.resourceCount >= :minCount AND bl.resourceCount <= :maxCount"
-    )
-})
 @Data
 @NoArgsConstructor
 public class BatchListEntity {

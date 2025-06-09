@@ -43,36 +43,6 @@ import java.util.List;
     @Index(name = "idx_sdp_tariff_profile", columnList = "tariff_profile"),
     @Index(name = "idx_sdp_customer_agreement", columnList = "customer_agreement")
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "ServiceDeliveryPointEntity.findById",
-        query = "SELECT sdp FROM ServiceDeliveryPointEntity sdp WHERE sdp.id = :id"
-    ),
-    @NamedQuery(
-        name = "ServiceDeliveryPointEntity.findByUuid",
-        query = "SELECT sdp FROM ServiceDeliveryPointEntity sdp WHERE sdp.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "ServiceDeliveryPointEntity.findByName",
-        query = "SELECT sdp FROM ServiceDeliveryPointEntity sdp WHERE sdp.name = :name"
-    ),
-    @NamedQuery(
-        name = "ServiceDeliveryPointEntity.findByTariffProfile",
-        query = "SELECT sdp FROM ServiceDeliveryPointEntity sdp WHERE sdp.tariffProfile = :tariffProfile"
-    ),
-    @NamedQuery(
-        name = "ServiceDeliveryPointEntity.findByCustomerAgreement",
-        query = "SELECT sdp FROM ServiceDeliveryPointEntity sdp WHERE sdp.customerAgreement = :customerAgreement"
-    ),
-    @NamedQuery(
-        name = "ServiceDeliveryPointEntity.findAll",
-        query = "SELECT sdp FROM ServiceDeliveryPointEntity sdp"
-    ),
-    @NamedQuery(
-        name = "ServiceDeliveryPointEntity.findAllIds",
-        query = "SELECT sdp.id FROM ServiceDeliveryPointEntity sdp"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

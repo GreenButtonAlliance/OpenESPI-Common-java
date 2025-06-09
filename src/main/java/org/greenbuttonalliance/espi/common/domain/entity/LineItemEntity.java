@@ -48,56 +48,6 @@ import java.time.ZoneId;
     @Index(name = "idx_line_item_date_time", columnList = "date_time"),
     @Index(name = "idx_line_item_amount", columnList = "amount")
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "LineItemEntity.findById",
-        query = "SELECT li FROM LineItemEntity li WHERE li.id = :id"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.findByElectricPowerUsageSummaryId",
-        query = "SELECT li FROM LineItemEntity li WHERE li.electricPowerUsageSummary.id = :electricPowerUsageSummaryId ORDER BY li.dateTime"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.findByUsageSummaryId",
-        query = "SELECT li FROM LineItemEntity li WHERE li.usageSummary.id = :usageSummaryId ORDER BY li.dateTime"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.findByDateTimeRange",
-        query = "SELECT li FROM LineItemEntity li WHERE li.dateTime >= :startTime AND li.dateTime <= :endTime ORDER BY li.dateTime"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.findByAmountRange",
-        query = "SELECT li FROM LineItemEntity li WHERE li.amount >= :minAmount AND li.amount <= :maxAmount ORDER BY li.amount DESC"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.findByNoteContaining",
-        query = "SELECT li FROM LineItemEntity li WHERE LOWER(li.note) LIKE LOWER(CONCAT('%', :searchText, '%')) ORDER BY li.dateTime"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.findAll",
-        query = "SELECT li FROM LineItemEntity li ORDER BY li.dateTime"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.findAllIds",
-        query = "SELECT li.id FROM LineItemEntity li"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.sumAmountsByElectricPowerUsageSummary",
-        query = "SELECT SUM(li.amount) FROM LineItemEntity li WHERE li.electricPowerUsageSummary.id = :electricPowerUsageSummaryId"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.sumAmountsByUsageSummary",
-        query = "SELECT SUM(li.amount) FROM LineItemEntity li WHERE li.usageSummary.id = :usageSummaryId"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.countByElectricPowerUsageSummary",
-        query = "SELECT COUNT(li) FROM LineItemEntity li WHERE li.electricPowerUsageSummary.id = :electricPowerUsageSummaryId"
-    ),
-    @NamedQuery(
-        name = "LineItemEntity.countByUsageSummary",
-        query = "SELECT COUNT(li) FROM LineItemEntity li WHERE li.usageSummary.id = :usageSummaryId"
-    )
-})
 @Data
 @NoArgsConstructor
 @ToString(exclude = {"electricPowerUsageSummary", "usageSummary"})

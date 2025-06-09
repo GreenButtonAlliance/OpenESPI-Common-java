@@ -21,22 +21,40 @@
 package org.greenbuttonalliance.espi.common.repositories;
 
 import org.greenbuttonalliance.espi.common.domain.RetailCustomer;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface RetailCustomerRepository {
+@Repository
+public interface RetailCustomerRepository extends JpaRepository<RetailCustomer, Long> {
 
-	void deleteById(Long retailCustomerId);
+	// JpaRepository provides: save(), findAll(), findById(), deleteById(), etc.
 
-	List<RetailCustomer> findAll();
+	@Modifying
+	@Transactional
+	@Query("DELETE FROM RetailCustomer r WHERE r.id = :id")
+	void deleteById(@Param("id") Long retailCustomerId);
 
-	RetailCustomer findById(Long retailCustomerId);
+	@Query("SELECT r FROM RetailCustomer r WHERE r.id = :id")
+	Optional<RetailCustomer> findByIdString(@Param("id") String retailCustomerId);
 
-	RetailCustomer findById(String retailCustomerId);
+	@Query("SELECT r FROM RetailCustomer r WHERE r.username = :username")
+	Optional<UserDetails> findByUsername(@Param("username") String userName);
 
-	UserDetails findByUsername(String userName);
+	@Query("SELECT r.id FROM RetailCustomer r")
+	List<Long> findAllIds();
 
-	void persist(RetailCustomer retailCustomer);
+	@Query("SELECT DISTINCT r.id FROM RetailCustomer r")
+	List<Long> findAllIdsByXpath0();
+
+	@Query("SELECT DISTINCT r.id FROM RetailCustomer r WHERE r.id = :o1Id")
+	Optional<Long> findIdsByXpath(@Param("o1Id") Long o1Id);
 
 }

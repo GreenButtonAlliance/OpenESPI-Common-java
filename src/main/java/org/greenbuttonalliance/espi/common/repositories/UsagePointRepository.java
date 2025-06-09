@@ -20,38 +20,78 @@
 
 package org.greenbuttonalliance.espi.common.repositories;
 
-import org.greenbuttonalliance.espi.common.domain.IdentifiedObject;
-import org.greenbuttonalliance.espi.common.domain.RetailCustomer;
-import org.greenbuttonalliance.espi.common.domain.Subscription;
-import org.greenbuttonalliance.espi.common.domain.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.entity.UsagePointEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
-public interface UsagePointRepository {
+/**
+ * Modern Spring Data JPA repository for UsagePoint entities.
+ * Replaces the legacy UsagePointRepositoryImpl with modern Spring Data patterns.
+ */
+@Repository
+public interface UsagePointRepository extends JpaRepository<UsagePointEntity, Long> {
 
-	List<UsagePoint> findAllByRetailCustomerId(Long id);
+    /**
+     * Find all usage points for a specific retail customer.
+     */
+    @Query("SELECT up FROM UsagePointEntity up WHERE up.retailCustomer.id = :retailCustomerId")
+    List<UsagePointEntity> findAllByRetailCustomerId(@Param("retailCustomerId") Long retailCustomerId);
 
-	UsagePoint findById(Long id);
+    /**
+     * Find usage point by UUID.
+     */
+    @Query("SELECT up FROM UsagePointEntity up WHERE UPPER(up.uuid) = UPPER(:uuid)")
+    Optional<UsagePointEntity> findByUuid(@Param("uuid") String uuid);
 
-	void persist(UsagePoint up);
+    /**
+     * Find usage point by resource URI.
+     */
+    @Query("SELECT up FROM UsagePointEntity up WHERE up.uri = :uri")
+    Optional<UsagePointEntity> findByResourceUri(@Param("uri") String uri);
 
-	UsagePoint findByUUID(UUID uuid);
+    /**
+     * Find usage point by related href.
+     */
+    @Query("SELECT up FROM UsagePointEntity up JOIN up.relatedLinks rl WHERE rl.href = :href")
+    Optional<UsagePointEntity> findByRelatedHref(@Param("href") String href);
 
-	void associateByUUID(RetailCustomer retailCustomer, UUID uuid);
+    /**
+     * Find all usage points updated after a given timestamp.
+     */
+    @Query("SELECT up FROM UsagePointEntity up WHERE up.updated > :lastUpdate")
+    List<UsagePointEntity> findAllUpdatedAfter(@Param("lastUpdate") Calendar lastUpdate);
 
-	void createOrReplaceByUUID(UsagePoint usagePoint);
+    /**
+     * Find all usage point IDs for a specific retail customer.
+     */
+    @Query("SELECT up.id FROM UsagePointEntity up WHERE up.retailCustomer.id = :retailCustomerId")
+    List<Long> findAllIdsByRetailCustomerId(@Param("retailCustomerId") Long retailCustomerId);
 
-	List<UsagePoint> findAllUpdatedFor(Subscription subscription);
+    /**
+     * Find all usage point IDs.
+     */
+    @Query("SELECT up.id FROM UsagePointEntity up")
+    List<Long> findAllIds();
 
-	void deleteById(Long id);
+    /**
+     * Check if usage point exists by UUID.
+     */
+    @Query("SELECT COUNT(up) > 0 FROM UsagePointEntity up WHERE UPPER(up.uuid) = UPPER(:uuid)")
+    boolean existsByUuid(@Param("uuid") String uuid);
 
-	UsagePoint findByURI(String uri);
-
-	IdentifiedObject findByRelatedHref(String href);
-
-	List<Long> findAllIdsForRetailCustomer(Long retailCustomerId);
-
-	List<Long> findAllIds();
-
+    /**
+     * Delete usage point by UUID.
+     */
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM UsagePointEntity up WHERE UPPER(up.uuid) = UPPER(:uuid)")
+    void deleteByUuid(@Param("uuid") String uuid);
 }

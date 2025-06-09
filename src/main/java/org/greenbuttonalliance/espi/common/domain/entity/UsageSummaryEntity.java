@@ -44,32 +44,6 @@ import java.util.List;
 @Table(name = "usage_summaries", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"uuid"})
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "UsageSummaryEntity.findById",
-        query = "SELECT us FROM UsageSummaryEntity us WHERE us.id = :id"
-    ),
-    @NamedQuery(
-        name = "UsageSummaryEntity.findByUuid",
-        query = "SELECT us FROM UsageSummaryEntity us WHERE us.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "UsageSummaryEntity.findAllIdsByUsagePointId",
-        query = "SELECT us.id FROM UsageSummaryEntity us WHERE us.usagePoint.id = :usagePointId"
-    ),
-    @NamedQuery(
-        name = "UsageSummaryEntity.findAllIds",
-        query = "SELECT us.id FROM UsageSummaryEntity us"
-    ),
-    @NamedQuery(
-        name = "UsageSummaryEntity.findAllIdsByXpath",
-        query = "SELECT us.id FROM UsagePointEntity up, UsageSummaryEntity us WHERE up.retailCustomer.id = :o1Id AND us.usagePoint.id = :o2Id"
-    ),
-    @NamedQuery(
-        name = "UsageSummaryEntity.findIdByXpath",
-        query = "SELECT us.id FROM UsagePointEntity up, UsageSummaryEntity us WHERE up.retailCustomer.id = :o1Id AND us.usagePoint.id = :o2Id AND us.id = :o3Id"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

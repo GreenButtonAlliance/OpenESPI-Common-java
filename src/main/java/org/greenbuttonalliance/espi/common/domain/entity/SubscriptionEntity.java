@@ -48,48 +48,6 @@ import java.util.List;
     @Index(name = "idx_subscription_authorization", columnList = "authorization_id"),
     @Index(name = "idx_subscription_last_update", columnList = "last_update")
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "SubscriptionEntity.findById",
-        query = "SELECT sub FROM SubscriptionEntity sub WHERE sub.id = :id"
-    ),
-    @NamedQuery(
-        name = "SubscriptionEntity.findByUuid",
-        query = "SELECT sub FROM SubscriptionEntity sub WHERE sub.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "SubscriptionEntity.findByHashedId",
-        query = "SELECT sub FROM SubscriptionEntity sub WHERE sub.hashedId = :hashedId"
-    ),
-    @NamedQuery(
-        name = "SubscriptionEntity.findAll",
-        query = "SELECT sub FROM SubscriptionEntity sub"
-    ),
-    @NamedQuery(
-        name = "SubscriptionEntity.findAllIds",
-        query = "SELECT sub.id FROM SubscriptionEntity sub"
-    ),
-    @NamedQuery(
-        name = "SubscriptionEntity.findByAuthorizationId",
-        query = "SELECT sub FROM SubscriptionEntity sub WHERE sub.authorization.id = :id"
-    ),
-    @NamedQuery(
-        name = "SubscriptionEntity.findByRetailCustomerId",
-        query = "SELECT sub FROM SubscriptionEntity sub WHERE sub.retailCustomer.id = :retailCustomerId"
-    ),
-    @NamedQuery(
-        name = "SubscriptionEntity.findByApplicationInformationId",
-        query = "SELECT sub FROM SubscriptionEntity sub WHERE sub.applicationInformation.id = :applicationInformationId"
-    ),
-    @NamedQuery(
-        name = "SubscriptionEntity.findActiveSubscriptions",
-        query = "SELECT sub FROM SubscriptionEntity sub WHERE sub.authorization IS NOT NULL AND sub.authorization.status = 'ACTIVE'"
-    ),
-    @NamedQuery(
-        name = "SubscriptionEntity.findByUsagePointId",
-        query = "SELECT DISTINCT sub FROM SubscriptionEntity sub JOIN sub.usagePoints up WHERE up.id = :usagePointId"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

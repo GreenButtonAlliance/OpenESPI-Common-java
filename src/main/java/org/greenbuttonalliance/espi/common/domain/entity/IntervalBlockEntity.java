@@ -44,36 +44,6 @@ import java.util.List;
 @Table(name = "interval_blocks", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"uuid"})
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "IntervalBlockEntity.findAllByMeterReadingId",
-        query = "SELECT ib FROM IntervalBlockEntity ib WHERE ib.meterReading.id = :meterReadingId"
-    ),
-    @NamedQuery(
-        name = "IntervalBlockEntity.findById",
-        query = "SELECT ib FROM IntervalBlockEntity ib WHERE ib.id = :id"
-    ),
-    @NamedQuery(
-        name = "IntervalBlockEntity.findByUuid",
-        query = "SELECT ib FROM IntervalBlockEntity ib WHERE ib.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "IntervalBlockEntity.findAllIdsByUsagePointId",
-        query = "SELECT ib.id FROM IntervalBlockEntity ib WHERE ib.meterReading.usagePoint.id = :usagePointId"
-    ),
-    @NamedQuery(
-        name = "IntervalBlockEntity.findAllIds",
-        query = "SELECT ib.id FROM IntervalBlockEntity ib"
-    ),
-    @NamedQuery(
-        name = "IntervalBlockEntity.findAllIdsByXpath",
-        query = "SELECT DISTINCT ib.id FROM UsagePointEntity up, MeterReadingEntity mr, IntervalBlockEntity ib WHERE up.retailCustomer.id = :o1Id AND mr.usagePoint.id = :o2Id AND ib.meterReading.id = :o3Id"
-    ),
-    @NamedQuery(
-        name = "IntervalBlockEntity.findIdByXpath",
-        query = "SELECT DISTINCT ib.id FROM UsagePointEntity up, MeterReadingEntity mr, IntervalBlockEntity ib WHERE up.retailCustomer.id = :o1Id AND mr.usagePoint.id = :o2Id AND ib.meterReading.id = :o3Id AND ib.id = :o4Id"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

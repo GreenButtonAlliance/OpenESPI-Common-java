@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.repositories;
 
-import org.greenbuttonalliance.espi.common.domain.ReadingType;
+import org.greenbuttonalliance.espi.common.domain.ServiceDeliveryPoint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,37 +30,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface ReadingTypeRepository extends JpaRepository<ReadingType, Long> {
+public interface ServiceDeliveryPointRepository extends JpaRepository<ServiceDeliveryPoint, Long> {
 
 	// JpaRepository provides: save(), findById(), findAll(), deleteById(), etc.
 
 	@Modifying
 	@Transactional
-	@Query("DELETE FROM ReadingType r WHERE r.id = :id")
+	@Query("DELETE FROM ServiceDeliveryPoint s WHERE s.id = :id")
 	void deleteById(@Param("id") Long id);
 
-	@Query("SELECT r.id FROM ReadingType r")
+	@Query("SELECT s.id FROM ServiceDeliveryPoint s")
 	List<Long> findAllIds();
 
-	Optional<ReadingType> findByUuid(UUID uuid);
+	@Query("SELECT s FROM ServiceDeliveryPoint s WHERE s.name = :name")
+	List<ServiceDeliveryPoint> findByName(@Param("name") String name);
 
-	@Modifying
-	@Transactional
-	@Query("DELETE FROM ReadingType r WHERE r.uuid = :uuid")
-	void deleteByUuid(@Param("uuid") UUID uuid);
+	@Query("SELECT s FROM ServiceDeliveryPoint s WHERE s.tariffProfile = :tariffProfile")
+	List<ServiceDeliveryPoint> findByTariffProfile(@Param("tariffProfile") String tariffProfile);
 
-	// Custom method for createOrReplaceByUUID - should be implemented in service layer
+	@Query("SELECT s FROM ServiceDeliveryPoint s WHERE s.customerAgreement = :customerAgreement")
+	List<ServiceDeliveryPoint> findByCustomerAgreement(@Param("customerAgreement") String customerAgreement);
 
-	@Query("SELECT meterReading.readingType.id FROM MeterReading meterReading WHERE meterReading.usagePoint.id = :usagePointId")
-	List<Long> findAllIdsByUsagePointId(@Param("usagePointId") Long usagePointId);
+	@Query("SELECT s FROM ServiceDeliveryPoint s WHERE LOWER(s.name) LIKE LOWER(CONCAT('%', :searchText, '%'))")
+	List<ServiceDeliveryPoint> findByNameContaining(@Param("searchText") String searchText);
 
-	@Query("SELECT DISTINCT r.id FROM ReadingType r")
-	List<Long> findAllIdsByXpath0();
-
-	@Query("SELECT DISTINCT r.id FROM ReadingType r WHERE r.id = :o1Id")
-	Optional<Long> findIdByXpath(@Param("o1Id") Long o1Id);
+	// Additional utility methods
+	@Query("SELECT COUNT(s) FROM ServiceDeliveryPoint s WHERE s.tariffProfile = :tariffProfile")
+	Long countByTariffProfile(@Param("tariffProfile") String tariffProfile);
 
 }

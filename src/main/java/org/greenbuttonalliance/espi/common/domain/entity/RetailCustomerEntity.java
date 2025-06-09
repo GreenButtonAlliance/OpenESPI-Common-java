@@ -49,40 +49,6 @@ import java.util.List;
     @UniqueConstraint(columnNames = {"uuid"}),
     @UniqueConstraint(columnNames = {"username"})
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "RetailCustomerEntity.findById",
-        query = "SELECT rc FROM RetailCustomerEntity rc WHERE rc.id = :id"
-    ),
-    @NamedQuery(
-        name = "RetailCustomerEntity.findByUuid",
-        query = "SELECT rc FROM RetailCustomerEntity rc WHERE rc.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "RetailCustomerEntity.findByUsername",
-        query = "SELECT rc FROM RetailCustomerEntity rc WHERE rc.username = :username"
-    ),
-    @NamedQuery(
-        name = "RetailCustomerEntity.findAll",
-        query = "SELECT rc FROM RetailCustomerEntity rc"
-    ),
-    @NamedQuery(
-        name = "RetailCustomerEntity.findAllIds",
-        query = "SELECT rc.id FROM RetailCustomerEntity rc"
-    ),
-    @NamedQuery(
-        name = "RetailCustomerEntity.findAllIdsByXpath",
-        query = "SELECT DISTINCT rc.id FROM RetailCustomerEntity rc"
-    ),
-    @NamedQuery(
-        name = "RetailCustomerEntity.findIdByXpath",
-        query = "SELECT DISTINCT rc.id FROM RetailCustomerEntity rc WHERE rc.id = :o1Id"
-    ),
-    @NamedQuery(
-        name = "RetailCustomerEntity.findEnabledByUsername",
-        query = "SELECT rc FROM RetailCustomerEntity rc WHERE rc.username = :username AND rc.enabled = true"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

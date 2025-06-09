@@ -42,36 +42,6 @@ import jakarta.validation.constraints.Size;
     @Index(name = "idx_reading_quality_interval_reading", columnList = "interval_reading_id"),
     @Index(name = "idx_reading_quality_quality", columnList = "quality")
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "ReadingQualityEntity.findById",
-        query = "SELECT rq FROM ReadingQualityEntity rq WHERE rq.id = :id"
-    ),
-    @NamedQuery(
-        name = "ReadingQualityEntity.findByQuality",
-        query = "SELECT rq FROM ReadingQualityEntity rq WHERE rq.quality = :quality"
-    ),
-    @NamedQuery(
-        name = "ReadingQualityEntity.findByIntervalReadingId",
-        query = "SELECT rq FROM ReadingQualityEntity rq WHERE rq.intervalReading.id = :intervalReadingId"
-    ),
-    @NamedQuery(
-        name = "ReadingQualityEntity.findAll",
-        query = "SELECT rq FROM ReadingQualityEntity rq"
-    ),
-    @NamedQuery(
-        name = "ReadingQualityEntity.findAllIds",
-        query = "SELECT rq.id FROM ReadingQualityEntity rq"
-    ),
-    @NamedQuery(
-        name = "ReadingQualityEntity.findProblemQualities",
-        query = "SELECT rq FROM ReadingQualityEntity rq WHERE rq.quality != :goodQuality"
-    ),
-    @NamedQuery(
-        name = "ReadingQualityEntity.countByIntervalReading",
-        query = "SELECT COUNT(rq) FROM ReadingQualityEntity rq WHERE rq.intervalReading.id = :intervalReadingId"
-    )
-})
 @Data
 @NoArgsConstructor
 @ToString(exclude = {"intervalReading"})

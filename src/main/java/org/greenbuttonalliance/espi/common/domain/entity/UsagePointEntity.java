@@ -45,36 +45,6 @@ import java.util.Set;
 @Table(name = "usage_points", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"uuid"})
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "UsagePointEntity.findByRetailCustomerId",
-        query = "SELECT up FROM UsagePointEntity up WHERE up.retailCustomer.id = :retailCustomerId"
-    ),
-    @NamedQuery(
-        name = "UsagePointEntity.findByUuid",
-        query = "SELECT up FROM UsagePointEntity up WHERE up.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "UsagePointEntity.findById",
-        query = "SELECT up FROM UsagePointEntity up WHERE up.id = :id"
-    ),
-    @NamedQuery(
-        name = "UsagePointEntity.findUpdatedAfter",
-        query = "SELECT up FROM UsagePointEntity up WHERE up.updated > :lastUpdate"
-    ),
-    @NamedQuery(
-        name = "UsagePointEntity.findByUri",
-        query = "SELECT up FROM UsagePointEntity up WHERE up.uri = :uri"
-    ),
-    @NamedQuery(
-        name = "UsagePointEntity.findAllIdsForRetailCustomer",
-        query = "SELECT up.id FROM UsagePointEntity up WHERE up.retailCustomer.id = :retailCustomerId"
-    ),
-    @NamedQuery(
-        name = "UsagePointEntity.findAllIds",
-        query = "SELECT up.id FROM UsagePointEntity up"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor

@@ -47,60 +47,6 @@ import java.time.Instant;
     @Index(name = "idx_authorization_state", columnList = "state"),
     @Index(name = "idx_authorization_resource_uri", columnList = "resource_uri")
 })
-@NamedQueries({
-    @NamedQuery(
-        name = "AuthorizationEntity.findById",
-        query = "SELECT auth FROM AuthorizationEntity auth WHERE auth.id = :id"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findByUuid",
-        query = "SELECT auth FROM AuthorizationEntity auth WHERE auth.uuid = :uuid"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findByAccessToken",
-        query = "SELECT auth FROM AuthorizationEntity auth WHERE auth.accessToken = :accessToken"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findByRefreshToken",
-        query = "SELECT auth FROM AuthorizationEntity auth WHERE auth.refreshToken = :refreshToken"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findByState",
-        query = "SELECT auth FROM AuthorizationEntity auth WHERE auth.state = :state"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findByRetailCustomerId",
-        query = "SELECT auth FROM AuthorizationEntity auth WHERE auth.retailCustomer.id = :retailCustomerId AND auth.resourceURI IS NOT NULL"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findByScope",
-        query = "SELECT auth FROM AuthorizationEntity auth WHERE auth.scope = :scope AND auth.retailCustomer.id = :retailCustomerId"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findByResourceUri",
-        query = "SELECT auth FROM AuthorizationEntity auth WHERE auth.resourceURI LIKE :uri"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findAllIds",
-        query = "SELECT auth.id FROM AuthorizationEntity auth"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findAllIdsByApplicationInformationId",
-        query = "SELECT auth.id FROM AuthorizationEntity auth WHERE auth.applicationInformation.id = :applicationInformationId"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findAllIdsByBulkId",
-        query = "SELECT auth.id FROM AuthorizationEntity auth WHERE auth.thirdParty = :thirdParty AND auth.scope LIKE :bulkId"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findExpiredAuthorizations",
-        query = "SELECT auth FROM AuthorizationEntity auth WHERE auth.expiresIn IS NOT NULL AND auth.expiresIn < :currentTime"
-    ),
-    @NamedQuery(
-        name = "AuthorizationEntity.findActiveByCustomerAndApplication",
-        query = "SELECT auth FROM AuthorizationEntity auth WHERE auth.retailCustomer.id = :customerId AND auth.applicationInformation.id = :applicationId AND (auth.expiresIn IS NULL OR auth.expiresIn > :currentTime)"
-    )
-})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
