@@ -20,7 +20,7 @@
 package org.greenbuttonalliance.espi.common.service.impl;
 
 import org.greenbuttonalliance.espi.common.domain.ElectricPowerQualitySummary;
-import org.greenbuttonalliance.espi.common.domain.ElectricPowerUsageSummary;
+// ElectricPowerUsageSummary removed - deprecated resource
 import org.greenbuttonalliance.espi.common.domain.UsagePoint;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
 import org.greenbuttonalliance.espi.common.repositories.ElectricPowerQualitySummaryRepository;

@@ -73,8 +73,7 @@ public class ExportServiceImpl implements ExportService {
 	@Autowired
 	private ElectricPowerQualitySummaryService electricPowerQualitySummaryService;
 
-	@Autowired
-	private ElectricPowerUsageSummaryService electricPowerUsageSummaryService;
+	// ElectricPowerUsageSummaryService removed - deprecated resource
 
 	@Autowired
 	private UsageSummaryService usageSummaryService;
@@ -162,14 +161,7 @@ public class ExportServiceImpl implements ExportService {
 		return this.electricPowerQualitySummaryService;
 	}
 
-	public void setElectricPowerUsageSummaryService(
-			ElectricPowerUsageSummaryService electricPowerUsageSummaryService) {
-		this.electricPowerUsageSummaryService = electricPowerUsageSummaryService;
-	}
-
-	public ElectricPowerUsageSummaryService getElectricPowerUsageSummaryService() {
-		return this.electricPowerUsageSummaryService;
-	}
+	// ElectricPowerUsageSummaryService methods removed - deprecated resource
 
 	public void setUsageSummaryService(
 			UsageSummaryService usageSummaryService) {

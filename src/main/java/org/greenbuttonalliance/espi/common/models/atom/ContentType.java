@@ -72,12 +72,12 @@ import java.util.Map;
 @XmlRootElement(name = "content")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "contentType", propOrder = { "usagePoint", "meterReading",
-		"intervalBlocks", "electricPowerUsageSummary", "usageSummary",
+		"intervalBlocks", "usageSummary",
 		"electricPowerQualitySummary", "readingType", "localTimeParameters",
 		"applicationInformation", "authorization", "subscription",
 		"retailCustomer", "content" })
 @XmlSeeAlso({ MeterReading.class, UsagePoint.class,
-		ElectricPowerUsageSummary.class, UsageSummary.class, TimeConfiguration.class,
+		UsageSummary.class, TimeConfiguration.class,
 		ApplicationInformation.class, Authorization.class, Subscription.class,
 		ElectricPowerQualitySummary.class, IntervalBlock.class,
 		ReadingType.class, ApplicationInformation.class, Authorization.class,
@@ -96,9 +96,7 @@ public class ContentType {
 	@XmlAnyElement(lax = true)
 	protected List<IntervalBlock> intervalBlocks;
 
-	@XmlElementRefs({ @XmlElementRef(name = "ElectricPowerUsageSummary", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false), })
-	@XmlAnyElement(lax = true)
-	protected ElectricPowerUsageSummary electricPowerUsageSummary;
+	// ElectricPowerUsageSummary removed - deprecated resource
 
 	@XmlElementRefs({ @XmlElementRef(name = "UsageSummary", namespace = "http://naesb.org/espi", type = JAXBElement.class, required = false), })
 	@XmlAnyElement(lax = true)
@@ -327,13 +325,7 @@ public class ContentType {
 		return readingType;
 	}
 
-	public ElectricPowerUsageSummary getElectricPowerUsageSummary() {
-		return electricPowerUsageSummary;
-	}
-
-	public void setElectricPowerUsageSummary(ElectricPowerUsageSummary electricPowerUsageSummary) {
-		this.electricPowerUsageSummary = electricPowerUsageSummary;
-	}
+	// ElectricPowerUsageSummary methods removed - deprecated resource
 
 	public UsageSummary getUsageSummary() {
 		return usageSummary;
@@ -374,8 +366,7 @@ public class ContentType {
 			return getMeterReading();
 		} else if (getLocalTimeParameters() != null) {
 			return getLocalTimeParameters();
-		} else if (getElectricPowerUsageSummary() != null) {
-			return getElectricPowerUsageSummary();
+		// ElectricPowerUsageSummary removed - deprecated resource
 		} else if (getUsageSummary() != null) {
 			return getUsageSummary();
 		} else if (getElectricPowerQualitySummary() != null) {
@@ -411,8 +402,7 @@ public class ContentType {
 			setLocalTimeParameters((TimeConfiguration) resource);
 		} else if (resource instanceof IntervalBlock) {
 			setIntervalBlocks(Lists.newArrayList((IntervalBlock) resource));
-		} else if (resource instanceof ElectricPowerUsageSummary) {
-			setElectricPowerUsageSummary((ElectricPowerUsageSummary) resource);
+		// ElectricPowerUsageSummary removed - deprecated resource
 		} else if (resource instanceof UsageSummary) {
 			setUsageSummary((UsageSummary) resource);
 		} else if (resource instanceof ElectricPowerQualitySummary) {
@@ -465,11 +455,7 @@ public class ContentType {
 				return this.getElectricPowerQualitySummary().getId();
 			}
 		}
-		if (this.getElectricPowerUsageSummary() != null) {
-			if (ElectricPowerUsageSummary.class.equals(resourceClass)) {
-				return this.getElectricPowerUsageSummary().getId();
-			}
-		}
+		// ElectricPowerUsageSummary removed - deprecated resource
 		if (this.getUsageSummary() != null) {
 			if (UsageSummary.class.equals(resourceClass)) {
 				return this.getUsageSummary().getId();
@@ -552,24 +538,7 @@ public class ContentType {
 					+ this.getElectricPowerQualitySummary().getId();
 		}
 
-		if (this.getElectricPowerUsageSummary() != null) {
-			UsagePoint usagePoint = this.getElectricPowerUsageSummary()
-					.getUsagePoint();
-
-			RetailCustomer retailCustomer = getRetailCustomer(usagePoint);
-
-			if (subscriptionId != 0L) {
-
-				result = getSubscriptionUsagePointIds(subscriptionId, result, usagePoint);
-
-			} else {
-
-				result = getRetailCustomerUsagePointIds(result, usagePoint, retailCustomer);
-			}
-
-			result = result + "/ElectricPowerUsageSummary/"
-					+ this.getElectricPowerUsageSummary().getId();
-		}
+		// ElectricPowerUsageSummary removed - deprecated resource
 
 		if (this.getUsageSummary() != null) {
 			UsagePoint usagePoint = this.getUsageSummary()

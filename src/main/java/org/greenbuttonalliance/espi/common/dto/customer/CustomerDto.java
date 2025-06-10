@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.dto.customer;
 
-import org.greenbuttonalliance.espi.common.domain.customer.entity.CustomerKind;
+import org.greenbuttonalliance.espi.common.domain.customer.enums.CustomerKind;
 import org.greenbuttonalliance.espi.common.dto.atom.LinkDto;
 
 import jakarta.xml.bind.annotation.*;
