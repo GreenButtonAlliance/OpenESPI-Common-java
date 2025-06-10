@@ -20,12 +20,12 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
+import org.greenbuttonalliance.espi.common.domain.IntervalBlock;
 import org.greenbuttonalliance.espi.common.domain.MeterReading;
-import org.greenbuttonalliance.espi.common.domain.ReadingType;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
-import org.greenbuttonalliance.espi.common.repositories.ReadingTypeRepository;
+import org.greenbuttonalliance.espi.common.repositories.IntervalBlockRepository;
 import org.greenbuttonalliance.espi.common.service.ImportService;
-import org.greenbuttonalliance.espi.common.service.ReadingTypeService;
+import org.greenbuttonalliance.espi.common.service.IntervalBlockService;
 import org.greenbuttonalliance.espi.common.service.ResourceService;
 import org.greenbuttonalliance.espi.common.utils.EntryTypeIterator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +37,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ReadingTypeServiceImpl implements ReadingTypeService {
+public class IntervalBlockServiceImpl implements IntervalBlockService {
 
 	@Autowired
-	private ReadingTypeRepository readingTypeRepository;
+	protected IntervalBlockRepository intervalBlockRepository;
 
 	@Autowired
 	private ResourceService resourceService;
@@ -49,27 +49,28 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 	private ImportService importService;
 
 	@Override
-	public ReadingType findByUUID(UUID uuid) {
-		return readingTypeRepository.findByUuid(uuid).orElse(null);
+	public List<IntervalBlock> findAllByMeterReadingId(Long meterReadingId) {
+		return intervalBlockRepository.findAllByMeterReadingId(meterReadingId);
 	}
 
-	public ReadingType findById(Long readingTypeId) {
-		return readingTypeRepository.findById(readingTypeId).orElse(null);
-	}
-
-	@Override
-	public void persist(ReadingType readingType) {
-		readingTypeRepository.save(readingType);
+	public void setRepository(IntervalBlockRepository repository) {
+		this.intervalBlockRepository = repository;
 	}
 
 	@Override
-	public String feedFor(ReadingType readingType) {
+	public String feedFor(List<IntervalBlock> intervalBlocks) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String entryFor(ReadingType readingType) {
+	public IntervalBlock findById(long retailCustomerId, long usagePointId,
+			long meterReadingId, long intervalBlockId) {
+		return intervalBlockRepository.findById(intervalBlockId);
+	}
+
+	@Override
+	public String entryFor(IntervalBlock intervalBlock) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -81,21 +82,38 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 	}
 
 	@Override
-	public void deleteById(long readingTypeId) {
-		readingTypeRepository.deleteById(readingTypeId);
+	public void delete(IntervalBlock intervalBlock) {
+		intervalBlockRepository.deleteById(intervalBlock.getId());
+	}
+
+	@Override
+	public List<IntervalBlock> findAllByMeterReading(MeterReading meterReading) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IntervalBlock findByURI(String uri) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void persist(IntervalBlock intervalBlock) {
+		intervalBlockRepository.save(intervalBlock);
 	}
 
 	@Override
 	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
-			Long usagePointId) {
+			Long usagePointId, Long meterReadingId) {
 		EntryTypeIterator result = null;
 		try {
 			// TODO - this is sub-optimal (but defers the need to understand
 			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
-			temp = resourceService.findAllIds(ReadingType.class);
+			temp = resourceService.findAllIds(IntervalBlock.class);
 			result = (new EntryTypeIterator(resourceService, temp,
-					ReadingType.class));
+					IntervalBlock.class));
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -106,13 +124,15 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 
 	@Override
 	public EntryType findEntryType(Long retailCustomerId, Long usagePointId,
-			Long meterReadingId, Long readingTypeId) {
+			Long meterReadingId, Long intervalBlockId) {
 		EntryType result = null;
 		try {
-			List<Long> allIds = new ArrayList<Long>();
-			allIds.add(readingTypeId);
-			result = (new EntryTypeIterator(resourceService, allIds,
-					ReadingType.class)).nextEntry(ReadingType.class);
+			// TODO - this is sub-optimal (but defers the need to understan
+			// creation of an EntryType
+			List<Long> temp = new ArrayList<Long>();
+			temp.add(intervalBlockId);
+			result = (new EntryTypeIterator(resourceService, temp,
+					IntervalBlock.class)).nextEntry(IntervalBlock.class);
 		} catch (Exception e) {
 			// TODO need a log file entry as we are going to return a null if
 			// it's not found
@@ -122,34 +142,37 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 	}
 
 	@Override
-	public void add(ReadingType readingType) {
+	public void add(IntervalBlock intervalBlock) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void delete(ReadingType readingType) {
-		readingTypeRepository.deleteById(readingType.getId());
-	}
-
-	@Override
-	public ReadingType importResource(InputStream stream) {
+	public IntervalBlock importResource(InputStream stream) {
 		try {
 			importService.importData(stream, null);
 			EntryType entry = importService.getEntries().get(0);
-			ReadingType readingType = entry.getContent().getReadingType();
-			return readingType;
+			List<IntervalBlock> intervalBlocks = entry.getContent()
+					.getIntervalBlocks();
+			return intervalBlocks.get(0);
 		} catch (Exception e) {
 			return null;
 		}
 	}
 
-	public void setReadingTypeRepository(ReadingTypeRepository repository) {
-		this.readingTypeRepository = repository;
+	@Override
+	public IntervalBlock findById(long intervalBlockId) {
+		intervalBlockRepository.findById(intervalBlockId);
+		return null;
 	}
 
-	public ReadingTypeRepository getReadingTypeRepository() {
-		return this.readingTypeRepository;
+	public void setIntervalBlockRepository(
+			IntervalBlockRepository intervalBlockRepository) {
+		this.intervalBlockRepository = intervalBlockRepository;
+	}
+
+	public IntervalBlockRepository getIntervalBlockRepository() {
+		return this.intervalBlockRepository;
 	}
 
 	public void setResourceService(ResourceService resourceService) {

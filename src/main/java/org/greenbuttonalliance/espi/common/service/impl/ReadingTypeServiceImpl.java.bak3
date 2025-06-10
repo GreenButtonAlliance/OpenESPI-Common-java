@@ -50,11 +50,11 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 
 	@Override
 	public ReadingType findByUUID(UUID uuid) {
-		return readingTypeRepository.findByUuid(uuid).orElse(null);
+		return readingTypeRepository.findByUUID(uuid);
 	}
 
 	public ReadingType findById(Long readingTypeId) {
-		return readingTypeRepository.findById(readingTypeId).orElse(null);
+		return readingTypeRepository.findById(readingTypeId);
 	}
 
 	@Override

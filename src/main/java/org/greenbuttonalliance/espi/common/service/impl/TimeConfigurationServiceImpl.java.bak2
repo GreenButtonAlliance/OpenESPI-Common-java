@@ -81,16 +81,16 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 
 	@Override
 	public TimeConfiguration findByUUID(UUID uuid) {
-		return timeConfigurationRepository.findByUuid(uuid).orElse(null);
+		return timeConfigurationRepository.findByUUID(uuid);
 	}
 
 	public TimeConfiguration findById(Long timeConfigurationId) {
-		return timeConfigurationRepository.findById(timeConfigurationId).orElse(null);
+		return timeConfigurationRepository.findById(timeConfigurationId);
 	}
 
 	@Override
 	public void persist(TimeConfiguration timeConfiguration) {
-		timeConfigurationRepository.save(timeConfiguration);
+		timeConfigurationRepository.persist(timeConfiguration);
 	}
 
 	@Override

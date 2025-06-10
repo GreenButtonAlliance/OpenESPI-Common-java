@@ -48,7 +48,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 			Long meterReadingId) {
 		// TODO need to scope to the retailCustomer.usagePoint.meterReading
 		// for now, just do it the old way
-		return meterReadingRepository.findById(meterReadingId).orElse(null);
+		return meterReadingRepository.findById(meterReadingId);
 	}
 
 	@Override

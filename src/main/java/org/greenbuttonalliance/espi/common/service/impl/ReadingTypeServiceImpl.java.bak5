@@ -54,7 +54,7 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 	}
 
 	public ReadingType findById(Long readingTypeId) {
-		return readingTypeRepository.findById(readingTypeId).orElse(null);
+		return readingTypeRepository.findById(readingTypeId);
 	}
 
 	@Override

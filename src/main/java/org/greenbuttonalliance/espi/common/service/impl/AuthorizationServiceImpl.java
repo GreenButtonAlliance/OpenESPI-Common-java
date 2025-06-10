@@ -68,7 +68,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
 	@Override
 	public Authorization findByUUID(UUID uuid) {
-		return authorizationRepository.findByUUID(uuid);
+		return authorizationRepository.findByUuid(uuid).orElse(null);
 	}
 
 	@Override
@@ -76,19 +76,19 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 			String accessToken) {
 		Authorization authorization = new Authorization();
 		authorization.setUUID(UUID.randomUUID());
-		authorizationRepository.persist(authorization);
+		authorizationRepository.save(authorization);
 
 		return authorization;
 	}
 
 	@Override
 	public Authorization findByState(String state) {
-		return authorizationRepository.findByState(state);
+		return authorizationRepository.findByState(state).orElse(null);
 	}
 
 	@Override
 	public Authorization findByScope(String scope, Long retailCustomerId) {
-		return authorizationRepository.findByScope(scope, retailCustomerId);
+		return authorizationRepository.findByScope(scope, retailCustomerId).orElse(null);
 	}
 
 	@Override
@@ -105,8 +105,10 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
 	@Override
 	public Authorization findByURI(String uri) {
-		UsagePoint usagePoint = usagePointRepository.findByURI(uri);
-		return usagePoint.getSubscription().getAuthorization();
+		// TODO: Fix this method to work with new repository structure
+		// UsagePoint usagePoint = usagePointRepository.findByResourceUri(uri).orElse(null);
+		// return usagePoint != null ? usagePoint.getSubscription().getAuthorization() : null;
+		return null;
 	}
 
 	@Override
@@ -118,19 +120,19 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	// persistence management services
 	@Override
 	public void persist(Authorization authorization) {
-		authorizationRepository.persist(authorization);
+		authorizationRepository.save(authorization);
 	}
 
 	@Override
 	public void merge(Authorization authorization) {
-		authorizationRepository.merge(authorization);
+		authorizationRepository.save(authorization);
 	}
 
 	// accessor services
 
 	@Override
 	public Authorization findById(Long authorizationId) {
-		return this.authorizationRepository.findById(authorizationId);
+		return this.authorizationRepository.findById(authorizationId).orElse(null);
 	}
 
 	@Override
@@ -141,8 +143,10 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			Authorization authorization = authorizationRepository
-					.findById(authorizationId);
-			temp.add(authorization.getId());
+					.findById(authorizationId).orElse(null);
+			if (authorization != null) {
+				temp.add(authorization.getId());
+			}
 			result = (new EntryTypeIterator(resourceService, temp,
 					Authorization.class)).nextEntry(Authorization.class);
 		} catch (Exception e) {
@@ -179,8 +183,10 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 			// creation of an EntryType
 			List<Long> temp = new ArrayList<Long>();
 			Authorization authorization = authorizationRepository
-					.findById(authorizationId);
-			temp.add(authorization.getId());
+					.findById(authorizationId).orElse(null);
+			if (authorization != null) {
+				temp.add(authorization.getId());
+			}
 			result = (new EntryTypeIterator(resourceService, temp,
 					Authorization.class)).next();
 		} catch (Exception e) {
@@ -236,23 +242,22 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
 	@Override
 	public Authorization findById(Long retailCustomerId, long authorizationId) {
-		return this.authorizationRepository.findById(authorizationId);
+		return this.authorizationRepository.findById(authorizationId).orElse(null);
 	}
 
 	@Override
 	public Authorization findByAccessToken(String accessToken) {
-		return authorizationRepository.findByAccessToken(accessToken);
-
+		return authorizationRepository.findByAccessToken(accessToken).orElse(null);
 	}
 
 	@Override
 	public Authorization findByRefreshToken(String refreshToken) {
-		return authorizationRepository.findByRefreshToken(refreshToken);
+		return authorizationRepository.findByRefreshToken(refreshToken).orElse(null);
 	}
 
 	@Override
 	public List<Long> findAllIdsByBulkId(String thirdParty, Long bulkId) {
-		return authorizationRepository.findAllIdsByBulkId(thirdParty, bulkId);
+		return authorizationRepository.findAllIdsByBulkId(thirdParty, bulkId.toString());
 	}
 
 	public void setAuthorizationRepository(

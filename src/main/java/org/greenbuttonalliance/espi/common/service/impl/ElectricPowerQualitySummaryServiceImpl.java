@@ -50,19 +50,19 @@ public class ElectricPowerQualitySummaryServiceImpl implements
 
 	@Override
 	public ElectricPowerQualitySummary findByUUID(UUID uuid) {
-		return electricPowerQualitySummaryRepository.findByUUID(uuid);
+		return electricPowerQualitySummaryRepository.findByUuid(uuid).orElse(null);
 	}
 
 	public ElectricPowerQualitySummary findById(
 			Long electricPowerQualitySummaryId) {
 		return electricPowerQualitySummaryRepository
-				.findById(electricPowerQualitySummaryId);
+				.findById(electricPowerQualitySummaryId).orElse(null);
 	}
 
 	@Override
 	public void persist(ElectricPowerQualitySummary electricPowerQualitySummary) {
 		electricPowerQualitySummaryRepository
-				.persist(electricPowerQualitySummary);
+				.save(electricPowerQualitySummary);
 	}
 
 	@Override

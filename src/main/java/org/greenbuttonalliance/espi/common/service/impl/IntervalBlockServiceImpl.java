@@ -66,7 +66,7 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 	@Override
 	public IntervalBlock findById(long retailCustomerId, long usagePointId,
 			long meterReadingId, long intervalBlockId) {
-		return intervalBlockRepository.findById(intervalBlockId);
+		return intervalBlockRepository.findById(intervalBlockId).orElse(null);
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 
 	@Override
 	public void persist(IntervalBlock intervalBlock) {
-		intervalBlockRepository.persist(intervalBlock);
+		intervalBlockRepository.save(intervalBlock);
 	}
 
 	@Override
@@ -162,8 +162,7 @@ public class IntervalBlockServiceImpl implements IntervalBlockService {
 
 	@Override
 	public IntervalBlock findById(long intervalBlockId) {
-		intervalBlockRepository.findById(intervalBlockId);
-		return null;
+		return intervalBlockRepository.findById(intervalBlockId).orElse(null);
 	}
 
 	public void setIntervalBlockRepository(

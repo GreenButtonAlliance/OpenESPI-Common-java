@@ -1,4 +1,3 @@
-
 /*
  *
  *    Copyright (c) 2018-2021 Green Button Alliance, Inc.
@@ -53,7 +52,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Autowired
 	private ImportService importService;
-
+	
 	@Autowired
 	private RetailCustomerService retailCustomerService;
 
@@ -69,7 +68,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		Set<String> role = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
 		if (role.contains("ROLE_USER")) {
-
+		
 			subscription.setApplicationInformation(applicationInformationService
 					.findByClientId(authentication.getOAuth2Request().getClientId()));
 			subscription.setRetailCustomer((RetailCustomer) authentication.getPrincipal());
@@ -110,13 +109,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Subscription findByHashedId(String hashedId) {
-		return subscriptionRepository.findByHashedId(hashedId).orElse(null);
+		return subscriptionRepository.findByHashedId(hashedId);
 	}
 
 	@Override
 	public EntryTypeIterator findEntriesByHashedId(String hashedId) {
 		Subscription subscription = subscriptionRepository
-				.findByHashedId(hashedId).orElse(null);
+				.findByHashedId(hashedId);
 		List<Long> subscriptionIds = new ArrayList<Long>();
 		subscriptionIds.add(subscription.getId());
 		return new EntryTypeIterator(resourceService, subscriptionIds,
@@ -167,7 +166,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Subscription findById(Long subscriptionId) {
-		return subscriptionRepository.findById(subscriptionId).orElse(null);
+		return subscriptionRepository.findById(subscriptionId);
 	}
 
 	@Override
@@ -183,7 +182,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Subscription findByAuthorizationId(Long id) {
-		return subscriptionRepository.findByAuthorizationId(id).orElse(null);
+		return subscriptionRepository.findByAuthorizationId(id);
 	}
 
 	@Override

@@ -85,7 +85,7 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 	}
 
 	public TimeConfiguration findById(Long timeConfigurationId) {
-		return timeConfigurationRepository.findById(timeConfigurationId).orElse(null);
+		return timeConfigurationRepository.findById(timeConfigurationId);
 	}
 
 	@Override

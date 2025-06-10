@@ -70,17 +70,12 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 
 	@Override
 	public RetailCustomer findById(Long id) {
-		return retailCustomerRepository.findById(id).orElse(null);
+		return retailCustomerRepository.findById(id);
 	}
 
 	@Override
 	public RetailCustomer findById(String retailCustomerId) {
-		try {
-			Long id = Long.parseLong(retailCustomerId);
-			return retailCustomerRepository.findById(id).orElse(null);
-		} catch (NumberFormatException e) {
-			return null;
-		}
+		return retailCustomerRepository.findById(retailCustomerId);
 	}
 
 	@Override
@@ -92,7 +87,7 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		try {
-			return retailCustomerRepository.findByUsername(username).orElse(null);
+			return retailCustomerRepository.findByUsername(username);
 		} catch (EmptyResultDataAccessException x) {
 			throw new UsernameNotFoundException("Unable to find user");
 		}
@@ -142,8 +137,7 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 					RetailCustomer.class);
 			try {
 
-				// TODO: Fix this method call
-			usagePoint = null;
+				usagePoint = resourceService.findByUuid(uuid, UsagePoint.class).orElse(null);
 
 			} catch (Exception e) {
 
@@ -152,13 +146,11 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 				usagePoint.setDescription("A Temporary UsagePoint Description");
 				usagePoint.setServiceCategory(new ServiceCategory(
 						ServiceCategory.ELECTRICITY_SERVICE));
-				// TODO: Use UsagePointService instead
-				// usagePointService.persist(usagePoint);
+				resourceService.save(usagePoint);
 
 			}
 			usagePoint.setRetailCustomer(retailCustomer);
-			// TODO: Use specific service instead
-			// service.persist(usagePoint);
+			resourceService.save(usagePoint);
 
 			// now see if there are any authorizations for this information
 			//
@@ -176,8 +168,7 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 										.getDataCustodianResourceEndpoint()
 										+ "/Batch/Subscription/"
 										+ subscription.getId());
-						// TODO: Use specific service instead
-						// authorizationService.persist(authorization);
+						resourceService.save(authorization);
 
 					}
 
@@ -185,8 +176,7 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 							.findByAuthorizationId(authorization.getId());
 
 					subscription.getUsagePoints().add(usagePoint);
-					// TODO: Use specific service instead
-					// subscriptionService.persist(subscription);
+					resourceService.save(subscription);
 				}
 			} catch (Exception e) {
 				// we get here if we don't have a subscription

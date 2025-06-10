@@ -40,7 +40,7 @@ public class BatchListServiceImpl implements BatchListService {
 
 	@Override
 	public void persist(BatchList batchList) {
-		repository.persist(batchList);
+		repository.save(batchList);
 	}
 
 	@Override

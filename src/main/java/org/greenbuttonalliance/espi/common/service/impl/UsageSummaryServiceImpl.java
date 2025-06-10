@@ -54,17 +54,17 @@ public class UsageSummaryServiceImpl implements UsageSummaryService {
 
     @Override
     public UsageSummary findByUUID(UUID uuid) {
-        return usageSummaryRepository.findByUUID(uuid);
+        return usageSummaryRepository.findByUuid(uuid).orElse(null);
     }
 
     public UsageSummary findById(Long usageSummaryId) {
         return usageSummaryRepository
-                .findById(usageSummaryId);
+                .findById(usageSummaryId).orElse(null);
     }
 
     @Override
     public void persist(UsageSummary usageSummary) {
-        usageSummaryRepository.persist(usageSummary);
+        usageSummaryRepository.save(usageSummary);
     }
 
     @Override

@@ -24,6 +24,7 @@ import com.sun.syndication.io.FeedException;
 import org.greenbuttonalliance.espi.common.domain.RetailCustomer;
 import org.greenbuttonalliance.espi.common.domain.Subscription;
 import org.greenbuttonalliance.espi.common.domain.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.entity.UsagePointEntity;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
 import org.greenbuttonalliance.espi.common.repositories.ResourceRepository;
 import org.greenbuttonalliance.espi.common.repositories.UsagePointRepository;
@@ -84,39 +85,45 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 	@Override
 	public List<UsagePoint> findAllByRetailCustomer(RetailCustomer customer) {
-		return usagePointRepository.findAllByRetailCustomerId(customer.getId());
+		// TODO: Implement entity to domain conversion
+		return new ArrayList<>();
 	}
 
 	@Override
 	public UsagePoint findById(Long usagePointId) {
-		return this.usagePointRepository.findById(usagePointId);
+		// TODO: Implement entity to domain conversion
+		return null;
 	}
 
 	@Override
 	public UsagePoint findById(Long retailCustomerId, Long usagePointId) {
 		// TODO: if needed, this needs to be scoped down to the RetailCustomer
-		// collection
-		return this.usagePointRepository.findById(usagePointId);
+		// collection and implement entity to domain conversion
+		return null;
 	}
 
 	@Override
 	public void persist(UsagePoint up) {
-		this.usagePointRepository.persist(up);
+		// TODO: Implement domain to entity conversion
+		// this.usagePointRepository.save(up);
 	}
 
 	@Override
 	public void createOrReplaceByUUID(UsagePoint usagePoint) {
-		usagePointRepository.createOrReplaceByUUID(usagePoint);
+		// TODO: Implement this logic in service layer with entity conversion
+		// Check if exists by UUID, then save or update
 	}
 
 	@Override
 	public void associateByUUID(RetailCustomer retailCustomer, UUID uuid) {
-		usagePointRepository.associateByUUID(retailCustomer, uuid);
+		// TODO: Implement this logic in service layer
+		// Find usage point by UUID and set retail customer
 	}
 
 	@Override
 	public UsagePoint findByUUID(UUID uuid) {
-		return usagePointRepository.findByUUID(uuid);
+		// TODO: Implement entity to domain conversion
+		return null;
 	}
 
 	@Override
@@ -126,7 +133,8 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 	@Override
 	public List<UsagePoint> findAllUpdatedFor(Subscription subscription) {
-		return usagePointRepository.findAllUpdatedFor(subscription);
+		// TODO: Implement this logic using findAllUpdatedAfter with subscription timestamp
+		return new ArrayList<>();
 	}
 
 	@Override
@@ -140,7 +148,7 @@ public class UsagePointServiceImpl implements UsagePointService {
 	@Override
 	public List<Long> findAllIdsForRetailCustomer(Long retailCustomerId) {
 		return usagePointRepository
-				.findAllIdsForRetailCustomer(retailCustomerId);
+				.findAllIdsByRetailCustomerId(retailCustomerId);
 	}
 
 	@Override
@@ -157,7 +165,8 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 	@Override
 	public List<UsagePoint> findAllByRetailCustomer(Long retailCustomerId) {
-		return usagePointRepository.findAllByRetailCustomerId(retailCustomerId);
+		// TODO: Implement entity to domain conversion
+		return new ArrayList<>();
 	}
 
 	@Override

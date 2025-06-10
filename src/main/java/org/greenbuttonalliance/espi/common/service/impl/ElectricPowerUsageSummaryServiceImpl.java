@@ -51,17 +51,17 @@ public class ElectricPowerUsageSummaryServiceImpl implements
 
     @Override
     public ElectricPowerUsageSummary findByUUID(UUID uuid) {
-        return electricPowerUsageSummaryRepository.findByUUID(uuid);
+        return electricPowerUsageSummaryRepository.findByUuid(uuid).orElse(null);
     }
 
     public ElectricPowerUsageSummary findById(Long electricPowerUsageSummaryId) {
         return electricPowerUsageSummaryRepository
-                .findById(electricPowerUsageSummaryId);
+                .findById(electricPowerUsageSummaryId).orElse(null);
     }
 
     @Override
     public void persist(ElectricPowerUsageSummary electricPowerUsageSummary) {
-        electricPowerUsageSummaryRepository.persist(electricPowerUsageSummary);
+        electricPowerUsageSummaryRepository.save(electricPowerUsageSummary);
     }
 
     @Override
