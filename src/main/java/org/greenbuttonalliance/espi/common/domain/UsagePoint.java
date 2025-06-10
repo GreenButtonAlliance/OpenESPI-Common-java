@@ -122,9 +122,10 @@ public class UsagePoint extends IdentifiedObject {
     private List<MeterReading> meterReadings = new ArrayList<>();
 
     @XmlTransient
-    @OneToMany(mappedBy = "usagePoint", cascade = { CascadeType.ALL }, orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ElectricPowerUsageSummary> electricPowerUsageSummaries = new ArrayList<>();
+    // ElectricPowerUsageSummary removed - deprecated resource
+    // @OneToMany(mappedBy = "usagePoint", cascade = { CascadeType.ALL }, orphanRemoval = true)
+    // @LazyCollection(LazyCollectionOption.FALSE)
+    // private List<ElectricPowerUsageSummary> electricPowerUsageSummaries = new ArrayList<>();
 
     @XmlTransient
     @OneToMany(mappedBy = "usagePoint", cascade = { CascadeType.ALL }, orphanRemoval = true)
@@ -265,19 +266,16 @@ public class UsagePoint extends IdentifiedObject {
         this.retailCustomer = retailCustomer;
     }
 
-    public List<ElectricPowerUsageSummary> getElectricPowerUsageSummaries() {
-        return electricPowerUsageSummaries;
-    }
-
-    public void addElectricPowerUsageSummary(
-            ElectricPowerUsageSummary electricPowerUsageSummary) {
-        electricPowerUsageSummaries.add(electricPowerUsageSummary);
-    }
-
-    public void removeElectricPowerUsageSummary(
-            ElectricPowerUsageSummary electricPowerUsageSummary) {
-        electricPowerUsageSummaries.remove(electricPowerUsageSummary);
-    }
+    // ElectricPowerUsageSummary methods removed - deprecated resource
+    // public List<ElectricPowerUsageSummary> getElectricPowerUsageSummaries() {
+    //     return electricPowerUsageSummaries;
+    // }
+    // public void addElectricPowerUsageSummary(ElectricPowerUsageSummary electricPowerUsageSummary) {
+    //     electricPowerUsageSummaries.add(electricPowerUsageSummary);
+    // }
+    // public void removeElectricPowerUsageSummary(ElectricPowerUsageSummary electricPowerUsageSummary) {
+    //     electricPowerUsageSummaries.remove(electricPowerUsageSummary);
+    // }
 
     public List<UsageSummary> getUsageSummaries() {
         return usageSummaries;
@@ -382,7 +380,7 @@ public class UsagePoint extends IdentifiedObject {
 
         getRelatedLinks().clear();
         getElectricPowerQualitySummaries().clear();
-        getElectricPowerUsageSummaries().clear();
+        // getElectricPowerUsageSummaries().clear(); // deprecated resource
         getUsageSummaries().clear();
         getMeterReadings().clear();
 

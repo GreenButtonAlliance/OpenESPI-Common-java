@@ -113,13 +113,7 @@ public class UsagePointEntity extends IdentifiedObjectEntity {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<MeterReadingEntity> meterReadings = new ArrayList<>();
 
-    /**
-     * Electric power usage summaries for this usage point.
-     * One-to-many relationship with cascade and orphan removal.
-     */
-    @OneToMany(mappedBy = "usagePoint", cascade = CascadeType.ALL, orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ElectricPowerUsageSummaryEntity> electricPowerUsageSummaries = new ArrayList<>();
+    // ElectricPowerUsageSummary relationships removed - deprecated resource
 
     /**
      * Usage summaries for this usage point.
@@ -198,29 +192,7 @@ public class UsagePointEntity extends IdentifiedObjectEntity {
         }
     }
 
-    /**
-     * Adds an electric power usage summary to this usage point.
-     * 
-     * @param summary the electric power usage summary to add
-     */
-    public void addElectricPowerUsageSummary(ElectricPowerUsageSummaryEntity summary) {
-        if (summary != null) {
-            summary.setUsagePoint(this);
-            electricPowerUsageSummaries.add(summary);
-        }
-    }
-
-    /**
-     * Removes an electric power usage summary from this usage point.
-     * 
-     * @param summary the electric power usage summary to remove
-     */
-    public void removeElectricPowerUsageSummary(ElectricPowerUsageSummaryEntity summary) {
-        if (summary != null) {
-            summary.setUsagePoint(null);
-            electricPowerUsageSummaries.remove(summary);
-        }
-    }
+    // ElectricPowerUsageSummary management methods removed - deprecated resource
 
     /**
      * Adds a usage summary to this usage point.
@@ -335,7 +307,7 @@ public class UsagePointEntity extends IdentifiedObjectEntity {
     public void unlink() {
         clearRelatedLinks();
         electricPowerQualitySummaries.clear();
-        electricPowerUsageSummaries.clear();
+        // electricPowerUsageSummaries removed - deprecated resource
         usageSummaries.clear();
         meterReadings.clear();
         retailCustomer = null;

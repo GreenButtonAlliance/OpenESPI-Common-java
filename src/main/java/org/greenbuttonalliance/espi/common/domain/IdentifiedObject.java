@@ -66,7 +66,8 @@ import java.util.UUID;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IdentifiedObject")
 @XmlSeeAlso({ MeterReading.class, UsagePoint.class,
-		ElectricPowerUsageSummary.class, TimeConfiguration.class,
+		// ElectricPowerUsageSummary.class, // deprecated resource
+		TimeConfiguration.class,
 		ApplicationInformation.class, Authorization.class, Subscription.class,
 		ElectricPowerQualitySummary.class, IntervalBlock.class,
 		ReadingType.class })
@@ -117,7 +118,7 @@ public class IdentifiedObject extends Resource implements Linkable,
 	//
 	public enum ResourceEnum {
 		RetailCustomer(0), UsagePoint(1), MeterReadingC(2), IntervalBlock(3), TimeConfiguration(
-				4), ElectricPowerQualitySummary(5), ElectricPowerUsageSummary(6), ReadingType(
+				4), ElectricPowerQualitySummary(5), /* ElectricPowerUsageSummary(6), */ ReadingType(
 				7), Subscription(8), Authorization(9), ApplicationInformation(
 				10);
 

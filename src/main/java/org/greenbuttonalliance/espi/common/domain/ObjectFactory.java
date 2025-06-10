@@ -81,8 +81,9 @@ public class ObjectFactory {
 			NAESB_URI, "UsagePoint");
 	public static final QName BatchItemInfo_QNAME = new QName(
 			NAESB_URI, "BatchItemInfo");
-	public static final QName ElectricPowerUsageSummary_QNAME = new QName(
-			NAESB_URI, "ElectricPowerUsageSummary");
+	// ElectricPowerUsageSummary QName removed - deprecated resource
+	// public static final QName ElectricPowerUsageSummary_QNAME = new QName(
+	//		NAESB_URI, "ElectricPowerUsageSummary");
 	public static final QName UsageSummary_QNAME = new QName(
 			NAESB_URI, "UsageSummary");
 	public static final QName LineItem_QNAME = new QName(
@@ -122,12 +123,13 @@ public class ObjectFactory {
 		return new BatchItemInfo();
 	}
 
-	/**
-	 * Create an instance of {@link ElectricPowerUsageSummary }
-	 */
-	public ElectricPowerUsageSummary createElectricPowerUsageSummary() {
-		return new ElectricPowerUsageSummary();
-	}
+	// ElectricPowerUsageSummary factory method removed - deprecated resource
+	// /**
+	//  * Create an instance of {@link ElectricPowerUsageSummary }
+	//  */
+	// public ElectricPowerUsageSummary createElectricPowerUsageSummary() {
+	//	return new ElectricPowerUsageSummary();
+	// }
 
 	/**
 	 * Create an instance of {@link UsageSummary }
@@ -468,17 +470,18 @@ public class ObjectFactory {
 				BatchItemInfo.class, null, value);
 	}
 
-	/**
-	 * Create an instance of {@link JAXBElement }{@code <}
-	 * {@link ElectricPowerUsageSummary }{@code >}
-	 */
-	@XmlElementDecl(namespace = NAESB_URI, name = "ElectricPowerUsageSummary")
-	public JAXBElement<ElectricPowerUsageSummary> createElectricPowerUsageSummary(
-			ElectricPowerUsageSummary value) {
-		return new JAXBElement<>(
-				ElectricPowerUsageSummary_QNAME,
-				ElectricPowerUsageSummary.class, null, value);
-	}
+	// ElectricPowerUsageSummary JAXBElement factory method removed - deprecated resource
+	// /**
+	//  * Create an instance of {@link JAXBElement }{@code <}
+	//  * {@link ElectricPowerUsageSummary }{@code >}
+	//  */
+	// @XmlElementDecl(namespace = NAESB_URI, name = "ElectricPowerUsageSummary")
+	// public JAXBElement<ElectricPowerUsageSummary> createElectricPowerUsageSummary(
+	//		ElectricPowerUsageSummary value) {
+	//	return new JAXBElement<>(
+	//			ElectricPowerUsageSummary_QNAME,
+	//			ElectricPowerUsageSummary.class, null, value);
+	// }
 
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}

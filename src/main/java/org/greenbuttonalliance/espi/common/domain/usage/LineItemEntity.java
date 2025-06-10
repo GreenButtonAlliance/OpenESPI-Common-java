@@ -43,14 +43,13 @@ import java.time.ZoneId;
  */
 @Entity
 @Table(name = "line_items", indexes = {
-    @Index(name = "idx_line_item_electric_power_usage_summary", columnList = "electric_power_usage_summary_id"),
     @Index(name = "idx_line_item_usage_summary", columnList = "usage_summary_id"),
     @Index(name = "idx_line_item_date_time", columnList = "date_time"),
     @Index(name = "idx_line_item_amount", columnList = "amount")
 })
 @Data
 @NoArgsConstructor
-@ToString(exclude = {"electricPowerUsageSummary", "usageSummary"})
+@ToString(exclude = {"usageSummary"})
 public class LineItemEntity {
 
     private static final long serialVersionUID = 1L;
@@ -95,13 +94,7 @@ public class LineItemEntity {
     @Size(max = 256, message = "Note cannot exceed 256 characters")
     private String note;
 
-    /**
-     * Electric power usage summary that contains this line item.
-     * Many line items can belong to one electric power usage summary.
-     */
-    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "electric_power_usage_summary_id")
-    private ElectricPowerUsageSummaryEntity electricPowerUsageSummary;
+    // ElectricPowerUsageSummary relationship removed - deprecated resource
 
     /**
      * Usage summary that contains this line item.
@@ -139,25 +132,7 @@ public class LineItemEntity {
         this.note = note;
     }
 
-    /**
-     * Sets the electric power usage summary for this line item.
-     * This method ensures the bidirectional relationship is maintained.
-     * 
-     * @param electricPowerUsageSummary the electric power usage summary to set
-     */
-    public void setElectricPowerUsageSummary(ElectricPowerUsageSummaryEntity electricPowerUsageSummary) {
-        // Remove from old summary if exists
-        if (this.electricPowerUsageSummary != null && this.electricPowerUsageSummary != electricPowerUsageSummary) {
-            this.electricPowerUsageSummary.removeLineItem(this);
-        }
-        
-        this.electricPowerUsageSummary = electricPowerUsageSummary;
-        
-        // Add to new summary if not null
-        if (electricPowerUsageSummary != null && !electricPowerUsageSummary.getLineItems().contains(this)) {
-            electricPowerUsageSummary.addLineItem(this);
-        }
-    }
+    // ElectricPowerUsageSummary setter removed - deprecated resource
 
     /**
      * Sets the usage summary for this line item.

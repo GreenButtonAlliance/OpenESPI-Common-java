@@ -79,10 +79,11 @@ public class LineItem {
 	@XmlElement(required = true)
 	protected String note;
 
-	@XmlTransient
-	@ManyToOne
-	@JoinColumn(name = "electric_power_usage_summary_id")
-	protected ElectricPowerUsageSummary electricPowerUsageSummary;
+	// ElectricPowerUsageSummary relationship removed - deprecated resource
+	// @XmlTransient
+	// @ManyToOne
+	// @JoinColumn(name = "electric_power_usage_summary_id")
+	// protected ElectricPowerUsageSummary electricPowerUsageSummary;
 
 	@XmlTransient
 	@ManyToOne
