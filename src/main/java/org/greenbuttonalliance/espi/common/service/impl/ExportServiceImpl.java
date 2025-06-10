@@ -364,60 +364,62 @@ public class ExportServiceImpl implements ExportService {
 	// ElectricPowerUsageSummary
 
 	// - ROOT form
-	@Override
-	public void exportElectricPowerUsageSummarys_Root(Long subscriptionId,
-			ServletOutputStream outputStream, ExportFilter exportFilter)
+	// ElectricPowerUsageSummary removed - deprecated resource
+	// public void exportElectricPowerUsageSummarys_Root(Long subscriptionId,
+	//		ServletOutputStream outputStream, ExportFilter exportFilter)
+	// throws IOException {
+	//	exportRootForm("/ElectricPowerUsageSummary", subscriptionId,
+	//			outputStream, exportFilter, ElectricPowerUsageSummary.class);
+	// }
 
-	throws IOException {
-		exportRootForm("/ElectricPowerUsageSummary", subscriptionId,
-				outputStream, exportFilter, ElectricPowerUsageSummary.class);
-	}
-
-	@Override
-	public void exportElectricPowerUsageSummary_Root(Long subscriptionId,
-			long electricPowerUsageSummaryId, ServletOutputStream stream,
-			ExportFilter exportFilter) throws IOException {
-		ElectricPowerUsageSummary electricPowerUsageSummary = resourceService
-				.findById(electricPowerUsageSummaryId,
-						ElectricPowerUsageSummary.class);
-		UsagePoint usagePoint = electricPowerUsageSummary.getUsagePoint();
-
-		String hrefFragment = "/Subscription/" + subscriptionId + "/UsagePoint"
-				+ usagePoint.getId() + "/ElectricPowerUsageSummary/"
-				+ electricPowerUsageSummaryId;
-
-		exportEntry(subscriptionId, resourceService.findEntryType(
-				electricPowerUsageSummaryId, ElectricPowerUsageSummary.class),
-				stream, exportFilter, hrefFragment);
-	}
+	// ElectricPowerUsageSummary removed - deprecated resource
+	// @Override
+	// public void exportElectricPowerUsageSummary_Root(Long subscriptionId,
+	//		long electricPowerUsageSummaryId, ServletOutputStream stream,
+	//		ExportFilter exportFilter) throws IOException {
+	//	ElectricPowerUsageSummary electricPowerUsageSummary = resourceService
+	//			.findById(electricPowerUsageSummaryId,
+	//					ElectricPowerUsageSummary.class);
+	//	UsagePoint usagePoint = electricPowerUsageSummary.getUsagePoint();
+	//
+	//	String hrefFragment = "/Subscription/" + subscriptionId + "/UsagePoint"
+	//			+ usagePoint.getId() + "/ElectricPowerUsageSummary/"
+	//			+ electricPowerUsageSummaryId;
+	//
+	//	exportEntry(subscriptionId, resourceService.findEntryType(
+	//			electricPowerUsageSummaryId, ElectricPowerUsageSummary.class),
+	//			stream, exportFilter, hrefFragment);
+	// }
 
 	// - XPath form
-	@Override
-	public void exportElectricPowerUsageSummary(Long subscriptionId,
-			Long retailCustomerId, Long usagePointId,
-			Long electricPowerUsageSummaryId, OutputStream stream,
-			ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/Subscription/" + subscriptionId
-				+ "/UsagePoint/" + usagePointId + "/ElectricPowerUsageSummary/"
-				+ electricPowerUsageSummaryId;
-		exportEntry(subscriptionId,
-				electricPowerUsageSummaryService.findEntryType(
-						retailCustomerId, usagePointId,
-						electricPowerUsageSummaryId), stream, exportFilter,
-				hrefFragment);
-	}
+	// ElectricPowerUsageSummary removed - deprecated resource
+	// @Override
+	// public void exportElectricPowerUsageSummary(Long subscriptionId,
+	//		Long retailCustomerId, Long usagePointId,
+	//		Long electricPowerUsageSummaryId, OutputStream stream,
+	//		ExportFilter exportFilter) throws IOException {
+	//	String hrefFragment = "/Subscription/" + subscriptionId
+	//			+ "/UsagePoint/" + usagePointId + "/ElectricPowerUsageSummary/"
+	//			+ electricPowerUsageSummaryId;
+	//	exportEntry(subscriptionId,
+	//			electricPowerUsageSummaryService.findEntryType(
+	//					retailCustomerId, usagePointId,
+	//					electricPowerUsageSummaryId), stream, exportFilter,
+	//			hrefFragment);
+	// }
 
-	@Override
-	public void exportElectricPowerUsageSummarys(Long subscriptionId,
-			Long retailCustomerId, Long usagePointId, OutputStream stream,
-			ExportFilter exportFilter) throws IOException {
-		String hrefFragment = "/Subscription/" + subscriptionId
-				+ "/UsagePoint/" + usagePointId + "/ElectricPowerUsageSummary";
-		exportEntries(subscriptionId,
-				electricPowerUsageSummaryService.findEntryTypeIterator(
-						retailCustomerId, usagePointId), stream, exportFilter,
-				ElectricPowerUsageSummary.class, hrefFragment);
-	}
+	// ElectricPowerUsageSummary removed - deprecated resource
+	// @Override
+	// public void exportElectricPowerUsageSummarys(Long subscriptionId,
+	//		Long retailCustomerId, Long usagePointId, OutputStream stream,
+	//		ExportFilter exportFilter) throws IOException {
+	//	String hrefFragment = "/Subscription/" + subscriptionId
+	//			+ "/UsagePoint/" + usagePointId + "/ElectricPowerUsageSummary";
+	//	exportEntries(subscriptionId,
+	//			electricPowerUsageSummaryService.findEntryTypeIterator(
+	//					retailCustomerId, usagePointId), stream, exportFilter,
+	//			ElectricPowerUsageSummary.class, hrefFragment);
+	// }
 
 	// UsageSummary
 

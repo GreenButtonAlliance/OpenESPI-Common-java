@@ -113,11 +113,12 @@ public class EntryTypeIterator {
 				IntervalBlock.class)) {
 			pairs.add(new ImmutablePair<>(id, IntervalBlock.class));
 		}
-		for (Long id : resourceService.findAllIdsByUsagePointId(usagePointId,
-				ElectricPowerUsageSummary.class)) {
-			pairs.add(new ImmutablePair<>(id,
-					ElectricPowerUsageSummary.class));
-		}
+		// ElectricPowerUsageSummary removed - deprecated resource
+		// for (Long id : resourceService.findAllIdsByUsagePointId(usagePointId,
+		//		ElectricPowerUsageSummary.class)) {
+		//	pairs.add(new ImmutablePair<>(id,
+		//			ElectricPowerUsageSummary.class));
+		// }
 		for (Long id : resourceService.findAllIdsByUsagePointId(usagePointId,
 				ElectricPowerQualitySummary.class)) {
 			pairs.add(new ImmutablePair<>(id,

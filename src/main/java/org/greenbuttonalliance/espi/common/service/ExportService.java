@@ -205,9 +205,10 @@ public interface ExportService {
      * @throws IOException
      *             A general exception signaled upon various failure conditions
      */
-    void exportElectricPowerUsageSummarys_Root(Long subscriptionId,
-                                               ServletOutputStream outputStream, ExportFilter exportFilter)
-            throws IOException;
+    // ElectricPowerUsageSummary removed - deprecated resource
+    // void exportElectricPowerUsageSummarys_Root(Long subscriptionId,
+    //                                           ServletOutputStream outputStream, ExportFilter exportFilter)
+    //        throws IOException;
 
     /**
      * @param subscriptionId
@@ -221,9 +222,10 @@ public interface ExportService {
      * @throws IOException
      *             A general exception signaled upon various failure conditions
      */
-    void exportElectricPowerUsageSummary_Root(Long subscriptionId,
-                                              long electricPowerUsageSummaryId, ServletOutputStream outputStream,
-                                              ExportFilter exportFilter) throws IOException;
+    // ElectricPowerUsageSummary removed - deprecated resource
+    // void exportElectricPowerUsageSummary_Root(Long subscriptionId,
+    //                                          long electricPowerUsageSummaryId, ServletOutputStream outputStream,
+    //                                          ExportFilter exportFilter) throws IOException;
 
     // - XPath form
 
@@ -243,10 +245,11 @@ public interface ExportService {
      * @throws IOException
      *             A general exception signaled upon various failure conditions
      */
-    void exportElectricPowerUsageSummary(Long subscriptionId,
-                                         Long retailCustomerId, Long usagePointId,
-                                         Long electricPowerUsageSummaryId, OutputStream stream,
-                                         ExportFilter exportFilter) throws IOException;
+    // ElectricPowerUsageSummary removed - deprecated resource
+    // void exportElectricPowerUsageSummary(Long subscriptionId,
+    //                                     Long retailCustomerId, Long usagePointId,
+    //                                     Long electricPowerUsageSummaryId, OutputStream stream,
+    //                                     ExportFilter exportFilter) throws IOException;
 
     /**
      * @param subscriptionId
@@ -262,9 +265,10 @@ public interface ExportService {
      * @throws IOException
      *             A general exception signaled upon various failure conditions
      */
-    void exportElectricPowerUsageSummarys(Long subscriptionId,
-                                          Long retailCustomerId, Long usagePointId, OutputStream stream,
-                                          ExportFilter exportFilter) throws IOException;
+    // ElectricPowerUsageSummary removed - deprecated resource
+    // void exportElectricPowerUsageSummarys(Long subscriptionId,
+    //                                      Long retailCustomerId, Long usagePointId, OutputStream stream,
+    //                                      ExportFilter exportFilter) throws IOException;
 
     // ElectricPowerUsageSummary
     // - ROOT form

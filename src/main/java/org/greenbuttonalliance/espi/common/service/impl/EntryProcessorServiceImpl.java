@@ -102,11 +102,11 @@ public class EntryProcessorServiceImpl implements EntryProcessorService {
 							(TimeConfiguration) existingResource);
 				}
 
-				if (existingResource instanceof ElectricPowerUsageSummary) {
-
-					entry.getContent().setElectricPowerUsageSummary(
-							(ElectricPowerUsageSummary) existingResource);
-				}
+				// ElectricPowerUsageSummary removed - deprecated resource
+				// if (existingResource instanceof ElectricPowerUsageSummary) {
+				//     entry.getContent().setElectricPowerUsageSummary(
+				//         (ElectricPowerUsageSummary) existingResource);
+				// }
 
 				if (existingResource instanceof ElectricPowerQualitySummary) {
 
@@ -254,10 +254,11 @@ public class EntryProcessorServiceImpl implements EntryProcessorService {
 							.addMeterReading((MeterReading) relatedResource);
 				}
 
-				if (relatedResource instanceof ElectricPowerUsageSummary) {
-					((UsagePoint) resource)
-							.addElectricPowerUsageSummary((ElectricPowerUsageSummary) relatedResource);
-				}
+				// ElectricPowerUsageSummary removed - deprecated resource
+				// if (relatedResource instanceof ElectricPowerUsageSummary) {
+				//     ((UsagePoint) resource)
+				//         .addElectricPowerUsageSummary((ElectricPowerUsageSummary) relatedResource);
+				// }
 
 				if (relatedResource instanceof ElectricPowerQualitySummary) {
 					((UsagePoint) resource)

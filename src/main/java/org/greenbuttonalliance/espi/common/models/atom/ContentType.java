@@ -745,8 +745,9 @@ public class ContentType {
 			retailCustomer = this.getUsagePoint().getRetailCustomer();
 			List<ElectricPowerQualitySummary> qualityList = this
 					.getUsagePoint().getElectricPowerQualitySummaries();
-			List<ElectricPowerUsageSummary> electricPowerSummaryList = this.getUsagePoint()
-					.getElectricPowerUsageSummaries();
+			// ElectricPowerUsageSummary removed - deprecated resource
+			// List<ElectricPowerUsageSummary> electricPowerSummaryList = this.getUsagePoint()
+			//		.getElectricPowerUsageSummaries();
 			List<UsageSummary> usageSummaryList = this.getUsagePoint()
 					.getUsageSummaries();
 			TimeConfiguration timeConfiguration = this.getUsagePoint()
@@ -772,8 +773,9 @@ public class ContentType {
 			result.add(temp + "/MeterReading");
 			if (!(qualityList.isEmpty()))
 				result.add(temp + "/ElectricPowerQualitySummary");
-			if (!(electricPowerSummaryList.isEmpty()))
-				result.add(temp + "/ElectricPowerUsageSummary");
+			// ElectricPowerUsageSummary removed - deprecated resource
+			// if (!(electricPowerSummaryList.isEmpty()))
+			//	result.add(temp + "/ElectricPowerUsageSummary");
 			if (!(usageSummaryList.isEmpty()))
 				result.add(temp + "/UsageSummary");
 			// for LocalTimeParameters - make it a ROOT access

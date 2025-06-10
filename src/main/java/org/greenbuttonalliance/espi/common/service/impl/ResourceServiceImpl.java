@@ -123,9 +123,10 @@ public class ResourceServiceImpl implements ResourceService {
 			// ElectricPowerQualitySummary doesn't have any
 		}
 
-		if (ElectricPowerUsageSummary.class.equals(parentClass)) {
-			// ElectricPowerUsageSummary doesn't have any
-		}
+		// ElectricPowerUsageSummary removed - deprecated resource
+		// if (ElectricPowerUsageSummary.class.equals(parentClass)) {
+		//	// ElectricPowerUsageSummary doesn't have any
+		// }
 
 		if (TimeConfiguration.class.equals(parentClass)) {
 			// the children are the UsagePoints

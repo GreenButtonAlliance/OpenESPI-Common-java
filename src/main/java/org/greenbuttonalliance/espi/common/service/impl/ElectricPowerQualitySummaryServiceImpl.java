@@ -106,8 +106,10 @@ public class ElectricPowerQualitySummaryServiceImpl implements
 			// TODO - this is sub-optimal (but defers the need to understand
 			// creation of an EntryType
 			List<Long> temp;
-			temp = resourceService.findAllIdsByXPath(retailCustomerId,
-					usagePointId, ElectricPowerUsageSummary.class);
+			// ElectricPowerUsageSummary removed - deprecated resource  
+			// temp = resourceService.findAllIdsByXPath(retailCustomerId,
+			//		usagePointId, ElectricPowerUsageSummary.class);
+			temp = new java.util.ArrayList<>();
 			// temp.add(electricPowerQualitySummaryId);
 			if (temp.contains(electricPowerQualitySummaryId)) {
 				temp.clear();
