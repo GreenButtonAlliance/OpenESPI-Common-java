@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.repositories;
 
-import org.greenbuttonalliance.espi.common.domain.entity.UsagePointEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -24,7 +24,7 @@ import com.sun.syndication.io.FeedException;
 import org.greenbuttonalliance.espi.common.domain.RetailCustomer;
 import org.greenbuttonalliance.espi.common.domain.Subscription;
 import org.greenbuttonalliance.espi.common.domain.UsagePoint;
-import org.greenbuttonalliance.espi.common.domain.entity.UsagePointEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
 import org.greenbuttonalliance.espi.common.models.atom.EntryType;
 import org.greenbuttonalliance.espi.common.repositories.ResourceRepository;
 import org.greenbuttonalliance.espi.common.repositories.UsagePointRepository;
