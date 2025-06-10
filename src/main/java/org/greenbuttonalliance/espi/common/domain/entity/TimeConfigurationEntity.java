@@ -37,6 +37,10 @@ import java.util.List;
  * Contains attributes related to the configuration of time services for energy metering.
  * Manages timezone information, daylight saving time rules, and time offsets for
  * accurate time synchronization across energy data collection systems.
+ * 
+ * NOTE: This entity is shared between Usage and Customer schemas as both define
+ * identical TimeConfiguration structures. The Customer schema TimeConfiguration
+ * has the same fields and semantics as the Usage schema TimeConfiguration.
  */
 @Entity
 @Table(name = "time_configurations", uniqueConstraints = {
