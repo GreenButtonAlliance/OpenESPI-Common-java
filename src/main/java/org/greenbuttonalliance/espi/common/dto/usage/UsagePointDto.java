@@ -21,12 +21,10 @@
 package org.greenbuttonalliance.espi.common.dto.usage;
 
 import org.greenbuttonalliance.espi.common.domain.ServiceCategory;
-import org.greenbuttonalliance.espi.common.dto.atom.LinkDto;
 
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.HexBinaryAdapter;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -39,33 +37,13 @@ import java.util.List;
 @XmlRootElement(name = "UsagePoint", namespace = "http://naesb.org/espi")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UsagePoint", namespace = "http://naesb.org/espi", propOrder = {
-    "id", "uuid", "published", "updated", "selfLink", "upLink", "relatedLinks",
-    "description", "roleFlags", "serviceCategory", "status", "serviceDeliveryPoint",
+    "uuid", "description", "roleFlags", "serviceCategory", "status", "serviceDeliveryPoint",
     "meterReadings", "usageSummaries", "electricPowerQualitySummaries"
 })
 public record UsagePointDto(
     
-    @XmlTransient
-    Long id,
-    
     @XmlAttribute(name = "mRID")
     String uuid,
-    
-    @XmlElement(name = "published")
-    OffsetDateTime published,
-    
-    @XmlElement(name = "updated")
-    OffsetDateTime updated,
-    
-    @XmlElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
-    @XmlElementWrapper(name = "links", namespace = "http://www.w3.org/2005/Atom")
-    List<LinkDto> relatedLinks,
-    
-    @XmlElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
-    LinkDto selfLink,
-    
-    @XmlElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
-    LinkDto upLink,
     
     @XmlElement(name = "description")
     String description,
@@ -100,34 +78,14 @@ public record UsagePointDto(
      * Default constructor for JAXB.
      */
     public UsagePointDto() {
-        this(null, null, null, null, null, null, null, null,
-             null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null);
     }
     
     /**
      * Minimal constructor for basic usage point data.
      */
     public UsagePointDto(String uuid, ServiceCategory serviceCategory) {
-        this(null, uuid, null, null, null, null, null, null,
-             null, serviceCategory, null, null, null, null, null);
-    }
-    
-    /**
-     * Gets the self href for this usage point.
-     * 
-     * @return self href string
-     */
-    public String getSelfHref() {
-        return selfLink != null ? selfLink.href() : null;
-    }
-    
-    /**
-     * Gets the up href for this usage point.
-     * 
-     * @return up href string
-     */
-    public String getUpHref() {
-        return upLink != null ? upLink.href() : null;
+        this(uuid, null, null, serviceCategory, null, null, null, null, null);
     }
     
     /**

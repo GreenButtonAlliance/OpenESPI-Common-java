@@ -33,7 +33,7 @@ import java.util.List;
 @XmlRootElement(name = "feed", namespace = "http://www.w3.org/2005/Atom")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AtomFeed", namespace = "http://www.w3.org/2005/Atom", propOrder = {
-    "id", "title", "updated", "links", "entries"
+    "id", "title", "published", "updated", "links", "entries"
 })
 public record AtomFeedDto(
     
@@ -42,6 +42,9 @@ public record AtomFeedDto(
     
     @XmlElement(name = "title", namespace = "http://www.w3.org/2005/Atom")
     String title,
+    
+    @XmlElement(name = "published", namespace = "http://www.w3.org/2005/Atom")
+    OffsetDateTime published,
     
     @XmlElement(name = "updated", namespace = "http://www.w3.org/2005/Atom")
     OffsetDateTime updated,
@@ -57,14 +60,14 @@ public record AtomFeedDto(
      * Default constructor for JAXB.
      */
     public AtomFeedDto() {
-        this(null, null, null, null, null);
+        this(null, null, null, null, null, null);
     }
     
     /**
      * Constructor for basic feed data.
      */
     public AtomFeedDto(String id, String title) {
-        this(id, title, OffsetDateTime.now(), null, null);
+        this(id, title, OffsetDateTime.now(), OffsetDateTime.now(), null, null);
     }
     
     /**
