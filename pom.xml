@@ -27,7 +27,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.2</version>
+        <version>3.5.0</version>
         <relativePath/>
     </parent>
 
@@ -102,10 +102,10 @@
         <java.version>21</java.version>
         <project.scm.id>github</project.scm.id>
 
-        <!-- Modern Dependencies for Spring Boot 3.3.2 -->
-        <lombok.version>1.18.30</lombok.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <testcontainers.version>1.19.3</testcontainers.version>
+        <!-- Modern Dependencies for Spring Boot 3.5.0 -->
+        <lombok.version>1.18.34</lombok.version>
+        <mapstruct.version>1.6.0</mapstruct.version>
+        <testcontainers.version>1.20.1</testcontainers.version>
 
         <!-- Legacy support for compatibility -->
         <commons-lang.version>2.6</commons-lang.version>
@@ -431,14 +431,14 @@
                     </excludes>
                     <annotationProcessorPaths>
                         <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
-                        </path>
-                        <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
                         </path>
                         <path>
                             <groupId>org.projectlombok</groupId>

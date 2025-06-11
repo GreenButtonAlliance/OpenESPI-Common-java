@@ -47,7 +47,6 @@ import java.util.stream.Collectors;
     @Index(name = "idx_batch_list_resource_count", columnList = "resource_count")
 })
 @Data
-@NoArgsConstructor
 public class BatchListEntity {
 
     private static final long serialVersionUID = 1L;
@@ -114,6 +113,14 @@ public class BatchListEntity {
      */
     public BatchListEntity(String description) {
         this.description = description;
+        this.createdAt = System.currentTimeMillis();
+        this.updatedAt = this.createdAt;
+    }
+
+    /**
+     * Default constructor required by JPA.
+     */
+    public BatchListEntity() {
         this.createdAt = System.currentTimeMillis();
         this.updatedAt = this.createdAt;
     }
