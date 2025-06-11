@@ -1,0 +1,38 @@
+version: 2
+updates:
+  # Enable version updates for Maven
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "greenbuttonalliance/maintainers"
+    assignees:
+      - "greenbuttonalliance/maintainers"
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: "scope"
+    # Only create PRs for security updates and minor version bumps
+    # to avoid breaking changes during Spring Boot 3.5 migration
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    # Automatically merge security patches
+    allow:
+      - dependency-type: "direct"
+        update-type: "security"
+      - dependency-type: "indirect"
+        update-type: "security"
+
+  # Monitor GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
