@@ -148,6 +148,15 @@ public class UsagePointEntity extends IdentifiedObjectEntity {
     private SubscriptionEntity subscription;
 
     /**
+     * Manual getter for ID field (Lombok issue workaround).
+     * 
+     * @return the entity ID
+     */
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
      * Generates the self href for this usage point.
      * 
      * @return self href string

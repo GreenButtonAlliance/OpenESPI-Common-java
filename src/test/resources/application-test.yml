@@ -1,0 +1,94 @@
+# Spring Boot 3.5 Test Configuration for OpenESPI-Common
+# Copyright (c) 2018-2025 Green Button Alliance, Inc.
+
+spring:
+  profiles:
+    active: test
+  
+  # JPA/Hibernate Configuration
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show_sql: false
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          batch_size: 20
+        hbm2ddl:
+          import_files: databbase/populateDB.sql
+    show-sql: false
+    open-in-view: false
+
+  # H2 Database for Testing
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 300000
+      max-lifetime: 1200000
+
+  # H2 Console (for debugging tests)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # Jackson Configuration for JSON
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write_dates_as_timestamps: false
+      write_empty_json_arrays: true
+    deserialization:
+      fail_on_unknown_properties: false
+
+  # Validation
+  validation:
+    enabled: true
+
+# Logging Configuration for Tests
+logging:
+  level:
+    org.greenbuttonalliance.espi: INFO
+    org.springframework: WARN
+    org.hibernate: WARN
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
+    org.springframework.transaction: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Test-specific configurations
+test:
+  espi:
+    # ESPI-compliant test settings
+    uuid-namespace: "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+    default-published: "2023-01-01T00:00:00Z"
+    default-updated: "2023-01-02T00:00:00Z"
+    
+  # Test data configuration
+  data:
+    cleanup-after-test: true
+    populate-sample-data: false
+
+# JUnit 5 Configuration
+junit:
+  jupiter:
+    execution:
+      parallel:
+        enabled: true
+        mode: concurrent
+    testinstance:
+      lifecycle: per_class
+
+# Management and Actuator (disabled for tests)
+management:
+  endpoints:
+    enabled-by-default: false

@@ -316,6 +316,15 @@ public class RetailCustomerEntity extends IdentifiedObjectEntity {
     }
 
     /**
+     * Manual getter for ID field (Lombok issue workaround).
+     * 
+     * @return the entity ID
+     */
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
      * Custom implementation for retail customers to use ID instead of UUID.
      * 
      * @return string representation of the ID

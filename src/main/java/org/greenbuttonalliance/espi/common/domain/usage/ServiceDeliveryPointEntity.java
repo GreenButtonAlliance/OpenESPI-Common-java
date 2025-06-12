@@ -76,6 +76,15 @@ public class ServiceDeliveryPointEntity extends IdentifiedObjectEntity {
     private String customerAgreement;
 
     /**
+     * Manual getter for ID field (Lombok issue workaround).
+     * 
+     * @return the entity ID
+     */
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
      * Usage points associated with this service delivery point.
      * One service delivery point can have multiple usage points (different meters/services).
      */

@@ -76,4 +76,22 @@ public class ServiceLocationEntity extends WorkLocationEntity {
      */
     @Column(name = "outage_block", length = 32)
     private String outageBlock;
+
+    // Explicit setter methods (Lombok should generate these, but adding for compatibility)
+    
+    /**
+     * Sets whether this service location needs inspection.
+     * @param needsInspection true if inspection is needed
+     */
+    public void setNeedsInspection(Boolean needsInspection) {
+        this.needsInspection = needsInspection;
+    }
+
+    /**
+     * Sets the site access problem description.
+     * @param siteAccessProblem the access problem description
+     */
+    public void setSiteAccessProblem(String siteAccessProblem) {
+        this.siteAccessProblem = siteAccessProblem;
+    }
 }

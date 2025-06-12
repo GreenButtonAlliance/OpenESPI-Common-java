@@ -66,8 +66,9 @@ public interface MeterReadingMapper {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "published", ignore = true) // Managed by entity
+    @Mapping(target = "updated", ignore = true)   // Managed by entity
+    @Mapping(target = "created", ignore = true)   // Managed by entity
     @Mapping(target = "description", source = "description")
     @Mapping(target = "readingType", source = "readingType")
     @Mapping(target = "intervalBlocks", source = "intervalBlocks")
@@ -75,6 +76,8 @@ public interface MeterReadingMapper {
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "uuidMostSignificantBits", ignore = true)
+    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
     MeterReadingEntity toEntity(MeterReadingDto dto);
 
     /**
@@ -85,9 +88,14 @@ public interface MeterReadingMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "published", ignore = true) // Managed by entity
+    @Mapping(target = "updated", ignore = true)   // Managed by entity
+    @Mapping(target = "created", ignore = true)   // Managed by entity
     @Mapping(target = "usagePoint", ignore = true)
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "uuidMostSignificantBits", ignore = true)
+    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
     void updateEntity(MeterReadingDto dto, @MappingTarget MeterReadingEntity entity);
 }

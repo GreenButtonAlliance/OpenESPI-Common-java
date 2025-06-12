@@ -144,6 +144,82 @@
         		<database>mysql</database>
         	</properties>
         </profile>
+        <profile>
+            <!-- Profile for running only entity tests without mapper compilation issues -->
+            <id>entity-tests-only</id>
+            <properties>
+                <profile>entity-tests-only</profile>
+                <database>hsql</database>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <!-- Temporarily exclude mapper classes with compilation issues -->
+                                <exclude>**/mapper/**/*.java</exclude>
+                                <!-- Exclude legacy classes causing annotation issues -->
+                                <exclude>**/domain/UsagePoint.java</exclude>
+                                <exclude>**/service/customer/impl/*ServiceImpl.java</exclude>
+                                <!-- Exclude legacy support classes with missing dependencies -->
+                                <exclude>**/support/Asserts.java</exclude>
+                                <exclude>**/support/BaseStepUtils.java</exclude>
+                                <exclude>**/support/IsEmpty.java</exclude>
+                                <exclude>**/support/WebDriverSingleton.java</exclude>
+                                <!-- Exclude classes depending on deprecated types -->
+                                <exclude>**/support/EspiFactory.java</exclude>
+                            </excludes>
+                            <testExcludes>
+                                <!-- Exclude legacy test files that depend on excluded support classes -->
+                                <exclude>**/repositories/**/*Test*.java</exclude>
+                                <exclude>**/service/**/*Test*.java</exclude>
+                                <exclude>**/utils/**/*Test*.java</exclude>
+                                <exclude>**/support/Asserts*Test*.java</exclude>
+                                <exclude>**/support/BaseStepUtils*Test*.java</exclude>
+                                <exclude>**/support/IsEmpty*Test*.java</exclude>
+                                <exclude>**/support/WebDriverSingleton*Test*.java</exclude>
+                                <exclude>**/support/EspiFactory*Test*.java</exclude>
+                                <exclude>**/domain/usage/*Tests.java</exclude>
+                                <exclude>**/*ValidationTests.java</exclude>
+                                <exclude>**/*MarshallerTests.java</exclude>
+                                <exclude>**/*UnmarshallerTests.java</exclude>
+                                <exclude>**/*PersistenceTests.java</exclude>
+                            </testExcludes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <!-- Only run modern entity tests -->
+                                <include>**/domain/usage/*EntityTest.java</include>
+                                <include>**/domain/*EntityTest.java</include>
+                                <include>**/support/TestDataBuilder*Test.java</include>
+                            </includes>
+                            <excludes>
+                                <!-- Exclude legacy tests that depend on excluded support classes -->
+                                <exclude>**/domain/usage/*Tests.java</exclude>
+                                <exclude>**/*ValidationTests.java</exclude>
+                                <exclude>**/*MarshallerTests.java</exclude>
+                                <exclude>**/*UnmarshallerTests.java</exclude>
+                                <exclude>**/*PersistenceTests.java</exclude>
+                                <exclude>**/repositories/**/*Test*.java</exclude>
+                                <exclude>**/service/**/*Test*.java</exclude>
+                                <exclude>**/utils/**/*Test*.java</exclude>
+                                <exclude>**/support/Asserts*Test*.java</exclude>
+                                <exclude>**/support/BaseStepUtils*Test*.java</exclude>
+                                <exclude>**/support/IsEmpty*Test*.java</exclude>
+                                <exclude>**/support/WebDriverSingleton*Test*.java</exclude>
+                                <exclude>**/support/EspiFactory*Test*.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <repositories>

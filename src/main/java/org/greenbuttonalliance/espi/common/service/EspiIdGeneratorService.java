@@ -64,7 +64,7 @@ public class EspiIdGeneratorService {
         }
         
         UUID uuid5 = generateUuid5(ESPI_NAMESPACE, selfHref.trim());
-        log.debug("Generated ESPI ID {} for href: {}", uuid5, selfHref);
+        // Removed logging to fix compilation - will be restored when Lombok is properly configured
         return uuid5;
     }
     

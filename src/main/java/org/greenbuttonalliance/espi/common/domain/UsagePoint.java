@@ -121,11 +121,7 @@ public class UsagePoint extends IdentifiedObject {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<MeterReading> meterReadings = new ArrayList<>();
 
-    @XmlTransient
-    // ElectricPowerUsageSummary removed - deprecated resource
-    // @OneToMany(mappedBy = "usagePoint", cascade = { CascadeType.ALL }, orphanRemoval = true)
-    // @LazyCollection(LazyCollectionOption.FALSE)
-    // private List<ElectricPowerUsageSummary> electricPowerUsageSummaries = new ArrayList<>();
+    // ElectricPowerUsageSummary removed - deprecated resource per ESPI specification updates
 
     @XmlTransient
     @OneToMany(mappedBy = "usagePoint", cascade = { CascadeType.ALL }, orphanRemoval = true)

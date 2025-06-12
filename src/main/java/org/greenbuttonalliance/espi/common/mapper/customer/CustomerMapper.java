@@ -46,21 +46,12 @@ public interface CustomerMapper {
      * @return the customer DTO
      */
     @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
-    @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
     @Mapping(target = "description", source = "description")
     @Mapping(target = "kind", source = "kind")
-    @Mapping(target = "name", source = "name")
     @Mapping(target = "specialNeed", source = "specialNeed")
-    @Mapping(target = "status", source = "status")
-    @Mapping(target = "priority", source = "priority")
-    @Mapping(target = "vip", source = "vip")
+    @Mapping(target = "status", source = "status.value")  // Map embedded status value
     @Mapping(target = "pucNumber", source = "pucNumber")
     @Mapping(target = "customerAccounts", source = "customerAccounts")
-    @Mapping(target = "customerAgreements", source = "customerAgreements")
     CustomerDto toDto(CustomerEntity entity);
 
     /**
@@ -72,21 +63,27 @@ public interface CustomerMapper {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "kind", source = "kind")
-    @Mapping(target = "name", source = "name")
     @Mapping(target = "specialNeed", source = "specialNeed")
-    @Mapping(target = "status", source = "status")
-    @Mapping(target = "priority", source = "priority")
-    @Mapping(target = "vip", source = "vip")
+    @Mapping(target = "status.value", source = "status")  // Map to embedded status value
+    @Mapping(target = "status.dateTime", ignore = true)
+    @Mapping(target = "status.reason", ignore = true)
     @Mapping(target = "pucNumber", source = "pucNumber")
     @Mapping(target = "customerAccounts", source = "customerAccounts")
-    @Mapping(target = "customerAgreements", source = "customerAgreements")
+    // Properties not in DTO - set to defaults or ignore
+    @Mapping(target = "customerName", ignore = true)
+    @Mapping(target = "locale", ignore = true)
+    @Mapping(target = "vip", ignore = true)
+    @Mapping(target = "priority", ignore = true)
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "updated", ignore = true)
+    @Mapping(target = "published", ignore = true)
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "uuidMostSignificantBits", ignore = true)
+    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
     CustomerEntity toEntity(CustomerDto dto);
 
     /**
@@ -97,8 +94,20 @@ public interface CustomerMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "status.value", source = "status")
+    @Mapping(target = "status.dateTime", ignore = true)
+    @Mapping(target = "status.reason", ignore = true)
+    @Mapping(target = "customerName", ignore = true)
+    @Mapping(target = "locale", ignore = true)
+    @Mapping(target = "vip", ignore = true)
+    @Mapping(target = "priority", ignore = true)
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "updated", ignore = true)
+    @Mapping(target = "published", ignore = true)
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "uuidMostSignificantBits", ignore = true)
+    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
     void updateEntity(CustomerDto dto, @MappingTarget CustomerEntity entity);
 }

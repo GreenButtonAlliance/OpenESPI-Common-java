@@ -64,7 +64,7 @@ public abstract class IdentifiedObjectEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @EqualsAndHashCode.Include
-    private Long id;
+    protected Long id;
 
     /**
      * NAESB ESPI compliant UUID identifier.
@@ -347,5 +347,14 @@ public abstract class IdentifiedObjectEntity implements Serializable {
     @PreUpdate 
     protected void preUpdate() {
         // updated timestamp is automatically handled by @UpdateTimestamp
+    }
+
+    /**
+     * Manual setter for description field (Lombok issue workaround).
+     * 
+     * @param description the resource description
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
