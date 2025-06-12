@@ -1,0 +1,132 @@
+# Spring Boot 3.5 AWS Green Button Sandbox Profile
+# Copyright (c) 2018-2025 Green Button Alliance, Inc.
+
+spring:
+  profiles:
+    active: aws-sandbox
+  
+  # AWS RDS Database Configuration
+  datasource:
+    url: ${AWS_DB_URL:jdbc:mysql://gba-sandbox.cluster-abcdef.us-east-1.rds.amazonaws.com:3306/openespi_sandbox}
+    username: ${AWS_DB_USERNAME}
+    password: ${AWS_DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: ${AWS_DB_POOL_MAX_SIZE:30}
+      minimum-idle: ${AWS_DB_POOL_MIN_IDLE:5}
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      connection-timeout: 20000
+      validation-timeout: 5000
+      leak-detection-threshold: 60000
+
+  # JPA/Hibernate Configuration for AWS
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        show_sql: false
+        format_sql: false
+        use_sql_comments: false
+        jdbc:
+          batch_size: 30
+        connection:
+          provider_disables_autocommit: true
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
+    show-sql: false
+    open-in-view: false
+
+  # Flyway Configuration for AWS Sandbox
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/mysql
+    baseline-on-migrate: false
+    baseline-version: 1
+    validate-on-migrate: true
+    clean-disabled: true
+    schemas:
+      - openespi_usage
+      - openespi_customer
+
+  # Jackson Configuration
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write_dates_as_timestamps: false
+      indent_output: false
+    deserialization:
+      fail_on_unknown_properties: false
+
+  # AWS CloudWatch Logging Configuration
+  cloud:
+    aws:
+      region:
+        static: ${AWS_REGION:us-east-1}
+      credentials:
+        access-key: ${AWS_ACCESS_KEY_ID}
+        secret-key: ${AWS_SECRET_ACCESS_KEY}
+
+# Logging Configuration for AWS Sandbox
+logging:
+  level:
+    org.greenbuttonalliance.espi: ${LOG_LEVEL_ESPI:INFO}
+    org.springframework: ${LOG_LEVEL_SPRING:WARN}
+    org.hibernate: ${LOG_LEVEL_HIBERNATE:WARN}
+    org.hibernate.SQL: ${LOG_LEVEL_SQL:WARN}
+    org.springframework.transaction: ${LOG_LEVEL_TRANSACTION:WARN}
+    org.flywaydb: INFO
+    com.amazonaws: ${LOG_LEVEL_AWS:WARN}
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+  file:
+    name: ${LOG_FILE_PATH:/var/log/openespi/aws-sandbox.log}
+
+# Management - Basic configuration (applications should configure endpoints)
+management:
+  endpoints:
+    enabled-by-default: false
+  info:
+    env:
+      enabled: true
+
+# ESPI Configuration for AWS Sandbox
+espi:
+  database:
+    usage-schema: openespi_usage
+    customer-schema: openespi_customer
+  security:
+    oauth2:
+      debug: false
+      issuer-uri: ${GBA_OAUTH2_ISSUER_URI}
+  features:
+    debug-mode: false
+    sql-logging: false
+    gba-sandbox: true
+
+# AWS Sandbox Server Configuration
+server:
+  port: ${SERVER_PORT:8443}
+  ssl:
+    enabled: ${SSL_ENABLED:true}
+    key-store: ${SSL_KEYSTORE_PATH}
+    key-store-password: ${SSL_KEYSTORE_PASSWORD}
+    key-store-type: PKCS12
+  error:
+    include-stacktrace: never
+    include-message: on_param
+
+# Green Button Alliance Sandbox Specific Configuration
+gba:
+  sandbox:
+    base-url: ${GBA_SANDBOX_BASE_URL:https://sandbox.greenbuttonalliance.org}
+    certification-mode: ${GBA_CERTIFICATION_MODE:true}
+    test-harness-enabled: ${GBA_TEST_HARNESS_ENABLED:true}

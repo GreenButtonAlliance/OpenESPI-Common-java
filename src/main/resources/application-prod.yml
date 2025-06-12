@@ -1,0 +1,131 @@
+# Spring Boot 3.5 Production Profile
+# Copyright (c) 2018-2025 Green Button Alliance, Inc.
+
+spring:
+  profiles:
+    active: prod
+  
+  # Production Database Configuration (environment-specific)
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/openespi_prod}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
+    hikari:
+      maximum-pool-size: ${DB_POOL_MAX_SIZE:50}
+      minimum-idle: ${DB_POOL_MIN_IDLE:10}
+      idle-timeout: ${DB_POOL_IDLE_TIMEOUT:600000}
+      max-lifetime: ${DB_POOL_MAX_LIFETIME:1800000}
+      connection-timeout: ${DB_POOL_CONNECTION_TIMEOUT:30000}
+      validation-timeout: ${DB_POOL_VALIDATION_TIMEOUT:5000}
+      leak-detection-threshold: ${DB_POOL_LEAK_DETECTION:60000}
+
+  # JPA/Hibernate Configuration for Production
+  jpa:
+    database: ${DB_PLATFORM:mysql}
+    database-platform: ${HIBERNATE_DIALECT:org.hibernate.dialect.MySQLDialect}
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.MySQLDialect}
+        show_sql: false
+        format_sql: false
+        use_sql_comments: false
+        jdbc:
+          batch_size: 50
+        connection:
+          provider_disables_autocommit: true
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region:
+            factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+    show-sql: false
+    open-in-view: false
+
+  # Flyway Configuration for Production
+  flyway:
+    enabled: true
+    locations: ${FLYWAY_LOCATIONS:classpath:db/migration/mysql}
+    baseline-on-migrate: false
+    baseline-version: 1
+    validate-on-migrate: true
+    clean-disabled: true
+    schemas: ${FLYWAY_SCHEMAS:openespi_usage,openespi_customer}
+
+  # Jackson Configuration
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write_dates_as_timestamps: false
+      indent_output: false
+    deserialization:
+      fail_on_unknown_properties: false
+
+  # Security Configuration
+  security:
+    require-ssl: ${SECURITY_REQUIRE_SSL:true}
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: ${OAUTH2_ISSUER_URI}
+
+# Production Logging Configuration (minimal)
+logging:
+  level:
+    org.greenbuttonalliance.espi: ${LOG_LEVEL_ESPI:INFO}
+    org.springframework: ${LOG_LEVEL_SPRING:WARN}
+    org.hibernate: ${LOG_LEVEL_HIBERNATE:WARN}
+    org.hibernate.SQL: ${LOG_LEVEL_SQL:WARN}
+    org.springframework.transaction: ${LOG_LEVEL_TRANSACTION:WARN}
+    org.flywaydb: ${LOG_LEVEL_FLYWAY:INFO}
+    root: ${LOG_LEVEL_ROOT:WARN}
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+  file:
+    name: ${LOG_FILE_PATH:/var/log/openespi/openespi-prod.log}
+    max-size: 100MB
+    max-history: 30
+
+# Management - Basic configuration (applications should configure endpoints)
+management:
+  endpoints:
+    enabled-by-default: false
+  info:
+    env:
+      enabled: false
+
+# ESPI Configuration for Production
+espi:
+  database:
+    usage-schema: ${ESPI_USAGE_SCHEMA:openespi_usage}
+    customer-schema: ${ESPI_CUSTOMER_SCHEMA:openespi_customer}
+  security:
+    oauth2:
+      debug: false
+      token-validity-seconds: ${OAUTH2_TOKEN_VALIDITY:3600}
+  features:
+    debug-mode: false
+    sql-logging: false
+    performance-monitoring: ${ESPI_PERFORMANCE_MONITORING:true}
+
+# Production Server Configuration
+server:
+  port: ${SERVER_PORT:8443}
+  ssl:
+    enabled: ${SSL_ENABLED:true}
+    key-store: ${SSL_KEYSTORE_PATH}
+    key-store-password: ${SSL_KEYSTORE_PASSWORD}
+    key-store-type: ${SSL_KEYSTORE_TYPE:PKCS12}
+  error:
+    include-stacktrace: never
+    include-message: never
+    include-binding-errors: never
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024

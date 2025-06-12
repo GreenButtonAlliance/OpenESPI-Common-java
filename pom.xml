@@ -116,31 +116,112 @@
     </properties>
 
     <profiles>
+        <!-- Legacy profile maintained for backward compatibility -->
         <profile>
             <id>dev</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <profile>dev</profile>
-                <database>hsql</database>
+                <spring.profiles.active>local</spring.profiles.active>
+                <profile>local</profile>
+                <database>h2</database>
             </properties>
         </profile>
+        
+        <!-- Modern Spring Boot 3.5 profiles -->
         <profile>
-            <id>devmysql</id>
+            <id>dev-mysql</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <profile>devmysql</profile>
+                <spring.profiles.active>dev-mysql</spring.profiles.active>
+                <profile>dev-mysql</profile>
                 <database>mysql</database>
             </properties>
         </profile>
+        
+        <profile>
+            <id>dev-postgresql</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>dev-postgresql</spring.profiles.active>
+                <profile>dev-postgresql</profile>
+                <database>postgresql</database>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>local</spring.profiles.active>
+                <profile>local</profile>
+                <database>h2</database>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>prod</spring.profiles.active>
+                <profile>prod</profile>
+                <database>mysql</database>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>docker</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>docker</spring.profiles.active>
+                <profile>docker</profile>
+                <database>mysql</database>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>aws-sandbox</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>aws-sandbox</spring.profiles.active>
+                <profile>aws-sandbox</profile>
+                <database>mysql</database>
+            </properties>
+        </profile>
+        
+        <!-- Legacy profile maintained for backward compatibility -->
+        <profile>
+            <id>devmysql</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>dev-mysql</spring.profiles.active>
+                <profile>dev-mysql</profile>
+                <database>mysql</database>
+            </properties>
+        </profile>
+        
+        <!-- Legacy profile maintained for backward compatibility -->
         <profile>
 			<!-- Green Button Alliance AWS Green Button Sandbox -->
         	<id>awsgbasandbox</id>
         	<properties>
-        		<profile>awsgbasandbox</profile>
+        		<spring.profiles.active>aws-sandbox</spring.profiles.active>
+        		<profile>aws-sandbox</profile>
         		<database>mysql</database>
         	</properties>
         </profile>
