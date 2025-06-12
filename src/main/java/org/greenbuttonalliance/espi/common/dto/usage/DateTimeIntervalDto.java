@@ -21,7 +21,9 @@
 package org.greenbuttonalliance.espi.common.dto.usage;
 
 import jakarta.xml.bind.annotation.*;
+import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 /**
  * DateTimeInterval DTO record for JAXB XML marshalling/unmarshalling.
@@ -44,26 +46,12 @@ public record DateTimeIntervalDto(
 ) {
     
     /**
-     * Default constructor for JAXB.
-     */
-    public DateTimeIntervalDto() {
-        this(null, null);
-    }
-    
-    /**
-     * Constructor with OffsetDateTime conversion.
-     */
-    public DateTimeIntervalDto(OffsetDateTime startDateTime, Long duration) {
-        this(startDateTime != null ? startDateTime.toEpochSecond() : null, duration);
-    }
-    
-    /**
      * Gets the start time as OffsetDateTime.
      * 
      * @return start time as OffsetDateTime or null
      */
     public OffsetDateTime getStartDateTime() {
-        return start != null ? OffsetDateTime.ofEpochSecond(start, 0, java.time.ZoneOffset.UTC) : null;
+        return start != null ? Instant.ofEpochSecond(start.longValue()).atOffset(ZoneOffset.UTC) : null;
     }
     
     /**
@@ -82,6 +70,18 @@ public record DateTimeIntervalDto(
      */
     public OffsetDateTime getEndDateTime() {
         Long end = getEnd();
-        return end != null ? OffsetDateTime.ofEpochSecond(end, 0, java.time.ZoneOffset.UTC) : null;
+        return end != null ? Instant.ofEpochSecond(end.longValue()).atOffset(ZoneOffset.UTC) : null;
+    }
+    
+    /**
+     * Factory method for creating from OffsetDateTime.
+     * 
+     * @param startDateTime the start time as OffsetDateTime
+     * @param duration the duration in seconds
+     * @return new DateTimeIntervalDto instance
+     */
+    public static DateTimeIntervalDto fromDateTime(OffsetDateTime startDateTime, Long duration) {
+        Long startEpoch = startDateTime != null ? startDateTime.toEpochSecond() : null;
+        return new DateTimeIntervalDto(startEpoch, duration);
     }
 }

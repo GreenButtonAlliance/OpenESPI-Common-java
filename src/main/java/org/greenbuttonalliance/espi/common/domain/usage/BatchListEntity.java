@@ -298,6 +298,15 @@ public class BatchListEntity {
     }
 
     /**
+     * Gets the cached resource count.
+     * 
+     * @return the cached count of resources
+     */
+    public Integer getResourceCount() {
+        return resourceCount != null ? resourceCount : 0;
+    }
+
+    /**
      * Updates the cached resource count.
      */
     private void updateResourceCount() {

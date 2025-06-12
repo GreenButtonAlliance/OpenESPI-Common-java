@@ -316,14 +316,6 @@ public class RetailCustomerEntity extends IdentifiedObjectEntity {
     }
 
     /**
-     * Gets the primary key ID. 
-     * Added manually due to Lombok @Data not generating properly.
-     */
-    public Long getId() {
-        return super.getId();
-    }
-
-    /**
      * Custom implementation for retail customers to use ID instead of UUID.
      * 
      * @return string representation of the ID

@@ -107,6 +107,16 @@ public class ReadingQualityEntity {
     }
 
     /**
+     * Gets the interval reading for this quality indicator.
+     * Lombok @Data should generate this, but added manually for compilation.
+     * 
+     * @return the associated interval reading
+     */
+    public IntervalReadingEntity getIntervalReading() {
+        return this.intervalReading;
+    }
+
+    /**
      * Sets the interval reading for this quality indicator.
      * This method ensures the bidirectional relationship is maintained.
      * 
