@@ -24,6 +24,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObjectEntity;
 
 import jakarta.persistence.*;
 
@@ -31,14 +32,17 @@ import jakarta.persistence.*;
  * Pure JPA/Hibernate entity for StatementRef without JAXB concerns.
  * 
  * [extension] A sequence of references to a document associated with a Statement.
+ * ESPI compliant with proper UUID identifiers and ATOM feed support.
  */
 @Entity
-@Table(name = "statement_refs")
+@Table(name = "statement_refs", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"uuid"})
+})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class StatementRefEntity extends ObjectEntity {
+public class StatementRefEntity extends IdentifiedObjectEntity {
 
     /**
      * [extension] Name of document or file including filename extension if present.

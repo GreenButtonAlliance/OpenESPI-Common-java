@@ -25,6 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.greenbuttonalliance.espi.common.domain.customer.enums.NotificationMethodKind;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObjectEntity;
 
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;
@@ -33,14 +34,17 @@ import java.time.OffsetDateTime;
  * Pure JPA/Hibernate entity for AccountNotification without JAXB concerns.
  * 
  * [extension] Customer action notification (e.g., delinquency, move in, move out)
+ * ESPI compliant with proper UUID identifiers and ATOM feed support.
  */
 @Entity
-@Table(name = "account_notifications")
+@Table(name = "account_notifications", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"uuid"})
+})
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class AccountNotificationEntity extends ObjectEntity {
+public class AccountNotificationEntity extends IdentifiedObjectEntity {
 
     /**
      * Method by which the customer was notified.
