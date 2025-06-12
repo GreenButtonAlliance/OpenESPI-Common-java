@@ -47,7 +47,6 @@ public class ModernExportService {
     private final MeterReadingExportService meterReadingExportService;
     private final AtomExportService atomExportService;
 
-    @Autowired
     public ModernExportService(
         UsagePointExportService usagePointExportService,
         MeterReadingExportService meterReadingExportService,

@@ -37,8 +37,11 @@ import java.util.UUID;
 @Service
 public class ResourceServiceImpl implements ResourceService {
 
-	@Autowired
-	private ResourceRepository repository;
+	private final ResourceRepository repository;
+
+	public ResourceServiceImpl(ResourceRepository repository) {
+		this.repository = repository;
+	}
 
 	/**
 	 * A private Map of Key:Value strings to hold the dynamic configuration.
@@ -230,9 +233,6 @@ public class ResourceServiceImpl implements ResourceService {
 		return repository.findIdByXPath(id1, id2, id3, id4, clazz);
 	}
 
-	public void setRepository(ResourceRepository repository) {
-		this.repository = repository;
-	}
 
 	@Override
 	public <T extends IdentifiedObject> EntryTypeIterator findEntryTypeIterator(
@@ -319,13 +319,6 @@ public class ResourceServiceImpl implements ResourceService {
 
 	}
 
-	public void setResourceRepository(ResourceRepository repository) {
-		this.repository = repository;
-	}
-
-	public ResourceRepository getResourceRepository() {
-		return this.repository;
-	}
 
 	@Override
 	public void setConfigurations(Map<String, String> params) {

@@ -42,8 +42,11 @@ import java.util.UUID;
 @Transactional
 public class StatementServiceImpl implements StatementService {
 
-    @Autowired
-    private StatementRepository statementRepository;
+    private final StatementRepository statementRepository;
+
+    public StatementServiceImpl(StatementRepository statementRepository) {
+        this.statementRepository = statementRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)

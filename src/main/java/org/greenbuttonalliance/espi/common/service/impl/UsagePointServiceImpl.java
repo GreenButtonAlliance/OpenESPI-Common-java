@@ -47,40 +47,30 @@ import java.util.UUID;
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class UsagePointServiceImpl implements UsagePointService {
 
-	@Autowired
-	private UsagePointRepository usagePointRepository;
+	private final UsagePointRepository usagePointRepository;
+	private final ImportService importService;
+	private final ResourceRepository repository;
+	private final ResourceService resourceService;
 
-	@Autowired
-	private ImportService importService;
-
-	@Autowired
-	private ResourceRepository repository;
-
-	@Autowired
-	private ResourceService resourceService;
-
-	public void setImportService(ImportService importService) {
-		this.importService = importService;
-	}
-
-	public ImportService getImportService() {
-		return importService;
-	}
-
-	public void setRepository(UsagePointRepository usagePointRepository) {
+	public UsagePointServiceImpl(UsagePointRepository usagePointRepository,
+								 ImportService importService,
+								 ResourceRepository repository,
+								 ResourceService resourceService) {
 		this.usagePointRepository = usagePointRepository;
-	}
-
-	public UsagePointRepository getRepository() {
-		return usagePointRepository;
-	}
-
-	public void setResourceService(ResourceService resourceService) {
+		this.importService = importService;
+		this.repository = repository;
 		this.resourceService = resourceService;
 	}
 
-	public ResourceService getResourceService() {
-		return resourceService;
+
+	@Override
+	public void setResourceService(ResourceService resourceService) {
+		// No-op: constructor injection used, but interface requires this method
+	}
+
+	@Override
+	public void setRepository(UsagePointRepository usagePointRepository) {
+		// No-op: constructor injection used, but interface requires this method
 	}
 
 	@Override

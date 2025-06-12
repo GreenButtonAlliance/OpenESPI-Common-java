@@ -35,8 +35,11 @@ import java.util.List;
 		org.springframework.dao.EmptyResultDataAccessException.class })
 public class BatchListServiceImpl implements BatchListService {
 
-	@Autowired
-	private BatchListRepository repository;
+	private final BatchListRepository repository;
+
+	public BatchListServiceImpl(BatchListRepository repository) {
+		this.repository = repository;
+	}
 
 	@Override
 	public void persist(BatchList batchList) {
@@ -48,9 +51,6 @@ public class BatchListServiceImpl implements BatchListService {
 		return repository.findAll();
 	}
 
-	public void setRepository(BatchListRepository repository) {
-		this.repository = repository;
-	}
 
 	public BatchListRepository getRepository(BatchListRepository repository) {
 		return repository;

@@ -40,8 +40,11 @@ import java.util.UUID;
 @Transactional
 public class ServiceLocationServiceImpl implements ServiceLocationService {
 
-    @Autowired
-    private ServiceLocationRepository serviceLocationRepository;
+    private final ServiceLocationRepository serviceLocationRepository;
+
+    public ServiceLocationServiceImpl(ServiceLocationRepository serviceLocationRepository) {
+        this.serviceLocationRepository = serviceLocationRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)

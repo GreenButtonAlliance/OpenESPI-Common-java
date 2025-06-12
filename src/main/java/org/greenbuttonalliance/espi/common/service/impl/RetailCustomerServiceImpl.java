@@ -37,23 +37,26 @@ import java.util.UUID;
 @Service
 public class RetailCustomerServiceImpl implements RetailCustomerService {
 
-	@Autowired
-	private RetailCustomerRepository retailCustomerRepository;
+	private final RetailCustomerRepository retailCustomerRepository;
+	private final ResourceService resourceService;
+	private final ImportService importService;
+	private final AuthorizationService authorizationService;
+	private final SubscriptionService subscriptionService;
+	private final UsagePointService usagePointService;
 
-	@Autowired
-	private ResourceService resourceService;
-
-	@Autowired
-	private ImportService importService;
-
-	@Autowired
-	private AuthorizationService authorizationService;
-
-	@Autowired
-	private SubscriptionService subscriptionService;
-
-	@Autowired
-	UsagePointService usagePointService;
+	public RetailCustomerServiceImpl(RetailCustomerRepository retailCustomerRepository,
+									 ResourceService resourceService,
+									 ImportService importService,
+									 AuthorizationService authorizationService,
+									 SubscriptionService subscriptionService,
+									 UsagePointService usagePointService) {
+		this.retailCustomerRepository = retailCustomerRepository;
+		this.resourceService = resourceService;
+		this.importService = importService;
+		this.authorizationService = authorizationService;
+		this.subscriptionService = subscriptionService;
+		this.usagePointService = usagePointService;
+	}
 
 	@Override
 	public List<RetailCustomer> findAll() {
@@ -201,54 +204,5 @@ public class RetailCustomerServiceImpl implements RetailCustomerService {
 		return subscription;
 	}
 
-	public void setRetailCustomerRepository(
-			RetailCustomerRepository retailCustomerRepository) {
-		this.retailCustomerRepository = retailCustomerRepository;
-	}
-
-	public RetailCustomerRepository getRetailCustomerRepository() {
-		return this.retailCustomerRepository;
-	}
-
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-
-	public ResourceService getResourceService() {
-		return this.resourceService;
-	}
-
-	public void setImportService(ImportService importService) {
-		this.importService = importService;
-	}
-
-	public ImportService getImportService() {
-		return this.importService;
-	}
-
-	public void setAuthorizationService(
-			AuthorizationService authorizationService) {
-		this.authorizationService = authorizationService;
-	}
-
-	public AuthorizationService getAuthorizationService() {
-		return this.authorizationService;
-	}
-
-	public void setSubscriptionService(SubscriptionService subscriptionService) {
-		this.subscriptionService = subscriptionService;
-	}
-
-	public SubscriptionService getSubscriptionService() {
-		return this.subscriptionService;
-	}
-
-	public void setUsagePointService(UsagePointService usagePointService) {
-		this.usagePointService = usagePointService;
-	}
-
-	public UsagePointService getUsagePointService() {
-		return this.usagePointService;
-	}
 
 }

@@ -39,14 +39,22 @@ import java.util.UUID;
 @Service
 public class ReadingTypeServiceImpl implements ReadingTypeService {
 
-	@Autowired
-	private ReadingTypeRepository readingTypeRepository;
+	private final ReadingTypeRepository readingTypeRepository;
+	private final ResourceService resourceService;
+	private final ImportService importService;
 
-	@Autowired
-	private ResourceService resourceService;
+	public ReadingTypeServiceImpl(ReadingTypeRepository readingTypeRepository,
+								  ResourceService resourceService,
+								  ImportService importService) {
+		this.readingTypeRepository = readingTypeRepository;
+		this.resourceService = resourceService;
+		this.importService = importService;
+	}
 
-	@Autowired
-	private ImportService importService;
+	@Override
+	public void setReadingTypeRepository(ReadingTypeRepository readingTypeRepository) {
+		// No-op: constructor injection used, but interface requires this method  
+	}
 
 	@Override
 	public ReadingType findByUUID(UUID uuid) {
@@ -144,28 +152,5 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 		}
 	}
 
-	public void setReadingTypeRepository(ReadingTypeRepository repository) {
-		this.readingTypeRepository = repository;
-	}
-
-	public ReadingTypeRepository getReadingTypeRepository() {
-		return this.readingTypeRepository;
-	}
-
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-
-	public ResourceService getResourceService() {
-		return this.resourceService;
-	}
-
-	public void setImportService(ImportService importService) {
-		this.importService = importService;
-	}
-
-	public ImportService getImportService() {
-		return this.importService;
-	}
 
 }

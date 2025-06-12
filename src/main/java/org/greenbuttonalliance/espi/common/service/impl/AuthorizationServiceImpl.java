@@ -41,17 +41,20 @@ import java.util.UUID;
 @Service
 public class AuthorizationServiceImpl implements AuthorizationService {
 
-	@Autowired
-	private AuthorizationRepository authorizationRepository;
+	private final AuthorizationRepository authorizationRepository;
+	private final UsagePointRepository usagePointRepository;
+	private final ResourceService resourceService;
+	private final ImportService importService;
 
-	@Autowired
-	private UsagePointRepository usagePointRepository;
-
-	@Autowired
-	private ResourceService resourceService;
-
-	@Autowired
-	private ImportService importService;
+	public AuthorizationServiceImpl(AuthorizationRepository authorizationRepository,
+									UsagePointRepository usagePointRepository,
+									ResourceService resourceService,
+									ImportService importService) {
+		this.authorizationRepository = authorizationRepository;
+		this.usagePointRepository = usagePointRepository;
+		this.resourceService = resourceService;
+		this.importService = importService;
+	}
 
 	@Override
 	public List<Authorization> findAllByRetailCustomerId(Long retailCustomerId) {
@@ -260,38 +263,5 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 		return authorizationRepository.findAllIdsByBulkId(thirdParty, bulkId.toString());
 	}
 
-	public void setAuthorizationRepository(
-			AuthorizationRepository authorizationRepository) {
-		this.authorizationRepository = authorizationRepository;
-	}
-
-	public AuthorizationRepository getAuthorizationRepository() {
-		return this.authorizationRepository;
-	}
-
-	public void setUsagePointRepository(
-			UsagePointRepository usagePointRepository) {
-		this.usagePointRepository = usagePointRepository;
-	}
-
-	public UsagePointRepository getUsagePointRepository() {
-		return this.usagePointRepository;
-	}
-
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-
-	public ResourceService getResourceService() {
-		return this.resourceService;
-	}
-
-	public void setImportService(ImportService importService) {
-		this.importService = importService;
-	}
-
-	public ImportService getImportService() {
-		return this.importService;
-	}
 
 }

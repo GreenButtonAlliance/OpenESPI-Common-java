@@ -49,27 +49,29 @@ public class ImportServiceImpl implements ImportService {
 
 	private final Log logger = LogFactory.getLog(getClass());
 
-	@Autowired
-	@Qualifier("domainMarshaller")
-	private Jaxb2Marshaller jaxb2Marshaller;
+	private final Jaxb2Marshaller jaxb2Marshaller;
+	private final AuthorizationService authorizationService;
+	private final SubscriptionService subscriptionService;
+	private final UsagePointService usagePointService;
+	private final RetailCustomerService retailCustomerService;
+	private final ResourceService resourceService;
+	private final EntryProcessorService entryProcessorService;
 
-	@Autowired
-	private AuthorizationService authorizationService;
-
-	@Autowired
-	private SubscriptionService subscriptionService;
-
-	@Autowired
-	private UsagePointService usagePointService;
-
-	@Autowired
-	private RetailCustomerService retailCustomerService;
-
-	@Autowired
-	private ResourceService resourceService;
-
-	@Autowired
-	private EntryProcessorService entryProcessorService;
+	public ImportServiceImpl(@Qualifier("domainMarshaller") Jaxb2Marshaller jaxb2Marshaller,
+							 AuthorizationService authorizationService,
+							 SubscriptionService subscriptionService,
+							 UsagePointService usagePointService,
+							 RetailCustomerService retailCustomerService,
+							 ResourceService resourceService,
+							 EntryProcessorService entryProcessorService) {
+		this.jaxb2Marshaller = jaxb2Marshaller;
+		this.authorizationService = authorizationService;
+		this.subscriptionService = subscriptionService;
+		this.usagePointService = usagePointService;
+		this.retailCustomerService = retailCustomerService;
+		this.resourceService = resourceService;
+		this.entryProcessorService = entryProcessorService;
+	}
 
 	// this is a list of the UsagePointIds referenced during
 	// this import
@@ -254,63 +256,5 @@ public class ImportServiceImpl implements ImportService {
 		}
 	}
 
-	public void setJaxb2Marshaller(Jaxb2Marshaller marshaller) {
-		this.jaxb2Marshaller = marshaller;
-	}
-
-	public Jaxb2Marshaller getJaxb2Marshaller() {
-		return this.jaxb2Marshaller;
-	}
-
-	public void setAuthorizationService(
-			AuthorizationService authorizationService) {
-		this.authorizationService = authorizationService;
-	}
-
-	public AuthorizationService getAuthorizationService() {
-		return this.authorizationService;
-	}
-
-	public void setSubscriptionService(SubscriptionService subscriptionService) {
-		this.subscriptionService = subscriptionService;
-	}
-
-	public SubscriptionService getSubscriptionService() {
-		return this.subscriptionService;
-	}
-
-	public void setUsagePointService(UsagePointService usagePointService) {
-		this.usagePointService = usagePointService;
-	}
-
-	public UsagePointService getUsagePointService() {
-		return this.usagePointService;
-	}
-
-	public void setRetailCustomerService(
-			RetailCustomerService retailCustomerService) {
-		this.retailCustomerService = retailCustomerService;
-	}
-
-	public RetailCustomerService getRetailCustomerService() {
-		return this.retailCustomerService;
-	}
-
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-
-	public ResourceService getResourceService() {
-		return this.resourceService;
-	}
-
-	public void setEntryProcessorService(
-			EntryProcessorService entryProcessorService) {
-		this.entryProcessorService = entryProcessorService;
-	}
-
-	public EntryProcessorService getEntryProcessorService() {
-		return this.entryProcessorService;
-	}
 
 }
