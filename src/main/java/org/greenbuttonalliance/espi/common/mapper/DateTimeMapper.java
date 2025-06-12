@@ -26,6 +26,7 @@ import org.mapstruct.Named;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.UUID;
 
 /**
  * Base mapper for common datetime conversions needed by all MapStruct mappers.
@@ -36,12 +37,12 @@ import java.time.ZoneOffset;
 public interface DateTimeMapper {
 
     /**
-     * Converts LocalDateTime to OffsetDateTime using system default offset.
+     * Converts LocalDateTime to OffsetDateTime using UTC offset.
      * @param localDateTime the local datetime
      * @return the offset datetime, or null if input is null
      */
     @Named("localToOffset")
-    default OffsetDateTime map(LocalDateTime localDateTime) {
+    default OffsetDateTime localToOffset(LocalDateTime localDateTime) {
         return localDateTime != null ? localDateTime.atOffset(ZoneOffset.UTC) : null;
     }
 
@@ -51,8 +52,24 @@ public interface DateTimeMapper {
      * @return the local datetime, or null if input is null
      */
     @Named("offsetToLocal")
-    default LocalDateTime map(OffsetDateTime offsetDateTime) {
+    default LocalDateTime offsetToLocal(OffsetDateTime offsetDateTime) {
         return offsetDateTime != null ? offsetDateTime.toLocalDateTime() : null;
+    }
+
+    /**
+     * Default mapping method for LocalDateTime to OffsetDateTime.
+     * Used by MapStruct when no explicit qualification is provided.
+     */
+    default OffsetDateTime map(LocalDateTime localDateTime) {
+        return localToOffset(localDateTime);
+    }
+
+    /**
+     * Default mapping method for OffsetDateTime to LocalDateTime.
+     * Used by MapStruct when no explicit qualification is provided.
+     */
+    default LocalDateTime map(OffsetDateTime offsetDateTime) {
+        return offsetToLocal(offsetDateTime);
     }
 
     /**
@@ -74,5 +91,25 @@ public interface DateTimeMapper {
     default OffsetDateTime mapFromLong(Long timestamp) {
         return timestamp != null ? OffsetDateTime.ofInstant(
             java.time.Instant.ofEpochMilli(timestamp), ZoneOffset.UTC) : null;
+    }
+
+    /**
+     * Converts UUID object to String.
+     * @param uuid the UUID object
+     * @return string representation of UUID
+     */
+    @Named("uuidToString")
+    default String uuidToString(UUID uuid) {
+        return uuid != null ? uuid.toString().toUpperCase() : null;
+    }
+
+    /**
+     * Converts String to UUID object.
+     * @param uuidString the UUID string
+     * @return UUID object
+     */
+    @Named("stringToUuid")
+    default UUID stringToUuid(String uuidString) {
+        return uuidString != null && !uuidString.trim().isEmpty() ? UUID.fromString(uuidString) : null;
     }
 }

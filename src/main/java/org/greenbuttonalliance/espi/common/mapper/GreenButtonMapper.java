@@ -24,123 +24,109 @@ import org.greenbuttonalliance.espi.common.mapper.customer.CustomerMapper;
 import org.greenbuttonalliance.espi.common.mapper.customer.CustomerAccountMapper;
 import org.greenbuttonalliance.espi.common.mapper.customer.CustomerAgreementMapper;
 import org.greenbuttonalliance.espi.common.mapper.usage.*;
-import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
 /**
- * Comprehensive MapStruct mapper that aggregates all entity-DTO mappers.
+ * Spring component that provides access to all Green Button MapStruct mappers.
  * 
- * This central mapper provides access to all Green Button resource mappers
- * and is designed to be injected as a single Spring component for use
- * in services and controllers.
+ * This is NOT a MapStruct mapper itself, but a Spring component that aggregates
+ * all individual mappers for easy access in services and controllers.
  */
-@Mapper(componentModel = "spring", uses = {
-    // Usage mappers
-    UsagePointMapper.class,
-    MeterReadingMapper.class,
-    IntervalBlockMapper.class,
-    IntervalReadingMapper.class,
-    ReadingTypeMapper.class,
-    ReadingQualityMapper.class,
-    UsageSummaryMapper.class,
-    ElectricPowerQualitySummaryMapper.class,
-    ServiceDeliveryPointMapper.class,
-    DateTimeIntervalMapper.class,
-    
-    // Customer mappers
-    CustomerMapper.class,
-    CustomerAccountMapper.class,
-    CustomerAgreementMapper.class
-})
-public interface GreenButtonMapper {
+@Component
+public class GreenButtonMapper {
 
-    /**
-     * Get the usage point mapper.
-     * 
-     * @return usage point mapper instance
-     */
-    UsagePointMapper usagePoint();
+    private final UsagePointMapper usagePointMapper;
+    private final MeterReadingMapper meterReadingMapper;
+    private final IntervalBlockMapper intervalBlockMapper;
+    private final IntervalReadingMapper intervalReadingMapper;
+    private final ReadingTypeMapper readingTypeMapper;
+    private final ReadingQualityMapper readingQualityMapper;
+    private final UsageSummaryMapper usageSummaryMapper;
+    private final ElectricPowerQualitySummaryMapper electricPowerQualitySummaryMapper;
+    private final ServiceDeliveryPointMapper serviceDeliveryPointMapper;
+    private final DateTimeIntervalMapper dateTimeIntervalMapper;
+    private final CustomerMapper customerMapper;
+    private final CustomerAccountMapper customerAccountMapper;
+    private final CustomerAgreementMapper customerAgreementMapper;
 
-    /**
-     * Get the meter reading mapper.
-     * 
-     * @return meter reading mapper instance
-     */
-    MeterReadingMapper meterReading();
+    public GreenButtonMapper(
+            UsagePointMapper usagePointMapper,
+            MeterReadingMapper meterReadingMapper,
+            IntervalBlockMapper intervalBlockMapper,
+            IntervalReadingMapper intervalReadingMapper,
+            ReadingTypeMapper readingTypeMapper,
+            ReadingQualityMapper readingQualityMapper,
+            UsageSummaryMapper usageSummaryMapper,
+            ElectricPowerQualitySummaryMapper electricPowerQualitySummaryMapper,
+            ServiceDeliveryPointMapper serviceDeliveryPointMapper,
+            DateTimeIntervalMapper dateTimeIntervalMapper,
+            CustomerMapper customerMapper,
+            CustomerAccountMapper customerAccountMapper,
+            CustomerAgreementMapper customerAgreementMapper) {
+        this.usagePointMapper = usagePointMapper;
+        this.meterReadingMapper = meterReadingMapper;
+        this.intervalBlockMapper = intervalBlockMapper;
+        this.intervalReadingMapper = intervalReadingMapper;
+        this.readingTypeMapper = readingTypeMapper;
+        this.readingQualityMapper = readingQualityMapper;
+        this.usageSummaryMapper = usageSummaryMapper;
+        this.electricPowerQualitySummaryMapper = electricPowerQualitySummaryMapper;
+        this.serviceDeliveryPointMapper = serviceDeliveryPointMapper;
+        this.dateTimeIntervalMapper = dateTimeIntervalMapper;
+        this.customerMapper = customerMapper;
+        this.customerAccountMapper = customerAccountMapper;
+        this.customerAgreementMapper = customerAgreementMapper;
+    }
 
-    /**
-     * Get the interval block mapper.
-     * 
-     * @return interval block mapper instance
-     */
-    IntervalBlockMapper intervalBlock();
+    public UsagePointMapper usagePoint() {
+        return usagePointMapper;
+    }
 
-    /**
-     * Get the interval reading mapper.
-     * 
-     * @return interval reading mapper instance
-     */
-    IntervalReadingMapper intervalReading();
+    public MeterReadingMapper meterReading() {
+        return meterReadingMapper;
+    }
 
-    /**
-     * Get the reading type mapper.
-     * 
-     * @return reading type mapper instance
-     */
-    ReadingTypeMapper readingType();
+    public IntervalBlockMapper intervalBlock() {
+        return intervalBlockMapper;
+    }
 
-    /**
-     * Get the reading quality mapper.
-     * 
-     * @return reading quality mapper instance
-     */
-    ReadingQualityMapper readingQuality();
+    public IntervalReadingMapper intervalReading() {
+        return intervalReadingMapper;
+    }
 
-    /**
-     * Get the usage summary mapper.
-     * 
-     * @return usage summary mapper instance
-     */
-    UsageSummaryMapper usageSummary();
+    public ReadingTypeMapper readingType() {
+        return readingTypeMapper;
+    }
 
-    /**
-     * Get the electric power quality summary mapper.
-     * 
-     * @return electric power quality summary mapper instance
-     */
-    ElectricPowerQualitySummaryMapper electricPowerQualitySummary();
+    public ReadingQualityMapper readingQuality() {
+        return readingQualityMapper;
+    }
 
-    /**
-     * Get the service delivery point mapper.
-     * 
-     * @return service delivery point mapper instance
-     */
-    ServiceDeliveryPointMapper serviceDeliveryPoint();
+    public UsageSummaryMapper usageSummary() {
+        return usageSummaryMapper;
+    }
 
-    /**
-     * Get the date/time interval mapper.
-     * 
-     * @return date/time interval mapper instance
-     */
-    DateTimeIntervalMapper dateTimeInterval();
+    public ElectricPowerQualitySummaryMapper electricPowerQualitySummary() {
+        return electricPowerQualitySummaryMapper;
+    }
 
-    /**
-     * Get the customer mapper.
-     * 
-     * @return customer mapper instance
-     */
-    CustomerMapper customer();
+    public ServiceDeliveryPointMapper serviceDeliveryPoint() {
+        return serviceDeliveryPointMapper;
+    }
 
-    /**
-     * Get the customer account mapper.
-     * 
-     * @return customer account mapper instance
-     */
-    CustomerAccountMapper customerAccount();
+    public DateTimeIntervalMapper dateTimeInterval() {
+        return dateTimeIntervalMapper;
+    }
 
-    /**
-     * Get the customer agreement mapper.
-     * 
-     * @return customer agreement mapper instance
-     */
-    CustomerAgreementMapper customerAgreement();
+    public CustomerMapper customer() {
+        return customerMapper;
+    }
+
+    public CustomerAccountMapper customerAccount() {
+        return customerAccountMapper;
+    }
+
+    public CustomerAgreementMapper customerAgreement() {
+        return customerAgreementMapper;
+    }
 }

@@ -21,16 +21,21 @@
 package org.greenbuttonalliance.espi.common.dto.usage;
 
 import jakarta.xml.bind.annotation.*;
+import java.time.OffsetDateTime;
+import java.util.List;
 
 /**
  * IntervalBlock DTO record for JAXB XML marshalling/unmarshalling.
  * 
- * Represents a block of interval readings for meter data.
- * Placeholder implementation for basic structure.
+ * Represents a time sequence of readings of the same ReadingType.
+ * Contains a date/time interval and a collection of interval readings.
+ * Supports Atom protocol XML wrapping.
  */
 @XmlRootElement(name = "IntervalBlock", namespace = "http://naesb.org/espi")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "IntervalBlock", namespace = "http://naesb.org/espi")
+@XmlType(name = "IntervalBlock", namespace = "http://naesb.org/espi", propOrder = {
+    "published", "updated", "relatedLinks", "selfLink", "upLink", "description", "interval", "intervalReadings"
+})
 public record IntervalBlockDto(
     
     @XmlTransient
@@ -39,14 +44,78 @@ public record IntervalBlockDto(
     @XmlAttribute(name = "mRID")
     String uuid,
     
+    @XmlElement(name = "published")
+    OffsetDateTime published,
+    
+    @XmlElement(name = "updated")
+    OffsetDateTime updated,
+    
+    @XmlElement(name = "link")
+    @XmlElementWrapper(name = "relatedLinks")
+    List<String> relatedLinks,
+    
+    @XmlElement(name = "selfLink")
+    String selfLink,
+    
+    @XmlElement(name = "upLink")
+    String upLink,
+    
     @XmlElement(name = "description")
-    String description
+    String description,
+    
+    @XmlElement(name = "interval")
+    DateTimeIntervalDto interval,
+    
+    @XmlElement(name = "IntervalReading")
+    @XmlElementWrapper(name = "IntervalReadings")
+    List<IntervalReadingDto> intervalReadings
 ) {
     
     /**
      * Default constructor for JAXB.
      */
     public IntervalBlockDto() {
-        this(null, null, null);
+        this(null, null, null, null, null, null, null, null, null, null);
+    }
+    
+    /**
+     * Minimal constructor for basic interval block data.
+     */
+    public IntervalBlockDto(String uuid, DateTimeIntervalDto interval) {
+        this(null, uuid, null, null, null, null, null, null, interval, null);
+    }
+    
+    /**
+     * Constructor with interval and readings.
+     */
+    public IntervalBlockDto(String uuid, DateTimeIntervalDto interval, List<IntervalReadingDto> intervalReadings) {
+        this(null, uuid, null, null, null, null, null, null, interval, intervalReadings);
+    }
+    
+    /**
+     * Generates the default self href for an interval block.
+     * 
+     * @return default self href
+     */
+    public String generateSelfHref() {
+        return uuid != null ? "/espi/1_1/resource/IntervalBlock/" + uuid : null;
+    }
+    
+    /**
+     * Generates the default up href for an interval block.
+     * 
+     * @return default up href
+     */
+    public String generateUpHref() {
+        return "/espi/1_1/resource/IntervalBlock";
+    }
+    
+    /**
+     * Gets the total number of interval readings.
+     * 
+     * @return interval reading count
+     */
+    public int getIntervalReadingCount() {
+        return intervalReadings != null ? intervalReadings.size() : 0;
     }
 }
