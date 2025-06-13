@@ -22,6 +22,7 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 
 import org.greenbuttonalliance.espi.common.domain.usage.ServiceDeliveryPointEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.ServiceDeliveryPointDto;
+import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -33,7 +34,7 @@ import org.mapstruct.MappingTarget;
  * used for JAXB XML marshalling in the Green Button API.
  */
 @Mapper(componentModel = "spring")
-public interface ServiceDeliveryPointMapper {
+public interface ServiceDeliveryPointMapper extends BaseIdentifiedObjectMapper {
 
     /**
      * Converts a ServiceDeliveryPointEntity to a ServiceDeliveryPointDto.
@@ -42,16 +43,16 @@ public interface ServiceDeliveryPointMapper {
      * @param entity the service delivery point entity
      * @return the service delivery point DTO
      */
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
     @Mapping(target = "description", source = "description")
     @Mapping(target = "name", source = "name")
-    @Mapping(target = "tariffProfile", source = "tariffProfile")
-    @Mapping(target = "customerAgreement", source = "customerAgreement")
+    @Mapping(target = "tariffProfile", ignore = true) // Relationship handled separately
+    @Mapping(target = "customerAgreement", ignore = true) // Relationship handled separately
     ServiceDeliveryPointDto toDto(ServiceDeliveryPointEntity entity);
 
     /**
@@ -62,13 +63,13 @@ public interface ServiceDeliveryPointMapper {
      * @return the service delivery point entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "name", source = "name")
-    @Mapping(target = "tariffProfile", source = "tariffProfile")
-    @Mapping(target = "customerAgreement", source = "customerAgreement")
+    @Mapping(target = "tariffProfile", ignore = true) // Relationship handled separately
+    @Mapping(target = "customerAgreement", ignore = true) // Relationship handled separately
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -82,6 +83,11 @@ public interface ServiceDeliveryPointMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "tariffProfile", ignore = true) // Relationship handled separately
+    @Mapping(target = "customerAgreement", ignore = true) // Relationship handled separately
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)

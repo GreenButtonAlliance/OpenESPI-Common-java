@@ -22,6 +22,7 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 
 import org.greenbuttonalliance.espi.common.domain.usage.IntervalBlockEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.IntervalBlockDto;
+import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -36,7 +37,7 @@ import org.mapstruct.MappingTarget;
     IntervalReadingMapper.class,
     DateTimeIntervalMapper.class
 })
-public interface IntervalBlockMapper {
+public interface IntervalBlockMapper extends BaseIdentifiedObjectMapper {
 
     /**
      * Converts an IntervalBlockEntity to an IntervalBlockDto.
@@ -45,9 +46,9 @@ public interface IntervalBlockMapper {
      * @param entity the interval block entity
      * @return the interval block DTO
      */
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -64,9 +65,9 @@ public interface IntervalBlockMapper {
      * @return the interval block entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "interval", source = "interval")
     @Mapping(target = "intervalReadings", source = "intervalReadings")
@@ -84,6 +85,9 @@ public interface IntervalBlockMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "meterReading", ignore = true)
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)

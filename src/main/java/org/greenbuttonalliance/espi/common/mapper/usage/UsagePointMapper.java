@@ -22,6 +22,7 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 
 import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.UsagePointDto;
+import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
 import org.greenbuttonalliance.espi.common.mapper.DateTimeMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -40,7 +41,7 @@ import org.mapstruct.MappingTarget;
     ElectricPowerQualitySummaryMapper.class,
     ServiceDeliveryPointMapper.class
 })
-public interface UsagePointMapper {
+public interface UsagePointMapper extends BaseIdentifiedObjectMapper {
 
     /**
      * Converts a UsagePointEntity to a UsagePointDto.
@@ -49,7 +50,12 @@ public interface UsagePointMapper {
      * @param entity the usage point entity
      * @return the usage point DTO
      */
-    @Mapping(target = "uuid", source = "uuid")
+    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
+    @Mapping(target = "selfLink", ignore = true)
+    @Mapping(target = "upLink", ignore = true)
     @Mapping(target = "description", source = "description")
     @Mapping(target = "roleFlags", source = "roleFlags")
     @Mapping(target = "serviceCategory", source = "serviceCategory")
@@ -68,7 +74,9 @@ public interface UsagePointMapper {
      * @return the usage point entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "roleFlags", source = "roleFlags")
     @Mapping(target = "serviceCategory", source = "serviceCategory")
@@ -80,8 +88,6 @@ public interface UsagePointMapper {
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
-    @Mapping(target = "published", ignore = true)
-    @Mapping(target = "updated", ignore = true)
     @Mapping(target = "retailCustomer", ignore = true)
     @Mapping(target = "localTimeParameters", ignore = true)
     @Mapping(target = "subscriptions", ignore = true)
@@ -95,11 +101,12 @@ public interface UsagePointMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
-    @Mapping(target = "published", ignore = true)
-    @Mapping(target = "updated", ignore = true)
     @Mapping(target = "retailCustomer", ignore = true)
     @Mapping(target = "localTimeParameters", ignore = true)
     @Mapping(target = "subscriptions", ignore = true)

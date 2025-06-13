@@ -22,6 +22,7 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 
 import org.greenbuttonalliance.espi.common.domain.usage.ReadingTypeEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.ReadingTypeDto;
+import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -33,7 +34,7 @@ import org.mapstruct.MappingTarget;
  * used for JAXB XML marshalling in the Green Button API.
  */
 @Mapper(componentModel = "spring")
-public interface ReadingTypeMapper {
+public interface ReadingTypeMapper extends BaseIdentifiedObjectMapper {
 
     /**
      * Converts a ReadingTypeEntity to a ReadingTypeDto.
@@ -42,9 +43,9 @@ public interface ReadingTypeMapper {
      * @param entity the reading type entity
      * @return the reading type DTO
      */
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -77,9 +78,9 @@ public interface ReadingTypeMapper {
      * @return the reading type entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "accumulationBehaviour", source = "accumulationBehaviour")
     @Mapping(target = "commodity", source = "commodity")
@@ -112,6 +113,9 @@ public interface ReadingTypeMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)

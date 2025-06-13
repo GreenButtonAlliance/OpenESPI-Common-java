@@ -22,6 +22,7 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 
 import org.greenbuttonalliance.espi.common.domain.usage.MeterReadingEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.MeterReadingDto;
+import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -36,7 +37,7 @@ import org.mapstruct.MappingTarget;
     IntervalBlockMapper.class,
     ReadingTypeMapper.class
 })
-public interface MeterReadingMapper {
+public interface MeterReadingMapper extends BaseIdentifiedObjectMapper {
 
     /**
      * Converts a MeterReadingEntity to a MeterReadingDto.
@@ -45,10 +46,9 @@ public interface MeterReadingMapper {
      * @param entity the meter reading entity
      * @return the meter reading DTO
      */
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -65,10 +65,9 @@ public interface MeterReadingMapper {
      * @return the meter reading entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", ignore = true) // Managed by entity
-    @Mapping(target = "updated", ignore = true)   // Managed by entity
-    @Mapping(target = "created", ignore = true)   // Managed by entity
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "readingType", source = "readingType")
     @Mapping(target = "intervalBlocks", source = "intervalBlocks")
@@ -76,8 +75,6 @@ public interface MeterReadingMapper {
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
-    @Mapping(target = "uuidMostSignificantBits", ignore = true)
-    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
     MeterReadingEntity toEntity(MeterReadingDto dto);
 
     /**
@@ -88,14 +85,12 @@ public interface MeterReadingMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "published", ignore = true) // Managed by entity
-    @Mapping(target = "updated", ignore = true)   // Managed by entity
-    @Mapping(target = "created", ignore = true)   // Managed by entity
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "usagePoint", ignore = true)
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
-    @Mapping(target = "uuidMostSignificantBits", ignore = true)
-    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
     void updateEntity(MeterReadingDto dto, @MappingTarget MeterReadingEntity entity);
 }

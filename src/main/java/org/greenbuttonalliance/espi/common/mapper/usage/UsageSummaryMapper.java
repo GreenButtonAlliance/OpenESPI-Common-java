@@ -22,6 +22,7 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 
 import org.greenbuttonalliance.espi.common.domain.usage.UsageSummaryEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.UsageSummaryDto;
+import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -35,7 +36,7 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring", uses = {
     DateTimeIntervalMapper.class
 })
-public interface UsageSummaryMapper {
+public interface UsageSummaryMapper extends BaseIdentifiedObjectMapper {
 
     /**
      * Converts a UsageSummaryEntity to a UsageSummaryDto.
@@ -44,9 +45,9 @@ public interface UsageSummaryMapper {
      * @param entity the usage summary entity
      * @return the usage summary DTO
      */
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -56,18 +57,8 @@ public interface UsageSummaryMapper {
     @Mapping(target = "billToDate", source = "billToDate")
     @Mapping(target = "costAdditionalLastPeriod", source = "costAdditionalLastPeriod")
     @Mapping(target = "currency", source = "currency")
-    @Mapping(target = "currentBillingPeriodOverAllConsumption", source = "currentBillingPeriodOverAllConsumption")
-    @Mapping(target = "currentDayLastYearNetConsumption", source = "currentDayLastYearNetConsumption")
-    @Mapping(target = "currentDayNetConsumption", source = "currentDayNetConsumption")
-    @Mapping(target = "currentDayOverallConsumption", source = "currentDayOverallConsumption")
-    @Mapping(target = "peakDemand", source = "peakDemand")
-    @Mapping(target = "previousDayLastYearOverallConsumption", source = "previousDayLastYearOverallConsumption")
-    @Mapping(target = "previousDayNetConsumption", source = "previousDayNetConsumption")
-    @Mapping(target = "previousDayOverallConsumption", source = "previousDayOverallConsumption")
     @Mapping(target = "qualityOfReading", source = "qualityOfReading")
-    @Mapping(target = "ratchetDemand", source = "ratchetDemand")
-    @Mapping(target = "ratchetDemandPeriod", source = "ratchetDemandPeriod")
-    @Mapping(target = "status", source = "status")
+    @Mapping(target = "statusTimeStamp", ignore = true) // Not in entity
     UsageSummaryDto toDto(UsageSummaryEntity entity);
 
     /**
@@ -78,28 +69,17 @@ public interface UsageSummaryMapper {
      * @return the usage summary entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "billingPeriod", source = "billingPeriod")
     @Mapping(target = "billLastPeriod", source = "billLastPeriod")
     @Mapping(target = "billToDate", source = "billToDate")
     @Mapping(target = "costAdditionalLastPeriod", source = "costAdditionalLastPeriod")
     @Mapping(target = "currency", source = "currency")
-    @Mapping(target = "currentBillingPeriodOverAllConsumption", source = "currentBillingPeriodOverAllConsumption")
-    @Mapping(target = "currentDayLastYearNetConsumption", source = "currentDayLastYearNetConsumption")
-    @Mapping(target = "currentDayNetConsumption", source = "currentDayNetConsumption")
-    @Mapping(target = "currentDayOverallConsumption", source = "currentDayOverallConsumption")
-    @Mapping(target = "peakDemand", source = "peakDemand")
-    @Mapping(target = "previousDayLastYearOverallConsumption", source = "previousDayLastYearOverallConsumption")
-    @Mapping(target = "previousDayNetConsumption", source = "previousDayNetConsumption")
-    @Mapping(target = "previousDayOverallConsumption", source = "previousDayOverallConsumption")
     @Mapping(target = "qualityOfReading", source = "qualityOfReading")
-    @Mapping(target = "ratchetDemand", source = "ratchetDemand")
-    @Mapping(target = "ratchetDemandPeriod", source = "ratchetDemandPeriod")
-    @Mapping(target = "status", source = "status")
-    @Mapping(target = "usagePoint", ignore = true)
+    @Mapping(target = "usagePoint", ignore = true) // Relationship handled separately
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -113,7 +93,10 @@ public interface UsageSummaryMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "usagePoint", ignore = true)
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "usagePoint", ignore = true) // Relationship handled separately
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)

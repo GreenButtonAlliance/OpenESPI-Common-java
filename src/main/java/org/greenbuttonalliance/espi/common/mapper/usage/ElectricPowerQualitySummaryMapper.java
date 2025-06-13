@@ -22,6 +22,7 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 
 import org.greenbuttonalliance.espi.common.domain.usage.ElectricPowerQualitySummaryEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.ElectricPowerQualitySummaryDto;
+import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -35,7 +36,7 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring", uses = {
     DateTimeIntervalMapper.class
 })
-public interface ElectricPowerQualitySummaryMapper {
+public interface ElectricPowerQualitySummaryMapper extends BaseIdentifiedObjectMapper {
 
     /**
      * Converts an ElectricPowerQualitySummaryEntity to an ElectricPowerQualitySummaryDto.
@@ -44,27 +45,8 @@ public interface ElectricPowerQualitySummaryMapper {
      * @param entity the electric power quality summary entity
      * @return the electric power quality summary DTO
      */
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
-    @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
-    @Mapping(target = "description", source = "description")
-    @Mapping(target = "flickerPlt", source = "flickerPlt")
-    @Mapping(target = "flickerPst", source = "flickerPst")
-    @Mapping(target = "harmonicVoltage", source = "harmonicVoltage")
-    @Mapping(target = "longInterruptions", source = "longInterruptions")
-    @Mapping(target = "mainsVoltage", source = "mainsVoltage")
-    @Mapping(target = "measurementProtocol", source = "measurementProtocol")
-    @Mapping(target = "powerFrequency", source = "powerFrequency")
-    @Mapping(target = "rapidVoltageChanges", source = "rapidVoltageChanges")
-    @Mapping(target = "shortInterruptions", source = "shortInterruptions")
-    @Mapping(target = "summaryInterval", source = "summaryInterval")
-    @Mapping(target = "supplyVoltageDips", source = "supplyVoltageDips")
-    @Mapping(target = "supplyVoltageImbalance", source = "supplyVoltageImbalance")
-    @Mapping(target = "supplyVoltageVariations", source = "supplyVoltageVariations")
-    @Mapping(target = "tempOvervoltage", source = "tempOvervoltage")
+    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "usagePointId", source = "usagePoint", qualifiedByName = "entityToId")
     ElectricPowerQualitySummaryDto toDto(ElectricPowerQualitySummaryEntity entity);
 
     /**
@@ -75,25 +57,10 @@ public interface ElectricPowerQualitySummaryMapper {
      * @return the electric power quality summary entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
-    @Mapping(target = "description", source = "description")
-    @Mapping(target = "flickerPlt", source = "flickerPlt")
-    @Mapping(target = "flickerPst", source = "flickerPst")
-    @Mapping(target = "harmonicVoltage", source = "harmonicVoltage")
-    @Mapping(target = "longInterruptions", source = "longInterruptions")
-    @Mapping(target = "mainsVoltage", source = "mainsVoltage")
-    @Mapping(target = "measurementProtocol", source = "measurementProtocol")
-    @Mapping(target = "powerFrequency", source = "powerFrequency")
-    @Mapping(target = "rapidVoltageChanges", source = "rapidVoltageChanges")
-    @Mapping(target = "shortInterruptions", source = "shortInterruptions")
-    @Mapping(target = "summaryInterval", source = "summaryInterval")
-    @Mapping(target = "supplyVoltageDips", source = "supplyVoltageDips")
-    @Mapping(target = "supplyVoltageImbalance", source = "supplyVoltageImbalance")
-    @Mapping(target = "supplyVoltageVariations", source = "supplyVoltageVariations")
-    @Mapping(target = "tempOvervoltage", source = "tempOvervoltage")
-    @Mapping(target = "usagePoint", ignore = true)
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", ignore = true)
+    @Mapping(target = "updated", ignore = true)
+    @Mapping(target = "usagePoint", ignore = true) // Relationships handled separately
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -107,6 +74,9 @@ public interface ElectricPowerQualitySummaryMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", ignore = true)
+    @Mapping(target = "updated", ignore = true)
     @Mapping(target = "usagePoint", ignore = true)
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)

@@ -22,6 +22,7 @@ package org.greenbuttonalliance.espi.common.mapper.customer;
 
 import org.greenbuttonalliance.espi.common.domain.customer.entity.CustomerAccountEntity;
 import org.greenbuttonalliance.espi.common.dto.customer.CustomerAccountDto;
+import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -33,7 +34,7 @@ import org.mapstruct.MappingTarget;
  * used for JAXB XML marshalling in the Green Button API.
  */
 @Mapper(componentModel = "spring")
-public interface CustomerAccountMapper {
+public interface CustomerAccountMapper extends BaseIdentifiedObjectMapper {
 
     /**
      * Converts a CustomerAccountEntity to a CustomerAccountDto.
@@ -42,23 +43,21 @@ public interface CustomerAccountMapper {
      * @param entity the customer account entity
      * @return the customer account DTO
      */
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
     @Mapping(target = "description", source = "description")
     @Mapping(target = "accountId", source = "accountId")
+    @Mapping(target = "accountNumber", ignore = true) // Not in entity
+    @Mapping(target = "budgetBill", source = "budgetBill")
     @Mapping(target = "billingCycle", source = "billingCycle")
-    @Mapping(target = "branchCode", source = "branchCode")
-    @Mapping(target = "currency", source = "currency")
-    @Mapping(target = "customerName", source = "customerName")
-    @Mapping(target = "isPrePay", source = "isPrePay")
-    @Mapping(target = "isResidential", source = "isResidential")
-    @Mapping(target = "isTaxExempt", source = "isTaxExempt")
     @Mapping(target = "lastBillAmount", source = "lastBillAmount")
-    @Mapping(target = "outstandingBalance", source = "outstandingBalance")
+    @Mapping(target = "transactionDate", ignore = true) // Not in entity
+    @Mapping(target = "customer", ignore = true) // Relationship handled separately
+    @Mapping(target = "customerAgreements", ignore = true) // Relationship handled separately
     CustomerAccountDto toDto(CustomerAccountEntity entity);
 
     /**
@@ -69,21 +68,16 @@ public interface CustomerAccountMapper {
      * @return the customer account entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "accountId", source = "accountId")
+    @Mapping(target = "budgetBill", source = "budgetBill")
     @Mapping(target = "billingCycle", source = "billingCycle")
-    @Mapping(target = "branchCode", source = "branchCode")
-    @Mapping(target = "currency", source = "currency")
-    @Mapping(target = "customerName", source = "customerName")
-    @Mapping(target = "isPrePay", source = "isPrePay")
-    @Mapping(target = "isResidential", source = "isResidential")
-    @Mapping(target = "isTaxExempt", source = "isTaxExempt")
     @Mapping(target = "lastBillAmount", source = "lastBillAmount")
-    @Mapping(target = "outstandingBalance", source = "outstandingBalance")
-    @Mapping(target = "customer", ignore = true)
+    @Mapping(target = "notifications", ignore = true) // Relationship handled separately
+    @Mapping(target = "contactInfo", ignore = true) // Relationship handled separately
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -97,7 +91,11 @@ public interface CustomerAccountMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "customer", ignore = true)
+    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "notifications", ignore = true) // Relationship handled separately
+    @Mapping(target = "contactInfo", ignore = true) // Relationship handled separately
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
