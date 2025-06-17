@@ -58,12 +58,15 @@ public interface ElectricPowerQualitySummaryMapper extends BaseIdentifiedObjectM
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "published", ignore = true)
+    @Mapping(target = "uuidMostSignificantBits", ignore = true)
+    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
+    @Mapping(target = "created", ignore = true)
     @Mapping(target = "updated", ignore = true)
-    @Mapping(target = "usagePoint", ignore = true) // Relationships handled separately
-    @Mapping(target = "relatedLinks", ignore = true)
-    @Mapping(target = "selfLink", ignore = true)
+    @Mapping(target = "published", ignore = true)
     @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "selfLink", ignore = true)
+    @Mapping(target = "relatedLinks", ignore = true)
+    @Mapping(target = "usagePoint", ignore = true) // Relationships handled separately
     ElectricPowerQualitySummaryEntity toEntity(ElectricPowerQualitySummaryDto dto);
 
     /**
@@ -75,11 +78,14 @@ public interface ElectricPowerQualitySummaryMapper extends BaseIdentifiedObjectM
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "published", ignore = true)
+    @Mapping(target = "uuidMostSignificantBits", ignore = true)
+    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
+    @Mapping(target = "created", ignore = true)
     @Mapping(target = "updated", ignore = true)
-    @Mapping(target = "usagePoint", ignore = true)
-    @Mapping(target = "relatedLinks", ignore = true)
-    @Mapping(target = "selfLink", ignore = true)
+    @Mapping(target = "published", ignore = true)
     @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "selfLink", ignore = true)
+    @Mapping(target = "relatedLinks", ignore = true)
+    @Mapping(target = "usagePoint", ignore = true)
     void updateEntity(ElectricPowerQualitySummaryDto dto, @MappingTarget ElectricPowerQualitySummaryEntity entity);
 }

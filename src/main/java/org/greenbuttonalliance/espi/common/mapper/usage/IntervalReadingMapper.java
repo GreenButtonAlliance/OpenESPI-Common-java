@@ -45,15 +45,15 @@ public interface IntervalReadingMapper {
      * @param entity the interval reading entity
      * @return the interval reading DTO
      */
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "uuid", ignore = true) // IntervalReading does not have UUID
+    @Mapping(target = "published", ignore = true) // IntervalReading does not have timestamps
+    @Mapping(target = "updated", ignore = true) // IntervalReading does not have timestamps
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
-    @Mapping(target = "description", source = "description")
+    @Mapping(target = "description", ignore = true) // IntervalReading does not have description
     @Mapping(target = "cost", source = "cost")
-    @Mapping(target = "currency", source = "currency")
+    @Mapping(target = "currency", ignore = true) // IntervalReading does not have currency
     @Mapping(target = "value", source = "value")
     @Mapping(target = "timePeriod", source = "timePeriod")
     @Mapping(target = "readingQualities", source = "readingQualities")
@@ -70,22 +70,14 @@ public interface IntervalReadingMapper {
      * @return the interval reading entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
-    @Mapping(target = "description", source = "description")
     @Mapping(target = "cost", source = "cost")
-    @Mapping(target = "currency", source = "currency")
     @Mapping(target = "value", source = "value")
     @Mapping(target = "timePeriod", source = "timePeriod")
     @Mapping(target = "readingQualities", source = "readingQualities")
     @Mapping(target = "consumptionTier", source = "consumptionTier")
     @Mapping(target = "tou", source = "tou")
     @Mapping(target = "cpp", source = "cpp")
-    @Mapping(target = "intervalBlock", ignore = true)
-    @Mapping(target = "relatedLinks", ignore = true)
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "intervalBlock", ignore = true) // Relationships handled separately
     IntervalReadingEntity toEntity(IntervalReadingDto dto);
 
     /**
@@ -96,9 +88,6 @@ public interface IntervalReadingMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "intervalBlock", ignore = true)
-    @Mapping(target = "relatedLinks", ignore = true)
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "intervalBlock", ignore = true) // Relationships handled separately
     void updateEntity(IntervalReadingDto dto, @MappingTarget IntervalReadingEntity entity);
 }

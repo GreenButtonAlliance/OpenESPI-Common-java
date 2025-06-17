@@ -21,7 +21,7 @@
 package org.greenbuttonalliance.espi.common.dto.usage;
 
 import jakarta.xml.bind.annotation.*;
-import org.greenbuttonalliance.espi.common.dto.DateTimeIntervalDto;
+import org.greenbuttonalliance.espi.common.dto.usage.DateTimeIntervalDto;
 
 /**
  * ElectricPowerQualitySummary DTO record for JAXB XML marshalling/unmarshalling.

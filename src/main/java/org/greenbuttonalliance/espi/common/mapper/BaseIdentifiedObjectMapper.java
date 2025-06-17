@@ -49,10 +49,17 @@ public interface BaseIdentifiedObjectMapper {
         }
         
         try {
-            // Use reflection to call getUuid() method on any IdentifiedObject entity
-            var method = entity.getClass().getMethod("getUuid");
-            Object result = method.invoke(entity);
-            return result != null ? result.toString() : null;
+            // First try getUuid() (lowercase - string field)
+            try {
+                var method = entity.getClass().getMethod("getUuid");
+                Object result = method.invoke(entity);
+                return result != null ? result.toString() : null;
+            } catch (NoSuchMethodException e1) {
+                // Try getUUID() (uppercase - UUID object)
+                var method = entity.getClass().getMethod("getUUID");
+                Object result = method.invoke(entity);
+                return result != null ? result.toString() : null;
+            }
         } catch (Exception e) {
             // Fallback to null if reflection fails
             return null;

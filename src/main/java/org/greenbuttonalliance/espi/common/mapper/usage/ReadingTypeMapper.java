@@ -44,30 +44,7 @@ public interface ReadingTypeMapper extends BaseIdentifiedObjectMapper {
      * @return the reading type DTO
      */
     @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
-    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
-    @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
-    @Mapping(target = "description", source = "description")
-    @Mapping(target = "accumulationBehaviour", source = "accumulationBehaviour")
-    @Mapping(target = "commodity", source = "commodity")
-    @Mapping(target = "consumptionTier", source = "consumptionTier")
-    @Mapping(target = "currency", source = "currency")
-    @Mapping(target = "dataQualifier", source = "dataQualifier")
-    @Mapping(target = "defaultQuality", source = "defaultQuality")
-    @Mapping(target = "flowDirection", source = "flowDirection")
-    @Mapping(target = "intervalLength", source = "intervalLength")
-    @Mapping(target = "kind", source = "kind")
-    @Mapping(target = "phase", source = "phase")
-    @Mapping(target = "powerOfTenMultiplier", source = "powerOfTenMultiplier")
-    @Mapping(target = "timeAttribute", source = "timeAttribute")
-    @Mapping(target = "tou", source = "tou")
-    @Mapping(target = "uom", source = "uom")
-    @Mapping(target = "cpp", source = "cpp")
-    @Mapping(target = "interharmonic", source = "interharmonic")
-    @Mapping(target = "measuringPeriod", source = "measuringPeriod")
-    @Mapping(target = "aggregate", source = "aggregate")
+    @Mapping(target = "argument", source = "argument") // Both DTO and Entity use 'argument' field name
     ReadingTypeDto toDto(ReadingTypeEntity entity);
 
     /**
@@ -78,31 +55,7 @@ public interface ReadingTypeMapper extends BaseIdentifiedObjectMapper {
      * @return the reading type entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "description", source = "description")
-    @Mapping(target = "accumulationBehaviour", source = "accumulationBehaviour")
-    @Mapping(target = "commodity", source = "commodity")
-    @Mapping(target = "consumptionTier", source = "consumptionTier")
-    @Mapping(target = "currency", source = "currency")
-    @Mapping(target = "dataQualifier", source = "dataQualifier")
-    @Mapping(target = "defaultQuality", source = "defaultQuality")
-    @Mapping(target = "flowDirection", source = "flowDirection")
-    @Mapping(target = "intervalLength", source = "intervalLength")
-    @Mapping(target = "kind", source = "kind")
-    @Mapping(target = "phase", source = "phase")
-    @Mapping(target = "powerOfTenMultiplier", source = "powerOfTenMultiplier")
-    @Mapping(target = "timeAttribute", source = "timeAttribute")
-    @Mapping(target = "tou", source = "tou")
-    @Mapping(target = "uom", source = "uom")
-    @Mapping(target = "cpp", source = "cpp")
-    @Mapping(target = "interharmonic", source = "interharmonic")
-    @Mapping(target = "measuringPeriod", source = "measuringPeriod")
-    @Mapping(target = "aggregate", source = "aggregate")
-    @Mapping(target = "relatedLinks", ignore = true)
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "argument", source = "argument") // Both DTO and Entity use 'argument' field name
     ReadingTypeEntity toEntity(ReadingTypeDto dto);
 
     /**
@@ -113,11 +66,6 @@ public interface ReadingTypeMapper extends BaseIdentifiedObjectMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "relatedLinks", ignore = true)
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "argument", source = "argument") // Both DTO and Entity use 'argument' field name
     void updateEntity(ReadingTypeDto dto, @MappingTarget ReadingTypeEntity entity);
 }

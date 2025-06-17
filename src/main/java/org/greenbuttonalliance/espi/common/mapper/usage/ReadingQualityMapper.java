@@ -34,7 +34,7 @@ import org.mapstruct.MappingTarget;
  * used for JAXB XML marshalling in the Green Button API.
  */
 @Mapper(componentModel = "spring")
-public interface ReadingQualityMapper extends BaseIdentifiedObjectMapper {
+public interface ReadingQualityMapper {
 
     /**
      * Converts a ReadingQualityEntity to a ReadingQualityDto.
@@ -43,13 +43,13 @@ public interface ReadingQualityMapper extends BaseIdentifiedObjectMapper {
      * @param entity the reading quality entity
      * @return the reading quality DTO
      */
-    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
-    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "uuid", ignore = true) // ReadingQuality does not have UUID
+    @Mapping(target = "published", ignore = true) // ReadingQuality does not have timestamps
+    @Mapping(target = "updated", ignore = true) // ReadingQuality does not have timestamps
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
-    @Mapping(target = "description", source = "description")
+    @Mapping(target = "description", ignore = true) // ReadingQuality does not have description
     @Mapping(target = "quality", source = "quality")
     ReadingQualityDto toDto(ReadingQualityEntity entity);
 
@@ -61,15 +61,8 @@ public interface ReadingQualityMapper extends BaseIdentifiedObjectMapper {
      * @return the reading quality entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "description", source = "description")
     @Mapping(target = "quality", source = "quality")
-    @Mapping(target = "intervalReading", ignore = true)
-    @Mapping(target = "relatedLinks", ignore = true)
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "intervalReading", ignore = true) // Relationships handled separately
     ReadingQualityEntity toEntity(ReadingQualityDto dto);
 
     /**
@@ -80,12 +73,6 @@ public interface ReadingQualityMapper extends BaseIdentifiedObjectMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "intervalReading", ignore = true)
-    @Mapping(target = "relatedLinks", ignore = true)
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "intervalReading", ignore = true) // Relationships handled separately
     void updateEntity(ReadingQualityDto dto, @MappingTarget ReadingQualityEntity entity);
 }

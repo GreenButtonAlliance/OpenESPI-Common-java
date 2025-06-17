@@ -66,15 +66,18 @@ public interface IntervalBlockMapper extends BaseIdentifiedObjectMapper {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "uuidMostSignificantBits", ignore = true)
+    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "updated", ignore = true)
     @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "selfLink", ignore = true)
+    @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "description", source = "description")
     @Mapping(target = "interval", source = "interval")
     @Mapping(target = "intervalReadings", source = "intervalReadings")
-    @Mapping(target = "meterReading", ignore = true)
-    @Mapping(target = "relatedLinks", ignore = true)
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "meterReading", ignore = true) // Relationships handled separately
     IntervalBlockEntity toEntity(IntervalBlockDto dto);
 
     /**
@@ -86,11 +89,14 @@ public interface IntervalBlockMapper extends BaseIdentifiedObjectMapper {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "uuidMostSignificantBits", ignore = true)
+    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "updated", ignore = true)
     @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "meterReading", ignore = true)
-    @Mapping(target = "relatedLinks", ignore = true)
-    @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
+    @Mapping(target = "selfLink", ignore = true)
+    @Mapping(target = "relatedLinks", ignore = true)
+    @Mapping(target = "meterReading", ignore = true) // Relationships handled separately
     void updateEntity(IntervalBlockDto dto, @MappingTarget IntervalBlockEntity entity);
 }
