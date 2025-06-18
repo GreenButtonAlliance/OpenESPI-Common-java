@@ -21,41 +21,50 @@
 package org.greenbuttonalliance.espi.common.domain.usage;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * Pure JPA/Hibernate entity for ServiceDeliveryPoint without JAXB concerns.
+ * Embeddable component for ServiceDeliveryPoint within UsagePoint.
  * 
  * Represents a physical location where energy services are delivered to a customer.
  * This is typically associated with a physical address and represents the endpoint
  * of the utility's distribution system where energy is consumed.
+ * 
+ * ServiceDeliveryPoint is an embedded element, not a standalone ESPI resource,
+ * so it does not extend IdentifiedObjectEntity and has no separate identity.
  */
-@Entity
-@Table(name = "service_delivery_points", indexes = {
-    @Index(name = "idx_sdp_name", columnList = "name"),
-    @Index(name = "idx_sdp_tariff_profile", columnList = "tariff_profile"),
-    @Index(name = "idx_sdp_customer_agreement", columnList = "customer_agreement")
-})
+@Embeddable
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@ToString(callSuper = true, exclude = {"usagePoints"})
-public class ServiceDeliveryPointEntity extends IdentifiedObjectEntity {
+public class ServiceDeliveryPointEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * ServiceDeliveryPoint mRID - identifier for the service delivery point.
+     * This is embedded within the UsagePoint but has its own identifier.
+     */
+    @Column(name = "sdp_mrid", length = 64)
+    @Size(max = 64, message = "ServiceDeliveryPoint mRID cannot exceed 64 characters")
+    private String mrid;
+    
+    /**
+     * Human-readable description of the service delivery point.
+     * Typically describes the location or purpose of the delivery point.
+     */
+    @Column(name = "sdp_description", length = 512)
+    @Size(max = 512, message = "ServiceDeliveryPoint description cannot exceed 512 characters")
+    private String description;
 
     /**
      * Human-readable name for this service delivery point.
      * Often corresponds to a physical address or location identifier.
      */
-    @Column(name = "name", length = 256)
+    @Column(name = "sdp_name", length = 256)
     @Size(max = 256, message = "Service delivery point name cannot exceed 256 characters")
     private String name;
 
@@ -63,7 +72,7 @@ public class ServiceDeliveryPointEntity extends IdentifiedObjectEntity {
      * Tariff profile identifier for this service delivery point.
      * References the rate schedule or pricing structure applicable to this location.
      */
-    @Column(name = "tariff_profile", length = 256)
+    @Column(name = "sdp_tariff_profile", length = 256)
     @Size(max = 256, message = "Tariff profile cannot exceed 256 characters")
     private String tariffProfile;
 
@@ -71,161 +80,37 @@ public class ServiceDeliveryPointEntity extends IdentifiedObjectEntity {
      * Customer agreement identifier for this service delivery point.
      * References the contractual agreement between utility and customer.
      */
-    @Column(name = "customer_agreement", length = 256)
+    @Column(name = "sdp_customer_agreement", length = 256)
     @Size(max = 256, message = "Customer agreement cannot exceed 256 characters")
     private String customerAgreement;
 
     /**
-     * Manual getter for ID field (Lombok issue workaround).
+     * Constructor with mRID and basic information.
      * 
-     * @return the entity ID
-     */
-    public Long getId() {
-        return this.id;
-    }
-
-    /**
-     * Usage points associated with this service delivery point.
-     * One service delivery point can have multiple usage points (different meters/services).
-     */
-    @OneToMany(mappedBy = "serviceDeliveryPoint", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<UsagePointEntity> usagePoints = new ArrayList<>();
-
-    /**
-     * Constructor with basic service delivery point information.
-     * 
+     * @param mrid the mRID identifier for the service delivery point
      * @param name the name of the service delivery point
      */
-    public ServiceDeliveryPointEntity(String name) {
+    public ServiceDeliveryPointEntity(String mrid, String name) {
+        this.mrid = mrid;
         this.name = name;
     }
 
     /**
-     * Constructor with full service delivery point information.
+     * Constructor with mRID and full service delivery point information.
      * 
+     * @param mrid the mRID identifier
+     * @param description human-readable description
      * @param name the name of the service delivery point
      * @param tariffProfile the tariff profile identifier
      * @param customerAgreement the customer agreement identifier
      */
-    public ServiceDeliveryPointEntity(String name, String tariffProfile, String customerAgreement) {
+    public ServiceDeliveryPointEntity(String mrid, String description, String name, 
+                                    String tariffProfile, String customerAgreement) {
+        this.mrid = mrid;
+        this.description = description;
         this.name = name;
         this.tariffProfile = tariffProfile;
         this.customerAgreement = customerAgreement;
-    }
-
-    // Note: Usage point collection accessors are generated by Lombok @Data
-    // Bidirectional relationship management methods removed - handled by DataCustodian/ThirdParty applications
-
-    /**
-     * Generates the self href for this service delivery point.
-     * 
-     * @return self href string
-     */
-    public String getSelfHref() {
-        return "/espi/1_1/resource/ServiceDeliveryPoint/" + getHashedId();
-    }
-
-    /**
-     * Generates the up href for this service delivery point.
-     * 
-     * @return up href string
-     */
-    public String getUpHref() {
-        return "/espi/1_1/resource/ServiceDeliveryPoint";
-    }
-
-    /**
-     * Overrides the default self href generation to use service delivery point specific logic.
-     * 
-     * @return self href for this service delivery point
-     */
-    @Override
-    protected String generateDefaultSelfHref() {
-        return getSelfHref();
-    }
-
-    /**
-     * Overrides the default up href generation to use service delivery point specific logic.
-     * 
-     * @return up href for this service delivery point
-     */
-    @Override
-    protected String generateDefaultUpHref() {
-        return getUpHref();
-    }
-
-    /**
-     * Merges data from another ServiceDeliveryPointEntity.
-     * Updates service delivery point information while preserving relationships.
-     * 
-     * @param other the other service delivery point entity to merge from
-     */
-    public void merge(ServiceDeliveryPointEntity other) {
-        if (other != null) {
-            super.merge(other);
-            
-            // Update basic information
-            this.name = other.name;
-            this.tariffProfile = other.tariffProfile;
-            this.customerAgreement = other.customerAgreement;
-            
-            // Note: Usage points collection is not merged to preserve existing relationships
-        }
-    }
-
-    /**
-     * Clears all relationships when unlinking the entity.
-     * Simplified - applications handle relationship cleanup.
-     */
-    public void unlink() {
-        clearRelatedLinks();
-        
-        // Simple collection clearing - applications handle bidirectional cleanup
-        usagePoints.clear();
-    }
-
-    /**
-     * Gets the number of usage points for this service delivery point.
-     * 
-     * @return count of usage points
-     */
-    public int getUsagePointCount() {
-        return usagePoints != null ? usagePoints.size() : 0;
-    }
-
-    /**
-     * Checks if this service delivery point has any usage points.
-     * 
-     * @return true if has usage points, false otherwise
-     */
-    public boolean hasUsagePoints() {
-        return usagePoints != null && !usagePoints.isEmpty();
-    }
-
-    /**
-     * Finds a usage point by ID within this service delivery point.
-     * 
-     * @param usagePointId the usage point ID to find
-     * @return the usage point entity, or null if not found
-     */
-    public UsagePointEntity findUsagePointById(Long usagePointId) {
-        if (usagePoints == null || usagePointId == null) {
-            return null;
-        }
-        return usagePoints.stream()
-            .filter(up -> usagePointId.equals(up.getId()))
-            .findFirst()
-            .orElse(null);
-    }
-
-    /**
-     * Checks if this service delivery point contains a usage point with the specified ID.
-     * 
-     * @param usagePointId the usage point ID to check
-     * @return true if contains the usage point, false otherwise
-     */
-    public boolean containsUsagePointId(Long usagePointId) {
-        return findUsagePointById(usagePointId) != null;
     }
 
     /**
@@ -238,7 +123,7 @@ public class ServiceDeliveryPointEntity extends IdentifiedObjectEntity {
         if (name != null && !name.trim().isEmpty()) {
             return name.trim();
         }
-        return "Service Delivery Point " + (getId() != null ? getId() : getHashedId());
+        return "Service Delivery Point " + (mrid != null ? mrid : "Unknown");
     }
 
     /**
@@ -260,70 +145,13 @@ public class ServiceDeliveryPointEntity extends IdentifiedObjectEntity {
     }
 
     /**
-     * Gets the tariff profile, with null safety.
-     * 
-     * @return tariff profile string, or empty string if null
-     */
-    public String getTariffProfileSafe() {
-        return tariffProfile != null ? tariffProfile : "";
-    }
-
-    /**
-     * Gets the customer agreement, with null safety.
-     * 
-     * @return customer agreement string, or empty string if null
-     */
-    public String getCustomerAgreementSafe() {
-        return customerAgreement != null ? customerAgreement : "";
-    }
-
-    /**
      * Validates the service delivery point configuration.
      * 
      * @return true if valid, false otherwise
      */
     public boolean isValid() {
-        // A service delivery point is considered valid if it has at least a name
-        return name != null && !name.trim().isEmpty();
-    }
-
-    /**
-     * Gets a summary string for this service delivery point.
-     * 
-     * @return summary string with key information
-     */
-    public String getSummary() {
-        StringBuilder summary = new StringBuilder();
-        summary.append("SDP: ").append(getDisplayName());
-        
-        if (hasTariffProfile()) {
-            summary.append(" [Tariff: ").append(tariffProfile).append("]");
-        }
-        
-        if (hasCustomerAgreement()) {
-            summary.append(" [Agreement: ").append(customerAgreement).append("]");
-        }
-        
-        summary.append(" (").append(getUsagePointCount()).append(" usage points)");
-        
-        return summary.toString();
-    }
-
-    /**
-     * Compares this service delivery point with another for business equality.
-     * Two service delivery points are considered equal if they have the same name,
-     * tariff profile, and customer agreement.
-     * 
-     * @param other the other service delivery point to compare
-     * @return true if business equal, false otherwise
-     */
-    public boolean isBusinessEqual(ServiceDeliveryPointEntity other) {
-        if (other == null) {
-            return false;
-        }
-        
-        return java.util.Objects.equals(this.name, other.name) &&
-               java.util.Objects.equals(this.tariffProfile, other.tariffProfile) &&
-               java.util.Objects.equals(this.customerAgreement, other.customerAgreement);
+        // A service delivery point is considered valid if it has at least a name or mRID
+        return (name != null && !name.trim().isEmpty()) || 
+               (mrid != null && !mrid.trim().isEmpty());
     }
 }

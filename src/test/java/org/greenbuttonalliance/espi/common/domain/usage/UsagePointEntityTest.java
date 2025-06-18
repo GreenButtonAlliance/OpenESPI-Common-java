@@ -21,6 +21,7 @@
 package org.greenbuttonalliance.espi.common.domain.usage;
 
 import org.greenbuttonalliance.espi.common.domain.ServiceCategory;
+import org.greenbuttonalliance.espi.common.domain.SummaryMeasurement;
 import org.greenbuttonalliance.espi.common.models.atom.LinkType;
 import org.greenbuttonalliance.espi.common.support.SpringBootTestBase;
 import org.junit.jupiter.api.DisplayName;
@@ -29,6 +30,8 @@ import org.junit.jupiter.api.Test;
 
 import jakarta.validation.ConstraintViolation;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -207,15 +210,16 @@ class UsagePointEntityTest extends SpringBootTestBase {
         @Test
         @DisplayName("Should handle service delivery point relationship")
         void shouldHandleServiceDeliveryPoint() {
-            ServiceDeliveryPointEntity sdp = serviceDeliveryPointEntity()
-                .withResourceId("sdp-1")
-                .build();
+            ServiceDeliveryPointEntity sdp = new ServiceDeliveryPointEntity();
+            sdp.setMrid("test-sdp-mrid");
+            sdp.setDescription("Test Service Delivery Point");
 
             UsagePointEntity entity = usagePointEntity()
                 .withServiceDeliveryPoint(sdp)
                 .build();
 
             assertThat(entity.getServiceDeliveryPoint()).isEqualTo(sdp);
+            assertThat(entity.getServiceDeliveryPoint().getMrid()).isEqualTo("test-sdp-mrid");
         }
 
         @Test
@@ -226,7 +230,63 @@ class UsagePointEntityTest extends SpringBootTestBase {
             assertThat(entity.getMeterReadings()).isNotNull().isEmpty();
             assertThat(entity.getUsageSummaries()).isNotNull().isEmpty();
             assertThat(entity.getElectricPowerQualitySummaries()).isNotNull().isEmpty();
+            assertThat(entity.getPnodeRefs()).isNotNull().isEmpty();
+            assertThat(entity.getAggregatedNodeRefs()).isNotNull().isEmpty();
             assertThat(entity.getRelatedLinks()).isNotNull().isEmpty();
+        }
+
+        @Test
+        @DisplayName("Should manage pricing node references relationship")
+        void shouldManagePnodeRefs() {
+            PnodeRefEntity pnodeRef1 = new PnodeRefEntity();
+            pnodeRef1.setApnodeType("LOAD");
+            pnodeRef1.setRef("PNODE_001");
+            pnodeRef1.setStartEffectiveDate(1672531200L);
+            pnodeRef1.setEndEffectiveDate(1672617600L);
+
+            PnodeRefEntity pnodeRef2 = new PnodeRefEntity();
+            pnodeRef2.setApnodeType("GENERATOR");
+            pnodeRef2.setRef("PNODE_002");
+            pnodeRef2.setStartEffectiveDate(1672531200L);
+
+            UsagePointEntity entity = new UsagePointEntity();
+            entity.getPnodeRefs().add(pnodeRef1);
+            entity.getPnodeRefs().add(pnodeRef2);
+            
+            // Set back-references
+            pnodeRef1.setUsagePoint(entity);
+            pnodeRef2.setUsagePoint(entity);
+
+            assertThat(entity.getPnodeRefs()).hasSize(2);
+            assertThat(entity.getPnodeRefs()).containsExactly(pnodeRef1, pnodeRef2);
+            assertThat(pnodeRef1.getUsagePoint()).isEqualTo(entity);
+            assertThat(pnodeRef2.getUsagePoint()).isEqualTo(entity);
+        }
+
+        @Test
+        @DisplayName("Should manage aggregated node references relationship")
+        void shouldManageAggregatedNodeRefs() {
+            // Create pricing node reference for aggregated node ref
+            PnodeRefEntity pnodeRef = new PnodeRefEntity();
+            pnodeRef.setApnodeType("LOAD");
+            pnodeRef.setRef("PNODE_001");
+            pnodeRef.setStartEffectiveDate(1672531200L);
+
+            AggregatedNodeRefEntity aggregatedNodeRef = new AggregatedNodeRefEntity();
+            aggregatedNodeRef.setAnodeType("ZONE");
+            aggregatedNodeRef.setRef("ANODE_001");
+            aggregatedNodeRef.setStartEffectiveDate(1672531200L);
+            aggregatedNodeRef.setEndEffectiveDate(1672617600L);
+            aggregatedNodeRef.setPnodeRef(pnodeRef);
+
+            UsagePointEntity entity = new UsagePointEntity();
+            entity.getAggregatedNodeRefs().add(aggregatedNodeRef);
+            aggregatedNodeRef.setUsagePoint(entity);
+
+            assertThat(entity.getAggregatedNodeRefs()).hasSize(1);
+            assertThat(entity.getAggregatedNodeRefs().get(0)).isEqualTo(aggregatedNodeRef);
+            assertThat(aggregatedNodeRef.getUsagePoint()).isEqualTo(entity);
+            assertThat(aggregatedNodeRef.getPnodeRef()).isEqualTo(pnodeRef);
         }
     }
 
@@ -264,6 +324,91 @@ class UsagePointEntityTest extends SpringBootTestBase {
     }
 
     @Nested
+    @DisplayName("SummaryMeasurement Tests")
+    class SummaryMeasurementTests {
+
+        @Test
+        @DisplayName("Should handle estimated load SummaryMeasurement")
+        void shouldHandleEstimatedLoad() {
+            SummaryMeasurement estimatedLoad = new SummaryMeasurement();
+            estimatedLoad.setPowerOfTenMultiplier("KILO");
+            estimatedLoad.setTimeStamp(1672531200L);
+            estimatedLoad.setUom("WH");
+            estimatedLoad.setValue(5000L);
+            estimatedLoad.setReadingTypeRef("/espi/1_1/resource/ReadingType/1");
+
+            UsagePointEntity entity = new UsagePointEntity();
+            entity.setEstimatedLoad(estimatedLoad);
+
+            assertThat(entity.getEstimatedLoad()).isEqualTo(estimatedLoad);
+            assertThat(entity.getEstimatedLoad().getValue()).isEqualTo(5000L);
+            assertThat(entity.getEstimatedLoad().getUom()).isEqualTo("WH");
+            assertThat(entity.getEstimatedLoad().getPowerOfTenMultiplier()).isEqualTo("KILO");
+            assertThat(entity.getEstimatedLoad().getReadingTypeRef()).isEqualTo("/espi/1_1/resource/ReadingType/1");
+        }
+
+        @Test
+        @DisplayName("Should handle nominal service voltage SummaryMeasurement")
+        void shouldHandleNominalServiceVoltage() {
+            SummaryMeasurement nominalServiceVoltage = new SummaryMeasurement();
+            nominalServiceVoltage.setPowerOfTenMultiplier("NONE");
+            nominalServiceVoltage.setUom("V");
+            nominalServiceVoltage.setValue(240L);
+
+            UsagePointEntity entity = new UsagePointEntity();
+            entity.setNominalServiceVoltage(nominalServiceVoltage);
+
+            assertThat(entity.getNominalServiceVoltage()).isEqualTo(nominalServiceVoltage);
+            assertThat(entity.getNominalServiceVoltage().getValue()).isEqualTo(240L);
+            assertThat(entity.getNominalServiceVoltage().getUom()).isEqualTo("V");
+        }
+
+        @Test
+        @DisplayName("Should handle rated current SummaryMeasurement")
+        void shouldHandleRatedCurrent() {
+            SummaryMeasurement ratedCurrent = new SummaryMeasurement();
+            ratedCurrent.setPowerOfTenMultiplier("NONE");
+            ratedCurrent.setUom("A");
+            ratedCurrent.setValue(100L);
+
+            UsagePointEntity entity = new UsagePointEntity();
+            entity.setRatedCurrent(ratedCurrent);
+
+            assertThat(entity.getRatedCurrent()).isEqualTo(ratedCurrent);
+            assertThat(entity.getRatedCurrent().getValue()).isEqualTo(100L);
+            assertThat(entity.getRatedCurrent().getUom()).isEqualTo("A");
+        }
+
+        @Test
+        @DisplayName("Should handle rated power SummaryMeasurement")
+        void shouldHandleRatedPower() {
+            SummaryMeasurement ratedPower = new SummaryMeasurement();
+            ratedPower.setPowerOfTenMultiplier("KILO");
+            ratedPower.setUom("W");
+            ratedPower.setValue(10L);
+
+            UsagePointEntity entity = new UsagePointEntity();
+            entity.setRatedPower(ratedPower);
+
+            assertThat(entity.getRatedPower()).isEqualTo(ratedPower);
+            assertThat(entity.getRatedPower().getValue()).isEqualTo(10L);
+            assertThat(entity.getRatedPower().getUom()).isEqualTo("W");
+            assertThat(entity.getRatedPower().getPowerOfTenMultiplier()).isEqualTo("KILO");
+        }
+
+        @Test
+        @DisplayName("Should handle null SummaryMeasurement fields")
+        void shouldHandleNullSummaryMeasurements() {
+            UsagePointEntity entity = new UsagePointEntity();
+
+            assertThat(entity.getEstimatedLoad()).isNull();
+            assertThat(entity.getNominalServiceVoltage()).isNull();
+            assertThat(entity.getRatedCurrent()).isNull();
+            assertThat(entity.getRatedPower()).isNull();
+        }
+    }
+
+    @Nested
     @DisplayName("Service Category Tests")
     class ServiceCategoryTests {
 
@@ -293,11 +438,37 @@ class UsagePointEntityTest extends SpringBootTestBase {
     class BusinessLogicTests {
 
         @Test
-        @DisplayName("Should maintain data integrity in complex scenarios")
+        @DisplayName("Should maintain data integrity in complex scenarios with new ESPI elements")
         void shouldMaintainDataIntegrityInComplexScenarios() {
             // Create a complex usage point with all relationships
             UsagePointEntity entity = completeUsagePointEntity();
 
+            // Add new ESPI elements
+            SummaryMeasurement estimatedLoad = new SummaryMeasurement();
+            estimatedLoad.setValue(5000L);
+            estimatedLoad.setUom("WH");
+            estimatedLoad.setPowerOfTenMultiplier("KILO");
+            entity.setEstimatedLoad(estimatedLoad);
+
+            PnodeRefEntity pnodeRef = new PnodeRefEntity();
+            pnodeRef.setApnodeType("LOAD");
+            pnodeRef.setRef("PNODE_001");
+            pnodeRef.setUsagePoint(entity);
+            entity.getPnodeRefs().add(pnodeRef);
+
+            AggregatedNodeRefEntity aggregatedNodeRef = new AggregatedNodeRefEntity();
+            aggregatedNodeRef.setAnodeType("ZONE");
+            aggregatedNodeRef.setRef("ANODE_001");
+            aggregatedNodeRef.setPnodeRef(pnodeRef);
+            aggregatedNodeRef.setUsagePoint(entity);
+            entity.getAggregatedNodeRefs().add(aggregatedNodeRef);
+
+            ServiceDeliveryPointEntity sdp = new ServiceDeliveryPointEntity();
+            sdp.setMrid("sdp-mrid-123");
+            sdp.setDescription("Test SDP");
+            entity.setServiceDeliveryPoint(sdp);
+
+            // Verify original functionality
             assertThat(entity.getUUID()).isNotNull();
             assertThat(entity.getDescription()).isNotNull();
             assertThat(entity.getServiceCategory().getKind()).isEqualTo(ServiceCategory.ELECTRICITY_SERVICE);
@@ -306,6 +477,20 @@ class UsagePointEntityTest extends SpringBootTestBase {
             assertThat(entity.getMeterReadings()).isNotEmpty();
             assertThat(entity.getUsageSummaries()).isNotEmpty();
             assertThat(entity.getElectricPowerQualitySummaries()).isNotEmpty();
+
+            // Verify new ESPI elements
+            assertThat(entity.getEstimatedLoad()).isNotNull();
+            assertThat(entity.getEstimatedLoad().getValue()).isEqualTo(5000L);
+            
+            assertThat(entity.getPnodeRefs()).hasSize(1);
+            assertThat(entity.getPnodeRefs().get(0).getApnodeType()).isEqualTo("LOAD");
+            
+            assertThat(entity.getAggregatedNodeRefs()).hasSize(1);
+            assertThat(entity.getAggregatedNodeRefs().get(0).getAnodeType()).isEqualTo("ZONE");
+            assertThat(entity.getAggregatedNodeRefs().get(0).getPnodeRef()).isEqualTo(pnodeRef);
+            
+            assertThat(entity.getServiceDeliveryPoint()).isNotNull();
+            assertThat(entity.getServiceDeliveryPoint().getMrid()).isEqualTo("sdp-mrid-123");
 
             // Verify nested relationships are properly connected
             MeterReadingEntity meterReading = entity.getMeterReadings().get(0);
@@ -324,10 +509,18 @@ class UsagePointEntityTest extends SpringBootTestBase {
             // Should not throw exceptions when accessing null relationships
             assertThat(entity.getServiceDeliveryPoint()).isNull();
             
+            // SummaryMeasurement fields should be null by default
+            assertThat(entity.getEstimatedLoad()).isNull();
+            assertThat(entity.getNominalServiceVoltage()).isNull();
+            assertThat(entity.getRatedCurrent()).isNull();
+            assertThat(entity.getRatedPower()).isNull();
+            
             // Collections should be initialized but empty
             assertThat(entity.getMeterReadings()).isEmpty();
             assertThat(entity.getUsageSummaries()).isEmpty();
             assertThat(entity.getElectricPowerQualitySummaries()).isEmpty();
+            assertThat(entity.getPnodeRefs()).isEmpty();
+            assertThat(entity.getAggregatedNodeRefs()).isEmpty();
         }
     }
 

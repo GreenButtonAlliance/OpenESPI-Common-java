@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn:*)",
+      "Bash(git -C /Users/donal/Git/GreenButtonAlliance/OpenESPI-GreenButton-Workspace/OpenESPI-AuthorizationServer-java add src/main/java/org/greenbuttonalliance/espi/authserver/service/ClientCertificateService.java)",
+      "Bash(git -C /Users/donal/Git/GreenButtonAlliance/OpenESPI-GreenButton-Workspace/OpenESPI-AuthorizationServer-java add src/main/java/org/greenbuttonalliance/espi/authserver/service/ClientCertificateUserDetailsService.java)",
+      "Bash(git -C /Users/donal/Git/GreenButtonAlliance/OpenESPI-GreenButton-Workspace/OpenESPI-AuthorizationServer-java add src/main/resources/db/migration/mysql/V6_0_0__add_certificate_authentication_support.sql)",
+      "WebFetch(domain:www.naesb.org)"
+    ],
+    "deny": []
+  }
+}

@@ -52,15 +52,20 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element name="timeStamp" type="{http://naesb.org/espi}TimeType" minOccurs="0"/>
  *         &lt;element name="uom" type="{http://naesb.org/espi}UnitSymbol" minOccurs="0"/>
  *         &lt;element name="value" type="{http://naesb.org/espi}Int48" minOccurs="0"/>
+ *         &lt;element name="readingTypeRef" type="xs:anyURI" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * IMPORTANT: readingTypeRef business rules per NAESB ESPI standard:
+ * - If UsagePoint atom 'related' readingType href URL is present: readingTypeRef is redundant and should be null/omitted
+ * - If no 'related' readingType href URL exists: readingTypeRef should default to the atom 'self' link's href URL
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SummaryMeasurement", propOrder = { "powerOfTenMultiplier",
-		"timeStamp", "uom", "value" })
+		"timeStamp", "uom", "value", "readingTypeRef" })
 @Embeddable
 public class SummaryMeasurement extends java.lang.Object {
 
@@ -68,6 +73,7 @@ public class SummaryMeasurement extends java.lang.Object {
 	protected Long timeStamp;
 	protected String uom;
 	protected Long value;
+	protected String readingTypeRef;
 
 	public SummaryMeasurement() {
 	}
@@ -78,6 +84,16 @@ public class SummaryMeasurement extends java.lang.Object {
 		this.timeStamp = timeStamp;
 		this.uom = uom;
 		this.value = value;
+		this.readingTypeRef = null;
+	}
+
+	public SummaryMeasurement(String powerOfTenMultiplier, Long timeStamp,
+			String uom, Long value, String readingTypeRef) {
+		this.powerOfTenMultiplier = powerOfTenMultiplier;
+		this.timeStamp = timeStamp;
+		this.uom = uom;
+		this.value = value;
+		this.readingTypeRef = readingTypeRef;
 	}
 
 	/**
@@ -154,6 +170,29 @@ public class SummaryMeasurement extends java.lang.Object {
 	 */
 	public void setValue(Long value) {
 		this.value = value;
+	}
+
+	/**
+	 * Gets the value of the readingTypeRef property.
+	 * 
+	 * BUSINESS RULE: Per NAESB ESPI standard:
+	 * - Returns null if UsagePoint atom 'related' readingType href URL is present (redundant)
+	 * - Returns atom 'self' link href URL if no 'related' readingType href exists
+	 *
+	 * @return possible object is {@link String }
+	 */
+	public String getReadingTypeRef() {
+		return readingTypeRef;
+	}
+
+	/**
+	 * Sets the value of the readingTypeRef property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 */
+	public void setReadingTypeRef(String value) {
+		this.readingTypeRef = value;
 	}
 
 }

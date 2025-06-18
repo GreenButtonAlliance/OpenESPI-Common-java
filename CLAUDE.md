@@ -1,0 +1,1 @@
+- Change committer name to "dcoffin@greenbuttonalliance.org"

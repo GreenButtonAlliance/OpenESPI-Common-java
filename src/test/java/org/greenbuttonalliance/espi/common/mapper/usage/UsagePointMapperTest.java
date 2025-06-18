@@ -22,6 +22,7 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 
 import org.greenbuttonalliance.espi.common.domain.DateTimeInterval;
 import org.greenbuttonalliance.espi.common.domain.ServiceCategory;
+import org.greenbuttonalliance.espi.common.domain.SummaryMeasurement;
 import org.greenbuttonalliance.espi.common.domain.usage.*;
 import org.greenbuttonalliance.espi.common.dto.usage.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,6 +52,8 @@ class UsagePointMapperTest {
     private ElectricPowerQualitySummaryMapper electricPowerQualitySummaryMapper;
     private ServiceDeliveryPointMapper serviceDeliveryPointMapper;
     private DateTimeIntervalMapper dateTimeIntervalMapper;
+    private PnodeRefMapper pnodeRefMapper;
+    private AggregatedNodeRefMapper aggregatedNodeRefMapper;
 
     @BeforeEach
     void setUp() {
@@ -63,6 +66,8 @@ class UsagePointMapperTest {
         usageSummaryMapper = Mappers.getMapper(UsageSummaryMapper.class);
         electricPowerQualitySummaryMapper = Mappers.getMapper(ElectricPowerQualitySummaryMapper.class);
         serviceDeliveryPointMapper = Mappers.getMapper(ServiceDeliveryPointMapper.class);
+        pnodeRefMapper = Mappers.getMapper(PnodeRefMapper.class);
+        aggregatedNodeRefMapper = Mappers.getMapper(AggregatedNodeRefMapper.class);
         usagePointMapper = Mappers.getMapper(UsagePointMapper.class);
     }
 
@@ -118,6 +123,23 @@ class UsagePointMapperTest {
         ElectricPowerQualitySummaryDto epqsDto = dto.electricPowerQualitySummaries().get(0);
         assertThat(epqsDto.uuid()).isEqualTo("epqs-uuid");
         assertThat(epqsDto.flickerPlt()).isEqualTo(0.5f);
+        
+        // Verify SummaryMeasurement fields (if present)
+        if (dto.estimatedLoad() != null) {
+            assertThat(dto.estimatedLoad().value()).isNotNull();
+            assertThat(dto.estimatedLoad().uom()).isNotNull();
+        }
+        
+        // Verify node references (if present)
+        if (dto.pnodeRefs() != null && !dto.pnodeRefs().isEmpty()) {
+            assertThat(dto.pnodeRefs().get(0).apnodeType()).isNotNull();
+            assertThat(dto.pnodeRefs().get(0).ref()).isNotNull();
+        }
+        
+        if (dto.aggregatedNodeRefs() != null && !dto.aggregatedNodeRefs().isEmpty()) {
+            assertThat(dto.aggregatedNodeRefs().get(0).anodeType()).isNotNull();
+            assertThat(dto.aggregatedNodeRefs().get(0).ref()).isNotNull();
+        }
     }
 
     @Test
@@ -137,6 +159,10 @@ class UsagePointMapperTest {
         // Verify that JPA-specific fields are ignored
         assertThat(entity.getId()).isNull();
         assertThat(entity.getRelatedLinks()).isNull();
+        
+        // Verify new collections are initialized
+        assertThat(entity.getPnodeRefs()).isNotNull();
+        assertThat(entity.getAggregatedNodeRefs()).isNotNull();
 
         // Verify meter readings conversion
         assertThat(entity.getMeterReadings()).hasSize(1);
@@ -156,6 +182,89 @@ class UsagePointMapperTest {
     }
 
     @Test
+    void testSummaryMeasurementMapping() {
+        // Create entity with SummaryMeasurement fields
+        UsagePointEntity entity = new UsagePointEntity();
+        entity.setUuid("test-uuid");
+        entity.setDescription("Test Usage Point");
+        entity.setServiceCategory(ServiceCategory.ELECTRICITY_SERVICE);
+        
+        SummaryMeasurement estimatedLoad = new SummaryMeasurement();
+        estimatedLoad.setValue(5000L);
+        estimatedLoad.setUom("WH");
+        estimatedLoad.setPowerOfTenMultiplier("KILO");
+        estimatedLoad.setReadingTypeRef("/espi/1_1/resource/ReadingType/1");
+        entity.setEstimatedLoad(estimatedLoad);
+        
+        SummaryMeasurement ratedPower = new SummaryMeasurement();
+        ratedPower.setValue(10L);
+        ratedPower.setUom("W");
+        ratedPower.setPowerOfTenMultiplier("KILO");
+        entity.setRatedPower(ratedPower);
+
+        // Convert to DTO
+        UsagePointDto dto = usagePointMapper.toDto(entity);
+
+        // Verify SummaryMeasurement fields are mapped
+        assertThat(dto.estimatedLoad()).isNotNull();
+        assertThat(dto.estimatedLoad().value()).isEqualTo(5000L);
+        assertThat(dto.estimatedLoad().uom()).isEqualTo("WH");
+        assertThat(dto.estimatedLoad().powerOfTenMultiplier()).isEqualTo("KILO");
+        assertThat(dto.estimatedLoad().readingTypeRef()).isEqualTo("/espi/1_1/resource/ReadingType/1");
+        
+        assertThat(dto.ratedPower()).isNotNull();
+        assertThat(dto.ratedPower().value()).isEqualTo(10L);
+        assertThat(dto.ratedPower().uom()).isEqualTo("W");
+        assertThat(dto.ratedPower().powerOfTenMultiplier()).isEqualTo("KILO");
+
+        // Convert back to entity
+        UsagePointEntity convertedEntity = usagePointMapper.toEntity(dto);
+        
+        // Verify round-trip integrity
+        assertThat(convertedEntity.getEstimatedLoad()).isNotNull();
+        assertThat(convertedEntity.getEstimatedLoad().getValue()).isEqualTo(5000L);
+        assertThat(convertedEntity.getRatedPower()).isNotNull();
+        assertThat(convertedEntity.getRatedPower().getValue()).isEqualTo(10L);
+    }
+
+    @Test
+    void testNodeReferencesMapping() {
+        // Create entity with node references
+        UsagePointEntity entity = new UsagePointEntity();
+        entity.setUuid("test-uuid");
+        entity.setDescription("Test Usage Point");
+        entity.setServiceCategory(ServiceCategory.ELECTRICITY_SERVICE);
+        
+        PnodeRefEntity pnodeRef = new PnodeRefEntity();
+        pnodeRef.setApnodeType("LOAD");
+        pnodeRef.setRef("PNODE_001");
+        pnodeRef.setStartEffectiveDate(1672531200L);
+        pnodeRef.setUsagePoint(entity);
+        entity.getPnodeRefs().add(pnodeRef);
+        
+        AggregatedNodeRefEntity aggregatedNodeRef = new AggregatedNodeRefEntity();
+        aggregatedNodeRef.setAnodeType("ZONE");
+        aggregatedNodeRef.setRef("ANODE_001");
+        aggregatedNodeRef.setPnodeRef(pnodeRef);
+        aggregatedNodeRef.setUsagePoint(entity);
+        entity.getAggregatedNodeRefs().add(aggregatedNodeRef);
+
+        // Convert to DTO
+        UsagePointDto dto = usagePointMapper.toDto(entity);
+
+        // Verify node references are mapped
+        assertThat(dto.pnodeRefs()).hasSize(1);
+        assertThat(dto.pnodeRefs().get(0).apnodeType()).isEqualTo("LOAD");
+        assertThat(dto.pnodeRefs().get(0).ref()).isEqualTo("PNODE_001");
+        
+        assertThat(dto.aggregatedNodeRefs()).hasSize(1);
+        assertThat(dto.aggregatedNodeRefs().get(0).anodeType()).isEqualTo("ZONE");
+        assertThat(dto.aggregatedNodeRefs().get(0).ref()).isEqualTo("ANODE_001");
+        assertThat(dto.aggregatedNodeRefs().get(0).pnodeRef()).isNotNull();
+        assertThat(dto.aggregatedNodeRefs().get(0).pnodeRef().apnodeType()).isEqualTo("LOAD");
+    }
+
+    @Test
     void testBidirectionalMapping_PreservesDataIntegrity() {
         // Create original entity
         UsagePointEntity originalEntity = createComplexUsagePointEntity();
@@ -169,12 +278,29 @@ class UsagePointMapperTest {
         assertThat(convertedEntity.getDescription()).isEqualTo(originalEntity.getDescription());
         assertThat(convertedEntity.getServiceCategory()).isEqualTo(originalEntity.getServiceCategory());
         assertThat(convertedEntity.getStatus()).isEqualTo(originalEntity.getStatus());
+        
+        // Verify SummaryMeasurement fields integrity
+        if (originalEntity.getEstimatedLoad() != null) {
+            assertThat(convertedEntity.getEstimatedLoad()).isNotNull();
+            assertThat(convertedEntity.getEstimatedLoad().getValue())
+                .isEqualTo(originalEntity.getEstimatedLoad().getValue());
+        }
+        
+        if (originalEntity.getServiceDeliveryPoint() != null) {
+            assertThat(convertedEntity.getServiceDeliveryPoint()).isNotNull();
+            assertThat(convertedEntity.getServiceDeliveryPoint().getMrid())
+                .isEqualTo(originalEntity.getServiceDeliveryPoint().getMrid());
+        }
 
         // Verify nested data integrity
         assertThat(convertedEntity.getMeterReadings()).hasSize(originalEntity.getMeterReadings().size());
         assertThat(convertedEntity.getUsageSummaries()).hasSize(originalEntity.getUsageSummaries().size());
         assertThat(convertedEntity.getElectricPowerQualitySummaries())
             .hasSize(originalEntity.getElectricPowerQualitySummaries().size());
+        
+        // Verify new collections are preserved
+        assertThat(convertedEntity.getPnodeRefs()).hasSize(originalEntity.getPnodeRefs().size());
+        assertThat(convertedEntity.getAggregatedNodeRefs()).hasSize(originalEntity.getAggregatedNodeRefs().size());
     }
 
     private UsagePointEntity createComplexUsagePointEntity() {
@@ -186,6 +312,41 @@ class UsagePointMapperTest {
         entity.setStatus((short) 1);
         entity.setPublished(OffsetDateTime.now());
         entity.setUpdated(OffsetDateTime.now());
+
+        // Add SummaryMeasurement fields
+        SummaryMeasurement estimatedLoad = new SummaryMeasurement();
+        estimatedLoad.setValue(5000L);
+        estimatedLoad.setUom("WH");
+        estimatedLoad.setPowerOfTenMultiplier("KILO");
+        entity.setEstimatedLoad(estimatedLoad);
+
+        SummaryMeasurement nominalVoltage = new SummaryMeasurement();
+        nominalVoltage.setValue(240L);
+        nominalVoltage.setUom("V");
+        entity.setNominalServiceVoltage(nominalVoltage);
+
+        // Add ServiceDeliveryPoint as embedded
+        ServiceDeliveryPointEntity sdp = new ServiceDeliveryPointEntity();
+        sdp.setMrid("test-sdp-mrid");
+        sdp.setDescription("Test Service Delivery Point");
+        entity.setServiceDeliveryPoint(sdp);
+
+        // Add PnodeRef
+        PnodeRefEntity pnodeRef = new PnodeRefEntity();
+        pnodeRef.setApnodeType("LOAD");
+        pnodeRef.setRef("PNODE_001");
+        pnodeRef.setStartEffectiveDate(1672531200L);
+        pnodeRef.setUsagePoint(entity);
+        entity.getPnodeRefs().add(pnodeRef);
+
+        // Add AggregatedNodeRef
+        AggregatedNodeRefEntity aggregatedNodeRef = new AggregatedNodeRefEntity();
+        aggregatedNodeRef.setAnodeType("ZONE");
+        aggregatedNodeRef.setRef("ANODE_001");
+        aggregatedNodeRef.setStartEffectiveDate(1672531200L);
+        aggregatedNodeRef.setPnodeRef(pnodeRef);
+        aggregatedNodeRef.setUsagePoint(entity);
+        entity.getAggregatedNodeRefs().add(aggregatedNodeRef);
 
         // Create meter reading with nested relationships
         MeterReadingEntity meterReading = createMeterReadingEntity();
@@ -299,9 +460,15 @@ class UsagePointMapperTest {
             ServiceCategory.ELECTRICITY_SERVICE,
             (short) 1,
             null, // serviceDeliveryPoint
+            null, // estimatedLoad
+            null, // nominalServiceVoltage
+            null, // ratedCurrent
+            null, // ratedPower
             Arrays.asList(meterReading),
             Arrays.asList(new UsageSummaryDto()),
-            Arrays.asList(new ElectricPowerQualitySummaryDto())
+            Arrays.asList(new ElectricPowerQualitySummaryDto()),
+            null, // pnodeRefs
+            null  // aggregatedNodeRefs
         );
     }
 }

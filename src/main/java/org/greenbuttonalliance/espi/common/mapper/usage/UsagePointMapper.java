@@ -51,19 +51,20 @@ public interface UsagePointMapper extends BaseIdentifiedObjectMapper {
      * @return the usage point DTO
      */
     @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
-    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
-    @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
-    @Mapping(target = "selfLink", ignore = true)
-    @Mapping(target = "upLink", ignore = true)
     @Mapping(target = "description", source = "description")
     @Mapping(target = "roleFlags", source = "roleFlags")
     @Mapping(target = "serviceCategory", source = "serviceCategory")
     @Mapping(target = "status", source = "status")
+    @Mapping(target = "estimatedLoad", source = "estimatedLoad")
+    @Mapping(target = "nominalServiceVoltage", source = "nominalServiceVoltage")
+    @Mapping(target = "ratedCurrent", source = "ratedCurrent")
+    @Mapping(target = "ratedPower", source = "ratedPower")
     @Mapping(target = "serviceDeliveryPoint", source = "serviceDeliveryPoint")
-    @Mapping(target = "meterReadings", source = "meterReadings")
-    @Mapping(target = "usageSummaries", source = "usageSummaries")
-    @Mapping(target = "electricPowerQualitySummaries", source = "electricPowerQualitySummaries")
+    @Mapping(target = "pnodeRefs", ignore = true) // Not yet implemented
+    @Mapping(target = "aggregatedNodeRefs", ignore = true) // Not yet implemented
+    @Mapping(target = "meterReadings", ignore = true) // Temporarily ignore collections
+    @Mapping(target = "usageSummaries", ignore = true) // Temporarily ignore collections
+    @Mapping(target = "electricPowerQualitySummaries", ignore = true) // Temporarily ignore collections
     UsagePointDto toDto(UsagePointEntity entity);
 
     /**
@@ -74,23 +75,29 @@ public interface UsagePointMapper extends BaseIdentifiedObjectMapper {
      * @return the usage point entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "uuid", ignore = true) // Managed by entity lifecycle
+    @Mapping(target = "published", ignore = true) // Managed by entity lifecycle
+    @Mapping(target = "updated", ignore = true) // Managed by entity lifecycle
     @Mapping(target = "description", source = "description")
     @Mapping(target = "roleFlags", source = "roleFlags")
     @Mapping(target = "serviceCategory", source = "serviceCategory")
     @Mapping(target = "status", source = "status")
+    @Mapping(target = "estimatedLoad", source = "estimatedLoad")
+    @Mapping(target = "nominalServiceVoltage", source = "nominalServiceVoltage")
+    @Mapping(target = "ratedCurrent", source = "ratedCurrent")
+    @Mapping(target = "ratedPower", source = "ratedPower")
     @Mapping(target = "serviceDeliveryPoint", source = "serviceDeliveryPoint")
-    @Mapping(target = "meterReadings", source = "meterReadings")
-    @Mapping(target = "usageSummaries", source = "usageSummaries")
-    @Mapping(target = "electricPowerQualitySummaries", source = "electricPowerQualitySummaries")
+    @Mapping(target = "uri", ignore = true) // Managed separately
+    @Mapping(target = "meterReadings", ignore = true) // Temporarily ignore collections
+    @Mapping(target = "usageSummaries", ignore = true) // Temporarily ignore collections
+    @Mapping(target = "electricPowerQualitySummaries", ignore = true) // Temporarily ignore collections
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
     @Mapping(target = "retailCustomer", ignore = true)
     @Mapping(target = "localTimeParameters", ignore = true)
     @Mapping(target = "subscriptions", ignore = true)
+    @Mapping(target = "subscription", ignore = true)
     UsagePointEntity toEntity(UsagePointDto dto);
 
     /**
@@ -102,13 +109,19 @@ public interface UsagePointMapper extends BaseIdentifiedObjectMapper {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "published", ignore = true) // Managed by entity lifecycle
+    @Mapping(target = "updated", ignore = true) // Managed by entity lifecycle
+    @Mapping(target = "estimatedLoad", source = "estimatedLoad")
+    @Mapping(target = "nominalServiceVoltage", source = "nominalServiceVoltage")
+    @Mapping(target = "ratedCurrent", source = "ratedCurrent")
+    @Mapping(target = "ratedPower", source = "ratedPower")
+    @Mapping(target = "uri", ignore = true) // Managed separately
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
     @Mapping(target = "retailCustomer", ignore = true)
     @Mapping(target = "localTimeParameters", ignore = true)
     @Mapping(target = "subscriptions", ignore = true)
+    @Mapping(target = "subscription", ignore = true)
     void updateEntity(UsagePointDto dto, @MappingTarget UsagePointEntity entity);
 }

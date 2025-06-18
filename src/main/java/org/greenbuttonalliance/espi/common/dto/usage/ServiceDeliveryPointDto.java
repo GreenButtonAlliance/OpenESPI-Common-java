@@ -21,8 +21,6 @@
 package org.greenbuttonalliance.espi.common.dto.usage;
 
 import jakarta.xml.bind.annotation.*;
-import java.time.OffsetDateTime;
-import java.util.List;
 
 /**
  * ServiceDeliveryPoint DTO record for JAXB XML marshalling/unmarshalling.
@@ -30,87 +28,101 @@ import java.util.List;
  * Represents a physical location where energy services are delivered to a customer.
  * This is typically associated with a physical address and represents the endpoint
  * of the utility's distribution system where energy is consumed.
- * Supports Atom protocol XML wrapping.
+ * 
+ * ServiceDeliveryPoint is an embedded element within UsagePoint and contains only
+ * ESPI business data - no Atom metadata (links, timestamps) as it's not a standalone resource.
  */
 @XmlRootElement(name = "ServiceDeliveryPoint", namespace = "http://naesb.org/espi")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "ServiceDeliveryPoint", namespace = "http://naesb.org/espi", propOrder = {
-    "published", "updated", "relatedLinks", "selfLink", "upLink", "description", "name", "tariffProfile", "customerAgreement"
+    "description", "name", "tariffProfile", "customerAgreement", "tariffRiderRefs"
 })
 public record ServiceDeliveryPointDto(
     
-    @XmlTransient
     Long id,
+    String uuid,
+    String description,
+    String name,
+    String tariffProfile,
+    String customerAgreement,
+    TariffRiderRefsDto tariffRiderRefs
+) {
+    
+    @XmlTransient
+    public Long getId() {
+        return id;
+    }
     
     @XmlAttribute(name = "mRID")
-    String uuid,
+    public String getUuid() {
+        return uuid;
+    }
     
-    @XmlElement(name = "published")
-    OffsetDateTime published,
-    
-    @XmlElement(name = "updated")
-    OffsetDateTime updated,
-    
-    @XmlElement(name = "link")
-    @XmlElementWrapper(name = "relatedLinks")
-    List<String> relatedLinks,
-    
-    @XmlElement(name = "selfLink")
-    String selfLink,
-    
-    @XmlElement(name = "upLink")
-    String upLink,
-    
+    /**
+     * Human-readable description of the service delivery point.
+     * Typically describes the location or purpose of the delivery point.
+     */
     @XmlElement(name = "description")
-    String description,
+    public String getDescription() {
+        return description;
+    }
     
+    /**
+     * The name is any free human readable and possibly non unique text 
+     * naming the service delivery point object.
+     */
     @XmlElement(name = "name")
-    String name,
+    public String getName() {
+        return name;
+    }
     
+    /**
+     * A schedule of charges; structure associated with Tariff that allows 
+     * the definition of complex tariff structures such as step and time of use.
+     */
     @XmlElement(name = "tariffProfile")
-    String tariffProfile,
+    public String getTariffProfile() {
+        return tariffProfile;
+    }
     
+    /**
+     * Agreement between the customer and the ServiceSupplier to pay for 
+     * service at a specific service location.
+     */
     @XmlElement(name = "customerAgreement")
-    String customerAgreement
-) {
+    public String getCustomerAgreement() {
+        return customerAgreement;
+    }
+    
+    /**
+     * List of rate options applied to the base tariff profile.
+     * Contains enrollment status and effective dates for each rider.
+     */
+    @XmlElement(name = "tariffRiderRefs")
+    public TariffRiderRefsDto getTariffRiderRefs() {
+        return tariffRiderRefs;
+    }
     
     /**
      * Default constructor for JAXB.
      */
     public ServiceDeliveryPointDto() {
-        this(null, null, null, null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null);
     }
     
     /**
      * Minimal constructor for basic service delivery point data.
      */
     public ServiceDeliveryPointDto(String uuid, String name) {
-        this(null, uuid, null, null, null, null, null, null, name, null, null);
+        this(null, uuid, null, name, null, null, null);
     }
     
     /**
      * Constructor with full service delivery point information.
      */
-    public ServiceDeliveryPointDto(String uuid, String name, String tariffProfile, String customerAgreement) {
-        this(null, uuid, null, null, null, null, null, null, name, tariffProfile, customerAgreement);
-    }
-    
-    /**
-     * Generates the default self href for a service delivery point.
-     * 
-     * @return default self href
-     */
-    public String generateSelfHref() {
-        return uuid != null ? "/espi/1_1/resource/ServiceDeliveryPoint/" + uuid : null;
-    }
-    
-    /**
-     * Generates the default up href for a service delivery point.
-     * 
-     * @return default up href
-     */
-    public String generateUpHref() {
-        return "/espi/1_1/resource/ServiceDeliveryPoint";
+    public ServiceDeliveryPointDto(String uuid, String name, String tariffProfile, 
+                                 String customerAgreement, TariffRiderRefsDto tariffRiderRefs) {
+        this(null, uuid, null, name, tariffProfile, customerAgreement, tariffRiderRefs);
     }
     
     /**
@@ -145,11 +157,61 @@ public record ServiceDeliveryPointDto(
     }
     
     /**
+     * Checks if this service delivery point has tariff riders configured.
+     * 
+     * @return true if tariff riders are present, false otherwise
+     */
+    public boolean hasTariffRiders() {
+        return tariffRiderRefs != null && !tariffRiderRefs.isEmpty();
+    }
+    
+    /**
+     * Gets the number of active (enrolled) tariff riders.
+     * 
+     * @return count of active tariff riders
+     */
+    public int getActiveTariffRiderCount() {
+        return hasTariffRiders() ? tariffRiderRefs.getActiveRiders().size() : 0;
+    }
+    
+    /**
+     * Gets a summary of tariff rider configuration.
+     * 
+     * @return formatted summary string
+     */
+    public String getTariffRiderSummary() {
+        if (!hasTariffRiders()) {
+            return "No tariff riders configured";
+        }
+        return tariffRiderRefs.getSummary();
+    }
+    
+    /**
      * Validates the service delivery point configuration.
      * 
      * @return true if valid, false otherwise
      */
     public boolean isValid() {
         return name != null && !name.trim().isEmpty();
+    }
+    
+    /**
+     * Creates a residential service delivery point with common settings.
+     * 
+     * @param uuid unique identifier
+     * @param name display name
+     * @param customerAgreement customer agreement reference
+     * @return ServiceDeliveryPoint with residential configuration
+     */
+    public static ServiceDeliveryPointDto createResidential(String uuid, String name, String customerAgreement) {
+        return new ServiceDeliveryPointDto(
+            null,
+            uuid,
+            "Residential electric service delivery point",
+            name,
+            "RESIDENTIAL_TOU",
+            customerAgreement,
+            TariffRiderRefsDto.createResidentialRiders()
+        );
     }
 }

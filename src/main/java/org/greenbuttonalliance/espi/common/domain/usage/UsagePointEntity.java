@@ -25,6 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.greenbuttonalliance.espi.common.domain.ServiceCategory;
+import org.greenbuttonalliance.espi.common.domain.SummaryMeasurement;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -82,11 +83,66 @@ public class UsagePointEntity extends IdentifiedObjectEntity {
     private String uri;
 
     /**
-     * Service delivery point associated with this usage point.
-     * One-to-one relationship with cascade operations.
+     * Estimated load for this usage point as SummaryMeasurement.
+     * Contains value, unit of measure, multiplier, and reading type reference.
      */
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "service_delivery_point_id")
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "estimated_load_multiplier")),
+        @AttributeOverride(name = "timeStamp", column = @Column(name = "estimated_load_timestamp")),
+        @AttributeOverride(name = "uom", column = @Column(name = "estimated_load_uom")),
+        @AttributeOverride(name = "value", column = @Column(name = "estimated_load_value")),
+        @AttributeOverride(name = "readingTypeRef", column = @Column(name = "estimated_load_reading_type_ref"))
+    })
+    private SummaryMeasurement estimatedLoad;
+
+    /**
+     * Nominal service voltage for this usage point as SummaryMeasurement.
+     * Contains value, unit of measure, multiplier, and reading type reference.
+     */
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "nominal_voltage_multiplier")),
+        @AttributeOverride(name = "timeStamp", column = @Column(name = "nominal_voltage_timestamp")),
+        @AttributeOverride(name = "uom", column = @Column(name = "nominal_voltage_uom")),
+        @AttributeOverride(name = "value", column = @Column(name = "nominal_voltage_value")),
+        @AttributeOverride(name = "readingTypeRef", column = @Column(name = "nominal_voltage_reading_type_ref"))
+    })
+    private SummaryMeasurement nominalServiceVoltage;
+
+    /**
+     * Rated current for this usage point as SummaryMeasurement.
+     * Contains value, unit of measure, multiplier, and reading type reference.
+     */
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "rated_current_multiplier")),
+        @AttributeOverride(name = "timeStamp", column = @Column(name = "rated_current_timestamp")),
+        @AttributeOverride(name = "uom", column = @Column(name = "rated_current_uom")),
+        @AttributeOverride(name = "value", column = @Column(name = "rated_current_value")),
+        @AttributeOverride(name = "readingTypeRef", column = @Column(name = "rated_current_reading_type_ref"))
+    })
+    private SummaryMeasurement ratedCurrent;
+
+    /**
+     * Rated power for this usage point as SummaryMeasurement.
+     * Contains value, unit of measure, multiplier, and reading type reference.
+     */
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "powerOfTenMultiplier", column = @Column(name = "rated_power_multiplier")),
+        @AttributeOverride(name = "timeStamp", column = @Column(name = "rated_power_timestamp")),
+        @AttributeOverride(name = "uom", column = @Column(name = "rated_power_uom")),
+        @AttributeOverride(name = "value", column = @Column(name = "rated_power_value")),
+        @AttributeOverride(name = "readingTypeRef", column = @Column(name = "rated_power_reading_type_ref"))
+    })
+    private SummaryMeasurement ratedPower;
+
+    /**
+     * Service delivery point embedded within this usage point.
+     * ServiceDeliveryPoint is not a standalone resource but an embedded component.
+     */
+    @Embedded
     private ServiceDeliveryPointEntity serviceDeliveryPoint;
 
     /**
@@ -146,6 +202,22 @@ public class UsagePointEntity extends IdentifiedObjectEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subscription_id")
     private SubscriptionEntity subscription;
+
+    /**
+     * Pricing node references for this usage point.
+     * One-to-many relationship with cascade and orphan removal.
+     */
+    @OneToMany(mappedBy = "usagePoint", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PnodeRefEntity> pnodeRefs = new ArrayList<>();
+
+    /**
+     * Aggregated node references for this usage point.
+     * One-to-many relationship with cascade and orphan removal.
+     */
+    @OneToMany(mappedBy = "usagePoint", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<AggregatedNodeRefEntity> aggregatedNodeRefs = new ArrayList<>();
 
     /**
      * Manual getter for ID field (Lombok issue workaround).
@@ -235,6 +307,8 @@ public class UsagePointEntity extends IdentifiedObjectEntity {
         // electricPowerUsageSummaries removed - deprecated resource
         usageSummaries.clear();
         meterReadings.clear();
+        pnodeRefs.clear();
+        aggregatedNodeRefs.clear();
         retailCustomer = null;
         subscriptions.clear();
         subscription = null;

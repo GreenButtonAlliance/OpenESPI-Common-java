@@ -75,6 +75,12 @@ public class TestDataBuilder {
         private List<ElectricPowerQualitySummaryEntity> electricPowerQualitySummaries = new ArrayList<>();
         private ServiceDeliveryPointEntity serviceDeliveryPoint;
         private List<LinkType> relatedLinks = new ArrayList<>();
+        private SummaryMeasurement estimatedLoad;
+        private SummaryMeasurement nominalServiceVoltage;
+        private SummaryMeasurement ratedCurrent;
+        private SummaryMeasurement ratedPower;
+        private List<PnodeRefEntity> pnodeRefs = new ArrayList<>();
+        private List<AggregatedNodeRefEntity> aggregatedNodeRefs = new ArrayList<>();
 
         public UsagePointEntityBuilder withId(Long id) {
             this.id = id;
@@ -121,6 +127,36 @@ public class TestDataBuilder {
             return this;
         }
 
+        public UsagePointEntityBuilder withEstimatedLoad(SummaryMeasurement estimatedLoad) {
+            this.estimatedLoad = estimatedLoad;
+            return this;
+        }
+
+        public UsagePointEntityBuilder withNominalServiceVoltage(SummaryMeasurement nominalServiceVoltage) {
+            this.nominalServiceVoltage = nominalServiceVoltage;
+            return this;
+        }
+
+        public UsagePointEntityBuilder withRatedCurrent(SummaryMeasurement ratedCurrent) {
+            this.ratedCurrent = ratedCurrent;
+            return this;
+        }
+
+        public UsagePointEntityBuilder withRatedPower(SummaryMeasurement ratedPower) {
+            this.ratedPower = ratedPower;
+            return this;
+        }
+
+        public UsagePointEntityBuilder withPnodeRef(PnodeRefEntity pnodeRef) {
+            this.pnodeRefs.add(pnodeRef);
+            return this;
+        }
+
+        public UsagePointEntityBuilder withAggregatedNodeRef(AggregatedNodeRefEntity aggregatedNodeRef) {
+            this.aggregatedNodeRefs.add(aggregatedNodeRef);
+            return this;
+        }
+
         public UsagePointEntity build() {
             UsagePointEntity entity = new UsagePointEntity();
             entity.setId(id);
@@ -135,6 +171,12 @@ public class TestDataBuilder {
             entity.setElectricPowerQualitySummaries(electricPowerQualitySummaries);
             entity.setServiceDeliveryPoint(serviceDeliveryPoint);
             entity.setRelatedLinks(relatedLinks);
+            entity.setEstimatedLoad(estimatedLoad);
+            entity.setNominalServiceVoltage(nominalServiceVoltage);
+            entity.setRatedCurrent(ratedCurrent);
+            entity.setRatedPower(ratedPower);
+            entity.setPnodeRefs(pnodeRefs);
+            entity.setAggregatedNodeRefs(aggregatedNodeRefs);
             
             // Generate ESPI-compliant UUID5 based on href
             UUID espiId = ESPI_ID_GENERATOR.generateEspiId("UsagePoint", resourceId);
@@ -548,6 +590,18 @@ public class TestDataBuilder {
         return new ApplicationInformationBuilder();
     }
 
+    public static PnodeRefEntityBuilder pnodeRefEntity() {
+        return new PnodeRefEntityBuilder();
+    }
+
+    public static AggregatedNodeRefEntityBuilder aggregatedNodeRefEntity() {
+        return new AggregatedNodeRefEntityBuilder();
+    }
+
+    public static SummaryMeasurementBuilder summaryMeasurement() {
+        return new SummaryMeasurementBuilder();
+    }
+
     // Convenience methods for complex test scenarios
     public static UsagePointEntity completeUsagePointEntity() {
         ReadingTypeEntity readingType = readingTypeEntity().build();
@@ -654,6 +708,159 @@ public class TestDataBuilder {
             entity.setSelfLink(new LinkType("self", selfHref));
             
             return entity;
+        }
+    }
+
+    // PnodeRefEntity Builder
+    public static class PnodeRefEntityBuilder {
+        private Long id;
+        private String apnodeType = "LOAD";
+        private String ref = "PNODE_001";
+        private Long startEffectiveDate = DEFAULT_START_TIME;
+        private Long endEffectiveDate;
+        private UsagePointEntity usagePoint;
+
+        public PnodeRefEntityBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public PnodeRefEntityBuilder withApnodeType(String apnodeType) {
+            this.apnodeType = apnodeType;
+            return this;
+        }
+
+        public PnodeRefEntityBuilder withRef(String ref) {
+            this.ref = ref;
+            return this;
+        }
+
+        public PnodeRefEntityBuilder withStartEffectiveDate(Long startEffectiveDate) {
+            this.startEffectiveDate = startEffectiveDate;
+            return this;
+        }
+
+        public PnodeRefEntityBuilder withEndEffectiveDate(Long endEffectiveDate) {
+            this.endEffectiveDate = endEffectiveDate;
+            return this;
+        }
+
+        public PnodeRefEntityBuilder withUsagePoint(UsagePointEntity usagePoint) {
+            this.usagePoint = usagePoint;
+            return this;
+        }
+
+        public PnodeRefEntity build() {
+            PnodeRefEntity entity = new PnodeRefEntity();
+            entity.setId(id);
+            entity.setApnodeType(apnodeType);
+            entity.setRef(ref);
+            entity.setStartEffectiveDate(startEffectiveDate);
+            entity.setEndEffectiveDate(endEffectiveDate);
+            entity.setUsagePoint(usagePoint);
+            return entity;
+        }
+    }
+
+    // AggregatedNodeRefEntity Builder
+    public static class AggregatedNodeRefEntityBuilder {
+        private Long id;
+        private String anodeType = "ZONE";
+        private String ref = "ANODE_001";
+        private Long startEffectiveDate = DEFAULT_START_TIME;
+        private Long endEffectiveDate;
+        private PnodeRefEntity pnodeRef;
+        private UsagePointEntity usagePoint;
+
+        public AggregatedNodeRefEntityBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public AggregatedNodeRefEntityBuilder withAnodeType(String anodeType) {
+            this.anodeType = anodeType;
+            return this;
+        }
+
+        public AggregatedNodeRefEntityBuilder withRef(String ref) {
+            this.ref = ref;
+            return this;
+        }
+
+        public AggregatedNodeRefEntityBuilder withStartEffectiveDate(Long startEffectiveDate) {
+            this.startEffectiveDate = startEffectiveDate;
+            return this;
+        }
+
+        public AggregatedNodeRefEntityBuilder withEndEffectiveDate(Long endEffectiveDate) {
+            this.endEffectiveDate = endEffectiveDate;
+            return this;
+        }
+
+        public AggregatedNodeRefEntityBuilder withPnodeRef(PnodeRefEntity pnodeRef) {
+            this.pnodeRef = pnodeRef;
+            return this;
+        }
+
+        public AggregatedNodeRefEntityBuilder withUsagePoint(UsagePointEntity usagePoint) {
+            this.usagePoint = usagePoint;
+            return this;
+        }
+
+        public AggregatedNodeRefEntity build() {
+            AggregatedNodeRefEntity entity = new AggregatedNodeRefEntity();
+            entity.setId(id);
+            entity.setAnodeType(anodeType);
+            entity.setRef(ref);
+            entity.setStartEffectiveDate(startEffectiveDate);
+            entity.setEndEffectiveDate(endEffectiveDate);
+            entity.setPnodeRef(pnodeRef);
+            entity.setUsagePoint(usagePoint);
+            return entity;
+        }
+    }
+
+    // SummaryMeasurement Builder
+    public static class SummaryMeasurementBuilder {
+        private String powerOfTenMultiplier = "NONE";
+        private Long timeStamp;
+        private String uom = "WH";
+        private Long value = 1000L;
+        private String readingTypeRef;
+
+        public SummaryMeasurementBuilder withPowerOfTenMultiplier(String powerOfTenMultiplier) {
+            this.powerOfTenMultiplier = powerOfTenMultiplier;
+            return this;
+        }
+
+        public SummaryMeasurementBuilder withTimeStamp(Long timeStamp) {
+            this.timeStamp = timeStamp;
+            return this;
+        }
+
+        public SummaryMeasurementBuilder withUom(String uom) {
+            this.uom = uom;
+            return this;
+        }
+
+        public SummaryMeasurementBuilder withValue(Long value) {
+            this.value = value;
+            return this;
+        }
+
+        public SummaryMeasurementBuilder withReadingTypeRef(String readingTypeRef) {
+            this.readingTypeRef = readingTypeRef;
+            return this;
+        }
+
+        public SummaryMeasurement build() {
+            SummaryMeasurement measurement = new SummaryMeasurement();
+            measurement.setPowerOfTenMultiplier(powerOfTenMultiplier);
+            measurement.setTimeStamp(timeStamp);
+            measurement.setUom(uom);
+            measurement.setValue(value);
+            measurement.setReadingTypeRef(readingTypeRef);
+            return measurement;
         }
     }
 
