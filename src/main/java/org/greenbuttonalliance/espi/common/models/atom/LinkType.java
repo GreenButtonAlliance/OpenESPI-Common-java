@@ -29,6 +29,9 @@
 package org.greenbuttonalliance.espi.common.models.atom;
 
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -73,9 +76,13 @@ public class LinkType implements Serializable {
 
     @XmlAttribute(name = HREF, required = true)
     @XmlSchemaType(name = "anyURI")
+    @Pattern(regexp = "^https?://.*", message = "Link href must be a valid absolute HTTP/HTTPS URL")
+    @NotBlank(message = "Link href cannot be blank")
+    @Size(max = 1024, message = "Link href cannot exceed 1024 characters")
     protected String href;
 
     @XmlAttribute(name = "rel")
+    @Size(max = 255, message = "Link rel cannot exceed 255 characters")
     protected String rel;
 
     public LinkType() {
