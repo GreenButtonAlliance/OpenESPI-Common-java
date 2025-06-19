@@ -82,26 +82,24 @@ public class LocationEntity extends IdentifiedObjectEntity {
      */
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "countryCode", column = @Column(name = "phone1_country_code")),
         @AttributeOverride(name = "areaCode", column = @Column(name = "phone1_area_code")),
         @AttributeOverride(name = "cityCode", column = @Column(name = "phone1_city_code")),
         @AttributeOverride(name = "localNumber", column = @Column(name = "phone1_local_number")),
         @AttributeOverride(name = "extension", column = @Column(name = "phone1_extension"))
     })
-    private OrganisationEntity.TelephoneNumber phone1;
+    private OrganisationEntity.PhoneNumber phone1;
 
     /**
      * Additional phone number.
      */
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "countryCode", column = @Column(name = "phone2_country_code")),
         @AttributeOverride(name = "areaCode", column = @Column(name = "phone2_area_code")),
         @AttributeOverride(name = "cityCode", column = @Column(name = "phone2_city_code")),
         @AttributeOverride(name = "localNumber", column = @Column(name = "phone2_local_number")),
         @AttributeOverride(name = "extension", column = @Column(name = "phone2_extension"))
     })
-    private OrganisationEntity.TelephoneNumber phone2;
+    private OrganisationEntity.PhoneNumber phone2;
 
     /**
      * Electronic address.

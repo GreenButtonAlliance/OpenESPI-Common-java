@@ -25,9 +25,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.greenbuttonalliance.espi.common.domain.customer.enums.CustomerKind;
+import org.greenbuttonalliance.espi.common.domain.usage.TimeConfigurationEntity;
 
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 /**
  * Pure JPA/Hibernate entity for Customer without JAXB concerns.
@@ -110,6 +112,28 @@ public class CustomerEntity extends OrganisationRoleEntity {
      */
     @Column(name = "customer_name", length = 256)
     private String customerName;
+    
+    /**
+     * Customer accounts owned by this customer.
+     * One customer can have multiple customer accounts.
+     */
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CustomerAccountEntity> customerAccounts;
+    
+    /**
+     * Time configuration for this customer.
+     * Each customer has one time configuration.
+     */
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "time_configuration_id")
+    private TimeConfigurationEntity timeConfiguration;
+    
+    /**
+     * Billing statements for this customer.
+     * One customer can have multiple statements.
+     */
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<StatementEntity> statements;
 
     /**
      * Embeddable class for Status

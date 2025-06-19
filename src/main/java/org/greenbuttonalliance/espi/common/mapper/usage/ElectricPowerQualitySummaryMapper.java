@@ -23,6 +23,8 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 import org.greenbuttonalliance.espi.common.domain.usage.ElectricPowerQualitySummaryEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.ElectricPowerQualitySummaryDto;
 import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
+import org.greenbuttonalliance.espi.common.mapper.BaseMapperUtils;
+import org.greenbuttonalliance.espi.common.mapper.DateTimeMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -34,9 +36,10 @@ import org.mapstruct.MappingTarget;
  * used for JAXB XML marshalling in the Green Button API.
  */
 @Mapper(componentModel = "spring", uses = {
+    DateTimeMapper.class,
     DateTimeIntervalMapper.class
 })
-public interface ElectricPowerQualitySummaryMapper extends BaseIdentifiedObjectMapper {
+public interface ElectricPowerQualitySummaryMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
 
     /**
      * Converts an ElectricPowerQualitySummaryEntity to an ElectricPowerQualitySummaryDto.
@@ -45,7 +48,8 @@ public interface ElectricPowerQualitySummaryMapper extends BaseIdentifiedObjectM
      * @param entity the electric power quality summary entity
      * @return the electric power quality summary DTO
      */
-    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "id", ignore = true) // DTO id field not used
+    @Mapping(target = "uuid", source = "id", qualifiedByName = "uuidToString")
     @Mapping(target = "usagePointId", source = "usagePoint", qualifiedByName = "entityToId")
     ElectricPowerQualitySummaryDto toDto(ElectricPowerQualitySummaryEntity entity);
 
@@ -56,10 +60,7 @@ public interface ElectricPowerQualitySummaryMapper extends BaseIdentifiedObjectM
      * @param dto the electric power quality summary DTO
      * @return the electric power quality summary entity
      */
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "uuidMostSignificantBits", ignore = true)
-    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
+    @Mapping(target = "id", source = "uuid", qualifiedByName = "stringToUuid")
     @Mapping(target = "created", ignore = true)
     @Mapping(target = "updated", ignore = true)
     @Mapping(target = "published", ignore = true)
@@ -77,9 +78,6 @@ public interface ElectricPowerQualitySummaryMapper extends BaseIdentifiedObjectM
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "uuidMostSignificantBits", ignore = true)
-    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
     @Mapping(target = "created", ignore = true)
     @Mapping(target = "updated", ignore = true)
     @Mapping(target = "published", ignore = true)

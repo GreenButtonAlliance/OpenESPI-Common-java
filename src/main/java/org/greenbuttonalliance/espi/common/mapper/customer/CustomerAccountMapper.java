@@ -23,6 +23,8 @@ package org.greenbuttonalliance.espi.common.mapper.customer;
 import org.greenbuttonalliance.espi.common.domain.customer.entity.CustomerAccountEntity;
 import org.greenbuttonalliance.espi.common.dto.customer.CustomerAccountDto;
 import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
+import org.greenbuttonalliance.espi.common.mapper.BaseMapperUtils;
+import org.greenbuttonalliance.espi.common.mapper.DateTimeMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -33,8 +35,10 @@ import org.mapstruct.MappingTarget;
  * Handles the conversion between the JPA entity used for persistence and the DTO 
  * used for JAXB XML marshalling in the Green Button API.
  */
-@Mapper(componentModel = "spring")
-public interface CustomerAccountMapper extends BaseIdentifiedObjectMapper {
+@Mapper(componentModel = "spring", uses = {
+    DateTimeMapper.class
+})
+public interface CustomerAccountMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
 
     /**
      * Converts a CustomerAccountEntity to a CustomerAccountDto.
@@ -43,7 +47,7 @@ public interface CustomerAccountMapper extends BaseIdentifiedObjectMapper {
      * @param entity the customer account entity
      * @return the customer account DTO
      */
-    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "uuid", source = "id", qualifiedByName = "uuidToString")
     @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
     @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
@@ -67,8 +71,7 @@ public interface CustomerAccountMapper extends BaseIdentifiedObjectMapper {
      * @param dto the customer account DTO
      * @return the customer account entity
      */
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
+    @Mapping(target = "id", source = "uuid", qualifiedByName = "stringToUuid")
     @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "description", source = "description")
@@ -91,7 +94,6 @@ public interface CustomerAccountMapper extends BaseIdentifiedObjectMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
     @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
     @Mapping(target = "notifications", ignore = true) // Relationship handled separately

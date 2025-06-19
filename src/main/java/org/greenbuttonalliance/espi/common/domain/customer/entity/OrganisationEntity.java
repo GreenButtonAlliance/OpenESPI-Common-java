@@ -44,35 +44,60 @@ import jakarta.persistence.*;
 public class OrganisationEntity extends IdentifiedObjectEntity {
 
     /**
-     * Organisation name
+     * Organisation name (replaces deprecated 'name' field)
      */
-    @Column(name = "name", length = 256)
-    private String name;
+    @Column(name = "organisation_name", length = 256)
+    private String organisationName;
 
     /**
-     * Street and number or rural address.
+     * Street address for this organisation.
      */
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "poBox", column = @Column(name = "street_po_box")),
-        @AttributeOverride(name = "street", column = @Column(name = "street_street")),
-        @AttributeOverride(name = "streetSuffix", column = @Column(name = "street_suffix")),
-        @AttributeOverride(name = "suite", column = @Column(name = "street_suite"))
+        @AttributeOverride(name = "streetDetail", column = @Column(name = "street_detail")),
+        @AttributeOverride(name = "townDetail", column = @Column(name = "street_town")),
+        @AttributeOverride(name = "stateOrProvince", column = @Column(name = "street_state")),
+        @AttributeOverride(name = "postalCode", column = @Column(name = "street_postal")),
+        @AttributeOverride(name = "country", column = @Column(name = "street_country"))
     })
     private StreetAddress streetAddress;
 
     /**
-     * Phone number for this organisation.
+     * Postal address for this organisation.
      */
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "countryCode", column = @Column(name = "phone_country_code")),
-        @AttributeOverride(name = "areaCode", column = @Column(name = "phone_area_code")),
-        @AttributeOverride(name = "cityCode", column = @Column(name = "phone_city_code")),
-        @AttributeOverride(name = "localNumber", column = @Column(name = "phone_local_number")),
-        @AttributeOverride(name = "extension", column = @Column(name = "phone_extension"))
+        @AttributeOverride(name = "streetDetail", column = @Column(name = "postal_detail")),
+        @AttributeOverride(name = "townDetail", column = @Column(name = "postal_town")),
+        @AttributeOverride(name = "stateOrProvince", column = @Column(name = "postal_state")),
+        @AttributeOverride(name = "postalCode", column = @Column(name = "postal_postal")),
+        @AttributeOverride(name = "country", column = @Column(name = "postal_country"))
     })
-    private TelephoneNumber phone;
+    private StreetAddress postalAddress;
+
+    /**
+     * Primary phone number for this organisation.
+     */
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "areaCode", column = @Column(name = "phone1_area_code")),
+        @AttributeOverride(name = "cityCode", column = @Column(name = "phone1_city_code")),
+        @AttributeOverride(name = "localNumber", column = @Column(name = "phone1_local_number")),
+        @AttributeOverride(name = "extension", column = @Column(name = "phone1_extension"))
+    })
+    private PhoneNumber phone1;
+
+    /**
+     * Secondary phone number for this organisation.
+     */
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "areaCode", column = @Column(name = "phone2_area_code")),
+        @AttributeOverride(name = "cityCode", column = @Column(name = "phone2_city_code")),
+        @AttributeOverride(name = "localNumber", column = @Column(name = "phone2_local_number")),
+        @AttributeOverride(name = "extension", column = @Column(name = "phone2_extension"))
+    })
+    private PhoneNumber phone2;
 
     /**
      * Electronic address for this organisation.
@@ -93,29 +118,29 @@ public class OrganisationEntity extends IdentifiedObjectEntity {
     @Data
     @NoArgsConstructor
     public static class StreetAddress {
-        @Column(name = "po_box", length = 256)
-        private String poBox;
+        @Column(name = "street_detail", length = 256)
+        private String streetDetail;
         
-        @Column(name = "street", length = 256) 
-        private String street;
+        @Column(name = "town_detail", length = 256) 
+        private String townDetail;
         
-        @Column(name = "street_suffix", length = 256)
-        private String streetSuffix;
+        @Column(name = "state_or_province", length = 256)
+        private String stateOrProvince;
         
-        @Column(name = "suite", length = 256)
-        private String suite;
+        @Column(name = "postal_code", length = 256)
+        private String postalCode;
+        
+        @Column(name = "country", length = 256)
+        private String country;
     }
 
     /**
-     * Embeddable class for TelephoneNumber
+     * Embeddable class for PhoneNumber
      */
     @Embeddable
     @Data
     @NoArgsConstructor
-    public static class TelephoneNumber {
-        @Column(name = "country_code", length = 256)
-        private String countryCode;
-        
+    public static class PhoneNumber {
         @Column(name = "area_code", length = 256)
         private String areaCode;
         

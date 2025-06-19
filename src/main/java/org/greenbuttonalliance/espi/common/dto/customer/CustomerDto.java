@@ -23,7 +23,7 @@ package org.greenbuttonalliance.espi.common.dto.customer;
 import org.greenbuttonalliance.espi.common.domain.customer.enums.CustomerKind;
 
 import jakarta.xml.bind.annotation.*;
-import java.util.List;
+import java.time.OffsetDateTime;
 
 /**
  * Customer DTO record for JAXB XML marshalling/unmarshalling.
@@ -34,15 +34,15 @@ import java.util.List;
 @XmlRootElement(name = "Customer", namespace = "http://naesb.org/espi/customer")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Customer", namespace = "http://naesb.org/espi/customer", propOrder = {
-    "uuid", "description", "kind", "specialNeed", "status", "pucNumber", "customerAccounts"
+    "organisationRole", "kind", "specialNeed", "vip", "pucNumber", "status", "priority", "locale", "customerName"
 })
 public record CustomerDto(
     
-    @XmlAttribute(name = "mRID")
+    @XmlTransient
     String uuid,
     
-    @XmlElement(name = "description")
-    String description,
+    @XmlElement(name = "OrganisationRole")
+    OrganisationRoleDto organisationRole,
     
     @XmlElement(name = "kind")
     CustomerKind kind,
@@ -50,28 +50,184 @@ public record CustomerDto(
     @XmlElement(name = "specialNeed")
     String specialNeed,
     
-    @XmlElement(name = "status")
-    String status,
+    @XmlElement(name = "vip")
+    Boolean vip,
     
     @XmlElement(name = "pucNumber")
     String pucNumber,
     
-    @XmlElement(name = "CustomerAccount")
-    @XmlElementWrapper(name = "CustomerAccounts")
-    List<CustomerAccountDto> customerAccounts
+    @XmlElement(name = "status")
+    StatusDto status,
+    
+    @XmlElement(name = "priority")
+    PriorityDto priority,
+    
+    @XmlElement(name = "locale")
+    String locale,
+    
+    @XmlElement(name = "customerName")
+    String customerName
 ) {
     
     /**
      * Default constructor for JAXB.
      */
     public CustomerDto() {
-        this(null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null, null);
     }
     
     /**
      * Minimal constructor for basic customer data.
      */
     public CustomerDto(String uuid, CustomerKind kind) {
-        this(uuid, null, kind, null, null, null, null);
+        this(uuid, null, kind, null, null, null, null, null, null, null);
+    }
+    
+    /**
+     * Embeddable DTO for Status.
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static record StatusDto(
+        @XmlElement(name = "value")
+        String value,
+        
+        @XmlElement(name = "dateTime")
+        OffsetDateTime dateTime,
+        
+        @XmlElement(name = "reason")
+        String reason
+    ) {
+        public StatusDto() {
+            this(null, null, null);
+        }
+    }
+    
+    /**
+     * Embeddable DTO for Priority.
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static record PriorityDto(
+        @XmlElement(name = "value")
+        Integer value,
+        
+        @XmlElement(name = "rank")
+        Integer rank,
+        
+        @XmlElement(name = "type")
+        String type
+    ) {
+        public PriorityDto() {
+            this(null, null, null);
+        }
+    }
+    
+    /**
+     * Embeddable DTO for OrganisationRole.
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static record OrganisationRoleDto(
+        @XmlElement(name = "organisation")
+        OrganisationDto organisation
+    ) {
+        public OrganisationRoleDto() {
+            this(null);
+        }
+    }
+    
+    /**
+     * Embeddable DTO for Organisation.
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static record OrganisationDto(
+        @XmlElement(name = "organisationName")
+        String organisationName,
+        
+        @XmlElement(name = "streetAddress")
+        StreetAddressDto streetAddress,
+        
+        @XmlElement(name = "postalAddress")
+        StreetAddressDto postalAddress,
+        
+        @XmlElement(name = "phone1")
+        PhoneNumberDto phone1,
+        
+        @XmlElement(name = "phone2")
+        PhoneNumberDto phone2,
+        
+        @XmlElement(name = "electronicAddress")
+        ElectronicAddressDto electronicAddress
+    ) {
+        public OrganisationDto() {
+            this(null, null, null, null, null, null);
+        }
+    }
+    
+    /**
+     * Embeddable DTO for StreetAddress.
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static record StreetAddressDto(
+        @XmlElement(name = "streetDetail")
+        String streetDetail,
+        
+        @XmlElement(name = "townDetail")
+        String townDetail,
+        
+        @XmlElement(name = "stateOrProvince")
+        String stateOrProvince,
+        
+        @XmlElement(name = "postalCode")
+        String postalCode,
+        
+        @XmlElement(name = "country")
+        String country
+    ) {
+        public StreetAddressDto() {
+            this(null, null, null, null, null);
+        }
+    }
+    
+    /**
+     * Embeddable DTO for PhoneNumber.
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static record PhoneNumberDto(
+        @XmlElement(name = "areaCode")
+        String areaCode,
+        
+        @XmlElement(name = "cityCode")
+        String cityCode,
+        
+        @XmlElement(name = "localNumber")
+        String localNumber,
+        
+        @XmlElement(name = "extension")
+        String extension
+    ) {
+        public PhoneNumberDto() {
+            this(null, null, null, null);
+        }
+    }
+    
+    /**
+     * Embeddable DTO for ElectronicAddress.
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static record ElectronicAddressDto(
+        @XmlElement(name = "email1")
+        String email1,
+        
+        @XmlElement(name = "email2")
+        String email2,
+        
+        @XmlElement(name = "web")
+        String web,
+        
+        @XmlElement(name = "radio")
+        String radio
+    ) {
+        public ElectronicAddressDto() {
+            this(null, null, null, null);
+        }
     }
 }

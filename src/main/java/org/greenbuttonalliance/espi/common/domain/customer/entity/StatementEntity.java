@@ -56,6 +56,14 @@ public class StatementEntity extends IdentifiedObjectEntity {
      */
     @OneToMany(mappedBy = "statement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<StatementRefEntity> statementRefs;
+    
+    /**
+     * Customer that owns this statement.
+     * Many statements can belong to one customer.
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customer;
 
     // Note: Lombok @Data should generate setter methods automatically
 }

@@ -23,6 +23,7 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.UsagePointDto;
 import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
+import org.greenbuttonalliance.espi.common.mapper.BaseMapperUtils;
 import org.greenbuttonalliance.espi.common.mapper.DateTimeMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -39,9 +40,11 @@ import org.mapstruct.MappingTarget;
     MeterReadingMapper.class,
     UsageSummaryMapper.class,
     ElectricPowerQualitySummaryMapper.class,
-    ServiceDeliveryPointMapper.class
+    ServiceDeliveryPointMapper.class,
+    PnodeRefMapper.class,
+    AggregatedNodeRefMapper.class
 })
-public interface UsagePointMapper extends BaseIdentifiedObjectMapper {
+public interface UsagePointMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
 
     /**
      * Converts a UsagePointEntity to a UsagePointDto.
@@ -50,7 +53,7 @@ public interface UsagePointMapper extends BaseIdentifiedObjectMapper {
      * @param entity the usage point entity
      * @return the usage point DTO
      */
-    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "uuid", source = "id", qualifiedByName = "uuidToString")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "roleFlags", source = "roleFlags")
     @Mapping(target = "serviceCategory", source = "serviceCategory")
@@ -60,11 +63,11 @@ public interface UsagePointMapper extends BaseIdentifiedObjectMapper {
     @Mapping(target = "ratedCurrent", source = "ratedCurrent")
     @Mapping(target = "ratedPower", source = "ratedPower")
     @Mapping(target = "serviceDeliveryPoint", source = "serviceDeliveryPoint")
-    @Mapping(target = "pnodeRefs", ignore = true) // Not yet implemented
-    @Mapping(target = "aggregatedNodeRefs", ignore = true) // Not yet implemented
-    @Mapping(target = "meterReadings", ignore = true) // Temporarily ignore collections
-    @Mapping(target = "usageSummaries", ignore = true) // Temporarily ignore collections
-    @Mapping(target = "electricPowerQualitySummaries", ignore = true) // Temporarily ignore collections
+    @Mapping(target = "pnodeRefs", ignore = true) // TODO: Add mapper implementation
+    @Mapping(target = "aggregatedNodeRefs", ignore = true) // TODO: Add mapper implementation
+    @Mapping(target = "meterReadings", ignore = true) // Circular dependency - handle separately
+    @Mapping(target = "usageSummaries", ignore = true) // Circular dependency - handle separately  
+    @Mapping(target = "electricPowerQualitySummaries", ignore = true) // Circular dependency - handle separately
     UsagePointDto toDto(UsagePointEntity entity);
 
     /**
@@ -74,10 +77,10 @@ public interface UsagePointMapper extends BaseIdentifiedObjectMapper {
      * @param dto the usage point DTO
      * @return the usage point entity
      */
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // Managed by entity lifecycle
-    @Mapping(target = "published", ignore = true) // Managed by entity lifecycle
-    @Mapping(target = "updated", ignore = true) // Managed by entity lifecycle
+    @Mapping(target = "id", source = "uuid", qualifiedByName = "stringToUuid")
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "published", ignore = true)
+    @Mapping(target = "updated", ignore = true)
     @Mapping(target = "description", source = "description")
     @Mapping(target = "roleFlags", source = "roleFlags")
     @Mapping(target = "serviceCategory", source = "serviceCategory")
@@ -87,10 +90,12 @@ public interface UsagePointMapper extends BaseIdentifiedObjectMapper {
     @Mapping(target = "ratedCurrent", source = "ratedCurrent")
     @Mapping(target = "ratedPower", source = "ratedPower")
     @Mapping(target = "serviceDeliveryPoint", source = "serviceDeliveryPoint")
-    @Mapping(target = "uri", ignore = true) // Managed separately
-    @Mapping(target = "meterReadings", ignore = true) // Temporarily ignore collections
-    @Mapping(target = "usageSummaries", ignore = true) // Temporarily ignore collections
-    @Mapping(target = "electricPowerQualitySummaries", ignore = true) // Temporarily ignore collections
+    @Mapping(target = "uri", ignore = true)
+    @Mapping(target = "pnodeRefs", ignore = true) // TODO: Add mapper implementation
+    @Mapping(target = "aggregatedNodeRefs", ignore = true) // TODO: Add mapper implementation
+    @Mapping(target = "meterReadings", ignore = true) // Circular dependency - handle separately
+    @Mapping(target = "usageSummaries", ignore = true) // Circular dependency - handle separately
+    @Mapping(target = "electricPowerQualitySummaries", ignore = true) // Circular dependency - handle separately
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -108,7 +113,6 @@ public interface UsagePointMapper extends BaseIdentifiedObjectMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
     @Mapping(target = "published", ignore = true) // Managed by entity lifecycle
     @Mapping(target = "updated", ignore = true) // Managed by entity lifecycle
     @Mapping(target = "estimatedLoad", source = "estimatedLoad")

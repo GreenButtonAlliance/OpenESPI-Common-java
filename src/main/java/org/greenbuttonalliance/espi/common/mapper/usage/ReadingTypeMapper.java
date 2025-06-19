@@ -23,6 +23,8 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 import org.greenbuttonalliance.espi.common.domain.usage.ReadingTypeEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.ReadingTypeDto;
 import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
+import org.greenbuttonalliance.espi.common.mapper.BaseMapperUtils;
+import org.greenbuttonalliance.espi.common.mapper.DateTimeMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -33,8 +35,10 @@ import org.mapstruct.MappingTarget;
  * Handles the conversion between the JPA entity used for persistence and the DTO 
  * used for JAXB XML marshalling in the Green Button API.
  */
-@Mapper(componentModel = "spring")
-public interface ReadingTypeMapper extends BaseIdentifiedObjectMapper {
+@Mapper(componentModel = "spring", uses = {
+    DateTimeMapper.class
+})
+public interface ReadingTypeMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
 
     /**
      * Converts a ReadingTypeEntity to a ReadingTypeDto.
@@ -43,7 +47,8 @@ public interface ReadingTypeMapper extends BaseIdentifiedObjectMapper {
      * @param entity the reading type entity
      * @return the reading type DTO
      */
-    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
+    @Mapping(target = "id", ignore = true) // DTO id field not used
+    @Mapping(target = "uuid", source = "id", qualifiedByName = "uuidToString")
     @Mapping(target = "argument", source = "argument") // Both DTO and Entity use 'argument' field name
     ReadingTypeDto toDto(ReadingTypeEntity entity);
 
@@ -54,7 +59,7 @@ public interface ReadingTypeMapper extends BaseIdentifiedObjectMapper {
      * @param dto the reading type DTO
      * @return the reading type entity
      */
-    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "id", source = "uuid", qualifiedByName = "stringToUuid")
     @Mapping(target = "argument", source = "argument") // Both DTO and Entity use 'argument' field name
     ReadingTypeEntity toEntity(ReadingTypeDto dto);
 

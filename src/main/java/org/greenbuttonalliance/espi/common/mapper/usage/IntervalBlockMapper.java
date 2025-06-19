@@ -23,6 +23,8 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 import org.greenbuttonalliance.espi.common.domain.usage.IntervalBlockEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.IntervalBlockDto;
 import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
+import org.greenbuttonalliance.espi.common.mapper.BaseMapperUtils;
+import org.greenbuttonalliance.espi.common.mapper.DateTimeMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -34,10 +36,11 @@ import org.mapstruct.MappingTarget;
  * used for JAXB XML marshalling in the Green Button API.
  */
 @Mapper(componentModel = "spring", uses = {
+    DateTimeMapper.class,
     IntervalReadingMapper.class,
     DateTimeIntervalMapper.class
 })
-public interface IntervalBlockMapper extends BaseIdentifiedObjectMapper {
+public interface IntervalBlockMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
 
     /**
      * Converts an IntervalBlockEntity to an IntervalBlockDto.
@@ -46,9 +49,10 @@ public interface IntervalBlockMapper extends BaseIdentifiedObjectMapper {
      * @param entity the interval block entity
      * @return the interval block DTO
      */
-    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
-    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "id", ignore = true) // DTO id field not used
+    @Mapping(target = "uuid", source = "id", qualifiedByName = "uuidToString")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localToOffset")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localToOffset")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -64,13 +68,10 @@ public interface IntervalBlockMapper extends BaseIdentifiedObjectMapper {
      * @param dto the interval block DTO
      * @return the interval block entity
      */
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "uuidMostSignificantBits", ignore = true)
-    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
+    @Mapping(target = "id", source = "uuid", qualifiedByName = "stringToUuid")
     @Mapping(target = "created", ignore = true)
     @Mapping(target = "updated", ignore = true)
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetToLocal")
     @Mapping(target = "upLink", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "relatedLinks", ignore = true)
@@ -88,12 +89,9 @@ public interface IntervalBlockMapper extends BaseIdentifiedObjectMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "uuidMostSignificantBits", ignore = true)
-    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
     @Mapping(target = "created", ignore = true)
     @Mapping(target = "updated", ignore = true)
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetToLocal")
     @Mapping(target = "upLink", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "relatedLinks", ignore = true)

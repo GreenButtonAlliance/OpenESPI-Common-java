@@ -22,6 +22,9 @@ package org.greenbuttonalliance.espi.common.mapper.customer;
 
 import org.greenbuttonalliance.espi.common.domain.customer.entity.CustomerEntity;
 import org.greenbuttonalliance.espi.common.dto.customer.CustomerDto;
+import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
+import org.greenbuttonalliance.espi.common.mapper.BaseMapperUtils;
+import org.greenbuttonalliance.espi.common.mapper.DateTimeMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -33,57 +36,55 @@ import org.mapstruct.MappingTarget;
  * used for JAXB XML marshalling in the Green Button API.
  */
 @Mapper(componentModel = "spring", uses = {
-    CustomerAccountMapper.class,
-    CustomerAgreementMapper.class
+    DateTimeMapper.class
 })
-public interface CustomerMapper {
+public interface CustomerMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
 
     /**
      * Converts a CustomerEntity to a CustomerDto.
-     * Maps customer information including accounts and agreements.
+     * Maps customer information including embedded objects.
      * 
      * @param entity the customer entity
      * @return the customer DTO
      */
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "description", source = "description")
+    @Mapping(target = "uuid", source = "id", qualifiedByName = "uuidToString")
+    @Mapping(target = "organisationRole", ignore = true)
     @Mapping(target = "kind", source = "kind")
     @Mapping(target = "specialNeed", source = "specialNeed")
-    @Mapping(target = "status", source = "status.value")  // Map embedded status value
+    @Mapping(target = "vip", source = "vip")
     @Mapping(target = "pucNumber", source = "pucNumber")
-    @Mapping(target = "customerAccounts", source = "customerAccounts")
+    @Mapping(target = "status", source = "status")
+    @Mapping(target = "priority", source = "priority")
+    @Mapping(target = "locale", source = "locale")
+    @Mapping(target = "customerName", source = "customerName")
     CustomerDto toDto(CustomerEntity entity);
 
     /**
      * Converts a CustomerDto to a CustomerEntity.
-     * Maps customer information including accounts and agreements.
+     * Maps customer information including embedded objects.
      * 
      * @param dto the customer DTO
      * @return the customer entity
      */
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "description", source = "description")
+    @Mapping(target = "id", source = "uuid", qualifiedByName = "stringToUuid")
+    @Mapping(target = "organisation", ignore = true)
     @Mapping(target = "kind", source = "kind")
     @Mapping(target = "specialNeed", source = "specialNeed")
-    @Mapping(target = "status.value", source = "status")  // Map to embedded status value
-    @Mapping(target = "status.dateTime", ignore = true)
-    @Mapping(target = "status.reason", ignore = true)
+    @Mapping(target = "vip", source = "vip")
     @Mapping(target = "pucNumber", source = "pucNumber")
-    @Mapping(target = "customerAccounts", source = "customerAccounts")
-    // Properties not in DTO - set to defaults or ignore
-    @Mapping(target = "customerName", ignore = true)
-    @Mapping(target = "locale", ignore = true)
-    @Mapping(target = "vip", ignore = true)
-    @Mapping(target = "priority", ignore = true)
+    @Mapping(target = "status", source = "status")
+    @Mapping(target = "priority", source = "priority")
+    @Mapping(target = "locale", source = "locale")
+    @Mapping(target = "customerName", source = "customerName")
+    @Mapping(target = "customerAccounts", ignore = true)
+    @Mapping(target = "timeConfiguration", ignore = true)
+    @Mapping(target = "statements", ignore = true)
     @Mapping(target = "created", ignore = true)
     @Mapping(target = "updated", ignore = true)
     @Mapping(target = "published", ignore = true)
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
-    @Mapping(target = "uuidMostSignificantBits", ignore = true)
-    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
     CustomerEntity toEntity(CustomerDto dto);
 
     /**
@@ -94,20 +95,23 @@ public interface CustomerMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "status.value", source = "status")
-    @Mapping(target = "status.dateTime", ignore = true)
-    @Mapping(target = "status.reason", ignore = true)
-    @Mapping(target = "customerName", ignore = true)
-    @Mapping(target = "locale", ignore = true)
-    @Mapping(target = "vip", ignore = true)
-    @Mapping(target = "priority", ignore = true)
+    @Mapping(target = "organisation", ignore = true)
+    @Mapping(target = "kind", source = "kind")
+    @Mapping(target = "specialNeed", source = "specialNeed")
+    @Mapping(target = "vip", source = "vip")
+    @Mapping(target = "pucNumber", source = "pucNumber")
+    @Mapping(target = "status", source = "status")
+    @Mapping(target = "priority", source = "priority")
+    @Mapping(target = "locale", source = "locale")
+    @Mapping(target = "customerName", source = "customerName")
+    @Mapping(target = "customerAccounts", ignore = true)
+    @Mapping(target = "timeConfiguration", ignore = true)
+    @Mapping(target = "statements", ignore = true)
     @Mapping(target = "created", ignore = true)
     @Mapping(target = "updated", ignore = true)
     @Mapping(target = "published", ignore = true)
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
-    @Mapping(target = "uuidMostSignificantBits", ignore = true)
-    @Mapping(target = "uuidLeastSignificantBits", ignore = true)
     void updateEntity(CustomerDto dto, @MappingTarget CustomerEntity entity);
 }

@@ -34,56 +34,27 @@ import java.util.List;
  */
 @XmlRootElement(name = "MeterReading", namespace = "http://naesb.org/espi")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MeterReading", namespace = "http://naesb.org/espi", propOrder = {
-    "id", "uuid", "published", "updated", "selfLink", "upLink", "relatedLinks",
-    "description", "readingType", "intervalBlocks"
-})
+@XmlType(name = "MeterReading", namespace = "http://naesb.org/espi")
 public record MeterReadingDto(
     
     @XmlTransient
     Long id,
     
-    @XmlAttribute(name = "mRID")
-    String uuid,
-    
-    @XmlElement(name = "published")
-    OffsetDateTime published,
-    
-    @XmlElement(name = "updated")
-    OffsetDateTime updated,
-    
-    @XmlElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
-    @XmlElementWrapper(name = "links", namespace = "http://www.w3.org/2005/Atom")
-    List<LinkDto> relatedLinks,
-    
-    @XmlElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
-    LinkDto selfLink,
-    
-    @XmlElement(name = "link", namespace = "http://www.w3.org/2005/Atom")
-    LinkDto upLink,
-    
-    @XmlElement(name = "description")
-    String description,
-    
-    @XmlElement(name = "ReadingType")
-    ReadingTypeDto readingType,
-    
-    @XmlElement(name = "IntervalBlock")
-    @XmlElementWrapper(name = "IntervalBlocks")
-    List<IntervalBlockDto> intervalBlocks
+    @XmlTransient
+    String uuid
 ) {
     
     /**
      * Default constructor for JAXB.
      */
     public MeterReadingDto() {
-        this(null, null, null, null, null, null, null, null, null, null);
+        this(null, null);
     }
     
     /**
      * Minimal constructor for basic meter reading data.
      */
     public MeterReadingDto(String uuid) {
-        this(null, uuid, null, null, null, null, null, null, null, null);
+        this(null, uuid);
     }
 }

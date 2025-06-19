@@ -25,6 +25,7 @@ import org.mapstruct.Named;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.UUID;
 
 /**
  * Base mapper interface providing common mapping methods for IdentifiedObject conversions.
@@ -36,10 +37,10 @@ import java.time.ZoneOffset;
 public interface BaseIdentifiedObjectMapper {
 
     /**
-     * Converts entity UUID (calculated from hashedId) to DTO UUID string.
-     * Entities use computed UUIDs based on hashedId for ESPI compliance.
+     * Converts entity UUID to DTO UUID string.
+     * Entities use UUID primary keys for ESPI compliance.
      * 
-     * @param entity any IdentifiedObject entity with getUuid() method
+     * @param entity any IdentifiedObject entity with getId() method
      * @return UUID string for the DTO, or null if entity is null
      */
     @Named("entityUuidToString")
@@ -49,17 +50,10 @@ public interface BaseIdentifiedObjectMapper {
         }
         
         try {
-            // First try getUuid() (lowercase - string field)
-            try {
-                var method = entity.getClass().getMethod("getUuid");
-                Object result = method.invoke(entity);
-                return result != null ? result.toString() : null;
-            } catch (NoSuchMethodException e1) {
-                // Try getUUID() (uppercase - UUID object)
-                var method = entity.getClass().getMethod("getUUID");
-                Object result = method.invoke(entity);
-                return result != null ? result.toString() : null;
-            }
+            // Try getId() method to get UUID directly
+            var method = entity.getClass().getMethod("getId");
+            Object result = method.invoke(entity);
+            return result != null ? result.toString() : null;
         } catch (Exception e) {
             // Fallback to null if reflection fails
             return null;

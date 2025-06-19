@@ -23,6 +23,8 @@ package org.greenbuttonalliance.espi.common.mapper.usage;
 import org.greenbuttonalliance.espi.common.domain.usage.UsageSummaryEntity;
 import org.greenbuttonalliance.espi.common.dto.usage.UsageSummaryDto;
 import org.greenbuttonalliance.espi.common.mapper.BaseIdentifiedObjectMapper;
+import org.greenbuttonalliance.espi.common.mapper.BaseMapperUtils;
+import org.greenbuttonalliance.espi.common.mapper.DateTimeMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -34,9 +36,10 @@ import org.mapstruct.MappingTarget;
  * used for JAXB XML marshalling in the Green Button API.
  */
 @Mapper(componentModel = "spring", uses = {
+    DateTimeMapper.class,
     DateTimeIntervalMapper.class
 })
-public interface UsageSummaryMapper extends BaseIdentifiedObjectMapper {
+public interface UsageSummaryMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
 
     /**
      * Converts a UsageSummaryEntity to a UsageSummaryDto.
@@ -45,9 +48,10 @@ public interface UsageSummaryMapper extends BaseIdentifiedObjectMapper {
      * @param entity the usage summary entity
      * @return the usage summary DTO
      */
-    @Mapping(target = "uuid", source = "entity", qualifiedByName = "entityUuidToString")
-    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "id", ignore = true) // DTO id field not used
+    @Mapping(target = "uuid", source = "id", qualifiedByName = "uuidToString")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localToOffset")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localToOffset")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -68,10 +72,9 @@ public interface UsageSummaryMapper extends BaseIdentifiedObjectMapper {
      * @param dto the usage summary DTO
      * @return the usage summary entity
      */
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "id", source = "uuid", qualifiedByName = "stringToUuid")
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetToLocal")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetToLocal")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "billingPeriod", source = "billingPeriod")
     @Mapping(target = "billLastPeriod", source = "billLastPeriod")
@@ -93,9 +96,8 @@ public interface UsageSummaryMapper extends BaseIdentifiedObjectMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", ignore = true) // UUID is computed from hashedId
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetToLocal")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetToLocal")
     @Mapping(target = "usagePoint", ignore = true) // Relationship handled separately
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)

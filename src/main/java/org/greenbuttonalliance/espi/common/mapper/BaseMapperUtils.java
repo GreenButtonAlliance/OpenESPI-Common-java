@@ -36,34 +36,8 @@ import java.util.UUID;
  */
 public interface BaseMapperUtils {
 
-    /**
-     * Converts UUID to String representation for entity mapping.
-     * 
-     * @param uuid the UUID to convert
-     * @return string representation of UUID, or null if input is null
-     */
-    @Named("entityUuidToString")
-    default String entityUuidToString(UUID uuid) {
-        return uuid != null ? uuid.toString() : null;
-    }
-
-    /**
-     * Converts String to UUID for entity mapping.
-     * 
-     * @param uuidString the UUID string to convert
-     * @return UUID object, or null if input is null or invalid
-     */
-    @Named("stringToEntityUuid")
-    default UUID stringToEntityUuid(String uuidString) {
-        if (uuidString == null || uuidString.trim().isEmpty()) {
-            return null;
-        }
-        try {
-            return UUID.fromString(uuidString.trim());
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
-    }
+    // UUID conversion methods removed to avoid conflicts with BaseIdentifiedObjectMapper
+    // Use DateTimeMapper.uuidToString and DateTimeMapper.stringToUuid instead
 
     /**
      * Extracts UUID from IdentifiedObjectEntity as string.

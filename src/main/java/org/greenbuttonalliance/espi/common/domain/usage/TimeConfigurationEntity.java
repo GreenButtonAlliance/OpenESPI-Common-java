@@ -92,6 +92,13 @@ public class TimeConfigurationEntity extends IdentifiedObjectEntity {
      */
     @OneToMany(mappedBy = "localTimeParameters", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<UsagePointEntity> usagePoints = new ArrayList<>();
+    
+    /**
+     * Customer that uses this time configuration.
+     * One-to-one relationship - each time configuration belongs to one customer.
+     */
+    @OneToOne(mappedBy = "timeConfiguration", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private org.greenbuttonalliance.espi.common.domain.customer.entity.CustomerEntity customer;
 
     /**
      * Constructor with timezone offset.

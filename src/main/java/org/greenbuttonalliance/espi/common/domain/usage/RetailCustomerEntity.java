@@ -320,7 +320,7 @@ public class RetailCustomerEntity extends IdentifiedObjectEntity {
      * 
      * @return the entity ID
      */
-    public Long getId() {
+    public UUID getId() {
         return this.id;
     }
 

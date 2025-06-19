@@ -84,4 +84,12 @@ public class CustomerAccountEntity extends DocumentEntity {
      */
     @Column(name = "account_id", length = 256)
     private String accountId;
+    
+    /**
+     * Customer that owns this account.
+     * Many customer accounts can belong to one customer.
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customer;
 }
