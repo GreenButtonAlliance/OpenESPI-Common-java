@@ -28,19 +28,17 @@ import lombok.ToString;
 import jakarta.persistence.*;
 
 /**
- * Pure JPA/Hibernate entity for WorkLocation without JAXB concerns.
+ * Abstract base class for AssetContainer without JAXB concerns.
  * 
- * Information about a particular location for various forms of work.
+ * Asset that is aggregation of other assets such as conductors, transformers, 
+ * switchgear, land, fences, buildings, equipment, vehicles, etc.
  */
-@Entity
-@Table(name = "work_locations", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
-})
+@MappedSuperclass
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class WorkLocationEntity extends LocationEntity {
-    // WorkLocation is simply a Location specialized for work activities
-    // No additional fields beyond those inherited from LocationEntity
+public abstract class AssetContainer extends Asset {
+    // AssetContainer is simply an Asset that can contain other assets
+    // No additional fields beyond those inherited from Asset
 }

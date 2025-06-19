@@ -44,7 +44,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"futureStatus"})
-public class CustomerAgreementEntity extends AgreementEntity {
+public class CustomerAgreementEntity extends Agreement {
 
     /**
      * Load management code.

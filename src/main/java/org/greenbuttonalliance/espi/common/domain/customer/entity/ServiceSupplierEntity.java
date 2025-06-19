@@ -24,6 +24,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 import org.greenbuttonalliance.espi.common.domain.customer.enums.SupplierKind;
 
 import jakarta.persistence.*;
@@ -42,7 +43,13 @@ import java.time.OffsetDateTime;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class ServiceSupplierEntity extends OrganisationRoleEntity {
+public class ServiceSupplierEntity extends IdentifiedObject {
+
+    /**
+     * Organisation having this role.
+     */
+    @Embedded
+    private Organisation organisation;
 
     /**
      * Kind of supplier.

@@ -29,19 +29,16 @@ import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 import jakarta.persistence.*;
 
 /**
- * Pure JPA/Hibernate entity for Organisation without JAXB concerns.
+ * Embeddable class for Organisation information.
  * 
  * Organisation that might have roles as utility, customer, supplier, manufacturer, etc.
+ * This is an embeddable component, not a standalone entity.
  */
-@Entity
-@Table(name = "organisations", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
-})
+@Embeddable
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@ToString(callSuper = true)
-public class OrganisationEntity extends IdentifiedObject {
+@ToString
+public class Organisation {
 
     /**
      * Organisation name (replaces deprecated 'name' field)
@@ -53,62 +50,30 @@ public class OrganisationEntity extends IdentifiedObject {
      * Street address for this organisation.
      */
     @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "streetDetail", column = @Column(name = "street_detail")),
-        @AttributeOverride(name = "townDetail", column = @Column(name = "street_town")),
-        @AttributeOverride(name = "stateOrProvince", column = @Column(name = "street_state")),
-        @AttributeOverride(name = "postalCode", column = @Column(name = "street_postal")),
-        @AttributeOverride(name = "country", column = @Column(name = "street_country"))
-    })
     private StreetAddress streetAddress;
 
     /**
      * Postal address for this organisation.
      */
     @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "streetDetail", column = @Column(name = "postal_detail")),
-        @AttributeOverride(name = "townDetail", column = @Column(name = "postal_town")),
-        @AttributeOverride(name = "stateOrProvince", column = @Column(name = "postal_state")),
-        @AttributeOverride(name = "postalCode", column = @Column(name = "postal_postal")),
-        @AttributeOverride(name = "country", column = @Column(name = "postal_country"))
-    })
     private StreetAddress postalAddress;
 
     /**
      * Primary phone number for this organisation.
      */
     @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "areaCode", column = @Column(name = "phone1_area_code")),
-        @AttributeOverride(name = "cityCode", column = @Column(name = "phone1_city_code")),
-        @AttributeOverride(name = "localNumber", column = @Column(name = "phone1_local_number")),
-        @AttributeOverride(name = "extension", column = @Column(name = "phone1_extension"))
-    })
     private PhoneNumber phone1;
 
     /**
      * Secondary phone number for this organisation.
      */
     @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "areaCode", column = @Column(name = "phone2_area_code")),
-        @AttributeOverride(name = "cityCode", column = @Column(name = "phone2_city_code")),
-        @AttributeOverride(name = "localNumber", column = @Column(name = "phone2_local_number")),
-        @AttributeOverride(name = "extension", column = @Column(name = "phone2_extension"))
-    })
     private PhoneNumber phone2;
 
     /**
      * Electronic address for this organisation.
      */
     @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "email1", column = @Column(name = "electronic_email1")),
-        @AttributeOverride(name = "email2", column = @Column(name = "electronic_email2")),
-        @AttributeOverride(name = "web", column = @Column(name = "electronic_web")),
-        @AttributeOverride(name = "radio", column = @Column(name = "electronic_radio"))
-    })
     private ElectronicAddress electronicAddress;
 
     /**
@@ -121,7 +86,7 @@ public class OrganisationEntity extends IdentifiedObject {
         @Column(name = "street_detail", length = 256)
         private String streetDetail;
         
-        @Column(name = "town_detail", length = 256) 
+        @Column(name = "town_detail", length = 256)
         private String townDetail;
         
         @Column(name = "state_or_province", length = 256)

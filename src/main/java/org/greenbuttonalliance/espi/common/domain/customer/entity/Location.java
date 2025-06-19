@@ -30,21 +30,19 @@ import jakarta.persistence.*;
 import java.util.List;
 
 /**
- * Pure JPA/Hibernate entity for Location without JAXB concerns.
+ * Abstract base class for Location types.
  * 
  * The place, scene, or point of something where someone or something has been, is, and/or will be 
  * at a given moment in time. It can be defined with one or more position points (coordinates) 
  * in a given coordinate system.
+ * This is an abstract mapped superclass, not a concrete entity.
  */
-@Entity
-@Table(name = "locations", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
-})
+@MappedSuperclass
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@ToString(callSuper = true, exclude = {"positionPoints"})
-public class LocationEntity extends IdentifiedObject {
+@ToString(callSuper = true)
+public abstract class Location extends IdentifiedObject {
 
     /**
      * Classification by utility's corporate standards and practices, relative to the location itself 
@@ -63,7 +61,7 @@ public class LocationEntity extends IdentifiedObject {
         @AttributeOverride(name = "streetSuffix", column = @Column(name = "main_street_suffix")),
         @AttributeOverride(name = "suite", column = @Column(name = "main_suite"))
     })
-    private OrganisationEntity.StreetAddress mainAddress;
+    private Organisation.StreetAddress mainAddress;
 
     /**
      * Secondary address of the location. For example, PO Box address may have different ZIP code than that in the 'mainAddress'.
@@ -75,7 +73,7 @@ public class LocationEntity extends IdentifiedObject {
         @AttributeOverride(name = "streetSuffix", column = @Column(name = "secondary_street_suffix")),
         @AttributeOverride(name = "suite", column = @Column(name = "secondary_suite"))
     })
-    private OrganisationEntity.StreetAddress secondaryAddress;
+    private Organisation.StreetAddress secondaryAddress;
 
     /**
      * Phone number.
@@ -87,7 +85,7 @@ public class LocationEntity extends IdentifiedObject {
         @AttributeOverride(name = "localNumber", column = @Column(name = "phone1_local_number")),
         @AttributeOverride(name = "extension", column = @Column(name = "phone1_extension"))
     })
-    private OrganisationEntity.PhoneNumber phone1;
+    private Organisation.PhoneNumber phone1;
 
     /**
      * Additional phone number.
@@ -99,7 +97,7 @@ public class LocationEntity extends IdentifiedObject {
         @AttributeOverride(name = "localNumber", column = @Column(name = "phone2_local_number")),
         @AttributeOverride(name = "extension", column = @Column(name = "phone2_extension"))
     })
-    private OrganisationEntity.PhoneNumber phone2;
+    private Organisation.PhoneNumber phone2;
 
     /**
      * Electronic address.
@@ -111,7 +109,7 @@ public class LocationEntity extends IdentifiedObject {
         @AttributeOverride(name = "web", column = @Column(name = "electronic_web")),
         @AttributeOverride(name = "radio", column = @Column(name = "electronic_radio"))
     })
-    private OrganisationEntity.ElectronicAddress electronicAddress;
+    private Organisation.ElectronicAddress electronicAddress;
 
     /**
      * (if applicable) Reference to geographical information source, often external to the utility.

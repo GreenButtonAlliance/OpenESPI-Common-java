@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Service interface for ServiceLocation management.
+ * Service interface for ServiceLocationEntity management.
  * 
  * Handles real estate location operations including addresses, access methods,
  * inspection requirements, and service delivery coordination.
@@ -111,7 +111,7 @@ public interface ServiceLocationService {
     /**
      * Count total service locations.
      */
-    long countServiceLocations();
+    long countServiceLocationEntitys();
 
     /**
      * Count locations needing inspection.

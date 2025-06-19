@@ -24,30 +24,20 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 
 import jakarta.persistence.*;
 
 /**
- * Pure JPA/Hibernate entity for OrganisationRole without JAXB concerns.
+ * Abstract base class for WorkLocation without JAXB concerns.
  * 
- * Identifies a way in which an organisation may participate in the utility enterprise.
- * Organisation roles are not mutually exclusive; hence one organisation typically has many roles.
+ * Information about a particular location for various forms of work.
  */
-@Entity
-@Table(name = "organisation_roles", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
-})
+@MappedSuperclass
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class OrganisationRoleEntity extends IdentifiedObject {
-
-    /**
-     * Organisation having this role.
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organisation_id")
-    private OrganisationEntity organisation;
+public abstract class WorkLocation extends Location {
+    // WorkLocation is simply a Location specialized for work activities
+    // No additional fields beyond those inherited from Location
 }

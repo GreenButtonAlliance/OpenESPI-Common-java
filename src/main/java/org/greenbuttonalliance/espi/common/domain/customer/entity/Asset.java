@@ -30,21 +30,18 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 /**
- * Pure JPA/Hibernate entity for Asset without JAXB concerns.
+ * Abstract base class for Asset without JAXB concerns.
  * 
  * Tangible resource of the utility, including power system equipment, various end devices, 
  * cabinets, buildings, etc. Asset description places emphasis on the physical characteristics 
  * of the equipment fulfilling that role.
  */
-@Entity
-@Table(name = "assets", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
-})
+@MappedSuperclass
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class AssetEntity extends IdentifiedObject {
+public abstract class Asset extends IdentifiedObject {
 
     /**
      * Utility-specific classification of Asset and its subtypes, according to their corporate standards, 
@@ -87,37 +84,18 @@ public class AssetEntity extends IdentifiedObject {
      * Electronic address.
      */
     @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "email1", column = @Column(name = "electronic_email1")),
-        @AttributeOverride(name = "email2", column = @Column(name = "electronic_email2")),
-        @AttributeOverride(name = "web", column = @Column(name = "electronic_web")),
-        @AttributeOverride(name = "radio", column = @Column(name = "electronic_radio"))
-    })
-    private OrganisationEntity.ElectronicAddress electronicAddress;
+    private Organisation.ElectronicAddress electronicAddress;
 
     /**
      * Lifecycle dates for this asset.
      */
     @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "installationDate", column = @Column(name = "lifecycle_installation_date")),
-        @AttributeOverride(name = "manufacturedDate", column = @Column(name = "lifecycle_manufactured_date")),
-        @AttributeOverride(name = "purchaseDate", column = @Column(name = "lifecycle_purchase_date")),
-        @AttributeOverride(name = "receivedDate", column = @Column(name = "lifecycle_received_date")),
-        @AttributeOverride(name = "retirementDate", column = @Column(name = "lifecycle_retirement_date")),
-        @AttributeOverride(name = "removalDate", column = @Column(name = "lifecycle_removal_date"))
-    })
     private LifecycleDate lifecycle;
 
     /**
      * Information on acceptance test.
      */
     @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "success", column = @Column(name = "acceptance_success")),
-        @AttributeOverride(name = "dateTime", column = @Column(name = "acceptance_date_time")),
-        @AttributeOverride(name = "type", column = @Column(name = "acceptance_type"))
-    })
     private AcceptanceTest acceptanceTest;
 
     /**
@@ -130,18 +108,13 @@ public class AssetEntity extends IdentifiedObject {
     /**
      * Whenever an asset is reconditioned, percentage of expected life for the asset when it was new; zero for new devices.
      */
-    @Column(name = "initial_loss_of_life", precision = 5, scale = 2)
+    @Column(name = "initial_loss_of_life")
     private BigDecimal initialLossOfLife;
 
     /**
      * Status of this asset.
      */
     @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "value", column = @Column(name = "status_value")),
-        @AttributeOverride(name = "dateTime", column = @Column(name = "status_date_time")),
-        @AttributeOverride(name = "reason", column = @Column(name = "status_reason"))
-    })
     private CustomerEntity.Status status;
 
     /**

@@ -30,20 +30,18 @@ import jakarta.persistence.*;
 import java.time.OffsetDateTime;
 
 /**
- * Pure JPA/Hibernate entity for Document without JAXB concerns.
+ * Abstract base class for Document types.
  * 
  * Parent class for different groupings of information collected and managed as a part of a business process.
  * It will frequently contain references to other objects, such as assets, people and power system resources.
+ * This is an abstract mapped superclass, not a concrete entity.
  */
-@Entity
-@Table(name = "documents", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
-})
+@MappedSuperclass
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class DocumentEntity extends IdentifiedObject {
+public abstract class Document extends IdentifiedObject {
 
     /**
      * Date and time that this document was created.

@@ -24,24 +24,33 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.greenbuttonalliance.espi.common.domain.DateTimeInterval;
 
 import jakarta.persistence.*;
+import java.time.OffsetDateTime;
 
 /**
- * Pure JPA/Hibernate entity for AssetContainer without JAXB concerns.
+ * Abstract base class for Agreement without JAXB concerns.
  * 
- * Asset that is aggregation of other assets such as conductors, transformers, 
- * switchgear, land, fences, buildings, equipment, vehicles, etc.
+ * Formal agreement between two parties defining the terms and conditions for a set of services. 
+ * The specifics of the services are, in turn, defined via one or more service agreements.
  */
-@Entity
-@Table(name = "asset_containers", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
-})
+@MappedSuperclass
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class AssetContainerEntity extends AssetEntity {
-    // AssetContainer is simply an Asset that can contain other assets
-    // No additional fields beyond those inherited from AssetEntity
+public abstract class Agreement extends Document {
+
+    /**
+     * Date this agreement was consummated among associated persons and/or organisations.
+     */
+    @Column(name = "sign_date")
+    private OffsetDateTime signDate;
+
+    /**
+     * Date and time interval this agreement is valid (from going into effect to termination).
+     */
+    @Embedded
+    private DateTimeInterval validityInterval;
 }

@@ -41,7 +41,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"usagePoints"})
-public class ServiceLocationEntity extends WorkLocationEntity {
+public class ServiceLocationEntity extends WorkLocation {
 
     /**
      * Method for the service person to access this service location. For example, a description of where to obtain 

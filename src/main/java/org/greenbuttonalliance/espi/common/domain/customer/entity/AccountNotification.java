@@ -25,56 +25,51 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.greenbuttonalliance.espi.common.domain.customer.enums.NotificationMethodKind;
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;
 
 /**
- * Pure JPA/Hibernate entity for AccountNotification without JAXB concerns.
+ * Embeddable class for AccountNotification without JAXB concerns.
  * 
  * [extension] Customer action notification (e.g., delinquency, move in, move out)
  * ESPI compliant with proper UUID identifiers and ATOM feed support.
  */
-@Entity
-@Table(name = "account_notifications", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
-})
+@Embeddable
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@ToString(callSuper = true)
-public class AccountNotificationEntity extends IdentifiedObject {
+@ToString
+public class AccountNotification {
 
     /**
      * Method by which the customer was notified.
      */
-    @Column(name = "method_kind", nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(name = "method_kind")
     private NotificationMethodKind methodKind;
 
     /**
      * Time/date of notification
      */
-    @Column(name = "time", nullable = false)
+    @Column(name = "time")
     private OffsetDateTime time;
 
     /**
      * Annotation of the reason for the notification
      */
-    @Column(name = "note", length = 256, nullable = false)
+    @Column(name = "note", length = 512)
     private String note;
 
     /**
      * Type of customer notification (delinquency, move in, move out ...)
      */
-    @Column(name = "customer_notification_kind", length = 256, nullable = false)
+    @Column(name = "customer_notification_kind", length = 256)
     private String customerNotificationKind;
 
     /**
      * Customer account this notification belongs to
+     * Note: This should be handled at the Entity level, not in an Embeddable
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_account_id", nullable = false)
-    private CustomerAccountEntity customerAccount;
+    // @Embedded - Removed as this creates circular reference issues
+    // private CustomerAccountEntity customerAccount;
 }

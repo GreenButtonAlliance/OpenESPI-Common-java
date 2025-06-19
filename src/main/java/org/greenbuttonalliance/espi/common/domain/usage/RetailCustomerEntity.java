@@ -36,6 +36,7 @@ import jakarta.validation.constraints.Size;
 // import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Pure JPA/Hibernate entity for RetailCustomer without JAXB concerns.

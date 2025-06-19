@@ -32,7 +32,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Service implementation for ServiceLocation management.
+ * Service implementation for ServiceLocationEntity management.
  * 
  * Provides business logic for real estate location operations.
  */
@@ -134,7 +134,7 @@ public class ServiceLocationServiceImpl implements ServiceLocationService {
             location.setNeedsInspection(needsInspection);
             return serviceLocationRepository.save(location);
         }
-        throw new IllegalArgumentException("ServiceLocation not found with id: " + id);
+        throw new IllegalArgumentException("ServiceLocationEntity not found with id: " + id);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class ServiceLocationServiceImpl implements ServiceLocationService {
             location.setSiteAccessProblem(accessProblem);
             return serviceLocationRepository.save(location);
         }
-        throw new IllegalArgumentException("ServiceLocation not found with id: " + id);
+        throw new IllegalArgumentException("ServiceLocationEntity not found with id: " + id);
     }
 
     @Override

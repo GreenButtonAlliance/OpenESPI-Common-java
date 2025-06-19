@@ -44,7 +44,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"notifications"})
-public class CustomerAccountEntity extends DocumentEntity {
+public class CustomerAccountEntity extends Document {
 
     /**
      * Cycle day on which the associated customer account will normally be billed, 
@@ -69,7 +69,7 @@ public class CustomerAccountEntity extends DocumentEntity {
      * Set of customer account notifications.
      */
     @OneToMany(mappedBy = "customerAccount", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<AccountNotificationEntity> notifications;
+    private List<AccountNotification> notifications;
 
     /**
      * [extension] Customer contact information used to identify individual 
@@ -77,7 +77,7 @@ public class CustomerAccountEntity extends DocumentEntity {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contact_info_id")
-    private OrganisationEntity contactInfo;
+    private Organisation contactInfo;
 
     /**
      * [extension] Customer account identifier

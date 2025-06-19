@@ -48,7 +48,7 @@ import jakarta.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class EndDeviceEntity extends AssetContainerEntity {
+public class EndDeviceEntity extends AssetContainer {
 
     /**
      * If true, there is no physical device. As an example, a virtual meter can be defined to aggregate 

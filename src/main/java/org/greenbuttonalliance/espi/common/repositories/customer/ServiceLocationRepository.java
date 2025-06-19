@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Spring Data JPA repository for ServiceLocation entities.
+ * Spring Data JPA repository for ServiceLocationEntity entities.
  * 
  * Manages real estate location data including addresses, access methods, and service delivery points.
  */
