@@ -35,7 +35,7 @@ import java.io.Serializable;
  * of the utility's distribution system where energy is consumed.
  * 
  * ServiceDeliveryPoint is an embedded element, not a standalone ESPI resource,
- * so it does not extend IdentifiedObjectEntity and has no separate identity.
+ * so it does not extend IdentifiedObject and has no separate identity.
  */
 @Embeddable
 @Data

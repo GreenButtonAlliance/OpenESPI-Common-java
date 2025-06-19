@@ -48,7 +48,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"usagePoint", "costAdditionalDetailLastPeriod"})
-public class UsageSummaryEntity extends IdentifiedObjectEntity {
+public class UsageSummaryEntity extends IdentifiedObject {
 
     private static final long serialVersionUID = 1L;
 
@@ -411,7 +411,7 @@ public class UsageSummaryEntity extends IdentifiedObjectEntity {
      * 
      * @param resource the parent usage point resource
      */
-    public void setUpResource(IdentifiedObjectEntity resource) {
+    public void setUpResource(IdentifiedObject resource) {
         if (resource instanceof UsagePointEntity parentUsagePoint) {
             this.usagePoint = parentUsagePoint;
         }

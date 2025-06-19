@@ -25,7 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.greenbuttonalliance.espi.common.domain.customer.enums.NotificationMethodKind;
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObjectEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;
@@ -44,7 +44,7 @@ import java.time.OffsetDateTime;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class AccountNotificationEntity extends IdentifiedObjectEntity {
+public class AccountNotificationEntity extends IdentifiedObject {
 
     /**
      * Method by which the customer was notified.

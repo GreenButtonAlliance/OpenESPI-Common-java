@@ -50,7 +50,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class UsagePointEntity extends IdentifiedObjectEntity {
+public class UsagePointEntity extends IdentifiedObject {
 
     private static final long serialVersionUID = 1L;
 

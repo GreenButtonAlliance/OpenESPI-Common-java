@@ -50,7 +50,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"usagePoints"})
-public class TimeConfigurationEntity extends IdentifiedObjectEntity {
+public class TimeConfigurationEntity extends IdentifiedObject {
 
     private static final long serialVersionUID = 1L;
 

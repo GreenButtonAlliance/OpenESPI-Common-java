@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * Enhanced base class for all ESPI identified objects using pure JPA/Hibernate annotations.
  * 
- * This entity provides:
+ * This mapped superclass provides:
  * - NAESB ESPI compliant UUID5 identifiers (exceeds 48-bit requirement)
  * - Proper JPA entity mapping without JAXB concerns
  * - Lombok-generated boilerplate reduction
@@ -53,7 +53,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public abstract class IdentifiedObjectEntity implements Serializable {
+public abstract class IdentifiedObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

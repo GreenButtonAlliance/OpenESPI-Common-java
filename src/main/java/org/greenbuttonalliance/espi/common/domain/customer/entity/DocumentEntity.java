@@ -24,7 +24,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObjectEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;
@@ -43,7 +43,7 @@ import java.time.OffsetDateTime;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class DocumentEntity extends IdentifiedObjectEntity {
+public class DocumentEntity extends IdentifiedObject {
 
     /**
      * Date and time that this document was created.

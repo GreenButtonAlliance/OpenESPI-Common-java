@@ -24,7 +24,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObjectEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 
 import jakarta.persistence.*;
 import java.util.List;
@@ -44,7 +44,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"positionPoints"})
-public class LocationEntity extends IdentifiedObjectEntity {
+public class LocationEntity extends IdentifiedObject {
 
     /**
      * Classification by utility's corporate standards and practices, relative to the location itself 

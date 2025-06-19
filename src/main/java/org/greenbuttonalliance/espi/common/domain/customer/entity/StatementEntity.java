@@ -24,7 +24,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObjectEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;
@@ -43,7 +43,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"statementRefs"})
-public class StatementEntity extends IdentifiedObjectEntity {
+public class StatementEntity extends IdentifiedObject {
 
     /**
      * [extension] Date and time at which a billing statement was issued.

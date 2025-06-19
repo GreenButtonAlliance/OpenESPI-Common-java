@@ -24,7 +24,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObjectEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -44,7 +44,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class AssetEntity extends IdentifiedObjectEntity {
+public class AssetEntity extends IdentifiedObject {
 
     /**
      * Utility-specific classification of Asset and its subtypes, according to their corporate standards, 

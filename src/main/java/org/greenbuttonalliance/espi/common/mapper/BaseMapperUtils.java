@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.mapper;
 
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObjectEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 import org.mapstruct.Named;
 
 import java.time.LocalDateTime;
@@ -40,14 +40,14 @@ public interface BaseMapperUtils {
     // Use DateTimeMapper.uuidToString and DateTimeMapper.stringToUuid instead
 
     /**
-     * Extracts UUID from IdentifiedObjectEntity as string.
+     * Extracts UUID from IdentifiedObject as string.
      * Used for DTO mapping where ID is represented as string.
      * 
      * @param entity the entity to extract UUID from
      * @return string representation of entity UUID, or null if entity is null
      */
     @Named("entityToUuidString")
-    default String entityToUuidString(IdentifiedObjectEntity entity) {
+    default String entityToUuidString(IdentifiedObject entity) {
         return entity != null && entity.getId() != null ? entity.getId().toString() : null;
     }
 

@@ -24,7 +24,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObjectEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 
 import jakarta.persistence.*;
 
@@ -41,7 +41,7 @@ import jakarta.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class ProgramDateIdMappingsEntity extends IdentifiedObjectEntity {
+public class ProgramDateIdMappingsEntity extends IdentifiedObject {
 
     /**
      * [extension] Program date description

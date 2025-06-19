@@ -51,7 +51,7 @@ import java.time.Instant;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"accessToken", "refreshToken", "retailCustomer", "subscription", "applicationInformation"})
-public class AuthorizationEntity extends IdentifiedObjectEntity {
+public class AuthorizationEntity extends IdentifiedObject {
 
     private static final long serialVersionUID = 1L;
 

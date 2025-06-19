@@ -44,7 +44,7 @@ import jakarta.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"usagePoint"})
-public class ElectricPowerQualitySummaryEntity extends IdentifiedObjectEntity {
+public class ElectricPowerQualitySummaryEntity extends IdentifiedObject {
 
     private static final long serialVersionUID = 1L;
 
@@ -271,7 +271,7 @@ public class ElectricPowerQualitySummaryEntity extends IdentifiedObjectEntity {
      * 
      * @param resource the parent usage point resource
      */
-    public void setUpResource(IdentifiedObjectEntity resource) {
+    public void setUpResource(IdentifiedObject resource) {
         if (resource instanceof UsagePointEntity parentUsagePoint) {
             this.usagePoint = parentUsagePoint;
         }

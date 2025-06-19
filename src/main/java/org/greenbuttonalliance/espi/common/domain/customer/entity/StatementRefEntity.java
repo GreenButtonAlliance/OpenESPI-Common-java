@@ -24,7 +24,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObjectEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
 
 import jakarta.persistence.*;
 
@@ -42,7 +42,7 @@ import jakarta.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class StatementRefEntity extends IdentifiedObjectEntity {
+public class StatementRefEntity extends IdentifiedObject {
 
     /**
      * [extension] Name of document or file including filename extension if present.

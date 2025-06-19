@@ -48,7 +48,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"intervalReadings", "meterReading"})
-public class IntervalBlockEntity extends IdentifiedObjectEntity {
+public class IntervalBlockEntity extends IdentifiedObject {
 
     private static final long serialVersionUID = 1L;
 
@@ -185,7 +185,7 @@ public class IntervalBlockEntity extends IdentifiedObjectEntity {
      *
      * @param resource the parent meter reading resource
      */
-    public void setUpResource(IdentifiedObjectEntity resource) {
+    public void setUpResource(IdentifiedObject resource) {
         if (resource instanceof MeterReadingEntity parentMeterReading) {
             this.meterReading = parentMeterReading;
         }

@@ -46,7 +46,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"meterReadings"})
-public class ReadingTypeEntity extends IdentifiedObjectEntity {
+public class ReadingTypeEntity extends IdentifiedObject {
 
     private static final long serialVersionUID = 1L;
 

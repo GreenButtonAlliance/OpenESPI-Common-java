@@ -48,7 +48,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class ApplicationInformationEntity extends IdentifiedObjectEntity {
+public class ApplicationInformationEntity extends IdentifiedObject {
 
     private static final long serialVersionUID = 1L;
 

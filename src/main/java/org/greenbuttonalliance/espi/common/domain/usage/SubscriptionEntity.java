@@ -52,7 +52,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"retailCustomer", "authorization", "applicationInformation", "usagePoints"})
-public class SubscriptionEntity extends IdentifiedObjectEntity {
+public class SubscriptionEntity extends IdentifiedObject {
 
     private static final long serialVersionUID = 1L;
 
