@@ -36,9 +36,10 @@ import org.mapstruct.MappingTarget;
  * used for JAXB XML marshalling in the Green Button API.
  */
 @Mapper(componentModel = "spring", uses = {
-    DateTimeMapper.class
+    DateTimeMapper.class,
+    BaseMapperUtils.class
 })
-public interface CustomerAccountMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
+public interface CustomerAccountMapper {
 
     /**
      * Converts a CustomerAccountEntity to a CustomerAccountDto.
@@ -47,9 +48,10 @@ public interface CustomerAccountMapper extends BaseIdentifiedObjectMapper, BaseM
      * @param entity the customer account entity
      * @return the customer account DTO
      */
+    @Mapping(target = "id", ignore = true) // DTO uses Long, entity uses UUID
     @Mapping(target = "uuid", source = "id", qualifiedByName = "uuidToString")
-    @Mapping(target = "published", source = "published", qualifiedByName = "localDateTimeToOffsetDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "localDateTimeToOffsetDateTime")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localToOffset")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localToOffset")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -72,8 +74,8 @@ public interface CustomerAccountMapper extends BaseIdentifiedObjectMapper, BaseM
      * @return the customer account entity
      */
     @Mapping(target = "id", source = "uuid", qualifiedByName = "stringToUuid")
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetToLocal")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetToLocal")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "accountId", source = "accountId")
     @Mapping(target = "budgetBill", source = "budgetBill")
@@ -94,8 +96,8 @@ public interface CustomerAccountMapper extends BaseIdentifiedObjectMapper, BaseM
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "published", source = "published", qualifiedByName = "offsetDateTimeToLocalDateTime")
-    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetDateTimeToLocalDateTime")
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetToLocal")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetToLocal")
     @Mapping(target = "notifications", ignore = true) // Relationship handled separately
     @Mapping(target = "contactInfo", ignore = true) // Relationship handled separately
     @Mapping(target = "relatedLinks", ignore = true)

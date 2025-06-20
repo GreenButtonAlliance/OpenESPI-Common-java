@@ -22,6 +22,8 @@ package org.greenbuttonalliance.espi.common.mapper.customer;
 
 import org.greenbuttonalliance.espi.common.domain.customer.entity.CustomerAgreementEntity;
 import org.greenbuttonalliance.espi.common.dto.customer.CustomerAgreementDto;
+import org.greenbuttonalliance.espi.common.mapper.BaseMapperUtils;
+import org.greenbuttonalliance.espi.common.mapper.DateTimeMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -32,7 +34,10 @@ import org.mapstruct.MappingTarget;
  * Handles the conversion between the JPA entity used for persistence and the DTO 
  * used for JAXB XML marshalling in the Green Button API.
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {
+    DateTimeMapper.class,
+    BaseMapperUtils.class
+})
 public interface CustomerAgreementMapper {
 
     /**
@@ -42,15 +47,19 @@ public interface CustomerAgreementMapper {
      * @param entity the customer agreement entity
      * @return the customer agreement DTO
      */
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "id", ignore = true) // DTO uses Long, entity uses UUID
+    @Mapping(target = "uuid", source = "id", qualifiedByName = "uuidToString")
+    @Mapping(target = "published", source = "published", qualifiedByName = "localToOffset")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "localToOffset")
     @Mapping(target = "relatedLinks", ignore = true) // Links handled separately
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
     @Mapping(target = "description", source = "description")
     @Mapping(target = "signDate", source = "signDate")
-    @Mapping(target = "validityInterval", source = "validityInterval")
+    @Mapping(target = "validityInterval", ignore = true) // Complex mapping
+    @Mapping(target = "customerAccount", ignore = true) // Relationship handled separately
+    @Mapping(target = "serviceLocations", ignore = true) // Relationship handled separately
+    @Mapping(target = "statements", ignore = true) // Relationship handled separately
     CustomerAgreementDto toDto(CustomerAgreementEntity entity);
 
     /**
@@ -60,14 +69,19 @@ public interface CustomerAgreementMapper {
      * @param dto the customer agreement DTO
      * @return the customer agreement entity
      */
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "uuid", source = "uuid")
-    @Mapping(target = "published", source = "published")
-    @Mapping(target = "updated", source = "updated")
+    @Mapping(target = "id", source = "uuid", qualifiedByName = "stringToUuid")
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetToLocal")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetToLocal")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "signDate", source = "signDate")
-    @Mapping(target = "validityInterval", source = "validityInterval")
-    @Mapping(target = "customer", ignore = true)
+    @Mapping(target = "validityInterval", ignore = true) // Complex mapping
+    @Mapping(target = "created", ignore = true) // Inherited from IdentifiedObject
+    @Mapping(target = "createdDateTime", ignore = true) // From Document
+    @Mapping(target = "lastModifiedDateTime", ignore = true) // From Document
+    @Mapping(target = "revisionNumber", ignore = true) // From Document
+    @Mapping(target = "subject", ignore = true) // From Document
+    @Mapping(target = "title", ignore = true) // From Document
+    @Mapping(target = "type", ignore = true) // From Document
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -81,7 +95,16 @@ public interface CustomerAgreementMapper {
      * @param entity the target entity to update
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "customer", ignore = true)
+    @Mapping(target = "published", source = "published", qualifiedByName = "offsetToLocal")
+    @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetToLocal")
+    @Mapping(target = "validityInterval", ignore = true) // Complex mapping
+    @Mapping(target = "created", ignore = true) // Inherited from IdentifiedObject
+    @Mapping(target = "createdDateTime", ignore = true) // From Document
+    @Mapping(target = "lastModifiedDateTime", ignore = true) // From Document
+    @Mapping(target = "revisionNumber", ignore = true) // From Document
+    @Mapping(target = "subject", ignore = true) // From Document
+    @Mapping(target = "title", ignore = true) // From Document
+    @Mapping(target = "type", ignore = true) // From Document
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)

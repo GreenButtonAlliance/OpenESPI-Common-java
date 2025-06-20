@@ -37,10 +37,11 @@ import org.mapstruct.MappingTarget;
  */
 @Mapper(componentModel = "spring", uses = {
     DateTimeMapper.class,
+    BaseMapperUtils.class,
     IntervalBlockMapper.class,
     ReadingTypeMapper.class
 })
-public interface MeterReadingMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
+public interface MeterReadingMapper {
 
     /**
      * Converts a MeterReadingEntity to a MeterReadingDto.

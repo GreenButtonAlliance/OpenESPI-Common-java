@@ -37,9 +37,10 @@ import org.mapstruct.MappingTarget;
  */
 @Mapper(componentModel = "spring", uses = {
     DateTimeMapper.class,
+    BaseMapperUtils.class,
     DateTimeIntervalMapper.class
 })
-public interface ElectricPowerQualitySummaryMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
+public interface ElectricPowerQualitySummaryMapper {
 
     /**
      * Converts an ElectricPowerQualitySummaryEntity to an ElectricPowerQualitySummaryDto.
@@ -50,7 +51,7 @@ public interface ElectricPowerQualitySummaryMapper extends BaseIdentifiedObjectM
      */
     @Mapping(target = "id", ignore = true) // DTO id field not used
     @Mapping(target = "uuid", source = "id", qualifiedByName = "uuidToString")
-    @Mapping(target = "usagePointId", source = "usagePoint", qualifiedByName = "entityToId")
+    @Mapping(target = "usagePointId", source = "usagePoint.id", qualifiedByName = "uuidToLong")
     ElectricPowerQualitySummaryDto toDto(ElectricPowerQualitySummaryEntity entity);
 
     /**

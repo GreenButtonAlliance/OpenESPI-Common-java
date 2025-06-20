@@ -37,10 +37,11 @@ import org.mapstruct.MappingTarget;
  */
 @Mapper(componentModel = "spring", uses = {
     DateTimeMapper.class,
+    BaseMapperUtils.class,
     IntervalReadingMapper.class,
     DateTimeIntervalMapper.class
 })
-public interface IntervalBlockMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
+public interface IntervalBlockMapper {
 
     /**
      * Converts an IntervalBlockEntity to an IntervalBlockDto.

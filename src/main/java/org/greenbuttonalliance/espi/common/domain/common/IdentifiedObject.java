@@ -264,7 +264,36 @@ public abstract class IdentifiedObject implements Serializable {
         relatedLinks.clear();
     }
 
-    // Removed merge() method - Spring Data JPA handles merging automatically
+    /**
+     * Merges this object with another IdentifiedObject.
+     * Updates common fields while preserving the ID.
+     * 
+     * @param other the other IdentifiedObject to merge from
+     */
+    public void merge(IdentifiedObject other) {
+        if (other != null) {
+            // Preserve the existing ID - don't overwrite with other.getId()
+            if (other.getDescription() != null) {
+                this.setDescription(other.getDescription());
+            }
+            // Don't update created timestamp - it should remain immutable
+            // Updated timestamp will be handled by @UpdateTimestamp
+            if (other.getPublished() != null) {
+                this.setPublished(other.getPublished());
+            }
+            // Merge links
+            if (other.getUpLink() != null) {
+                this.setUpLink(other.getUpLink());
+            }
+            if (other.getSelfLink() != null) {
+                this.setSelfLink(other.getSelfLink());
+            }
+            if (other.getRelatedLinks() != null && !other.getRelatedLinks().isEmpty()) {
+                this.getRelatedLinks().clear();
+                this.getRelatedLinks().addAll(other.getRelatedLinks());
+            }
+        }
+    }
 
     // Removed @PrePersist and @PreUpdate methods - Spring Boot handles lifecycle automatically
 

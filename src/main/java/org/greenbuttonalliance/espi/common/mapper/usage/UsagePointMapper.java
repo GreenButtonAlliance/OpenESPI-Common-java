@@ -37,6 +37,7 @@ import org.mapstruct.MappingTarget;
  */
 @Mapper(componentModel = "spring", uses = {
     DateTimeMapper.class,
+    BaseMapperUtils.class,
     MeterReadingMapper.class,
     UsageSummaryMapper.class,
     ElectricPowerQualitySummaryMapper.class,
@@ -44,7 +45,7 @@ import org.mapstruct.MappingTarget;
     PnodeRefMapper.class,
     AggregatedNodeRefMapper.class
 })
-public interface UsagePointMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
+public interface UsagePointMapper {
 
     /**
      * Converts a UsagePointEntity to a UsagePointDto.
@@ -115,11 +116,17 @@ public interface UsagePointMapper extends BaseIdentifiedObjectMapper, BaseMapper
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "published", ignore = true) // Managed by entity lifecycle
     @Mapping(target = "updated", ignore = true) // Managed by entity lifecycle
+    @Mapping(target = "created", ignore = true) // Inherited from IdentifiedObject
     @Mapping(target = "estimatedLoad", source = "estimatedLoad")
     @Mapping(target = "nominalServiceVoltage", source = "nominalServiceVoltage")
     @Mapping(target = "ratedCurrent", source = "ratedCurrent")
     @Mapping(target = "ratedPower", source = "ratedPower")
     @Mapping(target = "uri", ignore = true) // Managed separately
+    @Mapping(target = "pnodeRefs", ignore = true) // Object type - ignore for now
+    @Mapping(target = "aggregatedNodeRefs", ignore = true) // Object type - ignore for now
+    @Mapping(target = "meterReadings", ignore = true) // Object type - ignore for now
+    @Mapping(target = "usageSummaries", ignore = true) // Object type - ignore for now
+    @Mapping(target = "electricPowerQualitySummaries", ignore = true) // Object type - ignore for now
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)

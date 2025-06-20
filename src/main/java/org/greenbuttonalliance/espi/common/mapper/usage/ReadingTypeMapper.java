@@ -36,9 +36,10 @@ import org.mapstruct.MappingTarget;
  * used for JAXB XML marshalling in the Green Button API.
  */
 @Mapper(componentModel = "spring", uses = {
-    DateTimeMapper.class
+    DateTimeMapper.class,
+    BaseMapperUtils.class
 })
-public interface ReadingTypeMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
+public interface ReadingTypeMapper {
 
     /**
      * Converts a ReadingTypeEntity to a ReadingTypeDto.

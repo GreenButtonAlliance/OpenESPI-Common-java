@@ -142,7 +142,7 @@ public class IntervalReadingEntity implements Serializable {
      * 
      * @return the primary key ID
      */
-    public UUID getId() {
+    public Long getId() {
         return this.id;
     }
 

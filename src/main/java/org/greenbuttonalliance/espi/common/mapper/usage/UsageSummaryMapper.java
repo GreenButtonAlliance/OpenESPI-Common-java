@@ -37,9 +37,10 @@ import org.mapstruct.MappingTarget;
  */
 @Mapper(componentModel = "spring", uses = {
     DateTimeMapper.class,
+    BaseMapperUtils.class,
     DateTimeIntervalMapper.class
 })
-public interface UsageSummaryMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
+public interface UsageSummaryMapper {
 
     /**
      * Converts a UsageSummaryEntity to a UsageSummaryDto.
@@ -62,7 +63,7 @@ public interface UsageSummaryMapper extends BaseIdentifiedObjectMapper, BaseMapp
     @Mapping(target = "costAdditionalLastPeriod", source = "costAdditionalLastPeriod")
     @Mapping(target = "currency", source = "currency")
     @Mapping(target = "qualityOfReading", source = "qualityOfReading")
-    @Mapping(target = "statusTimeStamp", ignore = true) // Not in entity
+    @Mapping(target = "statusTimeStamp", source = "statusTimeStamp", qualifiedByName = "longToOffset")
     UsageSummaryDto toDto(UsageSummaryEntity entity);
 
     /**
@@ -82,7 +83,9 @@ public interface UsageSummaryMapper extends BaseIdentifiedObjectMapper, BaseMapp
     @Mapping(target = "costAdditionalLastPeriod", source = "costAdditionalLastPeriod")
     @Mapping(target = "currency", source = "currency")
     @Mapping(target = "qualityOfReading", source = "qualityOfReading")
+    @Mapping(target = "statusTimeStamp", source = "statusTimeStamp", qualifiedByName = "offsetToLong")
     @Mapping(target = "usagePoint", ignore = true) // Relationship handled separately
+    @Mapping(target = "created", ignore = true) // Inherited from IdentifiedObject
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)
@@ -98,7 +101,9 @@ public interface UsageSummaryMapper extends BaseIdentifiedObjectMapper, BaseMapp
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "published", source = "published", qualifiedByName = "offsetToLocal")
     @Mapping(target = "updated", source = "updated", qualifiedByName = "offsetToLocal")
+    @Mapping(target = "statusTimeStamp", source = "statusTimeStamp", qualifiedByName = "offsetToLong")
     @Mapping(target = "usagePoint", ignore = true) // Relationship handled separately
+    @Mapping(target = "created", ignore = true) // Inherited from IdentifiedObject
     @Mapping(target = "relatedLinks", ignore = true)
     @Mapping(target = "selfLink", ignore = true)
     @Mapping(target = "upLink", ignore = true)

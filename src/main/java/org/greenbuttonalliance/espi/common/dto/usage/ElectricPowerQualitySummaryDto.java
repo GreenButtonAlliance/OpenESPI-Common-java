@@ -183,7 +183,7 @@ public record ElectricPowerQualitySummaryDto(
      */
     public ElectricPowerQualitySummaryDto() {
         this(null, null, null, null, null, null, null, null, null, null, null, null, null, 
-             null, null, null, null, null, null);
+             null, null, null, null, null);
     }
     
     /**
@@ -195,7 +195,7 @@ public record ElectricPowerQualitySummaryDto(
      */
     public ElectricPowerQualitySummaryDto(Long id, String uuid, String description) {
         this(id, uuid, description, null, null, null, null, null, null, null, null, null, 
-             null, null, null, null, null, null, null);
+             null, null, null, null, null, null);
     }
     
     /**

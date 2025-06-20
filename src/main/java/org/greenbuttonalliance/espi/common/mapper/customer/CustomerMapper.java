@@ -38,7 +38,7 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring", uses = {
     DateTimeMapper.class
 })
-public interface CustomerMapper extends BaseIdentifiedObjectMapper, BaseMapperUtils {
+public interface CustomerMapper extends BaseMapperUtils {
 
     /**
      * Converts a CustomerEntity to a CustomerDto.
