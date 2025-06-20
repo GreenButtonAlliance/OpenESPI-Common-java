@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.mapper;
 
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
+import org.greenbuttonalliance.espi.common.domain.common.IdentifiedObject;
 import org.mapstruct.Named;
 
 import java.time.LocalDateTime;

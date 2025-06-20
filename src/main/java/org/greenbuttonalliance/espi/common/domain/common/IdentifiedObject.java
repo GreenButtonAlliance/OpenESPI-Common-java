@@ -18,7 +18,7 @@
  *
  */
 
-package org.greenbuttonalliance.espi.common.domain.usage;
+package org.greenbuttonalliance.espi.common.domain.common;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

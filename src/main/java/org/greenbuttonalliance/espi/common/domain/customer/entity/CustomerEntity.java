@@ -25,7 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.greenbuttonalliance.espi.common.domain.customer.enums.CustomerKind;
-import org.greenbuttonalliance.espi.common.domain.usage.IdentifiedObject;
+import org.greenbuttonalliance.espi.common.domain.common.IdentifiedObject;
 import org.greenbuttonalliance.espi.common.domain.usage.TimeConfigurationEntity;
 
 import jakarta.persistence.*;
