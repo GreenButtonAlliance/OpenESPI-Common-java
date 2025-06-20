@@ -124,8 +124,8 @@ public class MeterServiceImpl implements MeterService {
     @Override
     public MeterEntity save(MeterEntity meter) {
         // Generate UUID if not present
-        if (meter.getUUID() == null) {
-            meter.setUUID(UUID.randomUUID());
+        if (meter.getId() == null) {
+            meter.setId(UUID.randomUUID());
         }
         return meterRepository.save(meter);
     }

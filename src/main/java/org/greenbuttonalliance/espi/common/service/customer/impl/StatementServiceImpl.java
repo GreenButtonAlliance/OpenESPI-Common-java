@@ -111,8 +111,8 @@ public class StatementServiceImpl implements StatementService {
     @Override
     public StatementEntity save(StatementEntity statement) {
         // Generate UUID if not present
-        if (statement.getUUID() == null) {
-            statement.setUUID(UUID.randomUUID());
+        if (statement.getId() == null) {
+            statement.setId(UUID.randomUUID());
         }
         return statementRepository.save(statement);
     }

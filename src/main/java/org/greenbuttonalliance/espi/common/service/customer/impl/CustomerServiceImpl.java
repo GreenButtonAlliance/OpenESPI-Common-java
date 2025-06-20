@@ -113,8 +113,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerEntity save(CustomerEntity customer) {
         // Generate UUID if not present
-        if (customer.getUUID() == null) {
-            customer.setUUID(UUID.randomUUID());
+        if (customer.getId() == null) {
+            customer.setId(UUID.randomUUID());
         }
         return customerRepository.save(customer);
     }

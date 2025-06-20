@@ -24,8 +24,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.greenbuttonalliance.espi.common.domain.common.IdentifiedObject;
 
 import jakarta.persistence.*;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -35,16 +37,58 @@ import java.util.List;
  * customer agreement, used as a mechanism for customer billing and payment. 
  * It contains common information from the various types of customer agreements to 
  * create billings (invoices) for a customer and receive payment.
+ * 
+ * This is an actual ESPI resource entity that extends IdentifiedObject directly.
  */
 @Entity
 @Table(name = "customer_accounts", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
+    @UniqueConstraint(columnNames = {"id"})
 })
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"notifications"})
-public class CustomerAccountEntity extends Document {
+public class CustomerAccountEntity extends IdentifiedObject {
+
+    // Document fields (previously inherited from Document superclass)
+    
+    /**
+     * Date and time that this document was created.
+     */
+    @Column(name = "created_date_time")
+    private OffsetDateTime createdDateTime;
+
+    /**
+     * Date and time that this document was last modified.
+     */
+    @Column(name = "last_modified_date_time")
+    private OffsetDateTime lastModifiedDateTime;
+
+    /**
+     * Revision number for this document.
+     */
+    @Column(name = "revision_number", length = 256)
+    private String revisionNumber;
+
+    /**
+     * Subject of this document, intended for this document to be found by a search engine.
+     */
+    @Column(name = "subject", length = 256)
+    private String subject;
+
+    /**
+     * Title of this document.
+     */
+    @Column(name = "title", length = 256)
+    private String title;
+
+    /**
+     * Type of this document.
+     */
+    @Column(name = "type", length = 256)
+    private String type;
+
+    // CustomerAccount specific fields
 
     /**
      * Cycle day on which the associated customer account will normally be billed, 

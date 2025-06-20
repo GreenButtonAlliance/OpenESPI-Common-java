@@ -24,6 +24,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.greenbuttonalliance.espi.common.domain.DateTimeInterval;
+import org.greenbuttonalliance.espi.common.domain.common.IdentifiedObject;
 
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;
@@ -35,16 +37,72 @@ import java.util.List;
  * Agreement between the customer and the service supplier to pay for service at a specific service location. 
  * It records certain billing information about the type of service provided at the service location and is 
  * used during charge creation to determine the type of service.
+ * 
+ * This is an actual ESPI resource entity that extends IdentifiedObject directly.
  */
 @Entity
 @Table(name = "customer_agreements", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
+    @UniqueConstraint(columnNames = {"id"})
 })
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true, exclude = {"futureStatus"})
-public class CustomerAgreementEntity extends Agreement {
+public class CustomerAgreementEntity extends IdentifiedObject {
+
+    // Document fields (previously inherited from Document superclass)
+    
+    /**
+     * Date and time that this document was created.
+     */
+    @Column(name = "created_date_time")
+    private OffsetDateTime createdDateTime;
+
+    /**
+     * Date and time that this document was last modified.
+     */
+    @Column(name = "last_modified_date_time")
+    private OffsetDateTime lastModifiedDateTime;
+
+    /**
+     * Revision number for this document.
+     */
+    @Column(name = "revision_number", length = 256)
+    private String revisionNumber;
+
+    /**
+     * Subject of this document, intended for this document to be found by a search engine.
+     */
+    @Column(name = "subject", length = 256)
+    private String subject;
+
+    /**
+     * Title of this document.
+     */
+    @Column(name = "title", length = 256)
+    private String title;
+
+    /**
+     * Type of this document.
+     */
+    @Column(name = "type", length = 256)
+    private String type;
+
+    // Agreement fields (previously inherited from Agreement superclass)
+    
+    /**
+     * Date this agreement was consummated among associated persons and/or organisations.
+     */
+    @Column(name = "sign_date")
+    private OffsetDateTime signDate;
+
+    /**
+     * Date and time interval this agreement is valid (from going into effect to termination).
+     */
+    @Embedded
+    private DateTimeInterval validityInterval;
+
+    // CustomerAgreement specific fields
 
     /**
      * Load management code.

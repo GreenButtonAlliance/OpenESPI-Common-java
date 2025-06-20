@@ -24,9 +24,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.common.IdentifiedObject;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 
 /**
@@ -34,14 +34,17 @@ import java.time.OffsetDateTime;
  * 
  * Parent class for different groupings of information collected and managed as a part of a business process.
  * It will frequently contain references to other objects, such as assets, people and power system resources.
- * This is an abstract mapped superclass, not a concrete entity.
+ * This is a @MappedSuperclass that provides document-specific fields but does not extend IdentifiedObject.
+ * Actual ESPI resource entities that represent documents should extend IdentifiedObject directly.
  */
 @MappedSuperclass
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @NoArgsConstructor
-@ToString(callSuper = true)
-public abstract class Document extends IdentifiedObject {
+@ToString
+public abstract class Document implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Date and time that this document was created.

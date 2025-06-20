@@ -107,8 +107,8 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
     @Override
     public CustomerAccountEntity save(CustomerAccountEntity customerAccount) {
         // Generate UUID if not present
-        if (customerAccount.getUUID() == null) {
-            customerAccount.setUUID(UUID.randomUUID());
+        if (customerAccount.getId() == null) {
+            customerAccount.setId(UUID.randomUUID());
         }
         return customerAccountRepository.save(customerAccount);
     }

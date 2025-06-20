@@ -115,8 +115,8 @@ public class ServiceLocationServiceImpl implements ServiceLocationService {
     @Override
     public ServiceLocationEntity save(ServiceLocationEntity serviceLocation) {
         // Generate UUID if not present
-        if (serviceLocation.getUUID() == null) {
-            serviceLocation.setUUID(UUID.randomUUID());
+        if (serviceLocation.getId() == null) {
+            serviceLocation.setId(UUID.randomUUID());
         }
         return serviceLocationRepository.save(serviceLocation);
     }
@@ -150,7 +150,7 @@ public class ServiceLocationServiceImpl implements ServiceLocationService {
 
     @Override
     @Transactional(readOnly = true)
-    public long countServiceLocations() {
+    public long countServiceLocationEntitys() {
         return serviceLocationRepository.count();
     }
 
