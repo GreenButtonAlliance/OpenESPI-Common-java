@@ -35,7 +35,7 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "meters", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
+    @UniqueConstraint(columnNames = {"id"})
 })
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -24,9 +24,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.common.IdentifiedObject;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -35,14 +35,18 @@ import java.util.List;
  * The place, scene, or point of something where someone or something has been, is, and/or will be 
  * at a given moment in time. It can be defined with one or more position points (coordinates) 
  * in a given coordinate system.
- * This is an abstract mapped superclass, not a concrete entity.
+ * 
+ * This is a @MappedSuperclass that provides location-specific fields but does not extend IdentifiedObject.
+ * Actual ESPI resource entities that represent locations should extend IdentifiedObject directly.
  */
 @MappedSuperclass
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @NoArgsConstructor
-@ToString(callSuper = true)
-public abstract class Location extends IdentifiedObject {
+@ToString
+public abstract class Location implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Classification by utility's corporate standards and practices, relative to the location itself 

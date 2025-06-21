@@ -24,8 +24,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.greenbuttonalliance.espi.common.domain.common.IdentifiedObject;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * Pure JPA/Hibernate entity for EndDevice without JAXB concerns.
@@ -39,16 +41,98 @@ import jakarta.persistence.*;
  * There may be a related end device function that identifies a sensor or control point within a metering 
  * application or communications systems (e.g., water, gas, electricity).
  * Some devices may use an optical port that conforms to the ANSI C12.18 standard for communications.
+ * 
+ * This is an actual ESPI resource entity that extends IdentifiedObject directly.
  */
 @Entity
 @Table(name = "end_devices", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"uuid"})
+    @UniqueConstraint(columnNames = {"id"})
 })
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class EndDeviceEntity extends AssetContainer {
+public class EndDeviceEntity extends IdentifiedObject {
+
+    // Asset fields (previously inherited from Asset superclass)
+    
+    /**
+     * Utility-specific classification of Asset and its subtypes, according to their corporate standards, 
+     * practices, and existing IT systems (e.g., for management of assets, maintenance, work, outage, customers, etc.).
+     */
+    @Column(name = "type", length = 256)
+    private String type;
+
+    /**
+     * Uniquely tracked commodity (UTC) number.
+     */
+    @Column(name = "utc_number", length = 256)
+    private String utcNumber;
+
+    /**
+     * Serial number of this asset.
+     */
+    @Column(name = "serial_number", length = 256)
+    private String serialNumber;
+
+    /**
+     * Lot number for this asset. Even for the same model and version number, many assets are manufactured in lots.
+     */
+    @Column(name = "lot_number", length = 256)
+    private String lotNumber;
+
+    /**
+     * Purchase price of asset.
+     */
+    @Column(name = "purchase_price")
+    private Long purchasePrice;
+
+    /**
+     * True if asset is considered critical for some reason (for example, a pole with critical attachments).
+     */
+    @Column(name = "critical")
+    private Boolean critical;
+
+    /**
+     * Electronic address.
+     */
+    @Embedded
+    private Organisation.ElectronicAddress electronicAddress;
+
+    /**
+     * Lifecycle dates for this asset.
+     */
+    @Embedded
+    private Asset.LifecycleDate lifecycle;
+
+    /**
+     * Information on acceptance test.
+     */
+    @Embedded
+    private Asset.AcceptanceTest acceptanceTest;
+
+    /**
+     * Condition of asset in inventory or at time of installation. Examples include new, rebuilt, 
+     * overhaul required, other. Refer to inspection data for information on the most current condition of the asset.
+     */
+    @Column(name = "initial_condition", length = 256)
+    private String initialCondition;
+
+    /**
+     * Whenever an asset is reconditioned, percentage of expected life for the asset when it was new; zero for new devices.
+     */
+    @Column(name = "initial_loss_of_life")
+    private BigDecimal initialLossOfLife;
+
+    /**
+     * Status of this asset.
+     */
+    @Embedded
+    private CustomerEntity.Status status;
+
+    // AssetContainer fields (AssetContainer is simply an Asset that can contain other assets - no additional fields)
+
+    // EndDevice specific fields
 
     /**
      * If true, there is no physical device. As an example, a virtual meter can be defined to aggregate 

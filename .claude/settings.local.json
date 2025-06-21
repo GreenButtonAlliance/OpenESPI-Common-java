@@ -7,7 +7,10 @@
       "Bash(git -C /Users/donal/Git/GreenButtonAlliance/OpenESPI-GreenButton-Workspace/OpenESPI-AuthorizationServer-java add src/main/resources/db/migration/mysql/V6_0_0__add_certificate_authentication_support.sql)",
       "WebFetch(domain:www.naesb.org)",
       "Bash(./mvnw compile:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(git remote get-url:*)",
+      "Bash(git fetch:*)"
     ],
     "deny": []
   }

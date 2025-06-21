@@ -24,9 +24,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.common.IdentifiedObject;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -35,13 +35,18 @@ import java.math.BigDecimal;
  * Tangible resource of the utility, including power system equipment, various end devices, 
  * cabinets, buildings, etc. Asset description places emphasis on the physical characteristics 
  * of the equipment fulfilling that role.
+ * 
+ * This is a @MappedSuperclass that provides asset-specific fields but does not extend IdentifiedObject.
+ * Actual ESPI resource entities that represent assets should extend IdentifiedObject directly.
  */
 @MappedSuperclass
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @NoArgsConstructor
-@ToString(callSuper = true)
-public abstract class Asset extends IdentifiedObject {
+@ToString
+public abstract class Asset implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Utility-specific classification of Asset and its subtypes, according to their corporate standards, 
