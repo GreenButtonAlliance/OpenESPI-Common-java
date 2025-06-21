@@ -19,11 +19,11 @@
  */
 package org.greenbuttonalliance.espi.common.utils;
 
-import org.greenbuttonalliance.espi.common.domain.IdentifiedObject;
-import org.greenbuttonalliance.espi.common.domain.Routes;
-import org.greenbuttonalliance.espi.common.models.atom.ContentType;
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
-import org.greenbuttonalliance.espi.common.models.atom.LinkType;
+import org.greenbuttonalliance.espi.common.domain.legacy.IdentifiedObject;
+import org.greenbuttonalliance.espi.common.domain.legacy.Routes;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.ContentType;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.LinkType;
 
 public class EntryBuilder {
 

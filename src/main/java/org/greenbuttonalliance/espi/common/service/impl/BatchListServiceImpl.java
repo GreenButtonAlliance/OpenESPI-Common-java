@@ -20,10 +20,9 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
-import org.greenbuttonalliance.espi.common.domain.BatchList;
-import org.greenbuttonalliance.espi.common.repositories.BatchListRepository;
+import org.greenbuttonalliance.espi.common.domain.legacy.BatchList;
+import org.greenbuttonalliance.espi.common.repositories.usage.BatchListRepository;
 import org.greenbuttonalliance.espi.common.service.BatchListService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

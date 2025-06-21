@@ -20,8 +20,8 @@
 
 package org.greenbuttonalliance.espi.common.service;
 
-import org.greenbuttonalliance.espi.common.domain.Authorization;
-import org.greenbuttonalliance.espi.common.domain.IdentifiedObject;
+import org.greenbuttonalliance.espi.common.domain.legacy.Authorization;
+import org.greenbuttonalliance.espi.common.domain.legacy.IdentifiedObject;
 import org.greenbuttonalliance.espi.common.utils.ExportFilter;
 
 import jakarta.servlet.ServletOutputStream;

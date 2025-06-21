@@ -20,9 +20,9 @@
 
 package org.greenbuttonalliance.espi.common.service;
 
-import org.greenbuttonalliance.espi.common.domain.IdentifiedObject;
-import org.greenbuttonalliance.espi.common.domain.Linkable;
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
+import org.greenbuttonalliance.espi.common.domain.legacy.IdentifiedObject;
+import org.greenbuttonalliance.espi.common.domain.legacy.Linkable;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
 import org.greenbuttonalliance.espi.common.utils.EntryTypeIterator;
 
 import java.util.List;

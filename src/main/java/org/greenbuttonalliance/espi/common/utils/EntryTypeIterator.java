@@ -22,8 +22,13 @@ package org.greenbuttonalliance.espi.common.utils;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.greenbuttonalliance.espi.common.domain.*;
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
+import org.greenbuttonalliance.espi.common.domain.legacy.ElectricPowerQualitySummary;
+import org.greenbuttonalliance.espi.common.domain.legacy.IdentifiedObject;
+import org.greenbuttonalliance.espi.common.domain.legacy.IntervalBlock;
+import org.greenbuttonalliance.espi.common.domain.legacy.MeterReading;
+import org.greenbuttonalliance.espi.common.domain.legacy.ReadingType;
+import org.greenbuttonalliance.espi.common.domain.legacy.TimeConfiguration;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
 import org.greenbuttonalliance.espi.common.service.ResourceService;
 
 import java.util.ArrayList;

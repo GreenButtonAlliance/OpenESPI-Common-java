@@ -24,7 +24,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.DateTimeInterval;
+import org.greenbuttonalliance.espi.common.domain.legacy.DateTimeInterval;
 
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;

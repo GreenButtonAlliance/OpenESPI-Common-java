@@ -20,8 +20,8 @@
 
 package org.greenbuttonalliance.espi.common.service;
 
-import org.greenbuttonalliance.espi.common.domain.RetailCustomer;
-import org.greenbuttonalliance.espi.common.domain.Subscription;
+import org.greenbuttonalliance.espi.common.domain.legacy.RetailCustomer;
+import org.greenbuttonalliance.espi.common.domain.legacy.Subscription;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.io.InputStream;

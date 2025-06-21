@@ -22,9 +22,9 @@ package org.greenbuttonalliance.espi.common.utils;
 
 //import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 
-import org.greenbuttonalliance.espi.common.domain.IntervalBlock;
-import org.greenbuttonalliance.espi.common.models.atom.DateTimeType;
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
+import org.greenbuttonalliance.espi.common.domain.legacy.IntervalBlock;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.DateTimeType;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
 
 import java.util.Map;
 

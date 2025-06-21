@@ -20,17 +20,15 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
-import org.greenbuttonalliance.espi.common.domain.Authorization;
-import org.greenbuttonalliance.espi.common.domain.Subscription;
-import org.greenbuttonalliance.espi.common.domain.UsagePoint;
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
-import org.greenbuttonalliance.espi.common.repositories.AuthorizationRepository;
-import org.greenbuttonalliance.espi.common.repositories.UsagePointRepository;
+import org.greenbuttonalliance.espi.common.domain.legacy.Authorization;
+import org.greenbuttonalliance.espi.common.domain.legacy.Subscription;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
+import org.greenbuttonalliance.espi.common.repositories.usage.AuthorizationRepository;
+import org.greenbuttonalliance.espi.common.repositories.usage.UsagePointRepository;
 import org.greenbuttonalliance.espi.common.service.AuthorizationService;
 import org.greenbuttonalliance.espi.common.service.ImportService;
 import org.greenbuttonalliance.espi.common.service.ResourceService;
 import org.greenbuttonalliance.espi.common.utils.EntryTypeIterator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;

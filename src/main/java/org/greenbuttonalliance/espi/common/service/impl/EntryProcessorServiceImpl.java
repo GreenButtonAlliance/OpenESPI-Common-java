@@ -20,9 +20,16 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
-import org.greenbuttonalliance.espi.common.domain.*;
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
-import org.greenbuttonalliance.espi.common.models.atom.LinkType;
+import org.greenbuttonalliance.espi.common.domain.legacy.ApplicationInformation;
+import org.greenbuttonalliance.espi.common.domain.legacy.ElectricPowerQualitySummary;
+import org.greenbuttonalliance.espi.common.domain.legacy.IdentifiedObject;
+import org.greenbuttonalliance.espi.common.domain.legacy.IntervalBlock;
+import org.greenbuttonalliance.espi.common.domain.legacy.MeterReading;
+import org.greenbuttonalliance.espi.common.domain.legacy.ReadingType;
+import org.greenbuttonalliance.espi.common.domain.legacy.TimeConfiguration;
+import org.greenbuttonalliance.espi.common.domain.legacy.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.LinkType;
 import org.greenbuttonalliance.espi.common.service.EntryProcessorService;
 import org.greenbuttonalliance.espi.common.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;

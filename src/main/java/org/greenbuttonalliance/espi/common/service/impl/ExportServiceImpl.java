@@ -22,9 +22,9 @@ package org.greenbuttonalliance.espi.common.service.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.greenbuttonalliance.espi.common.domain.*;
-import org.greenbuttonalliance.espi.common.models.atom.DateTimeType;
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
+import org.greenbuttonalliance.espi.common.domain.legacy.*;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.DateTimeType;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
 import org.greenbuttonalliance.espi.common.service.*;
 import org.greenbuttonalliance.espi.common.utils.AtomMarshallerListener;
 import org.greenbuttonalliance.espi.common.utils.DateConverter;
@@ -205,7 +205,7 @@ public class ExportServiceImpl implements ExportService {
 
 	@Override
 	public <T extends IdentifiedObject> void exportResource(Long resourceId,
-			Class<T> clazz, OutputStream stream, ExportFilter exportFilter) {
+															Class<T> clazz, OutputStream stream, ExportFilter exportFilter) {
 		// TODO Auto-generated method stub
 
 	}

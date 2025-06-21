@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.utils;
 
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
 import org.greenbuttonalliance.espi.common.service.EntryProcessorService;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;

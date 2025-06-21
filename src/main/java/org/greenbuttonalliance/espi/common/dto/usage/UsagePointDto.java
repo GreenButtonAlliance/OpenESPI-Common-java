@@ -20,13 +20,12 @@
 
 package org.greenbuttonalliance.espi.common.dto.usage;
 
-import org.greenbuttonalliance.espi.common.domain.ServiceCategory;
+import org.greenbuttonalliance.espi.common.domain.legacy.ServiceCategory;
 import org.greenbuttonalliance.espi.common.dto.SummaryMeasurementDto;
 
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.HexBinaryAdapter;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.List;
 
 /**
  * UsagePoint DTO record for JAXB XML marshalling/unmarshalling.

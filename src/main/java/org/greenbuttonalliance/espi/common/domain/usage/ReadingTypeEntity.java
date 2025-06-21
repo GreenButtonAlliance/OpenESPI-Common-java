@@ -24,9 +24,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.RationalNumber;
+import org.greenbuttonalliance.espi.common.domain.legacy.RationalNumber;
 import org.greenbuttonalliance.espi.common.domain.common.IdentifiedObject;
-import org.greenbuttonalliance.espi.common.domain.ReadingInterharmonic;
+import org.greenbuttonalliance.espi.common.domain.legacy.ReadingInterharmonic;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;

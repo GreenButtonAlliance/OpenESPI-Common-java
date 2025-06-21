@@ -20,8 +20,8 @@
 
 package org.greenbuttonalliance.espi.common.support;
 
-import org.greenbuttonalliance.espi.common.domain.*;
-import org.greenbuttonalliance.espi.common.models.atom.LinkType;
+import org.greenbuttonalliance.espi.common.domain.legacy.*;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.LinkType;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 
 import java.math.BigInteger;

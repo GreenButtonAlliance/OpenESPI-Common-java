@@ -22,11 +22,11 @@ package org.greenbuttonalliance.espi.common.service.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.greenbuttonalliance.espi.common.domain.RetailCustomer;
-import org.greenbuttonalliance.espi.common.domain.TimeConfiguration;
-import org.greenbuttonalliance.espi.common.domain.UsagePoint;
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
-import org.greenbuttonalliance.espi.common.repositories.TimeConfigurationRepository;
+import org.greenbuttonalliance.espi.common.domain.legacy.RetailCustomer;
+import org.greenbuttonalliance.espi.common.domain.legacy.TimeConfiguration;
+import org.greenbuttonalliance.espi.common.domain.legacy.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
+import org.greenbuttonalliance.espi.common.repositories.usage.TimeConfigurationRepository;
 import org.greenbuttonalliance.espi.common.service.ImportService;
 import org.greenbuttonalliance.espi.common.service.ResourceService;
 import org.greenbuttonalliance.espi.common.service.TimeConfigurationService;

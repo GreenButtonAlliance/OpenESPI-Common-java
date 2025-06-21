@@ -20,9 +20,9 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
-import org.greenbuttonalliance.espi.common.domain.MeterReading;
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
-import org.greenbuttonalliance.espi.common.repositories.MeterReadingRepository;
+import org.greenbuttonalliance.espi.common.domain.legacy.MeterReading;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
+import org.greenbuttonalliance.espi.common.repositories.usage.MeterReadingRepository;
 import org.greenbuttonalliance.espi.common.service.ImportService;
 import org.greenbuttonalliance.espi.common.service.MeterReadingService;
 import org.greenbuttonalliance.espi.common.service.ResourceService;

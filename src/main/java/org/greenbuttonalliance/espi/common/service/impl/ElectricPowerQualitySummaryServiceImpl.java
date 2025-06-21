@@ -19,11 +19,11 @@
  */
 package org.greenbuttonalliance.espi.common.service.impl;
 
-import org.greenbuttonalliance.espi.common.domain.ElectricPowerQualitySummary;
+import org.greenbuttonalliance.espi.common.domain.legacy.ElectricPowerQualitySummary;
 // ElectricPowerUsageSummary removed - deprecated resource
-import org.greenbuttonalliance.espi.common.domain.UsagePoint;
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
-import org.greenbuttonalliance.espi.common.repositories.ElectricPowerQualitySummaryRepository;
+import org.greenbuttonalliance.espi.common.domain.legacy.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
+import org.greenbuttonalliance.espi.common.repositories.usage.ElectricPowerQualitySummaryRepository;
 import org.greenbuttonalliance.espi.common.service.ElectricPowerQualitySummaryService;
 import org.greenbuttonalliance.espi.common.service.ImportService;
 import org.greenbuttonalliance.espi.common.service.ResourceService;

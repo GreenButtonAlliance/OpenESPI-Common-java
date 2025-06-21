@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.service;
 
-import org.greenbuttonalliance.espi.common.domain.ApplicationInformation;
+import org.greenbuttonalliance.espi.common.domain.legacy.ApplicationInformation;
 
 import java.io.InputStream;
 import java.util.List;

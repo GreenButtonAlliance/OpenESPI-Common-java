@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.service.export;
 
-import org.greenbuttonalliance.espi.common.domain.MeterReading;
+import org.greenbuttonalliance.espi.common.domain.legacy.MeterReading;
 import org.greenbuttonalliance.espi.common.service.MeterReadingService;
 import org.greenbuttonalliance.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;

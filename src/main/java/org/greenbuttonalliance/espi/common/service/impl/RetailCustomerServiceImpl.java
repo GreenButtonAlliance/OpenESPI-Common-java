@@ -20,10 +20,13 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
-import org.greenbuttonalliance.espi.common.domain.*;
-import org.greenbuttonalliance.espi.common.repositories.RetailCustomerRepository;
+import org.greenbuttonalliance.espi.common.domain.legacy.Authorization;
+import org.greenbuttonalliance.espi.common.domain.legacy.RetailCustomer;
+import org.greenbuttonalliance.espi.common.domain.legacy.ServiceCategory;
+import org.greenbuttonalliance.espi.common.domain.legacy.Subscription;
+import org.greenbuttonalliance.espi.common.domain.legacy.UsagePoint;
+import org.greenbuttonalliance.espi.common.repositories.usage.RetailCustomerRepository;
 import org.greenbuttonalliance.espi.common.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -20,9 +20,8 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
-import org.greenbuttonalliance.espi.common.domain.ApplicationInformation;
-import org.greenbuttonalliance.espi.common.domain.usage.ApplicationInformationEntity;
-import org.greenbuttonalliance.espi.common.repositories.ApplicationInformationRepository;
+import org.greenbuttonalliance.espi.common.domain.legacy.ApplicationInformation;
+import org.greenbuttonalliance.espi.common.repositories.usage.ApplicationInformationRepository;
 import org.greenbuttonalliance.espi.common.service.ApplicationInformationService;
 import org.greenbuttonalliance.espi.common.service.ImportService;
 import org.greenbuttonalliance.espi.common.service.ResourceService;

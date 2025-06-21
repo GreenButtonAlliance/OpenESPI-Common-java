@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.mapper.usage;
 
-import org.greenbuttonalliance.espi.common.domain.DateTimeInterval;
+import org.greenbuttonalliance.espi.common.domain.legacy.DateTimeInterval;
 import org.greenbuttonalliance.espi.common.dto.usage.DateTimeIntervalDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

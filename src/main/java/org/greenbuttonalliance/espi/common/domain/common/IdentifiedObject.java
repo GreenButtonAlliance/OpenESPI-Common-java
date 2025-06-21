@@ -24,13 +24,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.models.atom.LinkType;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.LinkType;
 import org.greenbuttonalliance.espi.common.service.EspiIdGeneratorService;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.Valid;
 import java.io.Serializable;
 import java.time.LocalDateTime;

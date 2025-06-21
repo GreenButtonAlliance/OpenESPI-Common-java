@@ -24,9 +24,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.greenbuttonalliance.espi.common.domain.ServiceCategory;
+import org.greenbuttonalliance.espi.common.domain.legacy.ServiceCategory;
 import org.greenbuttonalliance.espi.common.domain.common.IdentifiedObject;
-import org.greenbuttonalliance.espi.common.domain.SummaryMeasurement;
+import org.greenbuttonalliance.espi.common.domain.legacy.SummaryMeasurement;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 

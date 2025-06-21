@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.service.export;
 
-import org.greenbuttonalliance.espi.common.domain.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.legacy.UsagePoint;
 import org.greenbuttonalliance.espi.common.service.UsagePointService;
 import org.greenbuttonalliance.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;

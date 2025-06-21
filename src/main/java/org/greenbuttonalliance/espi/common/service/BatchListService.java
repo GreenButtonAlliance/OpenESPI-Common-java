@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.service;
 
-import org.greenbuttonalliance.espi.common.domain.BatchList;
+import org.greenbuttonalliance.espi.common.domain.legacy.BatchList;
 
 import java.util.List;
 

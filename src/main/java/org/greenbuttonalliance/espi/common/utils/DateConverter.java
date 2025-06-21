@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.utils;
 
-import org.greenbuttonalliance.espi.common.models.atom.DateTimeType;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.DateTimeType;
 import org.joda.time.DateTime;
 
 import javax.xml.datatype.DatatypeConfigurationException;

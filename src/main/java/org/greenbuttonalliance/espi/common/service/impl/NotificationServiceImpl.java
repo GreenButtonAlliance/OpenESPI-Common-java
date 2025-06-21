@@ -22,7 +22,11 @@ package org.greenbuttonalliance.espi.common.service.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.greenbuttonalliance.espi.common.domain.*;
+import org.greenbuttonalliance.espi.common.domain.legacy.ApplicationInformation;
+import org.greenbuttonalliance.espi.common.domain.legacy.Authorization;
+import org.greenbuttonalliance.espi.common.domain.legacy.BatchList;
+import org.greenbuttonalliance.espi.common.domain.legacy.RetailCustomer;
+import org.greenbuttonalliance.espi.common.domain.legacy.Subscription;
 import org.greenbuttonalliance.espi.common.service.AuthorizationService;
 import org.greenbuttonalliance.espi.common.service.NotificationService;
 import org.greenbuttonalliance.espi.common.service.ResourceService;
@@ -61,7 +65,7 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Override
 	public void notify(Subscription subscription,
-			XMLGregorianCalendar startDate, XMLGregorianCalendar endDate) {
+					   XMLGregorianCalendar startDate, XMLGregorianCalendar endDate) {
 		
 		String thirdPartyNotificationURI = subscription
 				.getApplicationInformation().getThirdPartyNotifyUri();
@@ -89,7 +93,7 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Override
 	public void notify(RetailCustomer retailCustomer,
-			XMLGregorianCalendar startDate, XMLGregorianCalendar endDate) {
+					   XMLGregorianCalendar startDate, XMLGregorianCalendar endDate) {
 
 		if (retailCustomer != null) {
 
@@ -247,7 +251,7 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Override
 	public void notify(ApplicationInformation applicationInformation,
-			Long bulkId) {
+					   Long bulkId) {
 		String bulkRequestUri = applicationInformation
 				.getDataCustodianBulkRequestURI() + "/" + bulkId;
 		String thirdPartyNotificationURI = applicationInformation

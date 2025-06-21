@@ -20,8 +20,8 @@
 
 package org.greenbuttonalliance.espi.common.service;
 
-import org.greenbuttonalliance.espi.common.domain.MeterReading;
-import org.greenbuttonalliance.espi.common.repositories.MeterReadingRepository;
+import org.greenbuttonalliance.espi.common.domain.legacy.MeterReading;
+import org.greenbuttonalliance.espi.common.repositories.usage.MeterReadingRepository;
 
 import java.io.InputStream;
 

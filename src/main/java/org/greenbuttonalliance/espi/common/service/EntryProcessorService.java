@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.service;
 
-import org.greenbuttonalliance.espi.common.models.atom.EntryType;
+import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
 
 public interface EntryProcessorService {
 
