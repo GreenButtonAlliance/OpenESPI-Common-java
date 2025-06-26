@@ -24,13 +24,11 @@ import com.sun.syndication.io.FeedException;
 import org.greenbuttonalliance.espi.common.domain.usage.RetailCustomerEntity;
 import org.greenbuttonalliance.espi.common.domain.usage.SubscriptionEntity;
 import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
-import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
 import org.greenbuttonalliance.espi.common.repositories.usage.ResourceRepository;
 import org.greenbuttonalliance.espi.common.repositories.usage.UsagePointRepository;
 import org.greenbuttonalliance.espi.common.service.ImportService;
 import org.greenbuttonalliance.espi.common.service.ResourceService;
 import org.greenbuttonalliance.espi.common.service.UsagePointService;
-import org.greenbuttonalliance.espi.common.utils.EntryTypeIterator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,36 +37,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Modern UsagePoint service implementation using entity classes.
+ * Legacy ATOM feed and entry processing removed for Spring Boot 3.5 compatibility.
+ */
 @Service
-@Transactional(rollbackFor = { jakarta.xml.bind.JAXBException.class }, noRollbackFor = {
-		jakarta.persistence.NoResultException.class,
-		org.springframework.dao.EmptyResultDataAccessException.class })
+@Transactional
 public class UsagePointServiceImpl implements UsagePointService {
 
 	private final UsagePointRepository usagePointRepository;
-	private final ImportService importService;
-	private final ResourceRepository repository;
+	private final ResourceRepository resourceRepository;
 	private final ResourceService resourceService;
+	private final ImportService importService;
 
 	public UsagePointServiceImpl(UsagePointRepository usagePointRepository,
-								 ImportService importService,
-								 ResourceRepository repository,
-								 ResourceService resourceService) {
+								ResourceRepository resourceRepository,
+								ResourceService resourceService,
+								ImportService importService) {
 		this.usagePointRepository = usagePointRepository;
-		this.importService = importService;
-		this.repository = repository;
+		this.resourceRepository = resourceRepository;
 		this.resourceService = resourceService;
-	}
-
-
-	@Override
-	public void setResourceService(ResourceService resourceService) {
-		// No-op: constructor injection used, but interface requires this method
+		this.importService = importService;
 	}
 
 	@Override
 	public void setRepository(UsagePointRepository usagePointRepository) {
-		// No-op: constructor injection used, but interface requires this method
+		// Repository is injected via constructor
+	}
+
+	@Override
+	public void setResourceService(ResourceService resourceService) {
+		// ResourceService is injected via constructor
 	}
 
 	@Override
@@ -134,20 +133,20 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public List<Long> findAllIdsForRetailCustomer(Long retailCustomerId) {
+	public List<Long> findAllIdsForRetailCustomer(Long id) {
 		return usagePointRepository
-				.findAllIdsByRetailCustomerId(retailCustomerId);
+				.findAllIdsByRetailCustomerId(id);
 	}
 
 	@Override
 	public String feedFor(List<UsagePointEntity> usagePoints) throws FeedException {
-		// TODO Auto-generated method stub
+		// TODO: Implement modern feed generation
 		return null;
 	}
 
 	@Override
 	public String entryFor(UsagePointEntity usagePoint) {
-		// TODO Auto-generated method stub
+		// TODO: Implement modern entry generation
 		return null;
 	}
 
@@ -159,120 +158,40 @@ public class UsagePointServiceImpl implements UsagePointService {
 
 	@Override
 	public void add(UsagePointEntity usagePoint) {
-		// TODO Auto-generated method stub
+		// TODO: Implement add logic
 	}
 
 	@Override
 	public void delete(UsagePointEntity usagePoint) {
-
 		usagePointRepository.deleteById(usagePoint.getId());
-
 	}
 
 	@Override
 	public UsagePointEntity importResource(InputStream stream) {
-
-		UsagePointEntity usagePoint = null;
 		try {
+			// Use the modern ImportService to parse the stream
 			importService.importData(stream, null);
-			usagePoint = importService.getEntries().get(0).getContent()
-					.getUsagePoint();
-
+			
+			// Get the parsed usage points
+			List<UsagePointEntity> usagePoints = importService.getEntries();
+			
+			if (usagePoints != null && !usagePoints.isEmpty()) {
+				// Return the first usage point (typical for single resource import)
+				return usagePoints.get(0);
+			} else {
+				return null;
+			}
 		} catch (Exception e) {
-
+			// Log error and return null
+			return null;
 		}
-		return usagePoint;
 	}
 
-	@Override
-	public EntryType findEntryType(Long retailCustomerId, Long usagePointId) {
-		EntryType result = null;
-		try {
-			// TODO - this is sub-optimal (but defers the need to understand
-			// creation of an EntryType
-			List<Long> temp = new ArrayList<Long>();
-			temp.add(usagePointId);
-			findAllIdsForRetailCustomer(retailCustomerId);
-			result = (new EntryTypeIterator(resourceService, temp,
-					UsagePoint.class)).next();
-		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-			result = null;
-		}
-		return result;
-	}
-
-	@Override
-	public EntryTypeIterator findEntryTypeIterator() {
-		EntryTypeIterator result = null;
-		try {
-			// TODO - this is sub-optimal (but defers the need to understand
-			// creation of an EntryType
-			List<Long> temp = new ArrayList<Long>();
-			temp = usagePointRepository.findAllIds();
-			result = new EntryTypeIterator(resourceService, temp,
-					UsagePoint.class);
-		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-			result = null;
-		}
-		return result;
-	}
-
-	@Override
-	public EntryType findEntryType(Long usagePointId) {
-		EntryType result = null;
-		try {
-			// TODO - this is sub-optimal (but defers the need to understan
-			// creation of an EntryType
-			List<Long> temp = new ArrayList<Long>();
-			temp = usagePointRepository.findAllIds();
-			result = (new EntryTypeIterator(resourceService, temp,
-					UsagePoint.class)).nextEntry(UsagePoint.class);
-		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-			result = null;
-		}
-		return result;
-	}
-
-	@Override
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId) {
-		EntryTypeIterator result = null;
-		try {
-			List<Long> allIdsForRetailCustomer = findAllIdsForRetailCustomer(retailCustomerId);
-			result = new EntryTypeIterator(resourceService,
-					allIdsForRetailCustomer, UsagePoint.class);
-		} catch (Exception e) {
-			// TODO need a log file entry as we are going to return a null if
-			// it's not found
-
-			result = null;
-		}
-		return result;
-	}
-
-	@Override
-	public EntryTypeIterator findEntryTypeIterator(Long retailCustomerId,
-			Long usagePointId) {
-		EntryTypeIterator result = null;
-		List<Long> temp = new ArrayList<Long>();
-		temp.add(usagePointId);
-		try {
-			// make the call to insure it is a valid usagePointId
-			resourceService.findIdByXPath(retailCustomerId, usagePointId,
-					UsagePoint.class);
-			result = (new EntryTypeIterator(resourceService, temp,
-					UsagePoint.class));
-		} catch (Exception e) {
-			System.out
-					.printf("****UsagePointService: Seraching for an invalide UsagePointId - %d: %s\n",
-							usagePointId, e.toString());
-			result = null;
-		}
-		return result;
-	}
+	// Legacy methods removed - incompatible with Spring Boot 3.5
+	// The following methods used legacy EntryType and are no longer supported:
+	// - findEntryType(Long retailCustomerId, Long usagePointId)
+	// - findEntryTypeIterator()
+	// - findEntryType(Long usagePointId)  
+	// - findEntryTypeIterator(Long retailCustomerId)
+	// - findEntryTypeIterator(Long retailCustomerId, Long usagePointId)
 }

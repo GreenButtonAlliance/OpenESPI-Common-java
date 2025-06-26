@@ -33,7 +33,7 @@
 
     <groupId>org.greenbuttonalliance</groupId>
     <artifactId>OpenESPI-Common</artifactId>
-    <version>1.4-BUILD-SNAPSHOT</version>
+    <version>Spring-Boot-3.5-BUILD-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>OpenESPI-Common</name>

@@ -31,13 +31,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Modern Spring Data JPA repository for UsagePoint entities.
  * Replaces the legacy UsagePointRepositoryImpl with modern Spring Data patterns.
  */
 @Repository
-public interface UsagePointRepository extends JpaRepository<UsagePointEntity, Long> {
+public interface UsagePointRepository extends JpaRepository<UsagePointEntity, UUID> {
 
     /**
      * Find all usage points for a specific retail customer.

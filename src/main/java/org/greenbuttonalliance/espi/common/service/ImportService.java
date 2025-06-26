@@ -20,20 +20,16 @@
 
 package org.greenbuttonalliance.espi.common.service;
 
-import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
-import org.xml.sax.SAXException;
+import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
 
 import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 public interface ImportService {
-	void importData(InputStream stream, Long retailCustomerId)
-			throws IOException, SAXException, ParserConfigurationException;
+	void importData(InputStream stream, Long retailCustomerId);
 
-	List<EntryType> getEntries();
+	List<UsagePointEntity> getEntries();
 
 	XMLGregorianCalendar getMinUpdated();
 
