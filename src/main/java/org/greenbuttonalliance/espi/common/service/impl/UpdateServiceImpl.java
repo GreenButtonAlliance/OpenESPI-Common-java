@@ -20,9 +20,9 @@
 
 package org.greenbuttonalliance.espi.common.service.impl;
 
-import org.greenbuttonalliance.espi.common.domain.BatchList;
-import org.greenbuttonalliance.espi.common.domain.Subscription;
-import org.greenbuttonalliance.espi.common.domain.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.usage.BatchListEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.SubscriptionEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
 import org.greenbuttonalliance.espi.common.service.UsagePointService;
 import org.greenbuttonalliance.espi.common.service.UpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +36,13 @@ public class UpdateServiceImpl implements UpdateService {
 	@Autowired
 	private UsagePointService usagePointService;
 
-	public BatchList updatedResources(Subscription subscription) {
-		List<UsagePoint> usagePoints = usagePointService
+	public BatchListEntity updatedResources(SubscriptionEntity subscription) {
+		List<UsagePointEntity> usagePoints = usagePointService
 				.findAllUpdatedFor(subscription);
 
-		BatchList batchList = new BatchList();
+		BatchListEntity batchList = new BatchListEntity();
 
-		for (UsagePoint usagePoint : usagePoints) {
+		for (UsagePointEntity usagePoint : usagePoints) {
 			batchList.getResources().add(usagePoint.getSelfHref());
 		}
 

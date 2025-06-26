@@ -21,9 +21,9 @@
 package org.greenbuttonalliance.espi.common.service.impl;
 
 import com.sun.syndication.io.FeedException;
-import org.greenbuttonalliance.espi.common.domain.legacy.RetailCustomer;
-import org.greenbuttonalliance.espi.common.domain.legacy.Subscription;
-import org.greenbuttonalliance.espi.common.domain.legacy.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.usage.RetailCustomerEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.SubscriptionEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
 import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
 import org.greenbuttonalliance.espi.common.repositories.usage.ResourceRepository;
 import org.greenbuttonalliance.espi.common.repositories.usage.UsagePointRepository;
@@ -72,62 +72,62 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public List<UsagePoint> findAllByRetailCustomer(RetailCustomer customer) {
+	public List<UsagePointEntity> findAllByRetailCustomer(RetailCustomerEntity customer) {
 		// TODO: Implement entity to domain conversion
 		return new ArrayList<>();
 	}
 
 	@Override
-	public UsagePoint findById(Long usagePointId) {
+	public UsagePointEntity findById(Long usagePointId) {
 		// TODO: Implement entity to domain conversion
 		return null;
 	}
 
 	@Override
-	public UsagePoint findById(Long retailCustomerId, Long usagePointId) {
+	public UsagePointEntity findById(Long retailCustomerId, Long usagePointId) {
 		// TODO: if needed, this needs to be scoped down to the RetailCustomer
 		// collection and implement entity to domain conversion
 		return null;
 	}
 
 	@Override
-	public void persist(UsagePoint up) {
+	public void persist(UsagePointEntity up) {
 		// TODO: Implement domain to entity conversion
 		// this.usagePointRepository.save(up);
 	}
 
 	@Override
-	public void createOrReplaceByUUID(UsagePoint usagePoint) {
+	public void createOrReplaceByUUID(UsagePointEntity usagePoint) {
 		// TODO: Implement this logic in service layer with entity conversion
 		// Check if exists by UUID, then save or update
 	}
 
 	@Override
-	public void associateByUUID(RetailCustomer retailCustomer, UUID uuid) {
+	public void associateByUUID(RetailCustomerEntity retailCustomer, UUID uuid) {
 		// TODO: Implement this logic in service layer
 		// Find usage point by UUID and set retail customer
 	}
 
 	@Override
-	public UsagePoint findByUUID(UUID uuid) {
+	public UsagePointEntity findByUUID(UUID uuid) {
 		// TODO: Implement entity to domain conversion
 		return null;
 	}
 
 	@Override
-	public UsagePoint findByHashedId(String usagePointHashedId) {
+	public UsagePointEntity findByHashedId(String usagePointHashedId) {
 		return findByUUID(UUID.fromString(usagePointHashedId));
 	}
 
 	@Override
-	public List<UsagePoint> findAllUpdatedFor(Subscription subscription) {
+	public List<UsagePointEntity> findAllUpdatedFor(SubscriptionEntity subscription) {
 		// TODO: Implement this logic using findAllUpdatedAfter with subscription timestamp
 		return new ArrayList<>();
 	}
 
 	@Override
 	public void deleteByHashedId(String usagePointHashedId) {
-		UsagePoint usagePoint = findByHashedId(usagePointHashedId);
+		UsagePointEntity usagePoint = findByHashedId(usagePointHashedId);
 		if (usagePoint != null) {
 			usagePointRepository.deleteById(usagePoint.getId());
 		}
@@ -140,39 +140,39 @@ public class UsagePointServiceImpl implements UsagePointService {
 	}
 
 	@Override
-	public String feedFor(List<UsagePoint> usagePoints) throws FeedException {
+	public String feedFor(List<UsagePointEntity> usagePoints) throws FeedException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String entryFor(UsagePoint usagePoint) {
+	public String entryFor(UsagePointEntity usagePoint) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<UsagePoint> findAllByRetailCustomer(Long retailCustomerId) {
+	public List<UsagePointEntity> findAllByRetailCustomer(Long retailCustomerId) {
 		// TODO: Implement entity to domain conversion
 		return new ArrayList<>();
 	}
 
 	@Override
-	public void add(UsagePoint usagePoint) {
+	public void add(UsagePointEntity usagePoint) {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public void delete(UsagePoint usagePoint) {
+	public void delete(UsagePointEntity usagePoint) {
 
 		usagePointRepository.deleteById(usagePoint.getId());
 
 	}
 
 	@Override
-	public UsagePoint importResource(InputStream stream) {
+	public UsagePointEntity importResource(InputStream stream) {
 
-		UsagePoint usagePoint = null;
+		UsagePointEntity usagePoint = null;
 		try {
 			importService.importData(stream, null);
 			usagePoint = importService.getEntries().get(0).getContent()

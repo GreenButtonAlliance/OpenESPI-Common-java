@@ -20,9 +20,9 @@
 
 package org.greenbuttonalliance.espi.common.service;
 
-import org.greenbuttonalliance.espi.common.domain.BatchList;
-import org.greenbuttonalliance.espi.common.domain.Subscription;
+import org.greenbuttonalliance.espi.common.domain.usage.BatchListEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.SubscriptionEntity;
 
 public interface UpdateService {
-	BatchList updatedResources(Subscription subscription);
+	BatchListEntity updatedResources(SubscriptionEntity subscription);
 }

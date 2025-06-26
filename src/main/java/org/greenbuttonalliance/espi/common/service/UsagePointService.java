@@ -22,9 +22,9 @@ package org.greenbuttonalliance.espi.common.service;
 
 
 import com.sun.syndication.io.FeedException;
-import org.greenbuttonalliance.espi.common.domain.legacy.RetailCustomer;
-import org.greenbuttonalliance.espi.common.domain.legacy.Subscription;
-import org.greenbuttonalliance.espi.common.domain.legacy.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.usage.RetailCustomerEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.SubscriptionEntity;
+import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
 import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
 import org.greenbuttonalliance.espi.common.repositories.usage.UsagePointRepository;
 import org.greenbuttonalliance.espi.common.utils.EntryTypeIterator;
@@ -35,37 +35,37 @@ import java.util.UUID;
 
 public interface UsagePointService {
  
-	List<UsagePoint> findAllByRetailCustomer(RetailCustomer customer);
+	List<UsagePointEntity> findAllByRetailCustomer(RetailCustomerEntity customer);
 
-	void createOrReplaceByUUID(UsagePoint usagePoint);
+	void createOrReplaceByUUID(UsagePointEntity usagePoint);
 
-	void associateByUUID(RetailCustomer retailCustomer, UUID uuid);
+	void associateByUUID(RetailCustomerEntity retailCustomer, UUID uuid);
 
-	UsagePoint findByUUID(UUID uuid);
+	UsagePointEntity findByUUID(UUID uuid);
 
-	UsagePoint findByHashedId(String usagePointHashedId);
+	UsagePointEntity findByHashedId(String usagePointHashedId);
 
-	List<UsagePoint> findAllUpdatedFor(Subscription subscription);
+	List<UsagePointEntity> findAllUpdatedFor(SubscriptionEntity subscription);
 
 	void deleteByHashedId(String usagePointHashedId);
 
 	List<Long> findAllIdsForRetailCustomer(Long id);
 
-	String feedFor(List<UsagePoint> usagePoints) throws FeedException;
+	String feedFor(List<UsagePointEntity> usagePoints) throws FeedException;
 
-	String entryFor(UsagePoint usagePoint);
+	String entryFor(UsagePointEntity usagePoint);
 
-	List<UsagePoint> findAllByRetailCustomer(Long retailCustomerId);
+	List<UsagePointEntity> findAllByRetailCustomer(Long retailCustomerId);
  
 	void setRepository(UsagePointRepository usagePointRepository);
 
 	void setResourceService(ResourceService resourceService);
 
-	void persist(UsagePoint usagePoint);
+	void persist(UsagePointEntity usagePoint);
  
-	UsagePoint findById(Long usagePointId);
+	UsagePointEntity findById(Long usagePointId);
 
-	UsagePoint findById(Long retailCustomerId, Long usagePointId);
+	UsagePointEntity findById(Long retailCustomerId, Long usagePointId);
 
 	EntryType findEntryType(Long retailCustomerId, Long usagePointId);
 	
@@ -77,10 +77,10 @@ public interface UsagePointService {
 	
 	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
 
-	void add(UsagePoint usagePoint);
+	void add(UsagePointEntity usagePoint);
 
-	void delete(UsagePoint usagePoint);
+	void delete(UsagePointEntity usagePoint);
  
-	UsagePoint importResource(InputStream stream);
+	UsagePointEntity importResource(InputStream stream);
 
 }
