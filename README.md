@@ -1,3 +1,4 @@
+[![Build Status](https://img.shields.io/badge/Build-Passing-success?style=flat&logo=github-actions)](https://github.com/GreenButtonAlliance/OpenESPI-Common-java/actions)
 [![CI/CD Pipeline](https://github.com/GreenButtonAlliance/OpenESPI-Common-java/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/GreenButtonAlliance/OpenESPI-Common-java/actions/workflows/ci.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=GreenButtonAlliance_OpenESPI-Common-java&metric=alert_status)](https://sonarcloud.io/dashboard?id=GreenButtonAlliance_OpenESPI-Common-java)
 [![Java](https://img.shields.io/badge/Java-21-orange?style=flat&logo=openjdk)](https://openjdk.org/)
@@ -6,9 +7,7 @@
 [![Jakarta EE](https://img.shields.io/badge/Jakarta%20EE-9+-purple?style=flat&logo=eclipse)](https://jakarta.ee/)
 [![Hibernate](https://img.shields.io/badge/Hibernate-6.x-yellow?style=flat&logo=hibernate)](https://hibernate.org/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-lightgrey?style=flat&logo=apache)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Build Status](https://img.shields.io/badge/Build-Passing-success?style=flat&logo=github-actions)](https://github.com/GreenButtonAlliance/OpenESPI-Common-java/actions)
-[![Green Button](https://img.shields.io/badge/Green%20Button-ESPI%201.0-green?style=flat)](https://www.greenbuttonalliance.org/)
-[![NAESB](https://img.shields.io/badge/NAESB-REQ.21-blue?style=flat)](https://www.naesb.org/)
+[![NAESB](https://img.shields.io/badge/NAESB-ESPI%20ver.%204.0-blue?style=flat)](https://www.naesb.org/)
 [![MapStruct](https://img.shields.io/badge/MapStruct-1.6.0-orange?style=flat)](https://mapstruct.org/)
 [![Lombok](https://img.shields.io/badge/Lombok-1.18.34-red?style=flat)](https://projectlombok.org/)
 
@@ -71,4 +70,94 @@ Open IntelliJ and open the project (File > Open...).
 
 ## Testing
 
-All testing of OpenESPI is performed using the [Test Harness](https://github.com/greenbuttonalliance/OpenESPI-GreenButtonCMDTest.git) project. See the [README](https://github.com/greenbuttonalliance/OpenESPI-GreenButtonCMDTest/blob/master/README.md) file for instructions.
+The project includes comprehensive test classes to verify the Spring Boot 3.5 migration and core functionality:
+
+### Test Classes
+
+1. **`MigrationVerificationTest`** - Verifies core Spring Boot 3.5 migration features:
+   - Jakarta EE 9+ Validation API functionality
+   - Jakarta XML Binding (JAXB) for DTO marshalling
+   - UUID primary key architecture
+   - ESPI resource inheritance structure
+   - Entity properties with Jakarta annotations
+   - Customer domain entities independence
+   - SummaryMeasurement DTO business logic
+
+2. **`TestApplication`** - Spring Boot test application:
+   - Minimal Spring Boot configuration for testing
+   - Entity scanning for domain objects
+   - JPA repository configuration
+   - Test-specific profile activation
+
+3. **`SpringBootTestConfiguration`** - Test configuration beans:
+   - ESPI ID generator service for UUID5 generation
+   - JAXB marshallers for domain objects and XML fragments
+   - Bean validation factory
+   - REST template for testing
+
+### Running Tests
+
+#### Run All Tests (Recommended)
+```bash
+# Execute complete test suite
+mvn clean test
+
+# Run tests with verbose output
+mvn clean test -X
+
+# Run specific test class
+mvn test -Dtest=MigrationVerificationTest
+```
+
+#### Build with Tests
+```bash
+# Full build with test execution
+mvn clean package
+
+# Install to local repository with tests
+mvn clean install
+
+# Verify build integrity
+mvn clean verify
+```
+
+#### Development Builds (Skip Tests)
+```bash
+# Fast compilation without tests (development only)
+mvn clean compile -Dmaven.test.skip=true
+
+# Fast package without tests (development only)
+mvn clean package -Dmaven.test.skip=true
+
+# Fast install without tests (development only)
+mvn clean install -Dmaven.test.skip=true
+```
+
+#### Profile-Specific Testing
+```bash
+# Run with specific Maven profile
+mvn clean test -P <profile-name>
+
+# Example: development profile
+mvn clean test -P development
+```
+
+### Test Coverage
+
+The test suite verifies:
+- ✅ Jakarta EE 9+ API compatibility
+- ✅ Spring Boot 3.5 auto-configuration
+- ✅ JAXB XML marshalling/unmarshalling
+- ✅ UUID primary key generation and usage
+- ✅ Entity relationship mapping
+- ✅ Bean validation functionality
+- ✅ DTO record structure and ESPI business logic
+- ✅ Compilation integrity across all modules
+
+### Test Reports
+
+Test results are generated in:
+- `target/surefire-reports/` - Test execution reports
+- `target/site/jacoco/` - Code coverage reports (if jacoco plugin enabled)
+
+For integration testing with external Green Button data, refer to the consumer applications that use this common module.
