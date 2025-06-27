@@ -11,7 +11,12 @@
       "WebFetch(domain:github.com)",
       "Bash(git remote get-url:*)",
       "Bash(git fetch:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }

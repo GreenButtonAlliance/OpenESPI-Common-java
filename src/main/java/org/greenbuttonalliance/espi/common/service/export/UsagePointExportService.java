@@ -20,7 +20,7 @@
 
 package org.greenbuttonalliance.espi.common.service.export;
 
-import org.greenbuttonalliance.espi.common.domain.legacy.UsagePoint;
+import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
 import org.greenbuttonalliance.espi.common.service.UsagePointService;
 import org.greenbuttonalliance.espi.common.utils.ExportFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class UsagePointExportService {
      * @param stream the output stream
      */
     public void exportUsagePoint(Long usagePointId, OutputStream stream) {
-        UsagePoint entity = usagePointService.findById(usagePointId);
+        UsagePointEntity entity = usagePointService.findById(usagePointId);
         if (entity == null) {
             throw new IllegalArgumentException("UsagePoint not found: " + usagePointId);
         }

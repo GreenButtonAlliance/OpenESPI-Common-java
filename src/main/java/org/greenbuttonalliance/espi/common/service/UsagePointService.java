@@ -25,9 +25,7 @@ import com.sun.syndication.io.FeedException;
 import org.greenbuttonalliance.espi.common.domain.usage.RetailCustomerEntity;
 import org.greenbuttonalliance.espi.common.domain.usage.SubscriptionEntity;
 import org.greenbuttonalliance.espi.common.domain.usage.UsagePointEntity;
-import org.greenbuttonalliance.espi.common.domain.legacy.atom.EntryType;
 import org.greenbuttonalliance.espi.common.repositories.usage.UsagePointRepository;
-import org.greenbuttonalliance.espi.common.utils.EntryTypeIterator;
 
 import java.io.InputStream;
 import java.util.List;
@@ -67,15 +65,7 @@ public interface UsagePointService {
 
 	UsagePointEntity findById(Long retailCustomerId, Long usagePointId);
 
-	EntryType findEntryType(Long retailCustomerId, Long usagePointId);
-	
-	EntryType findEntryType(Long usagePointId);
-	
-	EntryTypeIterator findEntryTypeIterator();
-
-	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId);
-	
-	EntryTypeIterator findEntryTypeIterator(Long retailCustomerId, Long usagePointId);
+	// Legacy EntryType methods removed - incompatible with Spring Boot 3.5
 
 	void add(UsagePointEntity usagePoint);
 

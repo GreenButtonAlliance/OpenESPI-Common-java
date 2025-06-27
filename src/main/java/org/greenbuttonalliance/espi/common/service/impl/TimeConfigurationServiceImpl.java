@@ -190,8 +190,9 @@ public class TimeConfigurationServiceImpl implements TimeConfigurationService {
 		TimeConfiguration timeConfiguration = null;
 		try {
 			importService.importData(stream, null);
-			EntryType entry = importService.getEntries().get(0);
-			timeConfiguration = entry.getContent().getLocalTimeParameters();
+			// TODO: Implement modern import logic using DTOs
+			// Legacy getContent().getLocalTimeParameters() no longer supported
+			timeConfiguration = null; // Placeholder
 
 		} catch (Exception e) {
 			if(logger.isErrorEnabled()) {

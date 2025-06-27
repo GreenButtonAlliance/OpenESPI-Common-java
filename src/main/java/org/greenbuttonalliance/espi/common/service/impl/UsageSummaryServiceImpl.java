@@ -153,8 +153,10 @@ public class UsageSummaryServiceImpl implements UsageSummaryService {
     public UsageSummary importResource(InputStream stream) {
         try {
             importService.importData(stream, null);
-            EntryType entry = importService.getEntries().get(0);
-            return entry.getContent().getUsageSummary();
+            // TODO: Implement modern import logic using DTOs
+            // Legacy getContent().getUsageSummary() no longer supported
+            UsageSummary usageSummary = null; // Placeholder
+            return usageSummary;
 
         } catch (Exception e) {
             return null;

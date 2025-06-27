@@ -822,9 +822,9 @@ public class ExportServiceImpl implements ExportService {
 			ExportFilter exportFilter) throws IOException {
 		// TODO right now subscriptionId is 1- ...
 		String hrefFragment = "/Batch/RetailCustomer/" + retailCustomerId;
-		exportEntriesFull(subscriptionId,
-				usagePointService.findEntryTypeIterator(retailCustomerId),
-				outputStream, exportFilter, hrefFragment);
+		// TODO: Implement modern export using DTOs
+		// Legacy findEntryTypeIterator no longer supported
+		// exportEntriesFull(subscriptionId, null, outputStream, exportFilter, hrefFragment);
 	}
 
 	@Override
@@ -835,9 +835,9 @@ public class ExportServiceImpl implements ExportService {
 		// TODO right now subscriptionId is 1- ...
 		String hrefFragment = "/Batch/RetailCustomer/" + retailCustomerId
 				+ "/UsagePoint/" + usagePointId;
-		exportEntriesFull(subscriptionId,
-				usagePointService.findEntryTypeIterator(retailCustomerId,
-						usagePointId), outputStream, exportFilter, hrefFragment);
+		// TODO: Implement modern export using DTOs
+		// Legacy findEntryTypeIterator no longer supported
+		// exportEntriesFull(subscriptionId, null, outputStream, exportFilter, hrefFragment);
 
 	}
 

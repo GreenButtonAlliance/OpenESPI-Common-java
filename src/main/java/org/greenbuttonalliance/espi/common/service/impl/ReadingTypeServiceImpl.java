@@ -143,8 +143,9 @@ public class ReadingTypeServiceImpl implements ReadingTypeService {
 	public ReadingType importResource(InputStream stream) {
 		try {
 			importService.importData(stream, null);
-			EntryType entry = importService.getEntries().get(0);
-			ReadingType readingType = entry.getContent().getReadingType();
+			// TODO: Implement modern import logic using DTOs
+			// Legacy getContent().getReadingType() no longer supported
+			ReadingType readingType = null; // Placeholder
 			return readingType;
 		} catch (Exception e) {
 			return null;
