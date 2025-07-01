@@ -4,10 +4,10 @@
 
 # OpenESPI-Common -- Archived July 1, 2025
 
-NOTE: This repository is no longer maintained. The original OpenESPI project has been archived and is no longer being 
+**NOTE: This repository is no longer maintained. The original OpenESPI project has been archived and is no longer being 
 maintained.  The original code is being migrated to Spring Boot 3.5 with a modernized architecture.  The new code is 
 being developed in the [OpenESPI-GreenButton-Java](https://Github.com/GreenButtonAlliance/OpenESPI-GreenButton-Java),
-as a monorepo that contains the Data Custodian, Third Party, Common, and OAuth2 Authorization Server modules.
+as a monorepo that contains the Data Custodian, Third Party, Common, and OAuth2 Authorization Server modules.**
 
 This is the Common module of the OpenESPI Green Button Data Custodian and Third Party implementation. It is a Spring application written in java and built on top of jpa for database access.
 
